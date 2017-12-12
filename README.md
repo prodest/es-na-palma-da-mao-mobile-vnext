@@ -1,96 +1,94 @@
-# The Ionic Super Starter 🎮
+# ES na palma da mão
 
-<img src="https://user-images.githubusercontent.com/236501/32385619-bddac0ac-c08c-11e7-9ee4-9c892197191f.png" width="400" />
+> O **[ES NA PALMA DA MÃO](http://www.slideshare.net/rcolnago2/es-na-palma-da-mo-governo-mobile)** é um programa do **Governo do Estado do Espírito Santo** que reúne **iniciativas e serviços do Governo em plataforma móvel (aplicativo) e web, com unidade de experiência do cidadão**. Por meio do **ES NA PALMA DA MÃO**, diversos serviços governamentais podem ser acessados através da web e dispositivos móveis (sistemas operacionais iOS e Android) utilizando uma interface comum.
 
-The Ionic Super Starter is a batteries-included starter project for Ionic apps
-complete with pre-built pages, providers, and best practices for Ionic
-development.
+===============================================================================================================================
 
-The goal of the Super Starter is to get you from zero to app store faster than
-before, with a set of opinions from the Ionic team around page layout,
-data/user management, and project structure.
+**Tabela de Conteúdo**  
 
-The way to use this starter is to pick and choose the various page types you
-want use, and remove the ones you don't. If you want a blank slate, this
-starter isn't for you (use the `blank` type instead).
+- [Principais Tecnologias Utilizadas](#principais-tecnologias-utilizadas)
+	- [Typescript](#typescript)
+	- [Angular](#angular)
+	- [Ionic](#ionic)
+	- [Ionic App Scripts](#ionic-app-scripts)
+	- [Webpack](#webpack)
+ 	- [Sass](#sass)
+- [Visão Geral](#visão-geral)
+   - [Ambiente sandbox de autenticação](#ambiente-sandbox-de-autenticação)
+	- [Build System](#build-system)
+- [Passo a passo](#passo-a-passo)
+	- [Dependências](#dependências)
+	- [Instalando](#instalando)
+	- [Executando](#executando)
 
-One of the big advances in Ionic was moving from a rigid route-based navigation
-system to a flexible push/pop navigation system modeled off common native SDKs.
-We've embraced this pattern to provide a set of reusable pages that can be
-navigated to anywhere in the app. Take a look at the [Settings
-page](https://github.com/ionic-team/starters/blob/master/ionic-angular/official/super/src/pages/settings/settings.html)
-for a cool example of a page navigating to itself to provide a different UI
-without duplicating code.
+# Principais Tecnologias Utilizadas
+Essas são as principais ferramentas, *frameworks* e *libraries* que dão suporte ao projeto:
 
-## Table of Contents
+## [Typescript](https://www.typescriptlang.org/)
+TypeScript é uma linguagem para desenvolvimento JavaScript em larga escala. 
+Com TypeScript podemos escrever código utilizando uma estrutura fortemente tipada e ter este código compilado para JavaScript puro. 
+Nem todas as features do ES2105 já são suportados pelos browsers. TypeScript permite desfrutar de todas as novas características da linguage hoje, 
+covertendo código ES2105 em código equivalente em ES5. Qualquer navegador. Qualquer host.
 
-1. [Getting Started](#getting-started)
-2. [Pages](#pages)
-3. [Providers](#providers)
-4. [i18n](#i18n) (adding languages)
+## [Angular](https://angular.io)
+Angular é um framework estrutural para aplicações web dinâmicas.
 
-## <a name="getting-started"></a>Getting Started
+## [Ionic](http://ionicframework.com/)
+Ionic é um framework que visa a criação de aplicações híbridas para dispositivos móveis. 
 
-To test this starter out, install the latest version of the Ionic CLI and run:
+## [Ionic-App-Scripts](https://github.com/ionic-team/ionic-app-scripts)
+Scripts de build para projetos ionic usando o webpack como tecnologia subjacente.
 
-```bash
-ionic start mySuperApp super
-```
+## [Webpack](https://webpack.js.org/)
+webpack é um empacotador de módulos (javascript e cia) que cria bundles de assets à partir das dependências(assets) 
+do projeto.
 
-## Pages
+1. Permite fazer o pré-processamento de arquivos “diferentes” (coffee, es6, ts, sass, less, jade, imagens, etc) que 
+os tornam “utilizáveis” através de função require() ou import(ES2015);
+2. Possibilidade de carregar dependências sob demanda (code splitting), sem precisar
+colocar tudo num grande e pesado bundle.
 
-The Super Starter comes with a variety of ready-made pages. These pages help
-you assemble common building blocks for your app so you can focus on your
-unique features and branding.
+## [Sass](http://sass-lang.com/)
 
-The app loads with the `FirstRunPage` set to `TutorialPage` as the default. If
-the user has already gone through this page once, it will be skipped the next
-time they load the app.
+SASS é uma poderosa extensão da linguagem CSS que permite uma escrita profissional e completa das folhas de estilo de forma muito 
+mais dinâmica e produtiva. 
 
-If the tutorial is skipped but the user hasn't logged in yet, the Welcome page
-will be displayed which is a "splash" prompting the user to log in or create an
-account.
+# Visão Geral
 
-Once the user is authenticated, the app will load with the `MainPage` which is
-set to be the `TabsPage` as the default.
+## Ambiente sandbox de autenticação
+Para acessar a versão completa do ES na palma da mão, é necessário uma conta no *Acesso Cidadão*.
 
-The entry and main pages can be configured easily by updating the corresponding
-variables in
-[src/pages/pages.ts](https://github.com/ionic-team/starters/blob/master/ionic-angular/official/super/src/pages/pages.ts).
+O ES na palma da mão executado a partir do código fonte, bem como o [demo online](http://prodest.github.io/es-na-palma-da-mao-mobile/latest), usam uma versão [*sandbox* do acesso cidadão](https://developers.es.gov.br/acessocidadao), exclusiva para *developers*. 
+As contas de usuário criadas no *sandbox* não são válidas no [acesso cidadão real](https://acessocidadao.es.gov.br/), usado pelos cidadãos para acessar os serviços oferecidos pelo Governo do ES.
 
-Please read the
-[Pages](https://github.com/ionic-team/starters/tree/master/ionic-angular/official/super/src/pages)
-readme, and the readme for each page in the source for more documentation on
-each.
+## Build System
+O *build system* do **ES na Palma da Mão** usa yarn scripts, [ionic-app-scripts](https://github.com/ionic-team/ionic-app-scripts) e [webpack](https://webpack.js.org/).
 
-## Providers
+`ionic-app-scripts` usa `webpack` para tratar as seguintes questões:
+* Transpila código typescript para ES2015
+* Carrega arquivos HTML como módulos
+* Transpila .scss em .css e o adiciona ao DOM
+* Atualiza o browser e recompila se arquivos são alterados
+* Hot module replacement para CSS
+* Gera o *bundle* da aplicação
+* Carrega todos os módulos
 
-The Super Starter comes with some basic implementations of common providers.
+`yarn scripts`:
+* Chamadas às todas a tarefas úteis em tempo de desenvolvimento. Encapsula chamadas ao ionic-app-scripts, além de outras. Leia mais [abaixo](#tasks).
 
-### User
+# Começando
+## Dependências
+Ferramentas necessárias para rodar a aplicação:
+* `node` and `yarn`
 
-The `User` provider is used to authenticate users through its
-`login(accountInfo)` and `signup(accountInfo)` methods, which perform `POST`
-requests to an API endpoint that you will need to configure.
+## Instalando
+1. `fork` este repositório
+2. `clone` o seu fork
+3. execute o comando `yarn` para instalar as dependências
 
-### Api
-
-The `Api` provider is a simple CRUD frontend to an API. Simply put the root of
-your API url in the Api class and call get/post/put/patch/delete 
-
-## i18n
-
-Ionic Super Starter comes with internationalization (i18n) out of the box with
-[ngx-translate](https://github.com/ngx-translate/core). This makes it easy to
-change the text used in the app by modifying only one file. 
-
-### Adding Languages
-
-To add new languages, add new files to the `src/assets/i18n` directory,
-following the pattern of LANGCODE.json where LANGCODE is the language/locale
-code (ex: en/gb/de/es/etc.).
-
-### Changing the Language
-
-To change the language of the app, edit `src/app/app.component.ts` and modify
-`translate.use('en')` to use the LANGCODE from `src/assets/i18n/`
+## Executando
+O **ES na Palma da Mão** usa `ionic-app-scripts` para compilar a aplicação e executar o ambiente de desenvolvimento.
+Depois de instaladas todas as dependências, você deve *rodar* a aplicação. O comando `yarn ionic:serve` irá usar
+o `webpack` para compilar e gerar um *bundle* a aplicação, *subir* um servidor de desenvolvimento e *escutar* por alterações
+em todos os arquivos. A porta default usada é a 8100.
+ 

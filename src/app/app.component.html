@@ -1,0 +1,30 @@
+<ion-menu [content]="content">
+  <ion-header>
+    <ion-toolbar>
+      <ion-title>Menu</ion-title>
+    </ion-toolbar>
+  </ion-header>
+
+  <ion-content>
+    <ion-list>
+      <button menuClose ion-item no-lines (click)="openPage('LoginPage')">
+        <ion-icon item-start name="log-in"></ion-icon>
+        Login / Cadastre-se
+      </button>
+      <ng-container *ngFor="let menu of menus">
+        <ion-list-header>{{menu.name}}</ion-list-header>
+        <button menuClose ion-item *ngFor="let page of menu.items" (click)="openPage(page.component)">
+          <ion-icon item-start name="{{page.icon}}"></ion-icon>
+          {{page.title}}
+        </button>
+      </ng-container>
+      <button menuClose ion-item (click)="logout()">
+        <ion-icon item-start name="exit"></ion-icon>
+        Sair
+      </button>
+    </ion-list>
+  </ion-content>
+</ion-menu>
+
+<!-- Disable swipe-to-go-back because it's poor UX to combine STGB with side menus -->
+<ion-nav [root]="rootPage" #content swipeBackEnabled="false"></ion-nav>

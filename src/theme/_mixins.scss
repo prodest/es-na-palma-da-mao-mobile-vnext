@@ -1,0 +1,4 @@
+@mixin color($colorName) {
+  background-color: color($colors, $colorName, base);
+  color: color($colors, $colorName, contrast);
+}

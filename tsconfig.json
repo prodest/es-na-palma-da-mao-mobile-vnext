@@ -1,20 +1,28 @@
 {
-  "compilerOptions": {
+  "compilerOptions": {    
+    "target": "es6",
+    "module": "es6",
     "allowSyntheticDefaultImports": true,
     "declaration": false,
     "emitDecoratorMetadata": true,
     "experimentalDecorators": true,
+    "noUnusedLocals": true,
+    "noUnusedParameters": false,
     "lib": [
       "dom",
       "es2015"
     ],
-    "module": "es2015",
     "moduleResolution": "node",
     "sourceMap": true,
-    "target": "es5",
     "typeRoots": [
-      "../node_modules/@types"
-    ]
+      "./node_modules/@types"
+    ],
+    "baseUrl": ".",
+    "paths": {
+      "@espm/*": [
+        "src/libs/*"
+      ]
+    }
   },
   "include": [
     "src/**/*.ts"
