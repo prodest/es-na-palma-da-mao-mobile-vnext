@@ -13,15 +13,7 @@ import { ESPM } from './app.component'
 
 @NgModule( {
     declarations: [ ESPM ],
-    imports: [
-        BrowserModule,
-        CoreModule,
-        IonicStorageModule.forRoot( {
-            name: 'espm',
-            driverOrder: [ 'indexeddb', 'sqlite', 'websql' ]
-        } ),
-        IonicModule.forRoot( ESPM )
-    ],
+    imports: [ BrowserModule, CoreModule, IonicStorageModule.forRoot( { name: 'espm' } ), IonicModule.forRoot( ESPM ) ],
     bootstrap: [ IonicApp ],
     entryComponents: [ ESPM ],
     providers: [

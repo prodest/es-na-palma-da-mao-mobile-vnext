@@ -94,4 +94,5 @@
     </plugin>
     <engine name="android" spec="^6.2.3" />
     <engine name="ios" spec="^4.4.0" />
+    <plugin name="cordova-sqlite-storage" spec="^2.2.1" />
 </widget>
