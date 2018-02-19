@@ -1,6 +1,6 @@
 {
-  "name": "Ionic",
-  "short_name": "Ionic",
+  "name": "ES na Palma da Mão",
+  "short_name": "ESPM",
   "start_url": "index.html",
   "display": "standalone",
   "icons": [{
@@ -8,6 +8,6 @@
     "sizes": "512x512",
     "type": "image/png"
   }],
-  "background_color": "#4e8ef7",
-  "theme_color": "#4e8ef7"
+  "background_color": "#208baa",
+  "theme_color": "#208baa"
 }
