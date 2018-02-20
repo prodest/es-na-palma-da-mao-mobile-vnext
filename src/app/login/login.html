@@ -20,10 +20,10 @@
     </ion-list>
     <button ion-button full large color-primary-light type="submit">ENTRAR</button>
   </form>
-  <espm-section-title>
+  <espm-section-title showWhen="cordova">
     Ou entre usando
   </espm-section-title>
-  <div class="social-login">
+  <div class="social-login" showWhen="cordova">
     <button ion-button block icon-start margin-right color-primary-inverse (click)="googleLogin()">
       <ion-icon name="logo-google"></ion-icon>
       Google
