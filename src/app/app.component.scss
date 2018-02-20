@@ -27,13 +27,33 @@ button {
 
 .active,
 [active],
-[primary],
-.primary,
+[color-primary],
+.color-primary,
 .toolbar-title,
 ion-icon,
 ion-navbar.toolbar,
 .toolbar-background {
-  @include color(primary);
+  @include colors($color-primary,$color-light);
+}
+
+[color-secondary],
+.color-secondary {
+  @include colors($color-secondary,$color-light);
+}
+
+[color-primary-inverse],
+.color-primary-inverse {
+  @include colors($color-primary-light,$color-light);
+}
+
+[color-primary-light],
+.color-primary-light {
+  @include colors($color-light,$color-primary);
+}
+
+[color-light],
+.color-light {
+  @include colors(transparent, $color-light);
 }
 
 .list-header {

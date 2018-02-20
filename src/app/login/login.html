@@ -3,7 +3,7 @@
     <ion-title>Acesse sua conta</ion-title>
   </ion-navbar>
 </ion-header>
-<ion-content padding primary no-menu>
+<ion-content padding color-primary no-menu>
   <form (submit)="login(username, password)">
     <ion-list no-padding margin-top>
       <ion-item>
@@ -15,20 +15,20 @@
         <ion-input type="password" [(ngModel)]="password" name="password"></ion-input>
       </ion-item>
       <ion-item no-lines>
-        <button ion-button item-end clear color="primary-light" (click)="openUrlForgotPassword()">Esqueceu sua senha?</button>
+        <button ion-button item-end clear color-light (click)="openUrlForgotPassword()">Esqueceu sua senha?</button>
       </ion-item>
     </ion-list>
-    <button ion-button full large color="primary-light" type="submit">ENTRAR</button>
+    <button ion-button full large color-primary-light type="submit">ENTRAR</button>
   </form>
   <espm-section-title>
     Ou entre usando
   </espm-section-title>
   <div class="social-login">
-    <button ion-button block icon-start margin-right color="primary-inverse" (click)="googleLogin()">
+    <button ion-button block icon-start margin-right color-primary-inverse (click)="googleLogin()">
       <ion-icon name="logo-google"></ion-icon>
       Google
     </button>
-    <button ion-button block icon-start color="primary-inverse" (click)="facebookLogin()">
+    <button ion-button block icon-start color-primary-inverse (click)="facebookLogin()">
       <ion-icon name="logo-facebook"></ion-icon>
       Facebook
     </button>

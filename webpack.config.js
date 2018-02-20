@@ -12,6 +12,7 @@ const _ = require('lodash')
 const webpack = require('webpack')
 const merge = require('webpack-merge')
 const { dev, prod } = require('@ionic/app-scripts/config/webpack.config')
+const rxPaths = require('rxjs/_esm5/path-mapping')
 
 /* LINHAS CUSTOMIZADAS INSERIDAS
 ***********************************************************************************************************
@@ -45,10 +46,10 @@ setEnvironmentVariables(prod, envVariables)
 
 const customResolveConfig = {
   resolve: {
-    alias: {
+    alias: _.merge({
       '@espm/core': join(__dirname, './src/libs/core'),
       '@espm/shared': join(__dirname, './src/libs/shared')
-    }
+    }, rxPaths()) // ref: https://github.com/ReactiveX/rxjs/blob/master/doc/lettable-operators.md#user-content-build-and-treeshaking
   }
 }
 // ref: https://github.com/ionic-team/ionic-app-scripts/issues/1126

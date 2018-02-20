@@ -28,24 +28,6 @@ $color-gray: #51514f;
 $color-light: #fff;
 $color-error: darkred;
 
-// Named Color Variables
-// --------------------------------------------------
-// Named colors makes it easy to reuse colors on various components.
-// It's highly recommended to change the default colors
-// to match your app's branding. Ionic uses a Sass map of
-// colors so you can add, rename and remove colors as needed.
-// The "primary" color is the only required color in the map.
-
-$colors: (
-  primary: (base: $color-primary, contrast: $color-light),
-  secondary: (base: $color-secondary, contrast: $color-light),
-  primary-inverse: (base:$color-primary-light, contrast: $color-light),
-  primary-light: (base: $color-light, contrast: $color-primary),
-  light: $color-light,
-  danger: #f53d3d,
-  dark: #222
-);
-
 // ionic variables
 $font-family: 'Roboto';
 $font-family-base: $font-family, 'Helvetica Neue', sans-serif;

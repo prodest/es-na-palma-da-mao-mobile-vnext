@@ -11,7 +11,7 @@
         "build": "ionic-app-scripts build",
         "lint": "ionic-app-scripts lint",
         "ionic:build": "ionic-app-scripts build",
-        "ionic:build:prod": "ionic-app-scripts build --prod",
+        "ionic:build:prod": "ionic-app-scripts build --prod && npm run purifycss",
         "ionic:serve": "ionic-app-scripts serve",
         "htmlhint": "htmlhint --config .htmlhintrc",
         "precommit": "lint-staged",
@@ -21,7 +21,8 @@
         "workbox": "workbox generate:sw",
         "github:release": "sh ./release.sh",
         "commit": "git-cz",
-        "commitmsg": "validate-commit-msg"
+        "commitmsg": "validate-commit-msg",
+        "purifycss": "purifycss www/build/main.css www/build/*.js www/index.html --info --min --out www/build/main.css --whitelist *.ion-md-icon*"
     },
     "lint-staged": {
         "src/app/**/*.html": [
@@ -42,6 +43,7 @@
         "ionic_app_ng_module_class": "EspmModule",
         "ionic_app_entry_point": "src/main.ts",
         "ionic_webpack": "./webpack.config.js",
+        "ionic_sass": "./ionic-sass.js",
         "commitizen": {
             "path": "node_modules/cz-conventional-changelog"
         },
@@ -97,7 +99,9 @@
         "husky": "^0.14.3",
         "lint-staged": "^6.0.0",
         "lite-server": "^2.3.0",
+        "lodash": "^4.17.5",
         "prettier": "^1.9.1",
+        "purifycss": "^1.2.6",
         "tslint": "^5.8.0",
         "tslint-config-prettier": "^1.6.0",
         "tslint-config-standard": "^7.0.0",

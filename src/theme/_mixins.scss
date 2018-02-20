@@ -1,4 +1,8 @@
-@mixin color($colorName) {
-  background-color: color($colors, $colorName, base);
-  color: color($colors, $colorName, contrast);
+@mixin colors($bgColor: null, $color: null) {
+  @if $bgColor {
+    background-color: $bgColor;
+  }
+  @if $color {
+    color: $color;
+  }
 }
