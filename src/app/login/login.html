@@ -18,17 +18,17 @@
         <button ion-button item-end clear color-light (click)="openUrlForgotPassword()">Esqueceu sua senha?</button>
       </ion-item>
     </ion-list>
-    <button ion-button full large color-primary-light type="submit">ENTRAR</button>
+    <button ion-button full large color-primary-inverse type="submit">ENTRAR</button>
   </form>
   <espm-section-title showWhen="cordova">
     Ou entre usando
   </espm-section-title>
   <div class="social-login" showWhen="cordova">
-    <button ion-button block icon-start margin-right color-primary-inverse (click)="googleLogin()">
+    <button ion-button block icon-start margin-right color-primary-light (click)="googleLogin()">
       <ion-icon name="logo-google"></ion-icon>
       Google
     </button>
-    <button ion-button block icon-start color-primary-inverse (click)="facebookLogin()">
+    <button ion-button block icon-start color-primary-light (click)="facebookLogin()">
       <ion-icon name="logo-facebook"></ion-icon>
       Facebook
     </button>
