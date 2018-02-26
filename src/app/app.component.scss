@@ -56,6 +56,11 @@ ion-navbar.toolbar,
   @include colors(transparent, $color-light);
 }
 
+[color-danger],
+.color-danger {
+  @include colors(transparent, $color-danger);
+}
+
 .list-header {
   margin-bottom: 0;
   color: $color-secondary;
