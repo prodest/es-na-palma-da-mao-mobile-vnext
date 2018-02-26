@@ -16,6 +16,18 @@
 
 @import '../theme/mixins';
 
+ion-content {
+  background-color: #fefdff;
+  background-image: url("data:image/svg+xml,%3Csvg width='6' height='6' viewBox='0 0 6 6' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='%23c2cce1' fill-opacity='0.4' fill-rule='evenodd'%3E%3Cpath d='M5 0h1L0 6V5zM6 5v1H5z'/%3E%3C/g%3E%3C/svg%3E");
+}
+
+ion-menu {
+  ion-content {
+    background-color: #fafafa !important;
+    background-image: none;
+  }
+}
+
 body,
 input,
 textarea,
@@ -25,40 +37,30 @@ button {
   font-family: $font-family;
 }
 
+@each $colorName, $colorValues in $app-colors {
+  [color-#{$colorName}],
+  .color-#{$colorName} {
+    @include colors($colorValues...);
+  }
+
+  [color-#{$colorName}-fg],
+  .color-#{$colorName}-fg {
+    color: nth($colorValues, 1);
+  }
+
+  [color-#{$colorName}-bg],
+  .color-#{$colorName}-bg {
+    background-color: nth($colorValues, 1);
+  }
+}
+
 .active,
 [active],
-[color-primary],
-.color-primary,
 .toolbar-title,
 ion-icon,
 ion-navbar.toolbar,
 .toolbar-background {
   @include colors($color-primary,$color-light);
-}
-
-[color-primary-inverse],
-.color-primary-inverse {
-  @include colors($color-light,$color-primary);
-}
-
-[color-primary-light],
-.color-primary-light {
-  @include colors($color-primary-light,$color-light);
-}
-
-[color-secondary],
-.color-secondary {
-  @include colors($color-secondary,$color-light);
-}
-
-[color-light],
-.color-light {
-  @include colors(transparent, $color-light);
-}
-
-[color-danger],
-.color-danger {
-  @include colors(transparent, $color-danger);
 }
 
 .list-header {
@@ -79,4 +81,12 @@ ion-icon[name='exit'] {
   transform: scaleX(-1);
   filter: FlipH;
   -ms-filter: 'FlipH';
+}
+
+.split-pane-side {
+  .scroll-content {
+    overflow: hidden;
+    margin-right: -17px;
+    overflow-y: scroll;
+  }
 }

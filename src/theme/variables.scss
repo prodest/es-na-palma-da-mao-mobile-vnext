@@ -29,6 +29,17 @@ $color-light: #fff;
 $color-error: darkred;
 $color-danger: darkred;
 
+$app-colors: (
+  primary: ($color-primary, $color-light),
+  primary-inverse: ($color-light, $color-primary),
+  primary-light: ($color-primary-light, $color-light),
+  secondary: ($color-secondary, $color-light),
+  gray: ($color-primary, $color-light),
+  light: (transparent, $color-light),
+  error: (transparent, $color-danger),
+  danger: (transparent, $color-danger)
+);
+
 // ionic variables
 $font-family: 'Roboto';
 $font-family-base: $font-family, 'Helvetica Neue', sans-serif;
@@ -47,6 +58,8 @@ $font-family-md-base: $font-family, 'Helvetica Neue', sans-serif;
 // --------------------------------------------------
 // Windows only Sass variables can go here
 $font-family-wp-base: $font-family, 'Helvetica Neue', 'Segoe UI', 'Noto Sans', sans-serif;
+
+$split-pane-side-max-width: 20%;
 
 // App Theme
 // --------------------------------------------------
