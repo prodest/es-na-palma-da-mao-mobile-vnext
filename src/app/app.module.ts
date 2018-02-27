@@ -10,6 +10,7 @@ import { IonicStorageModule } from '@ionic/storage'
 import { IonicApp, IonicErrorHandler, IonicModule } from 'ionic-angular'
 
 import { ESPM } from './app.component'
+import { DetranProviders } from './detran/providers'
 
 @NgModule( {
     declarations: [ ESPM ],
@@ -22,6 +23,7 @@ import { ESPM } from './app.component'
         GooglePlus,
         Facebook,
         InAppBrowser,
+        ...DetranProviders,
         { provide: ErrorHandler, useClass: IonicErrorHandler }
     ]
 } )

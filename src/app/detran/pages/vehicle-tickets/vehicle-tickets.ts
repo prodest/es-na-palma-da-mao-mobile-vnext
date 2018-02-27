@@ -3,7 +3,7 @@ import { IonicPage } from 'ionic-angular'
 
 @IonicPage()
 @Component( {
-    selector: 'page-dashboard',
-    templateUrl: 'dashboard.html'
+    selector: 'page-vehicle-tickets',
+    templateUrl: 'vehicle-tickets.html'
 } )
-export class DashboardPage { }
+export class VehicleTicketsPage { }

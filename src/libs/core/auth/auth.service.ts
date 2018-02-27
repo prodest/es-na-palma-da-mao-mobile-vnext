@@ -117,7 +117,7 @@ export class AuthService {
      *
      */
     public get user(): User {
-        return this.authStorage.user
+        return this.authStorage.getValue( 'user' )
     }
     /**
      *
@@ -134,7 +134,7 @@ export class AuthService {
      *
      */
     private login = ( identity: Identity ): Observable<User> => {
-        return this.acessoCidadao.login( identity ).pipe( map( this.createUser ) )
+        return this.acessoCidadao.login( identity ).pipe( flatMap( this.createUser ) )
 
         // 5)
         // todo // this.pushService.init()
@@ -144,18 +144,17 @@ export class AuthService {
      *
      *
      */
-    private createUser = ( claims: AcessoCidadaoClaims ): User => {
+    private createUser = ( claims: AcessoCidadaoClaims ): Promise<User> => {
         const user = User.createFrom( claims )
-        user.avatarUrl = this.authStorage.avatarUrl || user.avatarUrl
-        this.authStorage.user = user
-        return user
+        user.avatarUrl = this.authStorage.getValue( 'avatarUrl' ) || user.avatarUrl
+        return this.authStorage.setValue( 'user', user )
     }
 
     /**
      *
      *
      */
-    private saveAvatarUrl = ( avatarUrl: string ) => ( this.authStorage.avatarUrl = avatarUrl )
+    private saveAvatarUrl = ( avatarUrl: string ): Promise<string> => this.authStorage.setValue( 'avatarUrl', avatarUrl )
 
     /**
      *

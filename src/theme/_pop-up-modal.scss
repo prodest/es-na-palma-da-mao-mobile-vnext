@@ -1,0 +1,50 @@
+// https://stackoverflow.com/questions/42695169/ionic-2-login-popup-using-modal-and-styling
+ion-modal.pop-up-modal {
+  @media (min-height: 500px) {
+    ion-backdrop {
+      visibility: visible;
+    }
+  }
+
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  z-index: $z-index-overlay;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  contain: strict;
+  .modal-wrapper {
+    &,
+    .ion-page,
+    .ion-page .content,
+    .ion-page .content .scroll-content {
+      contain: content;
+      position: relative;
+      top: auto;
+      left: auto;
+    }
+
+    z-index: $z-index-overlay-wrapper;
+    display: flex;
+    overflow: hidden;
+    flex-direction: column;
+    min-width: $alert-min-width;
+    max-height: $alert-max-height;
+    max-width: $alert-md-max-width;
+    opacity: 0;
+    height: auto;
+    border-radius: $alert-md-border-radius;
+    background-color: $alert-md-background-color;
+    box-shadow: $alert-md-box-shadow;
+
+    .ion-page .content {
+      background-color: $color-light;
+    }
+
+    min-width: 90% !important;
+  }
+}

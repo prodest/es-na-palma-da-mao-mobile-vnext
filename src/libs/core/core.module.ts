@@ -3,11 +3,11 @@ import { HttpClientModule } from '@angular/common/http'
 import { NgModule, Optional, SkipSelf } from '@angular/core'
 
 import { Auth } from './auth'
+import { Common } from './common'
+import { EnvironmentProvider } from './environment'
 
 // import { Api } from './api'
 // import { Config } from './app.config'
-// import { Common } from './common'
-import { EnvironmentProvider } from './environment'
 // import { GoogleMaps } from './google-maps'
 // import { Push } from './push'
 // import { AppState } from './state'
@@ -18,9 +18,9 @@ import { EnvironmentProvider } from './environment'
     providers: [
         EnvironmentProvider,
         //    Config,
-        ...Auth
+        ...Auth,
+        ...Common
         // ...Storage,
-        // ...Common,
         //  ...Api,
         //  ...AppState,
         //  ...Push,

@@ -15,6 +15,18 @@ const menus = [
                 order: 1
             },
             {
+                title: 'Detran CNH',
+                icon: 'card',
+                component: 'DriverLicensePage',
+                order: 2
+            },
+            {
+                title: 'Detran Veículos',
+                icon: 'car',
+                component: 'VehiclesPage',
+                order: 2
+            },
+            {
                 title: 'Agenda ES',
                 icon: 'calendar',
                 component: 'SchedulePage',

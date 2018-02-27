@@ -22,31 +22,35 @@ export class HomePage {
     ) { }
 
     /**
+     * ref: https://github.com/ionic-team/ionic/issues/11459#issuecomment-365224107
      *
      */
-    public ionViewWillEnter() {
-        if ( this.auth.isAuthenticated ) {
-            this.goToDashboardPage()
+    ionViewCanEnter(): boolean | Promise<any> {
+        const isAllowed = !this.auth.isAuthenticated
+
+        if ( !isAllowed ) {
+            setTimeout( this.goToDashboardPage, 0 )
         }
+        return isAllowed
     }
 
     /**
      *
      *
      */
-    public goToLoginPage = () => this.navCtrl.push( 'LoginPage' )
+    goToLoginPage = () => this.navCtrl.push( 'LoginPage' )
 
     /**
      *
      *
      */
-    public goToDashboardPage = () => this.navCtrl.setRoot( 'DashboardPage' )
+    goToDashboardPage = () => this.navCtrl.setRoot( 'DashboardPage' )
 
     /**
      *
      *
      */
-    public createAccount = (): void => {
+    createAccount = (): void => {
         let options = 'toolbar=no,location=no,clearcache=yes,clearsessioncache=yes,closebuttoncaption=Cancelar'
         let browser = this.iab.create(
             `${ this.environment.api.acessocidadao }/Conta/VerificarCPF?espmplatform=${ this.platform.platforms().join( ',' ) }`,

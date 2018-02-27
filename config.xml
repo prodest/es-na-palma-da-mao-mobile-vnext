@@ -4,16 +4,13 @@
     <description>O ES NA PALMA DA MÃO é um programa do Governo do Estado do Espírito Santo que reúne iniciativas e serviços do Governo em plataforma móvel (aplicativo) e web, com unidade de experiência do cidadão. Por meio do ES NA PALMA DA MÃO, diversos serviços governamentais podem ser acessados através da web e dispositivos móveis (sistemas operacionais iOS e Android) utilizando uma interface comum.</description>
     <author email="atendimento@prodest.es.gov.br" href="https://prodest.es.gov.br/">PRODEST</author>
     <content src="index.html" />
-
     <access origin="https://acessocidadao.es.gov.br" />
     <access origin="https://developers.es.gov.br" />
     <access origin="https://api.es.gov.br/" />
     <access origin="http://*.google.com" />
-    
     <allow-navigation href="https://developers.es.gov.br/*" />
     <allow-navigation href="https://sistemas.es.gov.br/*" />
     <allow-navigation href="https://acessocidadao.es.gov.br/*" />
-    
     <allow-intent href="http://*/*" />
     <allow-intent href="https://*/*" />
     <allow-intent href="tel:*" />
@@ -101,7 +98,7 @@
     <plugin name="cordova-plugin-googleplus" spec="^5.1.1">
         <variable name="REVERSED_CLIENT_ID" value="com.googleusercontent.apps.716051840979-no1a2uaro7tun9f7timu90c7rpoe7heg" />
     </plugin>
+    <plugin name="cordova-sqlite-storage" spec="^2.2.1" />
     <engine name="android" spec="^6.2.3" />
     <engine name="ios" spec="^4.4.0" />
-    <plugin name="cordova-sqlite-storage" spec="^2.2.1" />
 </widget>

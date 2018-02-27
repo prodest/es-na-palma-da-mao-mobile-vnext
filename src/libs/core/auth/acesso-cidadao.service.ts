@@ -2,12 +2,13 @@ import { HttpClient, HttpHeaders } from '@angular/common/http'
 import { Inject, Injectable } from '@angular/core'
 import { Observable } from 'rxjs/Observable'
 import { of } from 'rxjs/observable/of'
-import { flatMap, map, tap } from 'rxjs/operators'
+import { _throw } from 'rxjs/observable/throw'
+import { flatMap, map } from 'rxjs/operators'
 
+import { ANONYMOUS_HEADER } from '.'
+import { EnvVariables } from './../environment'
 import { Environment } from './../environment/environment'
-import { EnvVariables } from './../environment/index'
 import { AuthStorage } from './auth-storage.service'
-import { ANONYMOUS_HEADER } from './index'
 import { JwtHelper } from './jwt-helper'
 import { AcessoCidadaoResponse } from './models/authResponses/acessoCidadaoResponse'
 import { AcessoCidadaoClaims } from './models/claims/acessoCidadaoClaims'
@@ -56,9 +57,9 @@ export class AcessoCidadaoService {
      */
     public login = ( identity: Identity ): Observable<AcessoCidadaoClaims> => {
         return this.getToken( identity ).pipe(
-            tap( this.saveAccessToken ),
-            tap( this.saveRefreshToken ),
-            tap( this.saveClientId ),
+            flatMap( this.saveAccessToken ),
+            flatMap( this.saveRefreshToken ),
+            flatMap( this.saveClientId ),
             flatMap( this.getUserClaims )
         )
     }
@@ -72,7 +73,9 @@ export class AcessoCidadaoService {
      * Retorna se tem usuário logado ou não.
      */
     public get isAuthenticated(): boolean {
-        return !!this.authStorage.accessToken && !this.jwt.isTokenExpired( this.authStorage.accessToken ) // && !!this.user
+        return (
+            !!this.authStorage.getValue( 'accessToken' ) && !this.jwt.isTokenExpired( this.authStorage.getValue( 'accessToken' ) )
+        ) // && !!this.user
     }
 
     /**
@@ -80,12 +83,12 @@ export class AcessoCidadaoService {
      *
      */
     public refreshAccessTokenIfNeeded = (): Observable<Token> => {
-        if ( !this.authStorage.refreshToken ) {
-            Observable.throw( { message: 'no-token' } )
+        if ( !this.authStorage.getValue( 'refreshToken' ) ) {
+            _throw( { message: 'no-token' } )
         }
 
         let currentDate = new Date()
-        let token = of( this.authStorage.accessToken )
+        let token = of( this.authStorage.getValue( 'accessToken' ) )
 
         // Usa o token ainda válido e faz um refresh token em background (não-bloqueante)
         if ( this.isTokenIsExpiringIn( currentDate ) ) {
@@ -123,7 +126,7 @@ export class AcessoCidadaoService {
 
         return this.login( this.createRefreshTokenIdentity() ).pipe(
             // finalize(() => (AcessoCidadaoService.refreshingToken = false)),
-            map(() => this.authStorage.accessToken )
+            map(() => this.authStorage.getValue( 'accessToken' ) )
         )
     }
 
@@ -139,12 +142,12 @@ export class AcessoCidadaoService {
             scope: this.environment.identityServer.defaultScopes
         }
 
-        if ( this.authStorage.clientId === 'espm' ) {
+        if ( this.authStorage.getValue( 'clientId' ) === 'espm' ) {
             identity.client_id = this.environment.identityServer.clients.espm.id
             identity.client_secret = this.environment.identityServer.clients.espm.secret
         }
 
-        identity.refresh_token = this.authStorage.refreshToken
+        identity.refresh_token = this.authStorage.getValue( 'refreshToken' )
 
         return identity
     }
@@ -173,7 +176,7 @@ export class AcessoCidadaoService {
      *
      */
     private isTokenExpiredIn = ( date: Date ) => {
-        return this.jwt.isTokenExpired( this.authStorage.accessToken, date )
+        return this.jwt.isTokenExpired( this.authStorage.getValue( 'accessToken' ), date )
     }
 
     /**
@@ -181,7 +184,7 @@ export class AcessoCidadaoService {
      *
      */
     private isTokenIsExpiringIn = ( date: Date ) => {
-        return this.jwt.isTokenIsExpiringIn( this.authStorage.accessToken, date )
+        return this.jwt.isTokenIsExpiringIn( this.authStorage.getValue( 'accessToken' ), date )
     }
 
     /**
@@ -189,7 +192,7 @@ export class AcessoCidadaoService {
      *
      */
     private saveAccessToken = ( response: AcessoCidadaoResponse ) => {
-        this.authStorage.accessToken = response.access_token
+        return this.authStorage.setValue( 'accessToken', response.access_token ).then(() => response )
     }
 
     /**
@@ -197,7 +200,7 @@ export class AcessoCidadaoService {
      *
      */
     private saveRefreshToken = ( response: AcessoCidadaoResponse ) => {
-        this.authStorage.refreshToken = response.refresh_token
+        return this.authStorage.setValue( 'refreshToken', response.refresh_token ).then(() => response )
     }
 
     /**
@@ -205,6 +208,8 @@ export class AcessoCidadaoService {
      *
      */
     private saveClientId = ( response: AcessoCidadaoResponse ) => {
-        this.authStorage.clientId = this.jwt.decodeToken( response.access_token ).client_id
+        return this.authStorage
+            .setValue( 'clientId', this.jwt.decodeToken( response.access_token ).client_id )
+            .then(() => response )
     }
 }

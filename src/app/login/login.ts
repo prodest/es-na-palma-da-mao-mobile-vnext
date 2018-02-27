@@ -36,18 +36,22 @@ export class LoginPage {
     ) { }
 
     /**
+     * ref: https://github.com/ionic-team/ionic/issues/11459#issuecomment-365224107
      *
      */
-    public ionViewWillEnter() {
-        if ( this.auth.isAuthenticated ) {
-            this.goToDashboard()
+    ionViewCanEnter(): boolean | Promise<any> {
+        const isAllowed = !this.auth.isAuthenticated
+
+        if ( !isAllowed ) {
+            setTimeout( this.goToDashboard, 0 )
         }
+        return isAllowed
     }
 
     /**
      * Executa login na aplicação de acordo com as configurações do settings, usuário e senha.
      */
-    public login = ( username?: string, password?: string ) => {
+    login = ( username?: string, password?: string ) => {
         if ( !username || !password ) {
             this.toastCtrl.create( { message: 'Login e senha são obrigatórios' } ).present()
             return
@@ -60,17 +64,17 @@ export class LoginPage {
      * Realiza o login usando o facebook
      * https://github.com/jeduan/cordova-plugin-facebook4
      */
-    public facebookLogin = () => this.loginWith(() => this.auth.facebookLogin() )
+    facebookLogin = () => this.loginWith(() => this.auth.facebookLogin() )
 
     /**
      * Realiza o login usando conta do google
      */
-    public googleLogin = () => this.loginWith(() => this.auth.googleLogin() )
+    googleLogin = () => this.loginWith(() => this.auth.googleLogin() )
 
     /**
      * Abre a janela(no browser) de recuperar senha do acesso cidadão.
      */
-    public openUrlForgotPassword = () =>
+    openUrlForgotPassword = () =>
         this.openInAppBrowser( `${ this.environment.api.acessocidadao }/Conta/SolicitarReinicioSenha` )
 
     /************************************* Private API *************************************/

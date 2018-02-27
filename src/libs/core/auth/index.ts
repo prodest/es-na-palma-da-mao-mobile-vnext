@@ -8,6 +8,7 @@ import { JwtHelper } from './jwt-helper'
 import { JwtInterceptorProvider } from './jwt.interceptor'
 import { User } from './models/user'
 
+export * from './auth-storage.service'
 export * from './auth.service'
 export * from './models'
 

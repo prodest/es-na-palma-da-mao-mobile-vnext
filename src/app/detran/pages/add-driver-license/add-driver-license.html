@@ -1,0 +1,30 @@
+<ion-header>
+  <ion-navbar>
+    <ion-title>
+      Cadastrar CNH
+    </ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content>
+  <form novalidate>
+    <ion-list>
+      <ion-list-header>
+        Digite os dados da sua CNH
+      </ion-list-header>
+      <ion-item>
+        <ion-label floating>N° de Registro</ion-label>
+        <ion-input type="text"></ion-input>
+      </ion-item>
+
+      <ion-item>
+        <ion-label floating>Cédula (n° lateral)</ion-label>
+        <ion-input type="text"></ion-input>
+      </ion-item>
+    </ion-list>
+  </form>
+</ion-content>
+
+<ion-footer>
+  <button ion-button no-margin full (click)="onSubmitClick(form.value)">Salvar</button>
+</ion-footer>
