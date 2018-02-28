@@ -16,6 +16,14 @@ export class DetranService {
      *
      *
      */
+    get cnh(): DriverLicense {
+        return this.storage.getValue( 'driverLicense' )
+    }
+
+    /**
+     *
+     *
+     */
     constructor ( private storage: DetranStorage, private api: DetranApiService ) { }
 
     /**

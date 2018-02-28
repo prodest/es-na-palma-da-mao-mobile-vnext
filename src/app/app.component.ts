@@ -81,9 +81,7 @@ export class ESPM {
      *
      */
     public logout = () => {
-        this.auth.logout(() => {
-            this.openPage( 'HomePage' )
-        } )
+        this.auth.logout().then(() => this.openPage( 'HomePage' ) )
     }
 
     /**

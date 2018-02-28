@@ -2,6 +2,7 @@ import { Inject, Injectable } from '@angular/core'
 import { Environment, EnvVariables } from '@espm/core/environment'
 import { Facebook, FacebookLoginResponse } from '@ionic-native/facebook'
 import { GooglePlus } from '@ionic-native/google-plus'
+import { Platform } from 'ionic-angular'
 import { Observable } from 'rxjs/Observable'
 import { fromPromise } from 'rxjs/observable/fromPromise'
 import { flatMap, map, tap } from 'rxjs/operators'
@@ -24,6 +25,8 @@ import {
  */
 @Injectable()
 export class AuthService {
+    onDevice = false
+
     /**
      * Creates an instance of AuthService.
      *
@@ -33,8 +36,11 @@ export class AuthService {
         private acessoCidadao: AcessoCidadaoService,
         private googlePlus: GooglePlus,
         private facebook: Facebook,
+        private platform: Platform,
         @Inject( EnvVariables ) private environment: Environment // private pushService: PushService,
-    ) { }
+    ) {
+        this.onDevice = this.platform.is( 'cordova' )
+    }
 
     /**
      *
@@ -86,16 +92,16 @@ export class AuthService {
      *
      *
      */
-    public logout( success: Function ) {
+    public logout() {
         // 1 - se desloga de todos os providers
-        this.googlePlus.logout()
-        this.facebook.logout()
-        this.acessoCidadao.logout()
+        return Promise.all( [
+            this.onDevice ? this.googlePlus.logout() : Promise.resolve(),
+            this.onDevice ? this.facebook.logout() : Promise.resolve(),
+            this.acessoCidadao.logout()
+        ] )
 
         // 3 - Reinicia o push para usuário anônimo
         // todo this.pushService.init()
-
-        success()
     }
 
     /**
