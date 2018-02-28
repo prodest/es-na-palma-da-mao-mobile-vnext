@@ -1,6 +1,14 @@
 # Specifies intentionally untracked files to ignore when using Git
 # http://git-scm.com/docs/gitignore
 
+# dependencies
+/node_modules
+
+.env
+
+// push
+google-services.json
+
 *~
 *.sw[mnpcod]
 *.log
@@ -9,8 +17,30 @@
 log.txt
 *.sublime-project
 *.sublime-workspace
-.vscode/
 npm-debug.log*
+testem.log
+
+# IDEs and editors
+.vscode/
+/.idea
+.project
+.classpath
+.c9/
+*.launch
+.settings/
+*.sublime-workspace
+
+# compiled output
+/dist
+/tmp
+/build
+temp/
+
+# ngc output
+src/**/*.map
+src/**/*.metadata.json
+src/**/*.ngsummary.json
+src/**/*.js
 
 .idea/
 .sourcemaps/
@@ -18,18 +48,24 @@ npm-debug.log*
 .tmp/
 .versions/
 coverage/
-dist/
-node_modules/
-tmp/
-temp/
 hooks/
 platforms/
 plugins/
 plugins/android.json
 plugins/ios.json
 www/
+/connect.lock
+/libpeerconnection.log
 $RECYCLE.BIN/
+/typings
 
+#System Files
 .DS_Store
 Thumbs.db
 UserInterfaceState.xcuserstate
+
+# e2e
+/e2e/*.js
+/e2e/*.map
+
+
