@@ -8,9 +8,12 @@ import { SplashScreen } from '@ionic-native/splash-screen'
 import { StatusBar } from '@ionic-native/status-bar'
 import { IonicStorageModule } from '@ionic/storage'
 import { IonicApp, IonicErrorHandler, IonicModule } from 'ionic-angular'
+import * as moment from 'moment'
 
 import { ESPM } from './app.component'
 import { DetranProviders } from './detran/providers'
+
+moment.locale( 'pt-br' )
 
 @NgModule( {
     declarations: [ ESPM ],

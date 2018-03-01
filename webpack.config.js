@@ -12,6 +12,7 @@ const _ = require('lodash')
 const webpack = require('webpack')
 const merge = require('webpack-merge')
 const { dev, prod } = require('@ionic/app-scripts/config/webpack.config')
+const ContextReplacementPlugin = require('webpack/lib/ContextReplacementPlugin')
 const rxPaths = require('rxjs/_esm5/path-mapping')
 
 /* LINHAS CUSTOMIZADAS INSERIDAS
@@ -36,6 +37,7 @@ const envVariables = {
 const setEnvironmentVariables = (env, constants) => {
   const plugins = [
     new webpack.DefinePlugin(constants),
+    new ContextReplacementPlugin(/moment[/\\]locale$/, /pt-br/),
     new webpack.EnvironmentPlugin(['IONIC_ENV'])
   ]
   env.plugins = [...env.plugins, ...plugins]
