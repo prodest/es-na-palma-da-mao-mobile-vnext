@@ -1,0 +1,18 @@
+espm-vehicle {
+  [ion-item] {
+    .item-inner {
+      margin-left: 10px !important;
+
+      .vehicle__model {
+        margin-bottom: 0px;
+        font-weight: 500;
+      }
+      .vehicle__plate,
+      .vehicle__renavam {
+        display: block;
+        margin: 5px 0;
+        text-transform: uppercase;
+      }
+    }
+  }
+}

@@ -1,0 +1,41 @@
+espm-driver-status {
+  $ok: rgba(76, 175, 80, 0.85);
+  $blocked: rgba(244, 67, 54, 0.85);
+  $expired: rgba(229, 115, 115, 0.85);
+  $renew: #fdc44a;
+
+  .status--ok {
+    background-color: $ok;
+  }
+  .status--blocked {
+    background-color: $blocked;
+  }
+  .status--expired {
+    background-color: $expired;
+  }
+  .status--renew {
+    background-color: $renew;
+  }
+
+  .status__icon {
+    font-size: 40px;
+  }
+
+  .status__warning {
+    font-size: 12px;
+    color: darkred;
+  }
+
+  .status__msg {
+    margin-bottom: 8px;
+  }
+
+  .status__detail {
+    font-size: 12px;
+    color: #333;
+  }
+
+  .status__icon + .item-inner {
+    margin-left: 10px !important;
+  }
+}

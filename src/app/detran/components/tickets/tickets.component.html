@@ -1,0 +1,19 @@
+<ion-list *ngIf="tickets && tickets.length" class="tickets">
+    <ion-list-header>
+        Histórico de multas ({{tickets.length }} multas)
+    </ion-list-header>
+    <ion-item *ngFor="let ticket of tickets">
+        <div item-start class="ticket__points" [ngStyle]="{ 'background-color': ticket.classification | ticketLevelColor}">{{ticket.points}} </div>
+        <ion-note class="ticket__date">{{ticket.date | dateFormat}}</ion-note>
+        <small *ngIf="ticket.plate" color-secondary-fg>Placa: {{ticket.plate}}</small>
+        <p text-wrap class="ticket__address">
+            <ion-icon name="pin"></ion-icon>{{ticket.place | capitalize}}, {{ticket.district | capitalize}}
+        </p>
+        <small text-wrap margin-top class="ticket__description">{{ticket.description}}</small>
+    </ion-item>
+</ion-list>
+<ion-list *ngIf="tickets && !tickets.length" class="tickets">
+    <ion-list-header>
+        Nenhuma multa encontrada
+    </ion-list-header>
+</ion-list>

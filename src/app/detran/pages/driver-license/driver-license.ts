@@ -1,9 +1,9 @@
 import { Component } from '@angular/core'
-import { IonicPage, LoadingController, ModalController } from 'ionic-angular'
-import { finalize } from 'rxjs/operators'
+import { AuthService } from '@espm/core/auth'
+import { IonicPage, Loading, ModalController, NavController } from 'ionic-angular'
 
 import { DriverLicense } from './../../model'
-import { DetranService } from './../../providers'
+import { DriverService } from './../../providers'
 
 @IonicPage()
 @Component( {
@@ -11,21 +11,38 @@ import { DetranService } from './../../providers'
     templateUrl: 'driver-license.html'
 } )
 export class DriverLicensePage {
-    /**
-     *
-     *
-     */
-    constructor (
-        private detranService: DetranService,
-        private loadingCtrl: LoadingController,
-        private modalCtrl: ModalController
-    ) { }
+    loading: Loading
 
     /**
      *
      *
      */
-    addDriverLicense = () => {
+    constructor (
+        private auth: AuthService,
+        private detran: DriverService,
+        private navCtrl: NavController,
+        private modalCtrl: ModalController
+    ) { }
+
+    /**
+     * ref: https://github.com/ionic-team/ionic/issues/11459#issuecomment-365224107
+     *
+     */
+    ionViewCanEnter(): boolean | Promise<any> {
+        // permite acesso à tela de o usuário não possui cnh no acesso cidadão nem cadastrou agora
+        const isAllowed = !( this.auth.user.cnhNumero && this.auth.user.cnhCedula )
+
+        if ( !isAllowed ) {
+            setTimeout(() => this.navCtrl.setRoot( 'DriverLicenseStatusPage' ) )
+        }
+        return isAllowed
+    }
+
+    /**
+     *
+     *
+     */
+    addCNH = () => {
         let modal = this.modalCtrl.create( 'AddDriverLicensePage', null, {
             cssClass: 'pop-up-modal',
             enableBackdropDismiss: true
@@ -39,10 +56,6 @@ export class DriverLicensePage {
      *
      */
     saveCNH = ( cnh: DriverLicense ) => {
-        const loading = this.loadingCtrl.create( { content: 'Aguarde', enableBackdropDismiss: false } )
-        this.detranService
-            .saveCNH( cnh )
-            .pipe( finalize(() => loading.dismiss() ) )
-            .subscribe( CNH => console.log( 'adicionou: ', CNH ) )
+        cnh && this.detran.saveCNH( cnh ).subscribe(() => this.navCtrl.setRoot( 'DriverLicenseStatusPage' ) )
     }
 }

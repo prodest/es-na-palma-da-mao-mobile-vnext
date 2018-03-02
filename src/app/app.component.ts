@@ -20,6 +20,13 @@ const menus = [
                 component: 'DriverLicensePage',
                 order: 2
             },
+
+            {
+                title: 'Detran CNH Status',
+                icon: 'card',
+                component: 'DriverLicenseStatusPage',
+                order: 2
+            },
             {
                 title: 'Detran Veículos',
                 icon: 'car',

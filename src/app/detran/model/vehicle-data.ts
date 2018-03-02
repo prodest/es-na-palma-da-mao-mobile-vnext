@@ -1,7 +1,6 @@
 import { Vehicle } from './vehicle'
 
-export interface VehicleData {
-    id: number
+export interface VehiclesData {
     vehicles: Vehicle[]
-    date: Date
+    date: string
 }

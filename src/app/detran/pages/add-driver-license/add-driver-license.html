@@ -7,24 +7,31 @@
 </ion-header>
 
 <ion-content>
-  <form novalidate>
+  <form novalidate [formGroup]="form">
     <ion-list>
       <ion-list-header>
         Digite os dados da sua CNH
       </ion-list-header>
       <ion-item>
-        <ion-label floating>N° de Registro</ion-label>
-        <ion-input type="text"></ion-input>
+        <ion-label stacked>N° de Registro</ion-label>
+        <ion-input type="text" formControlName="registerNumber" clearInput></ion-input>
       </ion-item>
-
+      <espm-validation-message [errors]="validationErrors['registerNumber']"></espm-validation-message>
       <ion-item>
-        <ion-label floating>Cédula (n° lateral)</ion-label>
-        <ion-input type="text"></ion-input>
+        <ion-label stacked>Cédula (n° lateral)</ion-label>
+        <ion-input type="text" formControlName="ballot" clearInput></ion-input>
       </ion-item>
+      <espm-validation-message [errors]="validationErrors['ballot']"></espm-validation-message>
     </ion-list>
   </form>
+  <ion-grid>
+    <ion-row>
+      <ion-col>
+        <button ion-button no-margin full color-primary-inverse (click)="dismiss()">Cancelar</button>
+      </ion-col>
+      <ion-col>
+        <button ion-button no-margin full color-primary (click)="onSubmitClick(form.value)">Salvar</button>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
 </ion-content>
-
-<ion-footer>
-  <button ion-button no-margin full (click)="onSubmitClick(form.value)">Salvar</button>
-</ion-footer>

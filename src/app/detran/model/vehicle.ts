@@ -1,7 +1,6 @@
-import { VehicleInfo } from './vehicleInfo'
-
 export interface Vehicle {
     plate: string
     renavam: number
-    info?: VehicleInfo
+    color: string
+    model: string
 }

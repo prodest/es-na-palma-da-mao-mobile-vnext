@@ -1,0 +1,10 @@
+<button ion-item class="vehicle">
+    <ion-icon item-start name="car"></ion-icon>
+    <h3 class="vehicle__model" text-wrap>
+        {{vehicle.model}} - {{vehicle.color }}
+    </h3>
+    <small class="vehicle__plate">Placa: {{vehicle.plate}}</small>
+    <small class="vehicle__renavam">RENAVAM: {{vehicle.renavam}}</small>
+    <ng-content item-end>
+    </ng-content>
+</button>

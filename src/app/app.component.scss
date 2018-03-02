@@ -51,7 +51,7 @@ button {
 
   [color-#{$colorName}-bg],
   .color-#{$colorName}-bg {
-    background-color: nth($colorValues, 1);
+    background-color: nth($colorValues, 2);
   }
 }
 

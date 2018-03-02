@@ -17,7 +17,12 @@ moment.locale( 'pt-br' )
 
 @NgModule( {
     declarations: [ ESPM ],
-    imports: [ BrowserModule, CoreModule, IonicStorageModule.forRoot( { name: 'espm' } ), IonicModule.forRoot( ESPM ) ],
+    imports: [
+        BrowserModule,
+        CoreModule,
+        IonicStorageModule.forRoot( { name: 'espm', driverOrder: [ 'localstorage' ] } ),
+        IonicModule.forRoot( ESPM )
+    ],
     bootstrap: [ IonicApp ],
     entryComponents: [ ESPM ],
     providers: [

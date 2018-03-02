@@ -1,9 +1,7 @@
-import { DriverLicense, Vehicle, VehicleData } from './../model'
+import { Vehicle } from './../model'
 
 export interface DetranStorageModel {
     vehicles: Vehicle[]
-    driverLicense: DriverLicense
-    vehiclesData: VehicleData
     clientId: string
     avatarUrl: string
 }

@@ -1,6 +1,6 @@
 export interface Ticket {
     classification: string
-    date: Date
+    date: string
     description: string
     district: string
     place: string

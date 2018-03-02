@@ -103,14 +103,14 @@ export class AcessoCidadaoService {
         return token
     }
 
-    /************************************* Private API *************************************/
-
     /**
      * Obtém as claims do usuário no acesso cidadão.
      *
      */
-    private getUserClaims = (): Observable<AcessoCidadaoClaims> =>
+    public getUserClaims = (): Observable<AcessoCidadaoClaims> =>
         this.http.get<AcessoCidadaoClaims>( `${ this.environment.identityServer.url }/connect/userinfo` )
+
+    /************************************* Private API *************************************/
 
     /**
      *

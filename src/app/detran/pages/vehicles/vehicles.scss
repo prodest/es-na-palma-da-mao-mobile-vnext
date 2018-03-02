@@ -1,2 +1,20 @@
 page-vehicles {
+  [ion-item] {
+    .item-inner {
+      .vehicle__button {
+        font-size: 1.4rem;
+      }
+    }
+  }
+
+  espm-vehicle {
+    &.disabled {
+      [ion-item] {
+        .input-wrapper *,
+        ion-icon {
+          color: #ccc;
+        }
+      }
+    }
+  }
 }

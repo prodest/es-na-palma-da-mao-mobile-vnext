@@ -1,0 +1,37 @@
+<ion-header>
+  <ion-navbar>
+    <ion-title>
+      Adicionar veículo
+    </ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content>
+  <form novalidate [formGroup]="form">
+    <ion-list>
+      <ion-list-header>
+        Digite os dados do veículo
+      </ion-list-header>
+      <ion-item>
+        <ion-label stacked>Placa</ion-label>
+        <ion-input type="text" formControlName="plate" clearInput></ion-input>
+      </ion-item>
+      <espm-validation-message [errors]="validationErrors['plate']"></espm-validation-message>
+      <ion-item>
+        <ion-label stacked>RENAVAM</ion-label>
+        <ion-input type="text" formControlName="renavam" clearInput></ion-input>
+      </ion-item>
+      <espm-validation-message [errors]="validationErrors['renavam']"></espm-validation-message>
+    </ion-list>
+  </form>
+  <ion-grid>
+    <ion-row>
+      <ion-col>
+        <button ion-button no-margin full color-primary-inverse (click)="dismiss()">Cancelar</button>
+      </ion-col>
+      <ion-col>
+        <button ion-button no-margin full color-primary (click)="onSubmitClick(form.value)">Salvar</button>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-content>

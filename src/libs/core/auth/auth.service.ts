@@ -125,12 +125,21 @@ export class AuthService {
     public get user(): User {
         return this.authStorage.getValue( 'user' )
     }
+
     /**
      *
      *
      */
     public get isAnonymous(): boolean {
         return this.user && this.user.anonymous
+    }
+
+    /**
+     *
+     *
+     */
+    public refreshUser = (): Observable<User> => {
+        return this.acessoCidadao.getUserClaims().pipe( flatMap( this.createUser ) )
     }
 
     /************************************* Private API *************************************/

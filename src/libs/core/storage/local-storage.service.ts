@@ -40,9 +40,15 @@ export abstract class LocalStorage<T> {
         return this.merge( { [ key as string ]: value } as any ).then(( o: T ) => o[ key ] )
     }
 
-    // private getProperty = <T, K extends keyof T>(o: T, name: K): T[K] => {
-    //     return o[name]// o[name] is of type T[K]
-    // }
+    /**
+     *
+     *
+     */
+    public mergeValue = <K extends keyof T>( key: K, value: T[ K ] ): Promise<T[ K ]> => {
+        const allCopy = merge( {}, this.all )
+        allCopy[ key ] = value
+        return this.setAll( allCopy ).then(( o: T ) => o[ key ] )
+    }
 
     /**
      *
