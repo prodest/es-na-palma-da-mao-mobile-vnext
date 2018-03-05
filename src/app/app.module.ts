@@ -13,26 +13,26 @@ import * as moment from 'moment'
 import { ESPM } from './app.component'
 import { DetranProviders } from './detran/providers'
 
-moment.locale( 'pt-br' )
+moment.locale('pt-br')
 
-@NgModule( {
-    declarations: [ ESPM ],
-    imports: [
-        BrowserModule,
-        CoreModule,
-        IonicStorageModule.forRoot( { name: 'espm', driverOrder: [ 'localstorage' ] } ),
-        IonicModule.forRoot( ESPM )
-    ],
-    bootstrap: [ IonicApp ],
-    entryComponents: [ ESPM ],
-    providers: [
-        StatusBar,
-        SplashScreen,
-        GooglePlus,
-        Facebook,
-        InAppBrowser,
-        ...DetranProviders,
-        { provide: ErrorHandler, useClass: IonicErrorHandler }
-    ]
-} )
-export class EspmModule { }
+@NgModule({
+  declarations: [ESPM],
+  imports: [
+    BrowserModule,
+    CoreModule,
+    IonicStorageModule.forRoot({ name: 'espm', driverOrder: ['localstorage'] }),
+    IonicModule.forRoot(ESPM)
+  ],
+  bootstrap: [IonicApp],
+  entryComponents: [ESPM],
+  providers: [
+    StatusBar,
+    SplashScreen,
+    GooglePlus,
+    Facebook,
+    InAppBrowser,
+    ...DetranProviders,
+    { provide: ErrorHandler, useClass: IonicErrorHandler }
+  ]
+})
+export class EspmModule {}

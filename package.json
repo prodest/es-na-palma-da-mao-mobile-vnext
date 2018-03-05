@@ -15,9 +15,7 @@
     "ionic:serve": "ionic-app-scripts serve",
     "htmlhint": "htmlhint --config .htmlhintrc",
     "precommit": "lint-staged",
-    "prettier": "prettier --print-width 120 --no-semi --single-quote --write",
-    "tsfmt": "tsfmt --no-tslint --no-vscode --no-editorconfig --verbose -r",
-    "tsfmt-verify": "tsfmt --verify",
+    "prettier": "prettier --find-config-path --write",
     "workbox": "workbox generate:sw",
     "github:release": "sh ./release.sh",
     "commit": "git-cz",
@@ -31,7 +29,6 @@
     "src/**/*.ts": [
       "lint",
       "prettier",
-      "tsfmt",
       "git add"
     ],
     "src/**/*.{css,scss}": [
@@ -49,7 +46,7 @@
     },
     "validate-commit-msg": {
       "types": "conventional-commit-types",
-      "helpMessage": "Use \"yarn commit\" instead, we use conventional-changelog format :) (https://github.com/commitizen/cz-cli)"
+      "helpMessage": "Use \"npm run commit\" instead, we use conventional-changelog format :) (https://github.com/commitizen/cz-cli)"
     }
   },
   "dependencies": {
@@ -121,7 +118,7 @@
     "url": "git+https://github.com/prodest/es-na-palma-da-mao-mobile-vnext.git"
   },
   "keywords": [
-    "PRODEST"
+    "PRODEST", "GOVERNO ES", "ESPM"
   ],
   "author": "PRODEST (https://github.com/prodest/)",
   "contributors": [

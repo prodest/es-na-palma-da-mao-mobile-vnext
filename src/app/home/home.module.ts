@@ -4,8 +4,8 @@ import { IonicPageModule } from 'ionic-angular'
 
 import { HomePage } from './home'
 
-@NgModule( {
-    declarations: [ HomePage ],
-    imports: [ NoMenuDirectiveModule, IonicPageModule.forChild( HomePage ) ]
-} )
-export class HomePageModule { }
+@NgModule({
+  declarations: [HomePage],
+  imports: [NoMenuDirectiveModule, IonicPageModule.forChild(HomePage)]
+})
+export class HomePageModule {}

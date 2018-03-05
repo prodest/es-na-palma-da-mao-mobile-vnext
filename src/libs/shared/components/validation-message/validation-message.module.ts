@@ -4,9 +4,9 @@ import { IonicModule } from 'ionic-angular'
 
 import { ValidationMessageComponent } from './validation-message.component'
 
-@NgModule( {
-    imports: [ CommonModule, IonicModule ],
-    declarations: [ ValidationMessageComponent ],
-    exports: [ ValidationMessageComponent ]
-} )
-export class ValidationMessageModule { }
+@NgModule({
+  imports: [CommonModule, IonicModule],
+  declarations: [ValidationMessageComponent],
+  exports: [ValidationMessageComponent]
+})
+export class ValidationMessageModule {}

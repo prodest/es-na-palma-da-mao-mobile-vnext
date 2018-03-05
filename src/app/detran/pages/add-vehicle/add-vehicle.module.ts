@@ -4,8 +4,8 @@ import { IonicPageModule } from 'ionic-angular'
 
 import { AddVehiclePage } from './add-vehicle'
 
-@NgModule( {
-    imports: [ ValidationMessageModule, IonicPageModule.forChild( AddVehiclePage ) ],
-    declarations: [ AddVehiclePage ]
-} )
-export class AddVehiclePageModule { }
+@NgModule({
+  imports: [ValidationMessageModule, IonicPageModule.forChild(AddVehiclePage)],
+  declarations: [AddVehiclePage]
+})
+export class AddVehiclePageModule {}

@@ -5,6 +5,6 @@ import { Identity } from './identity'
  *
  */
 export interface SocialNetworkIdentity extends Identity {
-    accesstoken?: string
-    provider?: string
+  accesstoken?: string
+  provider?: string
 }

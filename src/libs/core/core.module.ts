@@ -13,31 +13,31 @@ import { EnvironmentProvider } from './environment'
 // import { AppState } from './state'
 // import { Storage } from './storage'
 
-@NgModule( {
-    imports: [ CommonModule, HttpClientModule ],
-    providers: [
-        EnvironmentProvider,
-        //    Config,
-        ...Auth,
-        ...Common
-        // ...Storage,
-        //  ...Api,
-        //  ...AppState,
-        //  ...Push,
-        //  ...GoogleMaps
-    ]
-} )
+@NgModule({
+  imports: [CommonModule, HttpClientModule],
+  providers: [
+    EnvironmentProvider,
+    //    Config,
+    ...Auth,
+    ...Common
+    // ...Storage,
+    //  ...Api,
+    //  ...AppState,
+    //  ...Push,
+    //  ...GoogleMaps
+  ]
+})
 export class CoreModule {
-    /**
-     * Creates an instance of CoreModule.
-     */
-    constructor (
-        @Optional()
-        @SkipSelf()
-        parentModule: CoreModule
-    ) {
-        if ( parentModule ) {
-            throw new Error( 'CoreModule is already loaded. Import it in the AppModule only' )
-        }
+  /**
+   * Creates an instance of CoreModule.
+   */
+  constructor(
+    @Optional()
+    @SkipSelf()
+    parentModule: CoreModule
+  ) {
+    if (parentModule) {
+      throw new Error('CoreModule is already loaded. Import it in the AppModule only')
     }
+  }
 }

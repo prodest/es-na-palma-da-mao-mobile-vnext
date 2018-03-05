@@ -6,56 +6,56 @@ import { DriverLicense } from './../../model'
 import { DriverService } from './../../providers'
 
 @IonicPage()
-@Component( {
-    selector: 'page-driver-license',
-    templateUrl: 'driver-license.html'
-} )
+@Component({
+  selector: 'page-driver-license',
+  templateUrl: 'driver-license.html'
+})
 export class DriverLicensePage {
-    loading: Loading
+  loading: Loading
 
-    /**
-     *
-     *
-     */
-    constructor (
-        private auth: AuthService,
-        private detran: DriverService,
-        private navCtrl: NavController,
-        private modalCtrl: ModalController
-    ) { }
+  /**
+   *
+   *
+   */
+  constructor(
+    private auth: AuthService,
+    private detran: DriverService,
+    private navCtrl: NavController,
+    private modalCtrl: ModalController
+  ) {}
 
-    /**
-     * ref: https://github.com/ionic-team/ionic/issues/11459#issuecomment-365224107
-     *
-     */
-    ionViewCanEnter(): boolean | Promise<any> {
-        // permite acesso à tela de o usuário não possui cnh no acesso cidadão nem cadastrou agora
-        const isAllowed = !( this.auth.user.cnhNumero && this.auth.user.cnhCedula )
+  /**
+   * ref: https://github.com/ionic-team/ionic/issues/11459#issuecomment-365224107
+   *
+   */
+  ionViewCanEnter(): boolean | Promise<any> {
+    // permite acesso à tela de o usuário não possui cnh no acesso cidadão nem cadastrou agora
+    const isAllowed = !(this.auth.user.cnhNumero && this.auth.user.cnhCedula)
 
-        if ( !isAllowed ) {
-            setTimeout(() => this.navCtrl.setRoot( 'DriverLicenseStatusPage' ) )
-        }
-        return isAllowed
+    if (!isAllowed) {
+      setTimeout(() => this.navCtrl.setRoot('DriverLicenseStatusPage'))
     }
+    return isAllowed
+  }
 
-    /**
-     *
-     *
-     */
-    addCNH = () => {
-        let modal = this.modalCtrl.create( 'AddDriverLicensePage', null, {
-            cssClass: 'pop-up-modal',
-            enableBackdropDismiss: true
-        } )
-        modal.onDidDismiss( this.saveCNH )
-        modal.present()
-    }
+  /**
+   *
+   *
+   */
+  addCNH = () => {
+    let modal = this.modalCtrl.create('AddDriverLicensePage', null, {
+      cssClass: 'pop-up-modal',
+      enableBackdropDismiss: true
+    })
+    modal.onDidDismiss(this.saveCNH)
+    modal.present()
+  }
 
-    /**
-     *
-     *
-     */
-    saveCNH = ( cnh: DriverLicense ) => {
-        cnh && this.detran.saveCNH( cnh ).subscribe(() => this.navCtrl.setRoot( 'DriverLicenseStatusPage' ) )
-    }
+  /**
+   *
+   *
+   */
+  saveCNH = (cnh: DriverLicense) => {
+    cnh && this.detran.saveCNH(cnh).subscribe(() => this.navCtrl.setRoot('DriverLicenseStatusPage'))
+  }
 }

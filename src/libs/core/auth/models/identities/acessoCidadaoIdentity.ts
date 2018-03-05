@@ -5,6 +5,6 @@ import { Identity } from './identity'
  *
  */
 export interface AcessoCidadaoIdentity extends Identity {
-    username?: string
-    password?: string
+  username?: string
+  password?: string
 }

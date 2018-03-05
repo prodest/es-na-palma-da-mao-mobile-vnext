@@ -1,4 +1,4 @@
 export class DriverLicense {
-    public registerNumber: string
-    public ballot: string
+  public registerNumber: string
+  public ballot: string
 }

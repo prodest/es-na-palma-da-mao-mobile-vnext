@@ -7,11 +7,11 @@ import { ValidationMessageModule } from './validation-message'
 // import { ValidationMessageComponent } from './validation-message'
 // const components  = [ ValidationMessageComponent, SectionTitleComponent]
 
-const modules = [ ValidationMessageModule, SectionTitleModule ]
+const modules = [ValidationMessageModule, SectionTitleModule]
 
-@NgModule( {
-    imports: [ ...modules ],
-    exports: [ ...modules ],
-    declarations: []
-} )
-export class ComponentsModule { }
+@NgModule({
+  imports: [...modules],
+  exports: [...modules],
+  declarations: []
+})
+export class ComponentsModule {}

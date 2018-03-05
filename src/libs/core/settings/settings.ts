@@ -9,11 +9,11 @@ import { SettingsModel } from './settings.model'
  */
 @Injectable()
 export class Settings extends LocalStorage<SettingsModel> {
-    /**
-     *
-     *
-     */
-    constructor ( storage: Storage, defaults: any, storageKey: string ) {
-        super( storage, defaults, storageKey )
-    }
+  /**
+   *
+   *
+   */
+  constructor(storage: Storage, defaults: any, storageKey: string) {
+    super(storage, defaults, storageKey)
+  }
 }

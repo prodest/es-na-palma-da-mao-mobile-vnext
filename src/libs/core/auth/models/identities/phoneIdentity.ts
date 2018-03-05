@@ -5,8 +5,8 @@ import { Identity } from './identity'
  *
  */
 export interface PhoneIdentity extends Identity {
-    accesstoken?: string
-    provider?: string
-    apiUrl?: string
-    authHeader?: string
+  accesstoken?: string
+  provider?: string
+  apiUrl?: string
+  authHeader?: string
 }

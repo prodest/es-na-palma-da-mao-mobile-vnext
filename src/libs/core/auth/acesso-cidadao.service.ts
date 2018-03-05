@@ -17,13 +17,13 @@ import { Identity } from './models/identities/identity'
 import { Token } from './models/token'
 
 const transformRequest = obj => {
-    let str: string[] = []
-    for ( let p in obj ) {
-        if ( obj.hasOwnProperty( p ) ) {
-            str.push( encodeURIComponent( p ) + '=' + encodeURIComponent( obj[ p ] ) )
-        }
+  let str: string[] = []
+  for (let p in obj) {
+    if (obj.hasOwnProperty(p)) {
+      str.push(encodeURIComponent(p) + '=' + encodeURIComponent(obj[p]))
     }
-    return str.join( '&' )
+  }
+  return str.join('&')
 }
 
 /**
@@ -33,183 +33,179 @@ const transformRequest = obj => {
  */
 @Injectable()
 export class AcessoCidadaoService {
-    // private static refreshingToken: boolean = false
+  // private static refreshingToken: boolean = false
 
-    /**
-     * Creates an instance of AcessoCidadaoService.
-     *
-     */
-    constructor (
-        private http: HttpClient,
-        private authStorage: AuthStorage,
-        private jwt: JwtHelper,
-        @Inject( EnvVariables ) private environment: Environment
-    ) { }
+  /**
+   * Creates an instance of AcessoCidadaoService.
+   *
+   */
+  constructor(
+    private http: HttpClient,
+    private authStorage: AuthStorage,
+    private jwt: JwtHelper,
+    @Inject(EnvVariables) private environment: Environment
+  ) {}
 
-    /**
-     * Autentica o usuário no acesso cidadão
-     *   1) Efetua login e obtém as claims de usuário do acesso cidadão
-     *   2) Cria uma usuário com os dados das claims + informações extras ( avatarUrl, anonymous, isAuthenticated ...)
-     *   3) Se o login foi via provider externo (google, facebook), tenta buscar a url do avatar do provider. Usa padrão como fallback
-     *   4) Salva o usuário no local storage.
-     *   5) Reinicia o serviço de push
-     *
-     */
-    public login = ( identity: Identity ): Observable<AcessoCidadaoClaims> => {
-        return this.getToken( identity ).pipe(
-            flatMap( this.saveAccessToken ),
-            flatMap( this.saveRefreshToken ),
-            flatMap( this.saveClientId ),
-            flatMap( this.getUserClaims )
-        )
+  /**
+   * Autentica o usuário no acesso cidadão
+   *   1) Efetua login e obtém as claims de usuário do acesso cidadão
+   *   2) Cria uma usuário com os dados das claims + informações extras ( avatarUrl, anonymous, isAuthenticated ...)
+   *   3) Se o login foi via provider externo (google, facebook), tenta buscar a url do avatar do provider. Usa padrão como fallback
+   *   4) Salva o usuário no local storage.
+   *   5) Reinicia o serviço de push
+   *
+   */
+  public login = (identity: Identity): Observable<AcessoCidadaoClaims> => {
+    return this.getToken(identity).pipe(
+      flatMap(this.saveAccessToken),
+      flatMap(this.saveRefreshToken),
+      flatMap(this.saveClientId),
+      flatMap(this.getUserClaims)
+    )
+  }
+
+  /**
+   * Faz logout do usuário. Remove o token do localstore e os claims salvos.
+   */
+  public logout = () => this.authStorage.reset()
+
+  /**
+   * Retorna se tem usuário logado ou não.
+   */
+  public get isAuthenticated(): boolean {
+    return !!this.authStorage.getValue('accessToken') && !this.jwt.isTokenExpired(this.authStorage.getValue('accessToken')) // && !!this.user
+  }
+
+  /**
+   * Atualiza e retorna o access token quando necessário baseado em sua data de expiração.
+   *
+   */
+  public refreshAccessTokenIfNeeded = (): Observable<Token> => {
+    if (!this.authStorage.getValue('refreshToken')) {
+      _throw({ message: 'no-token' })
     }
 
-    /**
-     * Faz logout do usuário. Remove o token do localstore e os claims salvos.
-     */
-    public logout = () => this.authStorage.reset()
+    let currentDate = new Date()
+    let token = of(this.authStorage.getValue('accessToken'))
 
-    /**
-     * Retorna se tem usuário logado ou não.
-     */
-    public get isAuthenticated(): boolean {
-        return (
-            !!this.authStorage.getValue( 'accessToken' ) && !this.jwt.isTokenExpired( this.authStorage.getValue( 'accessToken' ) )
-        ) // && !!this.user
+    // Usa o token ainda válido e faz um refresh token em background (não-bloqueante)
+    if (this.isTokenIsExpiringIn(currentDate)) {
+      this.refreshAccessToken().subscribe()
     }
 
-    /**
-     * Atualiza e retorna o access token quando necessário baseado em sua data de expiração.
-     *
-     */
-    public refreshAccessTokenIfNeeded = (): Observable<Token> => {
-        if ( !this.authStorage.getValue( 'refreshToken' ) ) {
-            _throw( { message: 'no-token' } )
-        }
-
-        let currentDate = new Date()
-        let token = of( this.authStorage.getValue( 'accessToken' ) )
-
-        // Usa o token ainda válido e faz um refresh token em background (não-bloqueante)
-        if ( this.isTokenIsExpiringIn( currentDate ) ) {
-            this.refreshAccessToken().subscribe()
-        }
-
-        // Faz um refresh token e espera pra retornar o novo token "refreshado"
-        if ( this.isTokenExpiredIn( currentDate ) ) {
-            token = this.refreshAccessToken()
-        }
-
-        return token
+    // Faz um refresh token e espera pra retornar o novo token "refreshado"
+    if (this.isTokenExpiredIn(currentDate)) {
+      token = this.refreshAccessToken()
     }
 
-    /**
-     * Obtém as claims do usuário no acesso cidadão.
-     *
-     */
-    public getUserClaims = (): Observable<AcessoCidadaoClaims> =>
-        this.http.get<AcessoCidadaoClaims>( `${ this.environment.identityServer.url }/connect/userinfo` )
+    return token
+  }
 
-    /************************************* Private API *************************************/
+  /**
+   * Obtém as claims do usuário no acesso cidadão.
+   *
+   */
+  public getUserClaims = (): Observable<AcessoCidadaoClaims> =>
+    this.http.get<AcessoCidadaoClaims>(`${this.environment.identityServer.url}/connect/userinfo`)
 
-    /**
-     *
-     *
-     */
-    private refreshAccessToken = (): Observable<Token> => {
-        // todo
-        // if (!this.acessoCidadaoResponse || AcessoCidadaoService.refreshingToken) {
-        //   return Promise.reject(new Error('Usuário não logado'))
-        // }
+  /************************************* Private API *************************************/
 
-        // AcessoCidadaoService.refreshingToken = true
+  /**
+   *
+   *
+   */
+  private refreshAccessToken = (): Observable<Token> => {
+    // todo
+    // if (!this.acessoCidadaoResponse || AcessoCidadaoService.refreshingToken) {
+    //   return Promise.reject(new Error('Usuário não logado'))
+    // }
 
-        return this.login( this.createRefreshTokenIdentity() ).pipe(
-            // finalize(() => (AcessoCidadaoService.refreshingToken = false)),
-            map(() => this.authStorage.getValue( 'accessToken' ) )
-        )
+    // AcessoCidadaoService.refreshingToken = true
+
+    return this.login(this.createRefreshTokenIdentity()).pipe(
+      // finalize(() => (AcessoCidadaoService.refreshingToken = false)),
+      map(() => this.authStorage.getValue('accessToken'))
+    )
+  }
+
+  /**
+   *
+   *
+   */
+  private createRefreshTokenIdentity = (): AcessoCidadaoIdentity => {
+    let identity: AcessoCidadaoIdentity = {
+      client_id: this.environment.identityServer.clients.espmExternalLoginAndroid.id,
+      client_secret: this.environment.identityServer.clients.espmExternalLoginAndroid.secret,
+      grant_type: 'refresh_token',
+      scope: this.environment.identityServer.defaultScopes
     }
 
-    /**
-     *
-     *
-     */
-    private createRefreshTokenIdentity = (): AcessoCidadaoIdentity => {
-        let identity: AcessoCidadaoIdentity = {
-            client_id: this.environment.identityServer.clients.espmExternalLoginAndroid.id,
-            client_secret: this.environment.identityServer.clients.espmExternalLoginAndroid.secret,
-            grant_type: 'refresh_token',
-            scope: this.environment.identityServer.defaultScopes
-        }
-
-        if ( this.authStorage.getValue( 'clientId' ) === 'espm' ) {
-            identity.client_id = this.environment.identityServer.clients.espm.id
-            identity.client_secret = this.environment.identityServer.clients.espm.secret
-        }
-
-        identity.refresh_token = this.authStorage.getValue( 'refreshToken' )
-
-        return identity
+    if (this.authStorage.getValue('clientId') === 'espm') {
+      identity.client_id = this.environment.identityServer.clients.espm.id
+      identity.client_secret = this.environment.identityServer.clients.espm.secret
     }
 
-    /**
-     *  Faz a requisição de um token no IdentityServer3, a partir dos dados fornecidos
-     *
-     */
-    private getToken = ( identity: Identity ): Observable<AcessoCidadaoResponse> => {
-        const headers = new HttpHeaders( {
-            'Content-Type': 'application/x-www-form-urlencoded',
-            [ ANONYMOUS_HEADER ]: 'true'
-        } )
+    identity.refresh_token = this.authStorage.getValue('refreshToken')
 
-        return this.http.post<AcessoCidadaoResponse>(
-            `${ this.environment.identityServer.url }/connect/token`,
-            transformRequest( identity ),
-            {
-                headers
-            }
-        )
-    }
+    return identity
+  }
 
-    /**
-     *
-     *
-     */
-    private isTokenExpiredIn = ( date: Date ) => {
-        return this.jwt.isTokenExpired( this.authStorage.getValue( 'accessToken' ), date )
-    }
+  /**
+   *  Faz a requisição de um token no IdentityServer3, a partir dos dados fornecidos
+   *
+   */
+  private getToken = (identity: Identity): Observable<AcessoCidadaoResponse> => {
+    const headers = new HttpHeaders({
+      'Content-Type': 'application/x-www-form-urlencoded',
+      [ANONYMOUS_HEADER]: 'true'
+    })
 
-    /**
-     *
-     *
-     */
-    private isTokenIsExpiringIn = ( date: Date ) => {
-        return this.jwt.isTokenIsExpiringIn( this.authStorage.getValue( 'accessToken' ), date )
-    }
+    return this.http.post<AcessoCidadaoResponse>(
+      `${this.environment.identityServer.url}/connect/token`,
+      transformRequest(identity),
+      {
+        headers
+      }
+    )
+  }
 
-    /**
-     * Persiste access token
-     *
-     */
-    private saveAccessToken = ( response: AcessoCidadaoResponse ) => {
-        return this.authStorage.setValue( 'accessToken', response.access_token ).then(() => response )
-    }
+  /**
+   *
+   *
+   */
+  private isTokenExpiredIn = (date: Date) => {
+    return this.jwt.isTokenExpired(this.authStorage.getValue('accessToken'), date)
+  }
 
-    /**
-     * Persiste rerfresh token
-     *
-     */
-    private saveRefreshToken = ( response: AcessoCidadaoResponse ) => {
-        return this.authStorage.setValue( 'refreshToken', response.refresh_token ).then(() => response )
-    }
+  /**
+   *
+   *
+   */
+  private isTokenIsExpiringIn = (date: Date) => {
+    return this.jwt.isTokenIsExpiringIn(this.authStorage.getValue('accessToken'), date)
+  }
 
-    /**
-     * Persiste client id
-     *
-     */
-    private saveClientId = ( response: AcessoCidadaoResponse ) => {
-        return this.authStorage
-            .setValue( 'clientId', this.jwt.decodeToken( response.access_token ).client_id )
-            .then(() => response )
-    }
+  /**
+   * Persiste access token
+   *
+   */
+  private saveAccessToken = (response: AcessoCidadaoResponse) => {
+    return this.authStorage.setValue('accessToken', response.access_token).then(() => response)
+  }
+
+  /**
+   * Persiste rerfresh token
+   *
+   */
+  private saveRefreshToken = (response: AcessoCidadaoResponse) => {
+    return this.authStorage.setValue('refreshToken', response.refresh_token).then(() => response)
+  }
+
+  /**
+   * Persiste client id
+   *
+   */
+  private saveClientId = (response: AcessoCidadaoResponse) => {
+    return this.authStorage.setValue('clientId', this.jwt.decodeToken(response.access_token).client_id).then(() => response)
+  }
 }

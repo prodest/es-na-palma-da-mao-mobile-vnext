@@ -10,11 +10,11 @@ import { AuthStorageModel } from './auth-storage.model'
  */
 @Injectable()
 export class AuthStorage extends LocalStorage<AuthStorageModel> {
-    /**
-     * Creates an instance of AuthStorage.
-     *
-     */
-    constructor ( storage: Storage, defaults: any, storageKey: string ) {
-        super( storage, defaults, storageKey )
-    }
+  /**
+   * Creates an instance of AuthStorage.
+   *
+   */
+  constructor(storage: Storage, defaults: any, storageKey: string) {
+    super(storage, defaults, storageKey)
+  }
 }

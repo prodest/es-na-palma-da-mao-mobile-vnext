@@ -4,8 +4,8 @@ import { IonicPageModule } from 'ionic-angular'
 
 import { AddDriverLicensePage } from './add-driver-license'
 
-@NgModule( {
-    imports: [ ValidationMessageModule, IonicPageModule.forChild( AddDriverLicensePage ) ],
-    declarations: [ AddDriverLicensePage ]
-} )
-export class AddDriverLicensePageModule { }
+@NgModule({
+  imports: [ValidationMessageModule, IonicPageModule.forChild(AddDriverLicensePage)],
+  declarations: [AddDriverLicensePage]
+})
+export class AddDriverLicensePageModule {}

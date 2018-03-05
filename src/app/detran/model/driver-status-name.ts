@@ -1,4 +1,4 @@
 export enum DriverStatusName {
-    Ok = 0,
-    Blocked = 1
+  Ok = 0,
+  Blocked = 1
 }

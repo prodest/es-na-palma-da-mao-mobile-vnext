@@ -12,16 +12,16 @@ export * from './auth-storage.service'
 export * from './auth.service'
 export * from './models'
 
-export function provideAuthStorage( storage: Storage ) {
-    const defaults: Partial<AuthStorageModel> = {
-        user: User.createNullUser()
-    }
-    return new AuthStorage( storage, defaults, '_auth-storage' )
+export function provideAuthStorage(storage: Storage) {
+  const defaults: Partial<AuthStorageModel> = {
+    user: User.createNullUser()
+  }
+  return new AuthStorage(storage, defaults, '_auth-storage')
 }
 
 export const ANONYMOUS_HEADER = 'anonymous'
 
 // envronment provider
-export const AuthStorageProvider = { provide: AuthStorage, useFactory: provideAuthStorage, deps: [ Storage ] }
+export const AuthStorageProvider = { provide: AuthStorage, useFactory: provideAuthStorage, deps: [Storage] }
 
-export const Auth = [ AcessoCidadaoService, AuthService, JwtHelper, AuthStorageProvider, JwtInterceptorProvider ]
+export const Auth = [AcessoCidadaoService, AuthService, JwtHelper, AuthStorageProvider, JwtInterceptorProvider]

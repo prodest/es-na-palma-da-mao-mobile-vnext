@@ -5,8 +5,8 @@ import { IonicPageModule } from 'ionic-angular'
 
 import { LoginPage } from './login'
 
-@NgModule( {
-    declarations: [ LoginPage ],
-    imports: [ ComponentsModule, NoMenuDirectiveModule, IonicPageModule.forChild( LoginPage ) ]
-} )
-export class LoginPageModule { }
+@NgModule({
+  declarations: [LoginPage],
+  imports: [ComponentsModule, NoMenuDirectiveModule, IonicPageModule.forChild(LoginPage)]
+})
+export class LoginPageModule {}
