@@ -10,7 +10,7 @@
     "noUnusedParameters": false,
     "lib": [
       "dom",
-      "es2015"
+      "es2016"
     ],
     "moduleResolution": "node",
     "sourceMap": true,

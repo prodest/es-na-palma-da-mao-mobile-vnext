@@ -9,7 +9,7 @@
     "serve": "lite-server --baseDir=\"www\"",
     "clean": "ionic-app-scripts clean",
     "build": "ionic-app-scripts build",
-    "lint": "ionic-app-scripts lint",
+    "lint": "ionic-app-scripts lint --bailOnLintError true",
     "ionic:build": "ionic-app-scripts build",
     "ionic:build:prod": "ionic-app-scripts build --prod && npm run purifycss",
     "ionic:serve": "ionic-app-scripts serve",
@@ -17,7 +17,8 @@
     "precommit": "lint-staged",
     "prettier": "prettier --find-config-path --write",
     "workbox": "workbox generate:sw",
-    "github:release": "sh ./release.sh",
+    "release": "standard-version",
+    "release:preview": "standard-version --dry-run",
     "commit": "git-cz",
     "commitmsg": "validate-commit-msg",
     "purifycss": "purifycss www/build/main.css www/build/*.js www/index.html --info --min --out www/build/main.css --whitelist *.ion-md-icon*"
@@ -104,6 +105,7 @@
     "lodash": "^4.17.5",
     "prettier": "^1.9.1",
     "purifycss": "^1.2.6",
+    "standard-version": "^4.3.0",
     "tslint": "^5.8.0",
     "tslint-config-prettier": "^1.9.0",
     "tslint-config-standard": "^7.0.0",
@@ -118,7 +120,9 @@
     "url": "git+https://github.com/prodest/es-na-palma-da-mao-mobile-vnext.git"
   },
   "keywords": [
-    "PRODEST", "GOVERNO ES", "ESPM"
+    "PRODEST",
+    "GOVERNO ES",
+    "ESPM"
   ],
   "author": "PRODEST (https://github.com/prodest/)",
   "contributors": [
