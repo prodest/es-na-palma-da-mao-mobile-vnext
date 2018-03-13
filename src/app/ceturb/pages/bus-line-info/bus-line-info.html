@@ -1,0 +1,68 @@
+<ion-header color-primary-bg>
+  <ion-navbar>
+    <button ion-button menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    <ion-title *ngIf="line">{{line.number}} {{line.name | capitalize }}</ion-title>
+    <ion-buttons end>
+      <button *ngIf="line" ion-button icon-only (click)="toggleFavorite(line)">
+        <ion-icon name="md-star" *ngIf="line.isFavorite"></ion-icon>
+        <ion-icon name="md-star-outline" *ngIf="!line.isFavorite"></ion-icon>
+      </button>
+    </ion-buttons>
+  </ion-navbar>
+  <ion-toolbar no-border-top>
+    <ion-segment [(ngModel)]="tab" (ionChange)="tab=$event.value">
+      <ion-segment-button value="info">
+        Horários
+      </ion-segment-button>
+      <ion-segment-button value="directions">
+        Itinerários
+      </ion-segment-button>
+    </ion-segment>
+  </ion-toolbar>
+</ion-header>
+<ion-content>
+  <ng-container *ngIf="details">
+    <ng-container *ngIf="tab==='info'">
+      <ng-container *ngFor="let departure of details.schedule.departures">
+        <ion-item>
+          <h2 text-center text-wrap> Saindo de {{departure.terminal | capitalize}}</h2>
+        </ion-item>
+        <ion-list *ngFor="let dayGroup of departure.dayGroups" no-lines class="day-group">
+          <ion-list-header>
+            <h4>{{dayGroup.name}}</h4>
+            <small>Início da Operação {{dayGroup.beginDate}}</small>
+          </ion-list-header>
+          <ion-item class="schedule-hours">
+            <espm-hour [hour]="hour" *ngFor="let hour of dayGroup.schedule" [class.before]="hour | before:currentHour"></espm-hour>
+          </ion-item>
+        </ion-list>
+      </ng-container>
+      <ion-list no-lines *ngIf="details.schedule.notes?.length">
+        <ion-list-header>
+          <h4>Observações</h4>
+        </ion-list-header>
+        <ion-item *ngFor="let note of details.schedule.notes">
+          <h1 item-start>{{note.type}}</h1>
+          <h5 text-wrap>{{note.description}}</h5>
+        </ion-item>
+      </ion-list>
+    </ng-container>
+
+    <ng-container *ngIf="tab==='directions'">
+      <ng-container *ngFor="let direction of details.route.directions">
+        <ion-list-header text-uppercase>
+          <h2 text-center text-wrap> {{direction.type}}</h2>
+        </ion-list-header>
+        <ion-list>
+          <ion-item *ngFor="let path of direction.paths; let i = index">
+            <span item-start class="path-order"> {{i + 1}}.</span>
+            <h3>
+            <ion-icon name="pin" class="path-icon" color-secondary-fg></ion-icon> {{path | capitalize}}</h3>
+          </ion-item>
+        </ion-list>
+      </ng-container>
+    </ng-container>
+  </ng-container>
+</ion-content>

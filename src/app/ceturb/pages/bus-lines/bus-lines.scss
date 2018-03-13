@@ -1,0 +1,14 @@
+page-bus-lines {
+  .busline_number {
+    font-weight: 700;
+    align-self: flex-start;
+    padding-top: 8px;
+  }
+  .busline_name {
+    line-height: 20px;
+    margin-left: 10px;
+  }
+  .busline_icon {
+    color: $color-secondary;
+  }
+}

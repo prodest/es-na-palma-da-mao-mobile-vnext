@@ -6,7 +6,7 @@
     <ion-title>Meus veículos</ion-title>
     <ion-buttons end *ngIf="(vehicles$ | async ) as vehicles">
       <button *ngIf="!editing" ion-button icon-only (click)="toggleEditMode($event)">
-        <ion-icon name="create"></ion-icon>
+        <ion-icon name="md-create"></ion-icon>
       </button>
       <button *ngIf="editing" ion-button icon-only (click)="toggleEditMode($event)">
         <ion-icon name="close"></ion-icon>

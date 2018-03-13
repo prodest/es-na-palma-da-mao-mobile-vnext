@@ -1,5 +1,5 @@
 <ion-item *ngIf="status.ok && !status.renew && !status.expired" no-lines class="status" [ngClass]="getStatusClass(status)">
-    <ion-icon name="car" item-start class="status__icon"></ion-icon>
+    <ion-icon name="mgcar" item-start class="status__icon"></ion-icon>
     <h2 class="status__msg">CNH Ok - Dirija com segurança</h2>
     <p class="status__detail">CNH válida até {{status.expirationDate | dateFormat: 'dd/MM/yyyy'}}</p>
 </ion-item>

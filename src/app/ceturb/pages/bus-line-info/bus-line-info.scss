@@ -1,0 +1,27 @@
+page-bus-line-info {
+  .day-group {
+    margin-bottom: 0;
+    padding-bottom: 30px;
+    background: #fff;
+    border-bottom: 1px solid #dedede;
+  }
+  .schedule-hours {
+    .label {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      &:after {
+        content: '';
+        flex: auto;
+      }
+    }
+  }
+
+  .path-order {
+    min-width: 25px;
+  }
+
+  .path-icon {
+    margin-right: 8px;
+  }
+}

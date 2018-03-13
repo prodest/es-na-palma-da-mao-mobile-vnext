@@ -11,6 +11,7 @@ import { IonicApp, IonicErrorHandler, IonicModule } from 'ionic-angular'
 import * as moment from 'moment'
 
 import { ESPM } from './app.component'
+import { CeturbProviders } from './ceturb/providers'
 import { DetranProviders } from './detran/providers'
 
 moment.locale('pt-br')
@@ -21,7 +22,13 @@ moment.locale('pt-br')
     BrowserModule,
     CoreModule,
     IonicStorageModule.forRoot({ name: 'espm', driverOrder: ['localstorage'] }),
-    IonicModule.forRoot(ESPM)
+    IonicModule.forRoot(ESPM, {
+      platforms: {
+        ios: {
+          backButtonText: 'Voltar'
+        }
+      }
+    })
   ],
   bootstrap: [IonicApp],
   entryComponents: [ESPM],
@@ -32,6 +39,7 @@ moment.locale('pt-br')
     Facebook,
     InAppBrowser,
     ...DetranProviders,
+    ...CeturbProviders,
     { provide: ErrorHandler, useClass: IonicErrorHandler }
   ]
 })

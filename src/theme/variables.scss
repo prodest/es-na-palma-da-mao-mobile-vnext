@@ -61,6 +61,34 @@ $font-family-wp-base: $font-family, 'Helvetica Neue', 'Segoe UI', 'Noto Sans', s
 
 $split-pane-side-max-width: 20%;
 
+/************* Button component ************************************/
+// // Android
+// $button-md-text-color: $color-light !important;
+// // IOS
+// $button-ios-text-color: $color-light !important;
+
+/************* Segment component ************************************/
+// Android
+$segment-button-md-text-color-activated: $color-light;
+$segment-button-md-border-color-activated: $color-secondary;
+//$segment-button-md-font-size: 1.5rem;
+// IOS
+$segment-button-ios-text-color: $color-light;
+$segment-button-ios-background-color-activated: $color-secondary;
+//$segment-button-ios-font-size: 1.4rem !important;
+
+/************* NavBar component ************************************/
+// Android
+$toolbar-md-button-color: $color-light;
+$toolbar-md-title-text-color: $color-light;
+// IOS
+$toolbar-ios-title-text-color: $color-light;
+$toolbar-ios-button-color: $color-light;
+
+/************* NavBar component ************************************/
+// IOS
+$searchbar-ios-background-color: transparent;
+
 // App Theme
 // --------------------------------------------------
 // Ionic apps can have different themes applied, which can
@@ -68,7 +96,7 @@ $split-pane-side-max-width: 20%;
 // so that the above variables are used and Ionic's
 // default are overridden.
 
-@import 'ionic.theme.default';
+// @import 'ionic.theme.default';
 
 // Ionicons
 // --------------------------------------------------

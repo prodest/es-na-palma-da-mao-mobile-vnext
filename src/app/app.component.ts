@@ -34,6 +34,12 @@ const menus = [
         order: 2
       },
       {
+        title: 'Ceturb Linhas',
+        icon: 'bus',
+        component: 'BusLinesPage',
+        order: 2
+      },
+      {
         title: 'Agenda ES',
         icon: 'calendar',
         component: 'SchedulePage',

@@ -51,14 +51,13 @@ button {
 
   [color-#{$colorName}-bg],
   .color-#{$colorName}-bg {
-    background-color: nth($colorValues, 2);
+    background-color: nth($colorValues, 1);
   }
 }
 
 .active,
 [active],
 .toolbar-title,
-ion-icon,
 ion-navbar.toolbar,
 .toolbar-background {
   @include colors($color-primary,$color-light);
@@ -68,11 +67,6 @@ ion-navbar.toolbar,
   margin-bottom: 0;
   color: $color-secondary;
   background: #f5f5f5;
-}
-
-.item > ion-icon {
-  background-color: transparent;
-  color: #333;
 }
 
 ion-icon[name='exit'] {
