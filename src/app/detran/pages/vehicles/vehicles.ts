@@ -6,7 +6,9 @@ import { Subject } from 'rxjs/Subject'
 import { Vehicle } from './../../model'
 import { VehiclesService } from './../../providers'
 
-@IonicPage()
+@IonicPage({
+  segment: 'detran/veiculos'
+})
 @Component({
   selector: 'page-vehicles',
   templateUrl: 'vehicles.html'
@@ -42,18 +44,6 @@ export class VehiclesPage implements OnDestroy {
   ngOnDestroy() {
     this.destroyed$.next()
     this.destroyed$.unsubscribe()
-  }
-
-  /**
-   *
-   *
-   */
-  loadVehicles = () => {
-    //  observa mundanças nos veículos
-    this.vehicles$ = this.detran.vehicles$.takeUntil(this.destroyed$) // .subscribe(this.updateVehicles)
-
-    // carregamento inicial
-    this.detran.load().subscribe()
   }
 
   /**
@@ -97,16 +87,8 @@ export class VehiclesPage implements OnDestroy {
    *
    *
    */
-  saveVehicle = (vehicle: Vehicle) => {
-    vehicle && this.detran.add(vehicle).subscribe()
-  }
-
-  /**
-   *
-   *
-   */
   showTickets = (vehicle: Vehicle) => {
-    this.navCtrl.push('VehicleTicketsPage', { vehicle })
+    this.navCtrl.push('VehicleTicketsPage', { vehicle, plate: vehicle.plate })
   }
 
   /**
@@ -114,6 +96,26 @@ export class VehiclesPage implements OnDestroy {
    *
    */
   toggleEditMode = () => (this.editing = !this.editing)
+
+  /**
+   *
+   *
+   */
+  private loadVehicles = () => {
+    //  observa mundanças nos veículos
+    this.vehicles$ = this.detran.vehicles$.takeUntil(this.destroyed$) // .subscribe(this.updateVehicles)
+
+    // carregamento inicial
+    this.detran.load().subscribe()
+  }
+
+  /**
+   *
+   *
+   */
+  private saveVehicle = (vehicle: Vehicle) => {
+    vehicle && this.detran.add(vehicle).subscribe()
+  }
 
   /**
    *

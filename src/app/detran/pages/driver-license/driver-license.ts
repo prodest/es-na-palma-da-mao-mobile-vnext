@@ -5,7 +5,9 @@ import { IonicPage, Loading, ModalController, NavController } from 'ionic-angula
 import { DriverLicense } from './../../model'
 import { DriverService } from './../../providers'
 
-@IonicPage()
+@IonicPage({
+  segment: 'detran/cadastrar-cnh'
+})
 @Component({
   selector: 'page-driver-license',
   templateUrl: 'driver-license.html'
@@ -55,7 +57,7 @@ export class DriverLicensePage {
    *
    *
    */
-  saveCNH = (cnh: DriverLicense) => {
+  private saveCNH = (cnh: DriverLicense) => {
     cnh && this.detran.saveCNH(cnh).subscribe(() => this.navCtrl.setRoot('DriverLicenseStatusPage'))
   }
 }

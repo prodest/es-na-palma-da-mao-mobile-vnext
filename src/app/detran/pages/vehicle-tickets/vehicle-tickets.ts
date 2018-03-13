@@ -5,7 +5,9 @@ import { Observable } from 'rxjs/Observable'
 import { Ticket, Vehicle } from './../../model'
 import { VehiclesService } from './../../providers'
 
-@IonicPage()
+@IonicPage({
+  segment: 'detran/veiculos/:plate/multas'
+})
 @Component({
   selector: 'page-vehicle-tickets',
   templateUrl: 'vehicle-tickets.html'
@@ -47,7 +49,7 @@ export class VehicleTicketsPage {
    *
    *
    */
-  loadTickets = () => {
+  private loadTickets = () => {
     this.tickets$ = this.detran.getTickets(this.vehicle)
   }
 }

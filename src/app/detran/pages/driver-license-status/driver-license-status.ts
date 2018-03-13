@@ -6,7 +6,9 @@ import * as moment from 'moment'
 import { DriverStatus, DriverStatusName, Ticket } from '../../model'
 import { DriverService } from './../../providers'
 
-@IonicPage()
+@IonicPage({
+  segment: 'detran/cnh'
+})
 @Component({
   selector: 'page-driver-license-status',
   templateUrl: 'driver-license-status.html'
@@ -51,7 +53,7 @@ export class DriverLicenseStatusPage {
   /**
    *
    */
-  loadData = () => {
+  private loadData = () => {
     this.detran.getDriverStatus().subscribe(this.updateStatus, () => (this.status = null))
 
     this.detran.getDriverTickets().subscribe(tickets => (this.tickets = tickets), () => (this.tickets = null))
@@ -60,7 +62,7 @@ export class DriverLicenseStatusPage {
   /**
    *
    */
-  updateStatus = (status: DriverStatus) => {
+  private updateStatus = (status: DriverStatus) => {
     // const mockCNH = (expirationDate, status, blockMotive) => {
     //     return {
     //         expirationDate,

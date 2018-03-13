@@ -5,8 +5,7 @@ import { of } from 'rxjs/observable/of'
 import { _throw } from 'rxjs/observable/throw'
 import { catchError, finalize, flatMap, map, pluck } from 'rxjs/operators'
 
-import { Vehicle, VehiclesData } from '../model'
-import { Ticket } from './../model/ticket'
+import { Ticket, Vehicle, VehiclesData } from '../model'
 import { DetranApiService } from './detran-api.service'
 import { DetranStorage } from './detran-storage.service'
 
