@@ -1,9 +1,9 @@
-import { Component } from '@angular/core'
-import { IonicPage, NavController, NavParams } from 'ionic-angular'
-import { Observable } from 'rxjs/Observable'
+import { Component } from '@angular/core';
+import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { Observable } from 'rxjs/Observable';
 
-import { Ticket, Vehicle } from './../../model'
-import { VehiclesService } from './../../providers'
+import { Ticket, Vehicle } from './../../model';
+import { VehiclesService } from './../../providers';
 
 @IonicPage({
   segment: 'detran/veiculos/:plate/multas'
@@ -13,8 +13,8 @@ import { VehiclesService } from './../../providers'
   templateUrl: 'vehicle-tickets.html'
 })
 export class VehicleTicketsPage {
-  tickets$: Observable<Ticket[]>
-  vehicle: Vehicle
+  tickets$: Observable<Ticket[]>;
+  vehicle: Vehicle;
 
   /**
    *
@@ -28,12 +28,12 @@ export class VehicleTicketsPage {
    */
   ionViewCanEnter(): boolean | Promise<any> {
     // permite acesso à tela de o usuário possui cnh no acesso cidadão ou cadastrou agora
-    const isAllowed = !!this.params.get('vehicle')
+    const isAllowed = !!this.params.get('vehicle');
 
     if (!isAllowed) {
-      setTimeout(() => this.navCtrl.setRoot('VehiclesPage'))
+      setTimeout(() => this.navCtrl.setRoot('VehiclesPage'));
     }
-    return isAllowed
+    return isAllowed;
   }
 
   /**
@@ -41,8 +41,8 @@ export class VehicleTicketsPage {
    *
    */
   ionViewWillLoad() {
-    this.vehicle = this.params.get('vehicle')
-    this.detran.ready.then(this.loadTickets)
+    this.vehicle = this.params.get('vehicle');
+    this.detran.ready.then(this.loadTickets);
   }
 
   /**
@@ -50,6 +50,6 @@ export class VehicleTicketsPage {
    *
    */
   private loadTickets = () => {
-    this.tickets$ = this.detran.getTickets(this.vehicle)
-  }
+    this.tickets$ = this.detran.getTickets(this.vehicle);
+  };
 }

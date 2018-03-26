@@ -1,7 +1,7 @@
-import { NgModule } from '@angular/core'
-import { IonicPageModule } from 'ionic-angular'
+import { NgModule } from '@angular/core';
+import { IonicPageModule } from 'ionic-angular';
 
-import { DriverLicensePage } from './driver-license'
+import { DriverLicensePage } from './driver-license';
 
 @NgModule({
   declarations: [DriverLicensePage],

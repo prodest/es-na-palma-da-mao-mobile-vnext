@@ -1,2 +1,2 @@
-export * from './hour.component'
-export * from './hour.component.module'
+export * from './hour.component';
+export * from './hour.component.module';

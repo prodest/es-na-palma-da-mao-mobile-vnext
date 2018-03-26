@@ -1,6 +1,6 @@
-import { ChangeDetectionStrategy, Component, Input } from '@angular/core'
+import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
 
-import { Ticket } from './../../model'
+import { Ticket } from './../../model';
 
 @Component({
   selector: 'espm-tickets',
@@ -8,5 +8,5 @@ import { Ticket } from './../../model'
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class TicketsComponent {
-  @Input() tickets: Ticket[]
+  @Input() tickets: Ticket[];
 }

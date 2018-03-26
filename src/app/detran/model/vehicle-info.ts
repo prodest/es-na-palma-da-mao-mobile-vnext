@@ -1,4 +1,4 @@
 export interface VehicleInfo {
-  color: string
-  model: string
+  color: string;
+  model: string;
 }

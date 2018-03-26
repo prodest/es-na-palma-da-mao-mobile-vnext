@@ -1,9 +1,9 @@
-import { Component } from '@angular/core'
-import { AuthService } from '@espm/core/auth'
-import { IonicPage, Loading, ModalController, NavController } from 'ionic-angular'
+import { Component } from '@angular/core';
+import { AuthService } from '@espm/core/auth';
+import { IonicPage, Loading, ModalController, NavController } from 'ionic-angular';
 
-import { DriverLicense } from './../../model'
-import { DriverService } from './../../providers'
+import { DriverLicense } from './../../model';
+import { DriverService } from './../../providers';
 
 @IonicPage({
   segment: 'detran/cadastrar-cnh'
@@ -13,7 +13,7 @@ import { DriverService } from './../../providers'
   templateUrl: 'driver-license.html'
 })
 export class DriverLicensePage {
-  loading: Loading
+  loading: Loading;
 
   /**
    *
@@ -32,12 +32,12 @@ export class DriverLicensePage {
    */
   ionViewCanEnter(): boolean | Promise<any> {
     // permite acesso à tela de o usuário não possui cnh no acesso cidadão nem cadastrou agora
-    const isAllowed = !(this.auth.user.cnhNumero && this.auth.user.cnhCedula)
+    const isAllowed = !(this.auth.user.cnhNumero && this.auth.user.cnhCedula);
 
     if (!isAllowed) {
-      setTimeout(() => this.navCtrl.setRoot('DriverLicenseStatusPage'))
+      setTimeout(() => this.navCtrl.setRoot('DriverLicenseStatusPage'));
     }
-    return isAllowed
+    return isAllowed;
   }
 
   /**
@@ -48,16 +48,16 @@ export class DriverLicensePage {
     let modal = this.modalCtrl.create('AddDriverLicensePage', null, {
       cssClass: 'pop-up-modal',
       enableBackdropDismiss: true
-    })
-    modal.onDidDismiss(this.saveCNH)
-    modal.present()
-  }
+    });
+    modal.onDidDismiss(this.saveCNH);
+    modal.present();
+  };
 
   /**
    *
    *
    */
   private saveCNH = (cnh: DriverLicense) => {
-    cnh && this.detran.saveCNH(cnh).subscribe(() => this.navCtrl.setRoot('DriverLicenseStatusPage'))
-  }
+    cnh && this.detran.saveCNH(cnh).subscribe(() => this.navCtrl.setRoot('DriverLicenseStatusPage'));
+  };
 }

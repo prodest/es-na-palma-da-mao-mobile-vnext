@@ -1,10 +1,10 @@
-import { Component, OnDestroy } from '@angular/core'
-import { AlertController, IonicPage, ModalController, NavController } from 'ionic-angular'
-import { Observable } from 'rxjs/Observable'
-import { Subject } from 'rxjs/Subject'
+import { Component, OnDestroy } from '@angular/core';
+import { AlertController, IonicPage, ModalController, NavController } from 'ionic-angular';
+import { Observable } from 'rxjs/Observable';
+import { Subject } from 'rxjs/Subject';
 
-import { Vehicle } from './../../model'
-import { VehiclesService } from './../../providers'
+import { Vehicle } from './../../model';
+import { VehiclesService } from './../../providers';
 
 @IonicPage({
   segment: 'detran/veiculos'
@@ -14,9 +14,9 @@ import { VehiclesService } from './../../providers'
   templateUrl: 'vehicles.html'
 })
 export class VehiclesPage implements OnDestroy {
-  editing = false
-  vehicles$: Observable<Vehicle[]>
-  destroyed$ = new Subject()
+  editing = false;
+  vehicles$: Observable<Vehicle[]>;
+  destroyed$ = new Subject();
 
   /**
    *
@@ -34,7 +34,7 @@ export class VehiclesPage implements OnDestroy {
    *
    */
   ionViewWillLoad() {
-    this.detran.ready.then(this.loadVehicles)
+    this.detran.ready.then(this.loadVehicles);
   }
 
   /**
@@ -42,8 +42,8 @@ export class VehiclesPage implements OnDestroy {
    *
    */
   ngOnDestroy() {
-    this.destroyed$.next()
-    this.destroyed$.unsubscribe()
+    this.destroyed$.next();
+    this.destroyed$.unsubscribe();
   }
 
   /**
@@ -54,10 +54,10 @@ export class VehiclesPage implements OnDestroy {
     let modal = this.modalCtrl.create('AddVehiclePage', null, {
       cssClass: 'pop-up-modal',
       enableBackdropDismiss: true
-    })
-    modal.onDidDismiss(this.saveVehicle)
-    modal.present()
-  }
+    });
+    modal.onDidDismiss(this.saveVehicle);
+    modal.present();
+  };
 
   /**
    *
@@ -75,27 +75,27 @@ export class VehiclesPage implements OnDestroy {
         {
           text: 'Remover',
           handler: () => {
-            return this.removeVehicle(vehicle)
+            return this.removeVehicle(vehicle);
           }
         }
       ]
-    })
-    alert.present()
-  }
+    });
+    alert.present();
+  };
 
   /**
    *
    *
    */
   showTickets = (vehicle: Vehicle) => {
-    this.navCtrl.push('VehicleTicketsPage', { vehicle, plate: vehicle.plate })
-  }
+    this.navCtrl.push('VehicleTicketsPage', { vehicle, plate: vehicle.plate });
+  };
 
   /**
    *
    *
    */
-  toggleEditMode = () => (this.editing = !this.editing)
+  toggleEditMode = () => (this.editing = !this.editing);
 
   /**
    *
@@ -103,25 +103,25 @@ export class VehiclesPage implements OnDestroy {
    */
   private loadVehicles = () => {
     //  observa mundanças nos veículos
-    this.vehicles$ = this.detran.vehicles$.takeUntil(this.destroyed$) // .subscribe(this.updateVehicles)
+    this.vehicles$ = this.detran.vehicles$.takeUntil(this.destroyed$); // .subscribe(this.updateVehicles)
 
     // carregamento inicial
-    this.detran.load().subscribe()
-  }
+    this.detran.load().subscribe();
+  };
 
   /**
    *
    *
    */
   private saveVehicle = (vehicle: Vehicle) => {
-    vehicle && this.detran.add(vehicle).subscribe()
-  }
+    vehicle && this.detran.add(vehicle).subscribe();
+  };
 
   /**
    *
    *
    */
   private removeVehicle(vehicle: Vehicle) {
-    this.editing && this.detran.remove(vehicle).subscribe()
+    this.editing && this.detran.remove(vehicle).subscribe();
   }
 }

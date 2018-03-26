@@ -1,6 +1,6 @@
-import { NgModule } from '@angular/core'
+import { NgModule } from '@angular/core';
 
-import { TicketLevelColorPipe } from './ticket-level-color.pipe'
+import { TicketLevelColorPipe } from './ticket-level-color.pipe';
 
 @NgModule({
   declarations: [TicketLevelColorPipe],

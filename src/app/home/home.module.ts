@@ -1,8 +1,8 @@
-import { NgModule } from '@angular/core'
-import { NoMenuDirectiveModule } from '@espm/shared/directives'
-import { IonicPageModule } from 'ionic-angular'
+import { NgModule } from '@angular/core';
+import { NoMenuDirectiveModule } from '@espm/shared/directives';
+import { IonicPageModule } from 'ionic-angular';
 
-import { HomePage } from './home'
+import { HomePage } from './home';
 
 @NgModule({
   declarations: [HomePage],

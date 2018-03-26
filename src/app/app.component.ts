@@ -1,8 +1,8 @@
-import { Component, ViewChild } from '@angular/core'
-import { AuthService } from '@espm/core/auth'
-import { SplashScreen } from '@ionic-native/splash-screen'
-import { StatusBar } from '@ionic-native/status-bar'
-import { Nav, Platform } from 'ionic-angular'
+import { Component, ViewChild } from '@angular/core';
+import { AuthService } from '@espm/core/auth';
+import { SplashScreen } from '@ionic-native/splash-screen';
+import { StatusBar } from '@ionic-native/status-bar';
+import { Nav, Platform } from 'ionic-angular';
 
 const menus = [
   {
@@ -59,16 +59,16 @@ const menus = [
       }
     ]
   }
-]
+];
 
 @Component({
   templateUrl: 'app.component.html'
 })
 // tslint:disable-next-line:component-class-suffix
 export class ESPM {
-  @ViewChild(Nav) nav: Nav
-  public rootPage: any = 'HomePage'
-  public menus = menus
+  @ViewChild(Nav) nav: Nav;
+  public rootPage: any = 'HomePage';
+  public menus = menus;
 
   /**
    *
@@ -82,20 +82,20 @@ export class ESPM {
     platform
       .ready()
       .then(this.initialize)
-      .catch(console.error)
+      .catch(console.error);
   }
 
   /**
    *
    */
-  public openPage = (page: string) => this.nav.setRoot(page)
+  public openPage = (page: string) => this.nav.setRoot(page);
 
   /**
    *
    */
   public logout = () => {
-    this.auth.logout().then(() => this.openPage('HomePage'))
-  }
+    this.auth.logout().then(() => this.openPage('HomePage'));
+  };
 
   /**
    *
@@ -103,8 +103,8 @@ export class ESPM {
   private initialize = () => {
     // Okay, so the platform is ready and our plugins are available.
     // Here you can do any higher level native things you might need.
-    this.statusBar.overlaysWebView(false)
-    this.statusBar.backgroundColorByHexString('#000')
-    this.splashScreen.hide()
-  }
+    this.statusBar.overlaysWebView(false);
+    this.statusBar.backgroundColorByHexString('#000');
+    this.splashScreen.hide();
+  };
 }

@@ -1,7 +1,7 @@
-import { NgModule } from '@angular/core'
-import { IonicPageModule } from 'ionic-angular'
+import { NgModule } from '@angular/core';
+import { IonicPageModule } from 'ionic-angular';
 
-import { VehicleComponent } from './vehicle.component'
+import { VehicleComponent } from './vehicle.component';
 
 @NgModule({
   declarations: [VehicleComponent],

@@ -1,6 +1,6 @@
 export interface Vehicle {
-  plate: string
-  renavam: number
-  color: string
-  model: string
+  plate: string;
+  renavam: number;
+  color: string;
+  model: string;
 }

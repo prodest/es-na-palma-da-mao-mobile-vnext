@@ -1,2 +1,2 @@
-export * from './tickets.component'
-export * from './tickets.component.module'
+export * from './tickets.component';
+export * from './tickets.component.module';

@@ -1,12 +1,12 @@
-import { HttpClient, HttpHeaders } from '@angular/common/http'
-import { Inject, Injectable } from '@angular/core'
-import { Environment, EnvVariables } from '@espm/core'
-import { Observable } from 'rxjs/Observable'
-import { forkJoin } from 'rxjs/observable/forkJoin'
-import { share } from 'rxjs/operators'
+import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { Inject, Injectable } from '@angular/core';
+import { Environment, EnvVariables } from '@espm/core';
+import { Observable } from 'rxjs/Observable';
+import { forkJoin } from 'rxjs/observable/forkJoin';
+import { share } from 'rxjs/operators';
 
-import { BusLine, BusLineDetails, BusRoute, FavoriteLinesData } from './../model/'
-import { BusSchedule } from './../model/bus-schedule'
+import { BusLine, BusLineDetails, BusRoute, FavoriteLinesData } from './../model/';
+import { BusSchedule } from './../model/bus-schedule';
 
 /**
  *
@@ -28,8 +28,8 @@ export class CeturbApiService {
       .get<BusLine[]>(`${this.env.api.ceturb}/lines`, {
         headers: new HttpHeaders({ anonymous: 'true' })
       })
-      .pipe(share())
-  }
+      .pipe(share());
+  };
 
   /**
    *
@@ -41,17 +41,17 @@ export class CeturbApiService {
       .get<BusSchedule>(`${this.env.api.ceturb}/schedule/${lineNumber}`, {
         headers: new HttpHeaders({ anonymous: 'true' })
       })
-      .pipe(share())
+      .pipe(share());
 
     // informações de rota
     const route$ = this.http
       .get<BusRoute>(`${this.env.api.ceturb}/route/${lineNumber}`, {
         headers: new HttpHeaders({ anonymous: 'true' })
       })
-      .pipe(share())
+      .pipe(share());
 
-    return forkJoin(schedule$, route$, (schedule: BusSchedule, route: BusRoute) => ({ schedule, route }))
-  }
+    return forkJoin(schedule$, route$, (schedule: BusSchedule, route: BusRoute) => ({ schedule, route }));
+  };
 
   /**
    *
@@ -62,13 +62,13 @@ export class CeturbApiService {
       .get<BusRoute>(`${this.env.api.ceturb}/route/${id}`, {
         headers: new HttpHeaders({ anonymous: 'true' })
       })
-      .pipe(share())
-  }
+      .pipe(share());
+  };
 
   /**
    *
    */
   syncFavorites = (favoriteLines: FavoriteLinesData): Observable<FavoriteLinesData> => {
-    return this.http.post<FavoriteLinesData>(`${this.env.api.espm}/ceturb/data/favorite`, favoriteLines).pipe(share())
-  }
+    return this.http.post<FavoriteLinesData>(`${this.env.api.espm}/ceturb/data/favorite`, favoriteLines).pipe(share());
+  };
 }

@@ -1,10 +1,10 @@
-import { Component } from '@angular/core'
-import { AuthService } from '@espm/core/auth'
-import { IonicPage, NavController } from 'ionic-angular'
-import * as moment from 'moment'
+import { Component } from '@angular/core';
+import { AuthService } from '@espm/core/auth';
+import { IonicPage, NavController } from 'ionic-angular';
+import * as moment from 'moment';
 
-import { DriverStatus, DriverStatusName, Ticket } from '../../model'
-import { DriverService } from './../../providers'
+import { DriverStatus, DriverStatusName, Ticket } from '../../model';
+import { DriverService } from './../../providers';
 
 @IonicPage({
   segment: 'detran/cnh'
@@ -14,15 +14,15 @@ import { DriverService } from './../../providers'
   templateUrl: 'driver-license-status.html'
 })
 export class DriverLicenseStatusPage {
-  tickets: Ticket[]
+  tickets: Ticket[];
   status: {
-    expirationDate: string
-    renew: boolean
-    ok: boolean
-    blocked: boolean
-    expired: boolean
-    blockMotive: string
-  }
+    expirationDate: string;
+    renew: boolean;
+    ok: boolean;
+    blocked: boolean;
+    expired: boolean;
+    blockMotive: string;
+  };
 
   /**
    *
@@ -35,29 +35,29 @@ export class DriverLicenseStatusPage {
    */
   ionViewCanEnter(): boolean | Promise<any> {
     // permite acesso à tela de o usuário possui cnh no acesso cidadão ou cadastrou agora
-    const isAllowed = !!(this.auth.user.cnhNumero && this.auth.user.cnhCedula)
+    const isAllowed = !!(this.auth.user.cnhNumero && this.auth.user.cnhCedula);
 
     if (!isAllowed) {
-      setTimeout(() => this.navCtrl.setRoot('DriverLicensePage'))
+      setTimeout(() => this.navCtrl.setRoot('DriverLicensePage'));
     }
-    return isAllowed
+    return isAllowed;
   }
 
   /**
    *
    */
   ionViewWillLoad() {
-    this.loadData()
+    this.loadData();
   }
 
   /**
    *
    */
   private loadData = () => {
-    this.detran.getDriverStatus().subscribe(this.updateStatus, () => (this.status = null))
+    this.detran.getDriverStatus().subscribe(this.updateStatus, () => (this.status = null));
 
-    this.detran.getDriverTickets().subscribe(tickets => (this.tickets = tickets), () => (this.tickets = null))
-  }
+    this.detran.getDriverTickets().subscribe(tickets => (this.tickets = tickets), () => (this.tickets = null));
+  };
 
   /**
    *
@@ -99,6 +99,6 @@ export class DriverLicenseStatusPage {
           .add(30, 'days')
           .isAfter(moment().startOf('day')),
       blockMotive: status.blockMotive
-    }
-  }
+    };
+  };
 }

@@ -1,9 +1,9 @@
-import { Component } from '@angular/core'
-import { FormBuilder, FormGroup, Validators } from '@angular/forms'
-import { FormBase } from '@espm/core'
-import { IonicPage, ViewController } from 'ionic-angular'
+import { Component } from '@angular/core';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { FormBase } from '@espm/core';
+import { IonicPage, ViewController } from 'ionic-angular';
 
-import { Vehicle } from './../../model'
+import { Vehicle } from './../../model';
 
 @IonicPage()
 @Component({
@@ -19,13 +19,13 @@ export class AddVehiclePage extends FormBase {
       required: 'Obrigatório',
       integer: 'Somente números'
     }
-  }
+  };
 
   /**
    * Creates an instance of AddDriverLicensePage
    */
   constructor(formBuilder: FormBuilder, private viewCtrl: ViewController) {
-    super(formBuilder)
+    super(formBuilder);
   }
 
   /**
@@ -35,16 +35,16 @@ export class AddVehiclePage extends FormBase {
     const form = this.formBuilder.group({
       plate: ['', [Validators.required, this.validators.plate]],
       renavam: ['', [Validators.required, this.validators.integer]]
-    })
+    });
 
-    this.onSubmit.subscribe(cnh => this.dismiss(cnh))
+    this.onSubmit.subscribe(cnh => this.dismiss(cnh));
 
-    return form
+    return form;
   }
 
   /**
    *
    *
    */
-  dismiss = (vehicle: Partial<Vehicle>) => this.viewCtrl.dismiss(vehicle)
+  dismiss = (vehicle: Partial<Vehicle>) => this.viewCtrl.dismiss(vehicle);
 }

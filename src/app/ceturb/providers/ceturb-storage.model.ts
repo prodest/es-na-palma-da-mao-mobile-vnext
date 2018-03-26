@@ -1,3 +1,3 @@
 export interface CeturbStorageModel {
-  favoriteLines: string[]
+  favoriteLines: string[];
 }

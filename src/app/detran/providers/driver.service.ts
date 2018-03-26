@@ -1,12 +1,12 @@
-import { Injectable } from '@angular/core'
-import { AuthService } from '@espm/core/auth'
-import { Loading, LoadingController } from 'ionic-angular'
-import { Observable } from 'rxjs/Observable'
-import { _throw } from 'rxjs/observable/throw'
-import { catchError, finalize, flatMap } from 'rxjs/operators'
+import { Injectable } from '@angular/core';
+import { AuthService } from '@espm/core/auth';
+import { Loading, LoadingController } from 'ionic-angular';
+import { Observable } from 'rxjs/Observable';
+import { _throw } from 'rxjs/observable/throw';
+import { catchError, finalize, flatMap } from 'rxjs/operators';
 
-import { DriverLicense, DriverStatus, Ticket } from '../model'
-import { DetranApiService } from './detran-api.service'
+import { DriverLicense, DriverStatus, Ticket } from '../model';
+import { DetranApiService } from './detran-api.service';
 
 /**
  *
@@ -14,7 +14,7 @@ import { DetranApiService } from './detran-api.service'
  */
 @Injectable()
 export class DriverService {
-  loading: Loading
+  loading: Loading;
 
   /**
    *
@@ -33,9 +33,9 @@ export class DriverService {
           registerNumber: this.auth.user.cnhNumero,
           ballot: this.auth.user.cnhCedula
         }
-      : null
+      : null;
 
-    this.showLoading()
+    this.showLoading();
 
     // Por enquanto a validação só pode ser feita depois de salvar
     // os dados.
@@ -51,40 +51,40 @@ export class DriverService {
 
         if (error.message === 'Não existe condutor no ES com os dados informados.') {
           if (currentCNH) {
-            return this.saveCNH(currentCNH).pipe(flatMap(() => _throw(error)))
+            return this.saveCNH(currentCNH).pipe(flatMap(() => _throw(error)));
           } else {
-            return _throw(error)
+            return _throw(error);
           }
         }
-        return _throw(error)
+        return _throw(error);
       })
-    )
-  }
+    );
+  };
 
   /**
    *
    *
    */
   getDriverStatus = (): Observable<DriverStatus> => {
-    this.showLoading('Carregando dados da CNH')
-    return this.api.getDriverStatus().pipe(finalize(this.dismissLoading))
-  }
+    this.showLoading('Carregando dados da CNH');
+    return this.api.getDriverStatus().pipe(finalize(this.dismissLoading));
+  };
 
   /**
    *
    *
    */
   getDriverTickets = (): Observable<Ticket[]> => {
-    this.showLoading('Carregando multas')
-    return this.api.getDriverTickets().pipe(finalize(this.dismissLoading))
-  }
+    this.showLoading('Carregando multas');
+    return this.api.getDriverTickets().pipe(finalize(this.dismissLoading));
+  };
 
   /**
    * Tenta buscar os dados do condutor com a cnh cadastrada. Se não conseguir
    * a CNH possívelmente está inválida
    *
    */
-  private validateCNH = () => this.api.getDriverStatus()
+  private validateCNH = () => this.api.getDriverStatus();
 
   /**
    *
@@ -92,12 +92,12 @@ export class DriverService {
    */
   private showLoading = (message: string = 'Aguarde') => {
     if (this.loading) {
-      this.loading.setContent(message)
+      this.loading.setContent(message);
     } else {
-      this.loading = this.loadingCtrl.create({ content: message, dismissOnPageChange: true })
-      this.loading.present()
+      this.loading = this.loadingCtrl.create({ content: message, dismissOnPageChange: true });
+      this.loading.present();
     }
-  }
+  };
 
   /**
    *
@@ -105,8 +105,8 @@ export class DriverService {
    */
   private dismissLoading = () => {
     if (this.loading) {
-      this.loading.dismiss()
-      this.loading = null
+      this.loading.dismiss();
+      this.loading = null;
     }
-  }
+  };
 }

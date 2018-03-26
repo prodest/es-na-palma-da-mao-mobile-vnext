@@ -1,4 +1,4 @@
-import { Pipe, PipeTransform } from '@angular/core'
+import { Pipe, PipeTransform } from '@angular/core';
 
 @Pipe({
   name: 'ticketLevelColor'
@@ -11,21 +11,21 @@ export class TicketLevelColorPipe implements PipeTransform {
     grave: '#F44336',
     gravíssima: 'black',
     gravissima: 'black'
-  }
+  };
 
   /**
    *
    */
   transform(value: string) {
-    return this.getTicketLevelColor(value)
+    return this.getTicketLevelColor(value);
   }
 
   /**
    * Obtem a cor relativa à uma classificação de multa. Usado somente na interface.
    */
   getTicketLevelColor(levelName: string): string {
-    levelName = levelName.trim().toLowerCase()
-    let color = this.levelsMap[levelName]
-    return color || ''
+    levelName = levelName.trim().toLowerCase();
+    let color = this.levelsMap[levelName];
+    return color || '';
   }
 }

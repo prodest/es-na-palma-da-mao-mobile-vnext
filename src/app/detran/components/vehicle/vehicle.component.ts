@@ -1,6 +1,6 @@
-import { ChangeDetectionStrategy, Component, Input } from '@angular/core'
+import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
 
-import { Vehicle } from './../../model'
+import { Vehicle } from './../../model';
 
 @Component({
   selector: 'espm-vehicle',
@@ -8,5 +8,5 @@ import { Vehicle } from './../../model'
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class VehicleComponent {
-  @Input() vehicle: Vehicle
+  @Input() vehicle: Vehicle;
 }

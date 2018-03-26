@@ -1,15 +1,15 @@
-import { Injectable } from '@angular/core'
-import { AuthService } from '@espm/core/auth'
-import { AlertController, App, Loading, LoadingController, ToastController } from 'ionic-angular'
-import { BehaviorSubject } from 'rxjs/BehaviorSubject'
-import { Observable } from 'rxjs/Observable'
-import { forkJoin } from 'rxjs/observable/forkJoin'
-import { from } from 'rxjs/observable/from'
-import { fromPromise } from 'rxjs/observable/fromPromise'
-import { filter, finalize, flatMap, map, tap } from 'rxjs/operators'
+import { Injectable } from '@angular/core';
+import { AuthService } from '@espm/core/auth';
+import { AlertController, App, Loading, LoadingController, ToastController } from 'ionic-angular';
+import { BehaviorSubject } from 'rxjs/BehaviorSubject';
+import { Observable } from 'rxjs/Observable';
+import { forkJoin } from 'rxjs/observable/forkJoin';
+import { from } from 'rxjs/observable/from';
+import { fromPromise } from 'rxjs/observable/fromPromise';
+import { filter, finalize, flatMap, map, tap } from 'rxjs/operators';
 
-import { BusLine, BusLineDetails, FavoriteLinesData } from './../model'
-import { CeturbApiService } from './ceturb-api.service'
+import { BusLine, BusLineDetails, FavoriteLinesData } from './../model';
+import { CeturbApiService } from './ceturb-api.service';
 
 /**
  *
@@ -17,12 +17,12 @@ import { CeturbApiService } from './ceturb-api.service'
  */
 @Injectable()
 export class BusLinesService {
-  loading: Loading
+  loading: Loading;
 
-  private lines$$ = new BehaviorSubject<BusLine[]>([])
+  private lines$$ = new BehaviorSubject<BusLine[]>([]);
 
   get lines$(): Observable<BusLine[]> {
-    return this.lines$$.asObservable()
+    return this.lines$$.asObservable();
   }
 
   /**
@@ -34,7 +34,7 @@ export class BusLinesService {
       flatMap((lines: BusLine[]) => from(lines)),
       filter((line: BusLine) => !!line),
       filter((line: BusLine) => line.number === lineNumber)
-    )
+    );
   }
 
   /**
@@ -42,7 +42,7 @@ export class BusLinesService {
    *
    */
   get lines(): BusLine[] {
-    return this.lines$$.getValue()
+    return this.lines$$.getValue();
   }
 
   /**
@@ -50,7 +50,7 @@ export class BusLinesService {
    *
    */
   get favorites(): string[] {
-    return this.lines.filter(l => l.isFavorite).map(l => l.number)
+    return this.lines.filter(l => l.isFavorite).map(l => l.number);
   }
 
   /**
@@ -71,23 +71,23 @@ export class BusLinesService {
    *
    */
   loadAll = (): void => {
-    this.showLoading()
+    this.showLoading();
 
     let lines$ = this.auth.user.anonymous
       ? this.api.getLines()
-      : forkJoin(this.api.getLines(), this.syncFavorites()).pipe(map(this.markFavorites))
+      : forkJoin(this.api.getLines(), this.syncFavorites()).pipe(map(this.markFavorites));
 
-    lines$.pipe(finalize(this.dismissLoading)).subscribe(this.updateLines)
-  }
+    lines$.pipe(finalize(this.dismissLoading)).subscribe(this.updateLines);
+  };
 
   /**
    *
    *
    */
   getLineDetails = (lineNumber: string): Observable<BusLineDetails> => {
-    this.showLoading()
-    return this.api.getLineDetails(lineNumber).pipe(finalize(this.dismissLoading))
-  }
+    this.showLoading();
+    return this.api.getLineDetails(lineNumber).pipe(finalize(this.dismissLoading));
+  };
 
   /**
    *
@@ -95,12 +95,14 @@ export class BusLinesService {
    */
   toggleFavorite = (line: BusLine): Observable<BusLine[]> => {
     if (this.auth.isAnonymous) {
-      return fromPromise(this.showAuthNeededModal())
+      return fromPromise(this.showAuthNeededModal());
     } else {
       // atualiza a lista de favoritos
-      const newFavorites = line.isFavorite ? this.favorites.filter(l => l !== line.number) : [...this.favorites, line.number]
+      const newFavorites = line.isFavorite
+        ? this.favorites.filter(l => l !== line.number)
+        : [...this.favorites, line.number];
 
-      this.showLoading()
+      this.showLoading();
 
       // sincroniza atualização na lista de favoritos
       return this.syncFavorites(newFavorites).pipe(
@@ -108,39 +110,39 @@ export class BusLinesService {
         map(() => this.markFavorites([this.lines, newFavorites])),
         tap(() => {
           if (line.isFavorite) {
-            this.showMessage(`Linha ${line.number} removida dos favoritos`)
+            this.showMessage(`Linha ${line.number} removida dos favoritos`);
           } else {
-            this.showMessage(`Linha ${line.number} adicionada aos favoritos`)
+            this.showMessage(`Linha ${line.number} adicionada aos favoritos`);
           }
         }),
         tap(this.updateLines)
-      )
+      );
     }
-  }
+  };
 
   /**
    *
    *
    */
   private updateLines = (lines: BusLine[]) => {
-    this.lines$$.next([...lines])
-  }
+    this.lines$$.next([...lines]);
+  };
 
   /**
    *
    *
    */
   private syncFavorites = (favoriteLines?: string[]): Observable<string[]> => {
-    const syncData: FavoriteLinesData = { favoriteLines: [], date: null }
+    const syncData: FavoriteLinesData = { favoriteLines: [], date: null };
 
     // novos dados sendo enviados para serem salvos
     if (favoriteLines) {
-      syncData.favoriteLines = favoriteLines
-      syncData.date = new Date().toISOString()
+      syncData.favoriteLines = favoriteLines;
+      syncData.date = new Date().toISOString();
     }
 
-    return this.api.syncFavorites(syncData).pipe(map((linesData: FavoriteLinesData) => linesData.favoriteLines))
-  }
+    return this.api.syncFavorites(syncData).pipe(map((linesData: FavoriteLinesData) => linesData.favoriteLines));
+  };
   /**
    *
    *
@@ -160,14 +162,14 @@ export class BusLinesService {
             this.app
               .getRootNav()
               .setRoot('LoginPage')
-              .then(() => alert.dismiss())
-            return false
+              .then(() => alert.dismiss());
+            return false;
           }
         }
       ]
-    })
-    return alert.present()
-  }
+    });
+    return alert.present();
+  };
 
   /**
    *
@@ -178,9 +180,9 @@ export class BusLinesService {
       return {
         ...line,
         isFavorite: favorites.indexOf(line.number) !== -1
-      }
-    })
-  }
+      };
+    });
+  };
 
   /**
    *
@@ -188,12 +190,12 @@ export class BusLinesService {
    */
   private showLoading = (message: string = 'Aguarde') => {
     if (this.loading) {
-      this.loading.setContent(message)
+      this.loading.setContent(message);
     } else {
-      this.loading = this.loadingCtrl.create({ content: message, dismissOnPageChange: true })
-      this.loading.present()
+      this.loading = this.loadingCtrl.create({ content: message, dismissOnPageChange: true });
+      this.loading.present();
     }
-  }
+  };
 
   /**
    *
@@ -201,16 +203,16 @@ export class BusLinesService {
    */
   private dismissLoading = () => {
     if (this.loading) {
-      this.loading.dismiss()
-      this.loading = null
+      this.loading.dismiss();
+      this.loading = null;
     }
-  }
+  };
 
   /**
    *
    *
    */
   public showMessage = (message: string) => {
-    this.toastCtrl.create({ message, duration: 4000 }).present()
-  }
+    this.toastCtrl.create({ message, duration: 4000 }).present();
+  };
 }

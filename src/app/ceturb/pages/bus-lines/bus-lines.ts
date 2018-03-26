@@ -1,10 +1,10 @@
-import { Component, OnDestroy } from '@angular/core'
-import { IonicPage, NavController } from 'ionic-angular'
-import deburr from 'lodash-es/deburr'
-import { Subject } from 'rxjs/Subject'
+import { Component, OnDestroy } from '@angular/core';
+import { IonicPage, NavController } from 'ionic-angular';
+import deburr from 'lodash-es/deburr';
+import { Subject } from 'rxjs/Subject';
 
-import { BusLine } from './../../model'
-import { BusLinesService } from './../../providers/bus-lines.service'
+import { BusLine } from './../../model';
+import { BusLinesService } from './../../providers/bus-lines.service';
 
 @IonicPage({
   segment: 'ceturb/linhas'
@@ -14,9 +14,9 @@ import { BusLinesService } from './../../providers/bus-lines.service'
   templateUrl: 'bus-lines.html'
 })
 export class BusLinesPage implements OnDestroy {
-  allLines: BusLine[]
-  filteredLines: BusLine[]
-  destroyed$ = new Subject()
+  allLines: BusLine[];
+  filteredLines: BusLine[];
+  destroyed$ = new Subject();
 
   /**
    *
@@ -29,7 +29,7 @@ export class BusLinesPage implements OnDestroy {
    *
    */
   ionViewWillLoad() {
-    this.loadBusLines()
+    this.loadBusLines();
   }
 
   /**
@@ -37,58 +37,58 @@ export class BusLinesPage implements OnDestroy {
    *
    */
   ngOnDestroy() {
-    this.destroyed$.next()
-    this.destroyed$.unsubscribe()
+    this.destroyed$.next();
+    this.destroyed$.unsubscribe();
   }
 
   /**
    *
    *
    */
-  trackByNumber = (index: number, line: BusLine) => line.number
+  trackByNumber = (index: number, line: BusLine) => line.number;
 
   /**
    *
    *
    */
   search = e => {
-    const search = this.normalize(e.target.value)
+    const search = this.normalize(e.target.value);
     this.filteredLines = this.allLines.filter(line => {
-      return this.normalize(line.name).includes(search) || this.normalize(line.number).includes(search)
-    })
-  }
+      return this.normalize(line.name).includes(search) || this.normalize(line.number).includes(search);
+    });
+  };
 
   /**
    *
    *
    */
   clear = () => {
-    this.filteredLines = this.allLines
-  }
+    this.filteredLines = this.allLines;
+  };
 
   /**
    *
    *
    */
-  showDetails = (busLine: BusLine) => this.navCtrl.push('BusLineInfoPage', { number: busLine.number })
+  showDetails = (busLine: BusLine) => this.navCtrl.push('BusLineInfoPage', { number: busLine.number });
 
   /**
    *
    *
    */
   private loadBusLines = () => {
-    const allLines$ = this.ceturb.lines$.takeUntil(this.destroyed$)
+    const allLines$ = this.ceturb.lines$.takeUntil(this.destroyed$);
 
     allLines$.subscribe(allLines => {
-      this.allLines = this.filteredLines = allLines || []
-    })
+      this.allLines = this.filteredLines = allLines || [];
+    });
 
-    this.ceturb.loadAll()
-  }
+    this.ceturb.loadAll();
+  };
 
   /**
    *
    *
    */
-  private normalize = (term: string) => (term ? deburr(term.toLowerCase()) : '')
+  private normalize = (term: string) => (term ? deburr(term.toLowerCase()) : '');
 }

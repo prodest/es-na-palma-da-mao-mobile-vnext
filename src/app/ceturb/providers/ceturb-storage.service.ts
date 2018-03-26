@@ -1,8 +1,8 @@
-import { Injectable } from '@angular/core'
-import { LocalStorage } from '@espm/core'
-import { Storage } from '@ionic/storage'
+import { Injectable } from '@angular/core';
+import { LocalStorage } from '@espm/core';
+import { Storage } from '@ionic/storage';
 
-import { CeturbStorageModel } from './ceturb-storage.model'
+import { CeturbStorageModel } from './ceturb-storage.model';
 
 /**
  *
@@ -15,6 +15,6 @@ export class CeturbStorage extends LocalStorage<CeturbStorageModel> {
    *
    */
   constructor(storage: Storage, defaults: any, storageKey: string) {
-    super(storage, defaults, storageKey)
+    super(storage, defaults, storageKey);
   }
 }

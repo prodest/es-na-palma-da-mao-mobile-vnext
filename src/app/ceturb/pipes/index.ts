@@ -1,6 +1,6 @@
-import { NgModule } from '@angular/core'
+import { NgModule } from '@angular/core';
 
-import { BeforePipe } from './before.pipe'
+import { BeforePipe } from './before.pipe';
 
 @NgModule({
   declarations: [BeforePipe],

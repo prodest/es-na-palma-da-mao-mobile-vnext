@@ -1,9 +1,9 @@
-import { NgModule } from '@angular/core'
-import { CapitalizePipeModule, DateFormatPipeModule } from '@espm/shared/pipes'
-import { IonicPageModule } from 'ionic-angular'
+import { NgModule } from '@angular/core';
+import { CapitalizePipeModule, DateFormatPipeModule } from '@espm/shared/pipes';
+import { IonicPageModule } from 'ionic-angular';
 
-import { DetranPipesModule } from '../../pipes'
-import { TicketsComponent } from './tickets.component'
+import { DetranPipesModule } from '../../pipes';
+import { TicketsComponent } from './tickets.component';
 
 @NgModule({
   declarations: [TicketsComponent],

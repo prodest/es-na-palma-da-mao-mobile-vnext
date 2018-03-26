@@ -1,13 +1,13 @@
-import { Injectable } from '@angular/core'
-import { Loading, LoadingController, ToastController } from 'ionic-angular'
-import { Observable } from 'rxjs/Observable'
-import { of } from 'rxjs/observable/of'
-import { _throw } from 'rxjs/observable/throw'
-import { catchError, finalize, flatMap, map, pluck } from 'rxjs/operators'
+import { Injectable } from '@angular/core';
+import { Loading, LoadingController, ToastController } from 'ionic-angular';
+import { Observable } from 'rxjs/Observable';
+import { of } from 'rxjs/observable/of';
+import { _throw } from 'rxjs/observable/throw';
+import { catchError, finalize, flatMap, map, pluck } from 'rxjs/operators';
 
-import { Ticket, Vehicle, VehiclesData } from '../model'
-import { DetranApiService } from './detran-api.service'
-import { DetranStorage } from './detran-storage.service'
+import { Ticket, Vehicle, VehiclesData } from '../model';
+import { DetranApiService } from './detran-api.service';
+import { DetranStorage } from './detran-storage.service';
 
 /**
  *
@@ -15,10 +15,10 @@ import { DetranStorage } from './detran-storage.service'
  */
 @Injectable()
 export class VehiclesService {
-  loading: Loading
+  loading: Loading;
 
   get vehicles$(): Observable<Vehicle[]> {
-    return this.storage.all$.pipe(pluck('vehicles'))
+    return this.storage.all$.pipe(pluck('vehicles'));
   }
 
   /**
@@ -26,7 +26,7 @@ export class VehiclesService {
    *
    */
   get ready(): Promise<any> {
-    return this.storage.ready
+    return this.storage.ready;
   }
 
   /**
@@ -46,11 +46,11 @@ export class VehiclesService {
    */
   add = (vehicle: Vehicle): Observable<Vehicle[]> => {
     if (this.storage.containsVehicle(vehicle)) {
-      this.showMessage('Placa ou RENAVAM já cadastrados')
-      return of(this.storage.getValue('vehicles'))
+      this.showMessage('Placa ou RENAVAM já cadastrados');
+      return of(this.storage.getValue('vehicles'));
     }
 
-    this.showLoading()
+    this.showLoading();
 
     return this.api.getVehicleInfo(vehicle).pipe(
       map((extra: Partial<Vehicle>) => ({ ...vehicle, ...extra })),
@@ -58,36 +58,36 @@ export class VehiclesService {
       finalize(this.dismissLoading),
       catchError(error => {
         if (error.status === 404) {
-          this.showMessage('Veículo não encontrado na base do DETRAN.')
+          this.showMessage('Veículo não encontrado na base do DETRAN.');
         } else {
-          this.showMessage('Erro ao salvar veículo. Tente novamente.')
+          this.showMessage('Erro ao salvar veículo. Tente novamente.');
         }
-        return _throw(error)
+        return _throw(error);
       })
-    )
-  }
+    );
+  };
 
   /**
    *
    *
    */
   remove(vehicle: Vehicle): Observable<Vehicle[]> {
-    let vehicles = this.storage.getValue('vehicles')
+    let vehicles = this.storage.getValue('vehicles');
 
     // remove veículo e sincroniza altrações com o servidor
     vehicles = vehicles.filter((v1: Vehicle) => {
-      return v1.plate !== vehicle.plate && v1.renavam !== vehicle.renavam
-    })
+      return v1.plate !== vehicle.plate && v1.renavam !== vehicle.renavam;
+    });
 
-    this.showLoading()
+    this.showLoading();
 
     return this.syncVehicles(vehicles).pipe(
       finalize(this.dismissLoading),
       catchError(error => {
-        this.showMessage('Erro ao remover veículo.')
-        return _throw(error)
+        this.showMessage('Erro ao remover veículo.');
+        return _throw(error);
       })
-    )
+    );
   }
 
   /**
@@ -96,42 +96,42 @@ export class VehiclesService {
    */
   load = (): Observable<Vehicle[]> => {
     // sincroniza veículos do servidor com armazenamento local
-    this.showLoading()
-    return this.syncVehicles().pipe(finalize(this.dismissLoading))
-  }
+    this.showLoading();
+    return this.syncVehicles().pipe(finalize(this.dismissLoading));
+  };
 
   /**
    *
    *
    */
   getTickets = (vehicle: Vehicle): Observable<Ticket[]> => {
-    return this.api.getVehicleTickets(vehicle)
-  }
+    return this.api.getVehicleTickets(vehicle);
+  };
 
   /**
    *
    *
    */
   private syncVehicle = (vehicle: Vehicle): Observable<Vehicle[]> => {
-    return this.syncVehicles([...this.storage.getValue('vehicles'), vehicle])
-  }
+    return this.syncVehicles([...this.storage.getValue('vehicles'), vehicle]);
+  };
 
   /**
    *
    *
    */
   private syncVehicles = (vehicles?: Vehicle[]): Observable<Vehicle[]> => {
-    const syncData: VehiclesData = { vehicles: [], date: null }
+    const syncData: VehiclesData = { vehicles: [], date: null };
 
     if (vehicles) {
-      syncData.vehicles = vehicles
-      syncData.date = new Date().toISOString()
+      syncData.vehicles = vehicles;
+      syncData.date = new Date().toISOString();
     }
 
     return this.api
       .syncVehicles(syncData)
-      .pipe(flatMap((vehiclesData: VehiclesData) => this.storage.mergeValue('vehicles', vehiclesData.vehicles)))
-  }
+      .pipe(flatMap((vehiclesData: VehiclesData) => this.storage.mergeValue('vehicles', vehiclesData.vehicles)));
+  };
 
   /**
    *
@@ -139,12 +139,12 @@ export class VehiclesService {
    */
   private showLoading = (message: string = 'Aguarde') => {
     if (this.loading) {
-      this.loading.setContent(message)
+      this.loading.setContent(message);
     } else {
-      this.loading = this.loadingCtrl.create({ content: message, dismissOnPageChange: true })
-      this.loading.present()
+      this.loading = this.loadingCtrl.create({ content: message, dismissOnPageChange: true });
+      this.loading.present();
     }
-  }
+  };
 
   /**
    *
@@ -152,16 +152,16 @@ export class VehiclesService {
    */
   private dismissLoading = () => {
     if (this.loading) {
-      this.loading.dismiss()
-      this.loading = null
+      this.loading.dismiss();
+      this.loading = null;
     }
-  }
+  };
 
   /**
    *
    *
    */
   private showMessage = (message: string) => {
-    this.toastCtrl.create({ message, duration: 4000 }).present()
-  }
+    this.toastCtrl.create({ message, duration: 4000 }).present();
+  };
 }

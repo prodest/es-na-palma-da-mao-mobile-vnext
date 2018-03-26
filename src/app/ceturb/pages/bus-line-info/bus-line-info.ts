@@ -1,11 +1,11 @@
-import { Component, OnDestroy } from '@angular/core'
-import { IonicPage, NavController, NavParams } from 'ionic-angular'
-import { interval } from 'rxjs/observable/interval'
-import { takeUntil } from 'rxjs/operators'
-import { Subject } from 'rxjs/Subject'
+import { Component, OnDestroy } from '@angular/core';
+import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { interval } from 'rxjs/observable/interval';
+import { takeUntil } from 'rxjs/operators';
+import { Subject } from 'rxjs/Subject';
 
-import { BusLine, BusLineDetails } from './../../model'
-import { BusLinesService } from './../../providers/bus-lines.service'
+import { BusLine, BusLineDetails } from './../../model';
+import { BusLinesService } from './../../providers/bus-lines.service';
 
 @IonicPage({
   segment: 'ceturb/linha/:number'
@@ -15,11 +15,11 @@ import { BusLinesService } from './../../providers/bus-lines.service'
   templateUrl: 'bus-line-info.html'
 })
 export class BusLineInfoPage implements OnDestroy {
-  private destroyed$ = new Subject()
-  line: BusLine
-  details: BusLineDetails
-  currentHour: string
-  tab: 'info' | 'directions' = 'info'
+  private destroyed$ = new Subject();
+  line: BusLine;
+  details: BusLineDetails;
+  currentHour: string;
+  tab: 'info' | 'directions' = 'info';
 
   /**
    *
@@ -31,32 +31,32 @@ export class BusLineInfoPage implements OnDestroy {
    *
    */
   ionViewCanEnter(): boolean | Promise<any> {
-    const isAllowed = !!this.params.get('number')
+    const isAllowed = !!this.params.get('number');
 
     if (!isAllowed) {
-      setTimeout(() => this.navCtrl.setRoot('BusLinesPage'))
+      setTimeout(() => this.navCtrl.setRoot('BusLinesPage'));
     }
-    return isAllowed
+    return isAllowed;
   }
 
   /**
    *
    */
   ionViewDidLoad() {
-    const lineNumber = this.params.get('number')
+    const lineNumber = this.params.get('number');
 
     this.ceturb
       .line$(lineNumber)
       .pipe(takeUntil(this.destroyed$))
-      .subscribe((line: BusLine) => (this.line = line))
+      .subscribe((line: BusLine) => (this.line = line));
 
-    this.ceturb.getLineDetails(this.line.number).subscribe((details: BusLineDetails) => (this.details = details))
+    this.ceturb.getLineDetails(this.line.number).subscribe((details: BusLineDetails) => (this.details = details));
 
-    this.updateCurrentHour()
+    this.updateCurrentHour();
 
     interval(1 * 1000)
       .pipe(takeUntil(this.destroyed$))
-      .subscribe(this.updateCurrentHour)
+      .subscribe(this.updateCurrentHour);
   }
 
   /**
@@ -64,8 +64,8 @@ export class BusLineInfoPage implements OnDestroy {
    *
    */
   ngOnDestroy() {
-    this.destroyed$.next()
-    this.destroyed$.unsubscribe()
+    this.destroyed$.next();
+    this.destroyed$.unsubscribe();
   }
 
   /**
@@ -73,12 +73,12 @@ export class BusLineInfoPage implements OnDestroy {
    *
    */
   toggleFavorite = (busLine: BusLine) => {
-    this.ceturb.toggleFavorite(busLine).subscribe()
-  }
+    this.ceturb.toggleFavorite(busLine).subscribe();
+  };
 
   /**
    *
    *
    */
-  private updateCurrentHour = () => (this.currentHour = new Date().toTimeString().slice(0, 5))
+  private updateCurrentHour = () => (this.currentHour = new Date().toTimeString().slice(0, 5));
 }

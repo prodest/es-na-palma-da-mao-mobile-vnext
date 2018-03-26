@@ -1,11 +1,11 @@
-import { BusLine } from './bus-line'
+import { BusLine } from './bus-line';
 
 export interface BusRoute {
-  line: BusLine
-  directions: BusDirection[]
+  line: BusLine;
+  directions: BusDirection[];
 }
 
 export interface BusDirection {
-  type: string
-  paths: string[]
+  type: string;
+  paths: string[];
 }

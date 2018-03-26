@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, Input } from '@angular/core'
+import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
 
 @Component({
   selector: 'espm-driver-status',
@@ -8,13 +8,13 @@ import { ChangeDetectionStrategy, Component, Input } from '@angular/core'
 export class DriverStatusComponent {
   @Input()
   status: {
-    expirationDate: string
-    renew: boolean
-    ok: boolean
-    blocked: boolean
-    expired: boolean
-    blockMotive: string
-  }
+    expirationDate: string;
+    renew: boolean;
+    ok: boolean;
+    blocked: boolean;
+    expired: boolean;
+    blockMotive: string;
+  };
 
   /**
    *
@@ -25,6 +25,6 @@ export class DriverStatusComponent {
       'status--blocked': cnh.blocked,
       'status--expired': cnh.expired,
       'status--renew': cnh.renew
-    }
-  }
+    };
+  };
 }
