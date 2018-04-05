@@ -37,25 +37,31 @@ const menus = [
         title: 'Ceturb Linhas',
         icon: 'bus',
         component: 'BusLinesPage',
-        order: 2
+        order: 3
+      },
+      {
+        title: 'Dio Edições Recentes',
+        icon: 'clock',
+        component: 'LatestEditionsPage',
+        order: 4
       },
       {
         title: 'Agenda ES',
         icon: 'calendar',
         component: 'SchedulePage',
-        order: 2
+        order: 5
       },
       {
         title: 'Notícias',
         icon: 'paper',
         component: 'NewsPage',
-        order: 3
+        order: 6
       },
       {
         title: 'Consulta Processo',
         icon: 'search',
         component: 'SepPage',
-        order: 4
+        order: 7
       }
     ]
   }

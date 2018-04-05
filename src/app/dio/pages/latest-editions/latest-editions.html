@@ -1,0 +1,16 @@
+<ion-header>
+    <ion-navbar>
+        <button ion-button menuToggle>
+            <ion-icon name="menu"></ion-icon>
+        </button>
+        <ion-title>Últimas Edições</ion-title>
+    </ion-navbar>
+</ion-header>
+
+<ion-content>
+    <ion-list>
+        <ion-item *ngFor="let edition of latestEditions$ | async" (click)="openEdition(edition.url)">
+            <h2>{{edition.description}} - {{edition.date}}</h2>
+        </ion-item>
+    </ion-list>
+</ion-content>

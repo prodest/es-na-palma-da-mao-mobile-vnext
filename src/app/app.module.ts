@@ -13,6 +13,7 @@ import * as moment from 'moment';
 import { ESPM } from './app.component';
 import { CeturbProviders } from './ceturb/providers';
 import { DetranProviders } from './detran/providers';
+import { DioProviders } from './dio/providers';
 
 moment.locale('pt-br');
 
@@ -40,6 +41,7 @@ moment.locale('pt-br');
     InAppBrowser,
     ...DetranProviders,
     ...CeturbProviders,
+    ...DioProviders,
     { provide: ErrorHandler, useClass: IonicErrorHandler }
   ]
 })
