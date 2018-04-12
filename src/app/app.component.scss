@@ -16,6 +16,12 @@
 
 @import '../theme/mixins';
 @import '../theme/pop-up-modal';
+@import 'font-awesome';
+
+i[class^='fa-'],
+ion-icon[class^='fa-'] {
+  font-family: 'FontAwesome' !important;
+}
 
 ion-content {
   background-color: #fefdff;
