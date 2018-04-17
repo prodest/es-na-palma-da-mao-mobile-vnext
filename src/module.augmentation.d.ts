@@ -14,6 +14,7 @@ declare module 'leaflet' {
     interface BusStopIconOptions extends BaseIconOptions {
       role?: 'default' | 'secondary' | 'origin' | 'destination' | 'available-destination';
       direction?: number;
+      spin?: boolean;
       type?: 'ponto' | 'terminal';
     }
 

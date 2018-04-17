@@ -4,3 +4,4 @@ export * from './bus-route';
 export * from './bus-schedule';
 export * from './favorite-lines-data';
 export * from './bus-stop';
+export * from './prevision';

@@ -39,6 +39,12 @@
   font-size: 1.5em;
 }
 
+// spin marker
+.marker-spin > i {
+  padding: 6px;
+  border-radius: 80px;
+}
+
 .marker-terminal > i {
   border-radius: 0px;
 }
@@ -91,10 +97,4 @@
 
 .marker-secondary .azimute {
   background: url('/assets/imgs/seta_ponto_de_parada_light.png') 50% 9% no-repeat;
-}
-
-// spin marker
-.marker-spin > i {
-  padding: 6px;
-  font-size: 1.4em;
 }

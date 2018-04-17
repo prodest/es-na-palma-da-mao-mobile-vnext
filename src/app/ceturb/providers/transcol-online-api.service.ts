@@ -1,3 +1,4 @@
+import { Prevision } from './../model/prevision';
 import { BusStop } from './../model/bus-stop';
 import { HttpClient } from '@angular/common/http';
 import { Inject, Injectable } from '@angular/core';
@@ -24,6 +25,56 @@ export class TranscolOnlineApiService {
     return this.http
       .post<any>(`${this.env.api.ceturb}/transcolOnline/svc/json/db/pesquisarPontosDeParada`, { envelope: bounds })
       .pipe(map(resp => resp.pontosDeParada), flatMap(ids => this.listBusStopsByIds(ids)), share())
+      .toPromise();
+  };
+
+  /**
+   *
+   */
+  getBusStopsIdsByRoute = (originId: number, destinationId: number): Promise<number[]> => {
+    return this.http
+      .post<any>(`${this.env.api.ceturb}/transcolOnline/svc/json/db/pesquisarPontosDeParada`, {
+        pontoDeOrigemId: originId,
+        pontoDeDestinoId: destinationId
+      })
+      .pipe(map(resp => resp.pontosDeParada), share())
+      .toPromise();
+  };
+
+  /**
+   *
+   */
+  getBusStopsIdsByOrigin(id: number): Promise<any[]> {
+    return this.http
+      .post<any>(`${this.env.api.ceturb}/transcolOnline/svc/json/db/pesquisarPontosDeParada`, { pontoDeOrigemId: id })
+      .pipe(map(resp => resp.pontosDeParada), share())
+      .toPromise();
+  }
+
+  /**
+   *
+   */
+  getPrevisionsByOriginAndDestination = (originId: number, destinationId: number): Promise<Prevision[]> => {
+    const payload = {
+      pontoDeOrigemId: originId,
+      pontoDeDestinoId: destinationId
+    };
+
+    return this.http
+      .post<any>(`${this.env.api.ceturb}/transcolOnline/svc/estimativas/obterEstimativasPorOrigemEDestino`, payload)
+      .pipe(share())
+      .toPromise();
+  };
+
+  /**
+   *
+   */
+  getPrevisionsByOrigin = (id: number): Promise<Prevision[]> => {
+    const payload = { pontoDeOrigemId: id };
+
+    return this.http
+      .post<any>(`${this.env.api.ceturb}/transcolOnline/svc/estimativas/obterEstimativasPorOrigem`, payload)
+      .pipe(share())
       .toPromise();
   };
 

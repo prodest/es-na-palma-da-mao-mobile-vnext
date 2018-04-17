@@ -7,6 +7,7 @@ import * as L from 'leaflet';
    */
   L.Icon.BusStop = L.DivIcon.extend({
     options: {
+      spin: false,
       role: 'default',
       iconSize: [32, 32],
       html: '<i class="fa fa-bus" aria-hidden="true"></i> <div class="azimute"></div>'
@@ -14,7 +15,25 @@ import * as L from 'leaflet';
 
     initialize: function(options) {
       (L as any).setOptions(this, options);
-      this.options.className = `marker dir-${options.direction} marker-${options.role} marker-${options.type}`;
+
+      let className = 'marker';
+      if (options.direction) {
+        className = `${className} dir-${options.direction}`;
+      }
+
+      if (options.role) {
+        className = `${className} marker-${options.role}`;
+      }
+
+      if (options.type) {
+        className = `${className} marker-${options.type}`;
+      }
+
+      if (options.spin) {
+        className = `${className} marker-spin`;
+        this.options.html = `<i class="fa fa-circle-o-notch fa-spin" aria-hidden="true"></i>`;
+      }
+      this.options.className = className;
     }
   });
 
