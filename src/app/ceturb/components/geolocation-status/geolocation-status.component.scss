@@ -1,0 +1,13 @@
+espm-geolocation-status {
+  .leaflet-control-locate {
+    a {
+      color: #444;
+      cursor: pointer;
+    }
+    &.searching {
+      a {
+        color: #2074b6;
+      }
+    }
+  }
+}

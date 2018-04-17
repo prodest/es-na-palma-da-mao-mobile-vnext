@@ -1,0 +1,25 @@
+<!-- <div class="leaflet-top leaflet-right"
+     [class.searching]="searching"
+     (click)="search.emit($event)">
+  <div class="leaflet-control-locate leaflet-bar leaflet-control">
+    <a title="Onde estou?">
+      <span class="fa"
+            [class.fa-map-marker]="!searching"
+            [class.fa-spin]="searching"
+            [class.fa-circle-o-notch]="searching"></span>
+    </a>
+  </div>
+</div> -->
+
+<div class="leaflet-top leaflet-right"
+     (click)="search.emit($event)">
+  <div class="leaflet-control-locate leaflet-bar leaflet-control"
+       [class.searching]="searching">
+    <a title="Onde estou?">
+      <span class="fa"
+            [class.fa-map-marker]="!searching"
+            [class.fa-spin]="searching"
+            [class.fa-circle-o-notch]="searching"></span>
+    </a>
+  </div>
+</div>
