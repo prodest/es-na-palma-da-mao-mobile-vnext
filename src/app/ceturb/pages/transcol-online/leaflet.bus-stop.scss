@@ -1,0 +1,100 @@
+/********************** Markers **********************/
+.bus-stop-icon {
+  border: 3px solid darked;
+  background: #fff;
+  border-radius: 50px;
+}
+
+.marker {
+  color: rgb(185, 91, 104);
+}
+
+.marker .azimute {
+  content: '';
+  position: absolute;
+  width: 47%;
+  height: 43px;
+  top: -50%;
+  z-index: -1;
+  background: url('/assets/imgs/seta_ponto_de_parada_dark.png') 50% 9% no-repeat;
+  left: 30%;
+  transform-origin: 44% 75%;
+}
+
+// gera classes para rotate (azimute)
+@for $i from 0 through 180 {
+  .marker.dir-#{$i} .azimute {
+    transform: rotate(#{$i}deg);
+  }
+  .marker.dir--#{$i} .azimute {
+    transform: rotate(-#{$i}deg);
+  }
+}
+
+.marker > i {
+  border: 2px solid #b95b68;
+  border-radius: 60px;
+  background: #fff;
+  padding: 5px 7px;
+  font-size: 1.5em;
+}
+
+.marker-terminal > i {
+  border-radius: 0px;
+}
+.marker-terminal > i:before {
+  content: 'T';
+  font-weight: bold;
+  font-family: verdana;
+}
+.marker-terminal .azimute,
+.marker-destination .azimute {
+  display: none;
+}
+
+// destination marker
+.marker-destination {
+  color: #003e50;
+  z-index: 9999 !important;
+}
+
+.marker-destination > i {
+  border: 3px solid #003e50;
+}
+
+.marker-available-destination {
+  color: #628b96;
+}
+
+.marker-available-destination > i {
+  border: 2px solid #628b96;
+}
+
+// origin marker
+.marker-origin {
+  color: darkgoldenrod;
+  z-index: 9999 !important;
+}
+.marker-origin > i {
+  border: 3px solid darkgoldenrod;
+}
+
+// secondary marker
+.marker-secondary {
+  display: none;
+  color: #d2cdce;
+}
+
+.marker-secondary > i {
+  border: 2px solid #d2cdce;
+}
+
+.marker-secondary .azimute {
+  background: url('/assets/imgs/seta_ponto_de_parada_light.png') 50% 9% no-repeat;
+}
+
+// spin marker
+.marker-spin > i {
+  padding: 6px;
+  font-size: 1.4em;
+}
