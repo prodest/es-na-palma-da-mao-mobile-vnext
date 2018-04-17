@@ -6,14 +6,14 @@
  * For details on configuring webpack, see their documentation here
  * https://webpack.js.org/configuration/
  */
-const { join } = require('path')
-const dotenvConfig = require('dotenv').config()
-const _ = require('lodash')
-const webpack = require('webpack')
-const merge = require('webpack-merge')
-const { dev, prod } = require('@ionic/app-scripts/config/webpack.config')
-const ContextReplacementPlugin = require('webpack/lib/ContextReplacementPlugin')
-const rxPaths = require('rxjs/_esm5/path-mapping')
+const { join } = require('path');
+const dotenvConfig = require('dotenv').config();
+const _ = require('lodash');
+const webpack = require('webpack');
+const merge = require('webpack-merge');
+const { dev, prod } = require('@ionic/app-scripts/config/webpack.config');
+const ContextReplacementPlugin = require('webpack/lib/ContextReplacementPlugin');
+const rxPaths = require('rxjs/_esm5/path-mapping');
 
 /* LINHAS CUSTOMIZADAS INSERIDAS
 ***********************************************************************************************************
@@ -29,36 +29,39 @@ const rxPaths = require('rxjs/_esm5/path-mapping')
 */
 const envVariables = {
   'process.env': _(process.env)
-                  .pick(_.keys(dotenvConfig.parsed))
-                  .mapValues((v) => (JSON.stringify(v)))
-                  .value()
-}
+    .pick(_.keys(dotenvConfig.parsed))
+    .mapValues(v => JSON.stringify(v))
+    .value()
+};
 
 const setEnvironmentVariables = (env, constants) => {
   const plugins = [
     new webpack.DefinePlugin(constants),
     new ContextReplacementPlugin(/moment[/\\]locale$/, /pt-br/),
     new webpack.EnvironmentPlugin(['IONIC_ENV'])
-  ]
-  env.plugins = [...env.plugins, ...plugins]
-}
+  ];
+  env.plugins = [...env.plugins, ...plugins];
+};
 
-setEnvironmentVariables(dev, envVariables)
-setEnvironmentVariables(prod, envVariables)
+setEnvironmentVariables(dev, envVariables);
+setEnvironmentVariables(prod, envVariables);
 
 const customResolveConfig = {
   resolve: {
-    alias: _.merge({
-      '@espm/core': join(__dirname, './src/libs/core'),
-      '@espm/shared': join(__dirname, './src/libs/shared')
-    }, rxPaths()) // ref: https://github.com/ReactiveX/rxjs/blob/master/doc/lettable-operators.md#user-content-build-and-treeshaking
+    alias: _.merge(
+      {
+        '@espm/core': join(__dirname, './src/libs/core'),
+        '@espm/shared': join(__dirname, './src/libs/shared')
+      },
+      rxPaths()
+    ) // ref: https://github.com/ReactiveX/rxjs/blob/master/doc/lettable-operators.md#user-content-build-and-treeshaking
   }
-}
+};
 // ref: https://github.com/ionic-team/ionic-app-scripts/issues/1126
 // devido ao fato de que o build não reconhece ts compiler options "paths"
 module.exports = {
   dev: merge(dev, customResolveConfig),
   prod: merge(prod, customResolveConfig)
-}
+};
 
 /***********************************************************************************************************/

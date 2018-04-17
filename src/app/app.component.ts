@@ -64,6 +64,12 @@ const menus = [
         order: 5
       },
       {
+        title: 'Ceturb Transcol Online',
+        icon: 'bus',
+        component: 'TranscolOnlinePage',
+        order: 2
+      },
+      {
         title: 'Agenda ES',
         icon: 'calendar',
         component: 'SchedulePage',

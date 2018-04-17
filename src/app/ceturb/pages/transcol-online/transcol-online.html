@@ -1,0 +1,15 @@
+<ion-header>
+  <ion-navbar>
+    <button ion-button
+            menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    <ion-title>Transcol Online</ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content>
+  <espm-geolocation-status [searching]="searchingLocation"
+                           (click)="getUserLocation()"></espm-geolocation-status>
+  <div id="map"></div>
+</ion-content>
