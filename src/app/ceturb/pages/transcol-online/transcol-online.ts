@@ -299,6 +299,14 @@ export class TranscolOnlinePage implements AfterViewInit, OnDestroy {
   /**
    *
    */
+  async getLinePrevisions(line: BusLine): Promise<Prevision[]> {
+    this.previsions = await this.api.getPrevisionsByOriginAndLine(line.pontoDeOrigemId, line.linhaId);
+    return this.previsions;
+  }
+
+  /**
+   *
+   */
   async getRoutePrevisions(originId: number, destinationId: number): Promise<Prevision[]> {
     this.previsions = await this.api.getPrevisionsByOriginAndDestination(originId, destinationId);
     return this.previsions;
@@ -344,6 +352,25 @@ export class TranscolOnlinePage implements AfterViewInit, OnDestroy {
   navigateToOriginPrevisions = (clearPrevisions = true) => {
     this.isShowingOriginPrevisions = true;
     this.isShowingLinePrevisions = false;
+    this.isShowingRoutePrevisions = false;
+  };
+
+  /**
+   *
+   */
+  showLinePrevisions = (line: BusLine): Promise<Prevision[]> => {
+    this.previsions = undefined;
+    this.selectedLine = line;
+    this.navigateToLinePrevisions();
+    return this.getLinePrevisions(line);
+  };
+
+  /**
+   *
+   */
+  navigateToLinePrevisions = (clearPrevisions = true) => {
+    this.isShowingOriginPrevisions = false;
+    this.isShowingLinePrevisions = true;
     this.isShowingRoutePrevisions = false;
   };
 

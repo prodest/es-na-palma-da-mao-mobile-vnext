@@ -1,10 +1,11 @@
-import { Prevision } from './../model/prevision';
-import { BusStop } from './../model/bus-stop';
 import { HttpClient } from '@angular/common/http';
 import { Inject, Injectable } from '@angular/core';
 import { Environment, EnvVariables } from '@espm/core';
 import { Observable } from 'rxjs/Observable';
-import { share, flatMap, map } from 'rxjs/operators';
+import { flatMap, map, share } from 'rxjs/operators';
+
+import { BusStop } from './../model/bus-stop';
+import { Prevision } from './../model/prevision';
 
 /**
  *
@@ -74,6 +75,21 @@ export class TranscolOnlineApiService {
 
     return this.http
       .post<any>(`${this.env.api.ceturb}/transcolOnline/svc/estimativas/obterEstimativasPorOrigem`, payload)
+      .pipe(share())
+      .toPromise();
+  };
+
+  /**
+   *
+   */
+  getPrevisionsByOriginAndLine = (originId: number, lineId: number): Promise<Prevision[]> => {
+    const payload = {
+      pontoDeOrigemId: originId,
+      linhaId: lineId
+    };
+
+    return this.http
+      .post<any>(`${this.env.api.ceturb}/transcolOnline/svc/estimativas/obterEstimativasPorOrigemELinha`, payload)
       .pipe(share())
       .toPromise();
   };

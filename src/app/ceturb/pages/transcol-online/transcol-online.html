@@ -8,7 +8,7 @@
   </ion-navbar>
 </ion-header>
 
-<ion-content>
+<ion-content class="no-scroll">
 
   <ion-searchbar *ngIf="(!selectedOrigin || !selectedDestination) && !isDetailsOpenned"
                  class="searchbar"
@@ -64,6 +64,30 @@
                     (select)="panToStop($event)"
                     class="destination">
       </stop-summary>
+    </div>
+    <div class="stop-info__content"
+         [ngClass]="{ 'previsionsByOrigin': isShowingOriginPrevisions, 'previsionsByLine': isShowingLinePrevisions, 'previsionsByRoute': isShowingRoutePrevisions }">
+        <origin-previsions *ngIf="isShowingOriginPrevisions"
+                          class="clickable"
+                          [origin]="selectedOrigin"
+                          [previsions]="previsions"
+                          (selectLine)="showLinePrevisions($event)"
+                          (refresh)="getOriginPrevisions(selectedOrigin.id)">
+        </origin-previsions>
+      <!-- <origin-previsions-list class="clickable" [ngClass]="{ 'shown': isShowingOriginPrevisions }" origin="selectedOrigin"
+          previsions="previsions" on-swipe-right="::showDestinations()" on-prevision-click="::showLinePrevisions({ identificadorLinha: prevision.identificadorLinha, linhaId: prevision.linhaId, pontoDeOrigemId: prevision.pontoDeOrigemId })"
+          on-refresh-click="::getOriginPrevisions(selectedOrigin.id)">
+      </origin-previsions-list>
+      <line-previsions-list [ngClass]="{ 'shown': isShowingLinePrevisions }"
+          line="selectedLine.identificadorLinha" previsions="previsions" on-swipe-right="::showOriginPrevisions()"
+          on-refresh-click="::getLinePrevisions(selectedLine)">
+      </line-previsions-list>
+      <route-previsions-list [ngClass]="{ 'shown': isShowingRoutePrevisions }" previsions="previsions"
+          on-refresh-click="::getRoutePrevisions( this.selectedOrigin.id, this.selectedDestination.id )()">
+      </route-previsions-list> -->
+      <!-- <div>A</div>
+      <div>B</div>
+      <div>C</div> -->
     </div>
   </div>
   <div id="map"></div>

@@ -1,0 +1,26 @@
+<div *ngIf="origin"
+     class="origin-previsions__page-title">
+    <div>
+        <i class="fa fa-code-fork"></i> Linhas que passam no ponto
+        <strong> {{origin.identificador}}</strong>
+    </div>
+</div>
+<div class="origin-previsions__table-header">
+    <span>Linha</span>
+    <span class="origin">Próximo</span>
+</div>
+<ion-scroll scrollY="true" *ngIf="previsions && previsions.length">
+    <ion-list class="prevision-list">
+        <button ion-item
+                *ngFor="let prevision of previsions"
+                (click)="selectLine.emit(prevision)">
+            <h2 item-start>{{ prevision.identificadorLinha }}</h2>
+            <p>{{ prevision.bandeira }}</p>
+            <ion-note>{{ prevision.observacaoLinha }}</ion-note>
+            <h4 item-end
+                [ngStyle]="{'color': prevision.confiabilidade}">{{ prevision.previsaoNaOrigem }}</h4>
+        </button>
+    </ion-list>
+</ion-scroll>
+<div class="not-founded"
+     *ngIf="previsions && !previsions.length">Nenhuma previsão encontrada</div>

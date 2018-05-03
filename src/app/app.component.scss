@@ -35,6 +35,10 @@ ion-menu {
   }
 }
 
+.no-scroll .scroll-content {
+  overflow: hidden;
+}
+
 body,
 input,
 textarea,
