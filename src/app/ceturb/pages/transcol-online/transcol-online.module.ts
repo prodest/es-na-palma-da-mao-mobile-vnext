@@ -1,7 +1,12 @@
 import { NgModule } from '@angular/core';
 import { IonicPageModule } from 'ionic-angular';
 
-import { GeolocationStatusModule, OriginPrevisionsComponentModule, StopSummaryComponentModule } from '../../components';
+import {
+  GeolocationStatusModule,
+  LinePrevisionsComponentModule,
+  OriginPrevisionsComponentModule,
+  StopSummaryComponentModule
+} from '../../components';
 import { TranscolOnlinePage } from './transcol-online';
 
 @NgModule({
@@ -10,6 +15,7 @@ import { TranscolOnlinePage } from './transcol-online';
     GeolocationStatusModule,
     OriginPrevisionsComponentModule,
     StopSummaryComponentModule,
+    LinePrevisionsComponentModule,
     IonicPageModule.forChild(TranscolOnlinePage)
   ]
 })

@@ -1,0 +1,42 @@
+<div *ngIf="line"
+     class="line-previsions__page-title">
+    <div>
+        <i class="fa fa-clock-o"></i> Próximos horários da linha
+        <strong> {{line}}</strong>
+        <div *ngIf="previsions?.length"
+             class="line-previsions__page-subtitle">{{previsions[0].bandeira}} - {{previsions[0].descricaoLinha}}</div>
+    </div>
+</div>
+<ion-grid class="line-previsions__table-header">
+    <ion-row>
+        <ion-col text-center>Ônibus</ion-col>
+        <ion-col text-center
+                 class="origin">Previsão</ion-col>
+        <ion-col text-center>Confiável</ion-col>
+    </ion-row>
+</ion-grid>
+<ion-scroll scrollY="true"
+            *ngIf="previsions && previsions.length">
+    <ion-grid>
+        <ion-row *ngFor="let prevision of previsions"
+                 class="line-previsions__row">
+            <ion-col text-center>
+                <strong>{{ prevision.veiculo }}</strong>
+            </ion-col>
+            <ion-col text-center
+                     class="origin">
+                <strong>{{ prevision.horarioNaOrigem }}</strong>
+                <span class="line-previsions__relative-time">{{ prevision.previsaoNaOrigem }}</span>
+            </ion-col>
+            <ion-col text-center
+                     class="line-previsions__reliability"
+                     [ngStyle]="{'color': prevision.confiabilidade}">
+                <i class="fa fa-bus"
+                   aria-hidden="true"></i>
+            </ion-col>
+        </ion-row>
+    </ion-grid>
+
+</ion-scroll>
+<div class="not-founded"
+     *ngIf="previsions && !previsions.length">Nenhuma previsão encontrada</div>

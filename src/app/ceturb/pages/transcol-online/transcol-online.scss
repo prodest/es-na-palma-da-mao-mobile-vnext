@@ -191,7 +191,7 @@ page-transcol-online {
   .stop-info__content > * {
     width: calc(100vw - 20px);
     margin-right: 20px;
-    display: block;
+    display: inline-block;
   }
 
   .stop-info__content.previsionsByOrigin {
