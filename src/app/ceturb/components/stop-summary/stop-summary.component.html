@@ -1,0 +1,11 @@
+<button ion-item
+        (click)="select.emit(stop)">
+  <stop-icon [stop]="stop"
+             item-start></stop-icon>
+  <p> {{ stop.isTerminal ? stop.descricao : stop.logradouro}} </p>
+  <ion-note> {{ stop.isTerminal ? stop.logradouro : stop.descricao}} - </ion-note>
+  <ion-note> {{stop.municipio}}</ion-note>
+  <ion-icon item-end
+            name="ios-close"
+            (click)="close.emit()"></ion-icon>
+</button>

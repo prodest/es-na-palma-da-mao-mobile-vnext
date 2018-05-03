@@ -81,6 +81,21 @@ export class TranscolOnlineApiService {
   /**
    *
    */
+  searchBusStopsIds(text: string, originId: number | undefined): Promise<number[]> {
+    const payload: any = { texto: text };
+    if (originId) {
+      payload.pontoDeOrigemId = originId;
+    }
+
+    return this.http
+      .post<any>(`${this.env.api.ceturb}/transcolOnline/svc/texto/pesquisarPontosDeParada`, payload)
+      .pipe(map(resp => resp.pontosDeParada), share())
+      .toPromise();
+  }
+
+  /**
+   *
+   */
   private listBusStopsByIds = (ids: number[]): Observable<BusStop[]> => {
     return this.http.post<BusStop[]>(`${this.env.api.ceturb}/transcolOnline/svc/json/db/listarPontosDeParada`, {
       listaIds: ids

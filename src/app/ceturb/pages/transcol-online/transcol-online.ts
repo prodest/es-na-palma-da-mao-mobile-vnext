@@ -1,13 +1,17 @@
-import { Prevision } from './../../model/prevision';
-import { TranscolOnlineApiService } from './../../providers/transcol-online-api.service';
-import { BusStop } from './../../model/bus-stop';
-import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
-import values from 'lodash-es/values';
-import * as L from 'leaflet';
 import './leaflet.bus-stop';
 import 'leaflet-pulse-icon/dist/L.Icon.Pulse';
 import 'leaflet.markercluster/dist/leaflet.markercluster';
+
+import { AfterViewInit, Component, OnDestroy, ViewChild } from '@angular/core';
+import { IonicPage, NavController, NavParams, Searchbar } from 'ionic-angular';
+import * as L from 'leaflet';
+import values from 'lodash-es/values';
+import { filter, map, switchMap, takeUntil } from 'rxjs/operators';
+import { Subject } from 'rxjs/Subject';
+
+import { BusStop } from './../../model/bus-stop';
+import { Prevision } from './../../model/prevision';
+import { TranscolOnlineApiService } from './../../providers/transcol-online-api.service';
 
 const VITORIA = L.latLng(-20.315894186649725, -40.29565483331681);
 const GRANDE_VITORIA = [-38.50708007812501, -17.14079039331664, -42.46215820312501, -23.725011735951796];
@@ -18,12 +22,16 @@ interface BusLine {
   pontoDeOrigemId: number;
 }
 
+const SEARCH_MIN_LENGTH = 3;
+
 @IonicPage()
 @Component({
   selector: 'page-transcol-online',
   templateUrl: 'transcol-online.html'
 })
-export class TranscolOnlinePage {
+export class TranscolOnlinePage implements AfterViewInit, OnDestroy {
+  @ViewChild(Searchbar) searchbar: Searchbar;
+
   map: L.Map;
   clusters: any = L.markerClusterGroup({
     maxClusterRadius: 80,
@@ -44,6 +52,10 @@ export class TranscolOnlinePage {
   selectedLine: BusLine | undefined;
   previsions: Prevision[] | undefined = [];
   destinations: BusStop[] = [];
+  searching: boolean = false;
+  searchId: number = 0;
+  placeholder = 'Pesquisar ponto de origem';
+
   zoom = {
     default: 13,
     minZoom: 8,
@@ -52,6 +64,7 @@ export class TranscolOnlinePage {
   searchingLocation = false;
 
   private userPin: L.Marker.Pulse;
+  private destroyed$ = new Subject();
 
   /**
    *
@@ -65,6 +78,31 @@ export class TranscolOnlinePage {
     this.map = this.createMap();
     this.getUserLocation();
     this.renderBusStops(await this.api.getBusStopsByArea(GRANDE_VITORIA));
+  }
+
+  /**
+   *
+   */
+  ngAfterViewInit(): void {
+    this.searchbar.ionInput
+      .pipe(
+        takeUntil(this.destroyed$),
+        map((e: any) => e.target.value),
+        filter(text => text && text.length >= SEARCH_MIN_LENGTH),
+        switchMap(text => this.api.searchBusStopsIds(text, this.selectedOrigin ? this.selectedOrigin.id : null)),
+        map(this.loadStopsFromMemory),
+        map(stops => (this.selectedOrigin ? stops.filter(this.isPossibleDestination) : stops))
+      )
+      .subscribe(stops => (this.searchResults = stops));
+  }
+
+  /**
+   *
+   *
+   */
+  ngOnDestroy() {
+    this.destroyed$.next();
+    this.destroyed$.unsubscribe();
   }
 
   /**
@@ -120,7 +158,7 @@ export class TranscolOnlinePage {
       this.unselectOrigin();
     } else if (this.isSelectedDestination(stop)) {
       this.unselectDestination();
-    } else if (!this.isSelectedOrigin(stop) && !this.isPossibleDestination(stop.id)) {
+    } else if (!this.isSelectedOrigin(stop) && !this.isPossibleDestination(stop)) {
       /*
          1-Se existe origem selecionada
          2-Se não é a origem selecionada
@@ -130,7 +168,7 @@ export class TranscolOnlinePage {
          Então seleciona como origem
         */
       this.selectOrigin(stop);
-    } else if (!this.isSelectedOrigin(stop) && this.isPossibleDestination(stop.id)) {
+    } else if (!this.isSelectedOrigin(stop) && this.isPossibleDestination(stop)) {
       /*
          1-Se existe origem selecionada
          2-Se não é a origem selecionada
@@ -176,6 +214,7 @@ export class TranscolOnlinePage {
     this.selectedDestination = undefined;
     this.selectOrigin(this.selectedOrigin);
     this.navigateToDestinations();
+    this.setSearchHint('Selecione um ponto de origem');
   };
 
   /**
@@ -212,8 +251,8 @@ export class TranscolOnlinePage {
   /**
    *
    */
-  isPossibleDestination = (stopId: number): boolean => {
-    return !!this.destinations.length && !!this.destinations.find(s => s.id === stopId);
+  isPossibleDestination = (stop: BusStop): boolean => {
+    return !!this.destinations.length && !!this.destinations.find(s => s.id === stop.id);
   };
 
   /**
@@ -265,6 +304,49 @@ export class TranscolOnlinePage {
     return this.previsions;
   }
 
+  get isRouteSelected(): boolean {
+    return !!this.selectedOrigin && !!this.selectedDestination;
+  }
+
+  /**
+   *
+   */
+  onPrevisionsButtonClick = () => {
+    if (this.isDetailsOpenned) {
+      if (this.isShowingOriginPrevisions || this.isShowingRoutePrevisions) {
+        this.closeDetails();
+      } else {
+        this.showOriginPrevisions();
+      }
+    } else {
+      if (this.isRouteSelected) {
+        this.showRoutePrevisions();
+      } else {
+        this.showOriginPrevisions();
+      }
+      this.openDetails();
+    }
+  };
+
+  /**
+   *
+   */
+  showOriginPrevisions = (): Promise<Prevision[]> => {
+    this.previsions = undefined;
+    this.selectedLine = undefined;
+    this.navigateToOriginPrevisions();
+    return this.getOriginPrevisions(this.selectedOrigin.id);
+  };
+
+  /**
+   *
+   */
+  navigateToOriginPrevisions = (clearPrevisions = true) => {
+    this.isShowingOriginPrevisions = true;
+    this.isShowingLinePrevisions = false;
+    this.isShowingRoutePrevisions = false;
+  };
+
   /**
    *
    */
@@ -275,7 +357,18 @@ export class TranscolOnlinePage {
   /**
    *
    */
-  private loadStopsFromMemory = (ids: number[]) => {
+  private setSearchHint = (hint: string) => {
+    if (!this.searchbar) {
+      return;
+    }
+    this.searchbar.placeholder = hint;
+    this.searchbar.value = '';
+  };
+
+  /**
+   *
+   */
+  private loadStopsFromMemory = (ids: number[]): BusStop[] => {
     return ids
       .map(id => this.allStops[id])
       .filter(m => !!m)
@@ -315,6 +408,8 @@ export class TranscolOnlinePage {
     // refresh estimatives
     this.getOriginPrevisions(origin.id);
     this.updateDestinations(origin);
+
+    this.setSearchHint('Selecione um ponto de destino');
   };
 
   /**
@@ -327,6 +422,8 @@ export class TranscolOnlinePage {
     this.closeAllScreens();
     this.unselectAll();
     this.clearSearchResults();
+
+    this.setSearchHint('Selecione um ponto de origem');
   };
 
   /**

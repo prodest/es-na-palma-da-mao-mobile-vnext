@@ -9,7 +9,62 @@
 </ion-header>
 
 <ion-content>
+
+  <ion-searchbar *ngIf="(!selectedOrigin || !selectedDestination) && !isDetailsOpenned"
+                 class="searchbar"
+                 placeholder="Pesquisar ponto de origem"
+                 (ionClear)="clearSearchResults()"
+                 (ionCancel)="clearSearchResults()"></ion-searchbar>
+
+  <ion-list class="search-results-list"
+            [virtualScroll]="searchResults"
+            approxItemHeight="71px">
+    <ion-item *virtualItem="let stop"
+              (click)="selectStop(stop)"
+              tappable>
+      <ng-container *ngIf="stop.isTerminal">
+        <h4> {{ stop.identificador}} - {{ stop.descricao }} </h4>
+      </ng-container>
+      <ng-container *ngIf="!stop.isTerminal">
+        <h4> {{ stop.identificador}} - {{ stop.logradouro }} </h4>
+        <p>
+          <ng-container *ngIf="stop.descricao"> {{ stop.descricao}} - </ng-container> {{ stop.municipio }}
+        </p>
+      </ng-container>
+    </ion-item>
+  </ion-list>
+
   <espm-geolocation-status [searching]="searchingLocation"
                            (click)="getUserLocation()"></espm-geolocation-status>
+
+  <div class="stop-info"
+       [ngClass]="{ 
+    'stop-info--origin': isSummaryOpenned, 
+    'stop-info--details': isDetailsOpenned, 
+    'stop-info--route': selectedOrigin && selectedDestination
+  }">
+    <div class="stop-info__header">
+      <ion-fab class="stop-info__btn">
+        <button ion-fab
+                (click)="onPrevisionsButtonClick()">
+          <i class="fa fa-clock-o"
+             aria-hidden="true"></i>
+        </button>
+      </ion-fab>
+
+      <stop-summary *ngIf="selectedOrigin"
+                    [stop]="selectedOrigin"
+                    (close)="unselectOrigin()"
+                    (select)="panToStop($event)">
+      </stop-summary>
+      <hr *ngIf="selectedDestination">
+      <stop-summary *ngIf="selectedDestination"
+                    [stop]="selectedDestination"
+                    (close)="unselectDestination()"
+                    (select)="panToStop($event)"
+                    class="destination">
+      </stop-summary>
+    </div>
+  </div>
   <div id="map"></div>
 </ion-content>
