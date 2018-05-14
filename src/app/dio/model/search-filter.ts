@@ -1,7 +1,7 @@
 export interface SearchFilter {
   query?: string;
-  dateMin?: Date;
-  dateMax?: Date;
+  dateMin?: string;
+  dateMax?: string;
   pageNumber: number;
   sort: string;
 }

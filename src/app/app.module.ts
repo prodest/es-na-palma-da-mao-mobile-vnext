@@ -13,7 +13,7 @@ import * as moment from 'moment';
 import { ESPM } from './app.component';
 import { CeturbProviders } from './ceturb/providers';
 import { DetranProviders } from './detran/providers';
-import { DioProviders } from './dio/providers';
+import { DioProviders, DioModules } from './dio';
 
 moment.locale('pt-br');
 
@@ -22,6 +22,7 @@ moment.locale('pt-br');
   imports: [
     BrowserModule,
     CoreModule,
+    ...DioModules,
     IonicStorageModule.forRoot({ name: 'espm', driverOrder: ['localstorage'] }),
     IonicModule.forRoot(ESPM, {
       platforms: {

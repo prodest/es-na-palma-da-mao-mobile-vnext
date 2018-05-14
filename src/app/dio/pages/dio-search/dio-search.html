@@ -1,0 +1,62 @@
+<!--
+  Generated template for the DioSearchPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+  <ion-navbar>
+    <button ion-button menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    <ion-title>Dio Consulta</ion-title>
+    <ion-buttons end>
+      <button ion-button (click)="openFilter()">
+        <ion-icon name="options"></ion-icon>
+      </button>
+    </ion-buttons>
+  </ion-navbar>
+</ion-header>
+
+<ion-content padding>
+  <ion-list *ngIf="searched && totalHits">
+    <ion-list-header>
+      {{ totalHits }} resultados encontrados para
+      <span class="accent">"{{ filter.query }}"</span>
+    </ion-list-header>
+    <ion-item *ngFor="let hit of hits">
+      <div class="hit-title">
+        <strong>Edição de {{ hit.date }}</strong>
+        <ion-badge>Pág. {{ hit.pageNumber }}</ion-badge>
+      </div>
+      <blockquote *ngFor="let highlight of hit.highlights">
+        ...<span [innerHTML]="highlight"></span>...
+      </blockquote>
+      <div class="hit-buttons">
+        <button ion-button (click)="open( hit.editionUrl )" clear>
+          EDIÇÃO
+          <ion-icon name="cloud-download"></ion-icon>
+        </button>
+        <button ion-button (click)="open( hit.pageUrl )" clear>
+          PÁGINA
+          <ion-icon name="cloud-download"></ion-icon>
+        </button>
+        <button ion-button (click)="share( hit )" clear>
+          COMPARTILHAR
+          <ion-icon name="share"></ion-icon>
+        </button>
+      </div>
+    </ion-item>
+  </ion-list>
+
+  <ion-item *ngIf="!searched" class="msg-consulta">
+    <p>Consulta ao Diário Oficial do ES</p>
+    <button ion-button (click)="openFilter()">CONSULTAR</button>
+  </ion-item>
+
+  <ion-item *ngIf="searched && !totalHits">
+    <p>Nenhum resultado encontrado para</p>
+    <highlight>"{{filter.query}}"</highlight>
+    <remark>Tente mudar o filtro da consulta</remark>
+  </ion-item>
+</ion-content>

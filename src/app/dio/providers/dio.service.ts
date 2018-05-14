@@ -6,7 +6,7 @@ import { Observable } from 'rxjs/Observable';
 import { finalize } from 'rxjs/operators';
 
 import { DioApiService } from './dio-api.service';
-import { Edition } from './../model';
+import { Edition, SearchFilter, SearchResult } from './../model';
 
 /**
  *
@@ -27,7 +27,16 @@ export class DioService {
 
   public getLatestEditions(): Observable<Edition[]> {
     this.showLoading();
-    return this.api.getLatestEditions().pipe(finalize(this.dismissLoading));
+    return this.api.getLatestEditions().pipe(finalize(() => this.dismissLoading()));
+  }
+
+  /**
+   *
+   * @param filter
+   */
+  public search(filter: SearchFilter): Observable<SearchResult> {
+    this.showLoading();
+    return this.api.search(filter).pipe(finalize(() => this.dismissLoading()));
   }
 
   /**

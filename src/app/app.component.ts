@@ -40,28 +40,34 @@ const menus = [
         order: 3
       },
       {
+        title: 'Dio Consulta',
+        icon: 'document',
+        component: 'DioSearchPage',
+        order: 4
+      },
+      {
         title: 'Dio Edições Recentes',
         icon: 'clock',
         component: 'LatestEditionsPage',
-        order: 4
+        order: 5
       },
       {
         title: 'Agenda ES',
         icon: 'calendar',
         component: 'SchedulePage',
-        order: 5
+        order: 6
       },
       {
         title: 'Notícias',
         icon: 'paper',
         component: 'NewsPage',
-        order: 6
+        order: 7
       },
       {
         title: 'Consulta Processo',
         icon: 'search',
         component: 'SepPage',
-        order: 7
+        order: 8
       }
     ]
   }

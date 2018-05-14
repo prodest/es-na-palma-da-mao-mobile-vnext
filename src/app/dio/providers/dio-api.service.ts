@@ -34,7 +34,12 @@ export class DioApiService {
     let params = Object.assign({ pageNumber: this.env.pagination.pageNumber, sort: 'date' }, filter);
     return this.http
       .get<SearchResult>(`${this.env.api.dio}/search`, {
-        params: new HttpParams().set('pageNumber', params.pageNumber.toString()).set('sort', params.sort),
+        params: new HttpParams()
+          .set('pageNumber', params.pageNumber.toString())
+          .set('sort', params.sort)
+          .set('query', params.query)
+          .set('dateMin', params.dateMin)
+          .set('dateMax', params.dateMax),
         headers: new HttpHeaders({ [ANONYMOUS_HEADER]: 'true' })
       })
       .pipe(share());

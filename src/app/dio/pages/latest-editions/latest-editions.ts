@@ -2,12 +2,13 @@ import { Component } from '@angular/core';
 import { IonicPage } from 'ionic-angular';
 import { Observable } from 'rxjs/Observable';
 import { Edition } from './../../model';
-import { DioService } from './../../providers';
+import { DioService } from './../../providers/dio.service';
 
 @IonicPage()
 @Component({
   selector: 'latest-editions',
-  templateUrl: 'latest-editions.html'
+  templateUrl: 'latest-editions.html',
+  providers: [DioService]
 })
 export class LatestEditionsPage {
   editing = false;

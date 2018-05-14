@@ -1,0 +1,44 @@
+page-dio-search {
+  .msg-consulta ion-label {
+    text-align: center;
+  }
+
+  .hit-title {
+    font-size: 12px;
+
+    ion-badge {
+      font-size: 12px;
+    }
+  }
+
+  .accent {
+    color: $color-secondary;
+  }
+
+  blockquote {
+    margin: 10px 0 15px 0;
+    padding: 5px 10px 10px 10px;
+    border-left: 3px solid #ccc;
+    font-size: 12px;
+
+    strong {
+      color: $color-secondary;
+    }
+
+    span {
+      white-space: normal;
+    }
+  }
+
+  .hit-buttons button {
+    /* float: right; */
+    margin-top: -30px;
+    width: auto;
+
+    ion-icon {
+      margin-left: 5px;
+      color: $color-primary;
+      background-color: transparent;
+    }
+  }
+}

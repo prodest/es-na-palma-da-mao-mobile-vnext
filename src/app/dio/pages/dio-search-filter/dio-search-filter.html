@@ -1,0 +1,37 @@
+<!--
+  Generated template for the DioSearchFilterPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+  <ion-navbar>
+    <ion-buttons left>
+      <button ion-button (click)="navCtrl.pop()">
+        <ion-icon name="arrow-back"></ion-icon>
+      </button>
+    </ion-buttons>
+    <ion-title>Dio</ion-title>
+    <ion-buttons end>
+      <button ion-button class="text-button" (click)="dismiss()">CONSULTAR</button>
+    </ion-buttons>
+  </ion-navbar>
+
+</ion-header>
+
+<ion-content padding>
+  <ion-list>
+    <ion-item>
+      <ion-label stacked>Palavra-chave</ion-label>
+      <ion-input type="text" [(ngModel)]="filter.query"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label stacked>Data inicial</ion-label>
+      <ion-datetime displayFormat="DD/MM/YYYY" [(ngModel)]="filter.dateMin"></ion-datetime>
+    </ion-item>
+    <ion-item>
+      <ion-label stacked>Data Final</ion-label>
+      <ion-datetime displayFormat="DD/MM/YYYY" [(ngModel)]="filter.dateMax"></ion-datetime>
+    </ion-item>
+  </ion-list>
+</ion-content>
