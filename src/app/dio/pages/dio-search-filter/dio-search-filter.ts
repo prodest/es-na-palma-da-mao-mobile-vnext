@@ -29,13 +29,14 @@ export class DioSearchFilterPage {
   }
 
   ionViewDidLoad() {
-    console.log('ionViewDidLoad DioSearchFilterPage');
     if (this.navParams.data.filter) {
       this.filter = Object.assign(this.filter, this.navParams.data.filter);
     }
   }
 
   dismiss() {
-    this.viewCtrl.dismiss(this.filter);
+    if (this.filter.query) {
+      this.viewCtrl.dismiss(this.filter);
+    }
   }
 }
