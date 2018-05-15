@@ -15,6 +15,12 @@ const menus = [
         order: 1
       },
       {
+        title: 'Notícias',
+        icon: 'paper',
+        component: 'NewsListPage',
+        order: 1
+      },
+      {
         title: 'Detran CNH',
         icon: 'card',
         component: 'DriverLicensePage',
@@ -56,12 +62,6 @@ const menus = [
         icon: 'calendar',
         component: 'SchedulePage',
         order: 6
-      },
-      {
-        title: 'Notícias',
-        icon: 'paper',
-        component: 'NewsPage',
-        order: 7
       },
       {
         title: 'Consulta Processo',
