@@ -1,10 +1,10 @@
 import { NgModule } from '@angular/core';
 import { IonicPageModule } from 'ionic-angular';
-import { FromNowPipeModule } from '@espm/shared/pipes';
 import { NewsDetailsPage } from './news-details';
+import { NoticiaComponentsModule } from './../../components/components.module';
 
 @NgModule({
   declarations: [NewsDetailsPage],
-  imports: [FromNowPipeModule, IonicPageModule.forChild(NewsDetailsPage)]
+  imports: [NoticiaComponentsModule, IonicPageModule.forChild(NewsDetailsPage)]
 })
 export class NewsDetailsPageModule {}

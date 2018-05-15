@@ -3,7 +3,6 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { SocialSharing } from '@ionic-native/social-sharing';
 import { NewsDetails } from '../../model';
 import { NewsApiService } from '../../providers/news-api.service';
-import * as moment from 'moment';
 
 /**
  * Generated class for the NewsDetailsPage page.
@@ -47,17 +46,5 @@ export class NewsDetailsPage {
     };
 
     this.socialSharing.shareWithOptions(shareOptions);
-  }
-
-  /**
-   *
-   *
-   * @param {NewsDetail} news
-   * @returns
-   *
-   * @memberOf NewsDetailController
-   */
-  public wasUpdated(news: NewsDetails) {
-    return news.lastModified && !moment(news.date).isSame(news.lastModified, 'day');
   }
 }
