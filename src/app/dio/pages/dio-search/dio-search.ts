@@ -3,7 +3,6 @@ import { IonicPage, NavController, NavParams, ModalController } from 'ionic-angu
 import { SocialSharing } from '@ionic-native/social-sharing';
 
 import { Hit, SearchFilter, SearchResult } from './../../model';
-import { DioSearchFilterPage } from './../dio-search-filter/dio-search-filter';
 import { DioService } from '../../providers/dio.service';
 import { finalize } from 'rxjs/operators';
 
@@ -39,18 +38,14 @@ export class DioSearchPage {
     public dio: DioService
   ) {}
 
-  ionViewDidLoad() {
-    console.log('ionViewDidLoad DioSearchPage');
-  }
-
   openFilter() {
     console.log(this.filter);
-    let filterModal = this.modalCtrl.create(DioSearchFilterPage, { filter: this.filter });
-    filterModal.onDidDismiss(filter => this.search(filter));
+    let filterModal = this.modalCtrl.create('DioSearchFilterPage', { filter: this.filter });
+    filterModal.onDidDismiss(this.search);
     filterModal.present();
   }
 
-  search(filter: SearchFilter) {
+  search = (filter: SearchFilter) => {
     if (filter) {
       Object.assign(this.filter, filter || {});
 
@@ -59,7 +54,7 @@ export class DioSearchPage {
         .pipe(finalize(() => (this.searched = true)))
         .subscribe(searchResults => this.onSearchSuccess(searchResults));
     }
-  }
+  };
 
   /**
    *
@@ -68,12 +63,21 @@ export class DioSearchPage {
    *
    * @memberOf NewsDetailController
    */
-  public share(hit: Hit): void {
+  share(hit: Hit): void {
     this.socialSharing.shareWithOptions({
       message: `DIO ES - ${hit.date} - Pág. ${hit.pageNumber}`,
       subject: `DIO ES - ${hit.date} - Pág. ${hit.pageNumber}`,
       url: hit.pageUrl
     });
+  }
+
+  /**
+   *
+   *
+   * @param {string} url
+   */
+  open(url: string): void {
+    window.open(url, '_system');
   }
 
   /**
@@ -92,14 +96,5 @@ export class DioSearchPage {
     this.totalHits = nextResults.totalHits;
     this.hits = this.hits.concat(nextResults.hits);
     this.hasMoreHits = nextResults.hits && nextResults.hits.length > 0;
-  }
-
-  /**
-   *
-   *
-   * @param {string} url
-   */
-  open(url: string): void {
-    window.open(url, '_system');
   }
 }

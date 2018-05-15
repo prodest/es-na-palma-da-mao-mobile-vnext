@@ -18,7 +18,7 @@
   </ion-navbar>
 </ion-header>
 
-<ion-content padding>
+<ion-content>
   <ion-list *ngIf="searched && totalHits">
     <ion-list-header>
       {{ totalHits }} resultados encontrados para
@@ -30,7 +30,8 @@
         <ion-badge>Pág. {{ hit.pageNumber }}</ion-badge>
       </div>
       <blockquote *ngFor="let highlight of hit.highlights">
-        ...<span [innerHTML]="highlight"></span>...
+        ...
+        <span [innerHTML]="highlight"></span>...
       </blockquote>
       <div class="hit-buttons">
         <button ion-button (click)="open( hit.editionUrl )" clear>

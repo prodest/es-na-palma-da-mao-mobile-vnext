@@ -13,7 +13,8 @@ import * as moment from 'moment';
 import { ESPM } from './app.component';
 import { CeturbProviders } from './ceturb/providers';
 import { DetranProviders } from './detran/providers';
-import { DioProviders, DioModules } from './dio';
+import { DioProviders } from './dio/providers';
+import { NewsProviders } from './news/providers';
 
 moment.locale('pt-br');
 
@@ -22,7 +23,6 @@ moment.locale('pt-br');
   imports: [
     BrowserModule,
     CoreModule,
-    ...DioModules,
     IonicStorageModule.forRoot({ name: 'espm', driverOrder: ['localstorage'] }),
     IonicModule.forRoot(ESPM, {
       platforms: {
@@ -43,6 +43,7 @@ moment.locale('pt-br');
     ...DetranProviders,
     ...CeturbProviders,
     ...DioProviders,
+    ...NewsProviders,
     { provide: ErrorHandler, useClass: IonicErrorHandler }
   ]
 })

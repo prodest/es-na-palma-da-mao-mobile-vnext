@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams, ViewController } from 'ionic-angular';
-
 import { SearchFilter } from './../../model';
+import * as moment from 'moment';
 
 /**
  * Generated class for the DioSearchFilterPage page.
@@ -19,10 +19,11 @@ export class DioSearchFilterPage {
   filter: SearchFilter;
 
   constructor(public navCtrl: NavController, public navParams: NavParams, public viewCtrl: ViewController) {
+    let now = moment().format('YYYY-MM-DD');
     this.filter = {
       query: '',
-      dateMin: new Date().toISOString(),
-      dateMax: new Date().toISOString(),
+      dateMin: now,
+      dateMax: now,
       pageNumber: 1,
       sort: ''
     };

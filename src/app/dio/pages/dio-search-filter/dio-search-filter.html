@@ -7,7 +7,7 @@
 <ion-header>
   <ion-navbar>
     <ion-buttons left>
-      <button ion-button (click)="navCtrl.pop()">
+      <button ion-button icon-only (click)="navCtrl.pop()">
         <ion-icon name="arrow-back"></ion-icon>
       </button>
     </ion-buttons>
@@ -16,10 +16,9 @@
       <button ion-button class="text-button" (click)="dismiss()">CONSULTAR</button>
     </ion-buttons>
   </ion-navbar>
-
 </ion-header>
 
-<ion-content padding>
+<ion-content>
   <ion-list>
     <ion-item>
       <ion-label stacked>Palavra-chave</ion-label>
@@ -27,11 +26,21 @@
     </ion-item>
     <ion-item>
       <ion-label stacked>Data inicial</ion-label>
-      <ion-datetime displayFormat="DD/MM/YYYY" [(ngModel)]="filter.dateMin"></ion-datetime>
+      <ion-datetime [(ngModel)]="filter.dateMin"
+            displayFormat="DD/MM/YYYY"
+            pickerFormat="DD MM YYYY"
+            cancelText="Cancelar"
+            doneText="Selecionar">
+      </ion-datetime>
     </ion-item>
     <ion-item>
       <ion-label stacked>Data Final</ion-label>
-      <ion-datetime displayFormat="DD/MM/YYYY" [(ngModel)]="filter.dateMax"></ion-datetime>
+      <ion-datetime [(ngModel)]="filter.dateMax"
+            displayFormat="DD/MM/YYYY"
+            pickerFormat="DD MM YYYY"
+            cancelText="Cancelar"
+            doneText="Selecionar">
+      </ion-datetime>
     </ion-item>
   </ion-list>
 </ion-content>
