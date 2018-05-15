@@ -1,0 +1,46 @@
+<!--
+  Generated template for the NewsDetailsPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+  <ion-navbar>
+    <ion-title>
+      <span *ngIf="news">{{news.origin}} </span>
+      <span *ngIf="!news">Notícias</span>
+    </ion-title>
+    <ion-buttons end>
+      <button ion-button (click)="share(this.news)">
+        <ion-icon name="share"></ion-icon>
+      </button>
+    </ion-buttons>
+  </ion-navbar>
+</ion-header>
+
+
+<ion-content>
+  <ion-card *ngIf="news">
+    <img *ngIf="news.image" [src]="news.image" />
+    <ion-row no-padding class="news-origin">
+      <ion-col>
+        <span ion-button clear small >{{news.origin}}</span>
+      </ion-col>
+      <ion-col text-center>
+        <span ion-button clear small>{{news.date | date: 'dd/MM/yyyy HH:mm'}}</span>
+      </ion-col>
+    </ion-row>
+    <ion-row *ngIf="wasUpdated(news)">
+      <ion-col>
+        <small class="last-updated">Atualizada em: {{ news.lastModified | fromNow }}
+        </small>
+      </ion-col>
+    </ion-row>
+    <ion-card-content>
+      <ion-card-title>
+        {{news.title}}
+      </ion-card-title>
+      <p [innerHTML]="news.body"></p>
+    </ion-card-content>
+  </ion-card>
+</ion-content>
