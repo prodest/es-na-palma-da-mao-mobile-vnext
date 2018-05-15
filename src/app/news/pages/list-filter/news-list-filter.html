@@ -1,0 +1,58 @@
+<!--
+  Generated template for the NewsListFilterPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+  <ion-navbar>
+    <ion-buttons left>
+      <button ion-button icon-only (click)="navCtrl.pop()">
+        <ion-icon name="arrow-back"></ion-icon>
+      </button>
+    </ion-buttons>
+    <ion-title>Notícias</ion-title>
+    <ion-buttons end>
+      <button ion-button class="text-button" (click)="dismiss()">FILTRAR</button>
+    </ion-buttons>
+  </ion-navbar>
+</ion-header>
+
+<ion-content>
+  <ion-list>
+    <ion-item no-lines>
+      <ion-label stacked>Palavra-chave</ion-label>
+      <ion-input type="text" [(ngModel)]="filter.query" required></ion-input>
+    </ion-item>
+    <ion-list-header>
+      Período
+    </ion-list-header>
+    <ion-item>
+      <ion-label stacked>Data inicial</ion-label>
+      <ion-datetime [(ngModel)]="filter.dateMin"
+                    displayFormat="DD/MM/YYYY"
+                    pickerFormat="DD MM YYYY"
+                    cancelText="Cancelar"
+                    doneText="Selecionar">
+      </ion-datetime>
+    </ion-item>
+    <ion-item no-lines>
+      <ion-label stacked>Data Final</ion-label>
+      <ion-datetime [(ngModel)]="filter.dateMax"
+                    displayFormat="DD/MM/YYYY"
+                    pickerFormat="DD MM YYYY"
+                    cancelText="Cancelar"
+                    doneText="Selecionar">
+      </ion-datetime>
+    </ion-item>
+    <ion-list-header>
+      Órgãos
+      <span *ngIf="isAllChecked()" (click)="toggleAllChecked()" class="label-button">Desmarcar todos</span>
+      <span *ngIf="!isAllChecked()" (click)="toggleAllChecked()" class="label-button">Selecionar todos</span>
+    </ion-list-header>
+    <ion-item *ngFor="let origin of availableOrigins">
+      <ion-label>{{origin}}</ion-label>
+      <ion-checkbox [checked]="isSelected(origin)" (click)="toggleChecked(origin)"></ion-checkbox>
+    </ion-item>
+  </ion-list>
+</ion-content>
