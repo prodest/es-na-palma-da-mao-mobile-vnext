@@ -1,0 +1,28 @@
+<!-- Generated template for the CardNoticiaComponent component -->
+<ion-card *ngIf="news">
+  <img *ngIf="news.image" [src]="news.image" />
+  <ion-card-content>
+    <ion-row class="news-info" *ngIf="!highlight">
+      <ion-col no-padding>
+        <span clear small class="news-origin">{{news.origin}}</span> |
+        <span clear small>{{news.date | date: 'dd/MM/yyyy HH:mm'}}</span>
+      </ion-col>
+      <ion-col *ngIf="!highlight && wasUpdated(news)">
+        <small class="last-updated">Atualizada a: {{ news.lastModified | fromNow }}</small>
+      </ion-col>
+    </ion-row>
+    <ion-card-title>
+      {{news.title}}
+    </ion-card-title>
+    <p *ngIf="!highlight" [innerHTML]="news.body"></p>
+    <p *ngIf="highlight" [innerHTML]="news.summary"></p>
+    <ion-row no-padding class="news-info-highlight" *ngIf="highlight">
+      <ion-col>
+        <span clear small>{{news.origin}} | {{news.date | fromNow}}</span>
+      </ion-col>
+      <ion-col>
+        <span clear small>LEIA MAIS</span>
+      </ion-col>
+    </ion-row>
+  </ion-card-content>
+</ion-card>

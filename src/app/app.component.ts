@@ -15,6 +15,12 @@ const menus = [
         order: 1
       },
       {
+        title: 'Notícias Destaques',
+        icon: 'paper',
+        component: 'NewsHighlightsPage',
+        order: 1
+      },
+      {
         title: 'Notícias',
         icon: 'paper',
         component: 'NewsListPage',

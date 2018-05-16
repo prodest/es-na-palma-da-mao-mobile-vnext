@@ -1,7 +1,7 @@
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { IonicModule } from 'ionic-angular';
-import { CardNoticiaComponent } from './card-noticia/card-noticia';
+import { CardNoticiaComponent } from './card-noticia.component';
 import { FromNowPipeModule } from '@espm/shared/pipes';
 
 @NgModule({
@@ -9,4 +9,4 @@ import { FromNowPipeModule } from '@espm/shared/pipes';
   imports: [CommonModule, FromNowPipeModule, IonicModule],
   exports: [CardNoticiaComponent]
 })
-export class NoticiaComponentsModule {}
+export class CardNoticiaComponentModule {}

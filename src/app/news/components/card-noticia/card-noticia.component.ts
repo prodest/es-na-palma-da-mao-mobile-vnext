@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, ChangeDetectionStrategy } from '@angular/core';
 import { NewsDetails } from '../../model/newsDetails';
 import * as moment from 'moment';
 
@@ -10,10 +10,12 @@ import * as moment from 'moment';
  */
 @Component({
   selector: 'card-noticia',
-  templateUrl: 'card-noticia.html'
+  templateUrl: 'card-noticia.component.html',
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class CardNoticiaComponent {
   @Input() public news: NewsDetails;
+  @Input() public highlight: boolean = false;
 
   constructor() {
     console.log('Hello CardNoticiaComponent Component');
