@@ -68,22 +68,19 @@
     </div>
     <div class="stop-info__content"
          [ngClass]="{ 'previsionsByOrigin': isShowingOriginPrevisions, 'previsionsByLine': isShowingLinePrevisions, 'previsionsByRoute': isShowingRoutePrevisions }">
-      <origin-previsions  class="clickable"
+      <origin-previsions class="clickable"
                          [origin]="selectedOrigin"
                          [previsions]="previsions"
                          (selectLine)="showLinePrevisions($event)">
       </origin-previsions>
 
-      <line-previsions *ngIf="selectedLine"
-                       [line]="selectedLine.identificadorLinha"
+      <line-previsions [line]="selectedLine?.identificadorLinha"
                        [previsions]="previsions">
       </line-previsions>
-      <!-- <route-previsions-list [ngClass]="{ 'shown': isShowingRoutePrevisions }" previsions="previsions"
-          on-refresh-click="::getRoutePrevisions( this.selectedOrigin.id, this.selectedDestination.id )()">
-      </route-previsions-list> -->
-      <!-- <div>A</div>
-      <div>B</div>
-      <div>C</div> -->
+
+      <route-previsions [previsions]="previsions">
+      </route-previsions>
+
     </div>
   </div>
   <div id="map"></div>

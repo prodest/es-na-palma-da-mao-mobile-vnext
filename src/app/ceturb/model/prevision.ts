@@ -18,4 +18,5 @@ export interface Prevision {
   pontoDeOrigemId: number;
   pontoDeDestinoId: number;
   previsaoNaOrigem: string;
+  previsaoNoDestino: string;
 }

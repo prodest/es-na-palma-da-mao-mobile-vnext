@@ -5,6 +5,7 @@ import {
   GeolocationStatusModule,
   LinePrevisionsComponentModule,
   OriginPrevisionsComponentModule,
+  RoutePrevisionsComponentModule,
   StopSummaryComponentModule
 } from '../../components';
 import { TranscolOnlinePage } from './transcol-online';
@@ -16,6 +17,7 @@ import { TranscolOnlinePage } from './transcol-online';
     OriginPrevisionsComponentModule,
     StopSummaryComponentModule,
     LinePrevisionsComponentModule,
+    RoutePrevisionsComponentModule,
     IonicPageModule.forChild(TranscolOnlinePage)
   ]
 })

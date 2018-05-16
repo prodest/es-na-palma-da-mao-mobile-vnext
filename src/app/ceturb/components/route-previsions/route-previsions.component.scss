@@ -1,0 +1,57 @@
+route-previsions {
+  ion-scroll {
+    position: relative;
+    height: calc(100vh - 310px);
+  }
+  .route-previsions__table-header {
+    display: flex;
+    justify-content: space-between;
+    font-size: 13px;
+    background: #f5f5f5;
+    padding: 8px;
+    > * {
+      width: 25%;
+      text-align: center;
+    }
+  }
+
+  .route-previsions {
+    position: relative;
+    height: calc(100vh - 300px);
+  }
+
+  .route-previsions__body {
+    font-size: 13px;
+    display: flex;
+    justify-content: space-between;
+    flex: 1;
+    // outline: 1px solid green;
+    height: 100%;
+    align-items: center;
+    > * {
+      width: 25%;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      flex-wrap: wrap;
+      // outline: 1px solid red;
+      line-height: 16px;
+
+      > * {
+        margin-right: 10px;
+      }
+    }
+  }
+
+  .route-previsions__time {
+  }
+
+  .route-previsions__relative-time {
+    text-transform: lowercase;
+  }
+
+  .route-previsions__reliability {
+    font-size: 20px;
+  }
+}

@@ -1,4 +1,8 @@
 origin-previsions {
+  ion-scroll {
+    position: relative;
+    height: calc(100vh - 280px);
+  }
   .origin-previsions__table-header,
   .origin-previsions__page-title {
     display: flex;
