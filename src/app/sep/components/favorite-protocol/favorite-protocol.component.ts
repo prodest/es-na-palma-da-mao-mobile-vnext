@@ -7,14 +7,14 @@ import { Component } from '@angular/core';
  * Components.
  */
 @Component({
-  selector: 'favorite-protocols',
-  templateUrl: 'favorite-protocols.html'
+  selector: 'favorite-protocol',
+  templateUrl: 'favorite-protocol.html'
 })
-export class FavoriteProtocolsComponent {
+export class FavoriteProtocolComponent {
   text: string;
 
   constructor() {
-    console.log('Hello FavoriteProtocolsComponent Component');
+    console.log('Hello FavoriteProtocolComponent Component');
     this.text = 'Hello World';
   }
 }

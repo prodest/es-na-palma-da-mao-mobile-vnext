@@ -1,4 +1,4 @@
-import { ProcessUpdate } from './process-update';
+import { ProtocolUpdate } from './protocol-update';
 
 export interface Process {
   number: string;
@@ -6,7 +6,7 @@ export interface Process {
   subject: string;
   summary: string;
   status: string;
-  updates: ProcessUpdate[];
+  updates: ProtocolUpdate[];
   district: string;
   extra: string;
   pageUrl: string;

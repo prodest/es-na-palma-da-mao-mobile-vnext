@@ -1,4 +1,4 @@
-export interface ProcessUpdate {
+export interface ProtocolUpdate {
   date: string;
   agency: string;
   area: string;

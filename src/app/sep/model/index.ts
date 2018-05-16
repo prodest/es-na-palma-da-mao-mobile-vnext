@@ -1,3 +1,4 @@
-export * from './favorite-process-data';
-export * from './process';
-export * from './process-update';
+export * from './favorite-protocol';
+export * from './favorite-protocol-data';
+export * from './protocol';
+export * from './protocol-update';

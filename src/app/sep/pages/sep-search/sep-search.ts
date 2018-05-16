@@ -14,9 +14,21 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
   templateUrl: 'sep-search.html'
 })
 export class SepSearchPage {
+  processNumberModel: number;
+
   constructor(public navCtrl: NavController, public navParams: NavParams) {}
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad SepSearchPage');
+  }
+
+  onInput(event) {
+    console.log(event);
+    console.log(this.processNumberModel);
+  }
+
+  onCancel(event) {
+    console.log(event);
+    console.log(this.processNumberModel);
   }
 }

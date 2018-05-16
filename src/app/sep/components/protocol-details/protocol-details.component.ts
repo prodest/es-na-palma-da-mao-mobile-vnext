@@ -7,8 +7,8 @@ import { Component } from '@angular/core';
  * Components.
  */
 @Component({
-  selector: 'protocol-details',
-  templateUrl: 'protocol-details.html'
+  selector: 'protocol-details.component',
+  templateUrl: 'protocol-details.component.html'
 })
 export class ProtocolDetailsComponent {
   text: string;

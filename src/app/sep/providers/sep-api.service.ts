@@ -5,7 +5,7 @@ import { Observable } from 'rxjs/Observable';
 import { share } from 'rxjs/operators';
 import { ANONYMOUS_HEADER } from '@espm/core/auth';
 
-import { FavoriteProcessData, Process } from './../model';
+import { FavoriteProtocolData, Process } from './../model';
 
 @Injectable()
 export class SepApiService {
@@ -25,7 +25,7 @@ export class SepApiService {
       .pipe(share());
   }
 
-  syncFavoriteProcess(favoriteProcess: FavoriteProcessData): Observable<FavoriteProcessData> {
-    return this.http.post<FavoriteProcessData>(`${this.env.api.espm}/sep/data/favorite`, favoriteProcess).pipe(share());
+  syncFavoriteProcess(favoriteProcess: FavoriteProtocolData): Observable<FavoriteProtocolData> {
+    return this.http.post<FavoriteProtocolData>(`${this.env.api.espm}/sep/data/favorite`, favoriteProcess).pipe(share());
   }
 }

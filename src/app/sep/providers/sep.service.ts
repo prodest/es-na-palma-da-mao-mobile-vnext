@@ -4,7 +4,7 @@ import { flatMap, tap } from 'rxjs/operators';
 
 import { SepStorageService } from './sep-storage.service';
 import { SepApiService } from './sep-api.service';
-import { FavoriteProcessData } from './../model';
+import { FavoriteProtocolData } from './../model';
 
 @Injectable()
 export class SepService {
@@ -30,7 +30,7 @@ export class SepService {
   }
 
   syncFavoriteProcess = (favoriteProcess?: string[]): Observable<string[]> => {
-    const syncData: FavoriteProcessData = { favoriteProcess: [], date: null };
+    const syncData: FavoriteProtocolData = { favoriteProcess: [], date: null };
 
     if (favoriteProcess) {
       syncData.favoriteProcess = favoriteProcess;
@@ -39,9 +39,9 @@ export class SepService {
 
     return this.api
       .syncFavoriteProcess(syncData)
-      .pipe(tap((favoriteProcessData: FavoriteProcessData) => (this.favoriteProcess = favoriteProcessData.favoriteProcess)))
+      .pipe(tap((favoriteProcessData: FavoriteProtocolData) => (this.favoriteProcess = favoriteProcessData.favoriteProcess)))
       .pipe(
-        flatMap((favoriteProcessData: FavoriteProcessData) =>
+        flatMap((favoriteProcessData: FavoriteProtocolData) =>
           this.storage.mergeValue('favoriteProcess', favoriteProcessData.favoriteProcess)
         )
       );
