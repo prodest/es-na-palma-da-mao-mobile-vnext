@@ -20,21 +20,22 @@
 
 
 <ion-content>
-  <ion-card *ngFor="let newsItem of news" (click)="goToNews(newsItem.id)">
-    <ion-card-header>
-      <h2>{{newsItem.title}}</h2>
-      <p>
-        <span class="origin-subtile">{{newsItem.origin}}</span>
-        <span class="news-date-subtitle">{{newsItem.date | fromNow }}</span>
-      </p>
-    </ion-card-header>
-    <ion-card-content>
-      <div class="md-media-md card-media">
-        <img alt="" *ngIf="newsItem.image" [src]="newsItem.image" onload="this.style.display='inline'" onerror="this.style.display='none'"
-        />
-      </div>
-    </ion-card-content>
-  </ion-card>
+  <ion-list>
+    <ion-item *ngFor="let newsItem of news" (click)="goToNews(newsItem.id)">
+      <ion-row nowrap>
+        <ion-col>
+          <h2 class="news-title">{{newsItem.title}}</h2>
+          <div class="news-info">
+            <span class="news-origin">{{newsItem.origin}}</span> |
+            <span class="news-date">{{newsItem.date | fromNow }}</span>
+          </div>
+        </ion-col>
+        <ion-col *ngIf="newsItem.image" no-padding>
+          <img alt="" [src]="newsItem.image" onerror="this.style.display='none'" />
+        </ion-col>
+      </ion-row>
+    </ion-item>
+  </ion-list>
 
   <ion-list *ngIf="news && !news.length">
     <ion-list-header>

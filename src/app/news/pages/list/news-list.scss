@@ -1,2 +1,25 @@
 page-news-list {
+  ion-item ion-label.label {
+    margin-bottom: 5px;
+  }
+
+  h2.news-title {
+    white-space: normal;
+    margin-bottom: 5px;
+  }
+
+  ion-row .col:first-child {
+    flex-grow: 3;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+  }
+
+  .news-info {
+    font-size: 1.2rem;
+
+    .news-origin {
+      color: $color-secondary;
+    }
+  }
 }
