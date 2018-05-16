@@ -3,20 +3,12 @@ import { Inject, Injectable } from '@angular/core';
 import { Environment, EnvVariables } from '@espm/core';
 import { Observable } from 'rxjs/Observable';
 import { share } from 'rxjs/operators';
-import { ANONYMOUS_HEADER } from './../../../libs/core/auth';
+import { ANONYMOUS_HEADER } from '@espm/core/auth';
 
 import { Filter, News, NewsDetails, Pagination } from '../model';
 
 @Injectable()
 export class NewsApiService {
-  public static $inject: string[] = ['$http', 'settings'];
-
-  /**
-   * Creates an instance of NewsApiService.
-   *
-   * @param {IHttpService} $http
-   * @param {ISettings} settings
-   */
   constructor(private http: HttpClient, @Inject(EnvVariables) private env: Environment) {}
 
   /**
