@@ -46,7 +46,7 @@ export class NewsListPage {
    *
    * @memberOf NewsListController
    */
-  public get isFirstPage() {
+  get isFirstPage() {
     return this.pagination.pageNumber === 1;
   }
 
@@ -55,7 +55,7 @@ export class NewsListPage {
    *
    * @returns {*}
    */
-  public async getAvailableOrigins() {
+  getAvailableOrigins() {
     return this.newsApiService.getAvailableOrigins().then((origins: string[]) => {
       this.availableOrigins = origins;
       this.filter.origins = this.filter.origins || [].concat(this.availableOrigins);
@@ -65,7 +65,7 @@ export class NewsListPage {
   /**
    * @memberOf NewsListController
    */
-  public doPaginate(infiniteScroll) {
+  doPaginate(infiniteScroll) {
     this.pagination.pageNumber += 1;
     this.getNews(this.filter, this.pagination)
       .pipe(tap(() => infiniteScroll.complete()))
@@ -75,7 +75,7 @@ export class NewsListPage {
   /**
    * Abre filtro(modal) por fonte da notícia
    */
-  public openFilter() {
+  openFilter() {
     let filterModal = this.modalCtrl.create('NewsListFilterPage', { filter: this.filter, origins: this.availableOrigins });
     filterModal.onDidDismiss(this.filterNews);
     filterModal.present();
@@ -86,7 +86,7 @@ export class NewsListPage {
    *
    * @param {string} id
    */
-  public goToNews(id: string) {
+  goToNews(id: string) {
     this.navCtrl.push('NewsDetailsPage', { id });
   }
 
