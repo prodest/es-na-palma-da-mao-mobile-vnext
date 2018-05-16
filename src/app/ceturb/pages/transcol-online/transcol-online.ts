@@ -3,6 +3,7 @@ import 'leaflet-pulse-icon/dist/L.Icon.Pulse';
 import 'leaflet.markercluster/dist/leaflet.markercluster';
 
 import { AfterViewInit, Component, OnDestroy, ViewChild } from '@angular/core';
+import { delay } from 'helpful-decorators';
 import { IonicPage, NavController, NavParams, Searchbar } from 'ionic-angular';
 import * as L from 'leaflet';
 import values from 'lodash-es/values';
@@ -93,7 +94,9 @@ export class TranscolOnlinePage implements AfterViewInit, OnDestroy {
         map(this.loadStopsFromMemory),
         map(stops => (this.selectedOrigin ? stops.filter(this.isPossibleDestination) : stops))
       )
-      .subscribe(stops => (this.searchResults = stops));
+      .subscribe(stops => {
+        this.searchResults = stops;
+      });
   }
 
   /**
@@ -214,7 +217,7 @@ export class TranscolOnlinePage implements AfterViewInit, OnDestroy {
     this.selectedDestination = undefined;
     this.selectOrigin(this.selectedOrigin);
     this.navigateToDestinations();
-    this.setSearchHint('Selecione um ponto de origem');
+    this.setSearchHint('Selecione um destino');
   };
 
   /**
@@ -382,15 +385,16 @@ export class TranscolOnlinePage implements AfterViewInit, OnDestroy {
   };
 
   /**
-   *
+   * Use delay to await reference to searchbar be available (on next loop)
    */
-  private setSearchHint = (hint: string) => {
+  @delay()
+  private setSearchHint(hint: string) {
     if (!this.searchbar) {
       return;
     }
     this.searchbar.placeholder = hint;
     this.searchbar.value = '';
-  };
+  }
 
   /**
    *
@@ -436,7 +440,7 @@ export class TranscolOnlinePage implements AfterViewInit, OnDestroy {
     this.getOriginPrevisions(origin.id);
     this.updateDestinations(origin);
 
-    this.setSearchHint('Selecione um ponto de destino');
+    this.setSearchHint('Selecione um destino');
   };
 
   /**

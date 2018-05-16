@@ -4,19 +4,20 @@
             menuToggle>
       <ion-icon name="menu"></ion-icon>
     </button>
-    <ion-title>Transcol Online</ion-title>
+    <ion-title (click)="isDetailsOpenned = !isDetailsOpenned">Transcol Online</ion-title>
   </ion-navbar>
 </ion-header>
 
 <ion-content class="no-scroll">
 
-  <ion-searchbar *ngIf="(!selectedOrigin || !selectedDestination) && !isDetailsOpenned"
+  <ion-searchbar [style.display]="(!selectedOrigin || !selectedDestination) && !isDetailsOpenned ? 'inherit':'none'"
                  class="searchbar"
                  placeholder="Pesquisar ponto de origem"
                  (ionClear)="clearSearchResults()"
                  (ionCancel)="clearSearchResults()"></ion-searchbar>
 
-  <ion-list class="search-results-list"
+  <ion-list [style.display]="isDetailsOpenned ? 'none':'inherit'"  
+            class="search-results-list"
             [virtualScroll]="searchResults"
             approxItemHeight="71px">
     <ion-item *virtualItem="let stop"
