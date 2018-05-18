@@ -7,6 +7,7 @@ import { Protocol } from '../../model/protocol';
 import { BarcodeScanner } from '@ionic-native/barcode-scanner';
 import { Observable } from 'rxjs/Observable';
 import { Subject } from 'rxjs/Subject';
+import { AndroidPermissionsService } from '@espm/core/permissions';
 
 /**
  * Generated class for the SepSearchPage page.
@@ -19,7 +20,7 @@ import { Subject } from 'rxjs/Subject';
 @Component({
   selector: 'page-sep-search',
   templateUrl: 'sep-search.html',
-  providers: [BarcodeScanner, SepService]
+  providers: [AndroidPermissionsService, BarcodeScanner, SepService]
 })
 export class SepSearchPage implements OnDestroy {
   protocolNumberModel: string;
@@ -29,6 +30,7 @@ export class SepSearchPage implements OnDestroy {
   constructor(
     private navCtrl: NavController,
     private barcodeScanner: BarcodeScanner,
+    private permissions: AndroidPermissionsService,
     private sepService: SepService,
     private sepApiService: SepApiService
   ) {}
@@ -61,15 +63,19 @@ export class SepSearchPage implements OnDestroy {
   };
 
   scanBarcode() {
-    let options = {
-      preferFrontCamera: false,
-      prompt: 'Posicione o código dentro da área de leitura', // supported on Android only
-      format: 'CODE_39'
-    };
+    this.permissions.requestPermission(this.permissions.PERMISSION.CAMERA).then(request => {
+      if (request.hasPermission) {
+        let options = {
+          preferFrontCamera: false,
+          prompt: 'Posicione o código dentro da área de leitura', // supported on Android only
+          format: 'CODE_39'
+        };
 
-    this.barcodeScanner
-      .scan(options)
-      .then(barcodeData => (barcodeData.cancelled ? null : this.search(barcodeData.text)))
-      .catch(console.error);
+        this.barcodeScanner
+          .scan(options)
+          .then(barcodeData => (barcodeData.cancelled ? null : this.search(barcodeData.text)))
+          .catch(console.error);
+      }
+    });
   }
 }

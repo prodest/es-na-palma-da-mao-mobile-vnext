@@ -7,7 +7,8 @@ export function provideSettings(storage: Storage) {
   return new SepStorage(
     storage,
     {
-      favoriteProtocols: []
+      favoriteProtocols: [],
+      date: null
     },
     '_sep-storage'
   );
