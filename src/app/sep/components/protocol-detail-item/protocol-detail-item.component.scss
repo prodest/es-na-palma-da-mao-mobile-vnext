@@ -1,0 +1,21 @@
+protocol-detail-item {
+  ion-item {
+    .input-wrapper {
+      justify-content: space-between;
+    }
+  }
+
+  .secondary-color {
+    color: $color-secondary;
+  }
+
+  .text-value {
+    white-space: normal;
+    text-align: right;
+  }
+
+  ion-label[fixed] {
+    flex: 0 1 auto;
+    width: auto;
+  }
+}

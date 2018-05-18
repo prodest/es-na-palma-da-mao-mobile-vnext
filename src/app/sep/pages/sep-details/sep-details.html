@@ -6,21 +6,88 @@
 -->
 <ion-header>
   <ion-navbar>
-    <ion-title>sep-details</ion-title>
+    <ion-title>Protocolo</ion-title>
     <ion-buttons end>
-      <button ion-button (click)="toggleFavorite()">
-        <ion-icon name="star-outline" *ngIf="!isFavorite"></ion-icon>
-        <ion-icon name="star" *ngIf="!isFavorite"></ion-icon>
+      <button ion-button icon-only (click)="toggleFavorite(protocol)">
+        <ion-icon name="star-outline" *ngIf="!isFavorite(protocol)"></ion-icon>
+        <ion-icon name="star" *ngIf="isFavorite(protocol)"></ion-icon>
       </button>
     </ion-buttons>
   </ion-navbar>
-  <ion-toolbar>
-    <ion-searchbar type="number" placeholder="Número do protocolo" [(ngModel)]="processNumberModel" (ionInput)="onInput($event)"
-      (ionCancel)="onCancel($event)">
-    </ion-searchbar>
-  </ion-toolbar>
 </ion-header>
 
 <ion-content>
-
+  <ion-list *ngIf="protocol">
+    <protocol-detail-item title="Número" [value]="protocol.number" [secondaryColor]="true"></protocol-detail-item>
+    <protocol-detail-item title="Situação" [value]="protocol.status | capitalize"></protocol-detail-item>
+    <ion-item item-content *ngIf="lastUpdate">
+      <ion-row class="protocol-item-details">
+        <ion-col>
+          <label for="">
+            <strong>Último Andamento</strong>
+          </label>
+        </ion-col>
+        <ion-col class="text-right">
+          <span for="">{{lastUpdate.date | date: 'dd/MM/yyyy'}}</span>
+        </ion-col>
+      </ion-row>
+      <div class="last-update-details">
+        <ion-row>
+          <ion-col>
+            <strong>Órgão:</strong> {{lastUpdate.agency | capitalize}}</ion-col>
+        </ion-row>
+        <ion-row>
+          <ion-col>
+            <strong>Local:</strong> {{lastUpdate.area | capitalize}}</ion-col>
+        </ion-row>
+      </div>
+    </ion-item>
+    <protocol-detail-item title="Assunto" [value]="protocol.subject | capitalize"></protocol-detail-item>
+    <protocol-detail-item title="Resumo" [value]="protocol.summary | capitalize"></protocol-detail-item>
+    <protocol-detail-item *ngIf="protocol.extra" title="Informações diversas" [value]="protocol.extra"></protocol-detail-item>
+    <ion-item>
+      <label>
+        <strong>Interessado(s)</strong>
+      </label>
+      <div *ngFor="let part of protocol.parts" class="interessados">{{part | capitalize}}</div>
+    </ion-item>
+    <protocol-detail-item title="Município" [value]="protocol.district | capitalize"></protocol-detail-item>
+    <ion-item *ngIf="protocol.updates">
+      <ion-list class="list-updates">
+        <ion-list-header>
+          <ion-row>
+            <ion-col>
+              Trâmites
+            </ion-col>
+            <ion-col class="text-right button-only">
+              <button class="show-updates" ion-button icon-right clear (click)="toggleUpdates()">
+                <ion-icon *ngIf="showAllUpdates" name="remove"></ion-icon>
+                <ion-icon *ngIf="!showAllUpdates" name="add"></ion-icon>
+              </button>
+            </ion-col>
+          </ion-row>
+        </ion-list-header>
+        <div *ngIf="showAllUpdates">
+          <ion-item *ngFor="let update of protocol.updates">
+            <ion-row>
+              <ion-col>
+                <strong>{{update.date | date: 'dd/MM/yyyy'}}</strong>
+              </ion-col>
+              <ion-col class="text-right">
+                <span class="event-status"> {{update.status | capitalize}}</span>
+              </ion-col>
+            </ion-row>
+            <ion-row>
+              <ion-col>
+                <strong *ngIf="update.agency">Órgão: </strong>{{update.agency | capitalize}}
+              </ion-col>
+              <ion-col>
+                <strong *ngIf="update.area">Local: </strong>{{update.area | capitalize}}
+              </ion-col>
+            </ion-row>
+          </ion-item>
+        </div>
+      </ion-list>
+    </ion-item>
+  </ion-list>
 </ion-content>

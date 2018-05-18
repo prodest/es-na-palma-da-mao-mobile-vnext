@@ -1,6 +1,6 @@
 import { ProtocolUpdate } from './protocol-update';
 
-export interface Process {
+export interface Protocol {
   number: string;
   parts: string[];
   subject: string;

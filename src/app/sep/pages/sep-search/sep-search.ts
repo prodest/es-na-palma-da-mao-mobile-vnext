@@ -1,5 +1,12 @@
-import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { Component, OnDestroy } from '@angular/core';
+import { IonicPage, NavController } from 'ionic-angular';
+import { SepService } from './../../providers/sep.service';
+import { FavoriteProtocol } from './../../model';
+import { SepApiService } from './../../providers/sep-api.service';
+import { Protocol } from '../../model/protocol';
+import { BarcodeScanner } from '@ionic-native/barcode-scanner';
+import { Observable } from 'rxjs/Observable';
+import { Subject } from 'rxjs/Subject';
 
 /**
  * Generated class for the SepSearchPage page.
@@ -11,24 +18,58 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
 @IonicPage()
 @Component({
   selector: 'page-sep-search',
-  templateUrl: 'sep-search.html'
+  templateUrl: 'sep-search.html',
+  providers: [BarcodeScanner, SepService]
 })
-export class SepSearchPage {
-  processNumberModel: number;
+export class SepSearchPage implements OnDestroy {
+  protocolNumberModel: string;
+  favoriteProtocols$: Observable<FavoriteProtocol[]>;
+  destroyed$ = new Subject();
 
-  constructor(public navCtrl: NavController, public navParams: NavParams) {}
+  constructor(
+    private navCtrl: NavController,
+    private barcodeScanner: BarcodeScanner,
+    private sepService: SepService,
+    private sepApiService: SepApiService
+  ) {}
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad SepSearchPage');
   }
 
-  onInput(event) {
-    console.log(event);
-    console.log(this.processNumberModel);
+  /**
+   *
+   *
+   */
+  ngOnDestroy() {
+    this.destroyed$.next();
+    this.destroyed$.unsubscribe();
   }
 
-  onCancel(event) {
-    console.log(event);
-    console.log(this.processNumberModel);
+  search(protocolNumber: string) {
+    if (protocolNumber) {
+      this.sepApiService.getProcessByNumber(protocolNumber).subscribe(this.goToProtocol);
+    }
+  }
+
+  ionViewWillLoad() {
+    this.favoriteProtocols$ = this.sepService.favoriteProtocols$.takeUntil(this.destroyed$);
+  }
+
+  goToProtocol = (protocol: Protocol) => {
+    this.navCtrl.push('SepDetailsPage', { protocol: protocol });
+  };
+
+  scanBarcode() {
+    let options = {
+      preferFrontCamera: false,
+      prompt: 'Posicione o código dentro da área de leitura', // supported on Android only
+      format: 'CODE_39'
+    };
+
+    this.barcodeScanner
+      .scan(options)
+      .then(barcodeData => (barcodeData.cancelled ? null : this.search(barcodeData.text)))
+      .catch(console.error);
   }
 }

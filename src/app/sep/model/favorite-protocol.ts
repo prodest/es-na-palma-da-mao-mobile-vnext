@@ -3,5 +3,4 @@ export interface FavoriteProtocol {
   subject: string;
   summary: string;
   status: string;
-  district: string;
 }

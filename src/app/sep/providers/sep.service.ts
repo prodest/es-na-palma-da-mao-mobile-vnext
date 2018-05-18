@@ -1,60 +1,130 @@
 import { Injectable } from '@angular/core';
+import { Loading, LoadingController, ToastController } from 'ionic-angular';
 import { Observable } from 'rxjs/Observable';
-import { flatMap, tap } from 'rxjs/operators';
+import { _throw } from 'rxjs/observable/throw';
+import { catchError, finalize, flatMap, pluck } from 'rxjs/operators';
 
-import { SepStorageService } from './sep-storage.service';
+import { SepStorage } from './sep-storage.service';
 import { SepApiService } from './sep-api.service';
-import { FavoriteProtocolData } from './../model';
+import { FavoriteProtocol, Protocol } from './../model';
+import { SepStorageModel } from './sep-storage.model';
 
 @Injectable()
 export class SepService {
-  private favoriteProcess = [];
+  loading: Loading;
 
-  constructor(private api: SepApiService, private storage: SepStorageService) {}
+  constructor(
+    private api: SepApiService,
+    private storage: SepStorage,
+    private toastCtrl: ToastController,
+    private loadingCtrl: LoadingController
+  ) {}
 
-  get getFavoriteProcess(): string[] {
-    return this.favoriteProcess;
+  get favoriteProtocols$(): Observable<FavoriteProtocol[]> {
+    return this.storage.all$.pipe(pluck('favoriteProtocols'));
   }
 
-  isFavoriteProcess(processNumber: string): boolean {
-    return !!this.storage.getValue('favoriteProcess').find(p => p === processNumber);
+  isFavorite(protocol: Protocol): boolean {
+    return this.storage.isFavorite(protocol);
   }
 
-  addToFavoriteProcess(processNumber: string) {
-    this.favoriteProcess.splice(this.locationOf(processNumber, this.favoriteProcess), 0, processNumber);
-  }
+  addFavorite = (protocol: Protocol): Observable<FavoriteProtocol[]> => {
+    let favoriteProtocol = this.mapFavorite(protocol);
 
-  removeFromFavoriteProcess(processNumber: string) {
-    this.favoriteProcess = this.favoriteProcess.filter(p => p !== processNumber);
-    this.syncFavoriteProcess(this.favoriteProcess);
-  }
+    this.showLoading();
 
-  syncFavoriteProcess = (favoriteProcess?: string[]): Observable<string[]> => {
-    const syncData: FavoriteProtocolData = { favoriteProcess: [], date: null };
+    let addedFavorites = this.storage.getValue('favoriteProtocols');
+    addedFavorites.splice(this.locationOf(protocol, addedFavorites), 0, favoriteProtocol);
 
-    if (favoriteProcess) {
-      syncData.favoriteProcess = favoriteProcess;
+    return this.syncFavorites(addedFavorites).pipe(
+      finalize(this.dismissLoading),
+      catchError(error => {
+        this.showMessage('Erro ao adicionar acompanhamento. Tente novamente.');
+        return _throw(error);
+      })
+    );
+  };
+
+  removeFavorite = (protocol: Protocol): Observable<FavoriteProtocol[]> => {
+    let favoriteProtocols = this.storage.getValue('favoriteProtocols').filter(p => p.number !== protocol.number);
+
+    this.showLoading();
+
+    return this.syncFavorites(favoriteProtocols).pipe(
+      finalize(this.dismissLoading),
+      catchError(error => {
+        this.showMessage('Erro ao remover acompanhamento. Tente novamente.');
+        return _throw(error);
+      })
+    );
+  };
+
+  syncFavorites = (favoriteProtocols?: FavoriteProtocol[]): Observable<FavoriteProtocol[]> => {
+    const syncData: SepStorageModel = { favoriteProtocols: [], date: null };
+
+    if (favoriteProtocols) {
+      syncData.favoriteProtocols = favoriteProtocols;
       syncData.date = new Date().toISOString();
     }
 
     return this.api
-      .syncFavoriteProcess(syncData)
-      .pipe(tap((favoriteProcessData: FavoriteProtocolData) => (this.favoriteProcess = favoriteProcessData.favoriteProcess)))
+      .syncFavoriteProtocols(syncData)
       .pipe(
-        flatMap((favoriteProcessData: FavoriteProtocolData) =>
-          this.storage.mergeValue('favoriteProcess', favoriteProcessData.favoriteProcess)
+        flatMap((favoriteProtocols: SepStorageModel) =>
+          this.storage.mergeValue('favoriteProtocols', favoriteProtocols.favoriteProtocols)
         )
       );
   };
 
-  private locationOf(element: any, array: any[], start?: number, end?: number) {
+  private mapFavorite(protocol: Protocol): FavoriteProtocol {
+    return {
+      number: protocol.number,
+      subject: protocol.subject,
+      summary: protocol.summary,
+      status: protocol.status
+    };
+  }
+
+  /**
+   *
+   *
+   */
+  private showLoading = (message: string = 'Aguarde') => {
+    if (this.loading) {
+      this.loading.setContent(message);
+    } else {
+      this.loading = this.loadingCtrl.create({ content: message, dismissOnPageChange: true });
+      this.loading.present();
+    }
+  };
+
+  /**
+   *
+   *
+   */
+  private dismissLoading = () => {
+    if (this.loading) {
+      this.loading.dismiss();
+      this.loading = null;
+    }
+  };
+
+  /**
+   *
+   *
+   */
+  private showMessage = (message: string) => {
+    this.toastCtrl.create({ message, duration: 4000 }).present();
+  };
+
+  private locationOf(element: Protocol, array: FavoriteProtocol[], start?: number, end?: number) {
     start = start || 0;
     end = end === undefined ? array.length - 1 : end;
     let pivot = Math.floor((start + end) / 2);
-    if (end < start || array[pivot] === element) {
+    if (end < start || array[pivot].number === element.number) {
       return pivot + 1;
     }
-    if (array[pivot] < element) {
+    if (array[pivot].number < element.number) {
       return this.locationOf(element, array, pivot + 1, end);
     } else {
       return this.locationOf(element, array, start, pivot - 1);

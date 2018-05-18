@@ -2,8 +2,7 @@
   "name": "espm",
   "version": "0.1.0",
   "displayName": "ES na Palma da Mão",
-  "description":
-    "O ES NA PALMA DA MÃO é um programa do Governo do Estado do Espírito Santo que reúne iniciativas e serviços do Governo em plataforma móvel (aplicativo) e web, com unidade de experiência do cidadão. Por meio do ES NA PALMA DA MÃO, diversos serviços governamentais podem ser acessados através da web e dispositivos móveis (sistemas operacionais iOS e Android) utilizando uma interface comum.",
+  "description": "O ES NA PALMA DA MÃO é um programa do Governo do Estado do Espírito Santo que reúne iniciativas e serviços do Governo em plataforma móvel (aplicativo) e web, com unidade de experiência do cidadão. Por meio do ES NA PALMA DA MÃO, diversos serviços governamentais podem ser acessados através da web e dispositivos móveis (sistemas operacionais iOS e Android) utilizando uma interface comum.",
   "private": true,
   "scripts": {
     "ngc": "ngc",
@@ -17,20 +16,27 @@
     "htmlhint": "htmlhint --config .htmlhintrc",
     "precommit": "lint-staged",
     "format": "prettier --find-config-path --write",
-    "format:check":
-      "prettier --find-config-path --list-different \"src/{app,environments,scss}/**/*{.ts,.js,.json,.css,.scss}\"",
+    "format:check": "prettier --find-config-path --list-different \"src/{app,environments,scss}/**/*{.ts,.js,.json,.css,.scss}\"",
     "workbox": "workbox generate:sw",
     "release": "standard-version",
     "release:preview": "standard-version --dry-run",
     "commit": "git-cz",
     "commitmsg": "validate-commit-msg",
-    "purifycss":
-      "purifycss www/build/main.css www/build/*.js www/index.html --info --min --out www/build/main.css --whitelist *.ion-md-icon*"
+    "purifycss": "purifycss www/build/main.css www/build/*.js www/index.html --info --min --out www/build/main.css --whitelist *.ion-md-icon*"
   },
   "lint-staged": {
-    "src/app/**/*.html": ["htmlhint"],
-    "src/**/*.ts": ["lint", "format", "git add"],
-    "src/**/*.{css,scss}": ["format", "git add"]
+    "src/app/**/*.html": [
+      "htmlhint"
+    ],
+    "src/**/*.ts": [
+      "lint",
+      "format",
+      "git add"
+    ],
+    "src/**/*.{css,scss}": [
+      "format",
+      "git add"
+    ]
   },
   "config": {
     "ionic_app_ng_module_class": "EspmModule",
@@ -42,8 +48,7 @@
     },
     "validate-commit-msg": {
       "types": "conventional-commit-types",
-      "helpMessage":
-        "Use \"npm run commit\" instead, we use conventional-changelog format :) (https://github.com/commitizen/cz-cli)"
+      "helpMessage": "Use \"npm run commit\" instead, we use conventional-changelog format :) (https://github.com/commitizen/cz-cli)"
     }
   },
   "dependencies": {
@@ -55,6 +60,7 @@
     "@angular/http": "^5.2.6",
     "@angular/platform-browser": "^5.2.6",
     "@angular/platform-browser-dynamic": "^5.2.6",
+    "@ionic-native/barcode-scanner": "^4.7.0",
     "@ionic-native/camera": "^4.5.3",
     "@ionic-native/core": "^4.5.3",
     "@ionic-native/facebook": "^4.4.2",
@@ -69,6 +75,7 @@
     "angular2-text-mask": "^8.0.2",
     "cordova-android": "^6.2.3",
     "cordova-ios": "^4.4.0",
+    "cordova-plugin-compat": "^1.2.0",
     "cordova-plugin-device": "^1.1.4",
     "cordova-plugin-facebook4": "^1.9.1",
     "cordova-plugin-googleplus": "^5.1.1",
@@ -85,6 +92,7 @@
     "ionicons": "^3.0.0",
     "lodash-es": "^4.17.5",
     "moment": "^2.20.1",
+    "phonegap-plugin-barcodescanner": "^6.0.8",
     "platform": "^1.3.4",
     "rxjs": "^5.5.6",
     "zone.js": "^0.8.20"
@@ -118,7 +126,11 @@
     "type": "git",
     "url": "git+https://github.com/prodest/es-na-palma-da-mao-mobile-vnext.git"
   },
-  "keywords": ["PRODEST", "GOVERNO ES", "ESPM"],
+  "keywords": [
+    "PRODEST",
+    "GOVERNO ES",
+    "ESPM"
+  ],
   "author": "PRODEST (https://github.com/prodest/)",
   "contributors": [
     {
@@ -155,8 +167,12 @@
       "ionic-plugin-keyboard": {},
       "cordova-sqlite-storage": {},
       "cordova-plugin-splashscreen": {},
-      "cordova-plugin-x-socialsharing": {}
+      "cordova-plugin-x-socialsharing": {},
+      "phonegap-plugin-barcodescanner": {}
     },
-    "platforms": ["android", "ios"]
+    "platforms": [
+      "android",
+      "ios"
+    ]
   }
 }

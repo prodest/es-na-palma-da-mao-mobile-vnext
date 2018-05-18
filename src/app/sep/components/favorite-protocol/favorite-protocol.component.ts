@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
+import { FavoriteProtocol } from './../../model';
 
 /**
  * Generated class for the FavoriteProtocolsComponent component.
@@ -8,13 +9,12 @@ import { Component } from '@angular/core';
  */
 @Component({
   selector: 'favorite-protocol',
-  templateUrl: 'favorite-protocol.html'
+  templateUrl: 'favorite-protocol.component.html'
 })
 export class FavoriteProtocolComponent {
-  text: string;
+  @Input() public favoriteProtocol: FavoriteProtocol;
 
   constructor() {
     console.log('Hello FavoriteProtocolComponent Component');
-    this.text = 'Hello World';
   }
 }

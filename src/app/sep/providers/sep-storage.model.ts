@@ -1,5 +1,7 @@
+import { FavoriteProtocol } from '../model';
+
 export interface SepStorageModel {
-  id: number;
-  favoriteProcess: string[];
-  date: Date;
+  id?: number;
+  favoriteProtocols: FavoriteProtocol[];
+  date: string;
 }

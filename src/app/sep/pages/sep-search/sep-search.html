@@ -11,18 +11,38 @@
     </button>
     <ion-title>Consulta SEP</ion-title>
     <ion-buttons end>
-      <button ion-button (click)="scanBarcode()">
+      <button ion-button icon-only (click)="scanBarcode()">
         <ion-icon name="barcode"></ion-icon>
       </button>
     </ion-buttons>
   </ion-navbar>
   <ion-toolbar>
-    <ion-searchbar type="number" placeholder="Número do protocolo" [(ngModel)]="processNumberModel" (ionInput)="onInput($event)"
-      (ionCancel)="onCancel($event)">
-    </ion-searchbar>
+    <ion-row class="search-bar">
+      <ion-col>
+        <ion-searchbar type="number" placeholder="Número do protocolo" [(ngModel)]="protocolNumberModel">
+        </ion-searchbar>
+      </ion-col>
+      <ion-col>
+        <button icon-only class="btn-search-protocol" ion-button color="light" round (click)="search(protocolNumberModel)">
+          <ion-icon name="play"></ion-icon>
+        </button>
+      </ion-col>
+    </ion-row>
   </ion-toolbar>
 </ion-header>
 
-<ion-content>
+<ion-content *ngIf="(favoriteProtocols$ | async ) as favorites">
+  <ion-list>
+    <ion-item *ngFor="let favorite of favorites">
 
+    </ion-item>
+  </ion-list>
+
+  <ion-row *ngIf="!favorites.length" class="initial-message">
+    <ion-col>
+      <span>Sistema Eletrônico de Protocolo</span>
+      <img src="/assets/imgs/sep/sep-logo.png">
+      <remark>Digite o número do processo que deseja consultar ou clique no ícone para abrir o leitor de código de barras</remark>
+    </ion-col>
+  </ion-row>
 </ion-content>

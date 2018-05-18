@@ -1,2 +1,23 @@
 page-sep-search {
+  .search-bar .col {
+    &:first-child {
+      flex-grow: 8;
+    }
+
+    &:last-child {
+      display: flex;
+      justify-content: center;
+    }
+
+    .btn-search-protocol {
+      align-self: center;
+      padding: 0 0.1rem;
+      height: 4.1rem;
+    }
+  }
+
+  .initial-message {
+    text-align: center;
+    padding: 10px;
+  }
 }

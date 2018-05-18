@@ -1,2 +1,2 @@
 export * from './favorite-protocol';
-export * from './protocol-details';
+export * from './protocol-detail-item';
