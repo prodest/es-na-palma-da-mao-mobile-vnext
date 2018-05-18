@@ -60,6 +60,7 @@
     "@angular/http": "^5.2.6",
     "@angular/platform-browser": "^5.2.6",
     "@angular/platform-browser-dynamic": "^5.2.6",
+    "@ionic-native/android-permissions": "^4.7.0",
     "@ionic-native/barcode-scanner": "^4.7.0",
     "@ionic-native/camera": "^4.5.3",
     "@ionic-native/core": "^4.5.3",
@@ -75,6 +76,7 @@
     "angular2-text-mask": "^8.0.2",
     "cordova-android": "^6.2.3",
     "cordova-ios": "^4.4.0",
+    "cordova-plugin-android-permissions": "^1.0.0",
     "cordova-plugin-compat": "^1.2.0",
     "cordova-plugin-device": "^1.1.4",
     "cordova-plugin-facebook4": "^1.9.1",
@@ -168,7 +170,8 @@
       "cordova-sqlite-storage": {},
       "cordova-plugin-splashscreen": {},
       "cordova-plugin-x-socialsharing": {},
-      "phonegap-plugin-barcodescanner": {}
+      "phonegap-plugin-barcodescanner": {},
+      "cordova-plugin-android-permissions": {}
     },
     "platforms": [
       "android",
