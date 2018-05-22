@@ -28,6 +28,12 @@ export class SepService {
     return this.storage.isFavorite(protocol);
   }
 
+  getProcessByNumber(protocolNumber: string): Observable<FavoriteProtocol> {
+    this.showLoading();
+
+    return this.api.getProcessByNumber(protocolNumber).pipe(finalize(this.dismissLoading));
+  }
+
   addFavorite = (protocol: Protocol): Observable<FavoriteProtocol[]> => {
     let favoriteProtocol = this.mapFavorite(protocol);
 

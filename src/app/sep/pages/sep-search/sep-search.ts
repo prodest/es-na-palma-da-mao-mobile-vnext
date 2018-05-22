@@ -1,8 +1,7 @@
 import { Component, OnDestroy } from '@angular/core';
-import { IonicPage, NavController } from 'ionic-angular';
+import { IonicPage, NavController, ToastController } from 'ionic-angular';
 import { SepService } from './../../providers/sep.service';
 import { FavoriteProtocol } from './../../model';
-import { SepApiService } from './../../providers/sep-api.service';
 import { Protocol } from '../../model/protocol';
 import { BarcodeScanner } from '@ionic-native/barcode-scanner';
 import { Observable } from 'rxjs/Observable';
@@ -29,15 +28,11 @@ export class SepSearchPage implements OnDestroy {
 
   constructor(
     private navCtrl: NavController,
+    private toastCtrl: ToastController,
     private barcodeScanner: BarcodeScanner,
     private permissions: AndroidPermissionsService,
-    private sepService: SepService,
-    private sepApiService: SepApiService
+    private sepService: SepService
   ) {}
-
-  ionViewDidLoad() {
-    console.log('ionViewDidLoad SepSearchPage');
-  }
 
   /**
    *
@@ -49,8 +44,12 @@ export class SepSearchPage implements OnDestroy {
   }
 
   search(protocolNumber: string) {
-    if (protocolNumber) {
-      this.sepApiService.getProcessByNumber(protocolNumber).subscribe(this.goToProtocol);
+    if (!protocolNumber) {
+      this.showMessage('Número do protocolo é obrigatório');
+    } else if (protocolNumber.length < 2 || protocolNumber.length > 8) {
+      this.showMessage('O número deve ter entre 2 e 8 dígitos');
+    } else if (protocolNumber) {
+      this.sepService.getProcessByNumber(protocolNumber).subscribe(this.goToProtocol);
     }
   }
 
@@ -78,4 +77,8 @@ export class SepSearchPage implements OnDestroy {
       }
     });
   }
+
+  private showMessage = (message: string) => {
+    this.toastCtrl.create({ message, duration: 4000 }).present();
+  };
 }

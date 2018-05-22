@@ -27,7 +27,14 @@ page-sep-details {
     padding-top: 0;
   }
 
-  ion-list.list-updates .item-block .item-inner {
+  ion-list.list-updates.list > div > .item-block .item-inner {
     border-bottom: 1px solid #dedede;
+  }
+
+  ion-list.list-updates.list > div > .item-block:last-child ion-label,
+  ion-list.list-updates.list > div > .item-block:last-child .item-inner,
+  ion-list.list-updates.list > div > .item-wrapper:last-child ion-label,
+  ion-list.list-updates.list > div > .item-wrapper:last-child .item-inner {
+    border-bottom: 0;
   }
 }
