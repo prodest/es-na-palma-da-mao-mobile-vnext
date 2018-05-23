@@ -1,30 +1,30 @@
-import { HttpClient, HttpHeaders } from '@angular/common/http'
-import { Inject, Injectable } from '@angular/core'
-import { Observable } from 'rxjs/Observable'
-import { of } from 'rxjs/observable/of'
-import { _throw } from 'rxjs/observable/throw'
-import { flatMap, map } from 'rxjs/operators'
+import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { Inject, Injectable } from '@angular/core';
+import { Observable } from 'rxjs/Observable';
+import { of } from 'rxjs/observable/of';
+import { _throw } from 'rxjs/observable/throw';
+import { flatMap, map } from 'rxjs/operators';
 
-import { ANONYMOUS_HEADER } from '.'
-import { EnvVariables } from './../environment'
-import { Environment } from './../environment/environment'
-import { AuthStorage } from './auth-storage.service'
-import { JwtHelper } from './jwt-helper'
-import { AcessoCidadaoResponse } from './models/authResponses/acessoCidadaoResponse'
-import { AcessoCidadaoClaims } from './models/claims/acessoCidadaoClaims'
-import { AcessoCidadaoIdentity } from './models/identities/acessoCidadaoIdentity'
-import { Identity } from './models/identities/identity'
-import { Token } from './models/token'
+import { ANONYMOUS_HEADER } from '.';
+import { EnvVariables } from './../environment';
+import { Environment } from './../environment/environment';
+import { AuthStorage } from './auth-storage.service';
+import { JwtHelper } from './jwt-helper';
+import { AcessoCidadaoResponse } from './models/authResponses/acessoCidadaoResponse';
+import { AcessoCidadaoClaims } from './models/claims/acessoCidadaoClaims';
+import { AcessoCidadaoIdentity } from './models/identities/acessoCidadaoIdentity';
+import { Identity } from './models/identities/identity';
+import { Token } from './models/token';
 
 const transformRequest = obj => {
-  let str: string[] = []
+  let str: string[] = [];
   for (let p in obj) {
     if (obj.hasOwnProperty(p)) {
-      str.push(encodeURIComponent(p) + '=' + encodeURIComponent(obj[p]))
+      str.push(encodeURIComponent(p) + '=' + encodeURIComponent(obj[p]));
     }
   }
-  return str.join('&')
-}
+  return str.join('&');
+};
 
 /**
  * Classe para autenticação usando IdentityServer3 no acessso cidadão
@@ -61,19 +61,19 @@ export class AcessoCidadaoService {
       flatMap(this.saveRefreshToken),
       flatMap(this.saveClientId),
       flatMap(this.getUserClaims)
-    )
-  }
+    );
+  };
 
   /**
    * Faz logout do usuário. Remove o token do localstore e os claims salvos.
    */
-  public logout = () => this.authStorage.reset()
+  public logout = () => this.authStorage.reset();
 
   /**
    * Retorna se tem usuário logado ou não.
    */
   public get isAuthenticated(): boolean {
-    return !!this.authStorage.getValue('accessToken') && !this.jwt.isTokenExpired(this.authStorage.getValue('accessToken')) // && !!this.user
+    return !!this.authStorage.getValue('accessToken') && !this.jwt.isTokenExpired(this.authStorage.getValue('accessToken')); // && !!this.user
   }
 
   /**
@@ -82,31 +82,31 @@ export class AcessoCidadaoService {
    */
   public refreshAccessTokenIfNeeded = (): Observable<Token> => {
     if (!this.authStorage.getValue('refreshToken')) {
-      _throw({ message: 'no-token' })
+      _throw({ message: 'no-token' });
     }
 
-    let currentDate = new Date()
-    let token = of(this.authStorage.getValue('accessToken'))
+    let currentDate = new Date();
+    let token = of(this.authStorage.getValue('accessToken'));
 
     // Usa o token ainda válido e faz um refresh token em background (não-bloqueante)
     if (this.isTokenIsExpiringIn(currentDate)) {
-      this.refreshAccessToken().subscribe()
+      this.refreshAccessToken().subscribe();
     }
 
     // Faz um refresh token e espera pra retornar o novo token "refreshado"
     if (this.isTokenExpiredIn(currentDate)) {
-      token = this.refreshAccessToken()
+      token = this.refreshAccessToken();
     }
 
-    return token
-  }
+    return token;
+  };
 
   /**
    * Obtém as claims do usuário no acesso cidadão.
    *
    */
   public getUserClaims = (): Observable<AcessoCidadaoClaims> =>
-    this.http.get<AcessoCidadaoClaims>(`${this.environment.identityServer.url}/connect/userinfo`)
+    this.http.get<AcessoCidadaoClaims>(`${this.environment.identityServer.url}/connect/userinfo`);
 
   /************************************* Private API *************************************/
 
@@ -125,8 +125,8 @@ export class AcessoCidadaoService {
     return this.login(this.createRefreshTokenIdentity()).pipe(
       // finalize(() => (AcessoCidadaoService.refreshingToken = false)),
       map(() => this.authStorage.getValue('accessToken'))
-    )
-  }
+    );
+  };
 
   /**
    *
@@ -138,17 +138,17 @@ export class AcessoCidadaoService {
       client_secret: this.environment.identityServer.clients.espmExternalLoginAndroid.secret,
       grant_type: 'refresh_token',
       scope: this.environment.identityServer.defaultScopes
-    }
+    };
 
     if (this.authStorage.getValue('clientId') === 'espm') {
-      identity.client_id = this.environment.identityServer.clients.espm.id
-      identity.client_secret = this.environment.identityServer.clients.espm.secret
+      identity.client_id = this.environment.identityServer.clients.espm.id;
+      identity.client_secret = this.environment.identityServer.clients.espm.secret;
     }
 
-    identity.refresh_token = this.authStorage.getValue('refreshToken')
+    identity.refresh_token = this.authStorage.getValue('refreshToken');
 
-    return identity
-  }
+    return identity;
+  };
 
   /**
    *  Faz a requisição de um token no IdentityServer3, a partir dos dados fornecidos
@@ -158,7 +158,7 @@ export class AcessoCidadaoService {
     const headers = new HttpHeaders({
       'Content-Type': 'application/x-www-form-urlencoded',
       [ANONYMOUS_HEADER]: 'true'
-    })
+    });
 
     return this.http.post<AcessoCidadaoResponse>(
       `${this.environment.identityServer.url}/connect/token`,
@@ -166,46 +166,48 @@ export class AcessoCidadaoService {
       {
         headers
       }
-    )
-  }
+    );
+  };
 
   /**
    *
    *
    */
   private isTokenExpiredIn = (date: Date) => {
-    return this.jwt.isTokenExpired(this.authStorage.getValue('accessToken'), date)
-  }
+    const token = this.authStorage.getValue('accessToken');
+    return token && this.jwt.isTokenExpired(token, date);
+  };
 
   /**
    *
    *
    */
   private isTokenIsExpiringIn = (date: Date) => {
-    return this.jwt.isTokenIsExpiringIn(this.authStorage.getValue('accessToken'), date)
-  }
+    const token = this.authStorage.getValue('accessToken');
+    return token && this.jwt.isTokenIsExpiringIn(token, date);
+  };
 
   /**
    * Persiste access token
    *
    */
   private saveAccessToken = (response: AcessoCidadaoResponse) => {
-    return this.authStorage.setValue('accessToken', response.access_token).then(() => response)
-  }
+    return this.authStorage.setValue('accessToken', response.access_token).then(() => response);
+  };
 
   /**
    * Persiste rerfresh token
    *
    */
   private saveRefreshToken = (response: AcessoCidadaoResponse) => {
-    return this.authStorage.setValue('refreshToken', response.refresh_token).then(() => response)
-  }
+    return this.authStorage.setValue('refreshToken', response.refresh_token).then(() => response);
+  };
 
   /**
    * Persiste client id
    *
    */
   private saveClientId = (response: AcessoCidadaoResponse) => {
-    return this.authStorage.setValue('clientId', this.jwt.decodeToken(response.access_token).client_id).then(() => response)
-  }
+    return this.authStorage.setValue('clientId', this.jwt.decodeToken(response.access_token).client_id).then(() => response);
+  };
 }
