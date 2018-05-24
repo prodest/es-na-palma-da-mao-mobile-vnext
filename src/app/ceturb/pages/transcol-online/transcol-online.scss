@@ -176,6 +176,13 @@ page-transcol-online {
     }
   }
 
+  .stop-info__btn-favorite {
+    right: 80px;
+    .is-favorite {
+      color: rgb(255, 193, 7) !important;
+    }
+  }
+
   .stop-info__content {
     display: flex;
     flex-direction: row;

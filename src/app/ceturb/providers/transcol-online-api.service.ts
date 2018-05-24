@@ -5,6 +5,7 @@ import { Observable } from 'rxjs/Observable';
 import { flatMap, map, share } from 'rxjs/operators';
 
 import { BusStop } from './../model/bus-stop';
+import { FavoriteStopsData } from './../model/favorite-stops';
 import { Prevision } from './../model/prevision';
 
 /**
@@ -22,40 +23,37 @@ export class TranscolOnlineApiService {
   /**
    *
    */
-  getBusStopsByArea = (bounds: number[]): Promise<BusStop[]> => {
+  getBusStopsByArea = (bounds: number[]): Observable<BusStop[]> => {
     return this.http
       .post<any>(`${this.env.api.ceturb}/transcolOnline/svc/json/db/pesquisarPontosDeParada`, { envelope: bounds })
-      .pipe(map(resp => resp.pontosDeParada), flatMap(ids => this.listBusStopsByIds(ids)), share())
-      .toPromise();
+      .pipe(map(resp => resp.pontosDeParada), flatMap(ids => this.listBusStopsByIds(ids)), share());
   };
 
   /**
    *
    */
-  getBusStopsIdsByRoute = (originId: number, destinationId: number): Promise<number[]> => {
+  getBusStopsIdsByRoute = (originId: number, destinationId: number): Observable<number[]> => {
     return this.http
       .post<any>(`${this.env.api.ceturb}/transcolOnline/svc/json/db/pesquisarPontosDeParada`, {
         pontoDeOrigemId: originId,
         pontoDeDestinoId: destinationId
       })
-      .pipe(map(resp => resp.pontosDeParada), share())
-      .toPromise();
+      .pipe(map(resp => resp.pontosDeParada), share());
   };
 
   /**
    *
    */
-  getBusStopsIdsByOrigin(id: number): Promise<any[]> {
+  getBusStopsIdsByOrigin = (id: number): Observable<any[]> => {
     return this.http
       .post<any>(`${this.env.api.ceturb}/transcolOnline/svc/json/db/pesquisarPontosDeParada`, { pontoDeOrigemId: id })
-      .pipe(map(resp => resp.pontosDeParada), share())
-      .toPromise();
-  }
+      .pipe(map(resp => resp.pontosDeParada), share());
+  };
 
   /**
    *
    */
-  getPrevisionsByOriginAndDestination = (originId: number, destinationId: number): Promise<Prevision[]> => {
+  getPrevisionsByOriginAndDestination = (originId: number, destinationId: number): Observable<Prevision[]> => {
     const payload = {
       pontoDeOrigemId: originId,
       pontoDeDestinoId: destinationId
@@ -63,26 +61,24 @@ export class TranscolOnlineApiService {
 
     return this.http
       .post<any>(`${this.env.api.ceturb}/transcolOnline/svc/estimativas/obterEstimativasPorOrigemEDestino`, payload)
-      .pipe(share())
-      .toPromise();
+      .pipe(share());
   };
 
   /**
    *
    */
-  getPrevisionsByOrigin = (id: number): Promise<Prevision[]> => {
+  getPrevisionsByOrigin = (id: number): Observable<Prevision[]> => {
     const payload = { pontoDeOrigemId: id };
 
     return this.http
       .post<any>(`${this.env.api.ceturb}/transcolOnline/svc/estimativas/obterEstimativasPorOrigem`, payload)
-      .pipe(share())
-      .toPromise();
+      .pipe(share());
   };
 
   /**
    *
    */
-  getPrevisionsByOriginAndLine = (originId: number, lineId: number): Promise<Prevision[]> => {
+  getPrevisionsByOriginAndLine = (originId: number, lineId: number): Observable<Prevision[]> => {
     const payload = {
       pontoDeOrigemId: originId,
       linhaId: lineId
@@ -90,14 +86,13 @@ export class TranscolOnlineApiService {
 
     return this.http
       .post<any>(`${this.env.api.ceturb}/transcolOnline/svc/estimativas/obterEstimativasPorOrigemELinha`, payload)
-      .pipe(share())
-      .toPromise();
+      .pipe(share());
   };
 
   /**
    *
    */
-  searchBusStopsIds(text: string, originId: number | undefined): Promise<number[]> {
+  searchBusStopsIds = (text: string, originId: number | undefined): Observable<number[]> => {
     const payload: any = { texto: text };
     if (originId) {
       payload.pontoDeOrigemId = originId;
@@ -105,9 +100,8 @@ export class TranscolOnlineApiService {
 
     return this.http
       .post<any>(`${this.env.api.ceturb}/transcolOnline/svc/texto/pesquisarPontosDeParada`, payload)
-      .pipe(map(resp => resp.pontosDeParada), share())
-      .toPromise();
-  }
+      .pipe(map(resp => resp.pontosDeParada), share());
+  };
 
   /**
    *
@@ -116,5 +110,14 @@ export class TranscolOnlineApiService {
     return this.http.post<BusStop[]>(`${this.env.api.ceturb}/transcolOnline/svc/json/db/listarPontosDeParada`, {
       listaIds: ids
     });
+  };
+
+  /**
+   *
+   */
+  syncFavoriteStops = (favoriteStops: FavoriteStopsData): Observable<FavoriteStopsData> => {
+    return this.http
+      .post<FavoriteStopsData>(`${this.env.api.espm}/ceturb/transcolOnline/data/favoriteStops`, favoriteStops)
+      .pipe(share());
   };
 }

@@ -1,3 +1,5 @@
+import { FavoriteLocation } from './favorite-stops';
+
 export interface BusStop {
   id: number;
   identificador: string;
@@ -10,5 +12,7 @@ export interface BusStop {
   bairro: string;
   isTerminal: boolean;
   isPonto: boolean;
+  isFavorite: boolean;
+  favoriteLocation?: FavoriteLocation;
   tipo: 'ponto' | 'terminal';
 }

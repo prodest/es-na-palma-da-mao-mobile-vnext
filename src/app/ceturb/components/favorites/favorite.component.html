@@ -1,0 +1,14 @@
+<div class="favorite-button">
+    <button ion-fab
+            mini>
+        <i *ngIf="favorite.favoriteLocation ==='casa'"
+           class="fa fa-home"></i>
+        <i *ngIf="favorite.favoriteLocation ==='escola'"
+           class="fa fa-graduation-cap"></i>
+        <i *ngIf="favorite.favoriteLocation ==='trabalho'"
+           class="fa fa-briefcase"></i>
+        <i *ngIf="favorite.favoriteLocation ==='outros'"
+           class="fa fa-star"></i>
+    </button>
+    <div class="favorite-label">{{favorite.descricao || favorite.logradouro}}</div>
+</div>

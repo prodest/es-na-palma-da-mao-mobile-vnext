@@ -1,0 +1,13 @@
+<ion-slides pager *ngIf="favorites?.length"
+            [class.onePage]="favorites.length <= pageSize"
+            [class.closed]="!visible">
+    <ion-slide *ngFor="let favoritePage of pages">
+        <div class="favorites-bar">
+            <div *ngFor="let favorite of favoritePage"
+                 class="favorite-button">
+                <favorite [favorite]="favorite"
+                          (click)="favoriteClick.emit(favorite)"></favorite>
+            </div>
+        </div>
+    </ion-slide>
+</ion-slides>

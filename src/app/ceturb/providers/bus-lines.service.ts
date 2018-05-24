@@ -141,7 +141,7 @@ export class BusLinesService {
       syncData.date = new Date().toISOString();
     }
 
-    return this.api.syncFavorites(syncData).pipe(map((linesData: FavoriteLinesData) => linesData.favoriteLines));
+    return this.api.syncFavoriteLines(syncData).pipe(map((linesData: FavoriteLinesData) => linesData.favoriteLines));
   };
   /**
    *

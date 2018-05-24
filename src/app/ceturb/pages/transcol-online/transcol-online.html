@@ -10,13 +10,19 @@
 
 <ion-content class="no-scroll">
 
+  <favorites *ngIf="favorites?.length"
+             [visible]="!selectedOrigin"
+             [favorites]="favorites"
+             (favoriteClick)="selectStop($event)">
+  </favorites>
+
   <ion-searchbar [style.display]="(!selectedOrigin || !selectedDestination) && !isDetailsOpenned ? 'inherit':'none'"
                  class="searchbar"
                  placeholder="Pesquisar ponto de origem"
                  (ionClear)="clearSearchResults()"
                  (ionCancel)="clearSearchResults()"></ion-searchbar>
 
-  <ion-list [style.display]="isDetailsOpenned ? 'none':'inherit'"  
+  <ion-list [style.display]="isDetailsOpenned ? 'none':'inherit'"
             class="search-results-list"
             [virtualScroll]="searchResults"
             approxItemHeight="71px">
@@ -53,11 +59,22 @@
         </button>
       </ion-fab>
 
+      <ion-fab class="stop-info__btn stop-info__btn-favorite">
+        <button ion-fab
+                [ngClass]="{'is-favorite': selectedOrigin.isFavorite }"
+                (click)="toggleFavorite(selectedOrigin)"
+                *ngIf="selectedOrigin && !selectedDestination">
+          <i class="fa fa-star"
+             aria-hidden="true"></i>
+        </button>
+      </ion-fab>
+
       <stop-summary *ngIf="selectedOrigin"
                     [stop]="selectedOrigin"
                     (close)="unselectOrigin()"
                     (select)="panToStop($event)">
       </stop-summary>
+
       <hr *ngIf="selectedDestination">
       <stop-summary *ngIf="selectedDestination"
                     [stop]="selectedDestination"

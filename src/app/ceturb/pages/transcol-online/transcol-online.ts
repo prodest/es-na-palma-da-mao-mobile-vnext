@@ -7,23 +7,23 @@ import { delay } from 'helpful-decorators';
 import { IonicPage, NavController, NavParams, Searchbar } from 'ionic-angular';
 import * as L from 'leaflet';
 import values from 'lodash-es/values';
-import { filter, map, switchMap, takeUntil } from 'rxjs/operators';
+import { filter, finalize, map, switchMap, takeUntil, tap } from 'rxjs/operators';
 import { Subject } from 'rxjs/Subject';
 
 import { BusStop } from './../../model/bus-stop';
 import { Prevision } from './../../model/prevision';
-import { TranscolOnlineApiService } from './../../providers/transcol-online-api.service';
+import { TranscolOnlineService } from './../../providers';
 
 const VITORIA = L.latLng(-20.315894186649725, -40.29565483331681);
 const GRANDE_VITORIA = [-38.50708007812501, -17.14079039331664, -42.46215820312501, -23.725011735951796];
+
+const SEARCH_MIN_LENGTH = 3;
 
 interface BusLine {
   identificadorLinha: string;
   linhaId: number;
   pontoDeOrigemId: number;
 }
-
-const SEARCH_MIN_LENGTH = 3;
 
 @IonicPage()
 @Component({
@@ -43,6 +43,7 @@ export class TranscolOnlinePage implements AfterViewInit, OnDestroy {
   showLabels: boolean;
   allStops: { [id: number]: L.Marker.BusStop };
   searchResults: BusStop[] = [];
+  favorites: BusStop[] = [];
   isDetailsOpenned = false;
   isShowingOriginPrevisions = false;
   isShowingLinePrevisions = false;
@@ -70,15 +71,18 @@ export class TranscolOnlinePage implements AfterViewInit, OnDestroy {
   /**
    *
    */
-  constructor(navCtrl: NavController, navParams: NavParams, private api: TranscolOnlineApiService) {}
+  constructor(navCtrl: NavController, navParams: NavParams, private transcolOnline: TranscolOnlineService) {}
 
   /**
    *
    */
-  async ionViewDidLoad() {
+  ionViewDidLoad() {
     this.map = this.createMap();
     this.getUserLocation();
-    this.renderBusStops(await this.api.getBusStopsByArea(GRANDE_VITORIA));
+
+    this.transcolOnline.busStops$.pipe(tap(this.renderBusStops)).subscribe(this.refreshSelectedStops);
+    this.transcolOnline.favorites$.subscribe(favorites => (this.favorites = favorites));
+    this.transcolOnline.getBusStopsByArea(GRANDE_VITORIA).subscribe();
   }
 
   /**
@@ -90,8 +94,7 @@ export class TranscolOnlinePage implements AfterViewInit, OnDestroy {
         takeUntil(this.destroyed$),
         map((e: any) => e.target.value),
         filter(text => text && text.length >= SEARCH_MIN_LENGTH),
-        switchMap(text => this.api.searchBusStopsIds(text, this.selectedOrigin ? this.selectedOrigin.id : null)),
-        map(this.loadStopsFromMemory),
+        switchMap(text => this.transcolOnline.searchBusStops(text, this.selectedOrigin ? this.selectedOrigin.id : null)),
         map(stops => (this.selectedOrigin ? stops.filter(this.isPossibleDestination) : stops))
       )
       .subscribe(stops => {
@@ -201,7 +204,10 @@ export class TranscolOnlinePage implements AfterViewInit, OnDestroy {
     // refresh estimatives
     this.showRoutePrevisions();
 
-    this.getRouteDestinations(this.selectedOrigin.id, this.selectedDestination.id).then(this.plotDestinationMarkers);
+    this.transcolOnline
+      .getRouteDestinations(this.selectedOrigin.id, this.selectedDestination.id)
+      .pipe(tap(destinations => (this.destinations = destinations)))
+      .subscribe(this.plotDestinationMarkers);
 
     // set destination icon
     this.setDestinationIcon(destination);
@@ -223,10 +229,13 @@ export class TranscolOnlinePage implements AfterViewInit, OnDestroy {
   /**
    *
    */
-  showRoutePrevisions = (): Promise<Prevision[]> => {
+  showRoutePrevisions = () => {
     this.previsions = undefined;
     this.navigateToRoutePrevisions();
-    return this.getRoutePrevisions(this.selectedOrigin.id, this.selectedDestination.id);
+    this.transcolOnline
+      .getRoutePrevisions(this.selectedOrigin.id, this.selectedDestination.id)
+      .pipe(tap(previsions => (this.previsions = previsions)))
+      .subscribe();
   };
 
   /**
@@ -261,58 +270,19 @@ export class TranscolOnlinePage implements AfterViewInit, OnDestroy {
   /**
    *
    */
-  async updateDestinations(origin: BusStop) {
+  updateDestinations(origin: BusStop) {
     const timer = setTimeout(() => this.setSpinIcon(origin), 800);
 
-    try {
-      const destinations = await this.getOriginDestinations(origin.id);
-      this.plotDestinationMarkers(destinations);
-      this.setOriginIcon(origin);
-    } finally {
-      clearInterval(timer);
-    }
-  }
-
-  /**
-   *
-   */
-  async getRouteDestinations(originId: number, destinationId: number): Promise<BusStop[]> {
-    const ids = await this.api.getBusStopsIdsByRoute(originId, destinationId);
-    this.destinations = this.loadStopsFromMemory(ids);
-    return this.destinations;
-  }
-
-  /**
-   *
-   */
-  async getOriginDestinations(originId: number): Promise<BusStop[]> {
-    const ids = await this.api.getBusStopsIdsByOrigin(originId);
-    this.destinations = this.loadStopsFromMemory(ids);
-    return this.destinations;
-  }
-
-  /**
-   *
-   */
-  async getOriginPrevisions(originId: number): Promise<Prevision[]> {
-    this.previsions = await this.api.getPrevisionsByOrigin(originId);
-    return this.previsions;
-  }
-
-  /**
-   *
-   */
-  async getLinePrevisions(line: BusLine): Promise<Prevision[]> {
-    this.previsions = await this.api.getPrevisionsByOriginAndLine(line.pontoDeOrigemId, line.linhaId);
-    return this.previsions;
-  }
-
-  /**
-   *
-   */
-  async getRoutePrevisions(originId: number, destinationId: number): Promise<Prevision[]> {
-    this.previsions = await this.api.getPrevisionsByOriginAndDestination(originId, destinationId);
-    return this.previsions;
+    this.transcolOnline
+      .getOriginDestinations(origin.id)
+      .pipe(
+        finalize(() => {
+          clearInterval(timer);
+          this.setOriginIcon(origin);
+        }),
+        tap(destinations => (this.destinations = destinations))
+      )
+      .subscribe(this.plotDestinationMarkers);
   }
 
   get isRouteSelected(): boolean {
@@ -342,11 +312,21 @@ export class TranscolOnlinePage implements AfterViewInit, OnDestroy {
   /**
    *
    */
-  showOriginPrevisions = (): Promise<Prevision[]> => {
+  toggleFavorite = (stop: BusStop) => {
+    this.transcolOnline.toggleFavorite(stop);
+  };
+
+  /**
+   *
+   */
+  showOriginPrevisions = () => {
     this.previsions = undefined;
     this.selectedLine = undefined;
     this.navigateToOriginPrevisions();
-    return this.getOriginPrevisions(this.selectedOrigin.id);
+    this.transcolOnline
+      .getOriginPrevisions(this.selectedOrigin.id)
+      .pipe(tap(previsions => (this.previsions = previsions)))
+      .subscribe();
   };
 
   /**
@@ -361,11 +341,14 @@ export class TranscolOnlinePage implements AfterViewInit, OnDestroy {
   /**
    *
    */
-  showLinePrevisions = (line: BusLine): Promise<Prevision[]> => {
+  showLinePrevisions = (line: BusLine) => {
     this.previsions = undefined;
     this.selectedLine = line;
     this.navigateToLinePrevisions();
-    return this.getLinePrevisions(line);
+    this.transcolOnline
+      .getLinePrevisions(line)
+      .pipe(tap(previsions => (this.previsions = previsions)))
+      .subscribe();
   };
 
   /**
@@ -385,6 +368,19 @@ export class TranscolOnlinePage implements AfterViewInit, OnDestroy {
   };
 
   /**
+   *
+   */
+  private refreshSelectedStops = (stops: BusStop[]) => {
+    if (this.selectedOrigin) {
+      this.selectedOrigin = stops.find(s => s.id === this.selectedOrigin.id);
+    }
+
+    if (this.selectedDestination) {
+      this.selectedDestination = stops.find(s => s.id === this.selectedDestination.id);
+    }
+  };
+
+  /**
    * Use delay to await reference to searchbar be available (on next loop)
    */
   @delay()
@@ -395,16 +391,6 @@ export class TranscolOnlinePage implements AfterViewInit, OnDestroy {
     this.searchbar.placeholder = hint;
     this.searchbar.value = '';
   }
-
-  /**
-   *
-   */
-  private loadStopsFromMemory = (ids: number[]): BusStop[] => {
-    return ids
-      .map(id => this.allStops[id])
-      .filter(m => !!m)
-      .map(m => m.stop);
-  };
 
   /**
    *
@@ -437,7 +423,11 @@ export class TranscolOnlinePage implements AfterViewInit, OnDestroy {
     this.panToStop(origin);
 
     // refresh estimatives
-    this.getOriginPrevisions(origin.id);
+    this.transcolOnline
+      .getOriginPrevisions(origin.id)
+      .pipe(tap(previsions => (this.previsions = previsions)))
+      .subscribe();
+
     this.updateDestinations(origin);
 
     this.setSearchHint('Selecione um destino');
@@ -624,14 +614,21 @@ export class TranscolOnlinePage implements AfterViewInit, OnDestroy {
    *
    */
   private renderBusStops = (stops: BusStop[]) => {
+    // cria allStops ou atualiza stops subjacentes
     this.allStops = stops.reduce((map, stop) => {
-      map[stop.id] = this.createMarker(stop);
+      // ! Se já existe um maker para o stop, copia e
+      // ! renderiza o marker com o valor atualizado do stop.
+      // ! Dessa forma o state do marker é mantido (origin, destinatio, etc)
+      // ! e apenas o stop subjacente é atualizado
+      const marker = map[stop.id];
+      map[stop.id] = this.createMarker(stop, marker ? marker.options : null);
       return map;
-    }, {});
+    }, this.allStops || {});
 
     this.clusters.clearLayers();
     this.clusters.addLayers(values(this.allStops));
     this.map.addLayer(this.clusters);
+
     console.log(`Adicionando camada com ${stops.length} paradas ao mapa`);
   };
 
@@ -639,11 +636,14 @@ export class TranscolOnlinePage implements AfterViewInit, OnDestroy {
    *
    *
    */
-  private createMarker = (stop: BusStop) => {
-    const marker = L.marker.busStop(stop, {
-      zIndexOffset: 100,
-      icon: L.icon.busStop({ role: 'default', direction: stop.direcao, type: stop.tipo })
-    });
+  private createMarker = (stop: BusStop, options?) => {
+    const marker = L.marker.busStop(
+      stop,
+      options || {
+        zIndexOffset: 100,
+        icon: L.icon.busStop({ role: 'default', direction: stop.direcao, type: stop.tipo })
+      }
+    );
 
     marker.on('click', e => {
       if (this.isDetailsOpenned) {

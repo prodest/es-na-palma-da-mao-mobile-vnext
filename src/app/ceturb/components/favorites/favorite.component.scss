@@ -1,0 +1,30 @@
+favorite {
+  .favorite-button {
+    display: flex;
+    flex-direction: column;
+    justify-items: center;
+    align-items: center;
+    max-width: 80px;
+    margin: 0 10px;
+    button {
+      background: #093340 !important;
+      color: #fff;
+      i {
+        font-size: 24px;
+      }
+    }
+  }
+
+  .favorite-label {
+    display: block; /* Fallback for non-webkit */
+    display: -webkit-box; /* Fallback for non-webkit */
+    height: 28px;
+    margin: 0 auto;
+    font-size: 10px;
+    line-height: 1.4;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+}

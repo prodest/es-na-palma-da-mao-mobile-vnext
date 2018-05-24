@@ -5,3 +5,4 @@ export * from './bus-schedule';
 export * from './favorite-lines-data';
 export * from './bus-stop';
 export * from './prevision';
+export * from './favorite-stops';
