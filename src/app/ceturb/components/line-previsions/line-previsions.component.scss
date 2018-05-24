@@ -12,6 +12,11 @@ line-previsions {
     padding: 8px 15px;
   }
 
+  .line-previsions__grid {
+    position: relative;
+    height: calc(100vh - 300px);
+  }
+
   .line-previsions__page-title {
     margin-bottom: 5px;
     background: none;

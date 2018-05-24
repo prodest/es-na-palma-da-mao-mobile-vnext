@@ -16,7 +16,8 @@
     </ion-row>
 </ion-grid>
 <ion-scroll scrollY="true"
-            *ngIf="previsions && previsions.length">
+            *ngIf="previsions && previsions.length"
+            class="line-previsions__grid">
     <ion-grid>
         <ion-row *ngFor="let prevision of previsions"
                  class="line-previsions__row">
