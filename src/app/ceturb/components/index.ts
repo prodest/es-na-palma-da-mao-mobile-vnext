@@ -5,3 +5,4 @@ export * from './origin-previsions';
 export * from './line-previsions';
 export * from './route-previsions';
 export * from './favorites';
+export * from './beta-ribbon';

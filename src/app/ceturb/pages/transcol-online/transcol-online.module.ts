@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { IonicPageModule } from 'ionic-angular';
 
 import {
+  BetaRibbonComponentModule,
   FavoritesModule,
   GeolocationStatusModule,
   LinePrevisionsComponentModule,
@@ -19,6 +20,7 @@ import { TranscolOnlinePage } from './transcol-online';
     StopSummaryComponentModule,
     LinePrevisionsComponentModule,
     RoutePrevisionsComponentModule,
+    BetaRibbonComponentModule,
     FavoritesModule,
     IonicPageModule.forChild(TranscolOnlinePage)
   ]
