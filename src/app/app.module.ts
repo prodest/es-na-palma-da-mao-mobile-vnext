@@ -15,6 +15,7 @@ import { CeturbProviders } from './ceturb/providers';
 import { DetranProviders } from './detran/providers';
 import { DioProviders } from './dio/providers';
 import { NewsProviders } from './news/providers';
+import { SepProviders } from './sep/providers';
 
 moment.locale('pt-br');
 
@@ -44,6 +45,7 @@ moment.locale('pt-br');
     ...CeturbProviders,
     ...DioProviders,
     ...NewsProviders,
+    ...SepProviders,
     { provide: ErrorHandler, useClass: IonicErrorHandler }
   ]
 })

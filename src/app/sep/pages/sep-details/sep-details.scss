@@ -1,0 +1,40 @@
+page-sep-details {
+  .interessados {
+    text-align: right;
+  }
+
+  .last-update-details {
+    margin-left: 25px;
+  }
+
+  .protocol-item-details {
+    ion-col:first-child {
+      padding-left: 0;
+    }
+  }
+
+  .event-status {
+    color: $color-secondary;
+  }
+
+  .show-updates {
+    margin: 0;
+    height: 18px;
+    color: $color-secondary;
+  }
+
+  .button-only {
+    padding-top: 0;
+  }
+
+  ion-list.list-updates.list > div > .item-block .item-inner {
+    border-bottom: 1px solid #dedede;
+  }
+
+  ion-list.list-updates.list > div > .item-block:last-child ion-label,
+  ion-list.list-updates.list > div > .item-block:last-child .item-inner,
+  ion-list.list-updates.list > div > .item-wrapper:last-child ion-label,
+  ion-list.list-updates.list > div > .item-wrapper:last-child .item-inner {
+    border-bottom: 0;
+  }
+}

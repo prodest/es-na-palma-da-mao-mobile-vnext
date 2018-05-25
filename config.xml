@@ -102,4 +102,6 @@
     <engine name="ios" spec="^4.4.0" />
     <plugin name="cordova-plugin-splashscreen" spec="^5.0.2" />
     <plugin name="cordova-plugin-x-socialsharing" spec="^5.3.2" />
+    <plugin name="phonegap-plugin-barcodescanner" spec="^6.0.8" />
+    <plugin name="cordova-plugin-android-permissions" spec="^1.0.0" />
 </widget>

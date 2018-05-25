@@ -78,7 +78,7 @@ const menus = [
       {
         title: 'Consulta Processo',
         icon: 'search',
-        component: 'SepPage',
+        component: 'SepSearchPage',
         order: 8
       }
     ]
