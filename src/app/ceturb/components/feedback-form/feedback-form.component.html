@@ -1,0 +1,23 @@
+<div padding>
+    <span>{{description}}</span>
+    <form #feedbackForm="ngForm" (ngSubmit)="onSubmit()">
+        <ion-list>
+            <ion-item *ngIf="showLine">
+                <ion-label fixed>Nº da Linha</ion-label>
+                <ion-input type="number" [(ngModel)]="model.line" name="line" required></ion-input>
+            </ion-item>
+            <ion-item *ngIf="showStop">
+                <ion-label fixed>Nº do Ponto</ion-label>
+                <ion-input type="number" [(ngModel)]="model.stop" name="stop" required></ion-input>
+            </ion-item>
+            <ion-item *ngIf="showTime">
+                <ion-label fixed>Hora</ion-label>
+                <ion-input type="time" [(ngModel)]="model.date" name="date" required></ion-input>
+            </ion-item>
+            <ion-item *ngIf="showText">
+                <ion-textarea [(ngModel)]="model.text" name="text" placeholder="Descreva seu problema" maxlength="1000" rows="5" required></ion-textarea>
+            </ion-item>
+        </ion-list>
+        <button [disabled]="!feedbackForm.form.valid" class="submit-button" ion-button full type="submit">ENVIAR</button>
+    </form>
+</div>

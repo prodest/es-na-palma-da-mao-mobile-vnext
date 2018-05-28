@@ -1,0 +1,25 @@
+feedback-form {
+  form {
+    margin-top: 15px;
+
+    button.submit-button {
+      background-color: white;
+      color: $color-primary;
+      border-radius: 3px;
+    }
+
+    ion-item {
+      &:first-child {
+        border-radius: 5px 5px 0 0;
+      }
+
+      &:last-child {
+        border-radius: 0 0 5px 5px;
+      }
+
+      &:only-child {
+        border-radius: 5px;
+      }
+    }
+  }
+}

@@ -6,3 +6,4 @@ export * from './line-previsions';
 export * from './route-previsions';
 export * from './favorites';
 export * from './beta-ribbon';
+export * from './feedback-form';

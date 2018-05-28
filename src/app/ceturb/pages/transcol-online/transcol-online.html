@@ -5,6 +5,14 @@
       <ion-icon name="menu"></ion-icon>
     </button>
     <ion-title (click)="isDetailsOpenned = !isDetailsOpenned">Transcol Online</ion-title>
+    <ion-buttons end>
+      <button ion-button icon-only (click)="openFeedback()">
+        <ion-icon name="text"></ion-icon>
+      </button>
+      <button ion-button icon-only (click)="showHelp()">
+        <ion-icon name="help"></ion-icon>
+      </button>
+    </ion-buttons>
   </ion-navbar>
 </ion-header>
 

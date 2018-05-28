@@ -1,10 +1,10 @@
 import './leaflet.bus-stop';
-import 'leaflet-pulse-icon/dist/L.Icon.Pulse';
+import 'leaflet-pulse-icon/src/L.Icon.Pulse';
 import 'leaflet.markercluster/dist/leaflet.markercluster';
 
 import { AfterViewInit, Component, OnDestroy, ViewChild } from '@angular/core';
 import { delay } from 'helpful-decorators';
-import { IonicPage, NavController, NavParams, Searchbar } from 'ionic-angular';
+import { IonicPage, ModalController, NavController, NavParams, Searchbar } from 'ionic-angular';
 import * as L from 'leaflet';
 import values from 'lodash-es/values';
 import { filter, finalize, map, switchMap, takeUntil, tap } from 'rxjs/operators';
@@ -71,7 +71,12 @@ export class TranscolOnlinePage implements AfterViewInit, OnDestroy {
   /**
    *
    */
-  constructor(navCtrl: NavController, navParams: NavParams, private transcolOnline: TranscolOnlineService) {}
+  constructor(
+    navCtrl: NavController,
+    navParams: NavParams,
+    public modalCtrl: ModalController,
+    private transcolOnline: TranscolOnlineService
+  ) {}
 
   /**
    *
@@ -365,6 +370,17 @@ export class TranscolOnlinePage implements AfterViewInit, OnDestroy {
    */
   clearSearchResults = () => {
     this.searchResults = [];
+  };
+
+  openFeedback = () => {
+    this.modalCtrl.create('TranscolOnlineFeedbackPage').present();
+  };
+
+  /**
+   *
+   */
+  showHelp = () => {
+    console.log('Not Implemented!');
   };
 
   /**
