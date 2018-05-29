@@ -80,6 +80,12 @@ const menus = [
         icon: 'search',
         component: 'SepSearchPage',
         order: 8
+      },
+      {
+        title: 'Sobre',
+        icon: 'information-circle',
+        component: 'AboutPage',
+        order: 99
       }
     ]
   }

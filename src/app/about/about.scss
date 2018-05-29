@@ -1,0 +1,40 @@
+page-about {
+  .accent {
+    color: $color-secondary;
+  }
+
+  .mini-svg-avatar {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .description {
+    padding-top: 10px;
+    padding-bottom: 10px;
+
+    ion-label {
+      white-space: normal;
+    }
+  }
+
+  img#logo-prodest {
+    max-width: 150px;
+  }
+
+  ion-list.list > div.full-divider > ion-item {
+    border-bottom: 1px solid #dedede;
+
+    &:last-child {
+      border-bottom: none;
+    }
+
+    .item-inner {
+      border-bottom: none;
+    }
+  }
+
+  .inner-header-list > ion-item:last-child .item-inner {
+    border-bottom: none;
+  }
+}

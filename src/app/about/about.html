@@ -1,0 +1,61 @@
+<!--
+  Generated template for the AboutPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+  <ion-navbar>
+    <button ion-button menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    <ion-title>Sobre</ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content>
+  <ion-list>
+    <ion-list-header>Geral</ion-list-header>
+    <div class="full-divider">
+      <ion-item>
+        <h4>ES na Palma da Mão</h4>
+      </ion-item>
+      <ion-item>
+        <h5>Versão: {{project.version}}</h5>
+      </ion-item>
+      <ion-item class="description">{{project.description}}</ion-item>
+    </div>
+    <ion-list-header>Equipe Atual</ion-list-header>
+    <div class="inner-header-list">
+      <ion-item *ngFor="let member of teamMembers" (click)="openUrl(member.html_url)">
+        <ion-avatar item-start>
+          <img [src]="member.avatar_url" [alt]="member.login">
+        </ion-avatar>
+        <h2>{{member.login}}</h2>
+      </ion-item>
+    </div>
+    <ion-list-header>Código-fonte</ion-list-header>
+    <div class="inner-header-list">
+      <ion-item (click)="openUrl( project.homepage )">
+        <ion-avatar item-start class="mini-svg-avatar">
+          <svg aria-hidden="true" height="16" version="1.1" view-box="0 0 16 16" width="16">
+            <path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0 0 16 8c0-4.42-3.58-8-8-8z"></path>
+          </svg>
+        </ion-avatar>
+        <h2>Repositório online</h2>
+      </ion-item>
+      <ion-item (click)="openUrl( project.bugs.url )">
+        <ion-avatar item-start class="mini-svg-avatar">
+          <svg aria-hidden="true" height="16" version="1.1" view-box="0 0 16 16" width="16">
+            <path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0 0 16 8c0-4.42-3.58-8-8-8z"></path>
+          </svg>
+        </ion-avatar>
+        <h2>Reportar problemas</h2>
+      </ion-item>
+    </div>
+    <ion-list-header>Desenvolvimento</ion-list-header>
+    <ion-item (click)="openUrl( 'http://prodest.es.gov.br/' )">
+      <img id="logo-prodest" src="./../../assets/imgs/prodest-logo.png" alt="logo PRODEST" />
+    </ion-item>
+  </ion-list>
+</ion-content>
