@@ -1,8 +1,10 @@
-import { NgModule } from '@angular/core'
+import { NgModule } from '@angular/core';
 
-import { NoMenuDirectiveModule } from './no-menu/no-menu-directive.module'
+import { MatchHeightDirectiveModule } from './match-height/match-height-directive.module';
+import { NoMenuDirectiveModule } from './no-menu/no-menu-directive.module';
 
-export const Directives = [NoMenuDirectiveModule]
+export const Directives = [NoMenuDirectiveModule, MatchHeightDirectiveModule];
+export { NoMenuDirectiveModule, MatchHeightDirectiveModule };
 
 @NgModule({
   declarations: [],
