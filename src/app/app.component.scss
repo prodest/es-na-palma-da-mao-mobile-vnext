@@ -115,3 +115,26 @@ ion-icon[name='exit'] {
 .pull-left {
   float: left;
 }
+
+.accent,
+[accent] {
+  color: #c86673 !important;
+}
+
+// @media only screen and (min-width: 768px) {
+//   .ion-page .scroll-content {
+//     padding: 10px;
+//   }
+// }
+
+// @media only screen and (min-width: 992px) {
+//   .ion-page .scroll-content {
+//     padding: 20px;
+//   }
+// }
+
+// @media only screen and (min-width: 1200px) {
+//   .ion-page .scroll-content {
+//     padding: 30px;
+//   }
+// }
