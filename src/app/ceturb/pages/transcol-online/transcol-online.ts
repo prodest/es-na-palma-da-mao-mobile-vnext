@@ -4,7 +4,7 @@ import 'leaflet.markercluster/dist/leaflet.markercluster';
 
 import { AfterViewInit, Component, OnDestroy, ViewChild } from '@angular/core';
 import { delay } from 'helpful-decorators';
-import { IonicPage, ModalController, NavController, NavParams, Searchbar } from 'ionic-angular';
+import { IonicPage, ModalController, NavController, Searchbar } from 'ionic-angular';
 import * as L from 'leaflet';
 import values from 'lodash-es/values';
 import { filter, finalize, map, switchMap, takeUntil, tap } from 'rxjs/operators';
@@ -67,14 +67,12 @@ export class TranscolOnlinePage implements AfterViewInit, OnDestroy {
 
   private userPin: L.Marker.Pulse;
   private destroyed$ = new Subject();
-
   /**
    *
    */
   constructor(
-    navCtrl: NavController,
-    navParams: NavParams,
-    public modalCtrl: ModalController,
+    private navCtrl: NavController,
+    private modalCtrl: ModalController,
     private transcolOnline: TranscolOnlineService
   ) {}
 
@@ -82,12 +80,13 @@ export class TranscolOnlinePage implements AfterViewInit, OnDestroy {
    *
    */
   ionViewDidLoad() {
-    this.map = this.createMap();
-    this.getUserLocation();
-
-    this.transcolOnline.busStops$.pipe(tap(this.renderBusStops)).subscribe(this.refreshSelectedStops);
-    this.transcolOnline.favorites$.subscribe(favorites => (this.favorites = favorites));
-    this.transcolOnline.getBusStopsByArea(GRANDE_VITORIA).subscribe();
+    // se clicar no menu e carregar a mesma página, o angular reaproveita
+    // o componente e o envento ionViewDidLoad é disparado antes do ngDestroy,
+    // causando um erro de que o mapa já está inicializado:
+    // ref: https://forum.ionicframework.com/t/leaflet-switching-tabs-map-container-is-already-initialized/108124
+    this.navCtrl.getActive().name === 'TranscolOnlinePage'
+      ? window.setTimeout(() => this.initialize(), 200)
+      : this.initialize();
   }
 
   /**
@@ -381,6 +380,20 @@ export class TranscolOnlinePage implements AfterViewInit, OnDestroy {
    */
   showHelp = () => {
     console.log('Not Implemented!');
+  };
+
+  /**
+   *
+   */
+  private initialize = () => {
+    this.map = this.createMap();
+    this.getUserLocation();
+
+    this.transcolOnline.busStops$
+      .pipe(takeUntil(this.destroyed$), tap(this.renderBusStops))
+      .subscribe(this.refreshSelectedStops);
+    this.transcolOnline.favorites$.pipe(takeUntil(this.destroyed$)).subscribe(favorites => (this.favorites = favorites));
+    this.transcolOnline.getBusStopsByArea(GRANDE_VITORIA).subscribe();
   };
 
   /**
