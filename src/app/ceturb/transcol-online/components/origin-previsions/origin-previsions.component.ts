@@ -1,6 +1,5 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 
-import { BusLine } from './../../model/bus-line';
 import { BusStop } from './../../model/bus-stop';
 import { Prevision } from './../../model/prevision';
 
@@ -11,5 +10,5 @@ import { Prevision } from './../../model/prevision';
 export class OriginPrevisionsComponent {
   @Input() origin: BusStop;
   @Input() previsions: Prevision[];
-  @Output() selectLine = new EventEmitter<BusLine>();
+  @Output() selectLine = new EventEmitter<Prevision>();
 }

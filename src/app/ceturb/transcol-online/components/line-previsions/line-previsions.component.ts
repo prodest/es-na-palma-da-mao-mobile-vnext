@@ -1,6 +1,5 @@
 import { Component, Input } from '@angular/core';
 
-import { BusLine } from './../../model/bus-line';
 import { Prevision } from './../../model/prevision';
 
 @Component({
@@ -8,6 +7,6 @@ import { Prevision } from './../../model/prevision';
   templateUrl: './line-previsions.component.html'
 })
 export class LinePrevisionsComponent {
-  @Input() line: BusLine;
+  @Input() line: string;
   @Input() previsions: Prevision[];
 }

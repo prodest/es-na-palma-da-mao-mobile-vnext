@@ -7,14 +7,8 @@ import { forkJoin } from 'rxjs/observable/forkJoin';
 import { fromPromise } from 'rxjs/observable/fromPromise';
 import { finalize, map, tap } from 'rxjs/operators';
 
-import { BusStop, FavoriteLocation, FavoriteStop, FavoriteStopsData, Prevision } from './../model';
+import { BusLine, BusStop, FavoriteLocation, FavoriteStop, FavoriteStopsData, Prevision } from './../model';
 import { TranscolOnlineApiService } from './transcol-online-api.service';
-
-interface BusLine {
-  identificadorLinha: string;
-  linhaId: number;
-  pontoDeOrigemId: number;
-}
 
 /**
  *

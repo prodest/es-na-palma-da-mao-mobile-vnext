@@ -4,9 +4,7 @@ import { Environment, EnvVariables } from '@espm/core';
 import { Observable } from 'rxjs/Observable';
 import { flatMap, map, share } from 'rxjs/operators';
 
-import { BusStop } from './../model/bus-stop';
-import { FavoriteStopsData } from './../model/favorite-stops';
-import { Prevision } from './../model/prevision';
+import { BusStop, FavoriteStopsData, Prevision } from './../model';
 
 /**
  *

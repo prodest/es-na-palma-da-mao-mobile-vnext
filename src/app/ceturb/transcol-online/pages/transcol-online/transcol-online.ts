@@ -10,20 +10,13 @@ import values from 'lodash-es/values';
 import { filter, finalize, map, switchMap, takeUntil, tap } from 'rxjs/operators';
 import { Subject } from 'rxjs/Subject';
 
-import { BusStop } from './../../model/bus-stop';
-import { Prevision } from './../../model/prevision';
+import { BusLine, BusStop, Prevision } from './../../model';
 import { TranscolOnlineService } from './../../providers';
 
 const VITORIA = L.latLng(-20.315894186649725, -40.29565483331681);
 const GRANDE_VITORIA = [-38.50708007812501, -17.14079039331664, -42.46215820312501, -23.725011735951796];
 
 const SEARCH_MIN_LENGTH = 3;
-
-interface BusLine {
-  identificadorLinha: string;
-  linhaId: number;
-  pontoDeOrigemId: number;
-}
 
 @IonicPage()
 @Component({
