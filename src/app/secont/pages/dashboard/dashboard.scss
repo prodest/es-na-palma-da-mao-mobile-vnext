@@ -1,0 +1,64 @@
+page-transparencia-dashboard {
+  .pages {
+    display: flex;
+    flex-wrap: wrap;
+    padding: 8px;
+
+    .card {
+      margin: 5px;
+      flex: 1 1 130px;
+      min-height: 130px;
+      font-size: 1.3rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-direction: column;
+      color: #49889a;
+
+      ion-icon {
+        font-size: 5rem;
+        margin-bottom: 10px;
+      }
+
+      &.expenses {
+        color: #b14139;
+        ion-icon {
+          transform: rotate(180deg) scaleX(-1);
+        }
+      }
+      &.revenues {
+        color: #73905a;
+      }
+    }
+  }
+
+  @media only screen and (min-width: 768px) {
+    .pages .card {
+      margin: 10px;
+      flex: 1 1 150px;
+      min-height: 150px;
+      font-size: 1.4rem;
+      ion-icon {
+        font-size: 6rem;
+        margin-bottom: 15px;
+      }
+    }
+  }
+
+  @media only screen and (min-width: 992px) {
+    .pages .card {
+      flex: 1 1 180px;
+      min-height: 180px;
+      font-size: 1.6rem;
+      ion-icon {
+        font-size: 8rem;
+      }
+    }
+  }
+
+  @media only screen and (min-width: 1200px) {
+    .pages .card {
+      padding: 30px;
+    }
+  }
+}

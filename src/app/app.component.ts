@@ -32,6 +32,12 @@ const menus = [
         component: 'DriverLicensePage',
         order: 2
       },
+      {
+        title: 'Transparência',
+        icon: 'grid',
+        component: 'TransparenciaDashboardPage',
+        order: 2
+      },
 
       {
         title: 'Detran CNH Status',
