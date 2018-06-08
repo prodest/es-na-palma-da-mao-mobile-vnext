@@ -1,5 +1,5 @@
-import * as L from 'leaflet';
-import { BusStop as BusStopModel } from 'src/app/ceturb/model';
+import { BusStop as BusStopModel } from 'src/app/ceturb/transcol-online/model';
+
 // leaflet-pulse-icon plugin
 declare module 'leaflet' {
   export namespace Icon {
