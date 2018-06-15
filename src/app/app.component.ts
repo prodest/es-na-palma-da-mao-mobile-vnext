@@ -65,7 +65,7 @@ const menus = [
       },
       {
         title: 'Dio Edições Recentes',
-        icon: 'clock',
+        icon: 'time',
         component: 'LatestEditionsPage',
         order: 5
       },

@@ -1,0 +1,20 @@
+<ion-item class="item"
+          [ngStyle]="{'border-left-color': item.color}">
+    <div>
+        <h3 class="item__label capitalize">{{item.label}}</h3>
+        <p class="item__value">{{item.value | currency: 'BRL': 'symbol'}}</p>
+    </div>
+    <div item-end
+         class="item__percentage"
+         *ngIf="item.percentage < 1">
+        &lt;1%
+    </div>
+    <div item-end
+         class="item__percentage"
+         *ngIf="item.percentage >= 1">
+        {{item.percentage}}%
+    </div>
+    <div item-end
+         *ngIf="clickable"
+         class="item__btn-detail"></div>
+</ion-item>

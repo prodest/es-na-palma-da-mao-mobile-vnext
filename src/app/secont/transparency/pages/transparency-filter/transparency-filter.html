@@ -1,0 +1,67 @@
+<!--
+  Generated template for the DioSearchFilterPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+  <ion-navbar>
+    <ion-buttons left>
+      <button ion-button
+              icon-only
+              (click)="navCtrl.pop()">
+        <ion-icon name="arrow-back"></ion-icon>
+      </button>
+    </ion-buttons>
+    <ion-title>{{title}}</ion-title>
+  </ion-navbar>
+</ion-header>
+<ion-content>
+  <ng-container *ngIf="filter">
+    <ion-list *ngIf="year">
+      <ion-list-header>
+        Selecione o período
+      </ion-list-header>
+      <ion-item>
+        <ion-label stacked>Ano</ion-label>
+        <ion-select [(ngModel)]="filter.year"
+                    interface="action-sheet"
+                    cancelText="Cancelar">
+          <ion-option *ngFor="let year of years">{{year}}</ion-option>
+        </ion-select>
+      </ion-item>
+    </ion-list>
+    <ion-list *ngIf="!year">
+      <ion-list-header>
+        Selecione o período
+      </ion-list-header>
+      <ion-item>
+        <ion-label>De</ion-label>
+        <ion-datetime [(ngModel)]="filter.fromISO"
+                      displayFormat="MMMM/YYYY"
+                      pickerFormat="MMMM YYYY"
+                      cancelText="Cancelar"
+                      doneText="Selecionar">
+        </ion-datetime>
+      </ion-item>
+      <ion-item>
+        <ion-label>Até</ion-label>
+        <ion-datetime [(ngModel)]="filter.toISO"
+                      displayFormat="MMMM/YYYY"
+                      pickerFormat="MMMM YYYY"
+                      cancelText="Cancelar"
+                      doneText="Selecionar">
+        </ion-datetime>
+      </ion-item>
+    </ion-list>
+
+    <div padding-right
+         padding-left>
+      <button ion-button
+              block
+              color-secondary
+              (click)="dismiss()">CONSULTAR</button>
+    </div>
+
+  </ng-container>
+</ion-content>

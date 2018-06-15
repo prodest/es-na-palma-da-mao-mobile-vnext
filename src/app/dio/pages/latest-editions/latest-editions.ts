@@ -1,10 +1,13 @@
 import { Component } from '@angular/core';
 import { IonicPage } from 'ionic-angular';
 import { Observable } from 'rxjs/Observable';
+
 import { Edition } from './../../model';
 import { DioService } from './../../providers/dio.service';
 
-@IonicPage()
+@IonicPage({
+  segment: 'dio/edicoes-recentes'
+})
 @Component({
   selector: 'latest-editions',
   templateUrl: 'latest-editions.html',

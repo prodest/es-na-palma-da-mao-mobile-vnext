@@ -1,0 +1,10 @@
+<div style="display: block">
+        <canvas baseChart
+                [chartType]="'pie'"
+                [options]="{animation:{ duration: 0}}"
+                [legend]="false"
+                [data]="data.values"
+                [labels]="data.labels"
+                [colors]="data.colors">
+        </canvas>
+</div>

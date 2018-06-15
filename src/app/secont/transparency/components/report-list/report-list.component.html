@@ -1,0 +1,18 @@
+<ng-container *ngTemplateOutlet="headerTemplate ? headerTemplate: defaultHeaderTemplate; context: { $implicit: title }">
+</ng-container>
+<ion-list [class.desc]="'desc' === sort">
+  <ng-container *ngFor="let item of items">
+    <ng-container *ngTemplateOutlet="itemTemplate ? itemTemplate: defaultItemTemplate;context: { $implicit: item }"></ng-container>
+  </ng-container>
+</ion-list>
+<ng-template #defaultHeaderTemplate
+             let-title>
+  <report-list-summary (onSort)="sort=$event">
+    <h2>{{title}}</h2>
+  </report-list-summary>
+</ng-template>
+
+<ng-template #defaultItemTemplate
+             let-item>
+  <default-item [item]="item"></default-item>
+</ng-template>

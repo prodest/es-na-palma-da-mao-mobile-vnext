@@ -3,14 +3,9 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { NewsApiService } from '../../providers/news-api.service';
 import { NewsDetails } from '../../model';
 
-/**
- * Generated class for the NewsHighlightsPage page.
- *
- * See https://ionicframework.com/docs/components/#navigation for more info on
- * Ionic pages and navigation.
- */
-
-@IonicPage()
+@IonicPage({
+  segment: 'noticias/destaques'
+})
 @Component({
   selector: 'page-news-highlights',
   templateUrl: 'news-highlights.html'

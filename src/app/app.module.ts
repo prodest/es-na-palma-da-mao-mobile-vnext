@@ -1,6 +1,8 @@
-import { ErrorHandler, NgModule } from '@angular/core';
+import { registerLocaleData } from '@angular/common';
+import ptBr from '@angular/common/locales/pt';
+import { ErrorHandler, LOCALE_ID, NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-import { CoreModule } from '@espm/core';
+import { CoreModule, ionicConfig } from '@espm/core';
 import { Facebook } from '@ionic-native/facebook';
 import { GooglePlus } from '@ionic-native/google-plus';
 import { InAppBrowser } from '@ionic-native/in-app-browser';
@@ -16,9 +18,11 @@ import { TranscolOnlineProviders } from './ceturb/transcol-online/providers';
 import { DetranProviders } from './detran/providers';
 import { DioProviders } from './dio/providers';
 import { NewsProviders } from './news/providers';
+import { TransparencyProviders } from './secont/transparency/providers';
 import { SepProviders } from './sep/providers';
 
 moment.locale('pt-br');
+registerLocaleData(ptBr);
 
 @NgModule({
   declarations: [ESPM],
@@ -26,13 +30,7 @@ moment.locale('pt-br');
     BrowserModule,
     CoreModule,
     IonicStorageModule.forRoot({ name: 'espm', driverOrder: ['localstorage'] }),
-    IonicModule.forRoot(ESPM, {
-      platforms: {
-        ios: {
-          backButtonText: 'Voltar'
-        }
-      }
-    })
+    IonicModule.forRoot(ESPM, ionicConfig)
   ],
   bootstrap: [IonicApp],
   entryComponents: [ESPM],
@@ -48,6 +46,8 @@ moment.locale('pt-br');
     ...DioProviders,
     ...NewsProviders,
     ...SepProviders,
+    ...TransparencyProviders,
+    { provide: LOCALE_ID, useValue: 'pt' },
     { provide: ErrorHandler, useClass: IonicErrorHandler }
   ]
 })

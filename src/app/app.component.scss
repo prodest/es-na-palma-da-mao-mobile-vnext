@@ -116,9 +116,17 @@ ion-icon[name='exit'] {
   float: left;
 }
 
+.capitalize {
+  text-transform: capitalize;
+}
+
 .accent,
 [accent] {
   color: #c86673 !important;
+}
+
+.action-sheet-group {
+  max-height: 60vh;
 }
 
 // @media only screen and (min-width: 768px) {

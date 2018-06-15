@@ -6,12 +6,14 @@
 -->
 <ion-header>
   <ion-navbar>
-    <button ion-button menuToggle>
+    <button ion-button
+            menuToggle>
       <ion-icon name="menu"></ion-icon>
     </button>
-    <ion-title>Dio Consulta</ion-title>
+    <ion-title>Diário Oficial ES</ion-title>
     <ion-buttons end>
-      <button ion-button (click)="openFilter()">
+      <button ion-button
+              (click)="openFilter()">
         <ion-icon name="options"></ion-icon>
       </button>
     </ion-buttons>
@@ -34,15 +36,21 @@
         <span [innerHTML]="highlight"></span>...
       </blockquote>
       <div class="hit-buttons">
-        <button ion-button (click)="open( hit.editionUrl )" clear>
+        <button ion-button
+                (click)="open( hit.editionUrl )"
+                clear>
           EDIÇÃO
           <ion-icon name="cloud-download"></ion-icon>
         </button>
-        <button ion-button (click)="open( hit.pageUrl )" clear>
+        <button ion-button
+                (click)="open( hit.pageUrl )"
+                clear>
           PÁGINA
           <ion-icon name="cloud-download"></ion-icon>
         </button>
-        <button ion-button (click)="share( hit )" clear>
+        <button ion-button
+                (click)="share( hit )"
+                clear>
           COMPARTILHAR
           <ion-icon name="share"></ion-icon>
         </button>
@@ -50,13 +58,19 @@
     </ion-item>
   </ion-list>
 
-  <ion-item *ngIf="!searched" class="msg-consulta">
-    <p>Consulta ao Diário Oficial do ES</p>
-    <button ion-button (click)="openFilter()">CONSULTAR</button>
-  </ion-item>
+  <div *ngIf="!searched"
+       text-center
+       class="msg-consulta">
+    <img src="/assets/imgs/dio/dio-logo.png">
+    <h2>Consulta ao Diário Oficial do ES</h2>
+    <p>
+      Selecione um filtro e faça a pesquisa
+    </p>
+  </div>
 
-  <ion-item *ngIf="searched && !totalHits">
-    <p>Nenhum resultado encontrado para</p>
+  <ion-item *ngIf="searched && !totalHits"
+            text-center>
+    <h2>Nenhum resultado encontrado para</h2>
     <highlight>"{{filter.query}}"</highlight>
     <remark>Tente mudar o filtro da consulta</remark>
   </ion-item>

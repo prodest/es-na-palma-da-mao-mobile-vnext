@@ -1,0 +1,17 @@
+<ion-list-header *ngIf="title"
+                 class="title">
+  {{title}}
+  <button *ngIf="hasInfo()"
+          ion-button
+          icon-only
+          clear
+          item-end
+          (click)="showInfo = !showInfo">
+    <ion-icon class="fa-info-circle"></ion-icon>
+  </button>
+</ion-list-header>
+<ion-list-header *ngIf="hasInfo() && showInfo"
+                 class="info"
+                 text-wrap>
+  {{info}}
+</ion-list-header>

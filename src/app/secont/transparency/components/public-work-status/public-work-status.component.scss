@@ -1,0 +1,27 @@
+public-work-status {
+  .status {
+    min-width: 100px;
+    color: #707070;
+    font-size: 1.4rem;
+  }
+
+  .status__icon {
+    font-size: 1.7rem;
+  }
+
+  .status--is-Concluída .status__icon {
+    color: #68903b;
+  }
+
+  .status--is-Iniciada .status__icon {
+    color: #03a9f4;
+  }
+
+  .status--is-Paralisada .status__icon {
+    color: firebrick;
+  }
+
+  .status--is-Reiniciada .status__icon {
+    color: #03a9f4;
+  }
+}

@@ -1,19 +1,14 @@
 import { Component, Inject } from '@angular/core';
-import { IonicPage, NavController, NavParams, ModalController } from 'ionic-angular';
-
 import { Environment, EnvVariables } from '@espm/core';
-import { Filter, News, Pagination } from './../../model';
-import { NewsApiService } from '../../providers/news-api.service';
+import { IonicPage, ModalController, NavController, NavParams } from 'ionic-angular';
 import { tap } from 'rxjs/operators';
 
-/**
- * Generated class for the NewsListPage page.
- *
- * See https://ionicframework.com/docs/components/#navigation for more info on
- * Ionic pages and navigation.
- */
+import { NewsApiService } from '../../providers/news-api.service';
+import { Filter, News, Pagination } from './../../model';
 
-@IonicPage()
+@IonicPage({
+  segment: 'noticias'
+})
 @Component({
   selector: 'page-news-list',
   templateUrl: 'news-list.html',
@@ -34,26 +29,25 @@ export class NewsListPage {
     @Inject(EnvVariables) private env: Environment
   ) {}
 
+  /**
+   *
+   *
+   */
   ionViewWillEnter() {
-    console.log('ionViewDidLoad NewsListPage');
     this.getAvailableOrigins().then(() => this.getFirstPage(this.filter));
   }
 
   /**
    *
    *
-   * @readonly
-   *
-   * @memberOf NewsListController
    */
   get isFirstPage() {
     return this.pagination.pageNumber === 1;
   }
 
   /**
-   * Carrega lista de origins disponíveis
    *
-   * @returns {*}
+   *
    */
   getAvailableOrigins() {
     return this.newsApiService.getAvailableOrigins().then((origins: string[]) => {
@@ -84,7 +78,6 @@ export class NewsListPage {
   /**
    * Navega para um notícia
    *
-   * @param {string} id
    */
   goToNews(id: string) {
     this.navCtrl.push('NewsDetailsPage', { id });
@@ -92,9 +85,6 @@ export class NewsListPage {
 
   /**
    *
-   * @returns {Promise<News[]>}
-   *
-   * @memberOf NewsListController
    */
   private getFirstPage(filter: Filter) {
     this.hasMoreNews = true;
@@ -130,9 +120,6 @@ export class NewsListPage {
 
   /**
    *
-   * @param {any} filter
-   *
-   * @memberOf NewsListController
    */
   private filterNews = filter => {
     if (filter) {

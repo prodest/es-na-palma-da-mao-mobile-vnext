@@ -1,0 +1,38 @@
+budget-deviation-item {
+  ion-item.item {
+    min-height: 72px;
+
+    .item__label {
+      white-space: normal;
+      margin: 0 0 10px 0;
+      color: #333;
+    }
+
+    .item__percentage,
+    .item__value {
+      color: #c86673;
+      margin: 3px 0 0 0;
+
+      span {
+        color: hsla(0, 0%, 45%, 0.87);
+      }
+    }
+
+    .item__percentage {
+      font-weight: bold;
+      font-size: 1.6em;
+      margin-left: 8px;
+      flex: 0;
+    }
+
+    .item__btn-detail {
+      flex: 0;
+      margin-left: 10px;
+    }
+    .item__btn-detail:before {
+      color: #ccc;
+      font-family: FontAwesome;
+      content: '\f054';
+    }
+  }
+}

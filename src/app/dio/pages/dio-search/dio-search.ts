@@ -1,19 +1,14 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams, ModalController } from 'ionic-angular';
 import { SocialSharing } from '@ionic-native/social-sharing';
-
-import { Hit, SearchFilter, SearchResult } from './../../model';
-import { DioService } from '../../providers/dio.service';
+import { IonicPage, ModalController, NavController, NavParams } from 'ionic-angular';
 import { finalize } from 'rxjs/operators';
 
-/**
- * Generated class for the DioSearchPage page.
- *
- * See https://ionicframework.com/docs/components/#navigation for more info on
- * Ionic pages and navigation.
- */
+import { DioService } from '../../providers/dio.service';
+import { Hit, SearchFilter, SearchResult } from './../../model';
 
-@IonicPage()
+@IonicPage({
+  segment: 'dio/consulta'
+})
 @Component({
   selector: 'page-dio-search',
   templateUrl: 'dio-search.html',

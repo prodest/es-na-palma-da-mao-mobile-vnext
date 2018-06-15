@@ -1,0 +1,9 @@
+page-transparencia-revenues {
+  ion-list {
+    display: flex;
+    flex-direction: column;
+    &.desc {
+      flex-direction: column-reverse;
+    }
+  }
+}

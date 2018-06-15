@@ -1,0 +1,42 @@
+<ion-header>
+  <ion-navbar>
+    <ion-title>Detalhes da Obra</ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content>
+  <div *ngIf="detail">
+    <report-title [title]="detail.label"></report-title>
+    <ion-list>
+      <ion-item>
+        <h2 class="subheader">Valor Total</h2>
+        <h3 class="secondary-color">{{detail.value | currency: 'BRL': 'symbol'}}</h3>
+        <public-work-status item-end [status]="detail.status"></public-work-status>
+      </ion-item>
+      <ion-item>
+        <h2 class="subheader">Município</h2>
+        <h3>{{detail.city}}</h3>
+      </ion-item>
+      <ion-item>
+        <h2 class="subheader">Órgão Responsável</h2>
+        <h3>{{detail.origin}}</h3>
+      </ion-item>
+      <ion-item>
+        <h2 class="subheader">Data Contratação</h2>
+        <h3>{{detail.date}}</h3>
+      </ion-item>
+      <ion-item>
+        <h2 class="subheader">Prazo</h2>
+        <h3>{{detail.estimate}}</h3>
+      </ion-item>
+      <ion-item>
+        <h2 class="subheader">Descrição Detalhada</h2>
+        <p class="full-text">{{detail.description}}</p>
+      </ion-item>
+      <ion-item *ngIf="detail.fullStatus">
+        <h2 class="subheader">Situação Detalhada</h2>
+        <h3>{{detail.fullStatus}}</h3>
+      </ion-item>
+    </ion-list>
+  </div>
+</ion-content>
