@@ -39,7 +39,7 @@ export class NewsListFilterPage {
 
   /**
    *
-   * @returns {boolean}
+   *
    */
   isAllChecked() {
     return this.filter.origins.length !== 0 && this.filter.origins.length === this.availableOrigins.length;
@@ -58,7 +58,7 @@ export class NewsListFilterPage {
 
   /**
    *
-   * @param origin
+   *
    */
   public toggleChecked(origin) {
     let idx = this.filter.origins.indexOf(origin);
@@ -71,8 +71,7 @@ export class NewsListFilterPage {
 
   /**
    *
-   * @param origin
-   * @returns {boolean}
+   *
    */
   public isSelected(origin) {
     return this.filter.origins.indexOf(origin) > -1;

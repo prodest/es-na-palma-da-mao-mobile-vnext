@@ -1,4 +1,4 @@
-import { ErrorHandler, NgModule } from '@angular/core';
+import { ErrorHandler, NgModule, APP_INITIALIZER, LOCALE_ID } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { CoreModule } from '@espm/core';
 import { Facebook } from '@ionic-native/facebook';
@@ -17,6 +17,9 @@ import { DetranProviders } from './detran/providers';
 import { DioProviders } from './dio/providers';
 import { NewsProviders } from './news/providers';
 import { SepProviders } from './sep/providers';
+import { CalendarProviders } from './calendar/providers';
+
+import { LocaleService, localeIdFactory, localeInitializer } from '@espm/core/locale/LocaleService';
 
 moment.locale('pt-br');
 
@@ -37,6 +40,7 @@ moment.locale('pt-br');
   bootstrap: [IonicApp],
   entryComponents: [ESPM],
   providers: [
+    LocaleService,
     StatusBar,
     SplashScreen,
     GooglePlus,
@@ -48,7 +52,10 @@ moment.locale('pt-br');
     ...DioProviders,
     ...NewsProviders,
     ...SepProviders,
-    { provide: ErrorHandler, useClass: IonicErrorHandler }
+    ...CalendarProviders,
+    { provide: ErrorHandler, useClass: IonicErrorHandler },
+    { provide: LOCALE_ID, useFactory: localeIdFactory, deps: [LocaleService] },
+    { provide: APP_INITIALIZER, multi: true, useFactory: localeInitializer, deps: [LOCALE_ID] }
   ]
 })
 export class EspmModule {}

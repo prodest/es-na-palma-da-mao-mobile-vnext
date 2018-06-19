@@ -27,6 +27,12 @@ const menus = [
         order: 1
       },
       {
+        title: 'Agenda',
+        icon: 'calendar',
+        component: 'CalendarPage',
+        order: 1
+      },
+      {
         title: 'Detran CNH',
         icon: 'card',
         component: 'DriverLicensePage',
