@@ -20,10 +20,8 @@ page-calendar {
       background-color: rgba(58, 135, 173, 0.6196078431372549) !important;
     }
 
-    .text-muted {
-      .date-label {
-        color: #999;
-      }
+    .text-muted day .date-label {
+      color: #999;
     }
 
     thead {
@@ -40,27 +38,6 @@ page-calendar {
       color: white !important;
       position: relative;
       height: 37px;
-
-      .date-label {
-        color: #333;
-        position: absolute;
-        top: 0;
-        right: 3px;
-      }
-
-      .pins {
-        position: absolute;
-        bottom: 2px;
-        left: 2px;
-
-        .pin {
-          width: 4px;
-          height: 4px;
-          float: left;
-          border-radius: 3px;
-          margin: 1px;
-        }
-      }
     }
   }
 
@@ -70,36 +47,6 @@ page-calendar {
     .event-detail-item {
       margin-bottom: 3px;
       border-left: 10px solid;
-    }
-
-    .inner-item-wrapper {
-      display: flex;
-
-      .event-time {
-        font-size: 1.3rem;
-        text-align: center;
-        min-width: 48px;
-
-        .start-date {
-          margin-bottom: 3px;
-        }
-      }
-
-      .event-detail-wrapper {
-        margin-left: 15px;
-        display: flex;
-        flex-direction: column;
-        justify-content: space-between;
-
-        .event-title {
-          font-size: 1.4rem;
-        }
-
-        .event-calendar-info {
-          font-size: 1.2rem;
-          color: #909090;
-        }
-      }
     }
 
     .no-events-label {

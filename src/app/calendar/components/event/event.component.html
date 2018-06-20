@@ -1,0 +1,28 @@
+<div class="event-time">
+  <div *ngIf="isAllDay(event, currentDate)" [style.color]="event.color" class="all-day">
+    <div class="start-date">Dia</div>
+    <div>Inteiro</div>
+  </div>
+  <div *ngIf="!isAllDay(event, currentDate)" class="monthview-eventdetail-timecolumn" [style.color]="event.color">
+    <div *ngIf="!endsIn(event, currentDate)">
+      Início
+    </div>
+    <div *ngIf="!startsIn(event, currentDate)">
+      Término
+    </div>
+    <div class="start-date" *ngIf="startsIn(event, currentDate)">
+      {{event.startTime|date: 'HH:mm'}}
+    </div>
+    <div *ngIf="endsIn(event, currentDate)">
+      {{event.endTime|date: 'HH:mm'}}
+    </div>
+  </div>
+</div>
+<div class="event-detail-wrapper">
+  <div class="event-title">
+    {{event.title}}
+  </div>
+  <div class="event-calendar-info" [style.color]="event.color">
+    {{event.calendar}}
+  </div>
+</div>

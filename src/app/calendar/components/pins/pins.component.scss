@@ -1,0 +1,15 @@
+pins {
+  .pins {
+    position: absolute;
+    bottom: 2px;
+    left: 2px;
+
+    .pin {
+      width: 4px;
+      height: 4px;
+      float: left;
+      border-radius: 3px;
+      margin: 1px;
+    }
+  }
+}

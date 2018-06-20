@@ -23,60 +23,26 @@
 </ion-header>
 
 <ion-content>
-  <calendar calendarMode="month" 
+  <calendar #CalendarComponent
+    calendarMode="month" 
     step="30" 
     [eventSource]="calendar.eventSources" 
     [currentDate]="calendar.currentDate" 
     [autoSelect]="false"
     [dateFormatter]="calendar.dateFormatter" 
-    [monthviewDisplayEventTemplate]="template" 
+    [monthviewDisplayEventTemplate]="templateDay" 
     [monthviewEventDetailTemplate]="templateEvent"
     (onTitleChanged)="onViewTitleChanged($event)">
   </calendar>
 
-  <ng-template #template let-view="view" let-row="row" let-col="col">
-    <span class="date-label">{{view.dates[row*7+col].label}}</span>
-    <div class="pins" *ngIf="view.dates[row*7+col].events.length > 0">
-      <ng-container *ngFor="let event of view.dates[row*7+col].events | uniqueBy:'etag'; index as i;">
-        <span class="pin" [style.background-color]="event.color" *ngIf="i < 24">
-        </span>
-      </ng-container>
-    </div>
+  <ng-template #templateDay let-view="view" let-row="row" let-col="col">
+    <day [label]="view.dates[row*7+col].label" [events]="view.dates[row*7+col].events"></day>
   </ng-template>
 
   <ng-template #templateEvent let-showEventDetail="showEventDetail" let-selectedDate="selectedDate">
     <ion-list class="event-detail-container" has-bouncing="false" *ngIf="showEventDetail" overflow-scroll="false">
       <ion-item class="event-detail-item" *ngFor="let event of selectedDate?.events" (click)="onEventSelected(event)" [style.border-left-color]="event.color">
-        <div class="inner-item-wrapper">
-          <div class="event-time">
-            <div *ngIf="isAllDay(event, selectedDate.date)" [style.color]="event.color" class="all-day">
-              <div class="start-date">Dia</div>
-              <div>Inteiro</div>
-            </div>
-            <div *ngIf="!isAllDay(event, selectedDate.date)" class="monthview-eventdetail-timecolumn" [style.color]="event.color">
-              <div *ngIf="!endsIn(event, selectedDate.date)">
-                Início
-              </div>
-              <div *ngIf="!startsIn(event, selectedDate.date)">
-                Término
-              </div>
-              <div class="start-date" *ngIf="startsIn(event, selectedDate.date)">
-                {{event.startTime|date: 'HH:mm'}}
-              </div>
-              <div *ngIf="endsIn(event, selectedDate.date)">
-                {{event.endTime|date: 'HH:mm'}}
-              </div>
-            </div>
-          </div>
-          <div class="event-detail-wrapper">
-            <div class="event-title">
-              {{event.title}}
-            </div>
-            <div class="event-calendar-info" [style.color]="event.color">
-              {{event.calendar}}
-            </div>
-          </div>
-        </div>
+        <event [event]="event" [currentDate]="selectedDate.date"></event>
       </ion-item>
       <ion-item *ngIf="selectedDate?.events.length==0" class="no-events-label">
         <div class="no-events-label">Nenhum Evento</div>

@@ -1,0 +1,29 @@
+event {
+  display: flex;
+
+  .event-time {
+    font-size: 1.3rem;
+    text-align: center;
+    min-width: 48px;
+
+    .start-date {
+      margin-bottom: 3px;
+    }
+  }
+
+  .event-detail-wrapper {
+    margin-left: 15px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+
+    .event-title {
+      font-size: 1.4rem;
+    }
+
+    .event-calendar-info {
+      font-size: 1.2rem;
+      color: #909090;
+    }
+  }
+}

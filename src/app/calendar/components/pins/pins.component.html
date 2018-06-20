@@ -1,0 +1,6 @@
+<div class="pins" *ngIf="events.length > 0">
+  <ng-container *ngFor="let event of events | uniqueBy:'etag'; index as i;">
+    <span class="pin" [style.background-color]="event.color" *ngIf="i < 24">
+    </span>
+  </ng-container>
+</div>

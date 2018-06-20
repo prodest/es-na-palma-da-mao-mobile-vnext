@@ -1,9 +1,9 @@
-import { Component } from '@angular/core';
+import { Component, ViewChild } from '@angular/core';
 import { IonicPage, ModalController, LoadingController, Loading } from 'ionic-angular';
 import { EventItem } from './../../model';
 import { CalendarApiService } from './../../providers';
 import { map, finalize } from 'rxjs/operators';
-import * as moment from 'moment';
+import { CalendarComponent } from 'ionic2-calendar/calendar';
 
 /**
  * Generated class for the CalendarPage page.
@@ -18,8 +18,12 @@ import * as moment from 'moment';
   templateUrl: 'calendar.html'
 })
 export class CalendarPage {
+  @ViewChild(CalendarComponent) myCalendar: CalendarComponent;
+
   loading: Loading;
-  calendar: { currentDate?: Date; eventSources?: EventItem[]; dateFormatter?: any } = {};
+  calendar: { currentDate?: Date; eventSources: EventItem[]; dateFormatter?: any } = {
+    eventSources: []
+  };
   selectedCalendars: string[] = [];
   availableCalendars: string[] = [];
   viewTitle: string = '';
@@ -69,7 +73,14 @@ export class CalendarPage {
       this.calendarApiService
         .getFullCalendars(selectedCalendars)
         .pipe(finalize(() => this.dismissLoading()))
-        .subscribe(events => (this.calendar.eventSources = events));
+        .subscribe(events => {
+          let firstTime = this.calendar.eventSources.length === 0;
+          this.calendar.eventSources = events;
+
+          if (firstTime) {
+            this.myCalendar.loadEvents();
+          }
+        });
     }
   };
 
@@ -79,51 +90,6 @@ export class CalendarPage {
    */
   onViewTitleChanged(title: string): void {
     this.viewTitle = title;
-  }
-
-  /**
-   *
-   *
-   */
-  isAllDay(event: EventItem, selectedTime) {
-    return (
-      event.allDay ||
-      (!event.sameDay &&
-        event.startTime <
-          moment(selectedTime)
-            .startOf('day')
-            .toDate() &&
-        event.endTime >
-          moment(selectedTime)
-            .endOf('day')
-            .toDate())
-    );
-  }
-
-  /**
-   *
-   *
-   */
-  startsIn(event: EventItem, selectedTime) {
-    return (
-      event.startTime >
-      moment(selectedTime)
-        .startOf('day')
-        .toDate()
-    );
-  }
-
-  /**
-   *
-   *
-   */
-  endsIn(event: EventItem, selectedTime) {
-    return (
-      event.endTime <
-      moment(selectedTime)
-        .endOf('day')
-        .toDate()
-    );
   }
 
   /**

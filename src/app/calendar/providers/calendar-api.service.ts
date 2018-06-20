@@ -39,7 +39,7 @@ export class CalendarApiService {
 
     calendars.forEach(calendar => (httpParams = httpParams.append('calendars', calendar)));
 
-    return this.http.get<EventItem[]>(`${this.env.api.calendars}/events`, { params: httpParams }).pipe(
+    return this.http.get<EventItem[]>(`${this.env.api.calendars}/events2`, { params: httpParams }).pipe(
       map(events =>
         events.map(event => {
           event.startTime = new Date(event.startTime);
