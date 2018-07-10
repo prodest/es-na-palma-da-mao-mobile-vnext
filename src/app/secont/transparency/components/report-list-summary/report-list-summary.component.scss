@@ -1,0 +1,23 @@
+report-list-summary {
+  .item h1,
+  h2 {
+    font-size: 2rem !important;
+    font-weight: bold !important;
+  }
+  button[ion-button] {
+    color: #999;
+    font-size: 0.9rem !important;
+  }
+}
+
+.expenses {
+  report-list-summary ion-label {
+    color: #b14139;
+  }
+}
+
+.revenues {
+  report-list-summary ion-label {
+    color: #73905a;
+  }
+}

@@ -1,21 +1,17 @@
 import { Component, OnDestroy } from '@angular/core';
-import { IonicPage, NavController, ToastController } from 'ionic-angular';
-import { SepService } from './../../providers/sep.service';
-import { FavoriteProtocol } from './../../model';
-import { Protocol } from '../../model/protocol';
+import { AndroidPermissionsService } from '@espm/core/permissions';
 import { BarcodeScanner } from '@ionic-native/barcode-scanner';
+import { IonicPage, NavController, ToastController } from 'ionic-angular';
 import { Observable } from 'rxjs/Observable';
 import { Subject } from 'rxjs/Subject';
-import { AndroidPermissionsService } from '@espm/core/permissions';
 
-/**
- * Generated class for the SepSearchPage page.
- *
- * See https://ionicframework.com/docs/components/#navigation for more info on
- * Ionic pages and navigation.
- */
+import { Protocol } from '../../model/protocol';
+import { FavoriteProtocol } from './../../model';
+import { SepService } from './../../providers/sep.service';
 
-@IonicPage()
+@IonicPage({
+  segment: 'sep/consulta'
+})
 @Component({
   selector: 'page-sep-search',
   templateUrl: 'sep-search.html',

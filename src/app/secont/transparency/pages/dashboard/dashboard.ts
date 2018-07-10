@@ -15,37 +15,37 @@ export class DashboardPage {
       type: 'revenues',
       name: 'Receitas',
       icon: 'fa-line-chart',
-      url: ''
+      url: 'TransparenciaRevenuesPage'
     },
     {
       type: '',
       name: 'Orçamentos',
       icon: 'fa-bar-chart',
-      url: ''
+      url: 'TransparenciaOrcamentosPage'
     },
     {
       type: '',
       name: 'Orçado x Executado',
       icon: 'fa-bar-chart',
-      url: ''
+      url: 'TransparenciaOrcadoxExecutadoPage'
     },
     {
       type: 'expenses',
       name: 'Despesas por Área',
       icon: 'fa-line-chart',
-      url: ''
+      url: 'TransparenciaExpensesByAreaPage'
     },
     {
       type: 'expenses',
       name: 'Despesas por Órgão',
       icon: 'fa-line-chart',
-      url: ''
+      url: 'TransparenciaExpensesByOriginPage'
     },
     {
       type: '',
       name: 'Obras Públicas',
       icon: 'fa-building-o',
-      url: ''
+      url: 'TransparenciaPublicWorksPage'
     }
   ];
 }

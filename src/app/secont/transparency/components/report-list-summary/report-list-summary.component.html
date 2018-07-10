@@ -1,0 +1,13 @@
+<ion-list-header>
+  <ng-content></ng-content>
+  <button ion-button
+          icon-only
+          clear
+          item-end
+          (click)="toggleSort(sort)">
+    <ion-icon class="fa-sort-amount-asc"
+              *ngIf="sort === 'asc'"></ion-icon>
+    <ion-icon class="fa-sort-amount-desc"
+              *ngIf="sort === 'desc'"></ion-icon>
+  </button>
+</ion-list-header>

@@ -1,7 +1,8 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams, ViewController } from 'ionic-angular';
-import { SearchFilter } from './../../model';
 import * as moment from 'moment';
+
+import { SearchFilter } from './../../model';
 
 /**
  * Generated class for the DioSearchFilterPage page.

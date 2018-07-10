@@ -1,0 +1,28 @@
+<ion-header color-primary-bg>
+  <ion-navbar>
+    <button ion-button menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    <ion-title>Obras Públicas</ion-title>
+    <ion-buttons end>
+      <button ion-button (click)="openFilter()">
+        <ion-icon name="options"></ion-icon>
+      </button>
+    </ion-buttons>
+  </ion-navbar>
+</ion-header>
+<ion-content>
+
+  <report-title *ngIf="data" [title]="reportTitle" [info]="data.info"></report-title>
+
+  <pie-chart [data]="data.chart" *ngIf="data?.chart"></pie-chart>
+
+  <report-list-summary #header>
+    <h2>Obras Públicas</h2>
+  </report-list-summary>
+  <ion-list *ngIf="data" [class.desc]="'desc' === header.sort">
+    <default-item *ngFor="let item of data.listable" [item]="item" [clickable]="true" navPush="TransparenciaPublicWorksByCityPage"
+      [navParams]="{cityId:item.id, filter: filter}"></default-item>
+  </ion-list>
+  <last-update *ngIf="data" [date]="data.lastUpdate"></last-update>
+</ion-content>

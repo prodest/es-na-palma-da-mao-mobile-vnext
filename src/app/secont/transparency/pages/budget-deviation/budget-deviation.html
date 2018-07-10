@@ -1,0 +1,26 @@
+<ion-header color-primary-bg>
+  <ion-navbar>
+    <button ion-button menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    <ion-title>Orçado x Executado</ion-title>
+    <ion-buttons end>
+      <button ion-button (click)="openFilter()">
+        <ion-icon name="options"></ion-icon>
+      </button>
+    </ion-buttons>
+  </ion-navbar>
+</ion-header>
+<ion-content>
+  <report-title *ngIf="data" [title]="reportTitle" [info]="data.info"></report-title>
+
+  <bar-chart [data]="budgetDeviationDatasets" *ngIf="budgetDeviationDatasets"></bar-chart>
+
+  <report-list-summary #header>
+    <h2 class="summary-item expected" *ngIf="data">Orçado: {{data.expected | currency: 'BRL': 'symbol'}}</h2>
+    <h2 class="summary-item executed" *ngIf="data">Executado: {{data.executed | currency: 'BRL': 'symbol'}}</h2>
+  </report-list-summary>
+  <ion-list *ngIf="data" [class.desc]="'desc' === header.sort">
+    <budget-deviation-item *ngFor="let item of data.listable" [item]="item"></budget-deviation-item>
+  </ion-list>
+</ion-content>

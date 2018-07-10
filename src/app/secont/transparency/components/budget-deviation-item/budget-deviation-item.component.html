@@ -1,0 +1,13 @@
+<ion-item class="item">
+    <div>
+        <h3 class="item__label capitalize">{{item.label}}</h3>
+        <p class="item__value">
+            <span>Orçado:</span> {{item.expected | currency: 'BRL': 'symbol'}}</p>
+        <p class="item__value">
+            <span>Executado:</span> {{item.executed | currency: 'BRL': 'symbol'}}</p>
+    </div>
+    <div item-end
+         class="item__percentage">
+        {{item.percentage}}%
+    </div>
+</ion-item>

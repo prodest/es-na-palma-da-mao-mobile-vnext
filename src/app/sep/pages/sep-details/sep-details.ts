@@ -1,17 +1,13 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavParams, ToastController } from 'ionic-angular';
-import { Protocol, ProtocolUpdate } from '../../model';
-import { SepStorageProvider, SepService } from '../../providers';
 import { AuthService } from '@espm/core/auth';
+import { IonicPage, NavParams, ToastController } from 'ionic-angular';
 
-/**
- * Generated class for the SepDetailsPage page.
- *
- * See https://ionicframework.com/docs/components/#navigation for more info on
- * Ionic pages and navigation.
- */
+import { Protocol, ProtocolUpdate } from '../../model';
+import { SepService, SepStorageProvider } from '../../providers';
 
-@IonicPage()
+@IonicPage({
+  segment: 'sep/processo/:protocol'
+})
 @Component({
   selector: 'page-sep-details',
   templateUrl: 'sep-details.html',

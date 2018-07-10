@@ -1,0 +1,54 @@
+default-item {
+  ion-item.item {
+    border-left-width: 8px;
+    border-style: solid;
+    min-height: 72px;
+
+    .item__label {
+      white-space: normal;
+      margin: 0;
+      color: #333;
+    }
+
+    .item__percentage,
+    .item__value {
+      color: #c86673;
+      margin: 3px 0 0 0;
+    }
+
+    .item__percentage {
+      font-weight: bold;
+      font-size: 1.6em;
+      margin-left: 8px;
+      flex: 0;
+    }
+
+    .item__btn-detail {
+      flex: 0;
+      margin-left: 10px;
+    }
+    .item__btn-detail:before {
+      color: #ccc;
+      font-family: FontAwesome;
+      content: '\f054';
+    }
+  }
+}
+
+.expenses {
+  ion-item.item {
+    .item__value,
+    .item__percentage {
+      color: #b14139 !important;
+    }
+  }
+}
+
+.revenues {
+  ion-item.item {
+    .item__percentage,
+    .item__value {
+      color: #73905a !important;
+    }
+  }
+}

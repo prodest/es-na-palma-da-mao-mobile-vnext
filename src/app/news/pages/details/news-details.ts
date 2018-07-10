@@ -1,17 +1,13 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { SocialSharing } from '@ionic-native/social-sharing';
+import { IonicPage, NavController, NavParams } from 'ionic-angular';
+
 import { NewsDetails } from '../../model';
 import { NewsApiService } from '../../providers/news-api.service';
 
-/**
- * Generated class for the NewsDetailsPage page.
- *
- * See https://ionicframework.com/docs/components/#navigation for more info on
- * Ionic pages and navigation.
- */
-
-@IonicPage()
+@IonicPage({
+  segment: 'noticia/:id'
+})
 @Component({
   selector: 'page-news-details',
   templateUrl: 'news-details.html',

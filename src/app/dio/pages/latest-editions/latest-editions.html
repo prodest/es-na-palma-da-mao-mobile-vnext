@@ -1,16 +1,31 @@
 <ion-header>
     <ion-navbar>
-        <button ion-button menuToggle>
+        <button ion-button
+                menuToggle>
             <ion-icon name="menu"></ion-icon>
         </button>
-        <ion-title>Últimas Edições</ion-title>
+        <ion-title>Diário Oficial ES</ion-title>
     </ion-navbar>
 </ion-header>
 
 <ion-content>
     <ion-list>
-        <ion-item *ngFor="let edition of latestEditions$ | async" (click)="openEdition(edition.url)">
-            <h2>{{edition.description}} - {{edition.date}}</h2>
+        <ion-list-header>
+            Edições recentes
+        </ion-list-header>
+        <ion-item *ngFor="let edition of latestEditions$ | async">
+            <h3>
+                <strong>{{edition.date}}</strong> - Diário Oficial do ES</h3>
+
+            <button ion-button
+                    item-end
+                    accent
+                    clear
+                    icon-start
+                    (click)="openEdition(edition.url)">
+                <ion-icon name="download"></ion-icon>
+                BAIXAR
+            </button>
         </ion-item>
     </ion-list>
 </ion-content>
