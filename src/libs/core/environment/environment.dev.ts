@@ -7,8 +7,7 @@ export const dev: Environment = {
   api: {
     invalidTokenHttpCode: 498,
     news: process.env.API_NEWS_URL || 'https://api.es.gov.br/developers/news',
-    // calendars: process.env.API_CALENDARS_URL || 'https://api.es.gov.br/developers/calendars',
-    calendars: 'http://localhost:4242/calendars',
+    calendars: process.env.API_CALENDARS_URL || 'https://api.es.gov.br/developers/calendars',
     sep: process.env.API_SEP_URL || 'https://api.es.gov.br/developers/sep',
     detran: process.env.API_DETRAN_URL || 'https://api.es.gov.br/developers/detran',
     dio: process.env.API_DIO_URL || 'https://api.es.gov.br/developers/dio',

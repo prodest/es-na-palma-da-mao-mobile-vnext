@@ -84,7 +84,7 @@ const menus = [
       {
         title: 'Agenda ES',
         icon: 'calendar',
-        component: 'SchedulePage',
+        component: 'CalendarPage',
         order: 6
       },
       {
