@@ -1,5 +1,11 @@
 export interface Project {
   name: string;
-  descrition: string;
+  description: string;
   version: string;
+  homepage: string;
+  bugs: Bugs;
+}
+
+interface Bugs {
+  url: string;
 }

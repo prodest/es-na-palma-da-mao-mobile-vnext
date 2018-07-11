@@ -1,16 +1,11 @@
 import { Component } from '@angular/core';
-import { IonicPage } from 'ionic-angular';
 import { InAppBrowser } from '@ionic-native/in-app-browser';
-import { TeamsApiService } from './providers';
-import { Project, TeamMember } from './model';
-const packageJson = require('../../../package.json');
+import { IonicPage } from 'ionic-angular';
 
-/**
- * Generated class for the AboutPage page.
- *
- * See https://ionicframework.com/docs/components/#navigation for more info on
- * Ionic pages and navigation.
- */
+import { Project, TeamMember } from './model';
+import { TeamsApiService } from './providers';
+
+const packageJson = require('../../../package.json');
 
 @IonicPage()
 @Component({
@@ -19,21 +14,23 @@ const packageJson = require('../../../package.json');
   providers: [TeamsApiService]
 })
 export class AboutPage {
-  teamMembers: TeamMember[];
-  project: Project;
+  teamMembers: TeamMember[] = [];
+  project: Project = packageJson;
 
-  constructor(private iab: InAppBrowser, private teamsApiService: TeamsApiService) {
-    this.teamMembers = [];
-    this.project = packageJson;
-  }
+  /**
+   *
+   */
+  constructor(private iab: InAppBrowser, private teamsApiService: TeamsApiService) {}
 
+  /**
+   *
+   */
   ionViewWillLoad() {
     this.teamsApiService.getTeamMembers().subscribe((teamMembers: TeamMember[]) => (this.teamMembers = teamMembers));
   }
 
   /**
    *
-   * @param {string} url
    */
   openUrl(url: string): void {
     this.iab.create(url, '_system');
