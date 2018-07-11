@@ -1,14 +1,17 @@
 <ion-header>
   <ion-navbar>
-    <button ion-button menuToggle>
+    <button ion-button
+            menuToggle>
       <ion-icon name="menu"></ion-icon>
     </button>
     <ion-title>Situação da CNH</ion-title>
   </ion-navbar>
 </ion-header>
 <ion-content>
-  <espm-driver-status *ngIf="status" [status]="status"></espm-driver-status>
-  <ion-item text-center *ngIf="!status">
+  <espm-driver-status *ngIf="status"
+                      [status]="status"></espm-driver-status>
+  <ion-item text-center
+            *ngIf="!status">
     <ion-spinner></ion-spinner>
   </ion-item>
   <espm-tickets [tickets]="tickets"></espm-tickets>

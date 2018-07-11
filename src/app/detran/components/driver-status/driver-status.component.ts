@@ -14,6 +14,7 @@ export class DriverStatusComponent {
     blocked: boolean;
     expired: boolean;
     blockMotive: string;
+    blockDate: string;
   };
 
   /**

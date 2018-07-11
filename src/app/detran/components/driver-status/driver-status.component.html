@@ -1,24 +1,45 @@
-<ion-item *ngIf="status.ok && !status.renew && !status.expired" no-lines class="status" [ngClass]="getStatusClass(status)">
-    <ion-icon name="mgcar" item-start class="status__icon"></ion-icon>
+<ion-item *ngIf="status.ok && !status.renew && !status.expired"
+          no-lines
+          class="status"
+          [ngClass]="getStatusClass(status)">
+    <ion-icon name="mgcar"
+              item-start
+              class="status__icon"></ion-icon>
     <h2 class="status__msg">CNH Ok - Dirija com segurança</h2>
     <p class="status__detail">CNH válida até {{status.expirationDate | dateFormat: 'dd/MM/yyyy'}}</p>
 </ion-item>
 
-<ion-item *ngIf="status.renew && !status.blocked" no-lines class="status" [ngClass]="getStatusClass(status)">
-    <ion-icon name="alert" item-start class="status__icon"></ion-icon>
+<ion-item *ngIf="status.renew && !status.blocked"
+          no-lines
+          class="status"
+          [ngClass]="getStatusClass(status)">
+    <ion-icon name="alert"
+              item-start
+              class="status__icon"></ion-icon>
     <h2 class="status__msg">Está na hora de renovar</h2>
     <p class="status__detail">CNH venceu há {{status.expirationDate | fromNow: true }}</p>
-    <p text-wrap class="status__warning">CNH será bloqueada após {{status.blockDate | dateFormat: 'dd/MM/yyyy' }}</p>
+    <p text-wrap
+       class="status__warning">CNH será bloqueada após {{status.blockDate | dateFormat: 'dd/MM/yyyy' }}</p>
 </ion-item>
 
-<ion-item *ngIf="status.expired && !status.blocked" no-lines class="status" [ngClass]="getStatusClass(status)">
-    <ion-icon name="alert" item-start class="status__icon"></ion-icon>
+<ion-item *ngIf="status.expired && !status.blocked"
+          no-lines
+          class="status"
+          [ngClass]="getStatusClass(status)">
+    <ion-icon name="alert"
+              item-start
+              class="status__icon"></ion-icon>
     <h2 class="status__msg">Renove sua CNH</h2>
     <p class="status__detail">CNH venceu há {{status.expirationDate | fromNow: true}}</p>
 </ion-item>
 
-<ion-item *ngIf="status.blocked" no-lines class="status" [ngClass]="getStatusClass(status)">
-    <ion-icon name="alert" item-start class="status__icon"></ion-icon>
+<ion-item *ngIf="status.blocked"
+          no-lines
+          class="status"
+          [ngClass]="getStatusClass(status)">
+    <ion-icon name="alert"
+              item-start
+              class="status__icon"></ion-icon>
     <h2 class="status__msg">CNH Bloqueada</h2>
     <p class="status__detail">{{status.blockMotive}}</p>
 </ion-item>
