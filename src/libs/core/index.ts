@@ -5,5 +5,6 @@ export * from './storage';
 export * from './forms';
 export * from './auth';
 export * from './ionic';
+export * from './utils';
 
 export { CoreModule } from './core.module';
