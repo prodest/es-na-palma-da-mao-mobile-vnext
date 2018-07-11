@@ -1,5 +1,5 @@
-import { Component, Inject } from '@angular/core';
-import { Environment, EnvVariables } from '@espm/core';
+import { ChangeDetectionStrategy, ChangeDetectorRef, Component, Inject } from '@angular/core';
+import { Environment, EnvVariables, trackById } from '@espm/core';
 import { IonicPage, ModalController, NavController } from 'ionic-angular';
 import { tap } from 'rxjs/operators';
 
@@ -11,7 +11,8 @@ import { Filter, News, Pagination } from './../../model';
 })
 @Component({
   selector: 'page-news-list',
-  templateUrl: 'news-list.html'
+  templateUrl: 'news-list.html',
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class NewsListPage {
   availableOrigins: string[] | undefined;
@@ -20,10 +21,14 @@ export class NewsListPage {
   filter: Filter = {};
   pagination: Pagination = {};
 
+  /**
+   *
+   */
   constructor(
     private navCtrl: NavController,
     private modalCtrl: ModalController,
     private newsApiService: NewsApiService,
+    private cd: ChangeDetectorRef,
     @Inject(EnvVariables) private env: Environment
   ) {}
 
@@ -31,7 +36,15 @@ export class NewsListPage {
    *
    *
    */
+  ionViewWillLoad() {
+    console.log('ionViewWillLoad');
+  }
+  /**
+   *
+   *
+   */
   ionViewWillEnter() {
+    console.log('ionViewWillEnter');
     this.getAvailableOrigins().then(() => this.getFirstPage(this.filter));
   }
 
@@ -81,6 +94,8 @@ export class NewsListPage {
     this.navCtrl.push('NewsDetailsPage', { id });
   }
 
+  trackById = trackById;
+
   /**
    *
    */
@@ -113,7 +128,11 @@ export class NewsListPage {
   private udpateNews = (nextNews: News[]) => {
     // Check whether it has reached the end
     this.hasMoreNews = nextNews.length >= this.pagination.pageSize;
-    return (this.news = [...(this.news || []), ...nextNews]);
+    this.news = [...(this.news || []), ...nextNews];
+
+    this.cd.detectChanges();
+
+    return this.news;
   };
 
   /**

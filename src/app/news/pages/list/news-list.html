@@ -17,20 +17,11 @@
 
 <ion-content>
   <ion-list>
-    <ion-item *ngFor="let newsItem of news"
-              (click)="goToNews(newsItem.id)">
-      <h2>{{newsItem.title}}</h2>
-      <p>
-        <span accent>{{newsItem.origin}}</span> | {{newsItem.date | fromNow }}
-      </p>
-      <ion-thumbnail item-end
-                     *ngIf="newsItem.image">
-        <img [src]="newsItem.image"
-             onerror="this.style.display='none'" />
-      </ion-thumbnail>
-    </ion-item>
+    <news-list-item [news]="newsItem"
+                    *ngFor="let newsItem of news; trackBy:trackById"
+                    (click)="goToNews(newsItem.id)">
+    </news-list-item>
   </ion-list>
-
   <ion-list *ngIf="news && !news.length">
     <ion-list-header>
       Nenhuma notícia encontrada

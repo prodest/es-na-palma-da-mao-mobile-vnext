@@ -1,0 +1,11 @@
+<ion-item>
+  <h2>{{news.title}}</h2>
+  <p>
+    <span accent>{{news.origin}}</span> | {{news.date | fromNow }}
+  </p>
+  <ion-thumbnail item-end
+                 *ngIf="news.image">
+    <img [src]="news.image"
+         onerror="this.style.display='none'" />
+  </ion-thumbnail>
+</ion-item>
