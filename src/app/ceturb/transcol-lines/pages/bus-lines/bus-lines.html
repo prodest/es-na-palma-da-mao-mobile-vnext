@@ -1,12 +1,18 @@
 <ion-header color-primary-bg>
   <ion-navbar>
-    <button ion-button menuToggle>
+    <button ion-button
+            menuToggle>
       <ion-icon name="menu"></ion-icon>
     </button>
     <ion-title>Linhas Transcol</ion-title>
   </ion-navbar>
-  <ion-searchbar placeholder="Pesquisar..." [showCancelButton]="true" cancelButtonText="Cancelar" [animated]="false" (ionInput)="search($event)"
-    (ionClear)="clear($event)" (ionCancel)="clear($event)">
+  <ion-searchbar placeholder="Pesquisar..."
+                 [showCancelButton]="true"
+                 cancelButtonText="Cancelar"
+                 [animated]="false"
+                 (ionInput)="search($event)"
+                 (ionClear)="clear($event)"
+                 (ionCancel)="clear($event)">
   </ion-searchbar>
 </ion-header>
 
@@ -15,12 +21,26 @@
     <ng-container *ngIf="filteredLines.length"> Exibindo {{filteredLines.length}} linhas</ng-container>
     <ng-container *ngIf="!filteredLines.length"> Nenhuma linha de ônibus encontrada</ng-container>
   </ion-list-header>
-  <ion-list [virtualScroll]="filteredLines" [virtualTrackBy]="trackByNumber" approxItemHeight="70px">
-    <button ion-item *virtualItem="let line" class="busline" (click)="showDetails(line)">
-      <h2 item-start class="busline_number" tappable>{{line.number}}</h2>
-      <p text-wrap class="busline_name">{{line.name}}a</p>
-      <ion-icon *ngIf="line.isFavorite" class="busline_icon" item-end name="md-star"></ion-icon>
-      <ion-icon *ngIf="!line.isFavorite" class="busline_icon" item-end name="md-star-outline"></ion-icon>
+  <ion-list [virtualScroll]="filteredLines"
+            [virtualTrackBy]="trackByNumber"
+            approxItemHeight="70px">
+    <button ion-item
+            *virtualItem="let line"
+            class="busline"
+            (click)="showDetails(line)">
+      <h2 item-start
+          class="busline_number"
+          tappable>{{line.number}}</h2>
+      <p text-wrap
+         class="busline_name">{{line.name}}</p>
+      <ion-icon *ngIf="line.isFavorite"
+                class="busline_icon"
+                item-end
+                name="md-star"></ion-icon>
+      <ion-icon *ngIf="!line.isFavorite"
+                class="busline_icon"
+                item-end
+                name="md-star-outline"></ion-icon>
     </button>
   </ion-list>
 </ion-content>

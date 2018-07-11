@@ -1,4 +1,5 @@
-<ion-slides pager *ngIf="favorites?.length"
+<ion-slides pager
+            *ngIf="favorites?.length"
             [class.onePage]="favorites.length <= pageSize"
             [class.closed]="!visible">
     <ion-slide *ngFor="let favoritePage of pages">
