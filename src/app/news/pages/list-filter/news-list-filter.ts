@@ -1,13 +1,7 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams, ViewController } from 'ionic-angular';
-import { Filter } from '../../model';
 
-/**
- * Generated class for the NewsListFilterPage page.
- *
- * See https://ionicframework.com/docs/components/#navigation for more info on
- * Ionic pages and navigation.
- */
+import { Filter } from '../../model';
 
 @IonicPage()
 @Component({
@@ -18,12 +12,18 @@ export class NewsListFilterPage {
   availableOrigins: string[];
   filter: Filter;
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, public viewCtrl: ViewController) {
+  /**
+   *
+   */
+  constructor(public navCtrl: NavController, private navParams: NavParams, private viewCtrl: ViewController) {
     this.filter = {
       origins: []
     };
   }
 
+  /**
+   *
+   */
   ionViewDidLoad() {
     if (this.navParams.data.filter) {
       this.filter = Object.assign(this.filter, this.navParams.data.filter);
@@ -33,6 +33,9 @@ export class NewsListFilterPage {
     }
   }
 
+  /**
+   *
+   */
   dismiss() {
     this.viewCtrl.dismiss(this.filter);
   }
@@ -60,7 +63,7 @@ export class NewsListFilterPage {
    *
    *
    */
-  public toggleChecked(origin) {
+  toggleChecked(origin) {
     let idx = this.filter.origins.indexOf(origin);
     if (idx > -1) {
       this.filter.origins.splice(idx, 1);
@@ -73,7 +76,7 @@ export class NewsListFilterPage {
    *
    *
    */
-  public isSelected(origin) {
+  isSelected(origin) {
     return this.filter.origins.indexOf(origin) > -1;
   }
 }

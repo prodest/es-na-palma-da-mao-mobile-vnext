@@ -1,7 +1,8 @@
 import { NgModule } from '@angular/core';
 import { IonicPageModule } from 'ionic-angular';
-import { NewsHighlightsPage } from './news-highlights';
+
 import { CardNoticiaComponentModule } from './../../components';
+import { NewsHighlightsPage } from './news-highlights';
 
 @NgModule({
   declarations: [NewsHighlightsPage],

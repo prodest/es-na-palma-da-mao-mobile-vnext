@@ -1,7 +1,8 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
-import { NewsApiService } from '../../providers/news-api.service';
+import { IonicPage, NavController } from 'ionic-angular';
+
 import { NewsDetails } from '../../model';
+import { NewsApiService } from '../../providers';
 
 @IonicPage({
   segment: 'noticias/destaques'
@@ -11,18 +12,22 @@ import { NewsDetails } from '../../model';
   templateUrl: 'news-highlights.html'
 })
 export class NewsHighlightsPage {
-  public highlights: NewsDetails[];
+  highlights: NewsDetails[];
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, public newsApiService: NewsApiService) {}
+  /**
+   * Navega para um notícia
+   */
+  constructor(private navCtrl: NavController, private newsApiService: NewsApiService) {}
 
+  /**
+   * Navega para um notícia
+   */
   ionViewWillEnter() {
     this.newsApiService.getHighlightNews().subscribe((news: NewsDetails[]) => (this.highlights = news));
   }
 
   /**
    * Navega para um notícia
-   *
-   * @param {string} id
    */
   goToNews(id: string) {
     this.navCtrl.push('NewsDetailsPage', { id });

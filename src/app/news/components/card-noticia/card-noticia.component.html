@@ -1,28 +1,43 @@
 <!-- Generated template for the CardNoticiaComponent component -->
-<ion-card *ngIf="news">
-  <img *ngIf="news.image" [src]="news.image" />
-  <ion-card-content>
-    <ion-row class="news-info" *ngIf="!highlight">
-      <ion-col no-padding>
-        <span clear small class="news-origin">{{news.origin}}</span> |
-        <span clear small>{{news.date | date: 'dd/MM/yyyy HH:mm'}}</span>
-      </ion-col>
-      <ion-col *ngIf="!highlight && wasUpdated(news)">
-        <small class="last-updated">Atualizada a: {{ news.lastModified | fromNow }}</small>
-      </ion-col>
-    </ion-row>
-    <ion-card-title>
-      {{news.title}}
-    </ion-card-title>
-    <p *ngIf="!highlight" [innerHTML]="news.body"></p>
-    <p *ngIf="highlight" [innerHTML]="news.summary"></p>
-    <ion-row no-padding class="news-info-highlight" *ngIf="highlight">
-      <ion-col>
-        <span clear small>{{news.origin}} | {{news.date | fromNow}}</span>
-      </ion-col>
-      <ion-col>
-        <span clear small>LEIA MAIS</span>
-      </ion-col>
-    </ion-row>
-  </ion-card-content>
-</ion-card>
+<ng-container *ngIf="news">
+  <ng-container *ngIf="!highlight">
+    <ion-card>
+      <img *ngIf="news.image"
+           [src]="news.image" />
+      <ion-card-content>
+        <div class="news-info">
+          <span accent>{{news.origin}}</span> |
+          <span>{{news.date | date: 'dd/MM/yyyy HH:mm'}}</span>
+          <small *ngIf="wasUpdated(news)"
+                 class="last-updated">Atualizada há: {{ news.lastModified | fromNow }}</small>
+        </div>
+        <ion-card-title>
+          {{news.title}}
+        </ion-card-title>
+        <p [innerHTML]="news.body"></p>
+      </ion-card-content>
+    </ion-card>
+  </ng-container>
+
+  <ng-container *ngIf="highlight">
+    <ion-card>
+      <img *ngIf="news.imageHighlight"
+           [src]="news.imageHighlight" />
+      <ion-card-content>
+        <ion-card-title>
+          {{news.title}}
+        </ion-card-title>
+        <p [innerHTML]="news.summary"></p>
+        <ion-row no-padding
+                 class="news-info-highlight">
+          <ion-col>
+            <span>{{news.origin}} | {{news.date | fromNow}}</span>
+          </ion-col>
+          <ion-col>
+            <span accent>LEIA MAIS</span>
+          </ion-col>
+        </ion-row>
+      </ion-card-content>
+    </ion-card>
+  </ng-container>
+</ng-container>
