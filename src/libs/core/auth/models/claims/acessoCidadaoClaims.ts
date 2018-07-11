@@ -6,55 +6,55 @@ export interface AcessoCidadaoClaims {
   /**
    * Claim indicando se o celular do usuário está validado
    */
-  celularValidado: boolean
+  celularValidado: boolean;
 
   /**
    * Claim com cpf do usuário
    *
    */
-  cpf: string
+  cpf: string;
 
   /**
    * Claim com a data de nascimento do usuário
    *
    */
-  dateofbirth: string
+  dateofbirth: string;
 
   /**
    * Claim com o email do usuário
    *
    */
-  emailaddress: string
+  emailaddress: string;
 
   /**
    * Claim com o telefone residencial do usuário
    *
    */
-  homephone: string
+  homephone: string;
 
   /**
    * Claim com o telefone celular do usuário
    *
    */
-  mobilephone: string
+  mobilephone: string;
 
   /**
    * Claim com o nome do usuário
    *
    */
-  nome: string
+  nome: string;
 
   /**
    * Claim com o nome da mãe do usuário
    *
    */
-  nomemae: string
+  nomemae: string;
 
   /**
    * Claim com o nome do pai do usuário
    *
    */
-  nomepai: string
+  nomepai: string;
 
   /**
    * Subject Id Claim
@@ -62,7 +62,7 @@ export interface AcessoCidadaoClaims {
    * O Id do usuário
    *
    */
-  sid: string
+  sid: string;
 
   /**
    * Subject Id Claim
@@ -70,17 +70,17 @@ export interface AcessoCidadaoClaims {
    * O Id do usuário
    *
    */
-  sub: number
+  sub: number;
 
   /**
    * Número de registro da CNH
    *
    */
-  cnhNumero: string
+  cnhNumero: string;
 
   /**
    * Cédula da CNH
    *
    */
-  cnhCedula: string
+  cnhCedula: string;
 }

@@ -13,16 +13,20 @@ import { FeedBack } from './../../model';
   templateUrl: 'feedback-form.component.html'
 })
 export class FeedbackFormComponent {
-  @Input() public showStop: boolean;
-  @Input() public showLine: boolean;
-  @Input() public showTime: boolean;
-  @Input() public showText: boolean;
-  @Input() public getLocation: boolean;
+  @Input() showStop: boolean;
+  @Input() showLine: boolean;
+  @Input() showTime: boolean;
+  @Input() showText: boolean;
+  @Input() getLocation: boolean;
   @Output() onSendFeedback = new EventEmitter<FeedBack>();
   @Output() onError = new EventEmitter<string>();
 
-  public model: FeedBack;
+  model: FeedBack;
 
+  /**
+   *
+   *
+   */
   constructor() {
     this.model = {
       line: null,
@@ -37,8 +41,6 @@ export class FeedbackFormComponent {
   /**
    *
    *
-   * @param {*} form
-   * @memberof FeedbackFormController
    */
   onSubmit() {
     this.onSendFeedback.emit(this.model);
@@ -47,8 +49,6 @@ export class FeedbackFormComponent {
   /**
    *
    *
-   * @readonly
-   * @memberof FeedbackFormController
    */
   get description() {
     let desc = 'Favor informar ';

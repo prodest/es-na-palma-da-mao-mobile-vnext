@@ -19,8 +19,4 @@ export const CeturbStorageProvider = { provide: CeturbStorage, useFactory: provi
 
 export { CeturbStorage, CeturbApiService, BusLinesService };
 
-export const CeturbProviders = [
-  CeturbStorageProvider,
-  CeturbApiService,
-  BusLinesService
-];
+export const CeturbProviders = [CeturbStorageProvider, CeturbApiService, BusLinesService];

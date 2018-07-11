@@ -4,15 +4,19 @@ import { Observable } from 'rxjs/Observable';
 import { _throw } from 'rxjs/observable/throw';
 import { catchError, finalize, flatMap, pluck } from 'rxjs/operators';
 
-import { SepStorage } from './sep-storage.service';
-import { SepApiService } from './sep-api.service';
 import { FavoriteProtocol, Protocol } from './../model';
+import { SepApiService } from './sep-api.service';
 import { SepStorageModel } from './sep-storage.model';
+import { SepStorage } from './sep-storage.service';
 
 @Injectable()
 export class SepService {
   loading: Loading;
 
+  /**
+   *
+   *
+   */
   constructor(
     private api: SepApiService,
     private storage: SepStorage,
@@ -24,16 +28,28 @@ export class SepService {
     return this.storage.all$.pipe(pluck('favoriteProtocols'));
   }
 
+  /**
+   *
+   *
+   */
   isFavorite(protocol: Protocol): boolean {
     return this.storage.isFavorite(protocol);
   }
 
+  /**
+   *
+   *
+   */
   getProcessByNumber(protocolNumber: string): Observable<FavoriteProtocol> {
     this.showLoading();
 
     return this.api.getProcessByNumber(protocolNumber).pipe(finalize(this.dismissLoading));
   }
 
+  /**
+   *
+   *
+   */
   addFavorite = (protocol: Protocol): Observable<FavoriteProtocol[]> => {
     let favoriteProtocol = this.mapFavorite(protocol);
 
@@ -51,6 +67,10 @@ export class SepService {
     );
   };
 
+  /**
+   *
+   *
+   */
   removeFavorite = (protocol: Protocol): Observable<FavoriteProtocol[]> => {
     let favoriteProtocols = this.storage.getValue('favoriteProtocols').filter(p => p.number !== protocol.number);
 
@@ -65,6 +85,10 @@ export class SepService {
     );
   };
 
+  /**
+   *
+   *
+   */
   syncFavorites = (favoriteProtocols?: FavoriteProtocol[]): Observable<FavoriteProtocol[]> => {
     const syncData: SepStorageModel = { favoriteProtocols: [], date: null };
 
@@ -82,6 +106,10 @@ export class SepService {
       );
   };
 
+  /**
+   *
+   *
+   */
   private mapFavorite(protocol: Protocol): FavoriteProtocol {
     return {
       number: protocol.number,
@@ -123,6 +151,10 @@ export class SepService {
     this.toastCtrl.create({ message, duration: 4000 }).present();
   };
 
+  /**
+   *
+   *
+   */
   private locationOf(element: Protocol, array: FavoriteProtocol[], start?: number, end?: number) {
     start = start || 0;
     end = end === undefined ? array.length - 1 : end;

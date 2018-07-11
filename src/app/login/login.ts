@@ -15,9 +15,9 @@ export class LoginPage {
   /**
    *
    */
-  public username: string | undefined;
-  public password: string | undefined;
-  public readonly errorMsgs = {
+  username: string | undefined;
+  password: string | undefined;
+  readonly errorMsgs = {
     accountNotLinked: 'User not found.' // Verification message with AcessoCidadao
   };
 

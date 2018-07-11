@@ -1,13 +1,9 @@
-<!--
-  Generated template for the TranscolOnlineFeedbackPage page.
-
-  See http://ionicframework.com/docs/components/#navigation for more info on
-  Ionic pages and navigation.
--->
 <ion-header>
   <ion-navbar>
     <ion-buttons left>
-      <button ion-button icon-only (click)="navCtrl.pop()">
+      <button ion-button
+              icon-only
+              (click)="navCtrl.pop()">
         <ion-icon name="arrow-back"></ion-icon>
       </button>
     </ion-buttons>
@@ -17,26 +13,31 @@
 
 <ion-content padding>
   <div class="title-container">
-    <h5 class="title"><strong>REPORTAR UM PROBLEMA</strong></h5>
+    <h5 class="title">
+      <strong>REPORTAR UM PROBLEMA</strong>
+    </h5>
     <h6 class="subtitle">Porque você está reportando um problema?</h6>
   </div>
   <div class="list-problems">
-    <div *ngFor="let feedbackItem of feedbackList; index as i;" >
-      <div class="line-item-inner first-panel" (click)="showDetails(i)">
+    <div *ngFor="let feedbackItem of feedbackList; index as i;">
+      <div class="line-item-inner first-panel"
+           (click)="showDetails(i)">
         <strong class="line-number">{{feedbackItem.description}}</strong>
         <div class="icon-detail">
-          <i [ngClass]="{ 'rotate': activePanel === i }" class="fa fa-chevron-right" aria-hidden="true"></i>
+          <i [ngClass]="{ 'rotate': activePanel === i }"
+             class="fa fa-chevron-right"
+             aria-hidden="true"></i>
         </div>
       </div>
-      <div class="panel" *ngIf="activePanel === i">
-        <feedback-form 
-          [showStop]="feedbackItem.showStop" 
-          [showLine]="feedbackItem.showLine" 
-          [showTime]="feedbackItem.showTime" 
-          [getLocation]="feedbackItem.getLocation"
-          [showText]="feedbackItem.showText"
-          (onSendFeedback)="saveFeedback($event)" 
-          (onError)="showDialog($event)">
+      <div class="panel"
+           *ngIf="activePanel === i">
+        <feedback-form [showStop]="feedbackItem.showStop"
+                       [showLine]="feedbackItem.showLine"
+                       [showTime]="feedbackItem.showTime"
+                       [getLocation]="feedbackItem.getLocation"
+                       [showText]="feedbackItem.showText"
+                       (onSendFeedback)="saveFeedback($event)"
+                       (onError)="showDialog($event)">
         </feedback-form>
       </div>
     </div>

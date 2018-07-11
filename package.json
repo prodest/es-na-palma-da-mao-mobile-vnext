@@ -16,7 +16,7 @@
     "htmlhint": "htmlhint --config .htmlhintrc",
     "precommit": "lint-staged",
     "format": "prettier --find-config-path --write",
-    "format:check": "prettier --find-config-path --list-different \"src/{app,environments,scss}/**/*{.ts,.js,.json,.css,.scss}\"",
+    "format:check": "prettier --find-config-path --list-different \"src/{app,libs,theme}/**/*{.ts,.js,.json,.css,.scss}\"",
     "workbox": "workbox generate:sw",
     "release": "standard-version",
     "release:preview": "standard-version --dry-run",
@@ -25,18 +25,9 @@
     "purifycss": "purifycss www/build/main.css www/build/*.js www/index.html --info --min --out www/build/main.css --whitelist *.ion-md-icon*"
   },
   "lint-staged": {
-    "src/app/**/*.html": [
-      "htmlhint"
-    ],
-    "src/**/*.ts": [
-      "lint",
-      "format",
-      "git add"
-    ],
-    "src/**/*.{css,scss}": [
-      "format",
-      "git add"
-    ]
+    "src/app/**/*.html": ["htmlhint"],
+    "src/**/*.ts": ["lint", "format", "git add"],
+    "src/**/*.{css,scss}": ["format", "git add"]
   },
   "config": {
     "ionic_app_ng_module_class": "EspmModule",
@@ -140,11 +131,7 @@
     "type": "git",
     "url": "git+https://github.com/prodest/es-na-palma-da-mao-mobile-vnext.git"
   },
-  "keywords": [
-    "PRODEST",
-    "GOVERNO ES",
-    "ESPM"
-  ],
+  "keywords": ["PRODEST", "GOVERNO ES", "ESPM"],
   "author": "PRODEST (https://github.com/prodest/)",
   "contributors": [
     {
@@ -185,9 +172,6 @@
       "phonegap-plugin-barcodescanner": {},
       "cordova-plugin-android-permissions": {}
     },
-    "platforms": [
-      "android",
-      "ios"
-    ]
+    "platforms": ["android", "ios"]
   }
 }

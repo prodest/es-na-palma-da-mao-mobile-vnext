@@ -1,9 +1,9 @@
 import { Component, Inject } from '@angular/core';
 import { Environment, EnvVariables } from '@espm/core';
-import { IonicPage, ModalController, NavController, NavParams } from 'ionic-angular';
+import { IonicPage, ModalController, NavController } from 'ionic-angular';
 import { tap } from 'rxjs/operators';
 
-import { NewsApiService } from '../../providers/news-api.service';
+import { NewsApiService } from '../../providers';
 import { Filter, News, Pagination } from './../../model';
 
 @IonicPage({
@@ -11,21 +11,19 @@ import { Filter, News, Pagination } from './../../model';
 })
 @Component({
   selector: 'page-news-list',
-  templateUrl: 'news-list.html',
-  providers: [NewsApiService]
+  templateUrl: 'news-list.html'
 })
 export class NewsListPage {
-  public availableOrigins: string[] | undefined;
-  public news: News[];
-  public hasMoreNews = true;
-  public filter: Filter = {};
-  public pagination: Pagination = {};
+  availableOrigins: string[] | undefined;
+  news: News[];
+  hasMoreNews = true;
+  filter: Filter = {};
+  pagination: Pagination = {};
 
   constructor(
-    public navCtrl: NavController,
-    public navParams: NavParams,
-    public modalCtrl: ModalController,
-    public newsApiService: NewsApiService,
+    private navCtrl: NavController,
+    private modalCtrl: ModalController,
+    private newsApiService: NewsApiService,
     @Inject(EnvVariables) private env: Environment
   ) {}
 
@@ -57,7 +55,7 @@ export class NewsListPage {
   }
 
   /**
-   * @memberOf NewsListController
+   *
    */
   doPaginate(infiniteScroll) {
     this.pagination.pageNumber += 1;

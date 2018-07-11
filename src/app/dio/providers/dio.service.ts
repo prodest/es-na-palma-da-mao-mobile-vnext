@@ -1,13 +1,13 @@
 import { Injectable } from '@angular/core';
 import { Loading, LoadingController } from 'ionic-angular';
 import { Observable } from 'rxjs/Observable';
-// import { of } from 'rxjs/observable/of'
-// import { _throw } from 'rxjs/observable/throw'
 import { finalize } from 'rxjs/operators';
 
-import { DioApiService } from './dio-api.service';
 import { Edition, SearchFilter, SearchResult } from './../model';
+import { DioApiService } from './dio-api.service';
 
+// import { of } from 'rxjs/observable/of'
+// import { _throw } from 'rxjs/observable/throw'
 /**
  *
  *
@@ -19,22 +19,22 @@ export class DioService {
    *
    *
    */
-  constructor(
-    private api: DioApiService,
-    // private toastCtrl: ToastController,
-    private loadingCtrl: LoadingController
-  ) {}
+  constructor(private api: DioApiService, private loadingCtrl: LoadingController) {}
 
-  public getLatestEditions(): Observable<Edition[]> {
+  /**
+   *
+   *
+   */
+  getLatestEditions(): Observable<Edition[]> {
     this.showLoading();
     return this.api.getLatestEditions().pipe(finalize(() => this.dismissLoading()));
   }
 
   /**
    *
-   * @param filter
+   *
    */
-  public search(filter: SearchFilter): Observable<SearchResult> {
+  search(filter: SearchFilter): Observable<SearchResult> {
     this.showLoading();
     return this.api.search(filter).pipe(finalize(() => this.dismissLoading()));
   }

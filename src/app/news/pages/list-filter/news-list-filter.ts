@@ -10,16 +10,14 @@ import { Filter } from '../../model';
 })
 export class NewsListFilterPage {
   availableOrigins: string[];
-  filter: Filter;
+  filter: Filter = {
+    origins: []
+  };
 
   /**
    *
    */
-  constructor(public navCtrl: NavController, private navParams: NavParams, private viewCtrl: ViewController) {
-    this.filter = {
-      origins: []
-    };
-  }
+  constructor(public navCtrl: NavController, private navParams: NavParams, private viewCtrl: ViewController) {}
 
   /**
    *

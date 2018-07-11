@@ -55,7 +55,7 @@ export class AcessoCidadaoService {
    *   5) Reinicia o serviço de push
    *
    */
-  public login = (identity: Identity): Observable<AcessoCidadaoClaims> => {
+  login = (identity: Identity): Observable<AcessoCidadaoClaims> => {
     return this.getToken(identity).pipe(
       flatMap(this.saveAccessToken),
       flatMap(this.saveRefreshToken),
@@ -67,12 +67,12 @@ export class AcessoCidadaoService {
   /**
    * Faz logout do usuário. Remove o token do localstore e os claims salvos.
    */
-  public logout = () => this.authStorage.reset();
+  logout = () => this.authStorage.reset();
 
   /**
    * Retorna se tem usuário logado ou não.
    */
-  public get isAuthenticated(): boolean {
+  get isAuthenticated(): boolean {
     return !!this.authStorage.getValue('accessToken') && !this.jwt.isTokenExpired(this.authStorage.getValue('accessToken')); // && !!this.user
   }
 
@@ -80,7 +80,7 @@ export class AcessoCidadaoService {
    * Atualiza e retorna o access token quando necessário baseado em sua data de expiração.
    *
    */
-  public refreshAccessTokenIfNeeded = (): Observable<Token> => {
+  refreshAccessTokenIfNeeded = (): Observable<Token> => {
     if (!this.authStorage.getValue('refreshToken')) {
       _throw({ message: 'no-token' });
     }
@@ -105,7 +105,7 @@ export class AcessoCidadaoService {
    * Obtém as claims do usuário no acesso cidadão.
    *
    */
-  public getUserClaims = (): Observable<AcessoCidadaoClaims> =>
+  getUserClaims = (): Observable<AcessoCidadaoClaims> =>
     this.http.get<AcessoCidadaoClaims>(`${this.environment.identityServer.url}/connect/userinfo`);
 
   /************************************* Private API *************************************/

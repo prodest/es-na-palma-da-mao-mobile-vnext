@@ -1,9 +1,10 @@
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { Inject, Injectable } from '@angular/core';
-import { EnvVariables, Environment, Params } from '@espm/core';
+import { Environment, EnvVariables, Params } from '@espm/core';
 import { Observable } from 'rxjs/Observable';
-import { EventItem, CalendarSummary } from '../model';
-import { share, map } from 'rxjs/operators';
+import { map, share } from 'rxjs/operators';
+
+import { CalendarSummary, EventItem } from '../model';
 
 @Injectable()
 export class CalendarApiService {
@@ -17,7 +18,7 @@ export class CalendarApiService {
    *
    *
    */
-  public getAvailableCalendars(): Observable<CalendarSummary[]> {
+  getAvailableCalendars(): Observable<CalendarSummary[]> {
     return this.http.get<CalendarSummary[]>(this.env.api.calendars).pipe(share());
   }
 
@@ -25,7 +26,7 @@ export class CalendarApiService {
    *
    *
    */
-  public getFullCalendars(calendars: string[] = [], filter = {}): Observable<EventItem[]> {
+  getFullCalendars(calendars: string[] = [], filter = {}): Observable<EventItem[]> {
     let today = new Date();
     let defaults = {
       singleEvents: true,

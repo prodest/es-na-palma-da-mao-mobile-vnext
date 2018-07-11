@@ -1,1 +1,5 @@
-export * from './teams-api.service';
+import { TeamsApiService } from './teams-api.service';
+
+export { TeamsApiService };
+
+export const AboutProviders = [TeamsApiService];

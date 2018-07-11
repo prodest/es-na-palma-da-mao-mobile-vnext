@@ -3,9 +3,9 @@ import { Inject, Injectable } from '@angular/core';
 import { Environment, EnvVariables } from '@espm/core';
 import { Observable } from 'rxjs/Observable';
 import { share } from 'rxjs/operators';
-import { ANONYMOUS_HEADER } from './../../../libs/core/auth';
 
 import { Edition, SearchFilter, SearchResult } from '../model';
+import { ANONYMOUS_HEADER } from './../../../libs/core/auth';
 
 @Injectable()
 export class DioApiService {
@@ -14,9 +14,8 @@ export class DioApiService {
   /**
    *
    *
-   * @returns {Observable<Edition[]>}
    */
-  public getLatestEditions(): Observable<Edition[]> {
+  getLatestEditions(): Observable<Edition[]> {
     return this.http
       .get<Edition[]>(`${this.env.api.dio}/latest`, {
         headers: new HttpHeaders({ [ANONYMOUS_HEADER]: 'true' })
@@ -27,10 +26,8 @@ export class DioApiService {
   /**
    *
    *
-   * @param {SearchFilter} [filter={ pageNumber: 0, sort: 'date' }]
-   * @returns {Observable<SearchResult>}
    */
-  public search(filter: SearchFilter): Observable<SearchResult> {
+  search(filter: SearchFilter): Observable<SearchResult> {
     let params = Object.assign({ pageNumber: this.env.pagination.pageNumber, sort: 'date' }, filter);
     return this.http
       .get<SearchResult>(`${this.env.api.dio}/search`, {

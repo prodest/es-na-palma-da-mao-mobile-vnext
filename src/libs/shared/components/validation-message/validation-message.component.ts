@@ -1,19 +1,19 @@
-import { Component, Input, OnChanges } from '@angular/core'
+import { Component, Input, OnChanges } from '@angular/core';
 
 @Component({
   selector: 'espm-validation-message',
   templateUrl: './validation-message.component.html'
 })
 export class ValidationMessageComponent implements OnChanges {
-  @Input() public errors: string[] = []
-  @Input() public showAll: boolean = false
+  @Input() errors: string[] = [];
+  @Input() showAll: boolean = false;
 
   /**
    *
    *
    */
-  public ngOnChanges() {
-    const errors = this.errors || []
-    this.errors = errors.length && !this.showAll ? [errors.shift()] : errors
+  ngOnChanges() {
+    const errors = this.errors || [];
+    this.errors = errors.length && !this.showAll ? [errors.shift()] : errors;
   }
 }

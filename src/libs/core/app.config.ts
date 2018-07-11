@@ -1,7 +1,7 @@
-import { Inject, Injectable } from '@angular/core'
+import { Inject, Injectable } from '@angular/core';
 
-import { EnvVariables } from './environment'
-import { Environment } from './environment/environment'
+import { EnvVariables } from './environment';
+import { Environment } from './environment/environment';
 
 @Injectable()
 export class Config {
@@ -9,8 +9,8 @@ export class Config {
    *
    *
    */
-  public get tokenName(): string {
-    return `espm-app-jwt-token-${this.environment.envName}`
+  get tokenName(): string {
+    return `espm-app-jwt-token-${this.environment.envName}`;
   }
 
   /**

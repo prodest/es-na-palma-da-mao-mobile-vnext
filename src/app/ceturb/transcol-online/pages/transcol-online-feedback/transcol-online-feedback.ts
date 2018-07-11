@@ -1,42 +1,42 @@
 import { Component } from '@angular/core';
 import { AlertController, IonicPage, NavController, ToastController } from 'ionic-angular';
-import { FeedBack, feedbackList } from './../../model';
-import { FeedBackApiService } from './../../providers/feedback-api.service';
 
-/**
- * Generated class for the TranscolOnlineFeedbackPage page.
- *
- * See https://ionicframework.com/docs/components/#navigation for more info on
- * Ionic pages and navigation.
- */
+import { FeedBack, feedbackList } from './../../model';
+import { FeedBackApiService } from './../../providers';
 
 @IonicPage()
 @Component({
   selector: 'page-transcol-online-feedback',
-  templateUrl: 'transcol-online-feedback.html',
-  providers: [FeedBackApiService]
+  templateUrl: 'transcol-online-feedback.html'
 })
 export class TranscolOnlineFeedbackPage {
   feedbackList: any[];
-
   activePanel: number;
 
+  /**
+   *
+   *
+   */
   constructor(
     private navCtrl: NavController,
     private toastCtrl: ToastController,
-    public alertCtrl: AlertController,
+    private alertCtrl: AlertController,
     private feedBackApiService: FeedBackApiService
   ) {
     this.feedbackList = feedbackList;
   }
 
+  /**
+   *
+   *
+   */
   ionViewDidLoad() {
     console.log('ionViewDidLoad TranscolOnlineFeedbackPage');
   }
 
   /**
    *
-   * @param {number} type
+   *
    */
   showDetails(type: number) {
     if (this.activePanel === type) {
@@ -48,7 +48,7 @@ export class TranscolOnlineFeedbackPage {
 
   /**
    *
-   * @param {any} form
+   *
    */
   saveFeedback(form: FeedBack) {
     form.type = this.activePanel;
@@ -58,10 +58,18 @@ export class TranscolOnlineFeedbackPage {
     });
   }
 
+  /**
+   *
+   *
+   */
   goBack = () => {
     this.navCtrl.pop();
   };
 
+  /**
+   *
+   *
+   */
   showDialog(message: string) {
     const alert = this.alertCtrl.create({
       title: 'Atenção',
@@ -71,6 +79,10 @@ export class TranscolOnlineFeedbackPage {
     alert.present();
   }
 
+  /**
+   *
+   *
+   */
   private showMessage = (message: string) => {
     this.toastCtrl.create({ message, duration: 4000 }).present();
   };

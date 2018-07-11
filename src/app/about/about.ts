@@ -10,8 +10,7 @@ const packageJson = require('../../../package.json');
 @IonicPage()
 @Component({
   selector: 'page-about',
-  templateUrl: 'about.html',
-  providers: [TeamsApiService]
+  templateUrl: 'about.html'
 })
 export class AboutPage {
   teamMembers: TeamMember[] = [];

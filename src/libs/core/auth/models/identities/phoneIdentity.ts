@@ -1,12 +1,12 @@
-import { Identity } from './identity'
+import { Identity } from './identity';
 
 /**
  * Identity de usuário para autenticação usando celular
  *
  */
 export interface PhoneIdentity extends Identity {
-  accesstoken?: string
-  provider?: string
-  apiUrl?: string
-  authHeader?: string
+  accesstoken?: string;
+  provider?: string;
+  apiUrl?: string;
+  authHeader?: string;
 }

@@ -1,10 +1,10 @@
-import { Identity } from './identity'
+import { Identity } from './identity';
 
 /**
  * Identity de usuário para autenticação usando redes sociais
  *
  */
 export interface SocialNetworkIdentity extends Identity {
-  accesstoken?: string
-  provider?: string
+  accesstoken?: string;
+  provider?: string;
 }

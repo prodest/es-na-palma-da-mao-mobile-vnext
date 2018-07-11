@@ -1,4 +1,5 @@
-import { Component, Input, ChangeDetectionStrategy } from '@angular/core';
+import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
+
 import { EventItem } from '../../model';
 
 @Component({
@@ -7,6 +8,6 @@ import { EventItem } from '../../model';
   changeDetection: ChangeDetectionStrategy.Default
 })
 export class DayComponent {
-  @Input() public events: EventItem[];
-  @Input() public label: string;
+  @Input() events: EventItem[];
+  @Input() label: string;
 }

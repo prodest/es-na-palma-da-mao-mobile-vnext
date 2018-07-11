@@ -1,2 +1,2 @@
-export * from './from-now.pipe'
-export * from './from-now.pipe.module'
+export * from './from-now.pipe';
+export * from './from-now.pipe.module';

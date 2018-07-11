@@ -1,7 +1,7 @@
 import * as moment from 'moment';
 
 export class YearFilter {
-  public year: number;
+  year: number;
 
   /**
    *
@@ -15,7 +15,7 @@ export class YearFilter {
    *
    *
    */
-  public static currentYear(): YearFilter {
+  static currentYear(): YearFilter {
     return new YearFilter(moment().year());
   }
 
@@ -28,7 +28,7 @@ export class YearFilter {
    *
    *
    */
-  public description() {
+  description() {
     return `Ano de ${this.year}`;
   }
 }

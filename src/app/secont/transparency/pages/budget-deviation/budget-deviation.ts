@@ -19,7 +19,7 @@ export class BudgetDeviationPage extends TransparencyPage<YearFilter, BudgetDevi
     blue: 'rgb(54, 162, 235)'
   };
 
-  public budgetDeviationDatasets;
+  budgetDeviationDatasets;
 
   /**
    *

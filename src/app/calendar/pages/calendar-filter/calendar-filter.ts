@@ -1,13 +1,6 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams, ViewController } from 'ionic-angular';
 
-/**
- * Generated class for the CalendarFilterPage page.
- *
- * See https://ionicframework.com/docs/components/#navigation for more info on
- * Ionic pages and navigation.
- */
-
 @IonicPage()
 @Component({
   selector: 'page-calendar-filter',
@@ -17,11 +10,19 @@ export class CalendarFilterPage {
   availableOrigins: string[];
   selectedOrigins: string[];
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, public viewCtrl: ViewController) {
+  /**
+   *
+   *
+   */
+  constructor(public navCtrl: NavController, private navParams: NavParams, private viewCtrl: ViewController) {
     this.availableOrigins = [];
     this.selectedOrigins = [];
   }
 
+  /**
+   *
+   *
+   */
   ionViewDidLoad() {
     if (this.navParams.data.selectedOrigins) {
       this.selectedOrigins = this.navParams.data.selectedOrigins;
@@ -31,6 +32,10 @@ export class CalendarFilterPage {
     }
   }
 
+  /**
+   *
+   *
+   */
   dismiss() {
     this.viewCtrl.dismiss(this.selectedOrigins);
   }
@@ -59,7 +64,7 @@ export class CalendarFilterPage {
    *
    *
    */
-  public toggleChecked(origin) {
+  toggleChecked(origin) {
     let idx = this.selectedOrigins.indexOf(origin);
     if (idx > -1) {
       this.selectedOrigins.splice(idx, 1);
@@ -74,7 +79,7 @@ export class CalendarFilterPage {
    *
    *
    */
-  public isSelected(origin) {
+  isSelected(origin) {
     return this.selectedOrigins.indexOf(origin) > -1;
   }
 }

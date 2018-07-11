@@ -1,38 +1,38 @@
-import { AcessoCidadaoClaims } from './claims/acessoCidadaoClaims'
+import { AcessoCidadaoClaims } from './claims/acessoCidadaoClaims';
 
-const defaultAvatarSrc = './assets/imgs/user.png'
+const defaultAvatarSrc = './assets/imgs/user.png';
 
 export class User implements AcessoCidadaoClaims {
-  public celularValidado: boolean
-  public cpf: string
-  public dateofbirth: string
-  public emailaddress: string
-  public homephone: string
-  public mobilephone: string
-  public nome: string
-  public nomemae: string
-  public nomepai: string
-  public sid: string
-  public sub: number
-  public cnhNumero: string
-  public cnhCedula: string
+  public celularValidado: boolean;
+  public cpf: string;
+  public dateofbirth: string;
+  public emailaddress: string;
+  public homephone: string;
+  public mobilephone: string;
+  public nome: string;
+  public nomemae: string;
+  public nomepai: string;
+  public sid: string;
+  public sub: number;
+  public cnhNumero: string;
+  public cnhCedula: string;
 
   // extra properties
-  public anonymous: boolean
-  public avatarUrl: string
+  public anonymous: boolean;
+  public avatarUrl: string;
 
   /**
    *
    *
    */
   public static createNullUser() {
-    const user = new User()
+    const user = new User();
 
-    user.nome = 'Usuário visitante'
-    user.anonymous = true
-    user.avatarUrl = defaultAvatarSrc
+    user.nome = 'Usuário visitante';
+    user.anonymous = true;
+    user.avatarUrl = defaultAvatarSrc;
 
-    return user
+    return user;
   }
 
   /**
@@ -43,6 +43,6 @@ export class User implements AcessoCidadaoClaims {
     return Object.assign(new User(), claims, {
       anonymous: false,
       avatarUrl: defaultAvatarSrc
-    })
+    });
   }
 }

@@ -1,21 +1,25 @@
 import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Inject, Injectable } from '@angular/core';
 import { Environment, EnvVariables } from '@espm/core';
+import { ANONYMOUS_HEADER } from '@espm/core/auth';
 import { Observable } from 'rxjs/Observable';
 import { share } from 'rxjs/operators';
-import { ANONYMOUS_HEADER } from '@espm/core/auth';
 
 import { Filter, News, NewsDetails, Pagination } from '../model';
 
 @Injectable()
 export class NewsApiService {
+  /**
+   *
+   *
+   */
   constructor(private http: HttpClient, @Inject(EnvVariables) private env: Environment) {}
 
   /**
    *
-   * @returns {*}
+   *
    */
-  public getNewsById(id: string): Observable<NewsDetails> {
+  getNewsById(id: string): Observable<NewsDetails> {
     return this.http
       .get<NewsDetails>(`${this.env.api.news}/${id}`, { headers: new HttpHeaders({ [ANONYMOUS_HEADER]: 'true' }) })
       .pipe(share());
@@ -23,9 +27,9 @@ export class NewsApiService {
 
   /**
    *
-   * @returns {*}
+   *
    */
-  public getHighlightNews(): Observable<News[]> {
+  getHighlightNews(): Observable<News[]> {
     return this.http
       .get<News[]>(`${this.env.api.news}/highlights`, { headers: new HttpHeaders({ [ANONYMOUS_HEADER]: 'true' }) })
       .pipe(share());
@@ -33,11 +37,9 @@ export class NewsApiService {
 
   /**
    *
-   * @param calendars
-   * @param options
-   * @returns {Array}
+   *
    */
-  public getNews(filter: Filter, pagination: Pagination): Observable<News[]> {
+  getNews(filter: Filter, pagination: Pagination): Observable<News[]> {
     let defaults = {
       origins: [],
       query: '',
@@ -61,9 +63,9 @@ export class NewsApiService {
 
   /**
    *
-   * @returns {*}
+   *
    */
-  public getAvailableOrigins(): Promise<string[]> {
+  getAvailableOrigins(): Promise<string[]> {
     return this.http
       .get<string[]>(`${this.env.api.news}/origins`, { headers: new HttpHeaders({ [ANONYMOUS_HEADER]: 'true' }) })
       .pipe(share())

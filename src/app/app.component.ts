@@ -109,8 +109,8 @@ const menus = [
 // tslint:disable-next-line:component-class-suffix
 export class ESPM {
   @ViewChild(Nav) nav: Nav;
-  public rootPage: any = 'HomePage';
-  public menus = menus;
+  rootPage: any = 'HomePage';
+  menus = menus;
 
   /**
    *
@@ -130,12 +130,12 @@ export class ESPM {
   /**
    *
    */
-  public openPage = (page: string) => this.nav.setRoot(page);
+  openPage = (page: string) => this.nav.setRoot(page);
 
   /**
    *
    */
-  public logout = () => {
+  logout = () => {
     this.auth.logout().then(() => this.openPage('HomePage'));
   };
 

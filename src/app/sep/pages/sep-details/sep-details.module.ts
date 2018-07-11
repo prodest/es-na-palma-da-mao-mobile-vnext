@@ -1,8 +1,9 @@
 import { NgModule } from '@angular/core';
-import { IonicPageModule } from 'ionic-angular';
-import { SepDetailsPage } from './sep-details';
-import { ProtocolDetailItemComponentModule } from './../../components';
 import { CapitalizePipeModule } from '@espm/shared/pipes';
+import { IonicPageModule } from 'ionic-angular';
+
+import { ProtocolDetailItemComponentModule } from './../../components';
+import { SepDetailsPage } from './sep-details';
 
 @NgModule({
   declarations: [SepDetailsPage],

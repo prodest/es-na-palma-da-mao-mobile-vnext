@@ -1,2 +1,2 @@
-export * from './date-format.pipe'
-export * from './date-format.pipe.module'
+export * from './date-format.pipe';
+export * from './date-format.pipe.module';

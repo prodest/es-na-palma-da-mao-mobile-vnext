@@ -1,2 +1,2 @@
-export * from './capitalize.pipe'
-export * from './capitalize.pipe.module'
+export * from './capitalize.pipe';
+export * from './capitalize.pipe.module';

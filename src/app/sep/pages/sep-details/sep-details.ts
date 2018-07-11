@@ -3,15 +3,14 @@ import { AuthService } from '@espm/core/auth';
 import { IonicPage, NavParams, ToastController } from 'ionic-angular';
 
 import { Protocol, ProtocolUpdate } from '../../model';
-import { SepService, SepStorageProvider } from '../../providers';
+import { SepService } from '../../providers';
 
 @IonicPage({
   segment: 'sep/processo/:protocol'
 })
 @Component({
   selector: 'page-sep-details',
-  templateUrl: 'sep-details.html',
-  providers: [SepStorageProvider]
+  templateUrl: 'sep-details.html'
 })
 export class SepDetailsPage {
   protocol: Protocol;

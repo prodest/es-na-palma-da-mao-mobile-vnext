@@ -1,6 +1,6 @@
-import { Injectable } from '@angular/core'
+import { Injectable } from '@angular/core';
 
-import { Token } from './models'
+import { Token } from './models';
 
 /**
  * Extraído de https://github.com/auth0/angular2-jwt/blob/master/angular2-jwt.ts
@@ -12,26 +12,26 @@ export class JwtHelper {
    *
    */
   private urlBase64Decode(str: string): string {
-    let output = str.replace(/-/g, '+').replace(/_/g, '/')
+    let output = str.replace(/-/g, '+').replace(/_/g, '/');
 
     // tslint:disable:no-switch-case-fall-through
     switch (output.length % 4) {
       case 0: {
-        break
+        break;
       }
       case 2: {
-        output += '=='
-        break
+        output += '==';
+        break;
       }
       case 3: {
-        output += '='
-        break
+        output += '=';
+        break;
       }
       default: {
-        throw new Error('Illegal base64url string!')
+        throw new Error('Illegal base64url string!');
       }
     }
-    return this.b64DecodeUnicode(output)
+    return this.b64DecodeUnicode(output);
   }
 
   /**
@@ -39,13 +39,13 @@ export class JwtHelper {
    *
    */
   private b64decode(str: string): string {
-    let chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/='
-    let output: string = ''
+    let chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/=';
+    let output: string = '';
 
-    str = String(str).replace(/=+$/, '')
+    str = String(str).replace(/=+$/, '');
 
     if (str.length % 4 === 1) {
-      throw new Error("'atob' failed: The string to be decoded is not correctly encoded.")
+      throw new Error("'atob' failed: The string to be decoded is not correctly encoded.");
     }
 
     // tslint:disable:no-conditional-assignment
@@ -65,9 +65,9 @@ export class JwtHelper {
         : 0
     ) {
       // try to find character in table (0-63, not found => -1)
-      buffer = chars.indexOf(buffer)
+      buffer = chars.indexOf(buffer);
     }
-    return output
+    return output;
   }
 
   /**
@@ -78,95 +78,95 @@ export class JwtHelper {
     return decodeURIComponent(
       Array.prototype.map
         .call(this.b64decode(str), (c: any) => {
-          return '%' + ('00' + c.charCodeAt(0).toString(16)).slice(-2)
+          return '%' + ('00' + c.charCodeAt(0).toString(16)).slice(-2);
         })
         .join('')
-    )
+    );
   }
 
   /**
    *
    *
    */
-  public decodeToken(token: Token): any {
-    let parts = token.split('.')
+  decodeToken(token: Token): any {
+    let parts = token.split('.');
 
     if (parts.length !== 3) {
-      throw new Error('JWT must have 3 parts')
+      throw new Error('JWT must have 3 parts');
     }
 
-    let decoded = this.urlBase64Decode(parts[1])
+    let decoded = this.urlBase64Decode(parts[1]);
     if (!decoded) {
-      throw new Error('Cannot decode the token')
+      throw new Error('Cannot decode the token');
     }
 
-    return JSON.parse(decoded)
+    return JSON.parse(decoded);
   }
 
   /**
    *
    *
    */
-  public getTokenExpirationDate(token: Token): Date {
-    let decoded: any
-    decoded = this.decodeToken(token)
+  getTokenExpirationDate(token: Token): Date {
+    let decoded: any;
+    decoded = this.decodeToken(token);
 
     if (!decoded.hasOwnProperty('exp')) {
-      return null
+      return null;
     }
 
-    let date = new Date(0) // The 0 here is the key, which sets the date to the epoch
-    date.setUTCSeconds(decoded.exp)
+    let date = new Date(0); // The 0 here is the key, which sets the date to the epoch
+    date.setUTCSeconds(decoded.exp);
 
-    return date
+    return date;
   }
 
   /**
    *
    *
    */
-  public getNotBeforeDate(token: Token): Date {
-    let decoded: any
-    decoded = this.decodeToken(token)
+  getNotBeforeDate(token: Token): Date {
+    let decoded: any;
+    decoded = this.decodeToken(token);
 
     if (!decoded.hasOwnProperty('nbf')) {
-      return null
+      return null;
     }
 
-    let date = new Date(0) // The 0 here is the key, which sets the date to the epoch
-    date.setUTCSeconds(decoded.nbf)
+    let date = new Date(0); // The 0 here is the key, which sets the date to the epoch
+    date.setUTCSeconds(decoded.nbf);
 
-    return date
+    return date;
   }
 
   /**
    *
    *
    */
-  public isTokenExpired(token: Token, date: Date = new Date()): boolean {
-    const exp = this.getTokenExpirationDate(token)
+  isTokenExpired(token: Token, date: Date = new Date()): boolean {
+    const exp = this.getTokenExpirationDate(token);
 
     if (exp == null) {
-      return false
+      return false;
     }
 
     // Token expired?
-    return date.valueOf() >= exp.valueOf()
+    return date.valueOf() >= exp.valueOf();
   }
 
   /**
    *
    *
    */
-  public isTokenIsExpiringIn(token: Token, date: Date = new Date()) {
-    const exp = this.getTokenExpirationDate(token).valueOf() // data de expiração do token (em ms)
-    const nbf = this.getNotBeforeDate(token).valueOf() // data  de início de validade do token (em ms)
+  isTokenIsExpiringIn(token: Token, date: Date = new Date()) {
+    const exp = this.getTokenExpirationDate(token).valueOf(); // data de expiração do token (em ms)
+    const nbf = this.getNotBeforeDate(token).valueOf(); // data  de início de validade do token (em ms)
 
-    const expiresIn = exp - nbf // duração do token (em ms)
+    const expiresIn = exp - nbf; // duração do token (em ms)
 
     return (
       !this.isTokenExpired(token, date) && exp - date.valueOf() < expiresIn / 2 // se já passou mais da metade da duraão do token
-    )
+    );
   }
 }
 
@@ -175,9 +175,9 @@ export class JwtHelper {
  * For use with the @CanActivate router decorator and NgIf
  */
 export function tokenNotExpired(jwt?: Token): boolean {
-  const token: Token = jwt
+  const token: Token = jwt;
 
-  const jwtHelper = new JwtHelper()
+  const jwtHelper = new JwtHelper();
 
-  return token != null && !jwtHelper.isTokenExpired(token)
+  return token != null && !jwtHelper.isTokenExpired(token);
 }

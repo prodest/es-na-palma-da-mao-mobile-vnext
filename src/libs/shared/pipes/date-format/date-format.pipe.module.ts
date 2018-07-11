@@ -1,7 +1,7 @@
-import { DatePipe } from '@angular/common'
-import { NgModule } from '@angular/core'
+import { DatePipe } from '@angular/common';
+import { NgModule } from '@angular/core';
 
-import { DateFormatPipe } from './date-format.pipe'
+import { DateFormatPipe } from './date-format.pipe';
 
 @NgModule({
   declarations: [DateFormatPipe],

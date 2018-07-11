@@ -5,17 +5,15 @@ import { IonicPage, NavController, ToastController } from 'ionic-angular';
 import { Observable } from 'rxjs/Observable';
 import { Subject } from 'rxjs/Subject';
 
-import { Protocol } from '../../model/protocol';
-import { FavoriteProtocol } from './../../model';
-import { SepService } from './../../providers/sep.service';
+import { FavoriteProtocol, Protocol } from './../../model';
+import { SepService } from './../../providers';
 
 @IonicPage({
   segment: 'sep/consulta'
 })
 @Component({
   selector: 'page-sep-search',
-  templateUrl: 'sep-search.html',
-  providers: [AndroidPermissionsService, BarcodeScanner, SepService]
+  templateUrl: 'sep-search.html'
 })
 export class SepSearchPage implements OnDestroy {
   protocolNumberModel: string;

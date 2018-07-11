@@ -12,7 +12,7 @@ import { DetranStorageModel } from './detran-storage.model';
 @Injectable()
 export class DetranStorage extends LocalStorage<DetranStorageModel> {
   /**
-   * Creates an instance of DetranStorage.
+   * C
    *
    */
   constructor(storage: Storage, defaults: any, storageKey: string) {
@@ -23,7 +23,7 @@ export class DetranStorage extends LocalStorage<DetranStorageModel> {
    *
    *
    */
-  public containsVehicle = (vehicle: Vehicle): boolean => {
+  containsVehicle = (vehicle: Vehicle): boolean => {
     return !!this.getValue('vehicles').find(v => {
       return v.plate.toUpperCase() === vehicle.plate.toUpperCase() || v.renavam === vehicle.renavam;
     });

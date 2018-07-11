@@ -16,7 +16,7 @@ export interface AccessTokenClaims {
    *  which may be context-specific. The amr value is an array of case sensitive strings.
    * @type {string[]}
    */
-  amr: string[]
+  amr: string[];
 
   /**
    * Audience Claim
@@ -29,21 +29,21 @@ export interface AccessTokenClaims {
    *
    * @type {string}
    */
-  aud: string
+  aud: string;
 
   /**
    *
    *
    * @type {number}
    */
-  auth_time: number
+  auth_time: number;
 
   /**
    * Id of the client we want to use when hitting the authorization endpoint
    *
    * @type {string}
    */
-  client_id: string
+  client_id: string;
 
   /**
    * Expiration Time Claim
@@ -55,14 +55,14 @@ export interface AccessTokenClaims {
    *
    * @type {number}
    */
-  exp: number
+  exp: number;
 
   /**
    *
    *
    * @type {string}
    */
-  idp: string
+  idp: string;
 
   /**
    * Issuer Claims
@@ -71,7 +71,7 @@ export interface AccessTokenClaims {
    *
    * @type {string}
    */
-  iss: string
+  iss: string;
 
   /**
    * Not Before Claim
@@ -82,14 +82,14 @@ export interface AccessTokenClaims {
    *
    * @type {number}
    */
-  nbf: number
+  nbf: number;
 
   /**
    * Scoped Permissions
    *
    * @type {string}
    */
-  scope: string
+  scope: string;
 
   /**
    * Subject Claims
@@ -100,5 +100,5 @@ export interface AccessTokenClaims {
    *
    * @type {string}
    */
-  sub: string
+  sub: string;
 }

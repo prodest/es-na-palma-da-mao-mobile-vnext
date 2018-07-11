@@ -1,5 +1,5 @@
-import { DatePipe } from '@angular/common'
-import { Pipe, PipeTransform } from '@angular/core'
+import { DatePipe } from '@angular/common';
+import { Pipe, PipeTransform } from '@angular/core';
 
 @Pipe({ name: 'dateFormat' })
 export class DateFormatPipe implements PipeTransform {
@@ -12,10 +12,10 @@ export class DateFormatPipe implements PipeTransform {
    *
    *
    */
-  public transform(dateString?: string, format = 'dd/MM/yyyy HH:mm'): any {
+  transform(dateString?: string, format = 'dd/MM/yyyy HH:mm'): any {
     if (!dateString) {
-      return ''
+      return '';
     }
-    return this.datePipe.transform(new Date(dateString), format)
+    return this.datePipe.transform(new Date(dateString), format);
   }
 }

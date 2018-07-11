@@ -1,8 +1,8 @@
-import { Injectable } from '@angular/core'
-import { Storage } from '@ionic/storage'
+import { Injectable } from '@angular/core';
+import { Storage } from '@ionic/storage';
 
-import { LocalStorage } from './../storage/local-storage.service'
-import { AuthStorageModel } from './auth-storage.model'
+import { LocalStorage } from './../storage/local-storage.service';
+import { AuthStorageModel } from './auth-storage.model';
 
 /**
  * Serviço que trata local storage no contexto da autenticação
@@ -15,6 +15,6 @@ export class AuthStorage extends LocalStorage<AuthStorageModel> {
    *
    */
   constructor(storage: Storage, defaults: any, storageKey: string) {
-    super(storage, defaults, storageKey)
+    super(storage, defaults, storageKey);
   }
 }

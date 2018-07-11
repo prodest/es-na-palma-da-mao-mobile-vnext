@@ -1,9 +1,9 @@
-import { HttpClient, HttpParams } from '@angular/common/http'
-import { Injectable } from '@angular/core'
-import { Observable } from 'rxjs/Observable'
-import { share } from 'rxjs/operators'
+import { HttpClient, HttpParams } from '@angular/common/http';
+import { Injectable } from '@angular/core';
+import { Observable } from 'rxjs/Observable';
+import { share } from 'rxjs/operators';
 
-export type Params = { [key: string]: any }
+export type Params = { [key: string]: any };
 
 @Injectable()
 export class ApiBaseService<T extends { id: string | number }> {
@@ -17,7 +17,7 @@ export class ApiBaseService<T extends { id: string | number }> {
    *
    */
   save(model: T): Observable<T> {
-    return model.id ? this.update(model) : this.create(model)
+    return model.id ? this.update(model) : this.create(model);
   }
 
   /**
@@ -25,7 +25,7 @@ export class ApiBaseService<T extends { id: string | number }> {
    *
    */
   create(model: T): Observable<T> {
-    return this.http.post<T>(this.api, model).pipe(share())
+    return this.http.post<T>(this.api, model).pipe(share());
   }
 
   /**
@@ -33,7 +33,7 @@ export class ApiBaseService<T extends { id: string | number }> {
    *
    */
   update(model: T): Observable<T> {
-    return this.http.put<T>(this.endpoint(model.id), model).pipe(share())
+    return this.http.put<T>(this.endpoint(model.id), model).pipe(share());
   }
 
   /**
@@ -41,7 +41,7 @@ export class ApiBaseService<T extends { id: string | number }> {
    *
    */
   delete(model: any): Observable<T> {
-    return this.http.delete<T>(this.endpoint(model.id)).pipe(share())
+    return this.http.delete<T>(this.endpoint(model.id)).pipe(share());
   }
 
   /**
@@ -49,7 +49,7 @@ export class ApiBaseService<T extends { id: string | number }> {
    *
    */
   get(route: number | string, params?: Params): Observable<T> {
-    return this.http.get<T>(this.endpoint(route), { params: this.toParams(params) }).pipe(share())
+    return this.http.get<T>(this.endpoint(route), { params: this.toParams(params) }).pipe(share());
   }
 
   /**
@@ -57,7 +57,7 @@ export class ApiBaseService<T extends { id: string | number }> {
    *
    */
   getAll(params?: Params): Observable<T[]> {
-    return this.http.get<T[]>(this.api, { params: this.toParams(params) }).pipe(share())
+    return this.http.get<T[]>(this.api, { params: this.toParams(params) }).pipe(share());
   }
 
   /**
@@ -65,7 +65,7 @@ export class ApiBaseService<T extends { id: string | number }> {
    *
    */
   protected endpoint(route: number | string): string {
-    return !route ? this.api : `${this.api}/${route}`.trim()
+    return !route ? this.api : `${this.api}/${route}`.trim();
   }
 
   /**
@@ -73,10 +73,10 @@ export class ApiBaseService<T extends { id: string | number }> {
    *
    */
   protected toParams(params: Params = {}) {
-    let httpParams = new HttpParams()
+    let httpParams = new HttpParams();
     Object.keys(params)
       .filter(key => params[key] != null)
-      .forEach(key => (httpParams = httpParams.append(key, params[key])))
-    return httpParams
+      .forEach(key => (httpParams = httpParams.append(key, params[key])));
+    return httpParams;
   }
 }

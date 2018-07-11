@@ -11,8 +11,7 @@ import { Hit, SearchFilter, SearchResult } from './../../model';
 })
 @Component({
   selector: 'page-dio-search',
-  templateUrl: 'dio-search.html',
-  providers: [SocialSharing]
+  templateUrl: 'dio-search.html'
 })
 export class DioSearchPage {
   searchResults: SearchResult;

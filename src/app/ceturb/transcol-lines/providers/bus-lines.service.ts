@@ -212,7 +212,7 @@ export class BusLinesService {
    *
    *
    */
-  public showMessage = (message: string) => {
+  showMessage = (message: string) => {
     this.toastCtrl.create({ message, duration: 4000 }).present();
   };
 }

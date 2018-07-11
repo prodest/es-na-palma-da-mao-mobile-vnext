@@ -1,6 +1,6 @@
-import { NgModule } from '@angular/core'
+import { NgModule } from '@angular/core';
 
-import { NoMenuDirective } from './no-menu.directive'
+import { NoMenuDirective } from './no-menu.directive';
 
 @NgModule({
   declarations: [NoMenuDirective],

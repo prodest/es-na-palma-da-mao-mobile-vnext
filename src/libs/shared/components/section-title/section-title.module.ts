@@ -1,6 +1,6 @@
-import { NgModule } from '@angular/core'
+import { NgModule } from '@angular/core';
 
-import { SectionTitleComponent } from './section-title'
+import { SectionTitleComponent } from './section-title';
 
 @NgModule({
   declarations: [SectionTitleComponent],
