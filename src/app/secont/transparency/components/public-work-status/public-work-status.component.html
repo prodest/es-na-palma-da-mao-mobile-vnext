@@ -1,7 +1,14 @@
-<div class="status status--is-{{status}}" *ngIf="status" [ngSwitch]="status">
-  <i *ngSwitchCase="PublicWorkStatus.Concluida" class="status__icon fa fa-check-circle"></i>
-  <i *ngSwitchCase="PublicWorkStatus.Iniciada" class="status__icon fa fa-play-circle"></i>
-  <i *ngSwitchCase="PublicWorkStatus.Paralisada" class="status__icon fa fa-stop-circle"></i>
-  <i *ngSwitchCase="PublicWorkStatus.Reiniciada" class="status__icon fa fa-play-circle"></i>
-  <i *ngSwitchDefault class="status__icon fa fa-exclamation-circle"></i> {{status}}
+<div class="status status--is-{{status}}"
+     *ngIf="status"
+     [ngSwitch]="status">
+  <i *ngSwitchCase="PublicWorkStatus.Concluida"
+     class="status__icon fa fa-check-circle"></i>
+  <i *ngSwitchCase="PublicWorkStatus.Iniciada"
+     class="status__icon fa fa-play-circle"></i>
+  <i *ngSwitchCase="PublicWorkStatus.Paralisada"
+     class="status__icon fa fa-stop-circle"></i>
+  <i *ngSwitchCase="PublicWorkStatus.Reiniciada"
+     class="status__icon fa fa-play-circle"></i>
+  <i *ngSwitchDefault
+     class="status__icon fa fa-exclamation-circle"></i> {{status}}
 </div>
