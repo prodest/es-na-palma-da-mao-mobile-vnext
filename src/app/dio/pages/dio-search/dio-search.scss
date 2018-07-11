@@ -24,11 +24,10 @@ page-dio-search {
 
     ion-badge {
       font-size: 12px;
+      float: right;
+      color: #208baa;
+      background-color: transparent;
     }
-  }
-
-  .accent {
-    color: $color-secondary;
   }
 
   blockquote {
@@ -47,14 +46,8 @@ page-dio-search {
   }
 
   .hit-buttons button {
-    /* float: right; */
-    margin-top: -30px;
-    width: auto;
-
     ion-icon {
       margin-left: 5px;
-      color: $color-primary;
-      background-color: transparent;
     }
   }
 }

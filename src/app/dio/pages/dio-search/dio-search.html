@@ -1,9 +1,3 @@
-<!--
-  Generated template for the DioSearchPage page.
-
-  See http://ionicframework.com/docs/components/#navigation for more info on
-  Ionic pages and navigation.
--->
 <ion-header>
   <ion-navbar>
     <button ion-button
@@ -13,6 +7,7 @@
     <ion-title>Diário Oficial ES</ion-title>
     <ion-buttons end>
       <button ion-button
+              icon-only
               (click)="openFilter()">
         <ion-icon name="options"></ion-icon>
       </button>
@@ -24,7 +19,7 @@
   <ion-list *ngIf="searched && totalHits">
     <ion-list-header>
       {{ totalHits }} resultados encontrados para
-      <span class="accent">"{{ filter.query }}"</span>
+      <strong>"{{ filter.query }}"</strong>
     </ion-list-header>
     <ion-item *ngFor="let hit of hits">
       <div class="hit-title">
@@ -38,21 +33,27 @@
       <div class="hit-buttons">
         <button ion-button
                 (click)="open( hit.editionUrl )"
-                clear>
+                clear
+                accent>
           EDIÇÃO
-          <ion-icon name="cloud-download"></ion-icon>
+          <ion-icon accent
+                    name="cloud-download"></ion-icon>
         </button>
         <button ion-button
                 (click)="open( hit.pageUrl )"
-                clear>
+                clear
+                accent>
           PÁGINA
-          <ion-icon name="cloud-download"></ion-icon>
+          <ion-icon accent
+                    name="cloud-download"></ion-icon>
         </button>
         <button ion-button
                 (click)="share( hit )"
-                clear>
+                clear
+                accent>
           COMPARTILHAR
-          <ion-icon name="share"></ion-icon>
+          <ion-icon accent
+                    name="share"></ion-icon>
         </button>
       </div>
     </ion-item>
