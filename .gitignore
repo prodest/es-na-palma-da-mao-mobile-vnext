@@ -45,6 +45,9 @@ src/**/*.metadata.json
 src/**/*.ngsummary.json
 src/**/*.js
 
+# exceptions
+!src/assets/scripts/Chart.bundle.min.js
+
 .idea/
 .sourcemaps/
 .sass-cache/
