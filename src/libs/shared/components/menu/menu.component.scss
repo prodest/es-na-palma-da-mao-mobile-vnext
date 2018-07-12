@@ -1,4 +1,4 @@
-menu {
+espm-menu {
   .menu {
     // ion-label {
     //   color: gray;
@@ -6,9 +6,15 @@ menu {
     // ion-icon {
     //   color: gray;
     // }
-    button.last {
-      .item-inner {
-        border-bottom: none;
+    button {
+      &.last {
+        .item-inner {
+          border-bottom: none;
+        }
+      }
+
+      &.accessDenied {
+        color: #999;
       }
     }
     ion-list-header {

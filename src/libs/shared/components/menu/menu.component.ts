@@ -1,6 +1,6 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { AuthService } from '@espm/core';
-import { App } from 'ionic-angular';
+import { AlertController, App, MenuController } from 'ionic-angular';
 
 const menus = [
   // {
@@ -141,13 +141,15 @@ const menus = [
         title: 'Situação CNH',
         icon: 'car',
         component: 'DriverLicensePage',
-        order: 2
+        order: 2,
+        secure: true
       },
       {
         title: 'Multas por Veículo',
         icon: 'car',
         component: 'VehiclesPage',
-        order: 2
+        order: 2,
+        secure: true
       }
     ]
   },
@@ -221,17 +223,57 @@ export class MenuComponent {
   /**
    *
    */
-  constructor(private auth: AuthService, private appCtrl: App) {}
+  constructor(
+    public auth: AuthService,
+    private menuCtrl: MenuController,
+    private alertCtrl: AlertController,
+    private appCtrl: App
+  ) {}
 
   /**
    *
    */
-  openPage = (page: string) => this.appCtrl.getRootNav().setRoot(page);
+  openPage = (page: string, accessDenied: boolean = false) => {
+    if (accessDenied) {
+      this.showAuthNeededModal();
+    } else {
+      this.appCtrl.getRootNav().setRoot(page);
+      this.menuCtrl.close();
+    }
+  };
 
   /**
    *
    */
   logout = () => {
     this.auth.logout().then(() => this.openPage('HomePage'));
+  };
+
+  /**
+   *
+   *
+   */
+  private showAuthNeededModal = () => {
+    let alert = this.alertCtrl.create({
+      title: 'Login necessário',
+      message: 'Você deve estar autenticado no <strong>ES na palma da mão</strong> para acessar essa funcionalidade.',
+      buttons: [
+        {
+          text: 'Entendi',
+          role: 'cancel'
+        },
+        {
+          text: 'Autenticar',
+          handler: () => {
+            this.appCtrl
+              .getRootNav()
+              .push('LoginPage')
+              .then(() => alert.dismiss());
+            return false;
+          }
+        }
+      ]
+    });
+    return alert.present();
   };
 }
