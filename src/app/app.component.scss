@@ -129,6 +129,19 @@ ion-icon[name='exit'] {
   max-height: 60vh;
 }
 
+ion-thumbnail {
+  img-loader {
+    width: 80px;
+    height: 80px;
+
+    ion-spinner {
+      svg circle {
+        stroke: #999 !important;
+      }
+    }
+  }
+}
+
 // @media only screen and (min-width: 768px) {
 //   .ion-page .scroll-content {
 //     padding: 10px;

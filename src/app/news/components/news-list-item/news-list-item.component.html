@@ -5,7 +5,7 @@
   </p>
   <ion-thumbnail item-end
                  *ngIf="news.image">
-    <img [src]="news.image"
-         onerror="this.style.display='none'" />
+    <img-loader [src]="news.image"></img-loader>
   </ion-thumbnail>
+
 </ion-item>
