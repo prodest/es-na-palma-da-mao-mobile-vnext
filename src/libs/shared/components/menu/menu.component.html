@@ -1,0 +1,29 @@
+<ion-list class="menu">
+  <button menuClose
+          ion-item
+          no-lines
+          (click)="openPage('LoginPage')">
+    <ion-icon item-start
+              name="ios-log-in"></ion-icon>
+    Login / Cadastre-se
+  </button>
+  <ng-container *ngFor="let menu of menus">
+    <ion-list-header>{{menu.name}}</ion-list-header>
+    <button menuClose
+            ion-item
+            *ngFor="let page of menu.items;let last = last"
+            [ngClass]="{ last: last }"
+            (click)="openPage(page.component)">
+      <ion-icon item-start
+                name="md-{{page.icon}}"></ion-icon>
+      {{page.title}}
+    </button>
+  </ng-container>
+  <button menuClose
+          ion-item
+          (click)="logout()">
+    <ion-icon item-start
+              name="log-out"></ion-icon>
+    Sair
+  </button>
+</ion-list>

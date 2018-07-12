@@ -1,0 +1,18 @@
+menu {
+  .menu {
+    // ion-label {
+    //   color: gray;
+    // }
+    // ion-icon {
+    //   color: gray;
+    // }
+    button.last {
+      .item-inner {
+        border-bottom: none;
+      }
+    }
+    ion-list-header {
+      font-weight: 500;
+    }
+  }
+}
