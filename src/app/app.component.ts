@@ -116,12 +116,12 @@ export class ESPM {
    *
    */
   constructor(
-    platform: Platform,
+    private platform: Platform,
     private auth: AuthService,
     private statusBar: StatusBar,
     private splashScreen: SplashScreen
   ) {
-    platform
+    this.platform
       .ready()
       .then(this.initialize)
       .catch(console.error);

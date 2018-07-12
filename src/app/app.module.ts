@@ -5,6 +5,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { CoreModule, ionicConfig } from '@espm/core';
 import { localeIdFactory, localeInitializer, LocaleService } from '@espm/core/locale/LocaleService';
 import { AndroidPermissionsService } from '@espm/core/permissions';
+import { AndroidPermissions } from '@ionic-native/android-permissions';
 import { BarcodeScanner } from '@ionic-native/barcode-scanner';
 import { Facebook } from '@ionic-native/facebook';
 import { GooglePlus } from '@ionic-native/google-plus';
@@ -48,6 +49,7 @@ registerLocaleData(ptBr);
     Facebook,
     SocialSharing,
     InAppBrowser,
+    AndroidPermissions,
     AndroidPermissionsService,
     BarcodeScanner,
     ...DetranProviders,
