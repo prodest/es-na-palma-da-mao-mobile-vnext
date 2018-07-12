@@ -1,4 +1,3 @@
-<!-- Generated template for the CardNoticiaComponent component -->
 <ng-container *ngIf="news">
   <ng-container *ngIf="!highlight">
     <ion-card>
@@ -8,7 +7,7 @@
         <div class="news-info">
           <span accent>{{news.origin}}</span>
           <ion-note>| {{news.date | date: 'dd/MM/yyyy HH:mm'}}</ion-note>
-          <ion-note *ngIf="wasUpdated(news)"
+          <ion-note *ngIf="news | wasUpdated"
                     class="last-updated">Atualizada há: {{ news.lastModified | fromNow }}</ion-note>
         </div>
         <ion-card-title>
