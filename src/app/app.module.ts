@@ -5,6 +5,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { CoreModule, ionicConfig } from '@espm/core';
 import { localeIdFactory, localeInitializer, LocaleService } from '@espm/core/locale/LocaleService';
 import { AndroidPermissionsService } from '@espm/core/permissions';
+import { ImageLoaderModule } from '@espm/shared';
 import { AndroidPermissions } from '@ionic-native/android-permissions';
 import { BarcodeScanner } from '@ionic-native/barcode-scanner';
 import { Facebook } from '@ionic-native/facebook';
@@ -37,7 +38,13 @@ registerLocaleData(ptBr);
     BrowserModule,
     CoreModule,
     IonicStorageModule.forRoot({ name: 'espm', driverOrder: ['localstorage'] }),
-    IonicModule.forRoot(ESPM, ionicConfig)
+    IonicModule.forRoot(ESPM, ionicConfig),
+    ImageLoaderModule.forRoot({
+      fallbackUrl: 'assets/imgs/no-img.png',
+      fallbackAsPlaceholder: false,
+      spinnerEnabled: true,
+      spinnerName: ''
+    })
   ],
   bootstrap: [IonicApp],
   entryComponents: [ESPM],
