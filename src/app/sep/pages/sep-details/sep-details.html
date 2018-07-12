@@ -63,7 +63,7 @@
     <ion-item *ngIf="protocol.updates">
       <ion-list class="list-updates">
         <ion-list-header>
-          <ion-row>
+          <ion-row (click)="toggleUpdates()">
             <ion-col>
               Trâmites
             </ion-col>
@@ -71,8 +71,7 @@
               <button class="show-updates"
                       ion-button
                       icon-right
-                      clear
-                      (click)="toggleUpdates()">
+                      clear>
                 <ion-icon *ngIf="showAllUpdates"
                           name="remove"></ion-icon>
                 <ion-icon *ngIf="!showAllUpdates"
