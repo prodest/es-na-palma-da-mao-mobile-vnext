@@ -8,13 +8,10 @@ card-noticia {
     color: #999;
   }
 
-  .news-info-highlight .col {
-    color: #999;
-    padding-left: 0;
-    padding-right: 0;
-
-    &:last-child span {
-      float: right;
-    }
+  .news-info-highlight {
+    margin-top: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
   }
 }

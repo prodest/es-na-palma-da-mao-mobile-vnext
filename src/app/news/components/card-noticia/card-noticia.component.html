@@ -6,10 +6,10 @@
            [src]="news.image" />
       <ion-card-content>
         <div class="news-info">
-          <span accent>{{news.origin}}</span> |
-          <span>{{news.date | date: 'dd/MM/yyyy HH:mm'}}</span>
-          <small *ngIf="wasUpdated(news)"
-                 class="last-updated">Atualizada há: {{ news.lastModified | fromNow }}</small>
+          <span accent>{{news.origin}}</span>
+          <ion-note>| {{news.date | date: 'dd/MM/yyyy HH:mm'}}</ion-note>
+          <ion-note *ngIf="wasUpdated(news)"
+                    class="last-updated">Atualizada há: {{ news.lastModified | fromNow }}</ion-note>
         </div>
         <ion-card-title>
           {{news.title}}
@@ -28,15 +28,13 @@
           {{news.title}}
         </ion-card-title>
         <p [innerHTML]="news.summary"></p>
-        <ion-row no-padding
-                 class="news-info-highlight">
-          <ion-col>
-            <span>{{news.origin}} | {{news.date | fromNow}}</span>
-          </ion-col>
-          <ion-col>
-            <span accent>LEIA MAIS</span>
-          </ion-col>
-        </ion-row>
+        <div class="news-info-highlight">
+          <ion-note item-start>{{news.origin}} | {{news.date | fromNow}}</ion-note>
+          <button item-end
+                  ion-button
+                  clear
+                  accent>LEIA MAIS</button>
+        </div>
       </ion-card-content>
     </ion-card>
   </ng-container>
