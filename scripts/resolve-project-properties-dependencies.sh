@@ -1,0 +1,1 @@
+sed -i 's/\(com.google.android.gms:[a-z-]*:\).*/\111.0.4/' ./platforms/android/project.properties
