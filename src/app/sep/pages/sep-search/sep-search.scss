@@ -1,23 +1,25 @@
 page-sep-search {
+  ion-content {
+    background: #208baa url('/assets/imgs/sep/triangles.png') !important;
+  }
   .search-bar .col {
     &:first-child {
       flex-grow: 8;
     }
-
-    &:last-child {
-      display: flex;
-      justify-content: center;
-    }
-
-    .btn-search-protocol {
-      align-self: center;
-      padding: 0 0.1rem;
-      height: 4.1rem;
+    .searchbar-md .searchbar-input {
+      padding: 6px 40px;
     }
   }
 
   .initial-message {
-    text-align: center;
-    padding: 10px;
+    color: #fff;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+    h2 {
+      font-size: 2rem;
+    }
   }
 }

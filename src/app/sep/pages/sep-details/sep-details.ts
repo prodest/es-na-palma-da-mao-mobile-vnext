@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { AuthService } from '@espm/core/auth';
-import { IonicPage, NavParams, ToastController } from 'ionic-angular';
+import { AlertController, App, IonicPage, NavParams } from 'ionic-angular';
 
 import { Protocol, ProtocolUpdate } from '../../model';
 import { SepService } from '../../providers';
@@ -17,9 +17,14 @@ export class SepDetailsPage {
   lastUpdate: ProtocolUpdate;
   showAllUpdates: boolean = true;
 
+  /**
+   *
+   *
+   */
   constructor(
-    private navParams: NavParams,
-    private toastCtrl: ToastController,
+    public navParams: NavParams,
+    private appCtrl: App,
+    private alertCtrl: AlertController,
     private auth: AuthService,
     private sepService: SepService
   ) {
@@ -27,14 +32,21 @@ export class SepDetailsPage {
     this.protocol = null;
   }
 
+  /**
+   *
+   *
+   */
   ionViewDidLoad() {
     if (this.navParams.data.protocol) {
       this.protocol = this.navParams.data.protocol;
       this.lastUpdate = this.protocol.updates[0];
-      console.log(this.auth.user);
     }
   }
 
+  /**
+   *
+   *
+   */
   isFavorite(protocol: Protocol): boolean {
     return this.sepService.isFavorite(protocol);
   }
@@ -46,9 +58,13 @@ export class SepDetailsPage {
     this.showAllUpdates = !this.showAllUpdates;
   }
 
+  /**
+   *
+   *
+   */
   toggleFavorite(protocol: Protocol): void {
     if (this.auth.user.anonymous) {
-      this.showMessage('Você precisa estar logado para ter acesso a essa funcionalidade');
+      this.showAuthNeededModal();
     } else {
       if (this.isFavorite(protocol)) {
         this.sepService.removeFavorite(protocol).subscribe();
@@ -58,7 +74,31 @@ export class SepDetailsPage {
     }
   }
 
-  private showMessage = (message: string) => {
-    this.toastCtrl.create({ message, duration: 4000 }).present();
+  /**
+   *
+   *
+   */
+  private showAuthNeededModal = () => {
+    let alert = this.alertCtrl.create({
+      title: 'Login necessário',
+      message: 'Você deve estar autenticado no <strong>ES na palma da mão</strong> para acessar essa funcionalidade.',
+      buttons: [
+        {
+          text: 'Entendi',
+          role: 'cancel'
+        },
+        {
+          text: 'Autenticar',
+          handler: () => {
+            this.appCtrl
+              .getRootNav()
+              .push('LoginPage')
+              .then(() => alert.dismiss());
+            return false;
+          }
+        }
+      ]
+    });
+    return alert.present();
   };
 }

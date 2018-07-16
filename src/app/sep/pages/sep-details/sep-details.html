@@ -1,6 +1,6 @@
 <ion-header>
   <ion-navbar>
-    <ion-title>Protocolo</ion-title>
+    <ion-title *ngIf="protocol">Detalhes do Processo</ion-title>
     <ion-buttons end>
       <button ion-button
               icon-only
@@ -15,92 +15,68 @@
 </ion-header>
 
 <ion-content>
+  <ion-list-header *ngIf="protocol">
+    <h1 style="font-weight: 500;">N° #{{protocol.number}}</h1>
+    <small style="display:block;color:#999;margin-top:5px;"> Consulta realizada em 13/07/2018 17:34:42</small>
+  </ion-list-header>
   <ion-list *ngIf="protocol">
-    <protocol-detail-item title="Número"
-                          [value]="protocol.number"
-                          [secondaryColor]="true"></protocol-detail-item>
-    <protocol-detail-item title="Situação"
-                          [value]="protocol.status | capitalize"></protocol-detail-item>
-    <ion-item item-content
-              *ngIf="lastUpdate">
-      <ion-row class="protocol-item-details">
-        <ion-col>
-          <label for="">
-            <strong>Último Andamento</strong>
-          </label>
-        </ion-col>
-        <ion-col class="text-right">
-          <span for="">{{lastUpdate.date | date: 'dd/MM/yyyy'}}</span>
-        </ion-col>
-      </ion-row>
-      <div class="last-update-details">
-        <ion-row>
-          <ion-col>
-            <strong>Órgão:</strong> {{lastUpdate.agency | capitalize}}</ion-col>
-        </ion-row>
-        <ion-row>
-          <ion-col>
-            <strong>Local:</strong> {{lastUpdate.area | capitalize}}</ion-col>
-        </ion-row>
-      </div>
-    </ion-item>
-    <protocol-detail-item title="Assunto"
-                          [value]="protocol.subject | capitalize"></protocol-detail-item>
-    <protocol-detail-item title="Resumo"
-                          [value]="protocol.summary | capitalize"></protocol-detail-item>
-    <protocol-detail-item *ngIf="protocol.extra"
-                          title="Informações diversas"
-                          [value]="protocol.extra"></protocol-detail-item>
     <ion-item>
-      <label>
-        <strong>Interessado(s)</strong>
-      </label>
-      <div *ngFor="let part of protocol.parts"
-           class="interessados">{{part | capitalize}}</div>
+      <p>{{protocol.summary | capitalize}}</p>
     </ion-item>
-    <protocol-detail-item title="Município"
-                          [value]="protocol.district | capitalize"></protocol-detail-item>
-    <ion-item *ngIf="protocol.updates">
-      <ion-list class="list-updates">
-        <ion-list-header>
-          <ion-row (click)="toggleUpdates()">
-            <ion-col>
-              Trâmites
-            </ion-col>
-            <ion-col class="text-right button-only">
-              <button class="show-updates"
-                      ion-button
-                      icon-right
-                      clear>
-                <ion-icon *ngIf="showAllUpdates"
-                          name="remove"></ion-icon>
-                <ion-icon *ngIf="!showAllUpdates"
-                          name="add"></ion-icon>
-              </button>
-            </ion-col>
-          </ion-row>
-        </ion-list-header>
-        <div *ngIf="showAllUpdates">
-          <ion-item *ngFor="let update of protocol.updates">
-            <ion-row>
-              <ion-col>
-                <strong>{{update.date | date: 'dd/MM/yyyy'}}</strong>
-              </ion-col>
-              <ion-col class="text-right">
-                <span class="event-status"> {{update.status | capitalize}}</span>
-              </ion-col>
-            </ion-row>
-            <ion-row>
-              <ion-col>
-                <strong *ngIf="update.agency">Órgão: </strong>{{update.agency | capitalize}}
-              </ion-col>
-              <ion-col>
-                <strong *ngIf="update.area">Local: </strong>{{update.area | capitalize}}
-              </ion-col>
-            </ion-row>
-          </ion-item>
-        </div>
-      </ion-list>
+
+    <ion-item>
+      <strong>Assunto</strong>
+      <p item-end>{{protocol.subject | capitalize}}</p>
+    </ion-item>
+
+    <ion-item>
+      <strong>Situação</strong>
+      <p item-end>{{protocol.status | capitalize}}</p>
+    </ion-item>
+
+    <ion-item *ngIf="lastUpdate">
+      <strong>Último Andamento</strong>
+      <p item-end>{{lastUpdate.date | date: 'dd/MM/yyyy'}}</p>
+    </ion-item>
+
+    <ion-item>
+      <strong>Município</strong>
+      <p item-end>{{protocol.district | capitalize}}</p>
+    </ion-item>
+
+    <ion-item no-lines>
+      <strong>Interessado(s)</strong>
+    </ion-item>
+
+    <ion-item *ngFor="let part of protocol.parts">
+      <ion-icon item-start
+                name="ios-contact"></ion-icon>
+      <p>{{part | capitalize}}</p>
+    </ion-item>
+    <ion-item *ngFor="let part of protocol.parts">
+      <ion-icon item-start
+                name="ios-contact"></ion-icon>
+      <p>{{part | capitalize}}</p>
+    </ion-item>
+    <ion-item *ngFor="let part of protocol.parts">
+      <ion-icon item-start
+                name="ios-contact"></ion-icon>
+      <p>{{part | capitalize}}</p>
+    </ion-item>
+    <ion-item>
+    </ion-item>
+    <ion-item no-lines>
+      <strong>Trâmites(s)</strong>
+    </ion-item>
+    <ion-item *ngFor="let update of protocol.updates">
+      <h3>
+        <strong>{{update.date | date: 'dd/MM/yyyy'}}</strong>
+        <ion-badge>{{update.status | capitalize}}</ion-badge>
+      </h3>
+      <p margin-top>
+        <strong *ngIf="update.agency">Órgão: </strong>{{update.agency | capitalize}}</p>
+      <p>
+        <strong *ngIf="update.area">Local: </strong>{{update.area | capitalize}}</p>
     </ion-item>
   </ion-list>
 </ion-content>
