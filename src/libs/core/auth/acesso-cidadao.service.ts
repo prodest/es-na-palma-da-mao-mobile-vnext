@@ -140,7 +140,7 @@ export class AcessoCidadaoService {
       scope: this.environment.identityServer.defaultScopes
     };
 
-    if (this.authStorage.getValue('clientId') === 'espm') {
+    if (this.authStorage.getValue('clientId') === this.environment.identityServer.clients.espm.id) {
       identity.client_id = this.environment.identityServer.clients.espm.id;
       identity.client_secret = this.environment.identityServer.clients.espm.secret;
     }
