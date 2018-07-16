@@ -4,10 +4,58 @@
             menuToggle>
       <ion-icon name="menu"></ion-icon>
     </button>
-    <ion-title>dashboard</ion-title>
+    <ion-title>ES na Palma da Mão</ion-title>
   </ion-navbar>
 </ion-header>
 
 <ion-content padding>
-  <h2>dashboard</h2>
+  <div id="brasao-governo">
+    <img src="https://cdn.es.gov.br/images/logo/governo/brasao/left-white/Brasao_Governo_240.png" />
+  </div>
+
+  <ion-slides [pager]="true">
+    <ion-slide>
+      <div class="dashboard-icons">
+        <ion-card navPush="TranscolOnlinePage">
+          <ion-icon class="pop-in"
+                    name="md-bus"></ion-icon>Transcol Online
+          <small>CETURB</small>
+        </ion-card>
+        <ion-card navPush="DioSearchPage">
+          <ion-icon class="pop-in"
+                    name="search"></ion-icon>Consulta DIO
+          <small>DIÁRIO OFICIAL</small>
+        </ion-card>
+        <ion-card navPush="NewsListPage">
+          <ion-icon class="pop-in"
+                    name="paper"></ion-icon>Notícias
+          <small>ES</small>
+        </ion-card>
+        <ion-card>
+          <ion-icon class="pop-in"
+                    name="car"></ion-icon>Multas por Veículo
+          <small>DETRAN</small>
+        </ion-card>
+      </div>
+    </ion-slide>
+    <ion-slide>
+      <div class="dashboard-icons">
+        <ion-card navPush="CalendarPage">
+          <ion-icon name="md-calendar"></ion-icon>Agenda ES
+        </ion-card>
+        <ion-card>
+          <ion-icon name="car"></ion-icon>Situação da CNH
+          <small>DETRAN</small>
+        </ion-card>
+        <ion-card navPush="SepSearchPage">
+          <ion-icon name="search"></ion-icon>Consulta Processo
+          <small>SEP</small>
+        </ion-card>
+        <ion-card navPush="TransparenciaDashboardPage">
+          <ion-icon name="pie"></ion-icon>Transparência
+          <small>SECONT</small>
+        </ion-card>
+      </div>
+    </ion-slide>
+  </ion-slides>
 </ion-content>

@@ -37,7 +37,6 @@ export interface Environment {
   identityServer: {
     url: string;
     publicKey: string;
-    scopes: string[];
     defaultScopes: string;
     clients: {
       espm: {
