@@ -1,11 +1,15 @@
-import { Component, ElementRef, Input, OnInit, Renderer } from '@angular/core';
+import { Component, ElementRef, Input, NgZone, OnDestroy, OnInit, Renderer } from '@angular/core';
+import { Content } from 'ionic-angular';
+import { takeUntil } from 'rxjs/operators';
+import { Subject } from 'rxjs/Subject';
 
 @Component({
   selector: 'expandable-header',
   templateUrl: './expandable-header.component.html'
 })
-export class ExpandableHeaderComponent implements OnInit {
-  @Input('scrollArea') scrollArea: any;
+export class ExpandableHeaderComponent implements OnInit, OnDestroy {
+  private destroyed$ = new Subject<boolean>();
+  @Input('scrollArea') scrollArea: Content;
   @Input('maxHeight') maxHeight: number;
   newHeaderHeight: any;
 
@@ -17,7 +21,7 @@ export class ExpandableHeaderComponent implements OnInit {
    *
    *
    */
-  constructor(private element: ElementRef, private renderer: Renderer) {}
+  constructor(private element: ElementRef, private renderer: Renderer, public zone: NgZone) {}
 
   /**
    *
@@ -25,7 +29,21 @@ export class ExpandableHeaderComponent implements OnInit {
    */
   ngOnInit() {
     this.renderer.setElementStyle(this.element.nativeElement, 'height', `${this.maxHeight}px`);
-    this.scrollArea.ionScroll.subscribe(this.resizeHeader);
+    this.scrollArea.ionScroll.pipe(takeUntil(this.destroyed$)).subscribe(this.resizeHeader);
+    this.scrollArea.ionScrollEnd.pipe(takeUntil(this.destroyed$)).subscribe(() => {
+      if (this.newHeaderHeight === 0 || this.newHeaderHeight >= this.maxHeight) {
+        this.scrollArea.resize();
+      }
+    });
+  }
+
+  /**
+   *
+   *
+   */
+  ngOnDestroy() {
+    this.destroyed$.next(true);
+    this.destroyed$.unsubscribe();
   }
 
   /**
@@ -33,6 +51,7 @@ export class ExpandableHeaderComponent implements OnInit {
    *
    */
   private resizeHeader = ev => {
+    // console.log(ev);
     ev &&
       ev.domWrite(() => {
         this.newHeaderHeight = this.maxHeight - ev.scrollTop;
