@@ -3,7 +3,7 @@ import { IonicPage } from 'ionic-angular';
 import { Observable } from 'rxjs/Observable';
 
 import { Edition } from './../../model';
-import { DioService } from './../../providers';
+import { DioApiService } from './../../providers';
 
 @IonicPage({
   segment: 'dio/edicoes-recentes'
@@ -20,7 +20,7 @@ export class LatestEditionsPage {
    *
    *
    */
-  constructor(private dio: DioService) {}
+  constructor(private dio: DioApiService) {}
 
   /**
    *

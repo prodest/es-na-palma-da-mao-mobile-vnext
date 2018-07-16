@@ -1,10 +1,18 @@
-import { Component } from '@angular/core';
-import { SocialSharing } from '@ionic-native/social-sharing';
-import { IonicPage, ModalController } from 'ionic-angular';
+import { Component, ViewChild } from '@angular/core';
+import { ExpandableHeaderComponent } from '@espm/shared';
+import { Content, IonicPage, Loading, LoadingController, ModalController, ToastController } from 'ionic-angular';
 import { finalize } from 'rxjs/operators';
 
-import { DioService } from '../../providers/dio.service';
+import { DioApiService } from '../../providers';
 import { Hit, SearchFilter, SearchResult } from './../../model';
+
+const defaultFilter = {
+  pageNumber: 0,
+  sort: 'date',
+  query: '',
+  dateMin: null,
+  dateMax: null
+};
 
 @IonicPage({
   segment: 'dio/consulta'
@@ -14,21 +22,27 @@ import { Hit, SearchFilter, SearchResult } from './../../model';
   templateUrl: 'dio-search.html'
 })
 export class DioSearchPage {
+  @ViewChild(Content) content: Content;
+  @ViewChild(ExpandableHeaderComponent) header: ExpandableHeaderComponent;
+  private loading: Loading;
   searchResults: SearchResult;
   hits: Hit[] | undefined;
   searched = false;
-  hasMoreHits = false;
+  hasMoreHits = true;
   totalHits: number = 0;
-  filter: SearchFilter = {
-    pageNumber: 0,
-    sort: 'date'
-  };
+  filter: SearchFilter = { ...defaultFilter };
+  lastQuery = '';
 
   /**
    *
    *
    */
-  constructor(private modalCtrl: ModalController, private socialSharing: SocialSharing, private dio: DioService) {}
+  constructor(
+    private modalCtrl: ModalController,
+    private toastr: ToastController,
+    private dio: DioApiService,
+    private loadingCtrl: LoadingController
+  ) {}
 
   /**
    *
@@ -44,33 +58,71 @@ export class DioSearchPage {
    *
    *
    */
-  search = (filter: SearchFilter) => {
-    this.filter = { ...this.filter, ...(filter || {}) };
-    this.dio
-      .search(this.filter)
-      .pipe(finalize(() => (this.searched = true)))
-      .subscribe(this.onSearchSuccess);
+  search = (filter: Partial<SearchFilter>, infiniteScroll) => {
+    this.filter = { ...defaultFilter, ...this.filter, ...filter };
+
+    if (!this.filter.query) {
+      this.toastr.create({ message: 'Escolha uma palavra-chave', duration: 3000, dismissOnPageChange: true }).present();
+    } else if (!this.filter.dateMin) {
+      this.toastr.create({ message: 'Escolha uma data inicial', duration: 3000, dismissOnPageChange: true }).present();
+    } else if (!this.filter.dateMax) {
+      this.toastr.create({ message: 'Escolha uma data final', duration: 3000, dismissOnPageChange: true }).present();
+    } else {
+      if (!infiniteScroll) {
+        this.showLoading();
+      }
+      this.dio
+        .search(this.filter)
+        .pipe(
+          finalize(() => {
+            this.searched = true;
+            this.dismissLoading();
+            infiniteScroll && infiniteScroll.complete();
+          })
+        )
+        .subscribe(this.onSearchSuccess);
+    }
   };
 
   /**
    *
    *
    */
-  share(hit: Hit): void {
-    this.socialSharing.shareWithOptions({
-      message: `DIO ES - ${hit.date} - Pág. ${hit.pageNumber}`,
-      subject: `DIO ES - ${hit.date} - Pág. ${hit.pageNumber}`,
-      url: hit.pageUrl
-    });
+  clear = () => {
+    this.filter = { ...defaultFilter };
+  };
+
+  /**
+   *
+   *
+   */
+  scrollToTop() {
+    this.content.scrollToTop().then(() => this.content.resize());
   }
 
   /**
    *
    *
    */
-  open(url: string): void {
-    window.open(url, '_system');
+  scrollTo(target: number): Promise<any> {
+    return this.content.scrollTo(this.content.scrollLeft, target);
   }
+
+  /**
+   *
+   *
+   */
+  private showLoading = () => {
+    this.loading = this.loadingCtrl.create({ content: 'Aguarde', dismissOnPageChange: true });
+    this.loading.present();
+  };
+  /**
+   *
+   *
+   */
+  private dismissLoading = () => {
+    this.loading && this.loading.dismiss();
+  };
 
   /**
    *
@@ -79,9 +131,11 @@ export class DioSearchPage {
   private onSearchSuccess = (nextResults: SearchResult) => {
     if (this.filter.pageNumber === 0) {
       this.hits = [];
+      this.scrollTo(this.header.height);
     }
     this.totalHits = nextResults.totalHits;
-    this.hits = this.hits.concat(nextResults.hits);
+    this.hits = [...this.hits, ...nextResults.hits];
     this.hasMoreHits = nextResults.hits && nextResults.hits.length > 0;
+    this.lastQuery = this.filter.query;
   };
 }

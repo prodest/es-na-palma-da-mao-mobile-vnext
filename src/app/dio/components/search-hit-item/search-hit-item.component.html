@@ -1,0 +1,36 @@
+<ion-item *ngIf="hit">
+  <div class="hit-title">
+    <strong>Edição de {{ hit.date }}</strong>
+    <ion-badge>Pág. {{ hit.pageNumber }}</ion-badge>
+  </div>
+  <blockquote *ngFor="let highlight of hit.highlights">
+    ...
+    <span [innerHTML]="highlight"></span>...
+  </blockquote>
+  <div class="hit-buttons">
+    <button ion-button
+            (click)="open( hit.editionUrl )"
+            clear
+            accent>
+      EDIÇÃO
+      <ion-icon accent
+                name="cloud-download"></ion-icon>
+    </button>
+    <button ion-button
+            (click)="open( hit.pageUrl )"
+            clear
+            accent>
+      PÁGINA
+      <ion-icon accent
+                name="cloud-download"></ion-icon>
+    </button>
+    <button ion-button
+            (click)="share( hit )"
+            clear
+            accent>
+      COMPARTILHAR
+      <ion-icon accent
+                name="share"></ion-icon>
+    </button>
+  </div>
+</ion-item>

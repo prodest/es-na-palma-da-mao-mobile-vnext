@@ -6,73 +6,91 @@
     </button>
     <ion-title>Diário Oficial ES</ion-title>
     <ion-buttons end>
-      <button ion-button
+      <button *ngIf="totalHits > 0"
+              ion-button
               icon-only
-              (click)="openFilter()">
+              (click)="scrollToTop()">
         <ion-icon name="options"></ion-icon>
       </button>
     </ion-buttons>
   </ion-navbar>
+  <expandable-header [scrollArea]="dioContent"
+                     maxHeight="260">
+    <ion-item no-lines>
+      <ion-label>
+        <ion-icon name="search"></ion-icon>
+      </ion-label>
+      <ion-input type="text"
+                 [(ngModel)]="filter.query"
+                 clearInput
+                 no-validation
+                 placeholder="Palavra-chave"></ion-input>
+    </ion-item>
+    <ion-item no-lines>
+      <ion-label>
+        <ion-icon name="calendar"></ion-icon>
+      </ion-label>
+      <ion-datetime [(ngModel)]="filter.dateMin"
+                    placeholder="Data inicial"
+                    displayFormat="DD/MM/YYYY"
+                    pickerFormat="DD MM YYYY"
+                    cancelText="Cancelar"
+                    doneText="Selecionar">
+      </ion-datetime>
+    </ion-item>
+    <ion-item no-lines>
+      <ion-label>
+        <ion-icon name="calendar"></ion-icon>
+      </ion-label>
+      <ion-datetime [(ngModel)]="filter.dateMax"
+                    placeholder="Data final"
+                    displayFormat="DD/MM/YYYY"
+                    pickerFormat="DD MM YYYY"
+                    cancelText="Cancelar"
+                    doneText="Selecionar">
+      </ion-datetime>
+    </ion-item>
+
+    <button ion-button
+            float-right
+            margin-right
+            color-secondary
+            (click)="search({pageNumber:0})">Pesquisar</button>
+    <button *ngIf="filter.dateMax || filter.dateMin || filter.query"
+            ion-button
+            float-right
+            clear
+            (click)="clear()">limpar</button>
+  </expandable-header>
 </ion-header>
 
-<ion-content>
-  <ion-list *ngIf="searched && totalHits">
+<ion-content #dioContent
+             fullscreen>
+  <ion-list *ngIf="searched && totalHits"
+            class="results">
     <ion-list-header>
       {{ totalHits }} resultados encontrados para
-      <strong>"{{ filter.query }}"</strong>
+      <strong>"{{ lastQuery }}"</strong>
     </ion-list-header>
-    <ion-item *ngFor="let hit of hits">
-      <div class="hit-title">
-        <strong>Edição de {{ hit.date }}</strong>
-        <ion-badge>Pág. {{ hit.pageNumber }}</ion-badge>
-      </div>
-      <blockquote *ngFor="let highlight of hit.highlights">
-        ...
-        <span [innerHTML]="highlight"></span>...
-      </blockquote>
-      <div class="hit-buttons">
-        <button ion-button
-                (click)="open( hit.editionUrl )"
-                clear
-                accent>
-          EDIÇÃO
-          <ion-icon accent
-                    name="cloud-download"></ion-icon>
-        </button>
-        <button ion-button
-                (click)="open( hit.pageUrl )"
-                clear
-                accent>
-          PÁGINA
-          <ion-icon accent
-                    name="cloud-download"></ion-icon>
-        </button>
-        <button ion-button
-                (click)="share( hit )"
-                clear
-                accent>
-          COMPARTILHAR
-          <ion-icon accent
-                    name="share"></ion-icon>
-        </button>
-      </div>
-    </ion-item>
+    <search-hit-item [hit]="hit"
+                     *ngFor="let hit of hits">
+    </search-hit-item>
   </ion-list>
 
-  <div *ngIf="!searched"
-       text-center
-       class="msg-consulta">
-    <img src="assets/imgs/dio/dio-logo.png">
-    <h2>Consulta ao Diário Oficial do ES</h2>
-    <p>
-      Selecione um filtro e faça a pesquisa
-    </p>
-  </div>
+  <ion-item *ngIf="!searched"
+            text-center>
+    <h2>Selecione um filtro</h2>
+    <p>Todos os campos são obrigatórios</p>
+  </ion-item>
 
   <ion-item *ngIf="searched && !totalHits"
             text-center>
     <h2>Nenhum resultado encontrado para</h2>
     <highlight>"{{filter.query}}"</highlight>
-    <remark>Tente mudar o filtro da consulta</remark>
+    <p>Tente mudar o filtro da consulta</p>
   </ion-item>
+  <ion-infinite-scroll *ngIf="hasMoreHits"
+                       (ionInfinite)="search({pageNumber:filter.pageNumber+1}, $event)">
+    <ion-infinite-scroll-content></ion-infinite-scroll-content>
+  </ion-infinite-scroll>
 </ion-content>
