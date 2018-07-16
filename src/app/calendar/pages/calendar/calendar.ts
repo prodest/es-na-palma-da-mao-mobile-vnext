@@ -1,9 +1,10 @@
 import { Component, ViewChild } from '@angular/core';
-import { IonicPage, ModalController, LoadingController, Loading } from 'ionic-angular';
+import { IonicPage, Loading, LoadingController, ModalController } from 'ionic-angular';
+import { CalendarComponent } from 'ionic2-calendar/calendar';
+import { finalize, map } from 'rxjs/operators';
+
 import { EventItem } from './../../model';
 import { CalendarApiService } from './../../providers';
-import { map, finalize } from 'rxjs/operators';
-import { CalendarComponent } from 'ionic2-calendar/calendar';
 
 /**
  * Generated class for the CalendarPage page.
@@ -132,7 +133,7 @@ export class CalendarPage {
    */
   private dismissLoading = () => {
     if (this.loading) {
-      this.loading.dismiss();
+      this.loading.dismiss().catch(console.log);
       this.loading = null;
     }
   };
