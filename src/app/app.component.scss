@@ -29,8 +29,11 @@ ion-content {
 }
 
 ion-menu {
+  .menu-inner {
+    background: $color-menu-bg !important;
+  }
   ion-content {
-    background-color: #fafafa !important;
+    background-color: transparent !important;
     background-image: none;
   }
 }

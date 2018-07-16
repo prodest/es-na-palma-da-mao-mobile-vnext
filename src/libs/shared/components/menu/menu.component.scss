@@ -1,12 +1,23 @@
 espm-menu {
   .menu {
-    // ion-label {
-    //   color: gray;
-    // }
-    // ion-icon {
-    //   color: gray;
-    // }
+    background: #2286a2;
+    ion-list-header {
+      font-weight: 500;
+      text-transform: uppercase;
+      border-top: 1px solid #11637a;
+      margin-bottom: 0;
+      color: #064d61;
+      background: #2286a2 !important;
+    }
     button {
+      background: transparent !important;
+      color: #ebf1f3;
+      ion-icon {
+        color: #0a5467;
+      }
+      .item-inner {
+        border-bottom: none !important;
+      }
       &.last {
         .item-inner {
           border-bottom: none;
@@ -14,11 +25,8 @@ espm-menu {
       }
 
       &.accessDenied {
-        color: #999;
+        color: #016680;
       }
-    }
-    ion-list-header {
-      font-weight: 500;
     }
   }
 }
