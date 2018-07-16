@@ -7,7 +7,9 @@
     <access origin="https://*.es.gov.br/*" />
     <access origin="http://*.es.gov.br/*" />
     <access origin="http://*.google.com/*" />
+    <access origin="http://*.geocontrol.com.br/*" />
     <access origin="http://*.githubusercontent.com/*" />
+    <access origin="https://*.githubusercontent.com/*" />
     <allow-navigation href="https://developers.es.gov.br/*" />
     <allow-navigation href="https://sistemas.es.gov.br/*" />
     <allow-navigation href="https://acessocidadao.es.gov.br/*" />
