@@ -1,14 +1,22 @@
 <ion-header>
   <ion-navbar>
-    <button ion-button menuToggle>
+    <button ion-button
+            menuToggle>
       <ion-icon name="menu"></ion-icon>
     </button>
     <ion-title>Meus veículos</ion-title>
-    <ion-buttons end *ngIf="(vehicles$ | async ) as vehicles">
-      <button *ngIf="!editing" ion-button icon-only (click)="toggleEditMode($event)">
+    <ion-buttons *ngIf="(vehicles$ | async )?.length"
+                 end>
+      <button *ngIf="!editing"
+              ion-button
+              icon-only
+              (click)="toggleEditMode($event)">
         <ion-icon name="md-create"></ion-icon>
       </button>
-      <button *ngIf="editing" ion-button icon-only (click)="toggleEditMode($event)">
+      <button *ngIf="editing"
+              ion-button
+              icon-only
+              (click)="toggleEditMode($event)">
         <ion-icon name="close"></ion-icon>
       </button>
     </ion-buttons>
@@ -21,20 +29,40 @@
       Veículos cadastrados
       <ng-container *ngIf="vehicles.length > 1"> ({{vehicles.length }} veículos)</ng-container>
     </ion-list-header>
-    <espm-vehicle [vehicle]="vehicle" *ngFor="let vehicle of vehicles" [class.disabled]="editing">
-        <button class="vehicle__button" *ngIf="!editing" ion-button clear item-end color-secondary-fg (click)="showTickets(vehicle)">MULTAS</button>
-        <button class="vehicle__button" *ngIf="editing" ion-button clear item-end color-secondary-fg (click)="confirmRemove(vehicle)">REMOVER</button>
+    <espm-vehicle [vehicle]="vehicle"
+                  *ngFor="let vehicle of vehicles"
+                  [class.disabled]="editing">
+      <button class="vehicle__button"
+              *ngIf="!editing"
+              ion-button
+              clear
+              item-end
+              color-secondary-fg
+              (click)="showTickets(vehicle)">MULTAS</button>
+      <button class="vehicle__button"
+              *ngIf="editing"
+              ion-button
+              clear
+              item-end
+              color-secondary-fg
+              (click)="confirmRemove(vehicle)">REMOVER</button>
     </espm-vehicle>
   </ion-list>
 
-  <ion-list *ngIf="vehicles && !vehicles.length">
-    <ion-list-header>
-      Nenhum veículo encontrado
-    </ion-list-header>
-  </ion-list>
+  <ion-item *ngIf="vehicles && !vehicles.length"
+            text-center>
+    <h2>Nenhum veículo cadastrado</h2>
+    <p text-wrap>Adicione veículos para consulta suas multas</p>
+  </ion-item>
 
-  <ion-fab right bottom margin-right margin-bottom>
-    <button ion-fab color-primary (click)="addVehicle()">
+  <ion-fab right
+           bottom
+           margin-right
+           margin-bottom>
+    <button class="pop-in"
+            ion-fab
+            color-primary
+            (click)="addVehicle()">
       <ion-icon name="add"></ion-icon>
     </button>
   </ion-fab>
