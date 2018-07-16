@@ -6,3 +6,4 @@ export * from './highlight';
 export * from './templates';
 export * from './img-loader';
 export * from './menu';
+export * from './expandable-header';
