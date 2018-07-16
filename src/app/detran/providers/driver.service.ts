@@ -105,7 +105,7 @@ export class DriverService {
    */
   private dismissLoading = () => {
     if (this.loading) {
-      this.loading.dismiss();
+      this.loading.dismiss().catch(console.log);
       this.loading = null;
     }
   };
