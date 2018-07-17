@@ -8,9 +8,9 @@ import { AuthState, AuthStore } from './auth.store';
 
 @Injectable()
 export class AuthQuery extends Query<AuthState> {
-  isLoggedIn$ = this.select(auth => auth.accessToken).pipe(map(token => this.isValid(token)));
-  loginExpirationDate$ = this.select(auth => auth.accessToken).pipe(map(token => this.getExpirationDate(token)));
   user$ = this.select(auth => auth.user);
+  accessToken$ = this.select(auth => auth.accessToken);
+  isLoggedIn$ = this.accessToken$.pipe(map(token => this.isValid(token)));
 
   /**
    *
@@ -23,7 +23,7 @@ export class AuthQuery extends Query<AuthState> {
    *
    */
   get isLoggedIn(): boolean {
-    return this.state.accessToken && this.isValid(this.state.accessToken);
+    return this.isValid(this.state.accessToken);
   }
 
   /**
@@ -36,10 +36,5 @@ export class AuthQuery extends Query<AuthState> {
   /**
    *
    */
-  private isValid = (token: Token): boolean => !!token && !this.jwt.isTokenExpired(token);
-
-  /**
-   *
-   */
-  private getExpirationDate = (token: Token): Date => this.jwt.getTokenExpirationDate(token);
+  private isValid = (token: Token | null): boolean => token && !this.jwt.isTokenExpired(token);
 }
