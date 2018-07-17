@@ -126,5 +126,5 @@ export class AcessoCidadaoService {
    * Store user info (claims)
    *
    */
-  private storeClaims = (claims: AcessoCidadaoClaims) => this.authStore.update({ user: claims });
+  private storeClaims = (claims: AcessoCidadaoClaims) => this.authStore.update({ claims });
 }

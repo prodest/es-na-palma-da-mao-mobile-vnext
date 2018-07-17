@@ -4,7 +4,7 @@ import { Store, StoreConfig } from '@datorama/akita';
 import { AcessoCidadaoClaims, createAnonymousUser, defaultAvatarSrc, Token } from '../models';
 
 export type AuthState = {
-  user: Partial<AcessoCidadaoClaims>;
+  claims: Partial<AcessoCidadaoClaims>;
   accessToken?: Token;
   refreshToken?: any;
   clientId?: string;
@@ -12,7 +12,7 @@ export type AuthState = {
 };
 
 const initialState: AuthState = {
-  user: createAnonymousUser(),
+  claims: createAnonymousUser(),
   avatarUrl: defaultAvatarSrc
 };
 

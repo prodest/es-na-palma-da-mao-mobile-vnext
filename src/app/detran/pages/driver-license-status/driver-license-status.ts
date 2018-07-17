@@ -34,10 +34,10 @@ export class DriverLicenseStatusPage {
    *
    */
   ionViewCanEnter(): boolean | Promise<any> {
-    const user = this.authQuery.state.user;
+    const { cnhNumero, cnhCedula } = this.authQuery.state.claims;
 
     // permite acesso à tela de o usuário possui cnh no acesso cidadão ou cadastrou agora
-    const isAllowed = !!(user.cnhNumero && user.cnhCedula);
+    const isAllowed = !!(cnhNumero && cnhCedula);
 
     if (!isAllowed) {
       setTimeout(() => this.navCtrl.setRoot('DriverLicensePage'));

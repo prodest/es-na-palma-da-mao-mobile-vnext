@@ -8,7 +8,7 @@ import { AuthState, AuthStore } from './auth.store';
 
 @Injectable()
 export class AuthQuery extends Query<AuthState> {
-  user$ = this.select(auth => auth.user);
+  user$ = this.select(auth => auth.claims);
   accessToken$ = this.select(auth => auth.accessToken);
   isLoggedIn$ = this.accessToken$.pipe(map(token => this.isValid(token)));
 

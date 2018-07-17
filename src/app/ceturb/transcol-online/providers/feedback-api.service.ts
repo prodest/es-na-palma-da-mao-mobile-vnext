@@ -18,7 +18,7 @@ export class FeedBackApiService {
    */
   saveFeedBack(feedback: FeedBack): Observable<any> {
     // preenche o usuário que reportou o feedback
-    feedback.user = this.authQuery.state.user;
+    feedback.user = this.authQuery.state.claims;
 
     return this.http.post(`${this.env.api.feedback}/demands`, {
       type: feedback.type,

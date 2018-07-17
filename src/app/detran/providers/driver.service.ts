@@ -32,15 +32,16 @@ export class DriverService {
    *
    */
   saveCNH = (cnh: DriverLicense) => {
-    const user = this.authQuery.state.user;
+    const { cnhNumero, cnhCedula } = this.authQuery.state.claims;
 
     // a CNH atual do usuário
-    const currentCNH = user.cnhNumero
-      ? {
-          registerNumber: user.cnhNumero,
-          ballot: user.cnhCedula
-        }
-      : null;
+    const currentCNH =
+      cnhNumero && cnhCedula
+        ? {
+            registerNumber: cnhNumero,
+            ballot: cnhCedula
+          }
+        : null;
 
     this.showLoading();
 
