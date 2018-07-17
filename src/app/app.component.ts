@@ -1,4 +1,6 @@
-import { Component } from '@angular/core';
+import { Component, Inject, NgZone } from '@angular/core';
+import { akitaDevtools, enableAkitaProdMode } from '@datorama/akita';
+import { Environment, EnvVariables } from '@espm/core';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import { StatusBar } from '@ionic-native/status-bar';
 import { Platform } from 'ionic-angular';
@@ -13,11 +15,25 @@ export class ESPM {
   /**
    *
    */
-  constructor(platform: Platform, private statusBar: StatusBar, private splashScreen: SplashScreen) {
+  constructor(
+    private statusBar: StatusBar,
+    private splashScreen: SplashScreen,
+    platform: Platform,
+    ngZone: NgZone,
+    @Inject(EnvVariables) environment: Environment
+  ) {
     platform
       .ready()
       .then(this.initialize)
       .catch(console.error);
+
+    if (!environment.production) {
+      akitaDevtools(ngZone);
+    }
+
+    if (environment.production) {
+      enableAkitaProdMode();
+    }
   }
 
   /**

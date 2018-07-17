@@ -1,14 +1,19 @@
 // tslint:disable-next-line
 /// <reference path="./module.augmentation.d.ts" />
 /// <reference path="./module.declaration.d.ts" />
-
 import { platformBrowserDynamic } from '@angular/platform-browser-dynamic';
+import { persistState } from '@datorama/akita';
 
 import { EspmModule } from './app/app.module';
 
 platformBrowserDynamic()
   .bootstrapModule(EspmModule)
   .then(registerServiceWorker);
+
+persistState({
+  key: 'auth-store',
+  include: ['auth']
+});
 
 function registerServiceWorker() {
   if ('serviceWorker' in navigator) {

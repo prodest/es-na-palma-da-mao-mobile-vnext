@@ -68,6 +68,7 @@
     "@angular/http": "^5.2.6",
     "@angular/platform-browser": "^5.2.6",
     "@angular/platform-browser-dynamic": "^5.2.6",
+    "@datorama/akita": "^1.2.1",
     "@ionic-native/android-permissions": "^4.9.1",
     "@ionic-native/barcode-scanner": "^4.7.0",
     "@ionic-native/camera": "^4.5.3",

@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { AuthService } from '@espm/core/auth';
+import { AuthQuery } from '@espm/core';
 import { AlertController, App, IonicPage, NavParams } from 'ionic-angular';
 
 import { Protocol, ProtocolUpdate } from '../../model';
@@ -25,7 +25,7 @@ export class SepDetailsPage {
     public navParams: NavParams,
     private appCtrl: App,
     private alertCtrl: AlertController,
-    private auth: AuthService,
+    private authQuery: AuthQuery,
     private sepService: SepService
   ) {
     this.lastUpdate = null;
@@ -63,7 +63,7 @@ export class SepDetailsPage {
    *
    */
   toggleFavorite(protocol: Protocol): void {
-    if (this.auth.user.anonymous) {
+    if (!this.authQuery.isLoggedIn) {
       this.showAuthNeededModal();
     } else {
       if (this.isFavorite(protocol)) {

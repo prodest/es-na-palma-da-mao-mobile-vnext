@@ -1,5 +1,5 @@
 <ion-list class="menu">
-  <button *ngIf="!isAuthenticated"
+  <button *ngIf="!isLoggedIn"
           menuClose
           ion-item
           no-lines
@@ -12,15 +12,15 @@
     <ion-list-header>{{menu.name}}</ion-list-header>
     <button ion-item
             *ngFor="let page of menu.items;let last = last"
-            [ngClass]="{ last: last, accessDenied: !isAuthenticated && page.secure }"
-            (click)="openPage(page.component, !isAuthenticated && page.secure )">
+            [ngClass]="{ last: last, accessDenied: !isLoggedIn && page.secure }"
+            (click)="openPage(page.component, !isLoggedIn && page.secure )">
       <ion-icon item-start
                 name="md-{{page.icon}}"></ion-icon>
       {{page.title}}
     </button>
 
   </ng-container>
-  <button *ngIf="isAuthenticated"
+  <button *ngIf="isLoggedIn"
           menuClose
           ion-item
           (click)="logout()">

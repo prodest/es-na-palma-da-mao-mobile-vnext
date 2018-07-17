@@ -1,6 +1,8 @@
-import { ChangeDetectionStrategy, Component } from '@angular/core';
-import { AuthService } from '@espm/core';
+import { ChangeDetectionStrategy, ChangeDetectorRef, Component, OnDestroy, OnInit } from '@angular/core';
+import { AuthQuery, AuthService } from '@espm/core';
 import { AlertController, App, MenuController } from 'ionic-angular';
+import { takeUntil, tap } from 'rxjs/operators';
+import { Subject } from 'rxjs/Subject';
 
 const menus = [
   {
@@ -120,23 +122,40 @@ const menus = [
   templateUrl: './menu.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class MenuComponent {
+export class MenuComponent implements OnInit, OnDestroy {
   menus = menus;
   rootPage: any = 'HomePage';
-
-  get isAuthenticated(): boolean {
-    return this.auth.isAuthenticated;
-  }
+  isLoggedIn: boolean;
+  private destroyed$ = new Subject<boolean>();
 
   /**
    *
    */
   constructor(
-    public auth: AuthService,
+    private authQuery: AuthQuery,
+    private auth: AuthService,
     private menuCtrl: MenuController,
     private alertCtrl: AlertController,
-    private appCtrl: App
+    private appCtrl: App,
+    private cd: ChangeDetectorRef
   ) {}
+
+  /**
+   *
+   */
+  ngOnInit() {
+    this.authQuery.isLoggedIn$
+      .pipe(tap(() => this.cd.markForCheck()), takeUntil(this.destroyed$))
+      .subscribe(isLoggedIn => (this.isLoggedIn = isLoggedIn));
+  }
+
+  /**
+   *
+   */
+  ngOnDestroy(): void {
+    this.destroyed$.next();
+    this.destroyed$.unsubscribe();
+  }
 
   /**
    *

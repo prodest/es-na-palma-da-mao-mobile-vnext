@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { AuthService } from '@espm/core/auth';
+import { AuthQuery } from '@espm/core';
 import { ActionSheetController, AlertController, App, Loading, LoadingController, Platform } from 'ionic-angular';
 import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 import { Observable } from 'rxjs/Observable';
@@ -61,7 +61,7 @@ export class TranscolOnlineService {
     private loadingCtrl: LoadingController,
     private alertCtrl: AlertController,
     private app: App,
-    private auth: AuthService,
+    private authQuery: AuthQuery,
     private platform: Platform,
     private actionSheetCtrl: ActionSheetController
   ) {}
@@ -73,9 +73,9 @@ export class TranscolOnlineService {
   getBusStopsByArea = (bounds: number[]): Observable<BusStop[]> => {
     this.showLoading();
 
-    let stops$ = this.auth.user.anonymous
-      ? this.api.getBusStopsByArea(bounds)
-      : forkJoin(this.api.getBusStopsByArea(bounds), this.syncFavorites()).pipe(map(this.mergeResults));
+    let stops$ = this.authQuery.isLoggedIn
+      ? forkJoin(this.api.getBusStopsByArea(bounds), this.syncFavorites()).pipe(map(this.mergeResults))
+      : this.api.getBusStopsByArea(bounds);
 
     return stops$.pipe(finalize(this.dismissLoading), tap(this.updateStops));
   };
@@ -127,7 +127,7 @@ export class TranscolOnlineService {
    *
    */
   toggleFavorite = (stop: BusStop) => {
-    if (this.auth.isAnonymous) {
+    if (!this.authQuery.isLoggedIn) {
       return fromPromise(this.showAuthNeededModal());
     }
 
@@ -145,7 +145,7 @@ export class TranscolOnlineService {
    *
    */
   addFavorite = (stop: BusStop, location: FavoriteLocation) => {
-    if (this.auth.isAnonymous) {
+    if (!this.authQuery.isLoggedIn) {
       return fromPromise(this.showAuthNeededModal());
     }
 
@@ -161,7 +161,7 @@ export class TranscolOnlineService {
    *
    */
   removeFavorite = (stop: BusStop) => {
-    if (this.auth.isAnonymous) {
+    if (!this.authQuery.isLoggedIn) {
       return fromPromise(this.showAuthNeededModal());
     }
 

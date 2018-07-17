@@ -1,5 +1,5 @@
 import { Component, Inject } from '@angular/core';
-import { AuthService } from '@espm/core/auth';
+import { AuthQuery } from '@espm/core';
 import { Environment, EnvVariables } from '@espm/core/environment';
 import { InAppBrowser, InAppBrowserEvent } from '@ionic-native/in-app-browser';
 import { IonicPage, NavController, Platform } from 'ionic-angular';
@@ -14,7 +14,7 @@ export class HomePage {
    * Creates an instance of HomePage.
    */
   constructor(
-    private auth: AuthService,
+    private authQuery: AuthQuery,
     private navCtrl: NavController,
     private iab: InAppBrowser,
     private platform: Platform,
@@ -26,7 +26,7 @@ export class HomePage {
    *
    */
   ionViewCanEnter(): boolean | Promise<any> {
-    const isAllowed = !this.auth.isAuthenticated;
+    const isAllowed = !this.authQuery.isLoggedIn;
 
     if (!isAllowed) {
       setTimeout(this.goToDashboardPage, 0);

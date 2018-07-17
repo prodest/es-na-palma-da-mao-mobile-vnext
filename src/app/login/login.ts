@@ -1,5 +1,5 @@
 import { Component, Inject } from '@angular/core';
-import { AuthService, User } from '@espm/core/auth';
+import { AcessoCidadaoClaims as User, AuthQuery, AuthService } from '@espm/core';
 import { Environment, EnvVariables } from '@espm/core/environment';
 import { InAppBrowser, InAppBrowserEvent } from '@ionic-native/in-app-browser';
 import { AlertController, IonicPage, LoadingController, NavController, Platform, ToastController } from 'ionic-angular';
@@ -27,6 +27,7 @@ export class LoginPage {
   constructor(
     private iab: InAppBrowser,
     private auth: AuthService,
+    private authQuery: AuthQuery,
     private platform: Platform,
     private toastCtrl: ToastController,
     private alertCtrl: AlertController,
@@ -40,7 +41,7 @@ export class LoginPage {
    *
    */
   ionViewCanEnter(): boolean | Promise<any> {
-    const isAllowed = !this.auth.isAuthenticated;
+    const isAllowed = !this.authQuery.isLoggedIn;
 
     if (!isAllowed) {
       setTimeout(this.goToDashboard, 0);
@@ -84,11 +85,11 @@ export class LoginPage {
    */
   private loginWith = (loginMethod: () => Observable<User>) => {
     const loading = this.loadingCtrl.create({ content: 'Autenticando' });
-    loading.present();
-
-    loginMethod()
-      .pipe(finalize(() => loading.dismiss()))
-      .subscribe(this.goToDashboard, this.onLoginError);
+    loading.present().then(() => {
+      loginMethod()
+        .pipe(finalize(() => loading.dismiss()))
+        .subscribe(this.goToDashboard, this.onLoginError);
+    });
   };
 
   /**

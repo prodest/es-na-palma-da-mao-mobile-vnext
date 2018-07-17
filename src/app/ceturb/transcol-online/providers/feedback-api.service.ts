@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Inject, Injectable } from '@angular/core';
-import { AuthService, Environment, EnvVariables } from '@espm/core';
+import { AuthQuery, Environment, EnvVariables } from '@espm/core';
 import { Observable } from 'rxjs/Observable';
 
 import { FeedBack } from './../model';
@@ -10,7 +10,7 @@ export class FeedBackApiService {
   /**
    *
    */
-  constructor(private http: HttpClient, private authService: AuthService, @Inject(EnvVariables) private env: Environment) {}
+  constructor(private http: HttpClient, private authQuery: AuthQuery, @Inject(EnvVariables) private env: Environment) {}
 
   /**
    *
@@ -18,7 +18,7 @@ export class FeedBackApiService {
    */
   saveFeedBack(feedback: FeedBack): Observable<any> {
     // preenche o usuário que reportou o feedback
-    feedback.user = this.authService.user;
+    feedback.user = this.authQuery.state.user;
 
     return this.http.post(`${this.env.api.feedback}/demands`, {
       type: feedback.type,

@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { AuthService } from '@espm/core/auth';
+import { AuthQuery } from '@espm/core';
 import { AlertController, App, Loading, LoadingController, ToastController } from 'ionic-angular';
 import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 import { Observable } from 'rxjs/Observable';
@@ -63,7 +63,7 @@ export class BusLinesService {
     private loadingCtrl: LoadingController,
     private alertCtrl: AlertController,
     private app: App,
-    private auth: AuthService
+    private authQuery: AuthQuery
   ) {}
 
   /**
@@ -73,9 +73,9 @@ export class BusLinesService {
   loadAll = (): void => {
     this.showLoading();
 
-    let lines$ = this.auth.user.anonymous
-      ? this.api.getLines()
-      : forkJoin(this.api.getLines(), this.syncFavorites()).pipe(map(this.markFavorites));
+    let lines$ = this.authQuery.isLoggedIn
+      ? forkJoin(this.api.getLines(), this.syncFavorites()).pipe(map(this.markFavorites))
+      : this.api.getLines();
 
     lines$.pipe(finalize(this.dismissLoading)).subscribe(this.updateLines);
   };
@@ -94,7 +94,7 @@ export class BusLinesService {
    *
    */
   toggleFavorite = (line: BusLine): Observable<BusLine[]> => {
-    if (this.auth.isAnonymous) {
+    if (!this.authQuery.isLoggedIn) {
       return fromPromise(this.showAuthNeededModal());
     } else {
       // atualiza a lista de favoritos

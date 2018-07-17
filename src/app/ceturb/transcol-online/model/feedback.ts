@@ -1,4 +1,4 @@
-import { User } from '@espm/core/auth';
+import { AcessoCidadaoClaims as User } from '@espm/core';
 
 export const feedbackList = [
   {
@@ -57,5 +57,5 @@ export type FeedBack = {
   time?: Date;
   text?: string;
   type?: FeedBackType;
-  user?: User;
+  user?: Partial<User>;
 };

@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { AuthService } from '@espm/core/auth';
+import { AuthQuery, AuthService } from '@espm/core';
 import { Loading, LoadingController } from 'ionic-angular';
 import { Observable } from 'rxjs/Observable';
 import { _throw } from 'rxjs/observable/throw';
@@ -20,18 +20,25 @@ export class DriverService {
    *
    *
    */
-  constructor(private auth: AuthService, private api: DetranApiService, private loadingCtrl: LoadingController) {}
+  constructor(
+    private auth: AuthService,
+    private authQuery: AuthQuery,
+    private api: DetranApiService,
+    private loadingCtrl: LoadingController
+  ) {}
 
   /**
    *
    *
    */
   saveCNH = (cnh: DriverLicense) => {
+    const user = this.authQuery.state.user;
+
     // a CNH atual do usuário
-    const currentCNH = this.auth.user.cnhNumero
+    const currentCNH = user.cnhNumero
       ? {
-          registerNumber: this.auth.user.cnhNumero,
-          ballot: this.auth.user.cnhCedula
+          registerNumber: user.cnhNumero,
+          ballot: user.cnhCedula
         }
       : null;
 

@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { AuthService } from '@espm/core/auth';
+import { AuthQuery } from '@espm/core';
 import { IonicPage, NavController } from 'ionic-angular';
 import * as moment from 'moment';
 
@@ -27,15 +27,17 @@ export class DriverLicenseStatusPage {
   /**
    *
    */
-  constructor(private auth: AuthService, private detran: DriverService, private navCtrl: NavController) {}
+  constructor(private authQuery: AuthQuery, private detran: DriverService, private navCtrl: NavController) {}
 
   /**
    * ref: https://github.com/ionic-team/ionic/issues/11459#issuecomment-365224107
    *
    */
   ionViewCanEnter(): boolean | Promise<any> {
+    const user = this.authQuery.state.user;
+
     // permite acesso à tela de o usuário possui cnh no acesso cidadão ou cadastrou agora
-    const isAllowed = !!(this.auth.user.cnhNumero && this.auth.user.cnhCedula);
+    const isAllowed = !!(user.cnhNumero && user.cnhCedula);
 
     if (!isAllowed) {
       setTimeout(() => this.navCtrl.setRoot('DriverLicensePage'));

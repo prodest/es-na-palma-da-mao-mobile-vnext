@@ -8,16 +8,15 @@ import { fromPromise } from 'rxjs/observable/fromPromise';
 import { flatMap, map, tap } from 'rxjs/operators';
 
 import { AcessoCidadaoService } from './acesso-cidadao.service';
-import { AuthStorage } from './auth-storage.service';
 import {
-  AcessoCidadaoClaims,
+  AcessoCidadaoClaims as User,
   AcessoCidadaoIdentity,
   GoogleAuthResponse,
   Identity,
   SocialNetworkIdentity,
-  Token,
-  User
+  Token
 } from './models';
+import { AuthStore } from './state';
 
 /**
  * Facade de autenticação consumido por toda a aplicação
@@ -32,7 +31,7 @@ export class AuthService {
    *
    */
   constructor(
-    private authStorage: AuthStorage,
+    private authStore: AuthStore,
     private acessoCidadao: AcessoCidadaoService,
     private googlePlus: GooglePlus,
     private facebook: Facebook,
@@ -96,9 +95,8 @@ export class AuthService {
     // 1 - se desloga de todos os providers
     return Promise.all([
       this.onDevice ? this.googlePlus.logout() : Promise.resolve(),
-      this.onDevice ? this.facebook.logout() : Promise.resolve(),
-      this.acessoCidadao.logout()
-    ]);
+      this.onDevice ? this.facebook.logout() : Promise.resolve()
+    ]).then(() => this.acessoCidadao.logout());
 
     // 3 - Reinicia o push para usuário anônimo
     // todo this.pushService.init()
@@ -114,33 +112,7 @@ export class AuthService {
    *
    *
    */
-  get isAuthenticated() {
-    return this.acessoCidadao.isAuthenticated;
-  }
-
-  /**
-   *
-   *
-   */
-  get user(): User {
-    return this.authStorage.getValue('user');
-  }
-
-  /**
-   *
-   *
-   */
-  get isAnonymous(): boolean {
-    return this.user && this.user.anonymous;
-  }
-
-  /**
-   *
-   *
-   */
-  refreshUser = (): Observable<User> => {
-    return this.acessoCidadao.getUserClaims().pipe(flatMap(this.createUser));
-  };
+  refreshUser = (): Observable<User> => this.acessoCidadao.getUserClaims();
 
   /************************************* Private API *************************************/
 
@@ -148,28 +120,13 @@ export class AuthService {
    *
    *
    */
-  private login = (identity: Identity): Observable<User> => {
-    return this.acessoCidadao.login(identity).pipe(flatMap(this.createUser));
-
-    // 5)
-    // todo // this.pushService.init()
-  };
+  private login = (identity: Identity): Observable<User> => this.acessoCidadao.login(identity);
 
   /**
    *
    *
    */
-  private createUser = (claims: AcessoCidadaoClaims): Promise<User> => {
-    const user = User.createFrom(claims);
-    user.avatarUrl = this.authStorage.getValue('avatarUrl') || user.avatarUrl;
-    return this.authStorage.setValue('user', user);
-  };
-
-  /**
-   *
-   *
-   */
-  private saveAvatarUrl = (avatarUrl: string): Promise<string> => this.authStorage.setValue('avatarUrl', avatarUrl);
+  private storeAvatarUrl = (avatarUrl: string): void => this.authStore.update({ avatarUrl: avatarUrl });
 
   /**
    *
@@ -202,11 +159,11 @@ export class AuthService {
    *
    */
   private saveFacebookAvatar = (resp: FacebookLoginResponse) =>
-    this.saveAvatarUrl(`https://graph.facebook.com/v2.7/${resp.authResponse.userID}/picture?type=normal`);
+    this.storeAvatarUrl(`https://graph.facebook.com/v2.7/${resp.authResponse.userID}/picture?type=normal`);
 
   /**
    *
    *
    */
-  private saveGoogleAvatar = (resp: GoogleAuthResponse) => this.saveAvatarUrl(resp.imageUrl);
+  private saveGoogleAvatar = (resp: GoogleAuthResponse) => this.storeAvatarUrl(resp.imageUrl);
 }
