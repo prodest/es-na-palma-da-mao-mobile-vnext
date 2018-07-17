@@ -96,7 +96,9 @@ export class AuthService {
     return Promise.all([
       this.onDevice ? this.googlePlus.logout() : Promise.resolve(),
       this.onDevice ? this.facebook.logout() : Promise.resolve()
-    ]).then(() => this.acessoCidadao.logout());
+    ]).then(() => {
+      this.acessoCidadao.logout();
+    });
 
     // 3 - Reinicia o push para usuário anônimo
     // todo this.pushService.init()

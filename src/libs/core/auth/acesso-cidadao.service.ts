@@ -1,5 +1,4 @@
 import { Inject, Injectable } from '@angular/core';
-import { transaction } from '@datorama/akita';
 import { Observable } from 'rxjs/Observable';
 import { of } from 'rxjs/observable/of';
 import { _throw } from 'rxjs/observable/throw';
@@ -37,7 +36,6 @@ export class AcessoCidadaoService {
    *   4) Salva o usuário no local storage.
    *   5) Reinicia o serviço de push
    */
-  @transaction()
   login(identity: Identity): Observable<AcessoCidadaoClaims> {
     return this.api.login(identity).pipe(tap(this.storeAuthResponse), flatMap(this.getUserClaims));
   }
@@ -45,7 +43,9 @@ export class AcessoCidadaoService {
   /**
    * Faz logout do usuário. Remove o token do localstore e os claims salvos.
    */
-  logout = () => this.authStore.reset();
+  logout = () => {
+    this.authStore.reset();
+  };
 
   /**
    * Atualiza e retorna o access token quando necessário baseado em sua data de expiração.

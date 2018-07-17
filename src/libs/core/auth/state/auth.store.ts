@@ -29,5 +29,5 @@ export class AuthStore extends Store<AuthState> {
   /**
    *
    */
-  reset = () => this.update(initialState);
+  reset = () => this.setState(() => initialState);
 }
