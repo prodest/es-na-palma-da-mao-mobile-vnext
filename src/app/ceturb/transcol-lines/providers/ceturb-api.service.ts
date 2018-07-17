@@ -68,7 +68,14 @@ export class CeturbApiService {
   /**
    *
    */
-  syncFavoriteLines = (favoriteLines: FavoriteLinesData): Observable<FavoriteLinesData> => {
+  saveFavoriteLines = (favoriteLines: FavoriteLinesData): Observable<FavoriteLinesData> => {
     return this.http.post<FavoriteLinesData>(`${this.env.api.espm}/ceturb/data/favorite`, favoriteLines).pipe(share());
+  };
+
+  /**
+   *
+   */
+  getFavoriteLines = (): Observable<FavoriteLinesData> => {
+    return this.http.get<FavoriteLinesData>(`${this.env.api.espm}/ceturb/data/favorite`).pipe(share());
   };
 }

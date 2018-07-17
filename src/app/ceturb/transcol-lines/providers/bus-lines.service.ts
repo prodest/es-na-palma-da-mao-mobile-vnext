@@ -1,14 +1,14 @@
-import { Injectable } from '@angular/core';
+import { Injectable, OnDestroy } from '@angular/core';
 import { AuthQuery } from '@espm/core';
 import { AlertController, App, Loading, LoadingController, ToastController } from 'ionic-angular';
-import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 import { Observable } from 'rxjs/Observable';
 import { forkJoin } from 'rxjs/observable/forkJoin';
-import { from } from 'rxjs/observable/from';
-import { fromPromise } from 'rxjs/observable/fromPromise';
-import { filter, finalize, flatMap, map, tap } from 'rxjs/operators';
+import { filter, finalize, flatMap, map, mapTo, takeUntil, tap } from 'rxjs/operators';
+import { Subject } from 'rxjs/Subject';
 
-import { BusLine, BusLineDetails, FavoriteLinesData } from './../model';
+import { BusLine, FavoriteLinesData } from './../model';
+import { BusLinesQuery } from './bus-lines.query';
+import { BusLinesStore } from './bus-lines.store';
 import { CeturbApiService } from './ceturb-api.service';
 
 /**
@@ -16,42 +16,18 @@ import { CeturbApiService } from './ceturb-api.service';
  *
  */
 @Injectable()
-export class BusLinesService {
+export class BusLinesService implements OnDestroy {
   loading: Loading;
 
-  private lines$$ = new BehaviorSubject<BusLine[]>([]);
+  private destroyed$ = new Subject();
 
-  get lines$(): Observable<BusLine[]> {
-    return this.lines$$.asObservable();
+  get lines$() {
+    return this.busLinesQuery.selectAll();
   }
 
-  /**
-   *
-   *
-   */
-  line$(lineNumber: string): Observable<BusLine> {
-    return this.lines$.pipe(
-      flatMap((lines: BusLine[]) => from(lines)),
-      filter((line: BusLine) => !!line),
-      filter((line: BusLine) => line.number === lineNumber)
-    );
-  }
-
-  /**
-   *
-   *
-   */
-  get lines(): BusLine[] {
-    return this.lines$$.getValue();
-  }
-
-  /**
-   *
-   *
-   */
-  get favorites(): string[] {
-    return this.lines.filter(l => l.isFavorite).map(l => l.number);
-  }
+  line$ = (lineNumber: number) => {
+    return this.busLinesQuery.selectEntity(lineNumber);
+  };
 
   /**
    *
@@ -63,8 +39,25 @@ export class BusLinesService {
     private loadingCtrl: LoadingController,
     private alertCtrl: AlertController,
     private app: App,
-    private authQuery: AuthQuery
-  ) {}
+    private authQuery: AuthQuery,
+    private busLinesStore: BusLinesStore,
+    private busLinesQuery: BusLinesQuery
+  ) {
+    // salva favoritos no server todas as vezes que os favoritos forem atualizados após o carregamento
+    // inicial da loja
+    this.busLinesQuery.favorites$
+      .pipe(takeUntil(this.destroyed$), filter(() => !this.busLinesStore.isPristine), flatMap(this.saveFavorites))
+      .subscribe();
+  }
+
+  /**
+   *
+   *
+   */
+  ngOnDestroy() {
+    this.destroyed$.next();
+    this.destroyed$.unsubscribe();
+  }
 
   /**
    *
@@ -74,49 +67,44 @@ export class BusLinesService {
     this.showLoading();
 
     let lines$ = this.authQuery.isLoggedIn
-      ? forkJoin(this.api.getLines(), this.syncFavorites()).pipe(map(this.markFavorites))
+      ? forkJoin(this.api.getLines(), this.api.getFavoriteLines()).pipe(map(this.markFavorites))
       : this.api.getLines();
 
-    lines$.pipe(finalize(this.dismissLoading)).subscribe(this.updateLines);
+    lines$.pipe(finalize(this.dismissLoading)).subscribe(this.storeLines);
   };
 
   /**
    *
    *
    */
-  getLineDetails = (lineNumber: string): Observable<BusLineDetails> => {
-    this.showLoading();
-    return this.api.getLineDetails(lineNumber).pipe(finalize(this.dismissLoading));
-  };
+  loadLineDetails = (lineNumber: string): Observable<BusLine> => {
+    const { schedule, route } = this.busLinesQuery.getEntity(lineNumber);
 
-  /**
-   *
-   *
-   */
-  toggleFavorite = (line: BusLine): Observable<BusLine[]> => {
-    if (!this.authQuery.isLoggedIn) {
-      return fromPromise(this.showAuthNeededModal());
-    } else {
-      // atualiza a lista de favoritos
-      const newFavorites = line.isFavorite
-        ? this.favorites.filter(l => l !== line.number)
-        : [...this.favorites, line.number];
-
+    if (!schedule || !route) {
       this.showLoading();
+    }
 
-      // sincroniza atualização na lista de favoritos
-      return this.syncFavorites(newFavorites).pipe(
+    return this.api
+      .getLineDetails(lineNumber)
+      .pipe(
         finalize(this.dismissLoading),
-        map(() => this.markFavorites([this.lines, newFavorites])),
-        tap(() => {
-          if (line.isFavorite) {
-            this.showMessage(`Linha ${line.number} removida dos favoritos`);
-          } else {
-            this.showMessage(`Linha ${line.number} adicionada aos favoritos`);
-          }
-        }),
-        tap(this.updateLines)
+        tap(details => this.busLinesStore.update(lineNumber, details)),
+        mapTo(this.busLinesQuery.getEntity(lineNumber))
       );
+  };
+
+  /**
+   *
+   *
+   */
+  toggleFavorite = (line: BusLine): BusLine => {
+    if (!this.authQuery.isLoggedIn) {
+      this.showAuthNeededModal();
+    } else {
+      this.busLinesStore.update(line.number, { isFavorite: !line.isFavorite });
+      line = this.busLinesQuery.getEntity(line.number);
+      this.showMessage(`Linha ${line.number} ${line.isFavorite ? 'adicionada aos' : 'removida dos'} favoritos`);
+      return line;
     }
   };
 
@@ -124,25 +112,19 @@ export class BusLinesService {
    *
    *
    */
-  private updateLines = (lines: BusLine[]) => {
-    this.lines$$.next([...lines]);
-  };
+  private storeLines = (lines: BusLine[]) => this.busLinesStore.set(lines);
 
   /**
    *
    *
    */
-  private syncFavorites = (favoriteLines?: string[]): Observable<string[]> => {
-    const syncData: FavoriteLinesData = { favoriteLines: [], date: null };
-
-    // novos dados sendo enviados para serem salvos
-    if (favoriteLines) {
-      syncData.favoriteLines = favoriteLines;
-      syncData.date = new Date().toISOString();
-    }
-
-    return this.api.syncFavoriteLines(syncData).pipe(map((linesData: FavoriteLinesData) => linesData.favoriteLines));
+  private saveFavorites = (favoriteLines: BusLine[]): Observable<FavoriteLinesData> => {
+    return this.api.saveFavoriteLines({
+      favoriteLines: favoriteLines.map(line => line.number),
+      date: new Date().toISOString()
+    });
   };
+
   /**
    *
    *
@@ -175,11 +157,11 @@ export class BusLinesService {
    *
    *
    */
-  private markFavorites = ([lines, favorites]): BusLine[] => {
+  private markFavorites = ([lines, favorites]: [BusLine[], FavoriteLinesData]): BusLine[] => {
     return lines.map(line => {
       return {
         ...line,
-        isFavorite: favorites.indexOf(line.number) !== -1
+        isFavorite: favorites.favoriteLines.indexOf(line.number) !== -1
       };
     });
   };

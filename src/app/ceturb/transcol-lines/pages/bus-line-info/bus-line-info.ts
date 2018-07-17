@@ -5,10 +5,10 @@ import { takeUntil } from 'rxjs/operators';
 import { Subject } from 'rxjs/Subject';
 
 import { BusLine, BusLineDetails } from './../../model';
-import { BusLinesService } from './../../providers/bus-lines.service';
+import { BusLinesService } from './../../providers';
 
 @IonicPage({
-  segment: 'ceturb/linha/:number'
+  segment: 'ceturb/linha/:lineNumber'
 })
 @Component({
   selector: 'page-bus-line-info',
@@ -31,7 +31,7 @@ export class BusLineInfoPage implements OnDestroy {
    *
    */
   ionViewCanEnter(): boolean | Promise<any> {
-    const isAllowed = !!this.params.get('number');
+    const isAllowed = !!this.params.get('lineNumber');
 
     if (!isAllowed) {
       setTimeout(() => this.navCtrl.setRoot('BusLinesPage'));
@@ -43,18 +43,19 @@ export class BusLineInfoPage implements OnDestroy {
    *
    */
   ionViewDidLoad() {
-    const lineNumber = this.params.get('number');
-
+    const lineNumber = this.params.get('lineNumber');
     this.ceturb
       .line$(lineNumber)
       .pipe(takeUntil(this.destroyed$))
-      .subscribe((line: BusLine) => (this.line = line));
+      .subscribe((line: BusLine) => {
+        this.line = line;
+      });
 
-    this.ceturb.getLineDetails(this.line.number).subscribe((details: BusLineDetails) => (this.details = details));
+    this.ceturb.loadLineDetails(lineNumber).subscribe();
 
     this.updateCurrentHour();
 
-    interval(1 * 1000)
+    interval(60 * 1000)
       .pipe(takeUntil(this.destroyed$))
       .subscribe(this.updateCurrentHour);
   }
@@ -73,7 +74,7 @@ export class BusLineInfoPage implements OnDestroy {
    *
    */
   toggleFavorite = (busLine: BusLine) => {
-    this.ceturb.toggleFavorite(busLine).subscribe();
+    this.ceturb.toggleFavorite(busLine);
   };
 
   /**

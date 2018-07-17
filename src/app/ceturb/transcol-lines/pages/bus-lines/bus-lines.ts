@@ -1,10 +1,11 @@
 import { Component, OnDestroy } from '@angular/core';
 import { IonicPage, NavController } from 'ionic-angular';
 import deburr from 'lodash-es/deburr';
+import { takeUntil, tap } from 'rxjs/operators';
 import { Subject } from 'rxjs/Subject';
 
 import { BusLine } from './../../model';
-import { BusLinesService } from './../../providers/bus-lines.service';
+import { BusLinesService } from './../../providers';
 
 @IonicPage({
   segment: 'ceturb/linhas'
@@ -16,7 +17,7 @@ import { BusLinesService } from './../../providers/bus-lines.service';
 export class BusLinesPage implements OnDestroy {
   allLines: BusLine[];
   filteredLines: BusLine[];
-  destroyed$ = new Subject();
+  private destroyed$ = new Subject();
 
   /**
    *
@@ -29,7 +30,16 @@ export class BusLinesPage implements OnDestroy {
    *
    */
   ionViewWillLoad() {
-    this.loadBusLines();
+    this.ceturb.lines$
+      .pipe(
+        takeUntil(this.destroyed$),
+        tap(allLines => {
+          this.allLines = this.filteredLines = allLines || [];
+        })
+      )
+      .subscribe();
+
+    this.ceturb.loadAll();
   }
 
   /**
@@ -70,21 +80,7 @@ export class BusLinesPage implements OnDestroy {
    *
    *
    */
-  showDetails = (busLine: BusLine) => this.navCtrl.push('BusLineInfoPage', { number: busLine.number });
-
-  /**
-   *
-   *
-   */
-  private loadBusLines = () => {
-    const allLines$ = this.ceturb.lines$.takeUntil(this.destroyed$);
-
-    allLines$.subscribe(allLines => {
-      this.allLines = this.filteredLines = allLines || [];
-    });
-
-    this.ceturb.loadAll();
-  };
+  showDetails = (busLine: BusLine) => this.navCtrl.push('BusLineInfoPage', { lineNumber: busLine.number });
 
   /**
    *

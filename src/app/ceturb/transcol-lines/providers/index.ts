@@ -1,22 +1,8 @@
-import { Storage } from '@ionic/storage';
-
+import { BusLinesQuery } from './bus-lines.query';
 import { BusLinesService } from './bus-lines.service';
+import { BusLinesStore } from './bus-lines.store';
 import { CeturbApiService } from './ceturb-api.service';
-import { CeturbStorage } from './ceturb-storage.service';
 
-export function provideSettings(storage: Storage) {
-  return new CeturbStorage(
-    storage,
-    {
-      favoriteLines: []
-    },
-    '_ceturb-storage'
-  );
-}
+export { CeturbApiService, BusLinesStore, BusLinesQuery, BusLinesService };
 
-// envronment provider
-export const CeturbStorageProvider = { provide: CeturbStorage, useFactory: provideSettings, deps: [Storage] };
-
-export { CeturbStorage, CeturbApiService, BusLinesService };
-
-export const CeturbProviders = [CeturbStorageProvider, CeturbApiService, BusLinesService];
+export const CeturbProviders = [CeturbApiService, BusLinesStore, BusLinesQuery, BusLinesService];

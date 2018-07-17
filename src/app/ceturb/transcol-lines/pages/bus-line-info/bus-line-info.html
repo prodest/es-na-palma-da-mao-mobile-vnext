@@ -30,9 +30,9 @@
   </ion-toolbar>
 </ion-header>
 <ion-content>
-  <ng-container *ngIf="details">
+  <ng-container *ngIf="line">
     <ng-container *ngIf="tab==='info'">
-      <ng-container *ngFor="let departure of details.schedule.departures">
+      <ng-container *ngFor="let departure of line.schedule?.departures">
         <ion-item>
           <h2 text-center
               text-wrap> Saindo de {{departure.terminal | capitalize}}</h2>
@@ -52,11 +52,11 @@
         </ion-list>
       </ng-container>
       <ion-list no-lines
-                *ngIf="details.schedule.notes?.length">
+                *ngIf="line.schedule?.notes?.length">
         <ion-list-header>
           <h4>Observações</h4>
         </ion-list-header>
-        <ion-item *ngFor="let note of details.schedule.notes">
+        <ion-item *ngFor="let note of line.schedule?.notes">
           <h1 item-start>{{note.type}}</h1>
           <h5 text-wrap>{{note.description}}</h5>
         </ion-item>
@@ -64,7 +64,7 @@
     </ng-container>
 
     <ng-container *ngIf="tab==='directions'">
-      <ng-container *ngFor="let direction of details.route.directions">
+      <ng-container *ngFor="let direction of line.route?.directions">
         <ion-list-header text-uppercase>
           <h2 text-center
               text-wrap> {{direction.type}}</h2>
