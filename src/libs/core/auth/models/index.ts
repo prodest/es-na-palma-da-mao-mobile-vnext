@@ -9,5 +9,4 @@ export * from './authResponses/googleAuthResponse';
 export * from './claims/acessoCidadaoClaims';
 export * from './claims/accessTokenClaims';
 
-export * from './user';
 export * from './token';

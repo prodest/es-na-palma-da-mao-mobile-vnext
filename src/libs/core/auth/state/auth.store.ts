@@ -1,7 +1,9 @@
 import { Injectable } from '@angular/core';
 import { Store, StoreConfig } from '@datorama/akita';
 
-import { AcessoCidadaoClaims, createAnonymousUser, defaultAvatarSrc, Token } from '../models';
+import { AcessoCidadaoClaims, Token } from '../models';
+
+export const defaultAvatarSrc = 'assets/imgs/user.png';
 
 export type AuthState = {
   claims: Partial<AcessoCidadaoClaims>;
@@ -11,10 +13,16 @@ export type AuthState = {
   avatarUrl?: string;
 };
 
-const initialState: AuthState = {
-  claims: createAnonymousUser(),
-  avatarUrl: defaultAvatarSrc
-};
+export function createDefaultAuthState(): AuthState {
+  return {
+    claims: {
+      nome: 'Usuário visitante'
+    },
+    avatarUrl: defaultAvatarSrc
+  };
+}
+
+const initialState: AuthState = createDefaultAuthState();
 
 @Injectable()
 @StoreConfig({ name: 'auth' })
