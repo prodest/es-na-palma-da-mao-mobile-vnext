@@ -74,7 +74,7 @@
     "@ionic-native/camera": "^4.5.3",
     "@ionic-native/core": "^4.5.3",
     "@ionic-native/facebook": "^4.4.2",
-    "@ionic-native/google-plus": "^4.4.2",
+    "@ionic-native/google-plus": "^4.9.2",
     "@ionic-native/in-app-browser": "^4.4.2",
     "@ionic-native/social-sharing": "^4.6.0",
     "@ionic-native/splash-screen": "^4.5.3",
