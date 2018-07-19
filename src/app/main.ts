@@ -1,13 +1,12 @@
 // tslint:disable-next-line
-/// <reference path="./module.augmentation.d.ts" />
-/// <reference path="./module.declaration.d.ts" />
+/// <reference path="../module.augmentation.d.ts" />
+/// <reference path="../module.declaration.d.ts" />
 import { platformBrowserDynamic } from '@angular/platform-browser-dynamic';
 import { persistState } from '@datorama/akita';
-
-import { EspmModule } from './app/app.module';
+import { AppModule } from './app.module';
 
 platformBrowserDynamic()
-  .bootstrapModule(EspmModule)
+  .bootstrapModule(AppModule)
   .then(registerServiceWorker);
 
 persistState({

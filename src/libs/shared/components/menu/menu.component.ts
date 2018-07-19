@@ -82,7 +82,7 @@ const menus = [
       {
         title: 'Portal da Transparência',
         icon: 'pie',
-        component: 'TransparenciaDashboardPage',
+        component: 'TransparencyDashboardPage',
         order: 2
       }
     ]

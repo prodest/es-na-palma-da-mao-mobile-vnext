@@ -10,8 +10,8 @@ export class SepStorage extends LocalStorage<SepStorageModel> {
   /* 
    * Creates an instance of SepStorageService
    */
-  constructor(storage: Storage, defaults: SepStorageModel, storageKey: string) {
-    super(storage, defaults, storageKey);
+  constructor(storage: Storage) {
+    super(storage, { favoriteProtocols: [], date: null }, '_sep-storage');
   }
 
   isFavorite(protocol: Protocol): boolean {

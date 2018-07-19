@@ -2,6 +2,8 @@ import * as moment from 'moment';
 
 export class YearFilter {
   year: number;
+  fromISO: string;
+  toISO: string;
 
   /**
    *

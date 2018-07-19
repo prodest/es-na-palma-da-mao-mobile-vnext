@@ -15,8 +15,8 @@ export class DetranStorage extends LocalStorage<DetranStorageModel> {
    * C
    *
    */
-  constructor(storage: Storage, defaults: any, storageKey: string) {
-    super(storage, defaults, storageKey);
+  constructor(storage: Storage) {
+    super(storage, { vehicles: [] }, '_detran-storage');
   }
 
   /**

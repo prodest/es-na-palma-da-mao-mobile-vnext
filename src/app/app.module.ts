@@ -19,7 +19,7 @@ import { IonicApp, IonicErrorHandler, IonicModule } from 'ionic-angular';
 import * as moment from 'moment';
 
 import { AboutProviders } from './about/providers';
-import { ESPM } from './app.component';
+import { ESPMComponent } from './app.component';
 import { CalendarProviders } from './calendar/providers';
 import { CeturbProviders } from './ceturb/transcol-lines/providers';
 import { TranscolOnlineProviders } from './ceturb/transcol-online/providers';
@@ -33,13 +33,13 @@ moment.locale('pt-br');
 registerLocaleData(ptBr);
 
 @NgModule({
-  declarations: [ESPM],
+  declarations: [ESPMComponent],
   imports: [
     BrowserModule,
     CoreModule,
     MenuModule,
     IonicStorageModule.forRoot({ name: 'espm', driverOrder: ['localstorage'] }),
-    IonicModule.forRoot(ESPM, ionicConfig),
+    IonicModule.forRoot(ESPMComponent, ionicConfig),
     ImageLoaderModule.forRoot({
       fallbackUrl: 'assets/imgs/no-img.png',
       fallbackAsPlaceholder: false,
@@ -48,7 +48,7 @@ registerLocaleData(ptBr);
     })
   ],
   bootstrap: [IonicApp],
-  entryComponents: [ESPM],
+  entryComponents: [ESPMComponent],
   providers: [
     LocaleService,
     StatusBar,
@@ -75,4 +75,4 @@ registerLocaleData(ptBr);
     { provide: ErrorHandler, useClass: IonicErrorHandler }
   ]
 })
-export class EspmModule {}
+export class AppModule {}

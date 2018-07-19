@@ -1,6 +1,7 @@
 import * as moment from 'moment';
 
 export class DateRangeFilter {
+  year: number;
   from: Date;
   to: Date;
   fromISO: string;

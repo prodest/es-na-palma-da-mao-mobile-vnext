@@ -7,10 +7,16 @@ export type Params = { [key: string]: any };
 
 @Injectable()
 export class ApiBaseService<T extends { id: string | number }> {
+  protected api: string;
+
   /**
    * Creates an instance of ApiBaseService.
    */
-  constructor(private http: HttpClient, protected api: string) {}
+  constructor(private http: HttpClient) {}
+
+  set setApi(api: string) {
+    this.api = api;
+  }
 
   /**
    *

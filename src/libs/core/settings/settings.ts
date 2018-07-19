@@ -13,7 +13,15 @@ export class Settings extends LocalStorage<SettingsModel> {
    *
    *
    */
-  constructor(storage: Storage, defaults: any, storageKey: string) {
-    super(storage, defaults, storageKey);
+  constructor(storage: Storage) {
+    super(
+      storage,
+      {
+        option1: true,
+        option2: 'option2',
+        option3: 'option3'
+      },
+      '_settings'
+    );
   }
 }

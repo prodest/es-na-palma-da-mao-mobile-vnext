@@ -2,14 +2,14 @@ import { Component } from '@angular/core';
 import { IonicPage } from 'ionic-angular';
 
 @IonicPage({
-  name: 'TransparenciaDashboardPage',
+  name: 'TransparencyDashboardPage',
   segment: 'secont/transparencia'
 })
 @Component({
-  selector: 'page-transparencia-dashboard',
-  templateUrl: 'dashboard.html'
+  selector: 'page-transparency-dashboard',
+  templateUrl: 'transparency-dashboard.html'
 })
-export class DashboardPage {
+export class TransparencyDashboardPage {
   pages = [
     {
       type: 'revenues',

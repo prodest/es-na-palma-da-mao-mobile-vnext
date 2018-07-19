@@ -9,7 +9,8 @@
     <span>Linha</span>
     <span class="origin">Próximo</span>
 </div>
-<ion-scroll scrollY="true" *ngIf="previsions && previsions.length">
+<ion-scroll scrollY="true"
+            *ngIf="previsions && previsions.length">
     <ion-list class="prevision-list">
         <button ion-item
                 *ngFor="let prevision of previsions"

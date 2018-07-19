@@ -8,8 +8,7 @@ import { Platform } from 'ionic-angular';
 @Component({
   templateUrl: 'app.component.html'
 })
-// tslint:disable-next-line:component-class-suffix
-export class ESPM {
+export class ESPMComponent {
   rootPage: any = 'HomePage';
 
   /**

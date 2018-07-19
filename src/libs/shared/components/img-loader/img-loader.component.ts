@@ -78,6 +78,10 @@ export class ImgLoaderComponent implements OnInit {
     this._useImg = val !== false;
   }
 
+  get useImg(): boolean {
+    return this._useImg;
+  }
+
   private _useImg: boolean;
 
   /**
