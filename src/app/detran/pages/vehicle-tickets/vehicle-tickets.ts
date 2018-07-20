@@ -1,9 +1,7 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
-import { Observable } from 'rxjs/Observable';
 
 import { Ticket, Vehicle } from './../../model';
-import { VehiclesService } from './../../providers';
 
 @IonicPage({
   segment: 'detran/veiculos/:plate/multas'
@@ -13,14 +11,14 @@ import { VehiclesService } from './../../providers';
   templateUrl: 'vehicle-tickets.html'
 })
 export class VehicleTicketsPage {
-  tickets$: Observable<Ticket[]>;
+  tickets: Ticket[];
   vehicle: Vehicle;
 
   /**
    *
    *
    */
-  constructor(private detran: VehiclesService, private navCtrl: NavController, private params: NavParams) {}
+  constructor(private navCtrl: NavController, private params: NavParams) {}
 
   /**
    * ref: https://github.com/ionic-team/ionic/issues/11459#issuecomment-365224107
@@ -42,14 +40,6 @@ export class VehicleTicketsPage {
    */
   ionViewWillLoad() {
     this.vehicle = this.params.get('vehicle');
-    this.detran.ready.then(this.loadTickets);
+    this.tickets = this.params.get('tickets');
   }
-
-  /**
-   *
-   *
-   */
-  private loadTickets = () => {
-    this.tickets$ = this.detran.getTickets(this.vehicle);
-  };
 }

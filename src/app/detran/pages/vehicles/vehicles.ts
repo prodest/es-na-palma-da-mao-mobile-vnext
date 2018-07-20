@@ -104,7 +104,12 @@ export class VehiclesPage implements OnDestroy {
    *
    */
   showTickets = (vehicle: Vehicle) => {
-    this.navCtrl.push('VehicleTicketsPage', { vehicle, plate: vehicle.plate });
+    this.detran
+      .getTickets(vehicle)
+      .subscribe(
+        tickets => this.navCtrl.push('VehicleTicketsPage', { vehicle, plate: vehicle.plate, tickets: tickets }),
+        error => console.log(error)
+      );
   };
 
   /**

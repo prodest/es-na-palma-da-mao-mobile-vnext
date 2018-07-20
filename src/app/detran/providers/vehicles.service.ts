@@ -105,7 +105,8 @@ export class VehiclesService {
    *
    */
   getTickets = (vehicle: Vehicle): Observable<Ticket[]> => {
-    return this.api.getVehicleTickets(vehicle);
+    this.showLoading();
+    return this.api.getVehicleTickets(vehicle).pipe(finalize(this.dismissLoading));
   };
 
   /**
