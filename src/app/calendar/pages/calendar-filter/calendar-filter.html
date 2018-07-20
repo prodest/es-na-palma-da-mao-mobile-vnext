@@ -8,11 +8,6 @@
       </button>
     </ion-buttons>
     <ion-title>Agenda ES</ion-title>
-    <ion-buttons end>
-      <button ion-button
-              class="text-button"
-              (click)="dismiss()">FILTRAR</button>
-    </ion-buttons>
   </ion-navbar>
 </ion-header>
 
@@ -34,3 +29,9 @@
     </ion-item>
   </ion-list>
 </ion-content>
+<ion-footer>
+  <button ion-button
+          full
+          color-secondary
+          (click)="dismiss()">Pesquisar</button>
+</ion-footer>
