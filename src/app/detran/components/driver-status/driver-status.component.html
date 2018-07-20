@@ -5,8 +5,8 @@
     <ion-icon name="mgcar"
               item-start
               class="status__icon"></ion-icon>
-    <h2 class="status__msg">CNH Ok - Dirija com segurança</h2>
-    <p class="status__detail">CNH válida até {{status.expirationDate | dateFormat: 'dd/MM/yyyy'}}</p>
+    <h2 class="status__msg">CNH válida até <strong>{{status.expirationDate | dateFormat: 'dd/MM/yyyy'}}</strong></h2>
+    <p class="status__detail">Dirija com segurança</p>
 </ion-item>
 
 <ion-item *ngIf="status.renew && !status.blocked"
