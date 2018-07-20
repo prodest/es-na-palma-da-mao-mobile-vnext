@@ -8,6 +8,8 @@
 /node_modules
 
 .env
+build.json
+espm.keystore
 
 // push
 google-services.json
@@ -73,5 +75,3 @@ UserInterfaceState.xcuserstate
 # e2e
 /e2e/*.js
 /e2e/*.map
-
-espm.keystore
