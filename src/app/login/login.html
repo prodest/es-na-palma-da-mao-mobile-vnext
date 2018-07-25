@@ -1,11 +1,14 @@
 <ion-header>
   <ion-navbar>
+    <button ion-button
+            menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
     <ion-title>Acesse sua conta</ion-title>
   </ion-navbar>
 </ion-header>
 <ion-content padding
-             color-primary
-             no-menu>
+             color-primary>
   <form (submit)="login(username, password)">
     <ion-list no-padding
               margin-top>

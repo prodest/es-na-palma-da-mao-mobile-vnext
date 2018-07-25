@@ -21,7 +21,6 @@
     "run:prod:ios": "npm run build:prod:ios && cordova run ios",
     "ionic:serve": "ionic-app-scripts serve -p 3000",
     "htmlhint": "htmlhint --config .htmlhintrc",
-    "precommit": "lint-staged",
     "format": "prettier --find-config-path --write",
     "format:check": "prettier --find-config-path --list-different \"src/{app,libs,theme}/**/*{.ts,.js,.json,.css,.scss}\"",
     "workbox": "workbox generate:sw",
@@ -33,18 +32,20 @@
     "tree-shaking": "find ./www -regex '.*\\.ttf$' -delete -or -regex '.*\\.svg$' -delete -or -regex '.*\\.eot$' -delete -or -regex '.*\\.map$' -delete"
   },
   "lint-staged": {
-    "src/app/**/*.html": [
-      "htmlhint"
-    ],
-    "src/**/*.ts": [
-      "lint",
-      "format",
-      "git add"
-    ],
-    "src/**/*.{css,scss}": [
-      "format",
-      "git add"
-    ]
+    "linters": {
+      "src/app/**/*.html": [
+        "htmlhint"
+      ],
+      "src/**/*.ts": [
+        "lint",
+        "format",
+        "git add"
+      ],
+      "src/**/*.{css,scss}": [
+        "format",
+        "git add"
+      ]
+    }
   },
   "config": {
     "ionic_source_map_type": "source-map",
@@ -70,9 +71,11 @@
     "@angular/platform-browser-dynamic": "^5.2.11",
     "@datorama/akita": "^1.2.2",
     "@ionic-native/android-permissions": "^4.9.1",
+    "@ionic-native/app-availability": "^4.10.1",
     "@ionic-native/barcode-scanner": "^4.7.0",
     "@ionic-native/camera": "^4.5.3",
     "@ionic-native/core": "^4.5.3",
+    "@ionic-native/device": "^4.10.1",
     "@ionic-native/facebook": "^4.4.2",
     "@ionic-native/google-plus": "^4.9.2",
     "@ionic-native/in-app-browser": "^4.4.2",
@@ -86,6 +89,7 @@
     "cordova-android": "7.1.0",
     "cordova-ios": "^4.4.0",
     "cordova-plugin-android-permissions": "^1.0.0",
+    "cordova-plugin-appavailability": "^0.4.2",
     "cordova-plugin-compat": "^1.2.0",
     "cordova-plugin-device": "^1.1.7",
     "cordova-plugin-facebook4": "^1.10.1",
@@ -201,7 +205,8 @@
       "cordova-plugin-googleplus": {
         "REVERSED_CLIENT_ID": "com.googleusercontent.apps.716051840979-96738cri764kv9vhih0d41ug07sroibv",
         "WEB_APPLICATION_CLIENT_ID": "716051840979-96738cri764kv9vhih0d41ug07sroibv.apps.googleusercontent.com"
-      }
+      },
+      "cordova-plugin-appavailability": {}
     },
     "platforms": [
       "ios",

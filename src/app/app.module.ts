@@ -14,6 +14,7 @@ import { InAppBrowser } from '@ionic-native/in-app-browser';
 import { SocialSharing } from '@ionic-native/social-sharing';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import { StatusBar } from '@ionic-native/status-bar';
+import { AppAvailability } from '@ionic-native/app-availability';
 import { IonicStorageModule } from '@ionic/storage';
 import { IonicApp, IonicErrorHandler, IonicModule } from 'ionic-angular';
 import * as moment from 'moment';
@@ -50,25 +51,26 @@ registerLocaleData(ptBr);
   bootstrap: [IonicApp],
   entryComponents: [ESPMComponent],
   providers: [
+    AndroidPermissions,
+    AndroidPermissionsService,
+    AppAvailability,
+    BarcodeScanner,
+    Facebook,
+    GooglePlus,
+    InAppBrowser,
     LocaleService,
     StatusBar,
     SplashScreen,
-    GooglePlus,
-    Facebook,
     SocialSharing,
-    InAppBrowser,
-    AndroidPermissions,
-    AndroidPermissionsService,
-    BarcodeScanner,
-    ...DetranProviders,
+    ...AboutProviders,
+    ...CalendarProviders,
     ...CeturbProviders,
-    ...TranscolOnlineProviders,
+    ...DetranProviders,
     ...DioProviders,
     ...NewsProviders,
-    ...CalendarProviders,
-    ...TransparencyProviders,
     ...SepProviders,
-    ...AboutProviders,
+    ...TranscolOnlineProviders,
+    ...TransparencyProviders,
     { provide: ErrorHandler, useClass: IonicErrorHandler },
     { provide: LOCALE_ID, useFactory: localeIdFactory, deps: [LocaleService] },
     { provide: APP_INITIALIZER, multi: true, useFactory: localeInitializer, deps: [LOCALE_ID] },

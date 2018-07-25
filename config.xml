@@ -117,4 +117,5 @@
     </plugin>
     <engine name="ios" spec="^4.4.0" />
     <engine name="android" spec="7.1.0" />
+    <plugin name="cordova-plugin-appavailability" spec="^0.4.2" />
 </widget>

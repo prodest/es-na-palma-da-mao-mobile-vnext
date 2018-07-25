@@ -13,12 +13,11 @@
     <button ion-item
             *ngFor="let page of menu.items;let last = last"
             [ngClass]="{ last: last, accessDenied: !isLoggedIn && page.secure }"
-            (click)="openPage(page.component, !isLoggedIn && page.secure )">
+            (click)="openPage(page, !isLoggedIn && page.secure )">
       <ion-icon item-start
                 name="md-{{page.icon}}"></ion-icon>
       {{page.title}}
     </button>
-
   </ng-container>
   <button *ngIf="isLoggedIn"
           menuClose
