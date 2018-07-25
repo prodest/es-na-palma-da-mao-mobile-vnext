@@ -1,8 +1,11 @@
 import { ChangeDetectionStrategy, ChangeDetectorRef, Component, OnDestroy, OnInit } from '@angular/core';
 import { AuthQuery, AuthService } from '@espm/core';
-import { AlertController, App, MenuController } from 'ionic-angular';
+import { App, MenuController, Platform } from 'ionic-angular';
+import { AppAvailability } from '@ionic-native/app-availability';
 import { takeUntil, tap } from 'rxjs/operators';
 import { Subject } from 'rxjs/Subject';
+import { AuthNeededService } from '@espm/core/auth/auth-needed.service';
+import { InAppBrowser } from '@ionic-native/in-app-browser';
 
 const menus = [
   {
@@ -105,6 +108,22 @@ const menus = [
     ]
   },
   {
+    name: 'Servidor',
+    items: [
+      {
+        title: 'Táxi Gov',
+        icon: 'car',
+        component: '',
+        order: 6,
+        url: 'mb://action=login',
+        name: 'app.mb',
+        deepLink: true,
+        package: 'mb.taxi.meiabandeirada',
+        uriScheme: 'mb://'
+      }
+    ]
+  },
+  {
     name: 'Outros',
     items: [
       {
@@ -132,12 +151,15 @@ export class MenuComponent implements OnInit, OnDestroy {
    *
    */
   constructor(
+    private iab: InAppBrowser,
+    private appAvailability: AppAvailability,
+    private authNeeded: AuthNeededService,
     private authQuery: AuthQuery,
     private auth: AuthService,
     private menuCtrl: MenuController,
-    private alertCtrl: AlertController,
     private appCtrl: App,
-    private cd: ChangeDetectorRef
+    private cd: ChangeDetectorRef,
+    private platform: Platform
   ) {}
 
   /**
@@ -160,12 +182,26 @@ export class MenuComponent implements OnInit, OnDestroy {
   /**
    *
    */
-  openPage = (page: string, accessDenied: boolean = false) => {
+  openPage = (route: any, accessDenied: boolean = false) => {
     if (accessDenied) {
-      this.showAuthNeededModal();
+      this.authNeeded.showAuthNeededModal();
     } else {
-      this.appCtrl.getRootNav().setRoot(page);
-      this.menuCtrl.close();
+      if (route.deepLink) {
+        if (this.platform.is('ios')) {
+          // TODO: Verificar como fazer para ios
+          this.appAvailability.check(route.uriScheme).then((yes: boolean) => console.log(yes), (no: any) => console.log(no));
+        } else {
+          this.appAvailability
+            .check(route.package)
+            .then(
+              (yes: boolean) => this.iab.create(route.url, '_system'),
+              (no: any) => this.iab.create('market://details?id=' + route.package, '_system')
+            );
+        }
+      } else {
+        this.appCtrl.getRootNav().setRoot(route);
+        this.menuCtrl.close();
+      }
     }
   };
 
@@ -174,33 +210,5 @@ export class MenuComponent implements OnInit, OnDestroy {
    */
   logout = () => {
     this.auth.logout().then(() => this.openPage('DashboardPage'));
-  };
-
-  /**
-   *
-   *
-   */
-  private showAuthNeededModal = () => {
-    let alert = this.alertCtrl.create({
-      title: 'Login necessário',
-      message: 'Você deve estar autenticado no <strong>ES na palma da mão</strong> para acessar essa funcionalidade.',
-      buttons: [
-        {
-          text: 'Entendi',
-          role: 'cancel'
-        },
-        {
-          text: 'Autenticar',
-          handler: () => {
-            this.appCtrl
-              .getRootNav()
-              .push('LoginPage')
-              .then(() => alert.dismiss());
-            return false;
-          }
-        }
-      ]
-    });
-    return alert.present();
   };
 }
