@@ -372,7 +372,7 @@ export class TranscolOnlinePage implements AfterViewInit, OnDestroy {
    *
    */
   showHelp = () => {
-    console.log('Not Implemented!');
+    this.modalCtrl.create('TranscolMapLabelsPage').present();
   };
 
   /**
