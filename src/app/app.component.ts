@@ -9,7 +9,7 @@ import { Platform } from 'ionic-angular';
   templateUrl: 'app.component.html'
 })
 export class ESPMComponent {
-  rootPage: any = 'HomePage';
+  rootPage: any = 'DashboardPage';
 
   /**
    *

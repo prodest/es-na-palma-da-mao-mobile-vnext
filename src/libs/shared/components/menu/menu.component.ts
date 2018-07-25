@@ -124,7 +124,7 @@ const menus = [
 })
 export class MenuComponent implements OnInit, OnDestroy {
   menus = menus;
-  rootPage: any = 'HomePage';
+  rootPage: any = 'DashboardPage';
   isLoggedIn: boolean;
   private destroyed$ = new Subject<boolean>();
 
@@ -173,7 +173,7 @@ export class MenuComponent implements OnInit, OnDestroy {
    *
    */
   logout = () => {
-    this.auth.logout().then(() => this.openPage('HomePage'));
+    this.auth.logout().then(() => this.openPage('DashboardPage'));
   };
 
   /**

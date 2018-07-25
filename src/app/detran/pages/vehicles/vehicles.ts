@@ -40,7 +40,7 @@ export class VehiclesPage implements OnDestroy {
     const isAllowed = this.authQuery.isLoggedIn;
 
     if (!isAllowed) {
-      setTimeout(() => this.navCtrl.setRoot('HomePage'));
+      setTimeout(() => this.navCtrl.setRoot('DashboardPage'));
     }
     return isAllowed;
   }
