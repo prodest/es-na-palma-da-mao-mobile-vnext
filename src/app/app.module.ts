@@ -2,9 +2,8 @@ import { registerLocaleData } from '@angular/common';
 import ptBr from '@angular/common/locales/pt';
 import { APP_INITIALIZER, ErrorHandler, LOCALE_ID, NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-import { CoreModule, ionicConfig } from '@espm/core';
+import { CoreModule, ionicConfig, PushService, AndroidPermissionsService } from '@espm/core';
 import { localeIdFactory, localeInitializer, LocaleService } from '@espm/core/locale/LocaleService';
-import { AndroidPermissionsService } from '@espm/core/permissions';
 import { ImageLoaderModule, MenuModule } from '@espm/shared';
 import { AndroidPermissions } from '@ionic-native/android-permissions';
 import { BarcodeScanner } from '@ionic-native/barcode-scanner';
@@ -63,6 +62,7 @@ registerLocaleData(ptBr);
     InAppBrowser,
     LocaleService,
     Push,
+    PushService,
     StatusBar,
     SplashScreen,
     SocialSharing,

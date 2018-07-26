@@ -7,5 +7,6 @@ export * from './auth';
 export * from './push';
 export * from './ionic';
 export * from './utils';
+export * from './permissions';
 
 export { CoreModule } from './core.module';

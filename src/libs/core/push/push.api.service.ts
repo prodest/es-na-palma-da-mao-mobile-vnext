@@ -1,9 +1,7 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Inject, Injectable } from '@angular/core';
-
 import { PushUser } from './model';
-import { EnvVariables } from './../environment';
-import { Environment } from './../environment/environment';
+import { Environment, EnvVariables } from '@espm/core';
 import { Device } from '@ionic-native/Device';
 import { Observable } from 'rxjs/Observable';
 
