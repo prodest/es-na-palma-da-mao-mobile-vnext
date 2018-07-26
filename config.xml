@@ -33,6 +33,7 @@
     <platform name="android">
         <resource-file src="google-services.json" target="app/google-services.json" />
         <hook src="scripts/resolve-project-properties-dependencies.sh" type="before_build" />
+        <hook src="scripts/copy-plugins-from-node_modules.sh" type="before_platform_add" />
         <config-file parent="/resources" target="./res/values/strings.xml">
             <string name="fb_app_id">926428880739042</string>
             <string name="fb_app_name">Acesso Cidadão</string>

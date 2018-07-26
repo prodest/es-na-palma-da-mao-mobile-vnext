@@ -1,0 +1,70 @@
+version: 2
+jobs:
+  create-enviroment:
+    docker:
+      - image: circleci/node:8
+    working_directory: ~/espm
+    steps:
+      - checkout
+      - restore_cache:
+          keys:
+          - v4-dependencies-node_modules-{{ checksum "package-lock.json" }}
+          - v4-dependencies-node_modules
+      - run: npm install
+      - save_cache:
+          paths:
+            - node_modules
+          key: v4-dependencies-node_modules-{{ checksum "package-lock.json" }}
+      - run:
+          name: Get secrets
+          command: |
+            git clone -q https://$GITLAB_USER:$GITLAB_PASSWORD@gitlab.es.gov.br/SGPRJ/espm-ci-secrets.git > /dev/null 2>&1
+            cp espm-ci-secrets/* .
+      - persist_to_workspace:
+          root: ~/espm
+          paths:
+            - ./
+  publish-prod:
+    docker:
+      - image: prodest/circleci-containers:mobile-android-v1
+    working_directory: ~/espm
+    steps:
+      - attach_workspace:
+          at: ./
+      - restore_cache:
+          keys:
+          - v3-dependencies-plugins-{{ checksum "package-lock.json" }}
+          - v3-dependencies-plugins
+      - run: npm run build:prod:android
+      # - run: rm -rf platforms && rm -f plugins/android.json # Remove para reescrever o arquivo platforms/android/res/values/string com nome, id e icon do app
+      - run: cordova prepare android -f
+      - run: cordova build android --release --buildconfig=build.json
+      # - run: 
+      #     name: Upload APK to Gitlab?
+      #     command: 
+      - run:
+          name: Publish on Play Store Alpha
+          command: node scripts/upload-apk.js platforms/android/app/build/outputs/apk/release/app-release.apk alpha br.gov.es.prodest.espm
+      - save_cache:
+          paths:
+            - plugins
+          key: v3-dependencies-plugins-{{ checksum "package-lock.json" }}
+workflows:
+  version: 2
+  main-workflow:
+    jobs:
+      - create-enviroment:
+          filters:
+            branches:
+              ignore: /.*/
+            tags:
+              only: /.*/
+      - publish-prod:
+          requires:
+            - create-enviroment
+          filters:
+            branches:
+              ignore: /.*/
+            tags:
+              only: /.*/
+             # only: /^v[0-9]+(\.[0-9]+){2}/ # v1.2.3

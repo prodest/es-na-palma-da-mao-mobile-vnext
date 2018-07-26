@@ -31,6 +31,12 @@
     "purifycss": "purifycss www/build/main.css www/build/*.js www/index.html --info --min --out www/build/main.css --whitelist *.ion-md-icon*",
     "tree-shaking": "find ./www -regex '.*\\.ttf$' -delete -or -regex '.*\\.svg$' -delete -or -regex '.*\\.eot$' -delete -or -regex '.*\\.map$' -delete"
   },
+  "standard-version": {
+    "scripts": {
+      "postbump": "node scripts/version-bump-cordova.js",
+      "precommit": "git add config.xml"
+    }
+  },
   "lint-staged": {
     "linters": {
       "src/app/**/*.html": [
@@ -134,6 +140,7 @@
     "commitizen": "^2.10.1",
     "cz-conventional-changelog": "^2.1.0",
     "dotenv": "^4.0.0",
+    "googleapis": "^28.1.0",
     "htmlhint": "^0.9.13",
     "husky": "^0.14.3",
     "lint-staged": "^6.0.0",
