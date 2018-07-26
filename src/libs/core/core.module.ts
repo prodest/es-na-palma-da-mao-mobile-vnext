@@ -5,8 +5,6 @@ import { NgModule, Optional, SkipSelf } from '@angular/core';
 import { Auth } from './auth';
 import { Common } from './common';
 import { EnvironmentProvider } from './environment';
-import { AndroidPermissions } from '@ionic-native/android-permissions';
-import { Device } from '@ionic-native/device';
 import { androidPermissionsProvider } from './permissions';
 import { PushProvider } from './push'
 
@@ -19,8 +17,6 @@ import { PushProvider } from './push'
 @NgModule({
   imports: [CommonModule, HttpClientModule],
   providers: [
-    AndroidPermissions,
-    Device,
     EnvironmentProvider,
     //    Config,
     ...Auth,

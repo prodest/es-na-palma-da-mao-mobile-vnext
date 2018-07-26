@@ -7,7 +7,7 @@ import { localeIdFactory, localeInitializer, LocaleService } from '@espm/core/lo
 import { ImageLoaderModule, MenuModule } from '@espm/shared';
 import { AndroidPermissions } from '@ionic-native/android-permissions';
 import { BarcodeScanner } from '@ionic-native/barcode-scanner';
-import { Device } from '@ionic-native/Device';
+import { Device } from '@ionic-native/device';
 import { Facebook } from '@ionic-native/facebook';
 import { GooglePlus } from '@ionic-native/google-plus';
 import { InAppBrowser } from '@ionic-native/in-app-browser';

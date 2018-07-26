@@ -2,7 +2,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Inject, Injectable } from '@angular/core';
 import { PushUser } from './model';
 import { Environment, EnvVariables } from '@espm/core';
-import { Device } from '@ionic-native/Device';
+import { Device } from '@ionic-native/device';
 import { Observable } from 'rxjs/Observable';
 
 const transformRequest = obj => {
@@ -48,7 +48,7 @@ export class PushApiService {
     let pushUser: PushUser = { user: this.device.uuid, secret: this.env.push.secret };
 
     if (registrationId) {
-      pushUser.type = this.device.platform;
+      pushUser.type = this.device.platform.toLowerCase();
       pushUser.token = registrationId;
     }
     return transformRequest(pushUser);
