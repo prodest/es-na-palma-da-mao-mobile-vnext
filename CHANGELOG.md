@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+<a name="4.1.4"></a>
+## [4.1.4](https://github.com/prodest/es-na-palma-da-mao-mobile-vnext/compare/v4.1.3...v4.1.4) (2018-07-26)
+
+
+### Bug Fixes
+
+* **push:** corrige nome do módulo ([32af8b3](https://github.com/prodest/es-na-palma-da-mao-mobile-vnext/commit/32af8b3))
+
+
+
 <a name="4.1.3"></a>
 ## [4.1.3](https://github.com/prodest/es-na-palma-da-mao-mobile-vnext/compare/v4.1.1...v4.1.3) (2018-07-26)
 
