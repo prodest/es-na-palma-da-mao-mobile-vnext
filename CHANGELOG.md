@@ -2,6 +2,22 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+<a name="4.1.0"></a>
+# [4.1.0](https://github.com/prodest/es-na-palma-da-mao-mobile-vnext/compare/v4.0.0...v4.1.0) (2018-07-26)
+
+
+### Features
+
+* **auth:** adiciona serviço auth-needed ([72323e8](https://github.com/prodest/es-na-palma-da-mao-mobile-vnext/commit/72323e8))
+* **circleci:** adiciona ci ao projeto ([4da4f93](https://github.com/prodest/es-na-palma-da-mao-mobile-vnext/commit/4da4f93))
+* **circleci:** torna scripts executáveis ([f455e3d](https://github.com/prodest/es-na-palma-da-mao-mobile-vnext/commit/f455e3d))
+* **cordova:** add plugin cordova-plugin-appavailability ([99ccdd3](https://github.com/prodest/es-na-palma-da-mao-mobile-vnext/commit/99ccdd3))
+* **home:** exclui HomePage ([0b114f3](https://github.com/prodest/es-na-palma-da-mao-mobile-vnext/commit/0b114f3))
+* **push:** adiciona serviço de push ([ce7767d](https://github.com/prodest/es-na-palma-da-mao-mobile-vnext/commit/ce7767d))
+* **transcol-online:** implementa modal com legenda do mapa ([a48691a](https://github.com/prodest/es-na-palma-da-mao-mobile-vnext/commit/a48691a))
+
+
+
 <a name="0.1.0"></a>
 # 0.1.0 (2018-03-05)
 
