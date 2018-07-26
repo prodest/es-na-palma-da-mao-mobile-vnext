@@ -34,6 +34,7 @@
         <resource-file src="google-services.json" target="app/google-services.json" />
         <hook src="scripts/resolve-project-properties-dependencies.sh" type="before_build" />
         <hook src="scripts/copy-plugins-from-node_modules.sh" type="before_platform_add" />
+        <hook src="scripts/manually-set-plugin-params.sh" type="before_platform_add" />
         <config-file parent="/resources" target="./res/values/strings.xml">
             <string name="fb_app_id">926428880739042</string>
             <string name="fb_app_name">Acesso Cidadão</string>
@@ -116,7 +117,7 @@
         <variable name="REVERSED_CLIENT_ID" value="com.googleusercontent.apps.716051840979-96738cri764kv9vhih0d41ug07sroibv" />
         <variable name="WEB_APPLICATION_CLIENT_ID" value="716051840979-96738cri764kv9vhih0d41ug07sroibv.apps.googleusercontent.com" />
     </plugin>
+    <plugin name="cordova-plugin-appavailability" spec="^0.4.2" />
     <engine name="ios" spec="^4.4.0" />
     <engine name="android" spec="7.1.0" />
-    <plugin name="cordova-plugin-appavailability" spec="^0.4.2" />
 </widget>
