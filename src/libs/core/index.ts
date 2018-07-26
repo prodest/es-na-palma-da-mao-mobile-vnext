@@ -4,6 +4,7 @@ export * from './settings';
 export * from './storage';
 export * from './forms';
 export * from './auth';
+export * from './push';
 export * from './ionic';
 export * from './utils';
 

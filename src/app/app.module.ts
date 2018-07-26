@@ -8,9 +8,11 @@ import { AndroidPermissionsService } from '@espm/core/permissions';
 import { ImageLoaderModule, MenuModule } from '@espm/shared';
 import { AndroidPermissions } from '@ionic-native/android-permissions';
 import { BarcodeScanner } from '@ionic-native/barcode-scanner';
+import { Device } from '@ionic-native/Device';
 import { Facebook } from '@ionic-native/facebook';
 import { GooglePlus } from '@ionic-native/google-plus';
 import { InAppBrowser } from '@ionic-native/in-app-browser';
+import { Push } from '@ionic-native/push';
 import { SocialSharing } from '@ionic-native/social-sharing';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import { StatusBar } from '@ionic-native/status-bar';
@@ -55,10 +57,12 @@ registerLocaleData(ptBr);
     AndroidPermissionsService,
     AppAvailability,
     BarcodeScanner,
+    Device,
     Facebook,
     GooglePlus,
     InAppBrowser,
     LocaleService,
+    Push,
     StatusBar,
     SplashScreen,
     SocialSharing,
