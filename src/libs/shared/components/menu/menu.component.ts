@@ -205,10 +205,17 @@ export class MenuComponent implements OnInit, OnDestroy {
     }
   };
 
+  /*
+   *
+   */
+  login = () => {
+    this.openPage({ component: 'LoginPage' });
+  };
+
   /**
    *
    */
   logout = () => {
-    this.auth.logout().then(() => this.openPage('DashboardPage'));
+    this.auth.logout().then(() => this.openPage({ component: 'DashboardPage' }));
   };
 }
