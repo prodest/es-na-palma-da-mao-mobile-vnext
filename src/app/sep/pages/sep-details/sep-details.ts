@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { AuthQuery } from '@espm/core';
-import { AlertController, App, IonicPage, NavParams } from 'ionic-angular';
+import { AlertController, App, IonicPage, NavParams, ToastController } from 'ionic-angular';
 
 import { Protocol, ProtocolUpdate } from '../../model';
 import { SepService } from '../../providers';
@@ -26,7 +26,8 @@ export class SepDetailsPage {
     private appCtrl: App,
     private alertCtrl: AlertController,
     private authQuery: AuthQuery,
-    private sepService: SepService
+    private sepService: SepService,
+    private toastCtrl: ToastController
   ) {
     this.lastUpdate = null;
     this.protocol = null;
@@ -67,9 +68,12 @@ export class SepDetailsPage {
       this.showAuthNeededModal();
     } else {
       if (this.isFavorite(protocol)) {
-        this.sepService.removeFavorite(protocol).subscribe();
+        this.sepService.removeFavorite(protocol).subscribe(() => {
+          this.showMessage(`Protocolo ${protocol} removido dos favoritos`);
+        });
       } else {
         this.sepService.addFavorite(protocol).subscribe();
+        this.showMessage(`Protocolo ${protocol} adicionado aos favoritos`);
       }
     }
   }
@@ -100,5 +104,13 @@ export class SepDetailsPage {
       ]
     });
     return alert.present();
+  };
+
+  /**
+   *
+   *
+   */
+  private showMessage = (message: string) => {
+    this.toastCtrl.create({ message, duration: 4000 }).present();
   };
 }
