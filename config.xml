@@ -33,8 +33,9 @@
     <platform name="android">
         <resource-file src="google-services.json" target="app/google-services.json" />
         <hook src="scripts/resolve-project-properties-dependencies.sh" type="before_build" />
-        <hook src="scripts/copy-plugins-from-node_modules.sh" type="before_platform_add" />
+        <hook src="scripts/copy-plugins-from-node_modules.js" type="before_platform_add" />
         <hook src="scripts/manually-set-plugin-params.sh" type="before_platform_add" />
+        <hook src="scripts/copy_resource_files.js" type="after_prepare" />
         <config-file parent="/resources" target="./res/values/strings.xml">
             <string name="fb_app_id">926428880739042</string>
             <string name="fb_app_name">Acesso Cidadão</string>
@@ -119,5 +120,5 @@
     </plugin>
     <plugin name="cordova-plugin-appavailability" spec="^0.4.2" />
     <engine name="ios" spec="^4.4.0" />
-    <engine name="android" spec="7.1.0" />
+    <engine name="android" spec="^7.1.1" />
 </widget>
