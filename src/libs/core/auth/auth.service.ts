@@ -95,15 +95,20 @@ export class AuthService {
    */
   logout() {
     // 1 - se desloga de todos os providers
-    return Promise.all([
-      this.onDevice ? this.googlePlus.logout() : Promise.resolve(),
-      this.onDevice ? this.facebook.logout() : Promise.resolve()
-    ]).then(() => {
-      this.acessoCidadao.logout();
+    const googlePlusPromise = this.onDevice ? this.googlePlus.logout().catch(() => true) : Promise.resolve();
 
-      // 3 - Restart push service to anonimous user
-      this.push.init();
-    });
+    const facebookPromise = this.onDevice
+      ? this.facebook.getLoginStatus().then(status => {
+          if (status.status === 'connected') {
+            this.facebook.logout();
+          }
+        })
+      : Promise.resolve();
+
+    return Promise.all([googlePlusPromise, facebookPromise])
+      .then(this.acessoCidadao.logout)
+      .then(this.push.unregister)
+      .then(this.push.init); // 3 - Restart push service to anonimous user
   }
 
   /**

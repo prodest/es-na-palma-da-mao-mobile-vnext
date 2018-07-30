@@ -7,6 +7,8 @@ import { PushApiService } from './push.api.service';
 
 @Injectable()
 export class PushService {
+  pushManager: PushObject;
+
   constructor(
     private app: App,
     private push: Push,
@@ -30,18 +32,28 @@ export class PushService {
       }
     };
 
-    let push: PushObject = this.push.init(pushOptions);
+    this.pushManager = this.push.init(pushOptions);
 
-    if (push.on) {
-      push.on('registration').subscribe((data: RegistrationEventResponse) => this.api.registerUser(data.registrationId));
+    if (this.pushManager.on) {
+      this.pushManager
+        .on('registration')
+        .subscribe((data: RegistrationEventResponse) => this.api.registerUser(data.registrationId).subscribe());
 
-      push.on('notification').subscribe((data: NotificationEventResponse) => {
+      this.pushManager.on('notification').subscribe((data: NotificationEventResponse) => {
         if (!data.additionalData.foreround) {
           // TODO:
           this.notify(this.getJson(data.additionalData['appData']));
         }
       });
     }
+  };
+
+  unregister = (): Promise<any> => {
+    console.log('unregister: ', this.pushManager);
+    if (this.pushManager) {
+      return this.pushManager.unregister();
+    }
+    return Promise.resolve();
   };
 
   /**

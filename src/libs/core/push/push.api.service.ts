@@ -5,16 +5,6 @@ import { Environment, EnvVariables } from '@espm/core';
 import { Device } from '@ionic-native/device';
 import { Observable } from 'rxjs/Observable';
 
-const transformRequest = obj => {
-  let str: string[] = [];
-  for (let p in obj) {
-    if (obj.hasOwnProperty(p)) {
-      str.push(encodeURIComponent(p) + '=' + encodeURIComponent(obj[p]));
-    }
-  }
-  return str.join('&');
-};
-
 @Injectable()
 export class PushApiService {
   /**
@@ -51,6 +41,6 @@ export class PushApiService {
       pushUser.type = this.device.platform.toLowerCase();
       pushUser.token = registrationId;
     }
-    return transformRequest(pushUser);
+    return pushUser;
   }
 }
