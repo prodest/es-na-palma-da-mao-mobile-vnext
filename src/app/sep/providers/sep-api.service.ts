@@ -6,7 +6,7 @@ import { Observable } from 'rxjs/Observable';
 import { share } from 'rxjs/operators';
 
 import { Protocol } from './../model';
-import { SepStorageModel } from './sep-storage.model';
+import { FavoriteProtocolsData } from '../model';
 
 @Injectable()
 export class SepApiService {
@@ -30,7 +30,15 @@ export class SepApiService {
    *
    *
    */
-  syncFavoriteProtocols(favoriteProtocols: SepStorageModel): Observable<SepStorageModel> {
-    return this.http.post<SepStorageModel>(`${this.env.api.espm}/sep/data/favorite`, favoriteProtocols).pipe(share());
+  syncFavoriteProtocols(favoriteProtocols: FavoriteProtocolsData): Observable<FavoriteProtocolsData> {
+    return this.http.post<FavoriteProtocolsData>(`${this.env.api.espm}/sep/data/favorite`, favoriteProtocols).pipe(share());
+  }
+
+  /**
+   *
+   *
+   */
+  getFavoriteProtocols(): Observable<FavoriteProtocolsData> {
+    return this.http.get<FavoriteProtocolsData>(`${this.env.api.espm}/sep/data/favorite`).pipe(share());
   }
 }

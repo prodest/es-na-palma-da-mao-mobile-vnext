@@ -1,17 +1,19 @@
-import { Injectable } from '@angular/core';
+import { Injectable, OnDestroy } from '@angular/core';
 import { Loading, LoadingController, ToastController } from 'ionic-angular';
 import { Observable } from 'rxjs/Observable';
 import { _throw } from 'rxjs/observable/throw';
-import { catchError, finalize, flatMap, pluck } from 'rxjs/operators';
+import { catchError, finalize, flatMap, pluck, takeUntil, filter, map } from 'rxjs/operators';
 
-import { FavoriteProtocol, Protocol } from './../model';
+import { FavoriteProtocol, Protocol, FavoriteProtocolsData } from './../model';
 import { SepApiService } from './sep-api.service';
-import { SepStorageModel } from './sep-storage.model';
-import { SepStorage } from './sep-storage.service';
+import { FavoriteProtocolStore, SepQuery } from '.';
+import { Subject } from 'rxjs/Subject';
+import { AuthQuery } from '@espm/core';
 
 @Injectable()
-export class SepService {
+export class SepService implements OnDestroy {
   loading: Loading;
+  destroyed$ = new Subject();
 
   /**
    *
@@ -19,21 +21,24 @@ export class SepService {
    */
   constructor(
     private api: SepApiService,
-    private storage: SepStorage,
     private toastCtrl: ToastController,
-    private loadingCtrl: LoadingController
-  ) {}
-
-  get favoriteProtocols$(): Observable<FavoriteProtocol[]> {
-    return this.storage.all$.pipe(pluck('favoriteProtocols'));
+    private loadingCtrl: LoadingController,
+    private favoriteProtocolStore: FavoriteProtocolStore,
+    private sepQuery: SepQuery,
+    private authQuery: AuthQuery
+  ) {
+    this.sepQuery.favorites$
+      .pipe(takeUntil(this.destroyed$), filter(() => !this.favoriteProtocolStore.isPristine), flatMap(this.syncFavorites))
+      .subscribe();
   }
 
   /**
    *
    *
    */
-  isFavorite(protocol: Protocol): boolean {
-    return this.storage.isFavorite(protocol);
+  ngOnDestroy() {
+    this.destroyed$.next();
+    this.destroyed$.unsubscribe();
   }
 
   /**
@@ -46,6 +51,15 @@ export class SepService {
     return this.api.getProcessByNumber(protocolNumber).pipe(finalize(this.dismissLoading));
   }
 
+  loadFavorites = () => {
+    if (this.authQuery.isLoggedIn) {
+      this.api
+        .getFavoriteProtocols()
+        .pipe(map(p => p.favoriteProtocols))
+        .subscribe(this.storeFavoriteProtocols);
+    }
+  };
+
   /**
    *
    *
@@ -54,6 +68,8 @@ export class SepService {
     let favoriteProtocol = this.mapFavorite(protocol);
 
     this.showLoading();
+
+    this.favoriteProtocolStore.update(protocol.number);
 
     let addedFavorites = this.storage.getValue('favoriteProtocols');
     addedFavorites.splice(this.locationOf(protocol, addedFavorites), 0, favoriteProtocol);
@@ -89,22 +105,14 @@ export class SepService {
    *
    *
    */
-  syncFavorites = (favoriteProtocols?: FavoriteProtocol[]): Observable<FavoriteProtocol[]> => {
-    const syncData: SepStorageModel = { favoriteProtocols: [], date: null };
-
-    if (favoriteProtocols) {
-      syncData.favoriteProtocols = favoriteProtocols;
-      syncData.date = new Date().toISOString();
-    }
-
-    return this.api
-      .syncFavoriteProtocols(syncData)
-      .pipe(
-        flatMap((favoriteProtocols: SepStorageModel) =>
-          this.storage.mergeValue('favoriteProtocols', favoriteProtocols.favoriteProtocols)
-        )
-      );
+  syncFavorites = (favoriteProtocols?: FavoriteProtocol[]): Observable<FavoriteProtocolsData> => {
+    return this.api.syncFavoriteProtocols({
+      favoriteProtocols: favoriteProtocols,
+      date: new Date().toISOString()
+    });
   };
+
+  private storeFavoriteProtocols = (data: FavoriteProtocol[]) => this.favoriteProtocolStore.set(data);
 
   /**
    *

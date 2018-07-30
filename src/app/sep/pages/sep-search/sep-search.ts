@@ -6,7 +6,7 @@ import { Observable } from 'rxjs/Observable';
 import { Subject } from 'rxjs/Subject';
 
 import { FavoriteProtocol, Protocol } from './../../model';
-import { SepService } from './../../providers';
+import { SepService } from '../../providers';
 
 @IonicPage({
   segment: 'sep/consulta'
@@ -17,7 +17,6 @@ import { SepService } from './../../providers';
 })
 export class SepSearchPage implements OnDestroy {
   protocolNumberModel: string;
-  favoriteProtocols$: Observable<FavoriteProtocol[]>;
   destroyed$ = new Subject();
 
   constructor(
@@ -48,7 +47,7 @@ export class SepSearchPage implements OnDestroy {
   }
 
   ionViewWillLoad() {
-    this.favoriteProtocols$ = this.sepService.favoriteProtocols$.takeUntil(this.destroyed$);
+    this.sepService.loadFavorites();    
   }
 
   goToProtocol = (protocol: Protocol) => {
