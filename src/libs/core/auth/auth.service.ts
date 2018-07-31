@@ -18,6 +18,7 @@ import {
   Token
 } from './models';
 import { AuthStore } from './state';
+import { Subject } from 'rxjs/Subject';
 
 /**
  * Facade de autenticação consumido por toda a aplicação
@@ -26,6 +27,7 @@ import { AuthStore } from './state';
 @Injectable()
 export class AuthService {
   onDevice = false;
+  signed$ = new Subject<boolean>();
 
   /**
    * Creates an instance of AuthService.
@@ -57,7 +59,7 @@ export class AuthService {
       password: password
     };
 
-    return this.login(identity);
+    return this.login(identity).pipe(tap(() => this.signed$.next(true)));
   };
 
   /**
@@ -107,6 +109,7 @@ export class AuthService {
 
     return Promise.all([googlePlusPromise, facebookPromise])
       .then(this.acessoCidadao.logout)
+      .then(() => this.signed$.next(false))
       .then(this.push.unregister)
       .then(this.push.init); // 3 - Restart push service to anonimous user
   }

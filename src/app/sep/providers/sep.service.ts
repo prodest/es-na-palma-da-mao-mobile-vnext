@@ -9,6 +9,7 @@ import { SepApiService } from './sep-api.service';
 import { FavoriteProtocolStore } from './sep.store';
 import { SepQuery } from './sep.query';
 import { Subject } from 'rxjs/Subject';
+import { AuthService } from '@espm/core';
 
 /**
  *
@@ -32,10 +33,22 @@ export class SepService implements OnDestroy {
     private toastCtrl: ToastController,
     private loadingCtrl: LoadingController,
     private favoriteProtocolStore: FavoriteProtocolStore,
-    private sepQuery: SepQuery
+    private sepQuery: SepQuery,
+    private auth: AuthService
   ) {
+    this.auth.signed$.pipe(takeUntil(this.destroyed$)).subscribe(signed => {
+      if (!signed) {
+        this.favoriteProtocolStore.remove();
+      }
+    });
+
     this.sepQuery.favorites$
-      .pipe(takeUntil(this.destroyed$), filter(() => !this.favoriteProtocolStore.isPristine), flatMap(this.syncFavorites))
+      .pipe(
+        takeUntil(this.destroyed$),
+        tap(favoriteProtocols => (this.favorites = favoriteProtocols)),
+        filter(() => !this.favoriteProtocolStore.isPristine),
+        flatMap(this.syncFavorites)
+      )
       .subscribe();
   }
 
@@ -96,9 +109,6 @@ export class SepService implements OnDestroy {
    *
    */
   syncFavorites = (favoriteProtocols?: FavoriteProtocol[]): Observable<FavoriteProtocolsData> => {
-    console.log('favorites change', favoriteProtocols);
-    this.favorites = favoriteProtocols;
-
     this.showLoading();
 
     return this.api
@@ -116,7 +126,6 @@ export class SepService implements OnDestroy {
   };
 
   private storeFavoriteProtocols = (data: FavoriteProtocol[]) => {
-    console.log('storeFavoriteProtocols', data);
     return this.favoriteProtocolStore.set(this.normalizeFavorites(data));
   };
 
@@ -152,7 +161,7 @@ export class SepService implements OnDestroy {
    */
   private dismissLoading = () => {
     if (this.loading) {
-      this.loading.dismiss().catch(console.log);
+      this.loading.dismiss();
       this.loading = null;
     }
   };

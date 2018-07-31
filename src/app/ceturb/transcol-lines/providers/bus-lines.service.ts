@@ -1,5 +1,5 @@
 import { Injectable, OnDestroy } from '@angular/core';
-import { AuthQuery } from '@espm/core';
+import { AuthQuery, AuthService } from '@espm/core';
 import { AlertController, App, Loading, LoadingController, ToastController } from 'ionic-angular';
 import { Observable } from 'rxjs/Observable';
 import { forkJoin } from 'rxjs/observable/forkJoin';
@@ -41,8 +41,16 @@ export class BusLinesService implements OnDestroy {
     private app: App,
     private authQuery: AuthQuery,
     private busLinesStore: BusLinesStore,
-    private busLinesQuery: BusLinesQuery
+    private busLinesQuery: BusLinesQuery,
+    private auth: AuthService
   ) {
+    // Remove as entities do BusLinesStore no caso do logout, para evitar problema com os favoritos.
+    this.auth.signed$.pipe(takeUntil(this.destroyed$)).subscribe(signed => {
+      if (!signed) {
+        this.busLinesStore.remove();
+      }
+    });
+
     // salva favoritos no server todas as vezes que os favoritos forem atualizados após o carregamento
     // inicial da loja
     this.busLinesQuery.favorites$
