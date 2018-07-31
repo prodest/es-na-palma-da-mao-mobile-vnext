@@ -6,6 +6,8 @@ import { Subject } from 'rxjs/Subject';
 
 import { Protocol } from './../../model';
 import { SepService } from '../../providers';
+import { takeUntil } from 'rxjs/operators';
+import { AuthQuery } from '@espm/core';
 
 @IonicPage({
   segment: 'sep/consulta'
@@ -18,12 +20,17 @@ export class SepSearchPage implements OnDestroy {
   protocolNumberModel: string;
   destroyed$ = new Subject();
 
+  /**
+   *
+   *
+   */
   constructor(
     private navCtrl: NavController,
     private toastCtrl: ToastController,
     private barcodeScanner: BarcodeScanner,
     private permissions: AndroidPermissionsService,
-    private sepService: SepService
+    private authQuery: AuthQuery,
+    public sepService: SepService
   ) {}
 
   /**
@@ -35,6 +42,10 @@ export class SepSearchPage implements OnDestroy {
     this.destroyed$.unsubscribe();
   }
 
+  /**
+   *
+   *
+   */
   search(protocolNumber: string) {
     if (!protocolNumber) {
       this.showMessage('Número do protocolo é obrigatório');
@@ -45,14 +56,23 @@ export class SepSearchPage implements OnDestroy {
     }
   }
 
+  /**
+   *
+   *
+   */
   ionViewWillLoad() {
-    this.sepService.loadFavorites();
+    if (this.authQuery.isLoggedIn) {
+      this.sepService
+        .loadFavorites()
+        .pipe(takeUntil(this.destroyed$))
+        .subscribe();
+    }
   }
 
-  goToProtocol = (protocol: Protocol) => {
-    this.navCtrl.push('SepDetailsPage', { protocol: protocol });
-  };
-
+  /**
+   *
+   *
+   */
   scanBarcode() {
     this.permissions.requestPermission(this.permissions.PERMISSION.CAMERA).then(request => {
       if (request.hasPermission) {
@@ -70,6 +90,18 @@ export class SepSearchPage implements OnDestroy {
     });
   }
 
+  /**
+   *
+   *
+   */
+  private goToProtocol = (protocol: Protocol) => {
+    this.navCtrl.push('SepDetailsPage', { protocol: protocol });
+  };
+
+  /**
+   *
+   *
+   */
   private showMessage = (message: string) => {
     this.toastCtrl.create({ message, duration: 4000 }).present();
   };

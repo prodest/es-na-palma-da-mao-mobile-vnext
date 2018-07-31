@@ -33,10 +33,19 @@
 </ion-header>
 
 <ion-content>
-  <div text-center
+  <div *ngIf="!sepService.hasFavorites()"
+       text-center
        class="initial-message">
     <img src="assets/imgs/sep/sep-logo-branco.png">
     <h2 margin>Sistema Eletrônico de Protocolo</h2>
     <p margin>Digite o número do processo que deseja consultar ou clique no ícone para abrir o leitor de código de barras</p>
   </div>
+  <ion-list *ngIf="sepService.hasFavorites()">
+    <ion-list-header>
+      Acompanhamentos
+    </ion-list-header>
+    <favorite-protocol *ngFor="let protocol of sepService.favorites"
+                       (click)="search(protocol.number)"
+                       [protocol]="protocol"></favorite-protocol>
+  </ion-list>
 </ion-content>

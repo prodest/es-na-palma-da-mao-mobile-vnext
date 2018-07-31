@@ -1,11 +1,12 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input } from '@angular/core';
+import { FavoriteProtocol } from '../../model';
 
 @Component({
   selector: 'favorite-protocol',
   templateUrl: './favorite-protocol.component.html'
 })
-export class FavoriteProtocolComponent implements OnInit {
-  constructor() {}
+export class FavoriteProtocolComponent {
+  @Input() protocol: FavoriteProtocol;
 
-  ngOnInit() {}
+  constructor() {}
 }

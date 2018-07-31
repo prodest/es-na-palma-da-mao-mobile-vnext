@@ -3,9 +3,9 @@ import { Inject, Injectable } from '@angular/core';
 import { Environment, EnvVariables } from '@espm/core';
 import { ANONYMOUS_HEADER } from '@espm/core/auth';
 import { Observable } from 'rxjs/Observable';
-import { share } from 'rxjs/operators';
+import { share, map } from 'rxjs/operators';
 
-import { Protocol } from './../model';
+import { Protocol, FavoriteProtocol } from './../model';
 import { FavoriteProtocolsData } from '../model';
 
 @Injectable()
@@ -36,7 +36,16 @@ export class SepApiService {
       id: favoriteProtocols.id,
       favoriteProcess: favoriteProtocols.favoriteProcess.map(p => p.number)
     };
-    return this.http.post<FavoriteProtocolsData>(`${this.env.api.espm}/sep/data/favorite`, requestData).pipe(share());
+    return this.http.post<FavoriteProtocolsData>(`${this.env.api.espm}/sep/data/favorite`, requestData).pipe(
+      map((data: FavoriteProtocolsData) => {
+        return {
+          id: data.id,
+          date: data.date,
+          favoriteProcess: this.normalizeFavorites(data.favoriteProcess)
+        };
+      }),
+      share()
+    );
   }
 
   /**
@@ -44,6 +53,35 @@ export class SepApiService {
    *
    */
   getFavoriteProtocols(): Observable<FavoriteProtocolsData> {
-    return this.http.get<FavoriteProtocolsData>(`${this.env.api.espm}/sep/data/favorite`).pipe(share());
+    return this.http.get<FavoriteProtocolsData>(`${this.env.api.espm}/sep/data/favorite`).pipe(
+      map((data: FavoriteProtocolsData) => {
+        return {
+          id: data.id,
+          date: data.date,
+          favoriteProcess: this.normalizeFavorites(data.favoriteProcess)
+        };
+      }),
+      share()
+    );
   }
+  /*
+   *
+   * Para adaptar a versão antiga com a versão nova do objeto FavoriteProtocol
+   */
+  private normalizeFavorites = (data: any): FavoriteProtocol[] => {
+    return data
+      .map(protocol => {
+        if (typeof protocol === 'string') {
+          return {
+            number: protocol,
+            subject: '',
+            summary: '',
+            status: ''
+          };
+        } else {
+          return protocol;
+        }
+      })
+      .filter((item, index, self) => self.findIndex(i => i.number === item.number) === index);
+  };
 }
