@@ -2,10 +2,9 @@ import { Component, OnDestroy } from '@angular/core';
 import { AndroidPermissionsService } from '@espm/core/permissions';
 import { BarcodeScanner } from '@ionic-native/barcode-scanner';
 import { IonicPage, NavController, ToastController } from 'ionic-angular';
-import { Observable } from 'rxjs/Observable';
 import { Subject } from 'rxjs/Subject';
 
-import { FavoriteProtocol, Protocol } from './../../model';
+import { Protocol } from './../../model';
 import { SepService } from '../../providers';
 
 @IonicPage({
@@ -42,12 +41,12 @@ export class SepSearchPage implements OnDestroy {
     } else if (protocolNumber.length < 2 || protocolNumber.length > 8) {
       this.showMessage('O número deve ter entre 2 e 8 dígitos');
     } else if (protocolNumber) {
-      this.sepService.getProcessByNumber(protocolNumber).subscribe(this.goToProtocol);
+      this.sepService.getProtocolByNumber(protocolNumber).subscribe(this.goToProtocol);
     }
   }
 
   ionViewWillLoad() {
-    this.sepService.loadFavorites();    
+    this.sepService.loadFavorites();
   }
 
   goToProtocol = (protocol: Protocol) => {

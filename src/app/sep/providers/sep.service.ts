@@ -2,18 +2,26 @@ import { Injectable, OnDestroy } from '@angular/core';
 import { Loading, LoadingController, ToastController } from 'ionic-angular';
 import { Observable } from 'rxjs/Observable';
 import { _throw } from 'rxjs/observable/throw';
-import { catchError, finalize, flatMap, pluck, takeUntil, filter, map } from 'rxjs/operators';
+import { catchError, finalize, flatMap, takeUntil, filter, map } from 'rxjs/operators';
 
 import { FavoriteProtocol, Protocol, FavoriteProtocolsData } from './../model';
 import { SepApiService } from './sep-api.service';
-import { FavoriteProtocolStore, SepQuery } from '.';
+import { FavoriteProtocolStore } from './sep.store';
+import { SepQuery } from './sep.query';
 import { Subject } from 'rxjs/Subject';
 import { AuthQuery } from '@espm/core';
-
+/**
+ *
+ *
+ * @export
+ * @class SepService
+ * @implements {OnDestroy}
+ */
 @Injectable()
 export class SepService implements OnDestroy {
   loading: Loading;
   destroyed$ = new Subject();
+  hasFavorite = false;
 
   /**
    *
@@ -23,9 +31,9 @@ export class SepService implements OnDestroy {
     private api: SepApiService,
     private toastCtrl: ToastController,
     private loadingCtrl: LoadingController,
+    private authQuery: AuthQuery,
     private favoriteProtocolStore: FavoriteProtocolStore,
-    private sepQuery: SepQuery,
-    private authQuery: AuthQuery
+    private sepQuery: SepQuery
   ) {
     this.sepQuery.favorites$
       .pipe(takeUntil(this.destroyed$), filter(() => !this.favoriteProtocolStore.isPristine), flatMap(this.syncFavorites))
@@ -45,17 +53,31 @@ export class SepService implements OnDestroy {
    *
    *
    */
-  getProcessByNumber(protocolNumber: string): Observable<FavoriteProtocol> {
+  getProtocolByNumber(protocolNumber: string): Observable<FavoriteProtocol> {
     this.showLoading();
 
     return this.api.getProcessByNumber(protocolNumber).pipe(finalize(this.dismissLoading));
   }
 
+  hasFavorites = () => {
+    return this.sepQuery.count$.takeUntil(this.destroyed$).subscribe(count => (this.hasFavorite = count > 0));
+  };
+
+  /*
+   *
+   */
+  isFavorite = (protocolNumber: string) => {
+    return this.sepQuery.isFavorite(protocolNumber);
+  };
+
+  /*
+   *
+   */
   loadFavorites = () => {
     if (this.authQuery.isLoggedIn) {
       this.api
         .getFavoriteProtocols()
-        .pipe(map(p => p.favoriteProtocols))
+        .pipe(map(p => p.favoriteProcess))
         .subscribe(this.storeFavoriteProtocols);
     }
   };
@@ -64,41 +86,18 @@ export class SepService implements OnDestroy {
    *
    *
    */
-  addFavorite = (protocol: Protocol): Observable<FavoriteProtocol[]> => {
-    let favoriteProtocol = this.mapFavorite(protocol);
-
-    this.showLoading();
-
-    this.favoriteProtocolStore.update(protocol.number);
-
-    let addedFavorites = this.storage.getValue('favoriteProtocols');
-    addedFavorites.splice(this.locationOf(protocol, addedFavorites), 0, favoriteProtocol);
-
-    return this.syncFavorites(addedFavorites).pipe(
-      finalize(this.dismissLoading),
-      catchError(error => {
-        this.showMessage('Erro ao adicionar acompanhamento. Tente novamente.');
-        return _throw(error);
-      })
-    );
+  addFavorite = (protocol: Protocol): void => {
+    this.favoriteProtocolStore.createOrReplace(protocol.number, this.mapFavorite(protocol));
+    this.showMessage(`Protocolo ${protocol.number} removido dos favoritos`);
   };
 
   /**
    *
    *
    */
-  removeFavorite = (protocol: Protocol): Observable<FavoriteProtocol[]> => {
-    let favoriteProtocols = this.storage.getValue('favoriteProtocols').filter(p => p.number !== protocol.number);
-
-    this.showLoading();
-
-    return this.syncFavorites(favoriteProtocols).pipe(
-      finalize(this.dismissLoading),
-      catchError(error => {
-        this.showMessage('Erro ao remover acompanhamento. Tente novamente.');
-        return _throw(error);
-      })
-    );
+  removeFavorite = (protocol: Protocol): void => {
+    this.favoriteProtocolStore.remove(protocol.number);
+    this.showMessage(`Protocolo ${protocol.number} removido dos favoritos`);
   };
 
   /**
@@ -106,13 +105,24 @@ export class SepService implements OnDestroy {
    *
    */
   syncFavorites = (favoriteProtocols?: FavoriteProtocol[]): Observable<FavoriteProtocolsData> => {
-    return this.api.syncFavoriteProtocols({
-      favoriteProtocols: favoriteProtocols,
-      date: new Date().toISOString()
-    });
+    this.showLoading();
+
+    return this.api
+      .syncFavoriteProtocols({
+        favoriteProcess: favoriteProtocols,
+        date: new Date().toISOString()
+      })
+      .pipe(
+        finalize(this.dismissLoading),
+        catchError(error => {
+          this.showMessage('Erro ao adicionar acompanhamento. Tente novamente.');
+          return _throw(error);
+        })
+      );
   };
 
-  private storeFavoriteProtocols = (data: FavoriteProtocol[]) => this.favoriteProtocolStore.set(data);
+  private storeFavoriteProtocols = (data: FavoriteProtocol[]) =>
+    this.favoriteProtocolStore.set(this.normalizeFavorites(data));
 
   /**
    *
@@ -159,21 +169,22 @@ export class SepService implements OnDestroy {
     this.toastCtrl.create({ message, duration: 4000 }).present();
   };
 
-  /**
+  /*
    *
-   *
+   * Para adaptar a versão antiga com a versão nova do objeto FavoriteProtocol
    */
-  private locationOf(element: Protocol, array: FavoriteProtocol[], start?: number, end?: number) {
-    start = start || 0;
-    end = end === undefined ? array.length - 1 : end;
-    let pivot = Math.floor((start + end) / 2);
-    if (end < start || array[pivot].number === element.number) {
-      return pivot + 1;
-    }
-    if (array[pivot].number < element.number) {
-      return this.locationOf(element, array, pivot + 1, end);
-    } else {
-      return this.locationOf(element, array, start, pivot - 1);
-    }
-  }
+  private normalizeFavorites = (data: any): FavoriteProtocol[] => {
+    return data
+      .map(protocol => {
+        if (typeof protocol === 'string') {
+          return {
+            number: protocol,
+            subject: '',
+            summary: '',
+            status: ''
+          };
+        }
+      })
+      .filter((item, index, self) => self.findIndex(i => i.number === item.number) === index);
+  };
 }

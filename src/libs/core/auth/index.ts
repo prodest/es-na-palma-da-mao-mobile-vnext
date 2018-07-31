@@ -8,6 +8,7 @@ import { AuthQuery, AuthStore } from './state';
 
 export * from './auth.service';
 export * from './models';
+export * from './auth-needed.service';
 export { AuthQuery } from './state';
 
 export const ANONYMOUS_HEADER = 'anonymous';

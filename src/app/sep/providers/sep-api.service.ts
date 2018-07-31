@@ -31,7 +31,12 @@ export class SepApiService {
    *
    */
   syncFavoriteProtocols(favoriteProtocols: FavoriteProtocolsData): Observable<FavoriteProtocolsData> {
-    return this.http.post<FavoriteProtocolsData>(`${this.env.api.espm}/sep/data/favorite`, favoriteProtocols).pipe(share());
+    let requestData = {
+      date: favoriteProtocols.date,
+      id: favoriteProtocols.id,
+      favoriteProcess: favoriteProtocols.favoriteProcess.map(p => p.number)
+    };
+    return this.http.post<FavoriteProtocolsData>(`${this.env.api.espm}/sep/data/favorite`, requestData).pipe(share());
   }
 
   /**
