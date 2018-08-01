@@ -2,6 +2,17 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+<a name="4.1.10"></a>
+## [4.1.10](https://github.com/prodest/es-na-palma-da-mao-mobile-vnext/compare/v4.1.9...v4.1.10) (2018-08-01)
+
+
+### Bug Fixes
+
+* **ci:** copia .env corretamente ([1cea967](https://github.com/prodest/es-na-palma-da-mao-mobile-vnext/commit/1cea967))
+* **transcol-online:** corrige path de imagem ([2766df1](https://github.com/prodest/es-na-palma-da-mao-mobile-vnext/commit/2766df1))
+
+
+
 <a name="4.1.9"></a>
 ## [4.1.9](https://github.com/prodest/es-na-palma-da-mao-mobile-vnext/compare/v4.1.8...v4.1.9) (2018-08-01)
 
