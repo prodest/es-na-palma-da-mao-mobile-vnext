@@ -2,6 +2,28 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+<a name="4.1.7"></a>
+## [4.1.7](https://github.com/prodest/es-na-palma-da-mao-mobile-vnext/compare/v4.1.6...v4.1.7) (2018-08-01)
+
+
+### Bug Fixes
+
+* **cordova:** adiciona dependências ao copiar plugins de node_modules ([04ba9df](https://github.com/prodest/es-na-palma-da-mao-mobile-vnext/commit/04ba9df))
+* **cordova:** corrige script copy-plugins-from-node-modules ([9cd6a0b](https://github.com/prodest/es-na-palma-da-mao-mobile-vnext/commit/9cd6a0b))
+* **push:** corrige login/logout com push config ([083cded](https://github.com/prodest/es-na-palma-da-mao-mobile-vnext/commit/083cded))
+* **sep:** exibe mensagem ao favoritar/desfavoritar protocolo ([5031766](https://github.com/prodest/es-na-palma-da-mao-mobile-vnext/commit/5031766)), closes [#12](https://github.com/prodest/es-na-palma-da-mao-mobile-vnext/issues/12)
+
+
+### Features
+
+* **auth:** adiciona signed$ subject ([0b8655a](https://github.com/prodest/es-na-palma-da-mao-mobile-vnext/commit/0b8655a))
+* **push:** adiciona ícones de push notification ([fcc928f](https://github.com/prodest/es-na-palma-da-mao-mobile-vnext/commit/fcc928f))
+* **sep:** ... ([063321b](https://github.com/prodest/es-na-palma-da-mao-mobile-vnext/commit/063321b))
+* **sep:** implementa favoritos/acompanhamentos ([a052763](https://github.com/prodest/es-na-palma-da-mao-mobile-vnext/commit/a052763))
+* **sep:** implementa storage do sep utilizando akita ([1775da6](https://github.com/prodest/es-na-palma-da-mao-mobile-vnext/commit/1775da6))
+
+
+
 <a name="4.1.6"></a>
 ## [4.1.6](https://github.com/prodest/es-na-palma-da-mao-mobile-vnext/compare/v4.1.5...v4.1.6) (2018-07-27)
 
