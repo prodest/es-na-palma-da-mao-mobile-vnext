@@ -16,7 +16,7 @@
   height: 43px;
   top: -50%;
   z-index: -1;
-  background: url('/assets/imgs/seta_ponto_de_parada_dark.png') 50% 9% no-repeat;
+  background: url('../assets/imgs/seta_ponto_de_parada_dark.png') 50% 9% no-repeat;
   left: 30%;
   transform-origin: 44% 75%;
 }
@@ -96,5 +96,5 @@
 }
 
 .marker-secondary .azimute {
-  background: url('/assets/imgs/seta_ponto_de_parada_light.png') 50% 9% no-repeat;
+  background: url('../assets/imgs/seta_ponto_de_parada_light.png') 50% 9% no-repeat;
 }
