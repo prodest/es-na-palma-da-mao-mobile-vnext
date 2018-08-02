@@ -27,7 +27,7 @@
     <button ion-item
             *virtualItem="let line"
             class="busline"
-            (click)="showDetails(line)">
+            (click)="showDetails(line, $event)">
       <h2 item-start
           class="busline_number"
           tappable>{{line.number}}</h2>
