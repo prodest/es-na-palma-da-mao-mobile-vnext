@@ -1,10 +1,11 @@
 import { Component } from '@angular/core';
 import { AuthQuery } from '@espm/core';
-import { IonicPage, NavController } from 'ionic-angular';
+import { IonicPage, NavController, ModalController } from 'ionic-angular';
 import * as moment from 'moment';
 
-import { DriverStatus, DriverStatusName, Ticket } from '../../model';
+import { DriverStatus, DriverStatusName, Ticket, DriverLicense } from '../../model';
 import { DriverService } from './../../providers';
+import { finalize } from 'rxjs/operators';
 
 @IonicPage({
   segment: 'detran/cnh'
@@ -15,6 +16,7 @@ import { DriverService } from './../../providers';
 })
 export class DriverLicenseStatusPage {
   tickets: Ticket[];
+  cnh: DriverLicense = null;
   status: {
     expirationDate: string;
     renew: boolean;
@@ -23,21 +25,30 @@ export class DriverLicenseStatusPage {
     expired: boolean;
     blockMotive: string;
   };
+  loaded: boolean = false;
 
   /**
    *
    */
-  constructor(private authQuery: AuthQuery, private detran: DriverService, private navCtrl: NavController) {}
+  constructor(
+    private authQuery: AuthQuery,
+    private detran: DriverService,
+    private navCtrl: NavController,
+    private modalCtrl: ModalController
+  ) {}
 
   /**
    * ref: https://github.com/ionic-team/ionic/issues/11459#issuecomment-365224107
    *
    */
   ionViewCanEnter(): boolean | Promise<any> {
-    const { cnhNumero, cnhCedula } = this.authQuery.state.claims;
+    this.cnh = {
+      registerNumber: this.authQuery.state.claims.cnhNumero,
+      ballot: this.authQuery.state.claims.cnhCedula
+    };
 
     // permite acesso à tela de o usuário possui cnh no acesso cidadão ou cadastrou agora
-    const isAllowed = !!(cnhNumero && cnhCedula);
+    const isAllowed = !!(this.cnh.registerNumber && this.cnh.ballot);
 
     if (!isAllowed) {
       setTimeout(() => this.navCtrl.setRoot('DriverLicensePage'));
@@ -56,7 +67,10 @@ export class DriverLicenseStatusPage {
    *
    */
   private loadData = () => {
-    this.detran.getDriverStatus().subscribe(this.updateStatus, () => (this.status = null));
+    this.detran
+      .getDriverStatus()
+      .pipe(finalize(() => (this.loaded = true)))
+      .subscribe(this.updateStatus, () => (this.status = null));
 
     this.detran.getDriverTickets().subscribe(tickets => (this.tickets = tickets), () => (this.tickets = null));
   };
@@ -102,5 +116,30 @@ export class DriverLicenseStatusPage {
           .isAfter(moment().startOf('day')),
       blockMotive: status.blockMotive
     };
+  };
+
+  /**
+   *
+   *
+   */
+  addCNH = () => {
+    let modal = this.modalCtrl.create(
+      'AddDriverLicensePage',
+      { cnh: this.cnh },
+      {
+        cssClass: 'pop-up-modal',
+        enableBackdropDismiss: true
+      }
+    );
+    modal.onDidDismiss(this.saveCNH);
+    modal.present();
+  };
+
+  /**
+   *
+   *
+   */
+  private saveCNH = (cnh: DriverLicense) => {
+    cnh && this.detran.saveCNH(cnh).subscribe(() => this.navCtrl.setRoot('DriverLicenseStatusPage'));
   };
 }
