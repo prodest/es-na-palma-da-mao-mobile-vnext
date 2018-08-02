@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+<a name="4.1.11"></a>
+## [4.1.11](https://github.com/prodest/es-na-palma-da-mao-mobile-vnext/compare/v4.1.10...v4.1.11) (2018-08-02)
+
+
+### Bug Fixes
+
+* **ceturb:** exibe favoritos antes das outras linhas ([1de2c25](https://github.com/prodest/es-na-palma-da-mao-mobile-vnext/commit/1de2c25))
+
+
+
 <a name="4.1.10"></a>
 ## [4.1.10](https://github.com/prodest/es-na-palma-da-mao-mobile-vnext/compare/v4.1.9...v4.1.10) (2018-08-01)
 
