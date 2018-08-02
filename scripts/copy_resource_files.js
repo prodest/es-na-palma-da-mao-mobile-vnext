@@ -11,7 +11,6 @@ var path = require('path');
 var rootdir = path.resolve(__dirname, '../'); // process.argv[ 2 ];
 
 const copyRecursiveSync = (src, dest) => {
-  console.log(src);
 
   var exists = fs.existsSync(src);
   if (exists) {
@@ -39,6 +38,7 @@ filestocopy.forEach(obj => {
     var srcPath = path.join(rootdir, key);
     var destPath = path.join(rootdir, val);
 
+    console.log('Copying files from: ' + key + ' to: ' + val);
     copyRecursiveSync(srcPath, destPath);
   });
 });
