@@ -18,7 +18,8 @@
       <ion-col>
         <ion-searchbar type="number"
                        placeholder="N° do protocolo"
-                       [(ngModel)]="protocolNumberModel">
+                       [(ngModel)]="protocolNumberModel"
+                       (change)=search(protocolNumberModel)>
         </ion-searchbar>
       </ion-col>
       <ion-col>
