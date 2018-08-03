@@ -10,6 +10,7 @@ import { BarcodeScanner } from '@ionic-native/barcode-scanner';
 import { Device } from '@ionic-native/device';
 import { Facebook } from '@ionic-native/facebook';
 import { GooglePlus } from '@ionic-native/google-plus';
+import { Geolocation } from '@ionic-native/geolocation';
 import { InAppBrowser } from '@ionic-native/in-app-browser';
 import { Push } from '@ionic-native/push';
 import { SocialSharing } from '@ionic-native/social-sharing';
@@ -58,6 +59,7 @@ registerLocaleData(ptBr);
     BarcodeScanner,
     Device,
     Facebook,
+    Geolocation,
     GooglePlus,
     InAppBrowser,
     LocaleService,

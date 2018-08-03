@@ -84,6 +84,7 @@
     "@ionic-native/core": "^4.5.3",
     "@ionic-native/device": "^4.10.1",
     "@ionic-native/facebook": "^4.4.2",
+    "@ionic-native/geolocation": "^4.11.0",
     "@ionic-native/google-plus": "^4.9.2",
     "@ionic-native/in-app-browser": "^4.4.2",
     "@ionic-native/push": "^4.10.1",
@@ -101,6 +102,7 @@
     "cordova-plugin-compat": "^1.2.0",
     "cordova-plugin-device": "^1.1.7",
     "cordova-plugin-facebook4": "^1.10.1",
+    "cordova-plugin-geolocation": "^4.0.1",
     "cordova-plugin-googleplus": "^5.3.0",
     "cordova-plugin-inappbrowser": "^1.7.2",
     "cordova-plugin-ionic-webview": "^1.2.1",
@@ -215,7 +217,8 @@
         "REVERSED_CLIENT_ID": "com.googleusercontent.apps.716051840979-96738cri764kv9vhih0d41ug07sroibv",
         "WEB_APPLICATION_CLIENT_ID": "716051840979-96738cri764kv9vhih0d41ug07sroibv.apps.googleusercontent.com"
       },
-      "cordova-plugin-appavailability": {}
+      "cordova-plugin-appavailability": {},
+      "cordova-plugin-geolocation": {}
     },
     "platforms": [
       "ios",

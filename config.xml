@@ -121,4 +121,5 @@
     <plugin name="cordova-plugin-appavailability" spec="^0.4.2" />
     <engine name="ios" spec="^4.4.0" />
     <engine name="android" spec="^7.1.1" />
+    <plugin name="cordova-plugin-geolocation" spec="^4.0.1" />
 </widget>
