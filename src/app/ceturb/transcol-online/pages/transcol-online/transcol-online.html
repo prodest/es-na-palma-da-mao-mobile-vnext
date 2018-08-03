@@ -6,10 +6,14 @@
     </button>
     <ion-title (click)="isDetailsOpenned = !isDetailsOpenned">Transcol Online</ion-title>
     <ion-buttons end>
-      <button ion-button icon-only (click)="openFeedback()">
+      <button ion-button
+              icon-only
+              (click)="openFeedback()">
         <ion-icon name="text"></ion-icon>
       </button>
-      <button ion-button icon-only (click)="showHelp()">
+      <button ion-button
+              icon-only
+              (click)="showHelp()">
         <ion-icon name="help"></ion-icon>
       </button>
     </ion-buttons>
@@ -17,7 +21,7 @@
 </ion-header>
 
 <ion-content class="no-scroll">
-  
+
   <beta-ribbon></beta-ribbon>
 
   <favorites *ngIf="favorites?.length"
@@ -52,6 +56,7 @@
   </ion-list>
 
   <espm-geolocation-status [searching]="searchingLocation"
+                           (onLocationUpdate)="onLocationFound($event)"
                            (click)="getUserLocation()"></espm-geolocation-status>
 
   <div class="stop-info"

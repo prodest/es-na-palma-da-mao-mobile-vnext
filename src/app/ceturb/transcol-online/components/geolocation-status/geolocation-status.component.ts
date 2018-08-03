@@ -1,11 +1,51 @@
 import { ChangeDetectionStrategy, Component, EventEmitter, Input, Output } from '@angular/core';
-
+import { Geolocation, Geoposition } from '@ionic-native/geolocation';
+import { filter, map } from 'rxjs/operators';
+import * as L from 'leaflet';
 @Component({
   selector: 'espm-geolocation-status',
   templateUrl: 'geolocation-status.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class GeolocationStatusComponent {
-  @Input() searching = true;
-  @Output() search = new EventEmitter();
+  constructor(private geo: Geolocation) {}
+
+  private _searching = true;
+  @Output() onLocationUpdate = new EventEmitter<L.LocationEvent>();
+
+  get searching() {
+    return this._searching;
+  }
+
+  @Input()
+  set searching(value: boolean) {
+    this._searching = value;
+    if (this._searching) {
+      let watch$ = this.geo
+        .watchPosition()
+        .pipe(filter((p: Geoposition) => p.coords !== undefined), map(this.geopositionToLocationEvent))
+        .subscribe(p => this.onLocationUpdate.emit(p));
+
+      setTimeout(() => {
+        console.log('setTimeout');
+        this._searching = false;
+        watch$.unsubscribe();
+      }, 10000);
+    }
+  }
+
+  private geopositionToLocationEvent = (p: Geoposition) => {
+    return {
+      latlng: {
+        lat: p.coords.latitude,
+        lng: p.coords.longitude
+      },
+      accuracy: p.coords.accuracy,
+      altitude: p.coords.altitude,
+      altitudeAccuracy: p.coords.altitudeAccuracy,
+      speed: p.coords.speed,
+      timestamp: p.timestamp,
+      heading: p.coords.heading
+    } as L.LocationEvent;
+  };
 }
