@@ -2,6 +2,19 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+<a name="4.1.12"></a>
+## [4.1.12](https://github.com/prodest/es-na-palma-da-mao-mobile-vnext/compare/v4.1.11...v4.1.12) (2018-08-03)
+
+
+### Bug Fixes
+
+* **detran:** trata situação de informações da cnh incorretas ([9930097](https://github.com/prodest/es-na-palma-da-mao-mobile-vnext/commit/9930097))
+* **sep:** corrige interessados aparecendo 3 vezes ([2e00856](https://github.com/prodest/es-na-palma-da-mao-mobile-vnext/commit/2e00856))
+* **sep:** executa a busca caso "Enter" seja precionado ([873843b](https://github.com/prodest/es-na-palma-da-mao-mobile-vnext/commit/873843b))
+* **transcol-online:** localização não funcionando no dispositivo ([5199f2d](https://github.com/prodest/es-na-palma-da-mao-mobile-vnext/commit/5199f2d))
+
+
+
 <a name="4.1.11"></a>
 ## [4.1.11](https://github.com/prodest/es-na-palma-da-mao-mobile-vnext/compare/v4.1.10...v4.1.11) (2018-08-02)
 
