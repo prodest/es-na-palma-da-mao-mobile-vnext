@@ -79,6 +79,16 @@ export class AcessoCidadaoService {
    */
   getUserClaims = (): Observable<AcessoCidadaoClaims> => this.api.getUserClaims().pipe(tap(this.storeClaims));
 
+  /**
+   * TODO:
+   */
+  resetPassword = (username: string): Observable<any> => this.api.resetPassword(username);
+
+  /**
+   * TODO:
+   */
+  createUser = (user: any): Observable<any> => this.api.createUser(user);
+
   /************************************* Private API *************************************/
 
   /**

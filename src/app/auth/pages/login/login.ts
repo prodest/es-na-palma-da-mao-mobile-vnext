@@ -1,7 +1,7 @@
 import { Component, Inject } from '@angular/core';
 import { AcessoCidadaoClaims as User, AuthQuery, AuthService } from '@espm/core';
 import { Environment, EnvVariables } from '@espm/core/environment';
-import { InAppBrowser, InAppBrowserEvent } from '@ionic-native/in-app-browser';
+import { InAppBrowser, InAppBrowserEvent, InAppBrowserObject } from '@ionic-native/in-app-browser';
 import { AlertController, IonicPage, LoadingController, NavController, Platform, ToastController } from 'ionic-angular';
 import { Observable } from 'rxjs/Observable';
 import { finalize } from 'rxjs/operators';
@@ -34,7 +34,7 @@ export class LoginPage {
     private navCtrl: NavController,
     private loadingCtrl: LoadingController,
     @Inject(EnvVariables) private environment: Environment
-  ) {}
+  ) { }
 
   /**
    * ref: https://github.com/ionic-team/ionic/issues/11459#issuecomment-365224107
@@ -151,13 +151,20 @@ export class LoginPage {
   private openInAppBrowser = (url: string): void => {
     let options = 'toolbar=no,location=no,clearcache=yes,clearsessioncache=yes,closebuttoncaption=Cancelar';
     // ios ou android
-    let browser = this.iab.create(`${url}?espmplatform=${this.platform.platforms().join(',')}`, '_blank', options);
+    let browser: InAppBrowserObject = this.iab.create(`${url}?espmplatform=${this.platform.platforms().join(',')}`, '_blank', options);
 
     browser.on('loadstart').subscribe((event: InAppBrowserEvent) => {
-      if (event.url === `${this.environment.api.acessocidadao}`) {
+      if (event.url === this.environment.api.acessocidadao) {
         browser.close();
       }
     });
     browser.on('loaderror').subscribe((event: InAppBrowserEvent) => browser.close());
   };
+
+  /**
+   * Redireciona para 1ª tela do processo de criação de conta
+   */
+  public createAccount(): void {
+    this.openInAppBrowser(`${this.environment.api.acessocidadao}/Conta/VerificarCPF`);
+  }
 }

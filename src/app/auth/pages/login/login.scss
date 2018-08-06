@@ -16,16 +16,8 @@ page-login {
       }
     }
 
-    button[large] {
-      height: 3em;
-      font-size: 1.6rem;
-    }
-
     .social-login {
-      padding: 15px 0;
-      display: flex;
-      justify-content: space-between;
-
+      margin-top: 20px;
       ion-icon {
         background-color: transparent !important;
       }

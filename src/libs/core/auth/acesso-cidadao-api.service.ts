@@ -22,7 +22,7 @@ export class AcessoCidadaoApiService {
   /**
    * Creates an instance of AuthService.
    */
-  constructor(private http: HttpClient, @Inject(EnvVariables) private environment: Environment) {}
+  constructor(private http: HttpClient, @Inject(EnvVariables) private environment: Environment) { }
 
   /**
    *
@@ -46,4 +46,16 @@ export class AcessoCidadaoApiService {
    */
   getUserClaims = (): Observable<AcessoCidadaoClaims> =>
     this.http.get<AcessoCidadaoClaims>(`${this.environment.identityServer.url}/connect/userinfo`);
+
+  /**
+   * TODO:
+   */
+  resetPassword = (username: string): Observable<any> =>
+    this.http.post<any>(`${this.environment.identityServer.url}/reset-password`, username);
+
+  /**
+   * TODO:
+   */
+  createUser = (user: any): Observable<any> =>
+    this.http.post<any>(`${this.environment.identityServer.url}/createAccount`, user)
 }
