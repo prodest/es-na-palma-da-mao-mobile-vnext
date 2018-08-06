@@ -7,6 +7,7 @@ import { Common } from './common';
 import { EnvironmentProvider } from './environment';
 import { androidPermissionsProvider } from './permissions';
 import { PushProvider } from './push'
+import { NotificationProviders } from '@espm/core/notification';
 
 // import { Api } from './api'
 // import { Config } from './app.config'
@@ -27,6 +28,7 @@ import { PushProvider } from './push'
     //  ...Api,
     //  ...AppState,
     //  ...GoogleMaps
+    ...NotificationProviders
   ]
 })
 export class CoreModule {

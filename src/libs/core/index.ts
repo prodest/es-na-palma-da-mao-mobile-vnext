@@ -8,5 +8,6 @@ export * from './push';
 export * from './ionic';
 export * from './utils';
 export * from './permissions';
+export * from './notification';
 
 export { CoreModule } from './core.module';

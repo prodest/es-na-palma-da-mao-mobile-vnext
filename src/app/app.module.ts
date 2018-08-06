@@ -12,6 +12,7 @@ import { Facebook } from '@ionic-native/facebook';
 import { GooglePlus } from '@ionic-native/google-plus';
 import { Geolocation } from '@ionic-native/geolocation';
 import { InAppBrowser } from '@ionic-native/in-app-browser';
+import { LocalNotifications } from '@ionic-native/local-notifications';
 import { Push } from '@ionic-native/push';
 import { SocialSharing } from '@ionic-native/social-sharing';
 import { SplashScreen } from '@ionic-native/splash-screen';
@@ -63,6 +64,7 @@ registerLocaleData(ptBr);
     GooglePlus,
     InAppBrowser,
     LocaleService,
+    LocalNotifications,
     Push,
     PushService,
     StatusBar,

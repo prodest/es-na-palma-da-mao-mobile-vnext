@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { AuthQuery } from '@espm/core';
+import { AuthQuery, NotificationService } from '@espm/core';
 import { IonicPage, NavController, ModalController } from 'ionic-angular';
 import * as moment from 'moment';
 
@@ -34,7 +34,8 @@ export class DriverLicenseStatusPage {
     private authQuery: AuthQuery,
     private detran: DriverService,
     private navCtrl: NavController,
-    private modalCtrl: ModalController
+    private modalCtrl: ModalController,
+    private notification: NotificationService
   ) {}
 
   /**
@@ -97,23 +98,21 @@ export class DriverLicenseStatusPage {
     // this.cnh = mockCNH( '2019-01-15T00:00:00.000Z', DriverStatus.Blocked, 'Atrasado demais' ) // bloqueado não vencida
     // this.cnh = mockCNH( '2019-01-15T00:00:00.000Z', DriverStatus.Ok, null ) // ok
 
+    // TODO: teste
+    const expirationMoment: moment.Moment = moment(status.expirationDate);
+    this.notification.scheduleCNHNotifications(expirationMoment);
+
     this.status = {
       expirationDate: status.expirationDate,
       blocked: status.status === DriverStatusName.Blocked,
       ok: status.status === DriverStatusName.Ok,
-      expired:
-        !!status.expirationDate &&
-        moment(status.expirationDate)
-          .add(30, 'days')
-          .isBefore(moment().startOf('day')),
+      expired: !!status.expirationDate && expirationMoment.add(30, 'days').isBefore(moment().startOf('day')),
       renew:
         !!status.expirationDate &&
         moment()
           .startOf('day')
           .isAfter(status.expirationDate) &&
-        moment(status.expirationDate)
-          .add(30, 'days')
-          .isAfter(moment().startOf('day')),
+        expirationMoment.add(30, 'days').isAfter(moment().startOf('day')),
       blockMotive: status.blockMotive
     };
   };
