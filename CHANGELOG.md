@@ -2,6 +2,21 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+<a name="4.2.0"></a>
+# [4.2.0](https://github.com/prodest/es-na-palma-da-mao-mobile-vnext/compare/v4.1.12...v4.2.0) (2018-08-06)
+
+
+### Bug Fixes
+
+* **app:** corrige procedimento resume ([79dd1ab](https://github.com/prodest/es-na-palma-da-mao-mobile-vnext/commit/79dd1ab))
+
+
+### Features
+
+* **login:** adiciona botão de cadastro na tela de login ([3b71ebb](https://github.com/prodest/es-na-palma-da-mao-mobile-vnext/commit/3b71ebb))
+
+
+
 <a name="4.1.12"></a>
 ## [4.1.12](https://github.com/prodest/es-na-palma-da-mao-mobile-vnext/compare/v4.1.11...v4.1.12) (2018-08-03)
 
