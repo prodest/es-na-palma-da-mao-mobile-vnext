@@ -1,18 +1,20 @@
-import { Component, Inject, NgZone, ViewChild } from '@angular/core';
+import { Component, Inject, NgZone, ViewChild, OnDestroy } from '@angular/core';
 import { akitaDevtools, enableAkitaProdMode } from '@datorama/akita';
 import { Environment, EnvVariables, AuthQuery, AuthService, PushService } from '@espm/core';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import { StatusBar } from '@ionic-native/status-bar';
 import { Platform, Nav } from 'ionic-angular';
 import { finalize } from 'rxjs/operators';
+import { Subscription } from 'rxjs/Subscription';
 
 @Component({
   templateUrl: 'app.component.html'
 })
-export class ESPMComponent {
+export class ESPMComponent implements OnDestroy {
   @ViewChild(Nav) nav: Nav;
-  
+
   rootPage: any = 'DashboardPage';
+  private onResumeSub: Subscription;
 
   /**
    *
@@ -41,6 +43,11 @@ export class ESPMComponent {
     }
   }
 
+  ngOnDestroy() {
+    // always unsubscribe your subscriptions to prevent leaks
+    this.onResumeSub.unsubscribe();
+  }
+
   /**
    *
    */
@@ -51,27 +58,27 @@ export class ESPMComponent {
     this.statusBar.backgroundColorByHexString('#000');
     this.splashScreen.hide();
 
-    this.platform.resume.toPromise().then(this.resumeApplication);
+    this.onResumeSub = this.platform.resume.subscribe(this.resumeApplication);
   };
 
   private resumeApplication = () => {
-    this.authQuery.isLoggedIn$.toPromise().then(isLoggedIn => {
-      if (isLoggedIn) {
-        this.auth
-          .refreshAccessTokenIfNeeded()
-          .pipe(finalize(this.push.init))
-          .toPromise()
-          .catch(error => {
+    if (this.authQuery.isLoggedIn) {
+      this.auth
+        .refreshAccessTokenIfNeeded()
+        .pipe(finalize(this.push.init))
+        .subscribe(
+          () => {},
+          error => {
             if (error.message === 'no-token') {
               this.auth.logout().then(() => this.nav.setRoot(this.rootPage));
             } else {
               this.push.init();
               this.nav.setRoot(this.rootPage);
             }
-          });
-      } else {
-        this.push.init();
-      }
-    });
+          }
+        );
+    } else {
+      this.push.init();
+    }
   };
 }
