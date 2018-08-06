@@ -34,7 +34,7 @@ export class LoginPage {
     private navCtrl: NavController,
     private loadingCtrl: LoadingController,
     @Inject(EnvVariables) private environment: Environment
-  ) { }
+  ) {}
 
   /**
    * ref: https://github.com/ionic-team/ionic/issues/11459#issuecomment-365224107
@@ -99,13 +99,6 @@ export class LoginPage {
   private onLoginError = (error: { data?: { error: string } }): void => {
     if (error.data && this.isAccountNotLinkedError(error.data)) {
       this.showDialogAccountNotLinked();
-    } else {
-      // todo: adequar à msgs de erro retornada quando formato estiver definido
-      let toast = this.toastCtrl.create({
-        message: 'Login ou senha inválidos',
-        duration: 3000
-      });
-      toast.present();
     }
   };
 
@@ -151,7 +144,11 @@ export class LoginPage {
   private openInAppBrowser = (url: string): void => {
     let options = 'toolbar=no,location=no,clearcache=yes,clearsessioncache=yes,closebuttoncaption=Cancelar';
     // ios ou android
-    let browser: InAppBrowserObject = this.iab.create(`${url}?espmplatform=${this.platform.platforms().join(',')}`, '_blank', options);
+    let browser: InAppBrowserObject = this.iab.create(
+      `${url}?espmplatform=${this.platform.platforms().join(',')}`,
+      '_blank',
+      options
+    );
 
     browser.on('loadstart').subscribe((event: InAppBrowserEvent) => {
       if (event.url === this.environment.api.acessocidadao) {
