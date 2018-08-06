@@ -1,0 +1,24 @@
+validate-cpf {
+  ion-content {
+    background-image: url('../assets/imgs/background.png');
+    background-size: 100% 100%;
+
+    .item {
+      background-color: transparent !important;
+
+      ion-label,
+      .text-input {
+        color: #fff !important;
+      }
+
+      &.item-block {
+        margin-bottom: 10px;
+      }
+    }
+
+    button[large] {
+      height: 3em;
+      font-size: 1.6rem;
+    }
+  }
+}

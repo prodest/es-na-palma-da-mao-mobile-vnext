@@ -1,0 +1,68 @@
+<ion-header>
+  <ion-navbar>
+    <button ion-button
+            menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    <ion-title>Acesse sua conta</ion-title>
+  </ion-navbar>
+</ion-header>
+<ion-content padding
+             color-primary>
+  <form (submit)="createUser()">
+    <ion-list no-padding
+              margin-top>
+      <ion-item>
+        <ion-label floating>CPF ou Email</ion-label>
+        <ion-input type="email"
+                   [(ngModel)]="username"
+                   name="email"></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label floating>Senha</ion-label>
+        <ion-input type="password"
+                   [(ngModel)]="password"
+                   name="password"></ion-input>
+      </ion-item>
+      <ion-item no-lines>
+        <button ion-button
+                item-end
+                clear
+                color-light
+                (click)="openUrlForgotPassword()">Esqueceu sua senha?</button>
+      </ion-item>
+    </ion-list>
+    <button ion-button
+            full
+            large
+            color-primary-inverse
+            type="submit">ENTRAR</button>
+  </form>
+  <div class="social-login" showWhen="cordova">
+    <button ion-button
+            block
+            icon-start
+            color-primary-light
+            (click)="googleLogin()">
+      <ion-icon name="logo-google"></ion-icon>
+      Google
+    </button>
+    <button ion-button
+            block
+            icon-start
+            color-primary-light
+            (click)="facebookLogin()">
+      <ion-icon name="logo-facebook"></ion-icon>
+      Facebook
+    </button>
+  </div>
+  <espm-section-title>
+    Ainda não tem conta?
+  </espm-section-title>
+  <button ion-button
+            block
+            color-secondary
+            (click)="createAccount()">
+      Cadastre-se
+    </button>
+</ion-content>
