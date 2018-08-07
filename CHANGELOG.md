@@ -2,6 +2,21 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+<a name="4.2.1"></a>
+## [4.2.1](https://github.com/prodest/es-na-palma-da-mao-mobile-vnext/compare/v4.2.0...v4.2.1) (2018-08-07)
+
+
+### Bug Fixes
+
+* **login:** corrige mensagem de erro aparecendo duas vezes ([28b18d7](https://github.com/prodest/es-na-palma-da-mao-mobile-vnext/commit/28b18d7))
+
+
+### Features
+
+* **notification:** implementa notificação de CNH vencendo/vencida ([cb12fcf](https://github.com/prodest/es-na-palma-da-mao-mobile-vnext/commit/cb12fcf))
+
+
+
 <a name="4.2.0"></a>
 # [4.2.0](https://github.com/prodest/es-na-palma-da-mao-mobile-vnext/compare/v4.1.12...v4.2.0) (2018-08-06)
 
