@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+<a name="4.2.2"></a>
+## [4.2.2](https://github.com/prodest/es-na-palma-da-mao-mobile-vnext/compare/v4.2.1...v4.2.2) (2018-08-08)
+
+
+### Bug Fixes
+
+* **transcol-online:** centraliza mapa ao achar localização ([191dfab](https://github.com/prodest/es-na-palma-da-mao-mobile-vnext/commit/191dfab))
+
+
+
 <a name="4.2.1"></a>
 ## [4.2.1](https://github.com/prodest/es-na-palma-da-mao-mobile-vnext/compare/v4.2.0...v4.2.1) (2018-08-07)
 
