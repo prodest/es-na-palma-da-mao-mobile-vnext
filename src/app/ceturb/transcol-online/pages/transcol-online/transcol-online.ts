@@ -10,8 +10,8 @@ import values from 'lodash-es/values';
 import { filter, finalize, map, switchMap, takeUntil, tap } from 'rxjs/operators';
 import { Subject } from 'rxjs/Subject';
 
-import { BusLine, BusStop, Prevision } from './../../model';
-import { TranscolOnlineService } from './../../providers';
+import { BusLine, BusStop, Prevision } from '../../model';
+import { TranscolOnlineService } from '../../providers';
 
 const VITORIA = L.latLng(-20.315894186649725, -40.29565483331681);
 const GRANDE_VITORIA = [-38.50708007812501, -17.14079039331664, -42.46215820312501, -23.725011735951796];
@@ -606,6 +606,13 @@ export class TranscolOnlinePage implements AfterViewInit, OnDestroy {
 
     this.userPin = L.marker.pulse(e.latlng, { iconSize: [20, 20], color: '#07C', heartbeat: 1 }).addTo(this.map);
   };
+
+  /**
+   * 
+   */
+  onLocationFirstHit = (e: L.LocationEvent) => {
+    this.map.setView(e.latlng, this.map.getZoom(), { animate: true, duration: 0.5 });
+  }
 
   /**
    *

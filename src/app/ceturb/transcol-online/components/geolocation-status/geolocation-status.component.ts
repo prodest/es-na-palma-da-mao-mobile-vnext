@@ -8,10 +8,13 @@ import * as L from 'leaflet';
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class GeolocationStatusComponent {
-  constructor(private geo: Geolocation) {}
+  private firstHit: boolean;
+
+  constructor(private geo: Geolocation) { }
 
   private _searching = true;
   @Output() onLocationUpdate = new EventEmitter<L.LocationEvent>();
+  @Output() onFirstHit = new EventEmitter<L.LocationEvent>();
 
   get searching() {
     return this._searching;
@@ -21,10 +24,17 @@ export class GeolocationStatusComponent {
   set searching(value: boolean) {
     this._searching = value;
     if (this._searching) {
+      this.firstHit = true;
       let watch$ = this.geo
         .watchPosition()
         .pipe(filter((p: Geoposition) => p.coords !== undefined), map(this.geopositionToLocationEvent))
-        .subscribe(p => this.onLocationUpdate.emit(p));
+        .subscribe(p => {
+          if (this.firstHit) {
+            this.onFirstHit.emit(p);
+          }
+          this.onLocationUpdate.emit(p);
+          this.firstHit = false;
+        });
 
       setTimeout(() => {
         console.log('setTimeout');
