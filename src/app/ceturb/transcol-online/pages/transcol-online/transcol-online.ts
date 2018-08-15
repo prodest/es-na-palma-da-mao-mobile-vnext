@@ -599,7 +599,6 @@ export class TranscolOnlinePage implements AfterViewInit, OnDestroy {
    *
    */
   onLocationFound = (e: L.LocationEvent) => {
-    this.searchingLocation = false;
     if (this.userPin) {
       this.map.removeLayer(this.userPin);
     }
@@ -607,12 +606,16 @@ export class TranscolOnlinePage implements AfterViewInit, OnDestroy {
     this.userPin = L.marker.pulse(e.latlng, { iconSize: [20, 20], color: '#07C', heartbeat: 1 }).addTo(this.map);
   };
 
+  onLocationUpdateFinished = () => {
+    this.searchingLocation = false;
+  };
+
   /**
-   * 
+   *
    */
   onLocationFirstHit = (e: L.LocationEvent) => {
     this.map.setView(e.latlng, this.map.getZoom(), { animate: true, duration: 0.5 });
-  }
+  };
 
   /**
    *

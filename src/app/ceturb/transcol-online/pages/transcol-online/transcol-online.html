@@ -57,6 +57,7 @@
 
   <espm-geolocation-status [searching]="searchingLocation"
                            (onLocationUpdate)="onLocationFound($event)"
+                           (onLocationUpdateFinished)="onLocationUpdateFinished()"
                            (onFirstHit)="onLocationFirstHit($event)"
                            (click)="getUserLocation()"></espm-geolocation-status>
 

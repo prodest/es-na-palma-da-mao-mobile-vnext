@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, EventEmitter, Input, Output } from '@angular/core';
+import { ChangeDetectionStrategy, Component, EventEmitter, Input, Output, ChangeDetectorRef } from '@angular/core';
 import { Geolocation, Geoposition } from '@ionic-native/geolocation';
 import { filter, map } from 'rxjs/operators';
 import * as L from 'leaflet';
@@ -10,10 +10,11 @@ import * as L from 'leaflet';
 export class GeolocationStatusComponent {
   private firstHit: boolean;
 
-  constructor(private geo: Geolocation) { }
+  constructor(private geo: Geolocation, private changeDetector: ChangeDetectorRef) {}
 
   private _searching = true;
   @Output() onLocationUpdate = new EventEmitter<L.LocationEvent>();
+  @Output() onLocationUpdateFinished = new EventEmitter();
   @Output() onFirstHit = new EventEmitter<L.LocationEvent>();
 
   get searching() {
@@ -37,8 +38,9 @@ export class GeolocationStatusComponent {
         });
 
       setTimeout(() => {
-        console.log('setTimeout');
         this._searching = false;
+        this.onLocationUpdateFinished.emit();
+        this.changeDetector.markForCheck();
         watch$.unsubscribe();
       }, 10000);
     }
