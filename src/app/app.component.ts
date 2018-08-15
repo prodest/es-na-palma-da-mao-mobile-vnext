@@ -59,6 +59,7 @@ export class ESPMComponent implements OnDestroy {
     this.splashScreen.hide();
 
     this.onResumeSub = this.platform.resume.subscribe(this.resumeApplication);
+    this.resumeApplication();
   };
 
   private resumeApplication = () => {
