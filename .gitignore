@@ -13,6 +13,7 @@ espm.keystore
 
 // push
 google-services.json
+GoogleService-Info.plist
 
 *~
 *.sw[mnpcod]
