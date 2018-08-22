@@ -119,8 +119,9 @@
         <variable name="WEB_APPLICATION_CLIENT_ID" value="716051840979-96738cri764kv9vhih0d41ug07sroibv.apps.googleusercontent.com" />
     </plugin>
     <plugin name="cordova-plugin-appavailability" spec="^0.4.2" />
-    <engine name="ios" spec="^4.4.0" />
     <engine name="android" spec="^7.1.1" />
     <plugin name="cordova-plugin-geolocation" spec="^4.0.1" />
     <plugin name="cordova-plugin-local-notification" spec="^0.9.0-beta.2" />
+    <engine name="ios" spec="~4.5.5" />
+    <preference name="SplashScreenDelay" value="3000" />
 </widget>
