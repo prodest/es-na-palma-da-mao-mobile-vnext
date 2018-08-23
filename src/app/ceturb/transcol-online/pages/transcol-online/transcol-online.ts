@@ -7,6 +7,7 @@ import { delay } from 'helpful-decorators';
 import { IonicPage, ModalController, NavController, Searchbar } from 'ionic-angular';
 import * as L from 'leaflet';
 import values from 'lodash-es/values';
+import { interval } from 'rxjs/observable/interval';
 import { filter, finalize, map, switchMap, takeUntil, tap } from 'rxjs/operators';
 import { Subject } from 'rxjs/Subject';
 
@@ -17,6 +18,7 @@ const VITORIA = L.latLng(-20.315894186649725, -40.29565483331681);
 const GRANDE_VITORIA = [-38.50708007812501, -17.14079039331664, -42.46215820312501, -23.725011735951796];
 
 const SEARCH_MIN_LENGTH = 3;
+const REFRESH_PREVISIONS_INTERVAL = 30000;
 
 @IonicPage()
 @Component({
@@ -97,6 +99,10 @@ export class TranscolOnlinePage implements AfterViewInit, OnDestroy {
       .subscribe(stops => {
         this.searchResults = stops;
       });
+
+    interval(REFRESH_PREVISIONS_INTERVAL)
+      .pipe(takeUntil(this.destroyed$))
+      .subscribe(this.refreshPrevisions);
   }
 
   /**
@@ -394,6 +400,22 @@ export class TranscolOnlinePage implements AfterViewInit, OnDestroy {
 
   /**
    *
+   *
+   */
+  private refreshPrevisions = () => {
+    if (this.isDetailsOpenned) {
+      if (this.selectedOrigin && this.selectedDestination) {
+        this.transcolOnline.getRoutePrevisions(this.selectedOrigin.id, this.selectedDestination.id).subscribe();
+      } else if (this.selectedLine) {
+        this.transcolOnline.getLinePrevisions(this.selectedLine).subscribe();
+      } else if (this.selectedOrigin) {
+        this.transcolOnline.getOriginPrevisions(this.selectedOrigin.id).subscribe();
+      }
+    }
+  };
+
+  /**
+   *
    */
   private refreshSelectedStops = (stops: BusStop[]) => {
     if (this.selectedOrigin) {
@@ -573,9 +595,6 @@ export class TranscolOnlinePage implements AfterViewInit, OnDestroy {
 
     map.on('moveend', this.onMapMove);
     map.on('click', this.clearMapSelection);
-    // map.on('locationfound', this.onLocationFound);
-    // map.on('locationerror', this.onLocationError);
-
     return map;
   };
 
