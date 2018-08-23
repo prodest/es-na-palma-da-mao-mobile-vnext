@@ -10,56 +10,54 @@
     <ion-title>Legenda</ion-title>
   </ion-navbar>
 </ion-header>
-
-<ion-content class="no-scroll">
-  <ion-list no-lines>
-    <ion-item-group class="bus-stops">
-      <ion-item-divider color="light">Pontos de Ônibus</ion-item-divider>
-      <ion-item class="info-available-origin">
-        <i class="fa fa-bus"
-           aria-hidden="true"></i>
-        <strong>Disponível</strong> como ponto de
-        <strong>origem</strong>
-      </ion-item>
-      <ion-item class="info-available-destination">
-        <i class="fa fa-bus"
-           aria-hidden="true"></i>
-        <strong>Disponível</strong> como ponto de
-        <strong>destino</strong>
-      </ion-item>
-      <ion-item class="info-origin">
-        <i class="fa fa-bus"
-           aria-hidden="true"></i>
-        <strong>Definido</strong> como ponto de
-        <strong>origem</strong>
-      </ion-item>
-      <ion-item class="info-destination">
-        <i class="fa fa-bus"
-           aria-hidden="true"></i>
-        <strong>Definido</strong> como ponto de
-        <strong>destino</strong>
-      </ion-item>
-      <ion-item-divider color="light">Qualidade das previsões</ion-item-divider>
-      <ion-item class="info-good">
-        <i class="fa fa-bus"
-           aria-hidden="true"></i>
-        Boa
-      </ion-item>
-      <ion-item class="info-not-good">
-        <i class="fa fa-bus"
-           aria-hidden="true"></i>
-        Média
-      </ion-item>
-      <ion-item class="info-bad">
-        <i class="fa fa-bus"
-           aria-hidden="true"></i>
-        Baixa
-      </ion-item>
-      <ion-item class="no-info">
-        <i class="fa fa-bus"
-           aria-hidden="true"></i>
-        Veículo não transmitindo ou viagem não iniciada
-      </ion-item>
-    </ion-item-group>
+<ion-content>
+  <ion-list class="bus-stops">
+    <ion-item-divider color="light">Pontos de Ônibus</ion-item-divider>
+    <ion-item class="available-origin">
+      <ion-icon class="fa-bus"
+                item-start></ion-icon>
+      <h3>
+        <strong>Disponível</strong> como ponto de <strong>origem</strong>
+      </h3>
+    </ion-item>
+    <ion-item class="available-destination">
+      <ion-icon class="fa-bus"
+                item-start></ion-icon>
+      <h3><strong>Disponível</strong> como ponto de <strong>destino</strong></h3>
+    </ion-item>
+    <ion-item class="origin">
+      <ion-icon class="fa-bus"
+                item-start></ion-icon>
+      <h3>
+        <strong>Disponível</strong> como ponto de <strong>origem</strong>
+      </h3>
+    </ion-item>
+    <ion-item class="destination"
+              no-lines>
+      <ion-icon class="fa-bus"
+                item-start></ion-icon>
+      <h3><strong>Disponível</strong> como ponto de <strong>destino</strong></h3>
+    </ion-item>
+    <ion-item-divider color="light">Qualidade das previsões</ion-item-divider>
+    <ion-item class="good">
+      <ion-icon class="fa-bus"
+                item-start></ion-icon>
+      <h3>Boa</h3>
+    </ion-item>
+    <ion-item class="not-good">
+      <ion-icon class="fa-bus"
+                item-start></ion-icon>
+      <h3>Média</h3>
+    </ion-item>
+    <ion-item class="bad">
+      <ion-icon class="fa-bus"
+                item-start></ion-icon>
+      <h3>Baixa</h3>
+    </ion-item>
+    <ion-item class="no-info">
+      <ion-icon class="fa-bus"
+                item-start></ion-icon>
+      <h3>Veículo não transmitindo ou viagem não iniciada</h3>
+    </ion-item>
   </ion-list>
 </ion-content>
