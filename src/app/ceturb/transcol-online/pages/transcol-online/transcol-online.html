@@ -30,9 +30,9 @@
              (favoriteClick)="selectStop($event)">
   </favorites>
 
-  <ion-searchbar [style.display]="(!selectedOrigin || !selectedDestination) && !isDetailsOpenned ? 'inherit':'none'"
-                 class="searchbar"
+  <ion-searchbar class="searchbar"
                  placeholder="Pesquisar ponto de origem"
+                 [ngClass]="{ 'hide-search': (selectedOrigin && selectedDestination) || isDetailsOpenned }"
                  (ionClear)="clearSearchResults()"
                  (ionCancel)="clearSearchResults()"></ion-searchbar>
 
