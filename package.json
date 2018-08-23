@@ -76,7 +76,7 @@
     "@angular/http": "^5.2.11",
     "@angular/platform-browser": "^5.2.11",
     "@angular/platform-browser-dynamic": "^5.2.11",
-    "@datorama/akita": "^1.3.5",
+    "@datorama/akita": "^1.6.2",
     "@ionic-native/android-permissions": "^4.9.1",
     "@ionic-native/app-availability": "^4.10.1",
     "@ionic-native/barcode-scanner": "^4.7.0",

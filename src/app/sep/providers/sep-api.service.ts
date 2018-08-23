@@ -3,10 +3,10 @@ import { Inject, Injectable } from '@angular/core';
 import { Environment, EnvVariables } from '@espm/core';
 import { ANONYMOUS_HEADER } from '@espm/core/auth';
 import { Observable } from 'rxjs/Observable';
-import { share, map } from 'rxjs/operators';
+import { map, share } from 'rxjs/operators';
 
-import { Protocol, FavoriteProtocol } from './../model';
 import { FavoriteProtocolsData } from '../model';
+import { Protocol } from './../model';
 
 @Injectable()
 export class SepApiService {
@@ -30,22 +30,10 @@ export class SepApiService {
    *
    *
    */
-  syncFavoriteProtocols(favoriteProtocols: FavoriteProtocolsData): Observable<FavoriteProtocolsData> {
-    let requestData = {
-      date: favoriteProtocols.date,
-      id: favoriteProtocols.id,
-      favoriteProcess: favoriteProtocols.favoriteProcess.map(p => p.number)
-    };
-    return this.http.post<FavoriteProtocolsData>(`${this.env.api.espm}/sep/data/favorite`, requestData).pipe(
-      map((data: FavoriteProtocolsData) => {
-        return {
-          id: data.id,
-          date: data.date,
-          favoriteProcess: this.normalizeFavorites(data.favoriteProcess)
-        };
-      }),
-      share()
-    );
+  syncFavoriteProtocols(favorites: FavoriteProtocolsData): Observable<FavoriteProtocolsData> {
+    return this.http
+      .post<FavoriteProtocolsData>(`${this.env.api.espm}/sep/data/favorite`, favorites)
+      .pipe(map(this.normalizeFavorites), share());
   }
 
   /**
@@ -53,35 +41,32 @@ export class SepApiService {
    *
    */
   getFavoriteProtocols(): Observable<FavoriteProtocolsData> {
-    return this.http.get<FavoriteProtocolsData>(`${this.env.api.espm}/sep/data/favorite`).pipe(
-      map((data: FavoriteProtocolsData) => {
-        return {
-          id: data.id,
-          date: data.date,
-          favoriteProcess: this.normalizeFavorites(data.favoriteProcess)
-        };
-      }),
-      share()
-    );
+    return this.http
+      .get<FavoriteProtocolsData>(`${this.env.api.espm}/sep/data/favorite`)
+      .pipe(map(this.normalizeFavorites), share());
   }
+
   /*
    *
    * Para adaptar a versão antiga com a versão nova do objeto FavoriteProtocol
    */
-  private normalizeFavorites = (data: any): FavoriteProtocol[] => {
-    return data
+  private normalizeFavorites = (data: FavoriteProtocolsData): FavoriteProtocolsData => {
+    const protocols = (data.protocols || (data as any).favoriteProcess || (data as any).favoriteProtocols)
       .map(protocol => {
-        if (typeof protocol === 'string') {
-          return {
-            number: protocol,
-            subject: '',
-            summary: '',
-            status: ''
-          };
-        } else {
-          return protocol;
-        }
+        return typeof protocol === 'string'
+          ? {
+              number: protocol,
+              subject: '',
+              summary: '',
+              status: ''
+            }
+          : protocol;
       })
       .filter((item, index, self) => self.findIndex(i => i.number === item.number) === index);
+
+    return {
+      ...data,
+      ...{ protocols }
+    };
   };
 }

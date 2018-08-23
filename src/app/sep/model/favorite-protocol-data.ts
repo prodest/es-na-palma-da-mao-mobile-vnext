@@ -1,7 +1,7 @@
-import { FavoriteProtocol } from ".";
+import { FavoriteProtocol } from './favorite-protocol';
 
 export interface FavoriteProtocolsData {
   id?: number;
-  favoriteProcess: FavoriteProtocol[];
+  protocols: FavoriteProtocol[];
   date?: string;
 }

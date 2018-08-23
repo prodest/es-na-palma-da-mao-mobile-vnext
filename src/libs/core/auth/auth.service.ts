@@ -6,7 +6,7 @@ import { GooglePlus } from '@ionic-native/google-plus';
 import { Platform } from 'ionic-angular';
 import { Observable } from 'rxjs/Observable';
 import { fromPromise } from 'rxjs/observable/fromPromise';
-import { flatMap, map, tap, finalize } from 'rxjs/operators';
+import { finalize, flatMap, map, tap } from 'rxjs/operators';
 
 import { AcessoCidadaoService } from './acesso-cidadao.service';
 import {
@@ -18,7 +18,6 @@ import {
   Token
 } from './models';
 import { AuthStore } from './state';
-import { Subject } from 'rxjs/Subject';
 
 /**
  * Facade de autenticação consumido por toda a aplicação
@@ -27,7 +26,6 @@ import { Subject } from 'rxjs/Subject';
 @Injectable()
 export class AuthService {
   onDevice = false;
-  signed$ = new Subject<boolean>();
 
   /**
    * Creates an instance of AuthService.
@@ -59,7 +57,7 @@ export class AuthService {
       password: password
     };
 
-    return this.login(identity).pipe(tap(() => this.signed$.next(true)));
+    return this.login(identity);
   };
 
   /**
@@ -109,7 +107,6 @@ export class AuthService {
 
     return Promise.all([googlePlusPromise, facebookPromise])
       .then(this.acessoCidadao.logout)
-      .then(() => this.signed$.next(false))
       .then(this.push.unregister)
       .then(this.push.init); // 3 - Restart push service to anonimous user
   }

@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { AuthQuery, AuthNeededService } from '@espm/core';
+import { AuthNeededService, AuthQuery } from '@espm/core';
 import { IonicPage, NavParams } from 'ionic-angular';
 
 import { Protocol, ProtocolUpdate } from '../../model';
@@ -22,7 +22,7 @@ export class SepDetailsPage {
    *
    */
   constructor(
-    public navParams: NavParams,
+    private navParams: NavParams,
     private authQuery: AuthQuery,
     private authNeeded: AuthNeededService,
     private sepService: SepService
@@ -65,9 +65,7 @@ export class SepDetailsPage {
     if (!this.authQuery.isLoggedIn) {
       this.authNeeded.showAuthNeededModal();
     } else {
-      this.isFavorite(protocol)
-        ? this.sepService.removeFavorite(protocol)
-        : this.sepService.addFavorite(protocol);
+      this.isFavorite(protocol) ? this.sepService.removeFavorite(protocol) : this.sepService.addFavorite(protocol);
     }
   }
 }

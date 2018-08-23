@@ -1,15 +1,15 @@
 import { Injectable, OnDestroy } from '@angular/core';
+import { AuthQuery } from '@espm/core';
 import { Loading, LoadingController, ToastController } from 'ionic-angular';
 import { Observable } from 'rxjs/Observable';
 import { _throw } from 'rxjs/observable/throw';
-import { catchError, finalize, flatMap, takeUntil, filter, map, tap } from 'rxjs/operators';
-
-import { FavoriteProtocol, Protocol, FavoriteProtocolsData } from './../model';
-import { SepApiService } from './sep-api.service';
-import { FavoriteProtocolStore } from './sep.store';
-import { SepQuery } from './sep.query';
+import { catchError, filter, finalize, flatMap, map, takeUntil, tap } from 'rxjs/operators';
 import { Subject } from 'rxjs/Subject';
-import { AuthService } from '@espm/core';
+
+import { FavoriteProtocol, FavoriteProtocolsData, Protocol } from './../model';
+import { SepApiService } from './sep-api.service';
+import { SepQuery } from './sep.query';
+import { FavoriteProtocolStore } from './sep.store';
 
 /**
  *
@@ -32,21 +32,17 @@ export class SepService implements OnDestroy {
     private api: SepApiService,
     private toastCtrl: ToastController,
     private loadingCtrl: LoadingController,
-    private favoriteProtocolStore: FavoriteProtocolStore,
+    private protocolsStore: FavoriteProtocolStore,
     private sepQuery: SepQuery,
-    private auth: AuthService
+    private authQuery: AuthQuery
   ) {
-    this.auth.signed$.pipe(takeUntil(this.destroyed$)).subscribe(signed => {
-      if (!signed) {
-        this.favoriteProtocolStore.remove();
-      }
-    });
+    this.authQuery.isLoggedOut$.pipe(takeUntil(this.destroyed$)).subscribe(() => this.protocolsStore.remove());
 
     this.sepQuery.favorites$
       .pipe(
         takeUntil(this.destroyed$),
         tap(favoriteProtocols => (this.favorites = favoriteProtocols)),
-        filter(() => !this.favoriteProtocolStore.isPristine),
+        filter(() => !this.protocolsStore.isPristine),
         flatMap(this.syncFavorites)
       )
       .subscribe();
@@ -84,14 +80,14 @@ export class SepService implements OnDestroy {
   /*
    *
    */
-  loadFavorites = () => this.api.getFavoriteProtocols().pipe(map(p => p.favoriteProcess), tap(this.storeFavoriteProtocols));
+  loadFavorites = () => this.api.getFavoriteProtocols().pipe(map(f => f.protocols), tap(this.storeFavoriteProtocols));
 
   /**
    *
    *
    */
   addFavorite = (protocol: Protocol): void => {
-    this.favoriteProtocolStore.createOrReplace(protocol.number, this.mapFavorite(protocol));
+    this.protocolsStore.createOrReplace(protocol.number, this.mapFavorite(protocol));
     this.showMessage(`Acompanahando protocolo ${protocol.number}`);
   };
 
@@ -100,7 +96,7 @@ export class SepService implements OnDestroy {
    *
    */
   removeFavorite = (protocol: Protocol): void => {
-    this.favoriteProtocolStore.remove(protocol.number);
+    this.protocolsStore.remove(protocol.number);
     this.showMessage(`Acompanhamento ${protocol.number} removido`);
   };
 
@@ -108,12 +104,12 @@ export class SepService implements OnDestroy {
    *
    *
    */
-  syncFavorites = (favoriteProtocols?: FavoriteProtocol[]): Observable<FavoriteProtocolsData> => {
+  syncFavorites = (protocols?: FavoriteProtocol[]): Observable<FavoriteProtocolsData> => {
     this.showLoading();
 
     return this.api
       .syncFavoriteProtocols({
-        favoriteProcess: favoriteProtocols,
+        protocols,
         date: new Date().toISOString()
       })
       .pipe(
@@ -126,7 +122,7 @@ export class SepService implements OnDestroy {
   };
 
   private storeFavoriteProtocols = (data: FavoriteProtocol[]) => {
-    return this.favoriteProtocolStore.set(this.normalizeFavorites(data));
+    return this.protocolsStore.set(this.normalizeFavorites(data));
   };
 
   /**
