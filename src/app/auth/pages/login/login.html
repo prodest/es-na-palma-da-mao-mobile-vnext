@@ -59,14 +59,7 @@
       Facebook
     </button>
   </div>
-  <espm-section-title>
-    Ainda não tem conta?
+  <espm-section-title (click)="createAccount()">
+    Ainda não tem conta? Cadastre-se
   </espm-section-title>
-  <button ion-button
-          large
-          block
-          color-secondary
-          (click)="createAccount()">
-    Cadastre-se
-  </button>
 </ion-content>
