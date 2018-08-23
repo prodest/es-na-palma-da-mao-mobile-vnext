@@ -9,6 +9,9 @@ page-sep-search {
     .searchbar-md .searchbar-input {
       padding: 6px 40px;
     }
+    .searchbar.searchbar-ios .searchbar-input {
+      background-color: white;
+    }
   }
 
   .initial-message {
