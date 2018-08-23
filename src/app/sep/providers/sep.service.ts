@@ -14,9 +14,6 @@ import { FavoriteProtocolStore } from './sep.store';
 /**
  *
  *
- * @export
- * @class SepService
- * @implements {OnDestroy}
  */
 @Injectable()
 export class SepService implements OnDestroy {

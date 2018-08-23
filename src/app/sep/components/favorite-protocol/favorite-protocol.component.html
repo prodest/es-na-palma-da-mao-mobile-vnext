@@ -1,1 +1,18 @@
-<ion-item>{{protocol.number}}</ion-item>
+<ion-list no-lines>
+    <ion-list-header>
+        Acompanhando:
+    </ion-list-header>
+    <button ion-item
+            *ngFor="let protocol of protocols; let even = even; let odd = odd"
+            [ngClass]="{ odd: odd, even: even }"
+            (click)="open.emit(protocol)">
+        <ion-icon item-start
+                  name="md-star"></ion-icon>
+        <p> Processo n° <strong>{{protocol.number}}</strong></p>
+        <button ion-button
+                item-end
+                clear>
+            Ver
+        </button>
+    </button>
+</ion-list>

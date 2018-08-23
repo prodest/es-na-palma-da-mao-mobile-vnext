@@ -1,3 +1,28 @@
-favorite-protocol {
+favorite-protocols {
+  ion-list-header {
+    background: #176075 !important;
+    color: #fff !important;
+    font-weight: 500 !important;
+  }
 
+  [ion-item] {
+    &.even {
+      background-color: rgba(26, 108, 132, 0.85) !important;
+    }
+
+    &.odd {
+      background-color: rgba(26, 108, 132, 1) !important;
+    }
+    p {
+      color: #fff !important;
+    }
+
+    ion-icon {
+      color: #fff;
+    }
+
+    button {
+      color: #fff !important;
+    }
+  }
 }

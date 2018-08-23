@@ -1,12 +1,13 @@
-import { Component, Input } from '@angular/core';
+import { ChangeDetectionStrategy, Component, EventEmitter, Input, Output } from '@angular/core';
+
 import { FavoriteProtocol } from '../../model';
 
 @Component({
-  selector: 'favorite-protocol',
-  templateUrl: './favorite-protocol.component.html'
+  selector: 'favorite-protocols',
+  templateUrl: './favorite-protocol.component.html',
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class FavoriteProtocolComponent {
-  @Input() protocol: FavoriteProtocol;
-
-  constructor() {}
+  @Input() protocols: FavoriteProtocol[];
+  @Output() open = new EventEmitter<FavoriteProtocol>();
 }
