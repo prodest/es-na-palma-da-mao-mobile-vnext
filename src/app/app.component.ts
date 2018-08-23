@@ -1,9 +1,9 @@
-import { Component, Inject, NgZone, ViewChild, OnDestroy } from '@angular/core';
+import { Component, Inject, NgZone, OnDestroy, ViewChild } from '@angular/core';
 import { akitaDevtools, enableAkitaProdMode } from '@datorama/akita';
-import { Environment, EnvVariables, AuthQuery, AuthService, PushService } from '@espm/core';
+import { AuthQuery, AuthService, Environment, EnvVariables, PushService } from '@espm/core';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import { StatusBar } from '@ionic-native/status-bar';
-import { Platform, Nav } from 'ionic-angular';
+import { Nav, Platform } from 'ionic-angular';
 import { finalize } from 'rxjs/operators';
 import { Subscription } from 'rxjs/Subscription';
 
@@ -34,7 +34,7 @@ export class ESPMComponent implements OnDestroy {
       .then(this.initialize)
       .catch(console.error);
 
-    if (!environment.production) {
+    if (process.env.DEV_TOOLS) {
       akitaDevtools(ngZone);
     }
 
