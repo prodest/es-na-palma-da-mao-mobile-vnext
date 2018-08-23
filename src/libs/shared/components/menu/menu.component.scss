@@ -9,6 +9,11 @@ espm-menu {
       color: #064d61;
       background: #2286a2 !important;
     }
+
+    ion-list-header.item-ios {
+      border-top: none;
+    }
+
     button {
       background: transparent !important;
       color: #ebf1f3;
