@@ -24,4 +24,8 @@ page-bus-line-info {
   .path-icon {
     margin-right: 8px;
   }
+
+  .segment-button:not(.segment-activated) {
+    background-color: white;
+  }
 }
