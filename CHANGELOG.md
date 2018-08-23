@@ -2,6 +2,35 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+<a name="4.3.0"></a>
+# [4.3.0](https://github.com/prodest/es-na-palma-da-mao-mobile-vnext/compare/v4.2.3...v4.3.0) (2018-08-23)
+
+
+### Bug Fixes
+
+* **app:** nome de exibição do app ([5913fac](https://github.com/prodest/es-na-palma-da-mao-mobile-vnext/commit/5913fac))
+* **dio:** corrige borda da mensagem inicial ([86f0536](https://github.com/prodest/es-na-palma-da-mao-mobile-vnext/commit/86f0536))
+* **ios:** adiciona bypass https para alguns sites ([1b9595d](https://github.com/prodest/es-na-palma-da-mao-mobile-vnext/commit/1b9595d))
+* **ios:** cor de fundo tabs bus-line-info ([be2f346](https://github.com/prodest/es-na-palma-da-mao-mobile-vnext/commit/be2f346))
+* **ios:** corrige background de input sep ([96178bc](https://github.com/prodest/es-na-palma-da-mao-mobile-vnext/commit/96178bc))
+* **ios:** corrige borda extra no menu ([c456147](https://github.com/prodest/es-na-palma-da-mao-mobile-vnext/commit/c456147))
+* **ios:** corrige exibição do ion-searchbar ([c56b198](https://github.com/prodest/es-na-palma-da-mao-mobile-vnext/commit/c56b198))
+* **ios:** corrige tamanho do botão no footer ([10dd477](https://github.com/prodest/es-na-palma-da-mao-mobile-vnext/commit/10dd477))
+* **ios:** utiliza ícones md para dio e sep ([77f98b5](https://github.com/prodest/es-na-palma-da-mao-mobile-vnext/commit/77f98b5))
+* **ios/ui:** erro de layout do menu ([bfaaec0](https://github.com/prodest/es-na-palma-da-mao-mobile-vnext/commit/bfaaec0))
+* **menu:** não atualiza menu no logout ([669bb50](https://github.com/prodest/es-na-palma-da-mao-mobile-vnext/commit/669bb50))
+* **sep:** erro na sincronização de favoritos ([9bafeae](https://github.com/prodest/es-na-palma-da-mao-mobile-vnext/commit/9bafeae))
+
+
+### Features
+
+* **core/auth:** adiciona observables para login/logout ([911e84b](https://github.com/prodest/es-na-palma-da-mao-mobile-vnext/commit/911e84b))
+* **devtools:** habilita devtools via env variables ([00c862d](https://github.com/prodest/es-na-palma-da-mao-mobile-vnext/commit/00c862d))
+* **menu:** muda título do menu ([eeed20e](https://github.com/prodest/es-na-palma-da-mao-mobile-vnext/commit/eeed20e))
+* **transcol-online:** implementa auto-refresh das previsões por tempo ([7394d30](https://github.com/prodest/es-na-palma-da-mao-mobile-vnext/commit/7394d30))
+
+
+
 <a name="4.2.3"></a>
 ## [4.2.3](https://github.com/prodest/es-na-palma-da-mao-mobile-vnext/compare/v4.2.2...v4.2.3) (2018-08-15)
 
