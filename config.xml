@@ -13,6 +13,10 @@
     <allow-navigation href="https://developers.es.gov.br/*" />
     <allow-navigation href="https://sistemas.es.gov.br/*" />
     <allow-navigation href="https://acessocidadao.es.gov.br/*" />
+    <allow-navigation href="http://mapas.geocontrol.com.br/*" />
+    <allow-navigation href="http://saude.es.gov.br/*" />
+    <allow-navigation href="http://sedu.es.gov.br/*" />
+    <allow-navigation href="http://seger.es.gov.br/*" />
     <allow-intent href="http://*/*" />
     <allow-intent href="https://*/*" />
     <allow-intent href="tel:*" />
