@@ -1,11 +1,11 @@
 import { ChangeDetectionStrategy, ChangeDetectorRef, Component, OnDestroy, OnInit } from '@angular/core';
 import { AuthQuery, AuthService } from '@espm/core';
-import { App, MenuController, Platform } from 'ionic-angular';
+import { AuthNeededService } from '@espm/core/auth/auth-needed.service';
 import { AppAvailability } from '@ionic-native/app-availability';
+import { InAppBrowser } from '@ionic-native/in-app-browser';
+import { App, MenuController, Platform } from 'ionic-angular';
 import { takeUntil, tap } from 'rxjs/operators';
 import { Subject } from 'rxjs/Subject';
-import { AuthNeededService } from '@espm/core/auth/auth-needed.service';
-import { InAppBrowser } from '@ionic-native/in-app-browser';
 
 const menus = [
   {
@@ -166,7 +166,7 @@ export class MenuComponent implements OnInit, OnDestroy {
    *
    */
   ngOnInit() {
-    this.authQuery.isLoggedIn$
+    this.authQuery.authChanged$
       .pipe(tap(() => this.cd.markForCheck()), takeUntil(this.destroyed$))
       .subscribe(isLoggedIn => (this.isLoggedIn = isLoggedIn));
   }
