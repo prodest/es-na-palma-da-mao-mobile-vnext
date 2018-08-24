@@ -216,10 +216,6 @@
         "ANDROID_SUPPORT_V13_VERSION": "27.+",
         "FCM_VERSION": "11.6.2"
       },
-      "cordova-plugin-googleplus": {
-        "REVERSED_CLIENT_ID": "com.googleusercontent.apps.716051840979-96738cri764kv9vhih0d41ug07sroibv",
-        "WEB_APPLICATION_CLIENT_ID": "716051840979-96738cri764kv9vhih0d41ug07sroibv.apps.googleusercontent.com"
-      },
       "cordova-plugin-appavailability": {},
       "cordova-plugin-geolocation": {},
       "cordova-plugin-local-notification": {}
