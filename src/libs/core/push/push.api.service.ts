@@ -35,7 +35,7 @@ export class PushApiService {
    *
    */
   private getPushUser(registrationId?: string) {
-    let pushUser: PushUser = { user: this.device.uuid, secret: this.env.push.secret };
+    let pushUser: PushUser = { user: this.device.uuid };
 
     if (registrationId) {
       pushUser.type = this.device.platform.toLowerCase();

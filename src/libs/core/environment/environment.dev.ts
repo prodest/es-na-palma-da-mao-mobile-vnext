@@ -13,7 +13,7 @@ export const dev: Environment = {
     dio: process.env.API_DIO_URL || 'https://api.es.gov.br/developers/dio',
     ceturb: process.env.API_CETURB_URL || 'https://api.es.gov.br/developers/ceturb',
     cbmes: process.env.API_CBMES_URL || 'https://api.es.gov.br/developers/cbmes',
-    push: process.env.API_PUSH_URL || 'https://api.es.gov.br/developers/push',
+    push: process.env.API_PUSH_URL || 'https://api.es.gov.br/developers/push/api/v1/',
     espm: process.env.API_ESPM_URL || 'https://api.es.gov.br/developers/espm',
     transparency: process.env.API_TRANSPARENCY_URL || 'https://api.es.gov.br/developers/transparency',
     acessocidadaoApi: process.env.API_ACESSO_CIDADAO_URL || 'https://developers.es.gov.br/acessocidadao.webapi/api',
@@ -28,8 +28,7 @@ export const dev: Environment = {
     sound: 'true',
     fcmSandbox: process.env.IOS_SANDBOX === 'true' || false,
     defaultIcon: 'notification',
-    defaultColor: '#549db2',
-    secret: process.env.PUSH_SECRET || ''
+    defaultColor: '#549db2'
   },
   pagination: {
     pageNumber: 0,

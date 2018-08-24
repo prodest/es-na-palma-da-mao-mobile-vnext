@@ -24,7 +24,6 @@ export interface Environment {
     badge: string;
     sound: string;
     fcmSandbox: boolean;
-    secret: string;
     defaultIcon: string;
     defaultColor: string;
   };
