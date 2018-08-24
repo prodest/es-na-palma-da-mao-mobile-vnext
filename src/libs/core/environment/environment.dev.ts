@@ -52,8 +52,7 @@ export const dev: Environment = {
       }
     }
   },
-  googleWebClientId:
-    process.env.GOOGLE_WEB_CLIENT_ID || '716051840979-96738cri764kv9vhih0d41ug07sroibv.apps.googleusercontent.com',
+  googleWebClientId: process.env.GOOGLE_WEB_CLIENT_ID || '',
   mobile: {
     client_id: 'espm',
     client_secret: 'secret',
