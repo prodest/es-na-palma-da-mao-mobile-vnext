@@ -2,6 +2,18 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+<a name="4.3.3"></a>
+## [4.3.3](https://github.com/prodest/es-na-palma-da-mao-mobile-vnext/compare/v4.3.2...v4.3.3) (2018-08-27)
+
+
+### Bug Fixes
+
+* **ci:** adiciona plugin cordova-plugin-googleplus durante CI ([af32ef8](https://github.com/prodest/es-na-palma-da-mao-mobile-vnext/commit/af32ef8))
+* **push:** remove propriedade 'secret' ([e90fe67](https://github.com/prodest/es-na-palma-da-mao-mobile-vnext/commit/e90fe67))
+* **transcol-online:** não atualizando previsions ([c2db49e](https://github.com/prodest/es-na-palma-da-mao-mobile-vnext/commit/c2db49e))
+
+
+
 <a name="4.3.2"></a>
 ## [4.3.2](https://github.com/prodest/es-na-palma-da-mao-mobile-vnext/compare/v4.3.1...v4.3.2) (2018-08-24)
 
