@@ -40,7 +40,11 @@ export class JwtInterceptor implements HttpInterceptor {
   protected createAuthRequest(req: HttpRequest<any>, next: HttpHandler) {
     return this.auth
       .refreshAccessTokenIfNeeded()
-      .pipe(flatMap(token => next.handle(req.clone({ headers: req.headers.set('Authorization', `Bearer ${token}`) }))));
+      .pipe(
+        flatMap(token =>
+          next.handle(token ? req.clone({ headers: req.headers.set('Authorization', `Bearer ${token}`) }) : req)
+        )
+      );
   }
 
   /**
