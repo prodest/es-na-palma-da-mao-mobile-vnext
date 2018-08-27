@@ -218,7 +218,11 @@
       },
       "cordova-plugin-appavailability": {},
       "cordova-plugin-geolocation": {},
-      "cordova-plugin-local-notification": {}
+      "cordova-plugin-local-notification": {},
+      "cordova-plugin-googleplus": {
+        "WEB_APPLICATION_CLIENT_ID": "716051840979-96738cri764kv9vhih0d41ug07sroibv.apps.googleusercontent.com",
+        "REVERSED_CLIENT_ID": "com.googleusercontent.apps.716051840979-96738cri764kv9vhih0d41ug07sroibv"
+      }
     },
     "platforms": [
       "ios",

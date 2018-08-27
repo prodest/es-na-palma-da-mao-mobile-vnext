@@ -34,7 +34,6 @@ jobs:
           at: ./
       - run: npm run build:prod:android
       - run: cordova platform add android@7.1.1
-      - run: ionic cordova plugin add cordova-plugin-googleplus@5.3.0 --save --variable WEB_APPLICATION_CLIENT_ID=716051840979-96738cri764kv9vhih0d41ug07sroibv.apps.googleusercontent.com --variable REVERSED_CLIENT_ID=com.googleusercontent.apps.716051840979-96738cri764kv9vhih0d41ug07sroibv
       - run: cordova prepare android -f
       - run: cordova build android --release --buildconfig=build.json
       # - run: 
