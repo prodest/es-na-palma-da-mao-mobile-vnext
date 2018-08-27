@@ -124,13 +124,12 @@ export class AcessoCidadaoService {
    * Store auth info
    *
    */
-  private storeAuthResponse = (response: AcessoCidadaoResponse) => {
+  private storeAuthResponse = (response: AcessoCidadaoResponse) =>
     this.authStore.update({
       accessToken: response.access_token,
       refreshToken: response.refresh_token,
       clientId: this.jwt.decodeToken(response.access_token).client_id
     });
-  };
 
   /**
    * Store user info (claims)
