@@ -2,6 +2,17 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+<a name="4.3.4"></a>
+## [4.3.4](https://github.com/prodest/es-na-palma-da-mao-mobile-vnext/compare/v4.3.3...v4.3.4) (2018-08-27)
+
+
+### Bug Fixes
+
+* **auth:** erro no subscribe do push service ([198355d](https://github.com/prodest/es-na-palma-da-mao-mobile-vnext/commit/198355d))
+* **auth:** verifica token ao criar requisição autenticada ([94a6a1f](https://github.com/prodest/es-na-palma-da-mao-mobile-vnext/commit/94a6a1f))
+
+
+
 <a name="4.3.3"></a>
 ## [4.3.3](https://github.com/prodest/es-na-palma-da-mao-mobile-vnext/compare/v4.3.2...v4.3.3) (2018-08-27)
 
