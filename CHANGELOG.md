@@ -2,6 +2,21 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+<a name="4.4.0"></a>
+# [4.4.0](https://github.com/prodest/es-na-palma-da-mao-mobile-vnext/compare/v4.3.4...v4.4.0) (2018-08-28)
+
+
+### Features
+
+* **sep:** integração com e-Docs ([d2551c6](https://github.com/prodest/es-na-palma-da-mao-mobile-vnext/commit/d2551c6))
+
+
+### Reverts
+
+* **cordova:** cordova-plugin-googleplus ([a29d726](https://github.com/prodest/es-na-palma-da-mao-mobile-vnext/commit/a29d726))
+
+
+
 <a name="4.3.4"></a>
 ## [4.3.4](https://github.com/prodest/es-na-palma-da-mao-mobile-vnext/compare/v4.3.3...v4.3.4) (2018-08-27)
 
