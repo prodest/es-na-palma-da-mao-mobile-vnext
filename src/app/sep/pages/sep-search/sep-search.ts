@@ -17,7 +17,7 @@ import { AuthQuery } from '@espm/core';
   templateUrl: 'sep-search.html'
 })
 export class SepSearchPage implements OnDestroy {
-  protocolNumberModel: string;
+  protocolId: string;
   destroyed$ = new Subject();
 
   /**
@@ -46,13 +46,13 @@ export class SepSearchPage implements OnDestroy {
    *
    *
    */
-  search(protocolNumber: string) {
-    if (!protocolNumber) {
-      this.showMessage('Número do protocolo é obrigatório');
-    } else if (protocolNumber.length < 2 || protocolNumber.length > 8) {
-      this.showMessage('O número deve ter entre 2 e 8 dígitos');
-    } else if (protocolNumber) {
-      this.sepService.getProtocolByNumber(protocolNumber).subscribe(this.goToProtocol);
+  search(protocol: string) {
+    if (!protocol) {
+      this.showMessage('O protocolo é obrigatório');
+    } else if (protocol.length < 2 || protocol.length > 13) {
+      this.showMessage('O protocolo deve ter entre 2 e 13 dígitos');
+    } else if (protocol) {
+      this.sepService.getProtocol(protocol).subscribe(this.goToProtocol);
     }
   }
 
@@ -71,7 +71,7 @@ export class SepSearchPage implements OnDestroy {
 
   /**
    *
-   *
+   * 
    */
   scanBarcode() {
     this.permissions.requestPermission(this.permissions.PERMISSION.CAMERA).then(request => {

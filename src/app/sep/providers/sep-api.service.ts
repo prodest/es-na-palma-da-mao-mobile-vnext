@@ -20,9 +20,9 @@ export class SepApiService {
    *
    *
    */
-  getProcessByNumber(protocolNumber: string): Observable<Protocol> {
+  getProtocol(protocol: string): Observable<Protocol> {
     return this.http
-      .get<Protocol>(`${this.env.api.sep}/${protocolNumber}`, { headers: new HttpHeaders({ [ANONYMOUS_HEADER]: 'true' }) })
+      .get<Protocol>(`${this.env.api.sep}/${protocol}`, { headers: new HttpHeaders({ [ANONYMOUS_HEADER]: 'true' }) })
       .pipe(share());
   }
 

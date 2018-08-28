@@ -58,10 +58,10 @@ export class SepService implements OnDestroy {
    *
    *
    */
-  getProtocolByNumber(protocolNumber: string): Observable<FavoriteProtocol> {
+  getProtocol(protocolNumber: string): Observable<FavoriteProtocol> {
     this.showLoading();
 
-    return this.api.getProcessByNumber(protocolNumber).pipe(finalize(this.dismissLoading));
+    return this.api.getProtocol(protocolNumber).pipe(finalize(this.dismissLoading));
   }
 
   /*
