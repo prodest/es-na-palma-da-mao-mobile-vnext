@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+<a name="4.4.1"></a>
+## [4.4.1](https://github.com/prodest/es-na-palma-da-mao-mobile-vnext/compare/v4.4.0...v4.4.1) (2018-08-29)
+
+
+### Bug Fixes
+
+* **ci/ios:** remove til do nome do app para evitar problemas de build ([23f3e3c](https://github.com/prodest/es-na-palma-da-mao-mobile-vnext/commit/23f3e3c))
+
+
+
 <a name="4.4.0"></a>
 # [4.4.0](https://github.com/prodest/es-na-palma-da-mao-mobile-vnext/compare/v4.3.4...v4.4.0) (2018-08-28)
 
