@@ -23,7 +23,6 @@ export interface Environment {
     alert: string;
     badge: string;
     sound: string;
-    fcmSandbox: boolean;
     defaultIcon: string;
     defaultColor: string;
   };

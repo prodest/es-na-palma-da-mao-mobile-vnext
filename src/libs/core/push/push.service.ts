@@ -27,8 +27,7 @@ export class PushService {
       ios: {
         alert: this.env.push.alert,
         badge: this.env.push.badge,
-        sound: this.env.push.sound,
-        fcmSandbox: this.env.push.fcmSandbox
+        sound: this.env.push.sound
       }
     };
 

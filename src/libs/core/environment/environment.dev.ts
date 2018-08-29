@@ -26,7 +26,6 @@ export const dev: Environment = {
     alert: 'true',
     badge: 'true',
     sound: 'true',
-    fcmSandbox: process.env.IOS_SANDBOX === 'true' || false,
     defaultIcon: 'notification',
     defaultColor: '#549db2'
   },
