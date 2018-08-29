@@ -15,6 +15,11 @@ espm.keystore
 google-services.json
 GoogleService-Info.plist
 
+// ios
+*.dSYM.zip
+*.ipa
+fastlane/
+
 *~
 *.sw[mnpcod]
 *.log
