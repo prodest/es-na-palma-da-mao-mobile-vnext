@@ -19,6 +19,7 @@ GoogleService-Info.plist
 *.dSYM.zip
 *.ipa
 fastlane/
+ios-build.json
 
 *~
 *.sw[mnpcod]
