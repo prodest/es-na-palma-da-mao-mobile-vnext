@@ -1,5 +1,5 @@
 # ionic build
-# npm run build:prod:ios
+npm run build:prod:ios
 
 # adiciona platform ios caso diretorio platforms/ios não exista
 [ ! -d "platforms/ios" ] && cordova platform add ios
@@ -10,7 +10,7 @@ pod install
 cd ../..
 
 # cordova build
-cordova build ios
+cordova build ios --buildConfig=ios-build.json --release --device
 
 # copy xcode project and entitlement files already with configurations
 cp fastlane/ios-static/project.pbxproj 'platforms/ios/ES na Palma da Mao.xcodeproj/.'
