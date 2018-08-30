@@ -11,6 +11,8 @@ build_job:
   stage: build
   tags:
     - mac
+  only:
+    - tags
   script:
     - git clone https://github.com/prodest/es-na-palma-da-mao-mobile-vnext
     - cd es-na-palma-da-mao-mobile-vnext
@@ -27,6 +29,8 @@ publish_job:
   stage: publish
   tags:
     - mac
+  only:
+    - tags
   script:
     - cd es-na-palma-da-mao-mobile-vnext
     - DELIVER_ITMSTRANSPORTER_ADDITIONAL_UPLOAD_PARAMETERS="-t DAV" fastlane ios beta
