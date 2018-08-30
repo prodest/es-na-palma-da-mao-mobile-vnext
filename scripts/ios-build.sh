@@ -1,3 +1,6 @@
+#!/bin/bash
+set -ex
+
 # update npm packages
 npm i
 

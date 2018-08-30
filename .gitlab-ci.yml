@@ -12,7 +12,7 @@ build_job:
   tags:
     - mac
   script:
-    - git clone http://github.com/prodest/es-na-palma-da-mao-mobile-vnext#develop
+    - git clone https://github.com/prodest/es-na-palma-da-mao-mobile-vnext
     - cd es-na-palma-da-mao-mobile-vnext
     - git clone -q https://$GITLAB_USER:$GITLAB_PASSWORD@gitlab.es.gov.br/SGPRJ/espm-ci-secrets.git > /dev/null 2>&1
     - cp espm-ci-secrets/.env .
