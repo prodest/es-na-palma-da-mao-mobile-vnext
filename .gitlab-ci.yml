@@ -9,6 +9,8 @@ cache:
 
 build_job:
   stage: build
+  tags:
+    - mac
   script:
     - git clone http://github.com/prodest/es-na-palma-da-mao-mobile-vnext#develop
     - cd es-na-palma-da-mao-mobile-vnext
@@ -18,6 +20,8 @@ build_job:
     - ./scripts/ios-build.sh
 publish_job:
   stage: publish
+  tags:
+    - mac
   only:
     - tags
   script:
