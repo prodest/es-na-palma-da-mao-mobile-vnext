@@ -18,6 +18,11 @@ build_job:
     - cp espm-ci-secrets/.env .
     - cp -r espm-ci-secrets/ios/* .
     - ./scripts/ios-build.sh
+  artifacts:
+    expire_in: 1 day
+    paths:
+      - /es-na-palma-da-mao-mobile-vnext/platforms/ios/build/device/
+      - /es-na-palma-da-mao-mobile-vnext/fastlane
 publish_job:
   stage: publish
   tags:
@@ -25,6 +30,7 @@ publish_job:
   only:
     - tags
   script:
-    - npm run publish:ios # DELIVER_ITMSTRANSPORTER_ADDITIONAL_UPLOAD_PARAMETERS="-t DAV" fastlane ios beta
+    - cd es-na-palma-da-mao-mobile-vnext
+    - DELIVER_ITMSTRANSPORTER_ADDITIONAL_UPLOAD_PARAMETERS="-t DAV" fastlane ios beta
   dependencies:
     - build_job
