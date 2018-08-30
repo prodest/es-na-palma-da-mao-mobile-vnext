@@ -27,8 +27,6 @@ publish_job:
   stage: publish
   tags:
     - mac
-  only:
-    - tags
   script:
     - cd es-na-palma-da-mao-mobile-vnext
     - DELIVER_ITMSTRANSPORTER_ADDITIONAL_UPLOAD_PARAMETERS="-t DAV" fastlane ios beta
