@@ -18,13 +18,10 @@ build_job:
     - cp espm-ci-secrets/.env .
     - cp -r espm-ci-secrets/ios/* .
     - ./scripts/ios-build.sh
-  artifacts:
-    expire_in: 1 day
-    paths:
-      - platforms/ios/build/device/
-      - fastlane
 publish_job:
   stage: publish
+  variables:
+    GIT_STRATEGY: none
   tags:
     - mac
   only:
