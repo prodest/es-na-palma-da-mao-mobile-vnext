@@ -5,7 +5,7 @@ stages:
 cache:
   key: ${CI_COMMIT_REF_SLUG}
   paths:
-    - es-na-palma-da-mao-mobile-vnext/node_modules
+    - node_modules
 
 build_job:
   stage: build
@@ -14,8 +14,6 @@ build_job:
   only:
     - tags
   script:
-    - git clone https://github.com/prodest/es-na-palma-da-mao-mobile-vnext
-    - cd es-na-palma-da-mao-mobile-vnext
     - git clone -q https://$GITLAB_USER:$GITLAB_PASSWORD@gitlab.es.gov.br/SGPRJ/espm-ci-secrets.git > /dev/null 2>&1
     - cp espm-ci-secrets/.env .
     - cp -r espm-ci-secrets/ios/* .
@@ -23,8 +21,8 @@ build_job:
   artifacts:
     expire_in: 1 day
     paths:
-      - /es-na-palma-da-mao-mobile-vnext/platforms/ios/build/device/
-      - /es-na-palma-da-mao-mobile-vnext/fastlane
+      - platforms/ios/build/device/
+      - fastlane
 publish_job:
   stage: publish
   tags:
@@ -32,7 +30,6 @@ publish_job:
   only:
     - tags
   script:
-    - cd es-na-palma-da-mao-mobile-vnext
     - DELIVER_ITMSTRANSPORTER_ADDITIONAL_UPLOAD_PARAMETERS="-t DAV" fastlane ios beta
   dependencies:
     - build_job
