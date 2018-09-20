@@ -112,6 +112,7 @@
     "cordova-plugin-ionic-webview": "^1.2.1",
     "cordova-plugin-local-notification": "^0.9.0-beta.2",
     "cordova-plugin-splashscreen": "^5.0.2",
+    "cordova-plugin-statusbar": "^2.4.2",
     "cordova-plugin-whitelist": "^1.3.3",
     "cordova-plugin-x-socialsharing": "^5.4.1",
     "cordova-sqlite-storage": "^2.4.0",
@@ -224,7 +225,8 @@
       "cordova-plugin-googleplus": {
         "WEB_APPLICATION_CLIENT_ID": "716051840979-96738cri764kv9vhih0d41ug07sroibv.apps.googleusercontent.com",
         "REVERSED_CLIENT_ID": "com.googleusercontent.apps.716051840979-96738cri764kv9vhih0d41ug07sroibv"
-      }
+      },
+      "cordova-plugin-statusbar": {}
     },
     "platforms": [
       "ios",
