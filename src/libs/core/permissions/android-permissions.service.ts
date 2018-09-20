@@ -17,20 +17,20 @@ export class AndroidPermissionsService {
   constructor(private androidPermissions: AndroidPermissions) {
     this.PERMISSION = this.androidPermissions.PERMISSION;
   }
+  /* Specific methods */
 
-  /**
-   *
-   */
-  requestCoarseLocationPermission() {
-    this.requestPermissions([this.androidPermissions.PERMISSION.ACCESS_COARSE_LOCATION]);
+  requestCoarseLocationPermission(): Promise<any> {
+    return this.requestPermission(this.androidPermissions.PERMISSION.ACCESS_COARSE_LOCATION);
   }
 
-  checkCoarseLocationPermission(): Promise<any> {
-    return this.checkPermission(this.androidPermissions.PERMISSION.ACCESS_COARSE_LOCATION);
+  requestCameraPermission(): Promise<any> {
+    return this.requestPermission(this.androidPermissions.PERMISSION.CAMERA);
   }
 
-  requestPermissions(permissions: string[]): void {
-    this.androidPermissions.requestPermissions(permissions);
+  /* Shared Methods */
+
+  requestPermissions(permissions: string[]): Promise<any> {
+    return this.androidPermissions.requestPermissions(permissions);
   }
 
   requestPermission(permission: string): Promise<any> {

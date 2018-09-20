@@ -117,17 +117,6 @@ export class TranscolOnlinePage implements AfterViewInit, OnDestroy {
   /**
    *
    */
-  getUserLocation = () => {
-    if (!this.searchingLocation) {
-      this.searchingLocation = true;
-    }
-    // TODO: Funciona melhor no browser, para o app utilzamos o plugin nativo (código no component)
-    // this.map.locate({ setView: true, maxZoom: 16, timeout: 5000, enableHighAccuracy: true });
-  };
-
-  /**
-   *
-   */
   closeDetails = () => {
     this.isDetailsOpenned = false;
   };
@@ -638,6 +627,17 @@ export class TranscolOnlinePage implements AfterViewInit, OnDestroy {
     console.log('zoom:', this.map.getZoom());
     console.log('bounds:', this.map.getBounds());
     console.log('center:', this.map.getCenter());
+  };
+
+  /**
+   *
+   */
+  getUserLocation = () => {
+    if (!this.searchingLocation) {
+      this.searchingLocation = true;
+    }
+    // TODO: Funciona melhor no browser, para o app utilizamos o plugin nativo (código no component)
+    // this.map.locate({ setView: true, maxZoom: 16, timeout: 5000, enableHighAccuracy: true });
   };
 
   /**

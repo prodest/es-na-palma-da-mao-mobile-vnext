@@ -71,10 +71,10 @@ export class SepSearchPage implements OnDestroy {
 
   /**
    *
-   * 
+   *
    */
   scanBarcode() {
-    this.permissions.requestPermission(this.permissions.PERMISSION.CAMERA).then(request => {
+    this.permissions.requestCameraPermission().then(request => {
       if (request.hasPermission) {
         let options = {
           preferFrontCamera: false,
