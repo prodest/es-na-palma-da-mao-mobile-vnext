@@ -37,7 +37,7 @@ export class DriverLicensePage {
     const isAllowed = !(cnhNumero && cnhCedula);
 
     if (!isAllowed) {
-      setTimeout(() => this.navCtrl.setRoot('DriverLicenseStatusPage'));
+      setTimeout(() => this.navCtrl.push('DriverLicenseStatusPage'));
     }
     return isAllowed;
   }
@@ -60,6 +60,10 @@ export class DriverLicensePage {
    *
    */
   private saveCNH = (cnh: DriverLicense) => {
-    cnh && this.detran.saveCNH(cnh).subscribe(() => this.navCtrl.setRoot('DriverLicenseStatusPage'));
+    cnh &&
+      this.detran.saveCNH(cnh).subscribe(() => {
+        this.navCtrl.insert(-1, 'DriverLicenseStatusPage');
+        this.navCtrl.pop();
+      });
   };
 }

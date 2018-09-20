@@ -145,6 +145,13 @@ ion-thumbnail {
 }
 
 /*
+ * Show menu button even with hidebackbutton class
+ */
+ion-navbar[hidebackbutton] button[menutoggle] {
+  display: block !important;
+}
+
+/*
  * Default search button on footer for iOS
  */
 ion-footer button.button-ios.search-button {

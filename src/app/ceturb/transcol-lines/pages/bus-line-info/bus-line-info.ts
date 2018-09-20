@@ -34,7 +34,7 @@ export class BusLineInfoPage implements OnDestroy {
     const isAllowed = !!this.params.get('lineNumber');
 
     if (!isAllowed) {
-      setTimeout(() => this.navCtrl.setRoot('BusLinesPage'));
+      setTimeout(() => this.navCtrl.push('BusLinesPage'));
     }
     return isAllowed;
   }

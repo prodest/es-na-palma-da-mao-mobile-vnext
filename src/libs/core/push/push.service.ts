@@ -60,7 +60,7 @@ export class PushService {
    */
   notify(pushData: PushData): void {
     if (pushData && pushData.state) {
-      this.app.getActiveNav().setRoot(pushData.state, pushData.params); // TODO: reload: true
+      this.app.getActiveNav().push(pushData.state, pushData.params); // TODO: reload: true
     }
   }
 

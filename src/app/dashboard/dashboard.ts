@@ -40,7 +40,7 @@ export class DashboardPage implements OnInit, OnDestroy {
     if (accessDenied) {
       this.authNeeded.showAuthNeededModal();
     } else {
-      this.appCtrl.getRootNav().setRoot(page);
+      this.appCtrl.getRootNav().push(page);
     }
   };
 }

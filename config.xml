@@ -144,6 +144,6 @@
         <variable name="WEB_APPLICATION_CLIENT_ID" value="716051840979-96738cri764kv9vhih0d41ug07sroibv.apps.googleusercontent.com" />
         <variable name="REVERSED_CLIENT_ID" value="com.googleusercontent.apps.716051840979-96738cri764kv9vhih0d41ug07sroibv" />
     </plugin>
+    <engine name="ios" spec="^4.5.5" />
     <engine name="android" spec="^7.1.1" />
-    <engine name="ios" spec="~4.5.5" />
 </widget>

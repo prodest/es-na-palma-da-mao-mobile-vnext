@@ -48,11 +48,11 @@ export class DriverLicenseStatusPage {
       ballot: this.authQuery.state.claims.cnhCedula
     };
 
-    // permite acesso à tela de o usuário possui cnh no acesso cidadão ou cadastrou agora
+    // permite acesso à tela se o usuário possui cnh no acesso cidadão ou cadastrou agora
     const isAllowed = !!(this.cnh.registerNumber && this.cnh.ballot);
 
     if (!isAllowed) {
-      setTimeout(() => this.navCtrl.setRoot('DriverLicensePage'));
+      setTimeout(() => this.navCtrl.push('DriverLicensePage'));
     }
     return isAllowed;
   }
@@ -139,6 +139,6 @@ export class DriverLicenseStatusPage {
    *
    */
   private saveCNH = (cnh: DriverLicense) => {
-    cnh && this.detran.saveCNH(cnh).subscribe(() => this.navCtrl.setRoot('DriverLicenseStatusPage'));
+    cnh && this.detran.saveCNH(cnh).subscribe(this.loadData);
   };
 }

@@ -194,12 +194,12 @@ export class MenuComponent implements OnInit, OnDestroy {
           this.appAvailability
             .check(route.package)
             .then(
-              (yes: boolean) => this.iab.create(route.url, '_system'),
-              (no: any) => this.iab.create('market://details?id=' + route.package, '_system')
+              () => this.iab.create(route.url, '_system'),
+              () => this.iab.create('market://details?id=' + route.package, '_system')
             );
         }
       } else {
-        this.appCtrl.getRootNav().setRoot(route.component);
+        this.appCtrl.getRootNav().push(route.component);
         this.menuCtrl.close();
       }
     }
@@ -216,6 +216,6 @@ export class MenuComponent implements OnInit, OnDestroy {
    *
    */
   logout = () => {
-    this.auth.logout().then(() => this.openPage({ component: 'DashboardPage' }));
+    this.auth.logout().then(() => this.appCtrl.getRootNav().setRoot('DashboardPage'));
   };
 }

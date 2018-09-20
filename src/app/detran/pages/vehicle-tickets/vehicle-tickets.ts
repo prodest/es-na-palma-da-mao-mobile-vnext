@@ -25,11 +25,11 @@ export class VehicleTicketsPage {
    *
    */
   ionViewCanEnter(): boolean | Promise<any> {
-    // permite acesso à tela de o usuário possui cnh no acesso cidadão ou cadastrou agora
+    // permite acesso à tela se o usuário possui cnh no acesso cidadão ou cadastrou agora
     const isAllowed = !!this.params.get('vehicle');
 
     if (!isAllowed) {
-      setTimeout(() => this.navCtrl.setRoot('VehiclesPage'));
+      setTimeout(() => this.navCtrl.push('VehiclesPage'));
     }
     return isAllowed;
   }
