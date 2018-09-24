@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+<a name="4.4.10"></a>
+## [4.4.10](https://github.com/prodest/es-na-palma-da-mao-mobile-vnext/compare/v4.4.9...v4.4.10) (2018-09-24)
+
+
+### Bug Fixes
+
+* **menu:** dashboard pelo menu exibindo botão de voltar ([8bd131e](https://github.com/prodest/es-na-palma-da-mao-mobile-vnext/commit/8bd131e))
+
+
+
 <a name="4.4.9"></a>
 ## [4.4.9](https://github.com/prodest/es-na-palma-da-mao-mobile-vnext/compare/v4.4.8...v4.4.9) (2018-09-24)
 
