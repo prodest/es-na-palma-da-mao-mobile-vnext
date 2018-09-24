@@ -47,6 +47,10 @@ export class AcessoCidadaoService {
     this.authStore.reset();
   };
 
+  getAccessToken = (): Observable<Token> => {
+    return of(this.authQuery.state.accessToken);
+  };
+
   /**
    * Atualiza e retorna o access token quando necessário baseado em sua data de expiração.
    *

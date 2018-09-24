@@ -119,6 +119,11 @@ export class AuthService {
 
   /**
    *
+   */
+  getAccessToken = (): Observable<Token> => this.acessoCidadao.getAccessToken();
+
+  /**
+   *
    *
    */
   refreshUser = (): Observable<User> => this.acessoCidadao.getUserClaims();

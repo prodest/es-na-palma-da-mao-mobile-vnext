@@ -1,10 +1,11 @@
 import { HTTP_INTERCEPTORS, HttpEvent, HttpHandler, HttpInterceptor, HttpRequest } from '@angular/common/http';
-import { Injectable, Injector } from '@angular/core';
+import { Injectable, Injector, Inject } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
 import { flatMap } from 'rxjs/operators';
 
 import { ANONYMOUS_HEADER } from '.';
 import { AuthService } from './auth.service';
+import { Environment, EnvVariables } from '../environment';
 
 @Injectable()
 export class JwtInterceptor implements HttpInterceptor {
@@ -17,7 +18,7 @@ export class JwtInterceptor implements HttpInterceptor {
   /**
    *
    */
-  constructor(private injector: Injector) {}
+  constructor(private injector: Injector, @Inject(EnvVariables) private environment: Environment) {}
 
   /**
    *
@@ -30,21 +31,23 @@ export class JwtInterceptor implements HttpInterceptor {
     const isAnonymousRequest = req.headers.has(ANONYMOUS_HEADER) && req.headers.get(ANONYMOUS_HEADER) === 'true';
 
     // Clone the request to add the new header.
-    return isAnonymousRequest ? this.createAnonymousRequest(req, next) : this.createAuthRequest(req, next);
+    return isAnonymousRequest
+      ? this.createAnonymousRequest(req, next)
+      : this.createAuthRequest(req, next, !this.isConnectToken(req.url));
   }
 
   /**
    *
    *
    */
-  protected createAuthRequest(req: HttpRequest<any>, next: HttpHandler) {
-    return this.auth
-      .refreshAccessTokenIfNeeded()
-      .pipe(
-        flatMap(token =>
-          next.handle(token ? req.clone({ headers: req.headers.set('Authorization', `Bearer ${token}`) }) : req)
-        )
-      );
+  protected createAuthRequest(req: HttpRequest<any>, next: HttpHandler, refresToken: boolean = true) {
+    const accessToken$ = refresToken ? this.auth.refreshAccessTokenIfNeeded() : this.auth.getAccessToken();
+
+    return accessToken$.pipe(
+      flatMap(token =>
+        next.handle(token ? req.clone({ headers: req.headers.set('Authorization', `Bearer ${token}`) }) : req)
+      )
+    );
   }
 
   /**
@@ -53,6 +56,12 @@ export class JwtInterceptor implements HttpInterceptor {
    */
   protected createAnonymousRequest(req: HttpRequest<any>, next: HttpHandler) {
     return next.handle(req.clone({ headers: req.headers.delete(ANONYMOUS_HEADER) }));
+  }
+
+  /** Private Methods */
+
+  private isConnectToken(url: string) {
+    return url === `${this.environment.identityServer.url}/connect/token`;
   }
 }
 
