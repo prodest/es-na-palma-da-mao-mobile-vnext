@@ -199,7 +199,11 @@ export class MenuComponent implements OnInit, OnDestroy {
             );
         }
       } else {
-        this.appCtrl.getRootNav().push(route.component);
+        if (route.component === 'DashboardPage') {
+          this.appCtrl.getRootNav().setRoot('DashboardPage');
+        } else {
+          this.appCtrl.getRootNav().push(route.component);
+        }
         this.menuCtrl.close();
       }
     }
