@@ -52,7 +52,7 @@ registerLocaleData(ptBr);
     })
   ],
   bootstrap: [IonicApp],
-  entryComponents: [ESPMComponent],
+  entryComponents: [ESPMComponent,],
   providers: [
     AndroidPermissions,
     AndroidPermissionsService,

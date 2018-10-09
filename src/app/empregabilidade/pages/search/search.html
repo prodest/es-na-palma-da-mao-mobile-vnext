@@ -1,0 +1,21 @@
+<ion-header>
+
+  <ion-navbar>
+    <ion-title>empregabilidade</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content padding>
+  <ion-item>
+    <ion-label>Gender</ion-label>
+    <ion-select [(ngModel)]="filter">
+      <ion-option *ngFor="let item of items"  [value]="item.value">{{ item.description }}</ion-option>
+    </ion-select>
+  </ion-item>
+  <ion-item>
+    <ion-input placeholder="Digite" clearInput></ion-input>
+  </ion-item>
+  <button ion-button block icon-end (click)="proximo()">Buscar<ion-icon name="search"></ion-icon></button>
+</ion-content>

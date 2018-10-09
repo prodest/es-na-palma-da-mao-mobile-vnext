@@ -1,0 +1,65 @@
+<ion-header>
+  <ion-navbar>
+    <ion-title>Resultado</ion-title>
+  </ion-navbar>
+  <ion-toolbar>
+    <ion-segment [(ngModel)]="tab" color="primary">
+      <ion-segment-button value="open">
+        aberto
+      </ion-segment-button>
+      <ion-segment-button value="ongoing">
+        andamento
+      </ion-segment-button>
+      <ion-segment-button value="closed">
+        fechado
+      </ion-segment-button>
+    </ion-segment>
+  </ion-toolbar>
+</ion-header>
+
+
+<ion-content padding>
+  <div [ngSwitch]="tab">
+    <div *ngSwitchCase="'open'">
+      <ion-list>
+        <ion-item *ngFor="let item of abertos">
+          <h2>{{ item.nome }}</h2>
+          <ul *ngIf="item.jobs">
+            <li *ngFor="let job of item.jobs">{{ job }}</li>
+          </ul>
+          <button ion-button clear item-end color="primary" (click)="detail(item.id)">ver mais</button>
+        </ion-item>
+      </ion-list>
+    </div>
+
+
+  </div>
+  <div [ngSwitch]="tab">
+    <div *ngSwitchCase="'ongoing'">
+      <ion-list>
+        <ion-item *ngFor="let item of andamentos">
+          <h2>{{ item.nome }}</h2>
+          <ul *ngIf="item.jobs">
+            <li *ngFor="let job of item.jobs">{{ job }}</li>
+          </ul>
+          <button ion-button clear item-end color="secondary" (click)="detail(item.id)">ver mais</button>
+        </ion-item>
+      </ion-list>
+    </div>
+
+  </div>
+  <div [ngSwitch]="tab">
+    <div *ngSwitchCase="'closed'">
+      <ion-list>
+        <ion-item *ngFor="let item of fechados">
+          <h2>{{ item.nome }}</h2>
+          <ul *ngIf="item.jobs">
+            <li *ngFor="let job of item.jobs">{{ job }}</li>
+          </ul>
+          <button ion-button clear item-end color="danger" (click)="detail(item.id)">ver mais</button>
+        </ion-item>
+      </ion-list>
+    </div>
+
+  </div>
+</ion-content>

@@ -124,6 +124,17 @@ const menus = [
     ]
   },
   {
+    name: 'Empregabilidade',
+    items: [
+      {
+        title: 'Buscar',
+        icon: 'search',
+        component: 'SearchPage',
+        order: 7
+      }
+    ]
+  },
+  {
     name: 'Outros',
     items: [
       {
