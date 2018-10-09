@@ -4,7 +4,7 @@ import * as L from 'leaflet';
   /**
    *
    *
-   */
+   *
   L.Icon.BusStop = L.DivIcon.extend({
     options: {
       spin: false,
@@ -48,7 +48,7 @@ import * as L from 'leaflet';
   /**
    *
    *
-   */
+   *
   L.Marker.BusStop = L.Marker.extend({
     initialize: function(stop, options) {
       this.stop = stop;
