@@ -122,6 +122,7 @@
     "font-awesome": "^4.7.0",
     "helpful-decorators": "^1.7.2",
     "intl": "^1.2.5",
+    "ionic": "^4.2.1",
     "ionic-angular": "^3.9.2",
     "ionic-plugin-keyboard": "^2.2.1",
     "ionic2-calendar": "^0.4.4",

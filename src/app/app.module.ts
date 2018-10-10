@@ -32,6 +32,8 @@ import { DioProviders } from './dio/providers';
 import { NewsProviders } from './news/providers';
 import { TransparencyProviders } from './secont/transparency/providers';
 import { SepProviders } from './sep/providers';
+import { SearchProvider } from '../app/empregabilidade/providers/search/search';
+import { ListProvider } from './empregabilidade/providers/list/list';
 
 moment.locale('pt-br');
 registerLocaleData(ptBr);
@@ -52,7 +54,7 @@ registerLocaleData(ptBr);
     })
   ],
   bootstrap: [IonicApp],
-  entryComponents: [ESPMComponent,],
+  entryComponents: [ESPMComponent],
   providers: [
     AndroidPermissions,
     AndroidPermissionsService,
@@ -82,7 +84,9 @@ registerLocaleData(ptBr);
     { provide: ErrorHandler, useClass: IonicErrorHandler },
     { provide: LOCALE_ID, useFactory: localeIdFactory, deps: [LocaleService] },
     { provide: APP_INITIALIZER, multi: true, useFactory: localeInitializer, deps: [LOCALE_ID] },
-    { provide: ErrorHandler, useClass: IonicErrorHandler }
+    { provide: ErrorHandler, useClass: IonicErrorHandler },
+    SearchProvider,
+    ListProvider
   ]
 })
 export class AppModule {}

@@ -22,12 +22,12 @@
   <div [ngSwitch]="tab">
     <div *ngSwitchCase="'open'">
       <ion-list>
-        <ion-item *ngFor="let item of abertos">
+        <ion-item *ngFor="let item of concursosAbertos">
           <h2>{{ item.nome }}</h2>
-          <ul *ngIf="item.jobs">
-            <li *ngFor="let job of item.jobs">{{ job }}</li>
+          <ul *ngIf="item.cargos">
+            <li *ngFor="let job of item.cargos">{{ job }}</li>
           </ul>
-          <button ion-button clear item-end color="primary" (click)="detail(item.id)">ver mais</button>
+          <button ion-button clear item-end color="primary" (click)="detail(item)">ver mais</button>
         </ion-item>
       </ion-list>
     </div>
@@ -37,12 +37,12 @@
   <div [ngSwitch]="tab">
     <div *ngSwitchCase="'ongoing'">
       <ion-list>
-        <ion-item *ngFor="let item of andamentos">
+        <ion-item *ngFor="let item of concursosAndamento">
           <h2>{{ item.nome }}</h2>
-          <ul *ngIf="item.jobs">
-            <li *ngFor="let job of item.jobs">{{ job }}</li>
+          <ul *ngIf="item.cargos">
+            <li *ngFor="let job of item.cargos">{{ job }}</li>
           </ul>
-          <button ion-button clear item-end color="secondary" (click)="detail(item.id)">ver mais</button>
+          <button ion-button clear item-end color="secondary" (click)="detail(item)">ver mais</button>
         </ion-item>
       </ion-list>
     </div>
@@ -51,12 +51,12 @@
   <div [ngSwitch]="tab">
     <div *ngSwitchCase="'closed'">
       <ion-list>
-        <ion-item *ngFor="let item of fechados">
+        <ion-item *ngFor="let item of concursosFechado">
           <h2>{{ item.nome }}</h2>
-          <ul *ngIf="item.jobs">
-            <li *ngFor="let job of item.jobs">{{ job }}</li>
+          <ul *ngIf="item.cargos">
+            <li *ngFor="let job of item.cargos">{{ job }}</li>
           </ul>
-          <button ion-button clear item-end color="danger" (click)="detail(item.id)">ver mais</button>
+          <button ion-button clear item-end color="danger" (click)="detail(item)">ver mais</button>
         </ion-item>
       </ion-list>
     </div>

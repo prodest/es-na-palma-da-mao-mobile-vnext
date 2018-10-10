@@ -1,36 +1,28 @@
-import { Component } from "@angular/core";
-import { IonicPage, NavController, NavParams } from "ionic-angular";
+import { Component } from '@angular/core';
+import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { ListProvider } from '../../providers/list/list';
 
 @IonicPage()
 @Component({
-  selector: "page-list-result",
-  templateUrl: "list-result.html"
+  selector: 'page-list-result',
+  templateUrl: 'list-result.html'
 })
 export class ListResultPage {
-  tab: any = "open";
-  abertos = [
-    { id: 1, nome: "sedu", vaga: "pedreiro", jobs: ["predero", "vridero"] },
-    {
-      id: 2,
-      nome: "ifes",
-      vaga: "carpinteiro",
-      jobs: ["arrumador", "fazedor"]
-    },
-    { id: 3, nome: "ifes", vaga: "estagiario", jobs: ["predero", "vridero"] }
-  ];
-  andamentos = [
-    { id: 1, nome: "sedu", vaga: "pedreiro", jobs: ["predero", "vridero"] },
-    { id: 2, nome: "ifes", vaga: "carpinteiro", jobs: ["predero", "vridero"] },
-    { id: 3, nome: "ifes", vaga: "estagiario", jobs: ["predero", "vridero"] }
-  ];
-  fechados = [
-    { id: 1, nome: "sedu", vaga: "pedreiro", jobs: ["predero", "vridero"] },
-    { id: 2, nome: "ifes", vaga: "carpinteiro", jobs: ["predero", "vridero"] },
-    { id: 3, nome: "ifes", vaga: "estagiario", jobs: ["predero", "vridero"] }
-  ];
-  constructor(public navCtrl: NavController, public navParams: NavParams) {}
+  tab: any = 'open';
+  concursosAbertos: any;
+  concursosFechado: any;
+  concursosAndamento: any;
+  constructor(public navCtrl: NavController, public navParams: NavParams, public listProvider: ListProvider) {
+    this.inicializa();
+  }
 
-  detail(id) {
-    this.navCtrl.push(ListResultPage);
+  detail(concurso) {
+    this.navCtrl.push('DetailsPage', concurso);
+  }
+  async inicializa() {
+    let listaConcursos = await this.navParams.data;
+    this.concursosAbertos = this.listProvider.listarAberto(listaConcursos, 'aberto');
+    this.concursosFechado = this.listProvider.listarAberto(listaConcursos, 'fechado');
+    this.concursosAndamento = this.listProvider.listarAberto(listaConcursos, 'andamento');
   }
 }
