@@ -14,16 +14,16 @@
       <ion-item>
         <h2>Cargos:</h2>
         <ul *ngIf="concurso.cargos">
-          <li *ngFor="let job of concurso.cargos">{{ job }}</li>
+          <div *ngFor="let job of concurso.cargos">{{ job }}</div>
         </ul>
         <h2>Datas:</h2>
         <ul *ngIf="concurso.datas">
-          <li *ngFor="let data of concurso.datas">{{ data.nome }} {{ data.data }}</li>
+          <div *ngFor="let data of concurso.datas">{{ data.nome }} {{ data.data }}</div>
         </ul>
         <h2>Anexos:</h2>
         <ul *ngIf="concurso.anexos">
-          <li *ngFor="let anexo of concurso.anexos"> <button ion-button full (click)="openLink(anexo.link)">
-              {{ anexo.documento }} </button> </li>
+          <div *ngFor="let anexo of concurso.anexos"> <button ion-button full (click)="openLink(anexo.link)">
+              {{ anexo.documento }} </button> </div>
         </ul>
       </ion-item>
     </ion-list>

@@ -3,11 +3,11 @@ import { Injectable } from '@angular/core';
 
 @Injectable()
 export class SearchProvider {
-  API_URL = 'http://fakedata-icarodgl.c9users.io:8080';
+  API_URL = 'http://meufakedata.herokuapp.com/busca';
   constructor(public http: HttpClient) {}
   search(parameter) {
     return new Promise(resolve => {
-      this.http.get(this.API_URL + '/busca/').subscribe(
+      this.http.get(this.API_URL).subscribe(
         data => {
           resolve(data);
         },

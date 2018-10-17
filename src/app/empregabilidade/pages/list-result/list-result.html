@@ -5,13 +5,13 @@
   <ion-toolbar>
     <ion-segment [(ngModel)]="tab" color="primary">
       <ion-segment-button id="alfafa" value="open">
-        aberto
+        Aberto
       </ion-segment-button>
       <ion-segment-button id="alfafa" value="ongoing">
-        andamento
+        Andamento
       </ion-segment-button>
       <ion-segment-button id="alfafa" value="closed">
-        fechado
+        Fechado
       </ion-segment-button>
     </ion-segment>
   </ion-toolbar>
@@ -25,7 +25,7 @@
         <ion-item *ngFor="let item of concursosAbertos">
           <h2>{{ item.nome }}</h2>
           <ul *ngIf="item.cargos">
-            <li *ngFor="let job of item.cargos">{{ job }}</li>
+            <div *ngFor="let job of item.cargos">{{ job }}</div>
           </ul>
           <button ion-button clear item-end color="primary" (click)="detail(item)">ver mais</button>
         </ion-item>
@@ -40,7 +40,7 @@
         <ion-item *ngFor="let item of concursosAndamento">
           <h2>{{ item.nome }}</h2>
           <ul *ngIf="item.cargos">
-            <li *ngFor="let job of item.cargos">{{ job }}</li>
+            <div *ngFor="let job of item.cargos">{{ job }}</div>
           </ul>
           <button ion-button clear item-end color="secondary" (click)="detail(item)">ver mais</button>
         </ion-item>
@@ -54,7 +54,7 @@
         <ion-item *ngFor="let item of concursosFechado">
           <h2>{{ item.nome }}</h2>
           <ul *ngIf="item.cargos">
-            <li *ngFor="let job of item.cargos">{{ job }}</li>
+            <div *ngFor="let job of item.cargos">{{ job }}</div>
           </ul>
           <button ion-button clear item-end color="danger" (click)="detail(item)">ver mais</button>
         </ion-item>
