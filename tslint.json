@@ -3,17 +3,36 @@
     "tslint-config-standard",
     "tslint-config-prettier"
   ],
-  "rulesDirectory": [ "node_modules/codelyzer" ],
+  "rulesDirectory": [
+    "node_modules/codelyzer"
+  ],
   "rules": {
     "no-empty": false,
     "jsdoc-format": false,
     "no-unused-variable": true,
     "strict-type-predicates": false,
-    "member-ordering": [ false ],
-    "import-blacklist": [ true, "rxjs" ],
+    "member-ordering": [
+      false
+    ],
+    "import-blacklist": [
+      true,
+      "rxjs"
+    ],
     "no-floating-promises": false,
-    // "directive-selector": [ true, "attribute", "espm", "camelCase" ],
-    // "component-selector": [ true, "element", [ "espm" ], "kebab-case" ],
+    "directive-selector": [
+      true,
+      "attribute",
+      "espm",
+      "camelCase"
+    ],
+    "component-selector": [
+      true,
+      "element",
+      [
+        "espm"
+      ],
+      "kebab-case"
+    ],
     "use-input-property-decorator": true,
     "use-output-property-decorator": true,
     "use-host-property-decorator": true,
@@ -25,7 +44,14 @@
     "use-pipe-transform-interface": true,
     "no-access-missing-member": false,
     "banana-in-box": true,
-    "component-class-suffix": [true, "Component", "Page"],
-    "directive-class-suffix": [true, "Directive"]
+    "component-class-suffix": [
+      true,
+      "Component",
+      "Page"
+    ],
+    "directive-class-suffix": [
+      true,
+      "Directive"
+    ]
   }
 }
