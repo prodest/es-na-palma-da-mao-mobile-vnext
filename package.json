@@ -5,7 +5,8 @@
   "description": "O ES NA PALMA DA MÃO é um programa do Governo do Estado do Espírito Santo que reúne iniciativas e serviços do Governo em plataforma móvel (aplicativo) e web, com unidade de experiência do cidadão. Por meio do ES NA PALMA DA MÃO, diversos serviços governamentais podem ser acessados através da web e dispositivos móveis (sistemas operacionais iOS e Android) utilizando uma interface comum.",
   "private": true,
   "scripts": {
-    "e2e": "webdriver-manager update && ionic-app-scripts build && protractor conf.js",
+    "webup":"webdriver-manager update",
+    "e2e": "ionic-app-scripts build && protractor conf.js",
     "ngc": "ngc",
     "serve": "lite-server --baseDir=\"www\"",
     "clean": "ionic-app-scripts clean",
