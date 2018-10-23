@@ -127,7 +127,6 @@
         <variable name="APP_ID" value="926428880739042" />
         <variable name="APP_NAME" value="Acesso Cidadão" />
     </plugin>
-    <plugin name="cordova-sqlite-storage" spec="^2.2.1" />
     <plugin name="cordova-plugin-splashscreen" spec="^5.0.2" />
     <plugin name="cordova-plugin-x-socialsharing" spec="^5.4.1" />
     <plugin name="phonegap-plugin-barcodescanner" spec="^7.0.2" />
@@ -147,4 +146,5 @@
     <plugin name="cordova-plugin-statusbar" spec="^2.4.2" />
     <engine name="ios" spec="^4.5.5" />
     <engine name="android" spec="^7.1.1" />
+    <plugin name="cordova-sqlite-storage" spec="2.5.0" />
 </widget>

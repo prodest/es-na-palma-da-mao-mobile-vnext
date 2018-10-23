@@ -127,7 +127,7 @@ const menus = [
     name: 'Empregabilidade',
     items: [
       {
-        title: 'Buscar',
+        title: 'Buscar concursos',
         icon: 'search',
         component: 'SearchPage',
         order: 7
@@ -178,7 +178,10 @@ export class MenuComponent implements OnInit, OnDestroy {
    */
   ngOnInit() {
     this.authQuery.authChanged$
-      .pipe(tap(() => this.cd.markForCheck()), takeUntil(this.destroyed$))
+      .pipe(
+        tap(() => this.cd.markForCheck()),
+        takeUntil(this.destroyed$)
+      )
       .subscribe(isLoggedIn => (this.isLoggedIn = isLoggedIn));
   }
 

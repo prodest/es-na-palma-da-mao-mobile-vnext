@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, ToastController, LoadingController } from 'ionic-angular';
 import { ListProvider } from '../../providers/list/list';
 
 @IonicPage()
@@ -12,17 +12,47 @@ export class ListResultPage {
   concursosAbertos: any;
   concursosFechado: any;
   concursosAndamento: any;
-  constructor(public navCtrl: NavController, public navParams: NavParams, public listProvider: ListProvider) {
+  constructor(
+    public navCtrl: NavController,
+    public navParams: NavParams,
+    public listProvider: ListProvider,
+    public toastCtrl: ToastController,
+    public loadingCtrl: LoadingController
+  ) {
     this.inicializa();
   }
 
-  detail(concurso) {
+  async detail(concurso) {
+    let loader = this.loadingCtrl.create({
+      content: 'Aguarde, atualizando concurso',
+      duration: 2000
+    });
+    loader.present();
+    try {
+      let concursoAtualizado = await this.listProvider.atualizaConcurso(concurso);
+
+      if (concursoAtualizado.status != 0) {
+        concurso = concursoAtualizado;
+      }
+    } catch (error) {
+      console.log('Erro ao atualizar concurso', error);
+    }
+    loader.dismiss();
     this.navCtrl.push('DetailsPage', concurso);
   }
   async inicializa() {
-    let listaConcursos = await this.navParams.data;
-    this.concursosAbertos = this.listProvider.listarAberto(listaConcursos, 'aberto');
-    this.concursosFechado = this.listProvider.listarAberto(listaConcursos, 'fechado');
-    this.concursosAndamento = this.listProvider.listarAberto(listaConcursos, 'andamento');
+    let loader = this.loadingCtrl.create({
+      content: 'Aguarde, Organizando concursos'
+    });
+    loader.present();
+    try {
+      let listaConcursos: Array<Concurso> = await this.navParams.data;
+      this.concursosAbertos = this.listProvider.listarPorStatus(listaConcursos, 'aberto');
+      this.concursosFechado = this.listProvider.listarPorStatus(listaConcursos, 'fechado');
+      this.concursosAndamento = this.listProvider.listarPorStatus(listaConcursos, 'andamento');
+    } catch (error) {
+      console.log('Erro ao organizar ', error);
+    }
+    loader.dismiss();
   }
 }

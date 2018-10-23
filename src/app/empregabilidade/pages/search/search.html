@@ -9,7 +9,7 @@
 
 <ion-content padding>
   <ion-item>
-    <ion-input placeholder="Digite uma palavra chave" name="BuscaEmprego" ng-model="query" clearInput></ion-input>
+    <ion-input placeholder="Digite uma palavra chave" name="buscaEmprego" [(ngModel)]="buscaEmprego" clearInput></ion-input>
   </ion-item>
-  <button ion-button block icon-end (click)="search(query)">Buscar<ion-icon name="search"></ion-icon></button>
+  <button ion-button block icon-end (click)="search()">Buscar<ion-icon name="search"></ion-icon></button>
 </ion-content>
