@@ -11,13 +11,7 @@ export class SearchPage {
   items: Array<{ value: string; description: string }>;
   filter: string;
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, public searchProvider: SearchProvider) {
-    this.items = [
-      { value: 'nome_concurso', description: 'nome do concurso' },
-      { value: 'profissao', description: 'profissão' },
-      { value: 'data', description: 'data do concurso' }
-    ];
-  }
+  constructor(public navCtrl: NavController, public navParams: NavParams, public searchProvider: SearchProvider) {}
   proximo(concursos) {
     this.navCtrl.push('ListResultPage', concursos);
   }
