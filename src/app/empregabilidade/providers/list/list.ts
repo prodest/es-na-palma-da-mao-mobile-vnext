@@ -18,8 +18,8 @@ export class ListProvider {
   async atualizaConcurso(concurso) {
     try {
       return await this.http.get(this.API_URL + '/' + concurso.id).toPromise();
-    } catch{
-      throw new Error("offline");
+    } catch (error) {
+      throw error;
     }
   }
 }

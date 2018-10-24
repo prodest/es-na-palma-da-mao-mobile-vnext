@@ -5,32 +5,32 @@ import { Storage } from '@ionic/storage';
 export class SearchProvider {
   API_URL = 'https://meufakedata.herokuapp.com/busca';
   constructor(public http: HttpClient, private storage: Storage) {}
-  async salvaConcursos(concursos) {
-    this.storage.set('listaDeConcursos', concursos);
-    console.log('salvo', concursos);
+
+  async salvaFavoritos(novoConcurso) {
+    let concursosfavoritos = await this.carregaFavoritos();
+    let novoNoArray: Array<Concurso> = [];
+    novoNoArray.push(novoConcurso);
+    if (concursosfavoritos.some(element => element.id == novoConcurso.id)) {
+      concursosfavoritos = concursosfavoritos.filter(element => element.id != novoConcurso.id);
+    } else {
+      concursosfavoritos.push(novoConcurso);
+    }
+    this.storage.set('listaDeConcursos', concursosfavoritos);
+    console.log('Lista de favoritos', concursosfavoritos);
+    return concursosfavoritos;
   }
-  async emMemoria() {
-    let concursos = this.storage.get('listaDeConcursos');
+
+  async carregaFavoritos(): Promise<Array<Concurso>> {
+    let concursos: Array<Concurso> = (await this.storage.get('listaDeConcursos')) as Array<Concurso>;
     console.log('recuperando concursos', concursos);
     return concursos;
   }
-  async search(parameter) {
-    /*
-    return new Promise(resolve => {
-      this.http.get(this.API_URL).subscribe(
-        data => {
-          resolve(data);
-        },
-        err => {
-          console.log('ERRO!', err);
-          resolve({ message: 'erro' });
-        }
-      );
-    });*/
+
+  async search(parameter): Promise<Array<Concurso>> {
     try {
-      return await this.http.get(this.API_URL).toPromise();
+      return (await this.http.get(this.API_URL).toPromise()) as Array<Concurso>;
     } catch (error) {
-      throw new Error(error.message);
+      throw error;
     }
   }
 }
