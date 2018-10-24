@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams, ToastController, LoadingController } from 'ionic-angular';
+import { IonicPage, NavController, LoadingController, NavParams } from 'ionic-angular';
 import { ListProvider } from '../../providers/list/list';
 
 @IonicPage()
@@ -16,7 +16,6 @@ export class ListResultPage {
     public navCtrl: NavController,
     public navParams: NavParams,
     public listProvider: ListProvider,
-    public toastCtrl: ToastController,
     public loadingCtrl: LoadingController
   ) {
     this.inicializa();
@@ -27,18 +26,19 @@ export class ListResultPage {
       content: 'Aguarde, atualizando concurso',
       duration: 2000
     });
+    let concursoAtualizado
     loader.present();
     try {
-      let concursoAtualizado = await this.listProvider.atualizaConcurso(concurso);
-
-      if (concursoAtualizado.status != 0) {
-        concurso = concursoAtualizado;
-      }
-    } catch (error) {
-      console.log('Erro ao atualizar concurso', error);
+      concursoAtualizado = await this.listProvider.atualizaConcurso(concurso);
+      loader.dismiss();
+      console.log("Concurso atualizado", concurso)
+      this.navCtrl.push('DetailsPage', concursoAtualizado);
+    } catch {
+      loader.dismiss();
+      console.log("Concurso desatualizado", concurso)
+      this.navCtrl.push('DetailsPage', concurso);
     }
-    loader.dismiss();
-    this.navCtrl.push('DetailsPage', concurso);
+
   }
   async inicializa() {
     let loader = this.loadingCtrl.create({
@@ -47,11 +47,11 @@ export class ListResultPage {
     loader.present();
     try {
       let listaConcursos: Array<Concurso> = await this.navParams.data;
-      this.concursosAbertos = this.listProvider.listarPorStatus(listaConcursos, 'aberto');
-      this.concursosFechado = this.listProvider.listarPorStatus(listaConcursos, 'fechado');
-      this.concursosAndamento = this.listProvider.listarPorStatus(listaConcursos, 'andamento');
-    } catch (error) {
-      console.log('Erro ao organizar ', error);
+      this.concursosAbertos =  this.listProvider.listarPorStatus(listaConcursos, 'aberto');
+      this.concursosFechado =  this.listProvider.listarPorStatus(listaConcursos, 'fechado');
+      this.concursosAndamento =  this.listProvider.listarPorStatus(listaConcursos, 'andamento');
+    } catch {
+      console.log("Erro ao organizar itens")
     }
     loader.dismiss();
   }

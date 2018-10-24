@@ -14,6 +14,7 @@ export class DetailsPage {
 
   async inicializa() {
     this.concurso = await this.navParams.data;
+    console.log("detalhe page",this.concurso)
   }
 
   openLink(link) {

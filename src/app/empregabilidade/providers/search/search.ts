@@ -30,7 +30,7 @@ export class SearchProvider {
     try {
       return await this.http.get(this.API_URL).toPromise();
     } catch (error) {
-      return error;
+      throw new Error(error.message);
     }
   }
 }
