@@ -24,10 +24,13 @@ export class SearchPage {
   }
   async carregaFavoritos(concursos) {
     let favoritos = await this.searchProvider.carregaFavoritos();
-    let difconcursos = concursos.filter(element => favoritos.indexOf(element));
-    console.log('será que fez a dif?', difconcursos);
-    concursos.concat(difconcursos);
-    console.log('será que fez a concat?', concursos);
+    let difconcursos = [];
+    await favoritos.map(e => {
+      if (!concursos.some(element => element.id == e.id)) {
+        difconcursos.push(e);
+      }
+    });
+    await difconcursos.map(e => concursos.push(e));
     return concursos;
   }
   async search() {
@@ -40,11 +43,9 @@ export class SearchPage {
 
       try {
         let concursoOnline = await this.searchProvider.search(this.buscaEmprego);
-        concursoOnline.forEach(element => {
-          concursos.push(element);
-        });
-      } catch {
-        console.error();
+        concursoOnline.map(c => concursos.push(c));
+      } catch (error) {
+        console.error(error);
       } finally {
         concursos = await this.carregaFavoritos(concursos);
         loader.dismiss();

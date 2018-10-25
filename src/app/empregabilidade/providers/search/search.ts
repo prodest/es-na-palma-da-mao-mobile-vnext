@@ -16,19 +16,17 @@ export class SearchProvider {
       concursosfavoritos.push(novoConcurso);
     }
     this.storage.set('listaDeConcursos', concursosfavoritos);
-    console.log('Lista de favoritos', concursosfavoritos);
     return concursosfavoritos;
   }
 
   async carregaFavoritos(): Promise<Array<Concurso>> {
     let concursos: Array<Concurso> = (await this.storage.get('listaDeConcursos')) as Array<Concurso>;
-    console.log('recuperando concursos', concursos);
     return concursos;
   }
 
   async search(parameter): Promise<Array<Concurso>> {
     try {
-      return (await this.http.get(this.API_URL).toPromise()) as Array<Concurso>;
+      return (await this.http.get(this.API_URL + '?nome=' + parameter).toPromise()) as Array<Concurso>;
     } catch (error) {
       throw error;
     }

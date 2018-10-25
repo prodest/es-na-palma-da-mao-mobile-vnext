@@ -33,7 +33,6 @@ export class ListResultPage {
     try {
       concursoAtualizado = await this.listProvider.atualizaConcurso(concurso);
       loader.dismiss();
-      console.log('Concurso atualizado', concurso);
       this.navCtrl.push('DetailsPage', concursoAtualizado);
     } catch (e) {
       loader.dismiss();
