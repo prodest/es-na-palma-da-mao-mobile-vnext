@@ -42,7 +42,11 @@ registerLocaleData(ptBr);
     BrowserModule,
     CoreModule,
     MenuModule,
-    IonicStorageModule.forRoot({ name: 'espm', driverOrder: ['localstorage'] }),
+    IonicStorageModule.forRoot(
+      { 
+       name: 'espm', 
+       driverOrder: ['localstorage'] 
+      }),
     IonicModule.forRoot(ESPMComponent, ionicConfig),
     ImageLoaderModule.forRoot({
       fallbackUrl: 'assets/imgs/no-img.png',
@@ -79,10 +83,25 @@ registerLocaleData(ptBr);
     ...SepProviders,
     ...TranscolOnlineProviders,
     ...TransparencyProviders,
-    { provide: ErrorHandler, useClass: IonicErrorHandler },
-    { provide: LOCALE_ID, useFactory: localeIdFactory, deps: [LocaleService] },
-    { provide: APP_INITIALIZER, multi: true, useFactory: localeInitializer, deps: [LOCALE_ID] },
-    { provide: ErrorHandler, useClass: IonicErrorHandler }
+    { 
+      provide: ErrorHandler, 
+      useClass: IonicErrorHandler 
+    },
+    { 
+      provide: LOCALE_ID, 
+      useFactory: localeIdFactory, 
+      deps: [LocaleService] 
+    },
+    { 
+      provide: APP_INITIALIZER, 
+      multi: true, 
+      useFactory: localeInitializer, 
+      deps: [LOCALE_ID] 
+    },
+    { 
+      provide: ErrorHandler, 
+      useClass: IonicErrorHandler 
+    }
   ]
 })
 export class AppModule {}
