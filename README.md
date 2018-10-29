@@ -2,7 +2,7 @@
 
 > O **[ES NA PALMA DA MÃO](http://www.slideshare.net/rcolnago2/es-na-palma-da-mo-governo-mobile)** é um programa do **Governo do Estado do Espírito Santo** que reúne **iniciativas e serviços do Governo em plataforma móvel (aplicativo) e web, com unidade de experiência do cidadão**. Por meio do **ES NA PALMA DA MÃO**, diversos serviços governamentais podem ser acessados através da web e dispositivos móveis (sistemas operacionais iOS e Android) utilizando uma interface comum.
 
-===============================================================================================================================
+==================================================================================================================================================================
 
 **Tabela de Conteúdo**  
 
@@ -84,7 +84,7 @@ obs: o ionic e o cordova são instalados no escopo global (-g).
 2. clone o seu fork: `git clone <url-github-fork>`
 3. acesse o diretorio criado: `cd es-na-palma-da-mao-mobile-vnext`
 4. instale as dependências da aplicação: `npm install`
-5. renomeio o arquivo '.env.example' para '.env': `cp .env.example .env`
+5. renomeie o arquivo '.env.example' para '.env': `cp .env.example .env`
 
 ## Executando
 O **ES na Palma da Mão** usa `ionic-app-scripts` para compilar a aplicação e executar o ambiente de desenvolvimento.
