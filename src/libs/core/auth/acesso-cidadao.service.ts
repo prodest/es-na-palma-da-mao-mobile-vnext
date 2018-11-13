@@ -2,7 +2,7 @@ import { Inject, Injectable } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
 import { of } from 'rxjs/observable/of';
 import { _throw } from 'rxjs/observable/throw';
-import { flatMap, map, tap } from 'rxjs/operators';
+import { flatMap, map, tap, finalize } from 'rxjs/operators';
 
 import { Environment, EnvVariables } from './../environment';
 import { AcessoCidadaoApiService } from './acesso-cidadao-api.service';
@@ -16,6 +16,8 @@ import { AuthQuery, AuthStore } from './state';
  */
 @Injectable()
 export class AcessoCidadaoService {
+  private semaphore: boolean = true;
+
   /**
    * Creates an instance of AcessoCidadaoService.
    *
@@ -99,8 +101,15 @@ export class AcessoCidadaoService {
    *
    *
    */
-  private refreshAccessToken = (): Observable<Token> =>
-    this.login(this.createRefreshTokenIdentity()).pipe(map(() => this.authQuery.state.accessToken));
+  private refreshAccessToken = (): Observable<Token> => {
+    if (this.semaphore) {
+      this.semaphore = false;
+      return this.login(this.createRefreshTokenIdentity()).pipe(
+        map(() => this.authQuery.state.accessToken),
+        finalize(() => (this.semaphore = true))
+      );
+    }
+  };
 
   /**
    *
