@@ -2,6 +2,20 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+<a name="4.4.12"></a>
+## [4.4.12](https://github.com/prodest/es-na-palma-da-mao-mobile-vnext/compare/v4.4.11...v4.4.12) (2018-11-13)
+
+
+### Bug Fixes
+
+* **app:** imagem brasão dashboard ([c592ccb](https://github.com/prodest/es-na-palma-da-mao-mobile-vnext/commit/c592ccb))
+* **app.module.ts:** fit in code ([a6d23c5](https://github.com/prodest/es-na-palma-da-mao-mobile-vnext/commit/a6d23c5))
+* **CONTRIBUTING:** update CONTRIBUTING.md ([567d7e9](https://github.com/prodest/es-na-palma-da-mao-mobile-vnext/commit/567d7e9))
+* **CONTRIBUTING.md:** add explanatory text for contribution ([60f69e7](https://github.com/prodest/es-na-palma-da-mao-mobile-vnext/commit/60f69e7))
+* **token:** invalid_grant ([1712d48](https://github.com/prodest/es-na-palma-da-mao-mobile-vnext/commit/1712d48))
+
+
+
 <a name="4.4.11"></a>
 ## [4.4.11](https://github.com/prodest/es-na-palma-da-mao-mobile-vnext/compare/v4.4.10...v4.4.11) (2018-09-24)
 
