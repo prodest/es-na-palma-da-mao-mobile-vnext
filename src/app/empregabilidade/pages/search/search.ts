@@ -4,7 +4,7 @@ import { SearchProvider } from '../../providers/search/search';
 
 @IonicPage()
 @Component({
-  selector: 'page-search',
+  selector: 'espm-page-search',
   templateUrl: 'search.html'
 })
 export class SearchPage {
@@ -26,7 +26,7 @@ export class SearchPage {
     let favoritos = await this.searchProvider.carregaFavoritos();
     let difconcursos = [];
     await favoritos.map(e => {
-      if (!concursos.some(element => element.id == e.id)) {
+      if (!concursos.some(element => element.id === e.id)) {
         difconcursos.push(e);
       }
     });
@@ -47,9 +47,18 @@ export class SearchPage {
       } catch (error) {
         console.error(error);
       } finally {
-        concursos = await this.carregaFavoritos(concursos);
+        // concursos = await this.carregaFavoritos(concursos);
         loader.dismiss();
-        this.proximo(concursos);
+        if (concursos.length > 0) {
+          this.proximo(concursos);
+        } else {
+          let toast = this.toastCtrl.create({
+            message: 'Nenhum concurso encontrado',
+            position: 'bottom',
+            duration: 2000
+          });
+          toast.present(toast);
+        }
       }
     } else {
       let toast = this.toastCtrl.create({

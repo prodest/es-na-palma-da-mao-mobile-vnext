@@ -5,7 +5,7 @@ import { SearchProvider } from '../../providers/search/search';
 
 @IonicPage()
 @Component({
-  selector: 'page-list-result',
+  selector: 'espm-page-list-result',
   templateUrl: 'list-result.html'
 })
 export class ListResultPage {

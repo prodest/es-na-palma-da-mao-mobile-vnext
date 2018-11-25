@@ -1,22 +1,13 @@
 <ion-header>
-  <ion-navbar>
-    <ion-title>Resultado</ion-title>
-  </ion-navbar>
+  <ion-navbar> <ion-title>Resultado</ion-title> </ion-navbar>
   <ion-toolbar>
     <ion-segment [(ngModel)]="tab" color="primary-inverse">
-      <ion-segment-button value="open">
-        Aberto
-      </ion-segment-button>
-      <ion-segment-button value="ongoing">
-        Andamento
-      </ion-segment-button>
-      <ion-segment-button value="closed">
-        Fechado
-      </ion-segment-button>
+      <ion-segment-button value="open"> Aberto </ion-segment-button>
+      <ion-segment-button value="ongoing"> Andamento </ion-segment-button>
+      <ion-segment-button value="closed"> Fechado </ion-segment-button>
     </ion-segment>
   </ion-toolbar>
 </ion-header>
-
 
 <ion-content padding>
   <div [ngSwitch]="tab">
@@ -28,34 +19,33 @@
             <div *ngFor="let job of item.cargos">{{ job }}</div>
           </ul>
           <button ion-button clear item-end color="primary" (click)="detail(item)">ver mais</button>
-          <button ion-button clear item-end large (click)="favoritos(item)">
-            <ion-icon name="heart" color="danger"></ion-icon>
-          </button>
+          <!--
+            <button ion-button clear item-end large (click)="favoritos(item)">
+              <ion-icon name="heart" color="danger"></ion-icon>
+            </button>
+          -->
         </ion-item>
       </ion-list>
     </div>
-
-
   </div>
   <div [ngSwitch]="tab">
     <div *ngSwitchCase="'ongoing'">
       <ion-list>
         <ion-item *ngFor="let item of concursosAndamento">
-
           <h2>{{ item.nome }}</h2>
 
           <ul *ngIf="item.cargos">
             <div *ngFor="let job of item.cargos">{{ job }}</div>
           </ul>
           <button ion-button clear item-end color="secondary" (click)="detail(item)">ver mais</button>
-          <button ion-button clear item-end large (click)="favoritos(item)">
-            <ion-icon name="heart" color="danger"></ion-icon>
-          </button>
+          <!--
+            <button ion-button clear item-end large (click)="favoritos(item)">
+              <ion-icon name="heart" color="danger"></ion-icon>
+            </button>
+          -->
         </ion-item>
-
       </ion-list>
     </div>
-
   </div>
   <div [ngSwitch]="tab">
     <div *ngSwitchCase="'closed'">
@@ -66,12 +56,13 @@
             <div *ngFor="let job of item.cargos">{{ job }}</div>
           </ul>
           <button ion-button clear item-end color="danger" (click)="detail(item)">ver mais</button>
-          <button ion-button clear item-end large (click)="favoritos(item)">
-            <ion-icon name="heart" color="danger"></ion-icon>
-          </button>
+          <!--
+            <button ion-button clear item-end large (click)="favoritos(item)">
+              <ion-icon name="heart" color="danger"></ion-icon>
+            </button>
+          -->
         </ion-item>
       </ion-list>
     </div>
-
   </div>
 </ion-content>
