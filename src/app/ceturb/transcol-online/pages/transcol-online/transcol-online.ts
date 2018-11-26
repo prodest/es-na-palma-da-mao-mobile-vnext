@@ -733,4 +733,12 @@ export class TranscolOnlinePage implements AfterViewInit, OnDestroy {
     });
     return marker;
   };
+
+  /**
+   *
+   *
+   */
+  showRealTime = () => {
+    this.modalCtrl.create('TranscolOnlineRealTimePage').present();
+  }
 }
