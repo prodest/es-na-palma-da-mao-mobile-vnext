@@ -1,3 +1,16 @@
 page-search {
-
+  .concursos_id {
+    font-weight: 700;
+    align-self: flex-start;
+    padding-top: 8px;
+  }
+  .concursos_name {
+    font-weight: 500;
+    font-size: 1.6rem;
+    text-align: justify;
+  }
+  .concursos_descricao {
+    font-weight: 300;
+    text-align: justify;
+  }
 }
