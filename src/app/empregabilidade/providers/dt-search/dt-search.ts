@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Storage } from '@ionic/storage';
+import { Concurso } from '../../dto/Concurso';
 @Injectable()
 export class SearchProvider {
   API_URL = 'https://api.es.gov.br/dev/selecaodt/concursos/';
@@ -8,7 +9,7 @@ export class SearchProvider {
 
   async salvaFavoritos(novoConcurso) {
     let concursosfavoritos = await this.carregaFavoritos();
-    let novoNoArray: Array<Concurso> = [];
+    let novoNoArray = [];
     novoNoArray.push(novoConcurso);
     if (concursosfavoritos.some(element => element.id === novoConcurso.id)) {
       concursosfavoritos = concursosfavoritos.filter(element => element.id !== novoConcurso.id);

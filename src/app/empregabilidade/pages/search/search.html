@@ -23,7 +23,7 @@
     </ion-list-header>
     <ion-list [virtualScroll]="filteredConcursos" [virtualTrackBy]="trackByStatus" approxItemHeight="70px">
       <button ion-item *virtualItem="let concurso" (click)="showDetails($event)">
-        <h3 text-wrap class="concursos_name">{{ concurso.nome }}</h3>
+        <h3 text-wrap class="concursos_name">{{ concurso.orgao }}</h3>
         <p text-wrap class="concursos_descricao">{{ concurso.descricao }}</p>
         <concurso-status [status]="concurso.status"></concurso-status>
       </button>

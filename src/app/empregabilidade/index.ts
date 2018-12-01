@@ -1,6 +1,5 @@
-import { SearchPageModule } from "./pages/search/search.module";
-import { ListResultPageModule } from "./pages/list-result/list-result.module";
+import { SearchPageModule } from './pages/search/search.module';
 
-export { SearchPageModule, ListResultPageModule };
+export { SearchPageModule };
 
-export const EmpregabilidadeModules = [SearchPageModule, ListResultPageModule];
+export const EmpregabilidadeModules = [SearchPageModule];

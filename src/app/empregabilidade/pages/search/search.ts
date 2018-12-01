@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams, ToastController, LoadingController } from 'ionic-angular';
-import { SearchProvider } from '../../providers/search/search';
+import { SearchProvider } from '../../providers/dt-search/dt-search';
 import deburr from 'lodash-es/deburr';
 import { Concurso } from '../../dto/Concurso';
 @IonicPage()
@@ -40,7 +40,7 @@ export class SearchPage {
   search = e => {
     const search = this.normalize(e.target.value);
     this.filteredConcursos = this.allConcursos.filter(concurso => {
-      return this.normalize(concurso.nome).includes(search) || this.normalize(concurso.status).includes(search);
+      return this.normalize(concurso.orgao).includes(search) || this.normalize(concurso.descricao).includes(search);
     });
   };
 
