@@ -1,5 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { Concurso } from '../../dto/Concurso';
 
 /*
   Generated class for the DtDetailsProvider provider.
@@ -9,9 +10,10 @@ import { Injectable } from '@angular/core';
 */
 @Injectable()
 export class DtDetailsProvider {
-
-  constructor(public http: HttpClient) {
-    console.log('Hello DtDetailsProvider Provider');
+  API_URL = 'https://api.es.gov.br/dev/selecaodt/concursos/';
+  constructor(public http: HttpClient) {}
+  async concursoDetalhe(id): Promise<Concurso> {
+    let concurso: Concurso = (await this.http.get(this.API_URL + id).toPromise()) as Concurso;
+    return concurso;
   }
-
 }

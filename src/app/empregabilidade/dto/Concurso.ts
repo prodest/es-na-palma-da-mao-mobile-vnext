@@ -3,4 +3,6 @@ export class Concurso {
   status: string;
   orgao: string;
   descricao: string;
+  datas: Date[];
+  anexos: Object[];
 }

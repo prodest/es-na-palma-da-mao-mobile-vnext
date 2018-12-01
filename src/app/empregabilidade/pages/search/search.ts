@@ -3,6 +3,7 @@ import { IonicPage, NavController, NavParams, ToastController, LoadingController
 import { SearchProvider } from '../../providers/dt-search/dt-search';
 import deburr from 'lodash-es/deburr';
 import { Concurso } from '../../dto/Concurso';
+import { DtDetailsProvider } from '../../providers/dt-details/dt-details';
 @IonicPage()
 @Component({
   selector: 'espm-page-search',
@@ -17,7 +18,8 @@ export class SearchPage {
     public navCtrl: NavController,
     public navParams: NavParams,
     public searchProvider: SearchProvider,
-    public loadingCtrl: LoadingController
+    public loadingCtrl: LoadingController,
+    public provideDetail: DtDetailsProvider
   ) {
     this.carrega();
   }
@@ -48,9 +50,15 @@ export class SearchPage {
     this.filteredConcursos = this.allConcursos;
   };
 
-  showDetails = () => {
-    // this.navCtrl.push('ConcursoDetailsPage');
-  };
+  async showDetails(id) {
+    let loader = this.loadingCtrl.create({
+      content: 'Aguarde, buscando detahes'
+    });
+    loader.present();
+    let concurso: Concurso = await this.provideDetail.concursoDetalhe(id);
+    loader.dismiss();
+    this.navCtrl.push('DetailsPage', concurso);
+  }
 
   private normalize = (term: string) => (term ? deburr(term.toLowerCase()) : '');
 }

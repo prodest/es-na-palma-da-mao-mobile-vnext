@@ -1,20 +1,19 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
-
+import { Concurso } from '../../dto/Concurso';
 @IonicPage()
 @Component({
-  selector: 'page-details',
+  selector: 'espm-page-details',
   templateUrl: 'details.html'
 })
 export class DetailsPage {
-  concurso: any;
+  concurso: Concurso;
   constructor(public navCtrl: NavController, public navParams: NavParams) {
     this.inicializa();
   }
 
   async inicializa() {
     this.concurso = await this.navParams.data;
-    console.log("detalhe page",this.concurso)
   }
 
   openLink(link) {
