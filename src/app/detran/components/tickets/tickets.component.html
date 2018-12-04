@@ -1,27 +1,25 @@
 <ion-list *ngIf="tickets && tickets.length"
           class="tickets">
     <ion-list-header>
-        Histórico de multas ({{tickets.length }} multas)
+        {{tickets.length}} débitos | {{ totalAmount() | currency:"BRL":true:"1.2" }}<button ion-button item-right (click)="generateBillet()">Gerar Guia</button>
     </ion-list-header>
-    <ion-item *ngFor="let ticket of tickets">
-        <div item-start
-             class="ticket__points"
-             [ngStyle]="{ 'background-color': ticket.classification | ticketLevelColor}">{{ticket.points}} </div>
-        <ion-note class="ticket__date">{{ticket.date | dateFormat}}</ion-note>
-        <small *ngIf="ticket.plate"
-               color-secondary-fg>Placa: {{ticket.plate}}</small>
+    <ion-item *ngFor="let ticket of tickets">               
+        <ion-note class="ticket__date">{{ticket.date | dateFormat}}</ion-note> 
         <p text-wrap
-           class="ticket__address">
+           class="ticket__address" *ngIf="ticket.place">
             <ion-icon name="pin"></ion-icon>{{ticket.place | capitalize}}, {{ticket.district | capitalize}}
         </p>
+        <p text-wrap class="ticket__address">
+            <ion-icon name="logo-usd"></ion-icon>{{ticket.amount | currency:"BRL":true:"1.2" }}
+        </p>        
         <small text-wrap
                margin-top
-               class="ticket__description">{{ticket.description}}</small>
+               class="ticket__description">{{ticket.description}}</small>        
     </ion-item>
 </ion-list>
 <ion-list *ngIf="tickets && !tickets.length"
           class="tickets">
     <ion-list-header>
-        Nenhuma multa encontrada
+        Nenhum débito encontrado
     </ion-list-header>
 </ion-list>

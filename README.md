@@ -2,7 +2,7 @@
 
 > O **[ES NA PALMA DA MÃO](http://www.slideshare.net/rcolnago2/es-na-palma-da-mo-governo-mobile)** é um programa do **Governo do Estado do Espírito Santo** que reúne **iniciativas e serviços do Governo em plataforma móvel (aplicativo) e web, com unidade de experiência do cidadão**. Por meio do **ES NA PALMA DA MÃO**, diversos serviços governamentais podem ser acessados através da web e dispositivos móveis (sistemas operacionais iOS e Android) utilizando uma interface comum.
 
-===============================================================================================================================
+==================================================================================================================================================================
 
 **Tabela de Conteúdo**  
 
@@ -14,12 +14,13 @@
 	- [Webpack](#webpack)
  	- [Sass](#sass)
 - [Visão Geral](#visão-geral)
-   - [Ambiente sandbox de autenticação](#ambiente-sandbox-de-autenticação)
 	- [Build System](#build-system)
-- [Passo a passo](#passo-a-passo)
 	- [Dependências](#dependências)
 	- [Instalando](#instalando)
 	- [Executando](#executando)
+	- [Executando no dispovitivo móvel para teste](#Executando-no-dispovitivo-móvel-para-teste)
+- [Autenticação](#autenticação)
+    - [Ambiente sandbox de autenticação](#ambiente-sandbox-de-autenticação)
 
 # Principais Tecnologias Utilizadas
 Essas são as principais ferramentas, *frameworks* e *libraries* que dão suporte ao projeto:
@@ -55,14 +56,8 @@ mais dinâmica e produtiva.
 
 # Visão Geral
 
-## Ambiente sandbox de autenticação
-Para acessar a versão completa do ES na palma da mão, é necessário uma conta no *Acesso Cidadão*.
-
-O ES na palma da mão executado a partir do código fonte, bem como o [demo online](http://prodest.github.io/es-na-palma-da-mao-mobile/latest), usam uma versão [*sandbox* do acesso cidadão](https://developers.es.gov.br/acessocidadao), exclusiva para *developers*. 
-As contas de usuário criadas no *sandbox* não são válidas no [acesso cidadão real](https://acessocidadao.es.gov.br/), usado pelos cidadãos para acessar os serviços oferecidos pelo Governo do ES.
-
 ## Build System
-O *build system* do **ES na Palma da Mão** usa yarn scripts, [ionic-app-scripts](https://github.com/ionic-team/ionic-app-scripts) e [webpack](https://webpack.js.org/).
+O *build system* do **ES na Palma da Mão** usa o npm, [ionic-app-scripts](https://github.com/ionic-team/ionic-app-scripts) e [webpack](https://webpack.js.org/).
 
 `ionic-app-scripts` usa `webpack` para tratar as seguintes questões:
 * Transpila código typescript para ES2015
@@ -73,22 +68,45 @@ O *build system* do **ES na Palma da Mão** usa yarn scripts, [ionic-app-scripts
 * Gera o *bundle* da aplicação
 * Carrega todos os módulos
 
-`yarn scripts`:
-* Chamadas às todas a tarefas úteis em tempo de desenvolvimento. Encapsula chamadas ao ionic-app-scripts, além de outras. Leia mais [abaixo](#tasks).
+`npm`:
+* Chamadas às todas a tarefas úteis em tempo de desenvolvimento. Encapsula chamadas ao ionic-app-scripts, além de outras.
 
-# Começando
 ## Dependências
 Ferramentas necessárias para rodar a aplicação:
-* `node` and `yarn`
+* `node + npm` versão LTS: [https://nodejs.org/en/download/](https://nodejs.org/en/download/)
+* ionic: `npm i -g ionic`
+* cordova: `npm i -g cordova`
+
+obs: o ionic e o cordova são instalados no escopo global (-g).
 
 ## Instalando
-1. `fork` este repositório
-2. `clone` o seu fork
-3. execute o comando `yarn` para instalar as dependências
+1. `fork` este repositório pelo GitHub
+2. clone o seu fork: `git clone <url-github-fork>`
+3. acesse o diretorio criado: `cd es-na-palma-da-mao-mobile-vnext`
+4. instale as dependências da aplicação: `npm install`
+5. renomeie o arquivo '.env.example' para '.env': `cp .env.example .env`
 
 ## Executando
 O **ES na Palma da Mão** usa `ionic-app-scripts` para compilar a aplicação e executar o ambiente de desenvolvimento.
-Depois de instaladas todas as dependências, você deve *rodar* a aplicação. O comando `yarn ionic:serve` irá usar
-o `webpack` para compilar e gerar um *bundle* a aplicação, *subir* um servidor de desenvolvimento e *escutar* por alterações
-em todos os arquivos. A porta default usada é a 8100.
- 
+Depois de instaladas todas as dependências, você deve *rodar* a aplicação. O comando `ionic serve`. Isso irá
+iniciar o build utilizando o ionic, vai gerar um *bundle* da aplicação, *subir* um servidor de desenvolvimento e *escutar* por alterações em todos os arquivos. 
+
+Por padrão a aplicação será servida em http://localhost:3000.
+
+## Executando no dispovitivo móvel para teste
+
+Com o celular plugado no PC e reconhecido pelo sistema.
+
+1. `npm run build:android`
+2. `cordova platform add android@7.1.1`
+3. `cordova prepare android -f`
+4. `cordova run android`
+
+# Autenticação
+
+## Ambiente sandbox de autenticação
+Para acessar a versão completa do ES na palma da mão, é necessário uma conta no *Acesso Cidadão*. Mas mesmo sem uma conta
+é possível acessar a maioria dos serviços. Para teste locais esse passo não precisa ser executado.
+
+O ES na palma da mão executado a partir do código fonte usa uma versão [*sandbox* do acesso cidadão](https://developers.es.gov.br/acessocidadao), exclusiva para *developers*. 
+As contas de usuário criadas no *sandbox* não são válidas no [acesso cidadão real](https://acessocidadao.es.gov.br/), usado pelos cidadãos para acessar os serviços oferecidos pelo Governo do ES.

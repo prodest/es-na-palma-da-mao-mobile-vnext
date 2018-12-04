@@ -1,8 +1,8 @@
 {
   "name": "espm",
-  "app_id": "2cc6d2ac",
-  "type": "ionic-angular",
   "integrations": {
     "cordova": {}
-  }
+  },
+  "type": "ionic-angular",
+  "pro_id": "2cc6d2ac"
 }

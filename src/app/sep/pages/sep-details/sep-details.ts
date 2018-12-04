@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
-import { AuthQuery } from '@espm/core';
-import { AlertController, App, IonicPage, NavParams } from 'ionic-angular';
+import { AuthNeededService, AuthQuery } from '@espm/core';
+import { IonicPage, NavParams } from 'ionic-angular';
 
 import { Protocol, ProtocolUpdate } from '../../model';
 import { SepService } from '../../providers';
@@ -22,10 +22,9 @@ export class SepDetailsPage {
    *
    */
   constructor(
-    public navParams: NavParams,
-    private appCtrl: App,
-    private alertCtrl: AlertController,
+    private navParams: NavParams,
     private authQuery: AuthQuery,
+    private authNeeded: AuthNeededService,
     private sepService: SepService
   ) {
     this.lastUpdate = null;
@@ -48,7 +47,7 @@ export class SepDetailsPage {
    *
    */
   isFavorite(protocol: Protocol): boolean {
-    return this.sepService.isFavorite(protocol);
+    return protocol ? this.sepService.isFavorite(protocol.number) : false;
   }
 
   /**
@@ -64,41 +63,9 @@ export class SepDetailsPage {
    */
   toggleFavorite(protocol: Protocol): void {
     if (!this.authQuery.isLoggedIn) {
-      this.showAuthNeededModal();
+      this.authNeeded.showAuthNeededModal();
     } else {
-      if (this.isFavorite(protocol)) {
-        this.sepService.removeFavorite(protocol).subscribe();
-      } else {
-        this.sepService.addFavorite(protocol).subscribe();
-      }
+      this.isFavorite(protocol) ? this.sepService.removeFavorite(protocol) : this.sepService.addFavorite(protocol);
     }
   }
-
-  /**
-   *
-   *
-   */
-  private showAuthNeededModal = () => {
-    let alert = this.alertCtrl.create({
-      title: 'Login necessário',
-      message: 'Você deve estar autenticado no <strong>ES na palma da mão</strong> para acessar essa funcionalidade.',
-      buttons: [
-        {
-          text: 'Entendi',
-          role: 'cancel'
-        },
-        {
-          text: 'Autenticar',
-          handler: () => {
-            this.appCtrl
-              .getRootNav()
-              .push('LoginPage')
-              .then(() => alert.dismiss());
-            return false;
-          }
-        }
-      ]
-    });
-    return alert.present();
-  };
 }

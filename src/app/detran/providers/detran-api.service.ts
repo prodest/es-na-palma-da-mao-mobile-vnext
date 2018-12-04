@@ -1,4 +1,4 @@
-import { HttpClient, HttpParams } from '@angular/common/http';
+import { HttpClient } from '@angular/common/http';
 import { Inject, Injectable } from '@angular/core';
 import { Environment, EnvVariables } from '@espm/core';
 import { Observable } from 'rxjs/Observable';
@@ -43,12 +43,11 @@ export class DetranApiService {
   /**
    *
    */
-  getVehicleTickets = (vehicle: Vehicle): Observable<Ticket[]> => {
+  getVehicleTickets = (vehicle: Vehicle): Observable<Ticket[]> => {    
     return this.http
-      .get<Ticket[]>(`${this.env.api.detran}/vehicle/tickets`, {
-        params: new HttpParams().set('plate', vehicle.plate).set('renavam', vehicle.renavam.toString())
-      })
+      .get<Ticket[]>(`${this.env.api.detranInternetBanking}/veiculos/${vehicle.plate}/${vehicle.renavam.toString()}/debitos`)
       .pipe(share());
+
   };
 
   /**
@@ -61,11 +60,17 @@ export class DetranApiService {
   /**
    *
    */
-  getVehicleInfo = (vehicle: Vehicle): Observable<Partial<Vehicle>> => {
+  getVehicleInfo = (vehicle: Vehicle): Observable<Partial<Vehicle>> => {    
+
     return this.http
-      .get<Partial<Vehicle>>(`${this.env.api.detran}/vehicle`, {
-        params: new HttpParams().set('plate', vehicle.plate).set('renavam', vehicle.renavam.toString())
-      })
+      .get<Partial<Vehicle>>(`${this.env.api.detranInternetBanking}/veiculos/${vehicle.plate}/${vehicle.renavam.toString()}`)      
+      .pipe(share());
+  };
+
+  //generateGRU = (vehicle: Vehicle, tickets_ids: String[]): Observable<any> => {
+  generateGRU = (vehicle: Vehicle): Observable<any> => {
+    return this.http
+      .get(`${this.env.api.detranInternetBanking}/veiculos/${vehicle.plate}/${vehicle.renavam.toString()}/debitos/guia`)            
       .pipe(share());
   };
 }

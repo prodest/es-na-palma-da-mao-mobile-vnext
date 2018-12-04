@@ -1,7 +1,8 @@
 import { SepApiService } from './sep-api.service';
-import { SepStorage } from './sep-storage.service';
 import { SepService } from './sep.service';
+import { SepQuery } from './sep.query';
+import { FavoriteProtocolStore, FavoriteProtocolState } from './sep.store';
 
-export { SepApiService, SepStorage, SepService };
+export { SepApiService, SepService, SepQuery, FavoriteProtocolStore, FavoriteProtocolState };
 
-export const SepProviders = [SepApiService, SepStorage, SepService];
+export const SepProviders = [SepApiService, SepService, SepQuery, FavoriteProtocolStore];

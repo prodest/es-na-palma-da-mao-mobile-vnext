@@ -1,6 +1,6 @@
 <?xml version='1.0' encoding='utf-8'?>
-<widget android-versionCode="400000" id="br.gov.es.prodest.espm" version="4.0.0" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
-    <name>espm</name>
+<widget android-versionCode="400037" id="br.gov.es.prodest.espm" version="4.4.12" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
+    <name>ES na Palma da Mao</name>
     <description>O ES NA PALMA DA MÃO é um programa do Governo do Estado do Espírito Santo que reúne iniciativas e serviços do Governo em plataforma móvel (aplicativo) e web, com unidade de experiência do cidadão. Por meio do ES NA PALMA DA MÃO, diversos serviços governamentais podem ser acessados através da web e dispositivos móveis (sistemas operacionais iOS e Android) utilizando uma interface comum.</description>
     <author email="atendimento@prodest.es.gov.br" href="https://prodest.es.gov.br/">PRODEST</author>
     <content src="index.html" />
@@ -13,6 +13,10 @@
     <allow-navigation href="https://developers.es.gov.br/*" />
     <allow-navigation href="https://sistemas.es.gov.br/*" />
     <allow-navigation href="https://acessocidadao.es.gov.br/*" />
+    <allow-navigation href="http://mapas.geocontrol.com.br/*" />
+    <allow-navigation href="http://saude.es.gov.br/*" />
+    <allow-navigation href="http://sedu.es.gov.br/*" />
+    <allow-navigation href="http://seger.es.gov.br/*" />
     <allow-intent href="http://*/*" />
     <allow-intent href="https://*/*" />
     <allow-intent href="tel:*" />
@@ -33,6 +37,9 @@
     <platform name="android">
         <resource-file src="google-services.json" target="app/google-services.json" />
         <hook src="scripts/resolve-project-properties-dependencies.sh" type="before_build" />
+        <hook src="scripts/copy-plugins-from-node_modules.js" type="before_platform_add" />
+        <hook src="scripts/manually-set-plugin-params.sh" type="before_platform_add" />
+        <hook src="scripts/copy_resource_files.js" type="after_prepare" />
         <config-file parent="/resources" target="./res/values/strings.xml">
             <string name="fb_app_id">926428880739042</string>
             <string name="fb_app_name">Acesso Cidadão</string>
@@ -60,6 +67,24 @@
     <platform name="ios">
         <allow-intent href="itms:*" />
         <allow-intent href="itms-apps:*" />
+        <edit-config file="*-Info.plist" mode="merge" target="NSCameraUsageDescription">
+            <string>O app precisa de acesso a sua câmera para poder scanear códigos de barras.</string>
+        </edit-config>
+        <edit-config file="*-Info.plist" mode="merge" target="NSLocationAlwaysUsageDescription">
+            <string>O app precisa de acesso a sua localização para poder prover uma melhor experiências na consulta de transporte público.</string>
+        </edit-config>
+        <edit-config file="*-Info.plist" mode="merge" target="NSLocationWhenInUseUsageDescription">
+            <string>O app precisa de acesso a sua localização para poder prover uma melhor experiências na consulta de transporte público.</string>
+        </edit-config>
+        <config-file parent="aps-environment" target="*/Entitlements-Debug.plist">
+            <string>development</string>
+        </config-file>
+        <config-file parent="aps-environment" target="*/Entitlements-Release.plist">
+            <string>production</string>
+        </config-file>
+        <config-file parent="aps-environment" target="*/Resources/ES na Palma da Mao.entitlements">
+            <string>production</string>
+        </config-file>
         <icon height="57" src="resources/ios/icon/icon.png" width="57" />
         <icon height="114" src="resources/ios/icon/icon@2x.png" width="114" />
         <icon height="40" src="resources/ios/icon/icon-40.png" width="40" />
@@ -111,11 +136,16 @@
         <variable name="ANDROID_SUPPORT_V13_VERSION" value="27.+" />
         <variable name="FCM_VERSION" value="11.6.2" />
     </plugin>
-    <plugin name="cordova-plugin-googleplus" spec="^5.3.0">
-        <variable name="REVERSED_CLIENT_ID" value="com.googleusercontent.apps.716051840979-96738cri764kv9vhih0d41ug07sroibv" />
-        <variable name="WEB_APPLICATION_CLIENT_ID" value="716051840979-96738cri764kv9vhih0d41ug07sroibv.apps.googleusercontent.com" />
-    </plugin>
-    <engine name="ios" spec="^4.4.0" />
-    <engine name="android" spec="7.1.0" />
     <plugin name="cordova-plugin-appavailability" spec="^0.4.2" />
+    <plugin name="cordova-plugin-geolocation" spec="^4.0.1" />
+    <plugin name="cordova-plugin-local-notification" spec="^0.9.0-beta.2" />
+    <preference name="SplashScreenDelay" value="3000" />
+    <plugin name="cordova-plugin-googleplus" spec="^5.3.0">
+        <variable name="WEB_APPLICATION_CLIENT_ID" value="716051840979-96738cri764kv9vhih0d41ug07sroibv.apps.googleusercontent.com" />
+        <variable name="REVERSED_CLIENT_ID" value="com.googleusercontent.apps.716051840979-96738cri764kv9vhih0d41ug07sroibv" />
+    </plugin>
+    <plugin name="cordova-plugin-statusbar" spec="^2.4.2" />
+    <engine name="ios" spec="^4.5.5" />
+    <engine name="android" spec="^7.1.1" />
+    <plugin name="cordova-clipboard" spec="^1.2.1" />
 </widget>

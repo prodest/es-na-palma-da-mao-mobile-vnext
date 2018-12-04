@@ -1,7 +1,7 @@
 import { Component, OnDestroy } from '@angular/core';
 import { IonicPage, NavController } from 'ionic-angular';
 import deburr from 'lodash-es/deburr';
-import { takeUntil, tap } from 'rxjs/operators';
+import { takeUntil, tap, map } from 'rxjs/operators';
 import { Subject } from 'rxjs/Subject';
 
 import { BusLine } from './../../model';
@@ -33,9 +33,8 @@ export class BusLinesPage implements OnDestroy {
     this.ceturb.lines$
       .pipe(
         takeUntil(this.destroyed$),
-        tap(allLines => {
-          this.allLines = this.filteredLines = allLines || [];
-        })
+        map(allLines => allLines.sort(this.sortLines)),
+        tap(allLines => (this.allLines = this.filteredLines = allLines || []))
       )
       .subscribe();
 
@@ -80,11 +79,37 @@ export class BusLinesPage implements OnDestroy {
    *
    *
    */
-  showDetails = (busLine: BusLine) => this.navCtrl.push('BusLineInfoPage', { lineNumber: busLine.number });
+  showDetails = (busLine: BusLine, event) => {
+    if (event.target.tagName === 'ION-ICON') {
+      this.toggleFavorite(busLine);
+    } else {
+      this.navCtrl.push('BusLineInfoPage', { lineNumber: busLine.number });
+    }
+  };
+
+  /**
+   *
+   */
+  private toggleFavorite = (busLine: BusLine) => this.ceturb.toggleFavorite(busLine);
 
   /**
    *
    *
    */
   private normalize = (term: string) => (term ? deburr(term.toLowerCase()) : '');
+
+  /**
+   *
+   */
+  private sortLines = (a: BusLine, b: BusLine) => {
+    if (a.isFavorite && b.isFavorite) {
+      return a.number < b.number ? -1 : 1;
+    } else if (a.isFavorite) {
+      return -1;
+    } else if (b.isFavorite) {
+      return 1;
+    } else {
+      return a.number < b.number ? -1 : 1;
+    }
+  };
 }

@@ -38,21 +38,19 @@
             color-primary-inverse
             type="submit">ENTRAR</button>
   </form>
-  <espm-section-title showWhen="cordova">
-    Ou entre usando
-  </espm-section-title>
   <div class="social-login"
        showWhen="cordova">
     <button ion-button
+            large
             block
             icon-start
-            margin-right
             color-primary-light
             (click)="googleLogin()">
       <ion-icon name="logo-google"></ion-icon>
       Google
     </button>
     <button ion-button
+            large
             block
             icon-start
             color-primary-light
@@ -61,4 +59,7 @@
       Facebook
     </button>
   </div>
+  <espm-section-title (click)="createAccount()">
+    Ainda não tem conta? Cadastre-se
+  </espm-section-title>
 </ion-content>

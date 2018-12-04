@@ -5,30 +5,30 @@ import { NgModule, Optional, SkipSelf } from '@angular/core';
 import { Auth } from './auth';
 import { Common } from './common';
 import { EnvironmentProvider } from './environment';
-import { AndroidPermissions } from '@ionic-native/android-permissions';
 import { androidPermissionsProvider } from './permissions';
+import { PushProvider } from './push'
+import { NotificationProviders } from '@espm/core/notification';
 
 // import { Api } from './api'
 // import { Config } from './app.config'
 // import { GoogleMaps } from './google-maps'
-// import { Push } from './push'
 // import { AppState } from './state'
 // import { Storage } from './storage'
 
 @NgModule({
   imports: [CommonModule, HttpClientModule],
   providers: [
-    AndroidPermissions,
     EnvironmentProvider,
     //    Config,
     ...Auth,
     ...Common,
-    ...androidPermissionsProvider
+    ...androidPermissionsProvider,
+    ...PushProvider,
     // ...Storage,
     //  ...Api,
     //  ...AppState,
-    //  ...Push,
     //  ...GoogleMaps
+    ...NotificationProviders
   ]
 })
 export class CoreModule {

@@ -94,7 +94,6 @@ ion-icon[name='exit'] {
 .split-pane-side {
   .scroll-content {
     overflow: hidden;
-    margin-right: -17px;
     overflow-y: scroll;
   }
 }
@@ -143,6 +142,22 @@ ion-thumbnail {
       }
     }
   }
+}
+
+/*
+ * Show menu button even with hidebackbutton class
+ */
+ion-navbar[hidebackbutton] button[menutoggle] {
+  display: block !important;
+}
+
+/*
+ * Default search button on footer for iOS
+ */
+ion-footer button.button-ios.search-button {
+  margin-bottom: 0;
+  margin-top: 0;
+  height: 3.24em;
 }
 
 // @media only screen and (min-width: 768px) {

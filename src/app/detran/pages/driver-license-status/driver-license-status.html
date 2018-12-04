@@ -1,18 +1,29 @@
 <ion-header>
-  <ion-navbar>
+  <ion-navbar hideBackButton>
     <button ion-button
             menuToggle>
       <ion-icon name="menu"></ion-icon>
     </button>
     <ion-title>Situação da CNH</ion-title>
+    <ion-buttons end>
+      <button ion-button
+              icon-only
+              (click)="addCNH()">
+        <ion-icon name="open"></ion-icon>
+      </button>
+    </ion-buttons>
   </ion-navbar>
 </ion-header>
 <ion-content>
   <espm-driver-status *ngIf="status"
                       [status]="status"></espm-driver-status>
   <ion-item text-center
-            *ngIf="!status">
+            *ngIf="!loaded">
     <ion-spinner></ion-spinner>
   </ion-item>
-  <espm-tickets [tickets]="tickets"></espm-tickets>
+  <ion-item text-center
+            *ngIf="loaded && !status">
+    Verifique os dados informados
+  </ion-item>
+  <espm-tickets [vehicle]="vehicle" [tickets]="tickets"></espm-tickets>
 </ion-content>

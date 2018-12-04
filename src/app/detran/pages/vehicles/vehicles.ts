@@ -109,7 +109,7 @@ export class VehiclesPage implements OnDestroy {
       .subscribe(
         tickets => this.navCtrl.push('VehicleTicketsPage', { vehicle, plate: vehicle.plate, tickets: tickets }),
         error => console.log(error)
-      );
+      );      
   };
 
   /**

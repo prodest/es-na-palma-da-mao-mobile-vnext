@@ -1,5 +1,5 @@
 <ion-header>
-  <ion-navbar>
+  <ion-navbar hideBackButton>
     <button ion-button
             menuToggle>
       <ion-icon name="menu"></ion-icon>
@@ -38,7 +38,7 @@
               clear
               item-end
               color-secondary-fg
-              (click)="showTickets(vehicle)">MULTAS</button>
+              (click)="showTickets(vehicle)">DÉBITOS</button>
       <button class="vehicle__button"
               *ngIf="editing"
               ion-button
@@ -52,7 +52,7 @@
   <ion-item *ngIf="vehicles && !vehicles.length"
             text-center>
     <h2>Nenhum veículo cadastrado</h2>
-    <p text-wrap>Adicione veículos para consulta suas multas</p>
+    <p text-wrap>Adicione veículos para consulta seus débitos</p>
   </ion-item>
 
   <ion-fab right

@@ -1,23 +1,31 @@
-import { Component, Inject, NgZone } from '@angular/core';
+import { Component, Inject, NgZone, OnDestroy, ViewChild } from '@angular/core';
 import { akitaDevtools, enableAkitaProdMode } from '@datorama/akita';
-import { Environment, EnvVariables } from '@espm/core';
+import { AuthQuery, AuthService, Environment, EnvVariables, PushService } from '@espm/core';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import { StatusBar } from '@ionic-native/status-bar';
-import { Platform } from 'ionic-angular';
+import { Nav, Platform } from 'ionic-angular';
+import { finalize } from 'rxjs/operators';
+import { Subscription } from 'rxjs/Subscription';
 
 @Component({
   templateUrl: 'app.component.html'
 })
-export class ESPMComponent {
+export class ESPMComponent implements OnDestroy {
+  @ViewChild(Nav) nav: Nav;
+
   rootPage: any = 'DashboardPage';
+  private onResumeSub: Subscription;
 
   /**
    *
    */
   constructor(
+    private authQuery: AuthQuery,
     private statusBar: StatusBar,
     private splashScreen: SplashScreen,
-    platform: Platform,
+    private platform: Platform,
+    private push: PushService,
+    private auth: AuthService,
     ngZone: NgZone,
     @Inject(EnvVariables) environment: Environment
   ) {
@@ -26,13 +34,18 @@ export class ESPMComponent {
       .then(this.initialize)
       .catch(console.error);
 
-    if (!environment.production) {
+    if (process.env.DEV_TOOLS) {
       akitaDevtools(ngZone);
     }
 
     if (environment.production) {
       enableAkitaProdMode();
     }
+  }
+
+  ngOnDestroy() {
+    // always unsubscribe your subscriptions to prevent leaks
+    this.onResumeSub.unsubscribe();
   }
 
   /**
@@ -44,5 +57,29 @@ export class ESPMComponent {
     this.statusBar.overlaysWebView(false);
     this.statusBar.backgroundColorByHexString('#000');
     this.splashScreen.hide();
+
+    this.onResumeSub = this.platform.resume.subscribe(this.resumeApplication);
+    this.resumeApplication();
+  };
+
+  private resumeApplication = () => {
+    if (this.authQuery.isLoggedIn) {
+      this.auth
+        .refreshAccessTokenIfNeeded()
+        .pipe(finalize(this.push.init))
+        .subscribe(
+          () => {},
+          error => {
+            if (error.message === 'no-token') {
+              this.auth.logout().then(() => this.nav.setRoot(this.rootPage));
+            } else {
+              this.push.init();
+              this.nav.setRoot(this.rootPage);
+            }
+          }
+        );
+    } else {
+      this.push.init();
+    }
   };
 }

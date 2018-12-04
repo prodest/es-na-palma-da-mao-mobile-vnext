@@ -54,6 +54,8 @@ export class ErrorHandlerInterceptor implements HttpInterceptor {
               message = body;
             } else if (body && body.message) {
               message = body.message;
+            } else if (body && body.error_description) {
+              message = body.error_description;
             } else if (body && body.error) {
               message = body.error;
             }

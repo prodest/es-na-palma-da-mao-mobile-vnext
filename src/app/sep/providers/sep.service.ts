@@ -1,17 +1,25 @@
-import { Injectable } from '@angular/core';
+import { Injectable, OnDestroy } from '@angular/core';
+import { AuthQuery } from '@espm/core';
 import { Loading, LoadingController, ToastController } from 'ionic-angular';
 import { Observable } from 'rxjs/Observable';
 import { _throw } from 'rxjs/observable/throw';
-import { catchError, finalize, flatMap, pluck } from 'rxjs/operators';
+import { catchError, filter, finalize, flatMap, map, takeUntil, tap } from 'rxjs/operators';
+import { Subject } from 'rxjs/Subject';
 
-import { FavoriteProtocol, Protocol } from './../model';
+import { FavoriteProtocol, FavoriteProtocolsData, Protocol } from './../model';
 import { SepApiService } from './sep-api.service';
-import { SepStorageModel } from './sep-storage.model';
-import { SepStorage } from './sep-storage.service';
+import { SepQuery } from './sep.query';
+import { FavoriteProtocolStore } from './sep.store';
 
+/**
+ *
+ *
+ */
 @Injectable()
-export class SepService {
+export class SepService implements OnDestroy {
   loading: Loading;
+  destroyed$ = new Subject();
+  favorites: FavoriteProtocol[] = [];
 
   /**
    *
@@ -19,91 +27,99 @@ export class SepService {
    */
   constructor(
     private api: SepApiService,
-    private storage: SepStorage,
     private toastCtrl: ToastController,
-    private loadingCtrl: LoadingController
-  ) {}
+    private loadingCtrl: LoadingController,
+    private protocolsStore: FavoriteProtocolStore,
+    private sepQuery: SepQuery,
+    private authQuery: AuthQuery
+  ) {
+    this.authQuery.isLoggedOut$.pipe(takeUntil(this.destroyed$)).subscribe(() => this.protocolsStore.remove());
 
-  get favoriteProtocols$(): Observable<FavoriteProtocol[]> {
-    return this.storage.all$.pipe(pluck('favoriteProtocols'));
+    this.sepQuery.favorites$
+      .pipe(
+        takeUntil(this.destroyed$),
+        tap(favoriteProtocols => (this.favorites = favoriteProtocols)),
+        filter(() => !this.protocolsStore.isPristine),
+        flatMap(this.syncFavorites)
+      )
+      .subscribe();
   }
 
   /**
    *
    *
    */
-  isFavorite(protocol: Protocol): boolean {
-    return this.storage.isFavorite(protocol);
+  ngOnDestroy() {
+    this.destroyed$.next();
+    this.destroyed$.unsubscribe();
   }
 
   /**
    *
    *
    */
-  getProcessByNumber(protocolNumber: string): Observable<FavoriteProtocol> {
+  getProtocol(protocolNumber: string): Observable<FavoriteProtocol> {
     this.showLoading();
 
-    return this.api.getProcessByNumber(protocolNumber).pipe(finalize(this.dismissLoading));
+    return this.api.getProtocol(protocolNumber).pipe(finalize(this.dismissLoading));
   }
+
+  /*
+   *
+   */
+  hasFavorites = () => this.favorites.length > 0;
+
+  /*
+   *
+   */
+  isFavorite = (protocolNumber: string) => this.sepQuery.isFavorite(protocolNumber);
+
+  /*
+   *
+   */
+  loadFavorites = () => this.api.getFavoriteProtocols().pipe(map(f => f.protocols), tap(this.storeFavoriteProtocols));
 
   /**
    *
    *
    */
-  addFavorite = (protocol: Protocol): Observable<FavoriteProtocol[]> => {
-    let favoriteProtocol = this.mapFavorite(protocol);
-
-    this.showLoading();
-
-    let addedFavorites = this.storage.getValue('favoriteProtocols');
-    addedFavorites.splice(this.locationOf(protocol, addedFavorites), 0, favoriteProtocol);
-
-    return this.syncFavorites(addedFavorites).pipe(
-      finalize(this.dismissLoading),
-      catchError(error => {
-        this.showMessage('Erro ao adicionar acompanhamento. Tente novamente.');
-        return _throw(error);
-      })
-    );
+  addFavorite = (protocol: Protocol): void => {
+    this.protocolsStore.createOrReplace(protocol.number, this.mapFavorite(protocol));
+    this.showMessage(`Acompanahando protocolo ${protocol.number}`);
   };
 
   /**
    *
    *
    */
-  removeFavorite = (protocol: Protocol): Observable<FavoriteProtocol[]> => {
-    let favoriteProtocols = this.storage.getValue('favoriteProtocols').filter(p => p.number !== protocol.number);
-
-    this.showLoading();
-
-    return this.syncFavorites(favoriteProtocols).pipe(
-      finalize(this.dismissLoading),
-      catchError(error => {
-        this.showMessage('Erro ao remover acompanhamento. Tente novamente.');
-        return _throw(error);
-      })
-    );
+  removeFavorite = (protocol: Protocol): void => {
+    this.protocolsStore.remove(protocol.number);
+    this.showMessage(`Acompanhamento ${protocol.number} removido`);
   };
 
   /**
    *
    *
    */
-  syncFavorites = (favoriteProtocols?: FavoriteProtocol[]): Observable<FavoriteProtocol[]> => {
-    const syncData: SepStorageModel = { favoriteProtocols: [], date: null };
-
-    if (favoriteProtocols) {
-      syncData.favoriteProtocols = favoriteProtocols;
-      syncData.date = new Date().toISOString();
-    }
+  syncFavorites = (protocols?: FavoriteProtocol[]): Observable<FavoriteProtocolsData> => {
+    this.showLoading();
 
     return this.api
-      .syncFavoriteProtocols(syncData)
+      .syncFavoriteProtocols({
+        protocols,
+        date: new Date().toISOString()
+      })
       .pipe(
-        flatMap((favoriteProtocols: SepStorageModel) =>
-          this.storage.mergeValue('favoriteProtocols', favoriteProtocols.favoriteProtocols)
-        )
+        finalize(this.dismissLoading),
+        catchError(error => {
+          this.showMessage('Erro ao adicionar acompanhamento. Tente novamente.');
+          return _throw(error);
+        })
       );
+  };
+
+  private storeFavoriteProtocols = (data: FavoriteProtocol[]) => {
+    return this.protocolsStore.set(this.normalizeFavorites(data));
   };
 
   /**
@@ -138,7 +154,7 @@ export class SepService {
    */
   private dismissLoading = () => {
     if (this.loading) {
-      this.loading.dismiss().catch(console.log);
+      this.loading.dismiss();
       this.loading = null;
     }
   };
@@ -147,25 +163,26 @@ export class SepService {
    *
    *
    */
-  private showMessage = (message: string) => {
-    this.toastCtrl.create({ message, duration: 4000 }).present();
-  };
+  private showMessage = (message: string) => this.toastCtrl.create({ message, duration: 4000 }).present();
 
-  /**
+  /*
    *
-   *
+   * Para adaptar a versão antiga com a versão nova do objeto FavoriteProtocol
    */
-  private locationOf(element: Protocol, array: FavoriteProtocol[], start?: number, end?: number) {
-    start = start || 0;
-    end = end === undefined ? array.length - 1 : end;
-    let pivot = Math.floor((start + end) / 2);
-    if (end < start || array[pivot].number === element.number) {
-      return pivot + 1;
-    }
-    if (array[pivot].number < element.number) {
-      return this.locationOf(element, array, pivot + 1, end);
-    } else {
-      return this.locationOf(element, array, start, pivot - 1);
-    }
-  }
+  private normalizeFavorites = (data: any): FavoriteProtocol[] => {
+    return data
+      .map(protocol => {
+        if (typeof protocol === 'string') {
+          return {
+            number: protocol,
+            subject: '',
+            summary: '',
+            status: ''
+          };
+        } else {
+          return protocol;
+        }
+      })
+      .filter((item, index, self) => self.findIndex(i => i.number === item.number) === index);
+  };
 }

@@ -83,7 +83,7 @@ export class DriverService {
    *
    */
   getDriverTickets = (): Observable<Ticket[]> => {
-    this.showLoading('Carregando multas');
+    this.showLoading('Carregando débitos');
     return this.api.getDriverTickets().pipe(finalize(this.dismissLoading));
   };
 

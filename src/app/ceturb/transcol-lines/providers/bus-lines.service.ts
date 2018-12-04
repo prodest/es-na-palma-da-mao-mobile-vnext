@@ -43,6 +43,9 @@ export class BusLinesService implements OnDestroy {
     private busLinesStore: BusLinesStore,
     private busLinesQuery: BusLinesQuery
   ) {
+    // Remove as entities do BusLinesStore no caso do logout, para evitar problema com os favoritos.
+    this.authQuery.isLoggedOut$.pipe(takeUntil(this.destroyed$)).subscribe(() => this.busLinesStore.remove());
+
     // salva favoritos no server todas as vezes que os favoritos forem atualizados após o carregamento
     // inicial da loja
     this.busLinesQuery.favorites$

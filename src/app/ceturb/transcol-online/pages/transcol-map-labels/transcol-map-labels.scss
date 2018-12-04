@@ -1,51 +1,56 @@
 page-transcol-map-labels {
-  .bus-stops ion-item i {
-    border-radius: 60px;
-    background: #fff;
-    padding: 5px 7px;
-    font-size: 1.3em;
-    margin-right: 15px;
-  }
-
-  .info-available-origin i {
-    color: #b95b68;
-    border: 2px solid #b95b68;
-  }
-
-  .info-available-destination i {
-    color: #628b96;
-    border: 2px solid #628b96;
-  }
-
-  .info-origin i {
-    color: darkgoldenrod;
-    border: 3px solid darkgoldenrod;
-  }
-
-  .info-destination i {
-    color: #003e50;
-    border: 3px solid #003e50;
-  }
-
-  .info-good i {
-    color: green;
-  }
-
-  .info-not-good i {
-    color: orange;
-  }
-
-  .info-bad i {
-    color: red;
-  }
-
-  .no-info {
-    ion-label {
-      white-space: normal;
+  .bus-stops {
+    ion-icon[item-start] + .item-inner {
+      margin-left: 12px;
     }
 
-    i {
-      color: gray;
+    ion-icon {
+      border-radius: 100%;
+      border: 2px solid transparent;
+      font-size: 1.3em;
+      padding: 5px 6px;
+    }
+
+    .available-origin ion-icon {
+      color: #b95b68;
+      border-color: #b95b68;
+    }
+
+    .available-destination ion-icon {
+      color: #628b96;
+      border-color: #628b96;
+    }
+
+    .origin ion-icon {
+      color: darkgoldenrod;
+      border-color: darkgoldenrod;
+    }
+
+    .destination ion-icon {
+      color: #003e50;
+      border-color: #003e50;
+    }
+
+    .good ion-icon {
+      color: green;
+    }
+
+    .not-good ion-icon {
+      color: orange;
+    }
+
+    .bad ion-icon {
+      color: red;
+    }
+
+    .no-info {
+      ion-label {
+        white-space: normal;
+      }
+
+      ion-icon {
+        color: gray;
+      }
     }
   }
 }

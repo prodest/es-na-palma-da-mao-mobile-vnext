@@ -2,11 +2,12 @@ import { Component, OnDestroy } from '@angular/core';
 import { AndroidPermissionsService } from '@espm/core/permissions';
 import { BarcodeScanner } from '@ionic-native/barcode-scanner';
 import { IonicPage, NavController, ToastController } from 'ionic-angular';
-import { Observable } from 'rxjs/Observable';
 import { Subject } from 'rxjs/Subject';
 
-import { FavoriteProtocol, Protocol } from './../../model';
-import { SepService } from './../../providers';
+import { Protocol } from './../../model';
+import { SepService } from '../../providers';
+import { takeUntil } from 'rxjs/operators';
+import { AuthQuery } from '@espm/core';
 
 @IonicPage({
   segment: 'sep/consulta'
@@ -16,16 +17,20 @@ import { SepService } from './../../providers';
   templateUrl: 'sep-search.html'
 })
 export class SepSearchPage implements OnDestroy {
-  protocolNumberModel: string;
-  favoriteProtocols$: Observable<FavoriteProtocol[]>;
+  protocolId: string;
   destroyed$ = new Subject();
 
+  /**
+   *
+   *
+   */
   constructor(
     private navCtrl: NavController,
     private toastCtrl: ToastController,
     private barcodeScanner: BarcodeScanner,
     private permissions: AndroidPermissionsService,
-    private sepService: SepService
+    private authQuery: AuthQuery,
+    public sepService: SepService
   ) {}
 
   /**
@@ -37,26 +42,39 @@ export class SepSearchPage implements OnDestroy {
     this.destroyed$.unsubscribe();
   }
 
-  search(protocolNumber: string) {
-    if (!protocolNumber) {
-      this.showMessage('Número do protocolo é obrigatório');
-    } else if (protocolNumber.length < 2 || protocolNumber.length > 8) {
-      this.showMessage('O número deve ter entre 2 e 8 dígitos');
-    } else if (protocolNumber) {
-      this.sepService.getProcessByNumber(protocolNumber).subscribe(this.goToProtocol);
+  /**
+   *
+   *
+   */
+  search(protocol: string) {
+    if (!protocol) {
+      this.showMessage('O protocolo é obrigatório');
+    } else if (protocol.length < 2 || protocol.length > 13) {
+      this.showMessage('O protocolo deve ter entre 2 e 13 dígitos');
+    } else if (protocol) {
+      this.sepService.getProtocol(protocol).subscribe(this.goToProtocol);
     }
   }
 
+  /**
+   *
+   *
+   */
   ionViewWillLoad() {
-    this.favoriteProtocols$ = this.sepService.favoriteProtocols$.takeUntil(this.destroyed$);
+    if (this.authQuery.isLoggedIn) {
+      this.sepService
+        .loadFavorites()
+        .pipe(takeUntil(this.destroyed$))
+        .subscribe();
+    }
   }
 
-  goToProtocol = (protocol: Protocol) => {
-    this.navCtrl.push('SepDetailsPage', { protocol: protocol });
-  };
-
+  /**
+   *
+   *
+   */
   scanBarcode() {
-    this.permissions.requestPermission(this.permissions.PERMISSION.CAMERA).then(request => {
+    this.permissions.requestCameraPermission().then(request => {
       if (request.hasPermission) {
         let options = {
           preferFrontCamera: false,
@@ -72,6 +90,18 @@ export class SepSearchPage implements OnDestroy {
     });
   }
 
+  /**
+   *
+   *
+   */
+  private goToProtocol = (protocol: Protocol) => {
+    this.navCtrl.push('SepDetailsPage', { protocol: protocol });
+  };
+
+  /**
+   *
+   *
+   */
   private showMessage = (message: string) => {
     this.toastCtrl.create({ message, duration: 4000 }).present();
   };

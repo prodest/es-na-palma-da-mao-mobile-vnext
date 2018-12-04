@@ -1,15 +1,19 @@
 <ion-header>
-  <ion-navbar>
+  <ion-navbar hideBackButton>
     <button ion-button
             menuToggle>
       <ion-icon name="menu"></ion-icon>
     </button>
     <ion-title (click)="isDetailsOpenned = !isDetailsOpenned">Transcol Online</ion-title>
     <ion-buttons end>
-      <button ion-button icon-only (click)="openFeedback()">
+      <button ion-button
+              icon-only
+              (click)="openFeedback()">
         <ion-icon name="text"></ion-icon>
       </button>
-      <button ion-button icon-only (click)="showHelp()">
+      <button ion-button
+              icon-only
+              (click)="showHelp()">
         <ion-icon name="help"></ion-icon>
       </button>
     </ion-buttons>
@@ -17,8 +21,6 @@
 </ion-header>
 
 <ion-content class="no-scroll">
-  
-  <beta-ribbon></beta-ribbon>
 
   <favorites *ngIf="favorites?.length"
              [visible]="!selectedOrigin"
@@ -26,9 +28,9 @@
              (favoriteClick)="selectStop($event)">
   </favorites>
 
-  <ion-searchbar [style.display]="(!selectedOrigin || !selectedDestination) && !isDetailsOpenned ? 'inherit':'none'"
-                 class="searchbar"
+  <ion-searchbar class="searchbar"
                  placeholder="Pesquisar ponto de origem"
+                 [ngClass]="{ 'hide-search': (selectedOrigin && selectedDestination) || isDetailsOpenned }"
                  (ionClear)="clearSearchResults()"
                  (ionCancel)="clearSearchResults()"></ion-searchbar>
 
@@ -52,6 +54,9 @@
   </ion-list>
 
   <espm-geolocation-status [searching]="searchingLocation"
+                           (onLocationUpdate)="onLocationFound($event)"
+                           (onLocationUpdateFinished)="onLocationUpdateFinished()"
+                           (onFirstHit)="onLocationFirstHit($event)"
                            (click)="getUserLocation()"></espm-geolocation-status>
 
   <div class="stop-info"

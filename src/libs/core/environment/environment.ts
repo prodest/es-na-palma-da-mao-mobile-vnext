@@ -7,6 +7,7 @@ export interface Environment {
     calendars: string;
     sep: string;
     detran: string;
+    detranInternetBanking: string;
     dio: string;
     ceturb: string;
     cbmes: string;
@@ -23,9 +24,6 @@ export interface Environment {
     alert: string;
     badge: string;
     sound: string;
-    gcmSandbox: string;
-    fcmSandbox: string;
-    secret: string;
     defaultIcon: string;
     defaultColor: string;
   };

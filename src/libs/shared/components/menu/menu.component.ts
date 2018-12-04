@@ -1,11 +1,11 @@
 import { ChangeDetectionStrategy, ChangeDetectorRef, Component, OnDestroy, OnInit } from '@angular/core';
 import { AuthQuery, AuthService } from '@espm/core';
-import { App, MenuController, Platform } from 'ionic-angular';
+import { AuthNeededService } from '@espm/core/auth/auth-needed.service';
 import { AppAvailability } from '@ionic-native/app-availability';
+import { InAppBrowser } from '@ionic-native/in-app-browser';
+import { App, MenuController, Platform } from 'ionic-angular';
 import { takeUntil, tap } from 'rxjs/operators';
 import { Subject } from 'rxjs/Subject';
-import { AuthNeededService } from '@espm/core/auth/auth-needed.service';
-import { InAppBrowser } from '@ionic-native/in-app-browser';
 
 const menus = [
   {
@@ -166,7 +166,7 @@ export class MenuComponent implements OnInit, OnDestroy {
    *
    */
   ngOnInit() {
-    this.authQuery.isLoggedIn$
+    this.authQuery.authChanged$
       .pipe(tap(() => this.cd.markForCheck()), takeUntil(this.destroyed$))
       .subscribe(isLoggedIn => (this.isLoggedIn = isLoggedIn));
   }
@@ -194,21 +194,32 @@ export class MenuComponent implements OnInit, OnDestroy {
           this.appAvailability
             .check(route.package)
             .then(
-              (yes: boolean) => this.iab.create(route.url, '_system'),
-              (no: any) => this.iab.create('market://details?id=' + route.package, '_system')
+              () => this.iab.create(route.url, '_system'),
+              () => this.iab.create('market://details?id=' + route.package, '_system')
             );
         }
       } else {
-        this.appCtrl.getRootNav().setRoot(route.component);
+        if (route.component === 'DashboardPage') {
+          this.appCtrl.getRootNav().setRoot('DashboardPage');
+        } else {
+          this.appCtrl.getRootNav().push(route.component);
+        }
         this.menuCtrl.close();
       }
     }
+  };
+
+  /*
+   *
+   */
+  login = () => {
+    this.openPage({ component: 'LoginPage' });
   };
 
   /**
    *
    */
   logout = () => {
-    this.auth.logout().then(() => this.openPage('DashboardPage'));
+    this.auth.logout().then(() => this.appCtrl.getRootNav().setRoot('DashboardPage'));
   };
 }

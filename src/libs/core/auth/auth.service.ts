@@ -1,11 +1,12 @@
 import { Inject, Injectable } from '@angular/core';
 import { Environment, EnvVariables } from '@espm/core/environment';
+import { PushService } from '@espm/core/push';
 import { Facebook, FacebookLoginResponse } from '@ionic-native/facebook';
 import { GooglePlus } from '@ionic-native/google-plus';
 import { Platform } from 'ionic-angular';
 import { Observable } from 'rxjs/Observable';
 import { fromPromise } from 'rxjs/observable/fromPromise';
-import { flatMap, map, tap } from 'rxjs/operators';
+import { finalize, flatMap, map, tap } from 'rxjs/operators';
 
 import { AcessoCidadaoService } from './acesso-cidadao.service';
 import {
@@ -36,6 +37,7 @@ export class AuthService {
     private googlePlus: GooglePlus,
     private facebook: Facebook,
     private platform: Platform,
+    private push: PushService,
     @Inject(EnvVariables) private environment: Environment // private pushService: PushService,
   ) {
     this.onDevice = this.platform.is('cordova');
@@ -93,15 +95,20 @@ export class AuthService {
    */
   logout() {
     // 1 - se desloga de todos os providers
-    return Promise.all([
-      this.onDevice ? this.googlePlus.logout() : Promise.resolve(),
-      this.onDevice ? this.facebook.logout() : Promise.resolve()
-    ]).then(() => {
-      this.acessoCidadao.logout();
-    });
+    const googlePlusPromise = this.onDevice ? this.googlePlus.logout().catch(() => true) : Promise.resolve();
 
-    // 3 - Reinicia o push para usuário anônimo
-    // todo this.pushService.init()
+    const facebookPromise = this.onDevice
+      ? this.facebook.getLoginStatus().then(status => {
+          if (status.status === 'connected') {
+            this.facebook.logout();
+          }
+        })
+      : Promise.resolve();
+
+    return Promise.all([googlePlusPromise, facebookPromise])
+      .then(this.acessoCidadao.logout)
+      .then(this.push.unregister)
+      .then(this.push.init); // 3 - Restart push service to anonimous user
   }
 
   /**
@@ -109,6 +116,11 @@ export class AuthService {
    *
    */
   refreshAccessTokenIfNeeded = (): Observable<Token> => this.acessoCidadao.refreshAccessTokenIfNeeded();
+
+  /**
+   *
+   */
+  getAccessToken = (): Observable<Token> => this.acessoCidadao.getAccessToken();
 
   /**
    *
@@ -122,7 +134,8 @@ export class AuthService {
    *
    *
    */
-  private login = (identity: Identity): Observable<User> => this.acessoCidadao.login(identity);
+  private login = (identity: Identity): Observable<User> =>
+    this.acessoCidadao.login(identity).pipe(finalize(this.push.init));
 
   /**
    *

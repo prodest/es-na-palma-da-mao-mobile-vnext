@@ -10,10 +10,11 @@ export const dev: Environment = {
     calendars: process.env.API_CALENDARS_URL || 'https://api.es.gov.br/developers/calendars',
     sep: process.env.API_SEP_URL || 'https://api.es.gov.br/developers/sep',
     detran: process.env.API_DETRAN_URL || 'https://api.es.gov.br/developers/detran',
+    detranInternetBanking: process.env.API_DETRAN_INTERNET_BANKING_URL || 'https://api.es.gov.br/api-detran-debitos',
     dio: process.env.API_DIO_URL || 'https://api.es.gov.br/developers/dio',
     ceturb: process.env.API_CETURB_URL || 'https://api.es.gov.br/developers/ceturb',
     cbmes: process.env.API_CBMES_URL || 'https://api.es.gov.br/developers/cbmes',
-    push: process.env.API_PUSH_URL || 'https://api.es.gov.br/developers/push',
+    push: process.env.API_PUSH_URL || 'https://api.es.gov.br/developers/push/api/v1/',
     espm: process.env.API_ESPM_URL || 'https://api.es.gov.br/developers/espm',
     transparency: process.env.API_TRANSPARENCY_URL || 'https://api.es.gov.br/developers/transparency',
     acessocidadaoApi: process.env.API_ACESSO_CIDADAO_URL || 'https://developers.es.gov.br/acessocidadao.webapi/api',
@@ -26,11 +27,8 @@ export const dev: Environment = {
     alert: 'true',
     badge: 'true',
     sound: 'true',
-    gcmSandbox: process.env.IOS_SANDBOX || 'false',
-    fcmSandbox: process.env.IOS_SANDBOX || 'false',
     defaultIcon: 'notification',
-    defaultColor: '#549db2',
-    secret: process.env.PUSH_SECRET || ''
+    defaultColor: '#549db2'
   },
   pagination: {
     pageNumber: 0,
@@ -54,8 +52,7 @@ export const dev: Environment = {
       }
     }
   },
-  googleWebClientId:
-    process.env.GOOGLE_WEB_CLIENT_ID || '716051840979-96738cri764kv9vhih0d41ug07sroibv.apps.googleusercontent.com',
+  googleWebClientId: process.env.GOOGLE_WEB_CLIENT_ID || '',
   mobile: {
     client_id: 'espm',
     client_secret: 'secret',

@@ -1,10 +1,11 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 
+
 import { Ticket, Vehicle } from './../../model';
 
 @IonicPage({
-  segment: 'detran/veiculos/:plate/multas'
+  segment: 'detran/veiculos/:plate/debitos'
 })
 @Component({
   selector: 'page-vehicle-tickets',
@@ -20,16 +21,18 @@ export class VehicleTicketsPage {
    */
   constructor(private navCtrl: NavController, private params: NavParams) {}
 
+  
+
   /**
    * ref: https://github.com/ionic-team/ionic/issues/11459#issuecomment-365224107
    *
    */
   ionViewCanEnter(): boolean | Promise<any> {
-    // permite acesso à tela de o usuário possui cnh no acesso cidadão ou cadastrou agora
+    // permite acesso à tela se o usuário possui cnh no acesso cidadão ou cadastrou agora
     const isAllowed = !!this.params.get('vehicle');
 
     if (!isAllowed) {
-      setTimeout(() => this.navCtrl.setRoot('VehiclesPage'));
+      setTimeout(() => this.navCtrl.push('VehiclesPage'));
     }
     return isAllowed;
   }

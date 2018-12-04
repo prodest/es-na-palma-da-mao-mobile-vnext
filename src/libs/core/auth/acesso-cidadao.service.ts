@@ -2,7 +2,7 @@ import { Inject, Injectable } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
 import { of } from 'rxjs/observable/of';
 import { _throw } from 'rxjs/observable/throw';
-import { flatMap, map, tap } from 'rxjs/operators';
+import { flatMap, map, tap, finalize } from 'rxjs/operators';
 
 import { Environment, EnvVariables } from './../environment';
 import { AcessoCidadaoApiService } from './acesso-cidadao-api.service';
@@ -16,6 +16,8 @@ import { AuthQuery, AuthStore } from './state';
  */
 @Injectable()
 export class AcessoCidadaoService {
+  private semaphore: boolean = true;
+
   /**
    * Creates an instance of AcessoCidadaoService.
    *
@@ -45,6 +47,10 @@ export class AcessoCidadaoService {
    */
   logout = () => {
     this.authStore.reset();
+  };
+
+  getAccessToken = (): Observable<Token> => {
+    return of(this.authQuery.state.accessToken);
   };
 
   /**
@@ -79,14 +85,31 @@ export class AcessoCidadaoService {
    */
   getUserClaims = (): Observable<AcessoCidadaoClaims> => this.api.getUserClaims().pipe(tap(this.storeClaims));
 
+  /**
+   * TODO:
+   */
+  resetPassword = (username: string): Observable<any> => this.api.resetPassword(username);
+
+  /**
+   * TODO:
+   */
+  createUser = (user: any): Observable<any> => this.api.createUser(user);
+
   /************************************* Private API *************************************/
 
   /**
    *
    *
    */
-  private refreshAccessToken = (): Observable<Token> =>
-    this.login(this.createRefreshTokenIdentity()).pipe(map(() => this.authQuery.state.accessToken));
+  private refreshAccessToken = (): Observable<Token> => {
+    if (this.semaphore) {
+      this.semaphore = false;
+      return this.login(this.createRefreshTokenIdentity()).pipe(
+        map(() => this.authQuery.state.accessToken),
+        finalize(() => (this.semaphore = true))
+      );
+    }
+  };
 
   /**
    *
@@ -114,13 +137,12 @@ export class AcessoCidadaoService {
    * Store auth info
    *
    */
-  private storeAuthResponse = (response: AcessoCidadaoResponse) => {
+  private storeAuthResponse = (response: AcessoCidadaoResponse) =>
     this.authStore.update({
       accessToken: response.access_token,
       refreshToken: response.refresh_token,
       clientId: this.jwt.decodeToken(response.access_token).client_id
     });
-  };
 
   /**
    * Store user info (claims)

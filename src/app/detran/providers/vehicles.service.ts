@@ -56,15 +56,17 @@ export class VehiclesService {
       map((extra: Partial<Vehicle>) => ({ ...vehicle, ...extra })),
       flatMap(this.syncVehicle),
       finalize(this.dismissLoading),
-      catchError(error => {
-        if (error.status === 404) {
+      catchError(error => {        
+        if (error.status === 404) {          
           this.showMessage('Veículo não encontrado na base do DETRAN.');
-        } else {
+        } else {          
           this.showMessage('Erro ao salvar veículo. Tente novamente.');
         }
         return _throw(error);
       })
     );
+    
+    
   };
 
   /**
@@ -105,7 +107,7 @@ export class VehiclesService {
    *
    */
   getTickets = (vehicle: Vehicle): Observable<Ticket[]> => {
-    this.showLoading();
+    this.showLoading();           
     return this.api.getVehicleTickets(vehicle).pipe(finalize(this.dismissLoading));
   };
 

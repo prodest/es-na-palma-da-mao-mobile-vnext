@@ -1,5 +1,5 @@
 <ion-header>
-  <ion-navbar>
+  <ion-navbar hideBackButton>
     <button ion-button
             menuToggle>
       <ion-icon name="menu"></ion-icon>
@@ -28,7 +28,7 @@
     </ion-item>
     <ion-item no-lines>
       <ion-label>
-        <ion-icon name="calendar"></ion-icon>
+        <ion-icon name="md-calendar"></ion-icon>
       </ion-label>
       <ion-datetime [(ngModel)]="filter.dateMin"
                     placeholder="Data inicial"
@@ -40,7 +40,7 @@
     </ion-item>
     <ion-item no-lines>
       <ion-label>
-        <ion-icon name="calendar"></ion-icon>
+        <ion-icon name="md-calendar"></ion-icon>
       </ion-label>
       <ion-datetime [(ngModel)]="filter.dateMax"
                     placeholder="Data final"
@@ -78,6 +78,7 @@
   </ion-list>
 
   <ion-item *ngIf="!searched"
+            class="item-info"
             text-center>
     <h2>Selecione um filtro</h2>
     <p>Todos os campos são obrigatórios</p>

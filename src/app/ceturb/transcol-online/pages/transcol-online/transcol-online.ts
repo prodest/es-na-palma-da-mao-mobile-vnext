@@ -7,16 +7,18 @@ import { delay } from 'helpful-decorators';
 import { IonicPage, ModalController, NavController, Searchbar } from 'ionic-angular';
 import * as L from 'leaflet';
 import values from 'lodash-es/values';
+import { interval } from 'rxjs/observable/interval';
 import { filter, finalize, map, switchMap, takeUntil, tap } from 'rxjs/operators';
 import { Subject } from 'rxjs/Subject';
 
-import { BusLine, BusStop, Prevision } from './../../model';
-import { TranscolOnlineService } from './../../providers';
+import { BusLine, BusStop, Prevision } from '../../model';
+import { TranscolOnlineService } from '../../providers';
 
 const VITORIA = L.latLng(-20.315894186649725, -40.29565483331681);
 const GRANDE_VITORIA = [-38.50708007812501, -17.14079039331664, -42.46215820312501, -23.725011735951796];
 
 const SEARCH_MIN_LENGTH = 3;
+const REFRESH_PREVISIONS_INTERVAL = 1000 * 30;
 
 @IonicPage()
 @Component({
@@ -97,6 +99,10 @@ export class TranscolOnlinePage implements AfterViewInit, OnDestroy {
       .subscribe(stops => {
         this.searchResults = stops;
       });
+
+    interval(REFRESH_PREVISIONS_INTERVAL)
+      .pipe(takeUntil(this.destroyed$))
+      .subscribe(this.refreshPrevisions);
   }
 
   /**
@@ -107,14 +113,6 @@ export class TranscolOnlinePage implements AfterViewInit, OnDestroy {
     this.destroyed$.next();
     this.destroyed$.unsubscribe();
   }
-
-  /**
-   *
-   */
-  getUserLocation = () => {
-    this.searchingLocation = true;
-    this.map.locate({ setView: true, maxZoom: 16, timeout: 5000, enableHighAccuracy: true });
-  };
 
   /**
    *
@@ -229,10 +227,7 @@ export class TranscolOnlinePage implements AfterViewInit, OnDestroy {
   showRoutePrevisions = () => {
     this.previsions = undefined;
     this.navigateToRoutePrevisions();
-    this.transcolOnline
-      .getRoutePrevisions(this.selectedOrigin.id, this.selectedDestination.id)
-      .pipe(tap(previsions => (this.previsions = previsions)))
-      .subscribe();
+    this.loadRoutePrevisions(this.selectedOrigin, this.selectedDestination);
   };
 
   /**
@@ -320,10 +315,7 @@ export class TranscolOnlinePage implements AfterViewInit, OnDestroy {
     this.previsions = undefined;
     this.selectedLine = undefined;
     this.navigateToOriginPrevisions();
-    this.transcolOnline
-      .getOriginPrevisions(this.selectedOrigin.id)
-      .pipe(tap(previsions => (this.previsions = previsions)))
-      .subscribe();
+    this.loadOriginPrevisions(this.selectedOrigin);
   };
 
   /**
@@ -342,10 +334,7 @@ export class TranscolOnlinePage implements AfterViewInit, OnDestroy {
     this.previsions = undefined;
     this.selectedLine = line;
     this.navigateToLinePrevisions();
-    this.transcolOnline
-      .getLinePrevisions(line)
-      .pipe(tap(previsions => (this.previsions = previsions)))
-      .subscribe();
+    this.loadLinePrevisions(line);
   };
 
   /**
@@ -387,6 +376,52 @@ export class TranscolOnlinePage implements AfterViewInit, OnDestroy {
       .subscribe(this.refreshSelectedStops);
     this.transcolOnline.favorites$.pipe(takeUntil(this.destroyed$)).subscribe(favorites => (this.favorites = favorites));
     this.transcolOnline.getBusStopsByArea(GRANDE_VITORIA).subscribe();
+  };
+
+  /**
+   *
+   *
+   */
+  private refreshPrevisions = () => {
+    if (this.isDetailsOpenned) {
+      if (this.selectedOrigin && this.selectedDestination) {
+        this.loadRoutePrevisions(this.selectedOrigin, this.selectedDestination);
+      } else if (this.selectedLine) {
+        this.loadLinePrevisions(this.selectedLine);
+      } else if (this.selectedOrigin) {
+        this.loadOriginPrevisions(this.selectedOrigin);
+      }
+    }
+  };
+
+  /**
+   *
+   */
+  private loadRoutePrevisions = (origin: BusStop, destination: BusStop) => {
+    this.transcolOnline
+      .getRoutePrevisions(origin.id, destination.id)
+      .pipe(tap(this.setPrevisions))
+      .subscribe();
+  };
+
+  /**
+   *
+   */
+  private loadLinePrevisions = (line: BusLine) => {
+    this.transcolOnline
+      .getLinePrevisions(line)
+      .pipe(tap(this.setPrevisions))
+      .subscribe();
+  };
+
+  /**
+   *
+   */
+  private loadOriginPrevisions = (stop: BusStop) => {
+    this.transcolOnline
+      .getOriginPrevisions(this.selectedOrigin.id)
+      .pipe(tap(this.setPrevisions))
+      .subscribe();
   };
 
   /**
@@ -447,13 +482,18 @@ export class TranscolOnlinePage implements AfterViewInit, OnDestroy {
     // refresh estimatives
     this.transcolOnline
       .getOriginPrevisions(origin.id)
-      .pipe(tap(previsions => (this.previsions = previsions)))
+      .pipe(tap(this.setPrevisions))
       .subscribe();
 
     this.updateDestinations(origin);
 
     this.setSearchHint('Selecione um destino');
   };
+
+  /**
+   *
+   */
+  private setPrevisions = previsions => (this.previsions = previsions);
 
   /**
    *
@@ -570,9 +610,6 @@ export class TranscolOnlinePage implements AfterViewInit, OnDestroy {
 
     map.on('moveend', this.onMapMove);
     map.on('click', this.clearMapSelection);
-    map.on('locationfound', this.onLocationFound);
-    map.on('locationerror', this.onLocationError);
-
     return map;
   };
 
@@ -595,8 +632,18 @@ export class TranscolOnlinePage implements AfterViewInit, OnDestroy {
   /**
    *
    */
-  private onLocationFound = (e: L.LocationEvent) => {
-    this.searchingLocation = false;
+  getUserLocation = () => {
+    if (!this.searchingLocation) {
+      this.searchingLocation = true;
+    }
+    // TODO: Funciona melhor no browser, para o app utilizamos o plugin nativo (código no component)
+    // this.map.locate({ setView: true, maxZoom: 16, timeout: 5000, enableHighAccuracy: true });
+  };
+
+  /**
+   *
+   */
+  onLocationFound = (e: L.LocationEvent) => {
     if (this.userPin) {
       this.map.removeLayer(this.userPin);
     }
@@ -604,13 +651,24 @@ export class TranscolOnlinePage implements AfterViewInit, OnDestroy {
     this.userPin = L.marker.pulse(e.latlng, { iconSize: [20, 20], color: '#07C', heartbeat: 1 }).addTo(this.map);
   };
 
+  onLocationUpdateFinished = () => {
+    this.searchingLocation = false;
+  };
+
   /**
    *
    */
-  private onLocationError = error => {
+  onLocationFirstHit = (e: L.LocationEvent) => {
+    this.map.setView(e.latlng, this.map.getZoom(), { animate: true, duration: 0.5 });
+  };
+
+  /**
+   *
+   */
+  /* private onLocationError = error => {
     this.searchingLocation = false;
     console.log('Error getting location', error);
-  };
+  }; */
 
   /**
    *
