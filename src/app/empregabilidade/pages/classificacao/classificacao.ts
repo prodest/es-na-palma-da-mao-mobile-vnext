@@ -1,0 +1,49 @@
+import { Component } from '@angular/core';
+import { IonicPage, NavController, NavParams, LoadingController } from 'ionic-angular';
+import { Classificado } from '../../dto/Classificado';
+import { SearchProvider } from '../../providers/search/search';
+import deburr from 'lodash-es/deburr';
+/**
+ * Generated class for the ClassificacaoPage page.
+ *
+ * See https://ionicframework.com/docs/components/#navigation for more info on
+ * Ionic pages and navigation.
+ */
+
+@IonicPage()
+@Component({
+  selector: 'espm-page-classificacao',
+  templateUrl: 'classificacao.html'
+})
+export class ClassificacaoPage {
+  allClassificado: Classificado[];
+  filteredClassificado: Classificado[];
+  constructor(
+    public searchProvider: SearchProvider,
+    public navCtrl: NavController,
+    public navParams: NavParams,
+    public loadingCtrl: LoadingController
+  ) {
+    this.carrega();
+  }
+
+  async carrega() {
+    let loader = this.loadingCtrl.create({
+      content: 'Aguarde, buscando candidatos'
+    });
+    loader.present();
+    this.allClassificado = await this.searchProvider.search('');
+    loader.dismiss();
+    this.clear();
+  }
+  clear = () => {
+    this.filteredClassificado = this.allClassificado;
+  };
+  search = e => {
+    const search = this.normalize(e.target.value);
+    this.filteredClassificado = this.allClassificado.filter(classificado => {
+      return this.normalize(classificado.nome).includes(search);
+    });
+  };
+  private normalize = (term: string) => (term ? deburr(term.toLowerCase()) : '');
+}
