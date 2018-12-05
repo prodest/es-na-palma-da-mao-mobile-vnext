@@ -22,9 +22,6 @@ export class DetailsPage {
   async inicializa() {
     this.concurso = await this.navParams.data;
   }
-  async ionViewWillLoad() {
-    console.log(this.concurso);
-  }
 
   openLink(link) {
     window.open(link, '_system', 'location=yes');

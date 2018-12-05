@@ -20,7 +20,6 @@ export class ClassificacaoPage {
   constructor(public navCtrl: NavController, public navParams: NavParams, public loadingCtrl: LoadingController) {}
   async ionViewWillLoad() {
     this.allClassificado = await this.navParams.data;
-    console.log(this.allClassificado);
     this.clear();
   }
   clear = () => {

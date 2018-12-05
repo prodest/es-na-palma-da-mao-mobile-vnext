@@ -20,7 +20,6 @@ export class DtDetailsProvider {
   async classificados(id): Promise<Array<Classificado>> {
     const URL_CLASSIFICADO = 'https://api.es.gov.br/dev/selecaodt/concursos/';
     try {
-      console.log('ID>>>>>>>>>>>>', id);
       return (await this.http.get(URL_CLASSIFICADO + id + '/classificacao').toPromise()) as Array<Classificado>;
     } catch (error) {
       throw error;
