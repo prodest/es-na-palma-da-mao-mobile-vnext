@@ -32,7 +32,7 @@ export class SearchPage {
       content: 'Aguarde, buscando concursos'
     });
     loader.present();
-    this.allConcursos = await this.searchProvider.search('');
+    this.allConcursos = await this.searchProvider.search();
     loader.dismiss();
     this.clear();
   }

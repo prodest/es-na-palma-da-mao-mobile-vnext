@@ -25,7 +25,7 @@ export class SearchProvider {
     return concursos;
   }
 
-  async search(parameter): Promise<Array<Concurso>> {
+  async search(): Promise<Array<Concurso>> {
     try {
       return (await this.http.get(this.API_URL).toPromise()) as Array<Concurso>;
     } catch (error) {

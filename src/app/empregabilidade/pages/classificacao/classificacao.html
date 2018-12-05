@@ -17,15 +17,16 @@
 
 <ion-content>
   <ion-content>
-    <ion-list-header *ngIf="filteredConcursos">
-      <ng-container *ngIf="filteredConcursos.length"> Exibindo {{ filteredConcursos.length }} concursos</ng-container>
-      <ng-container *ngIf="!filteredConcursos.length"> Nenhuma concurso encontrado</ng-container>
+    <ion-list-header *ngIf="filteredClassificado">
+      <ng-container *ngIf="filteredClassificado.length">
+        Exibindo {{ filteredClassificado.length }} Classificados</ng-container
+      >
+      <ng-container *ngIf="!filteredClassificado.length"> Nenhuma classificação encontrado</ng-container>
     </ion-list-header>
-    <ion-list [virtualScroll]="filteredConcursos" [virtualTrackBy]="trackByStatus" approxItemHeight="70px">
-      <button ion-item *virtualItem="let concurso" (click)="showDetails($event)">
-        <h3 text-wrap class="concursos_name">{{ concurso.nome }}</h3>
-        <p text-wrap class="concursos_descricao">{{ concurso.descricao }}</p>
-        <concurso-status [status]="concurso.status"></concurso-status>
+    <ion-list [virtualScroll]="filteredClassificado" approxItemHeight="70px">
+      <button ion-item *virtualItem="let classificado">
+        <h3 text-wrap class="classificado_name">{{ classificado.posicao }}</h3>
+        <p text-wrap class="classificado_descricao">{{ classificado.nome }}</p>
       </button>
     </ion-list>
   </ion-content>

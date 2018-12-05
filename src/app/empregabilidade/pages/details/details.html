@@ -13,6 +13,10 @@
         <ul *ngIf="concurso.datas">
           <div *ngFor="let data of concurso.datas">{{ data.nome }} {{ data.inicio }} {{ data.fim }}</div>
         </ul>
+        <h2>Classificação:</h2>
+        <ul>
+          <div><button ion-button full (click)="showclassificados(concurso.id)">Classificação</button></div>
+        </ul>
         <h2>Anexos:</h2>
         <ul *ngIf="concurso.anexos">
           <div *ngFor="let anexo of concurso.anexos">

@@ -1,7 +1,6 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams, LoadingController } from 'ionic-angular';
 import { Classificado } from '../../dto/Classificado';
-import { SearchProvider } from '../../providers/search/search';
 import deburr from 'lodash-es/deburr';
 /**
  * Generated class for the ClassificacaoPage page.
@@ -18,22 +17,10 @@ import deburr from 'lodash-es/deburr';
 export class ClassificacaoPage {
   allClassificado: Classificado[];
   filteredClassificado: Classificado[];
-  constructor(
-    public searchProvider: SearchProvider,
-    public navCtrl: NavController,
-    public navParams: NavParams,
-    public loadingCtrl: LoadingController
-  ) {
-    this.carrega();
-  }
-
-  async carrega() {
-    let loader = this.loadingCtrl.create({
-      content: 'Aguarde, buscando candidatos'
-    });
-    loader.present();
-    this.allClassificado = await this.searchProvider.search('');
-    loader.dismiss();
+  constructor(public navCtrl: NavController, public navParams: NavParams, public loadingCtrl: LoadingController) {}
+  async ionViewWillLoad() {
+    this.allClassificado = await this.navParams.data;
+    console.log(this.allClassificado);
     this.clear();
   }
   clear = () => {
