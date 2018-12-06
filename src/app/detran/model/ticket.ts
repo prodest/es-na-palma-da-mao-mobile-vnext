@@ -1,4 +1,5 @@
 export interface Ticket {
+  id: number;
   classification: string;
   date: string;
   description: string;
@@ -7,4 +8,5 @@ export interface Ticket {
   plate: string;
   points: number;
   warning: boolean;
+  amount: number;
 }

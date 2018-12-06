@@ -83,6 +83,7 @@
     "@ionic-native/app-availability": "^4.10.1",
     "@ionic-native/barcode-scanner": "^4.7.0",
     "@ionic-native/camera": "^4.5.3",
+    "@ionic-native/clipboard": "^4.18.0",
     "@ionic-native/core": "^4.5.3",
     "@ionic-native/device": "^4.10.1",
     "@ionic-native/facebook": "^4.4.2",
@@ -99,6 +100,7 @@
     "angular2-text-mask": "^8.0.2",
     "chart.js": "^2.7.2",
     "cordova-android": "^7.1.1",
+    "cordova-clipboard": "^1.2.1",
     "cordova-ios": "^4.5.5",
     "cordova-plugin-android-permissions": "^1.0.0",
     "cordova-plugin-appavailability": "^0.4.2",
@@ -226,7 +228,8 @@
         "WEB_APPLICATION_CLIENT_ID": "716051840979-96738cri764kv9vhih0d41ug07sroibv.apps.googleusercontent.com",
         "REVERSED_CLIENT_ID": "com.googleusercontent.apps.716051840979-96738cri764kv9vhih0d41ug07sroibv"
       },
-      "cordova-plugin-statusbar": {}
+      "cordova-plugin-statusbar": {},
+      "cordova-clipboard": {}
     },
     "platforms": [
       "ios",

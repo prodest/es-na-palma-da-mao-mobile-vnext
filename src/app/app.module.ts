@@ -32,6 +32,7 @@ import { DioProviders } from './dio/providers';
 import { NewsProviders } from './news/providers';
 import { TransparencyProviders } from './secont/transparency/providers';
 import { SepProviders } from './sep/providers';
+import { Clipboard } from '@ionic-native/clipboard';
 
 moment.locale('pt-br');
 registerLocaleData(ptBr);
@@ -72,6 +73,7 @@ registerLocaleData(ptBr);
     Push,
     PushService,
     StatusBar,
+    Clipboard,
     SplashScreen,
     SocialSharing,
     ...AboutProviders,
