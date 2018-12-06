@@ -2,25 +2,30 @@
   <ion-navbar> <ion-title>Detalhes</ion-title> </ion-navbar>
 </ion-header>
 
-<ion-content padding>
-  <h1>{{ concurso.nome }}</h1>
+<ion-content>
+  <h1 style="padding-left: 15px;">{{ concurso.nome }}</h1>
 
-  <ion-list>
-    <ion-item>
-      <h2>Datas:</h2>
-      <ul *ngIf="concurso.datas">
-        <div *ngFor="let data of concurso.datas">{{ data.nome }} {{ data.inicio }} {{ data.fim }}</div>
-      </ul>
-      <h2>Classificação:</h2>
-      <ul>
-        <div><button ion-button full (click)="showclassificados(concurso.id)">Classificação</button></div>
-      </ul>
-      <h2>Anexos:</h2>
-      <div *ngIf="concurso.anexos">
-        <div *ngFor="let anexo of concurso.anexos">
-          <button ion-button full (click)="openLink(anexo.link)">{{ anexo.documento }}</button>
-        </div>
-      </div>
+  <ion-list *ngIf="concurso.datas">
+    <ion-item-divider color="light">DATAS</ion-item-divider>
+
+    <ion-item *ngFor="let data of concurso.datas">
+      <h2>{{ data.nome }}</h2>
+
+      <p style="padding-left: 15px;">Inicio: {{ data.inicio }}</p>
+
+      <p style="padding-left: 15px;">Fim: {{ data.fim }}</p>
     </ion-item>
+  </ion-list>
+
+  <button ion-item (click)="showclassificados(concurso.id)">
+    <h2>CLASSIFICAÇÃO</h2>
+
+    <p>Lista de classificados</p>
+  </button>
+
+  <ion-list *ngIf="concurso.anexos">
+    <ion-item-divider color="light">ANEXOS</ion-item-divider>
+
+    <button ion-item *ngFor="let anexo of concurso.anexos" (click)="openLink(anexo.link)">{{ anexo.documento }}</button>
   </ion-list>
 </ion-content>
