@@ -7,14 +7,15 @@
 
   <ion-list *ngIf="concurso.datas">
     <ion-item-divider color="light">DATAS</ion-item-divider>
+    <div *ngFor="let data of concurso.datas">
+      <ion-item *ngIf="data.inicio || data.fim">
+        <h2>{{ data.nome }}</h2>
 
-    <ion-item *ngFor="let data of concurso.datas">
-      <h2>{{ data.nome }}</h2>
+        <p *ngIf="data.inicio" style="padding-left: 15px;">Inicio: {{ data.inicio }}</p>
 
-      <p style="padding-left: 15px;">Inicio: {{ data.inicio }}</p>
-
-      <p style="padding-left: 15px;">Fim: {{ data.fim }}</p>
-    </ion-item>
+        <p *ngIf="data.fim" style="padding-left: 15px;">Fim: {{ data.fim }}</p>
+      </ion-item>
+    </div>
   </ion-list>
 
   <button ion-item (click)="showclassificados(concurso.id)">
@@ -26,6 +27,8 @@
   <ion-list *ngIf="concurso.anexos">
     <ion-item-divider color="light">ANEXOS</ion-item-divider>
 
-    <button ion-item *ngFor="let anexo of concurso.anexos" (click)="openLink(anexo.link)">{{ anexo.documento }}</button>
+    <button text-wrap ion-item *ngFor="let anexo of concurso.anexos" (click)="openLink(anexo.link)">
+      {{ anexo.documento }}
+    </button>
   </ion-list>
 </ion-content>
