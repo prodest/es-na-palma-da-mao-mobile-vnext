@@ -17,13 +17,13 @@
       </ion-item>
     </div>
   </ion-list>
-
-  <button ion-item (click)="showclassificados(concurso.id)">
-    <h2>CLASSIFICAÇÃO</h2>
-
-    <p>Lista de classificados</p>
-  </button>
-
+  <ion-list>
+    <ion-item-divider color="light">CLASSIFICAÇÃO</ion-item-divider>
+    <button ion-item (click)="showclassificados(concurso.id)">
+      
+      <p>Lista de classificados</p>
+    </button>
+  </ion-list>
   <ion-list *ngIf="concurso.anexos">
     <ion-item-divider color="light">ANEXOS</ion-item-divider>
 
