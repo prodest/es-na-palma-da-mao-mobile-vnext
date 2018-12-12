@@ -122,6 +122,16 @@ const menus = [
         uriScheme: 'mb://'
       }
     ]
+  },{
+    name: 'Empregabilidade',
+    items: [
+      {
+        title: 'Buscar concursos',
+        icon: 'search',
+        component: 'SearchPage',
+        order: 7
+      }
+    ]
   },
   {
     name: 'Outros',
