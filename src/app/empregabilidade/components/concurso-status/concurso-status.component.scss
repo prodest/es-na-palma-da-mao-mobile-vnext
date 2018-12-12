@@ -1,0 +1,14 @@
+concurso-status {
+  margin: 5px 0;
+  display: inline-block;
+  text-transform: uppercase;
+  .andamento ion-badge {
+    background-color: #208baa;
+  }
+  .previsto ion-badge {
+    background-color: rgb(214, 166, 10);
+  }
+  .aberto ion-badge {
+    background-color: #05ab7a;
+  }
+}
