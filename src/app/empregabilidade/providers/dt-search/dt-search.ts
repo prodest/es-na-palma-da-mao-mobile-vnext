@@ -4,7 +4,7 @@ import { Storage } from '@ionic/storage';
 import { Concurso } from '../../dto/Concurso';
 @Injectable()
 export class SearchProvider {
-  API_URL = 'https://api.es.gov.br/dev/selecaodt/concursos/';
+  URL = process.env.API_EMPREGABILIDADE_URL;
   constructor(public http: HttpClient, private storage: Storage) {}
 
   async salvaFavoritos(novoConcurso) {
@@ -27,7 +27,7 @@ export class SearchProvider {
 
   async search(): Promise<Array<Concurso>> {
     try {
-      return (await this.http.get(this.API_URL).toPromise()) as Array<Concurso>;
+      return (await this.http.get(this.URL).toPromise()) as Array<Concurso>;
     } catch (error) {
       throw error;
     }

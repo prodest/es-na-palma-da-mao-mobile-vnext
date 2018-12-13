@@ -11,16 +11,15 @@ import { Classificado } from '../../dto/Classificado';
 */
 @Injectable()
 export class DtDetailsProvider {
-  API_URL = 'https://api.es.gov.br/dev/selecaodt/concursos/';
+  URL = process.env.API_EMPREGABILIDADE_URL;
   constructor(public http: HttpClient) {}
   async concursoDetalhe(id): Promise<Concurso> {
-    let concurso: Concurso = (await this.http.get(this.API_URL + id).toPromise()) as Concurso;
+    let concurso: Concurso = (await this.http.get(this.URL + id).toPromise()) as Concurso;
     return concurso;
   }
   async classificados(id): Promise<Array<Classificado>> {
-    const URL_CLASSIFICADO = 'https://api.es.gov.br/dev/selecaodt/concursos/';
     try {
-      return (await this.http.get(URL_CLASSIFICADO + id + '/classificacao').toPromise()) as Array<Classificado>;
+      return (await this.http.get(this.URL + id + '/classificacao').toPromise()) as Array<Classificado>;
     } catch (error) {
       throw error;
     }
