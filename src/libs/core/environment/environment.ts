@@ -16,6 +16,7 @@ export interface Environment {
     acessocidadaoApi: string;
     transparency: string;
     feedback: string;
+    empregabilidade: string;
   };
   push: {
     senderId: string;

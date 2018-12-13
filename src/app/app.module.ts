@@ -32,6 +32,8 @@ import { DioProviders } from './dio/providers';
 import { NewsProviders } from './news/providers';
 import { TransparencyProviders } from './secont/transparency/providers';
 import { SepProviders } from './sep/providers';
+import { SearchProvider } from './empregabilidade/providers/dt-search/dt-search';
+import { DtDetailsProvider } from './empregabilidade/providers/dt-details/dt-details';
 
 moment.locale('pt-br');
 registerLocaleData(ptBr);
@@ -101,7 +103,8 @@ registerLocaleData(ptBr);
     { 
       provide: ErrorHandler, 
       useClass: IonicErrorHandler 
-    }
+    },
+    SearchProvider,DtDetailsProvider
   ]
 })
 export class AppModule {}

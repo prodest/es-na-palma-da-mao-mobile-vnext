@@ -1,0 +1,30 @@
+<ion-header color-primary-bg>
+  <ion-navbar><ion-title>Classificação</ion-title></ion-navbar>
+    
+  <ion-searchbar
+    placeholder="Pesquisar..."
+    [showCancelButton]="true"
+    cancelButtonText="Cancelar"
+    [animated]="false"
+    (ionInput)="search($event)"
+    (ionClear)="clear($event)"
+    (ionCancel)="clear($event)"
+  >
+  </ion-searchbar>
+</ion-header>
+
+<ion-content>
+    <ion-list-header *ngIf="filteredClassificado">
+      <ng-container *ngIf="filteredClassificado.length">
+        Exibindo {{ filteredClassificado.length }} Classificados</ng-container
+      >
+      <ng-container *ngIf="!filteredClassificado.length"> Nenhuma classificação encontrado</ng-container>
+    </ion-list-header>
+    <ion-list [virtualScroll]="filteredClassificado" approxItemHeight="70px">
+      <button ion-item *virtualItem="let classificado">
+        <p text-wrap class="classificado_name">{{ classificado.nome }}</p>
+        <h3 text-wrap class="classificado_descricao">Colocação: {{ classificado.posicao }}</h3>
+      </button>
+    </ion-list>
+
+</ion-content>
