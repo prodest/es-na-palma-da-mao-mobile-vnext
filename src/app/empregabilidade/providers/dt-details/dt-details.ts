@@ -1,7 +1,8 @@
 import { HttpClient } from '@angular/common/http';
-import { Injectable } from '@angular/core';
+import { Injectable, Inject } from '@angular/core';
 import { Concurso } from '../../dto/Concurso';
 import { Classificado } from '../../dto/Classificado';
+import { EnvVariables, Environment } from '@espm/core';
 
 /*
   Generated class for the DtDetailsProvider provider.
@@ -11,15 +12,14 @@ import { Classificado } from '../../dto/Classificado';
 */
 @Injectable()
 export class DtDetailsProvider {
-  URL = process.env.API_EMPREGABILIDADE_URL;
-  constructor(public http: HttpClient) {}
+  constructor(public http: HttpClient, @Inject(EnvVariables) private env: Environment) {}
   async concursoDetalhe(id): Promise<Concurso> {
-    let concurso: Concurso = (await this.http.get(this.URL + id).toPromise()) as Concurso;
+    let concurso: Concurso = (await this.http.get(this.env.api.empregabilidade + id).toPromise()) as Concurso;
     return concurso;
   }
   async classificados(id): Promise<Array<Classificado>> {
     try {
-      return (await this.http.get(this.URL + id + '/classificacao').toPromise()) as Array<Classificado>;
+      return (await this.http.get(this.env.api.empregabilidade + id + '/classificacao').toPromise()) as Array<Classificado>;
     } catch (error) {
       throw error;
     }

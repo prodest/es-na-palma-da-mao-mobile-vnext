@@ -1,11 +1,11 @@
 import { HttpClient } from '@angular/common/http';
-import { Injectable } from '@angular/core';
+import { Injectable, Inject } from '@angular/core';
 import { Storage } from '@ionic/storage';
 import { Concurso } from '../../dto/Concurso';
+import { EnvVariables, Environment } from '@espm/core';
 @Injectable()
 export class SearchProvider {
-  URL = process.env.API_EMPREGABILIDADE_URL;
-  constructor(public http: HttpClient, private storage: Storage) {}
+  constructor(public http: HttpClient, private storage: Storage, @Inject(EnvVariables) private env: Environment) {}
 
   async salvaFavoritos(novoConcurso) {
     let concursosfavoritos = await this.carregaFavoritos();
@@ -27,7 +27,7 @@ export class SearchProvider {
 
   async search(): Promise<Array<Concurso>> {
     try {
-      return (await this.http.get(this.URL).toPromise()) as Array<Concurso>;
+      return (await this.http.get(this.env.api.empregabilidade).toPromise()) as Array<Concurso>;
     } catch (error) {
       throw error;
     }
