@@ -23,21 +23,21 @@ export class DebitsComponent {
   @Input() vehicle: Vehicle;
   @Input() debits: Debit[];
 
-  
+
 
   loading: Loading;
 
-  generateBillet = () => {    
+  generateBillet = () => {
     this.showLoading();
-      /* let ids = [];
-      for (let i = 0; i < this.debits.length; i++) {
-        ids.push(this.debits[i].idDebito)
-      }*/
-      // this.api.generateGRU(this.vehicle, ids).subscribe(req => {
-    this.api.generateGRU(this.vehicle).subscribe(req => {          
+    /* let ids = [];
+    for (let i = 0; i < this.debits.length; i++) {
+      ids.push(this.debits[i].idDebito)
+    }*/
+    // this.api.generateGRU(this.vehicle, ids).subscribe(req => {
+    this.api.generateGRU(this.vehicle).subscribe(req => {
       this.dismissLoading();
-      try {                
-        this.showGRUCode(req["guia"]["itemGuia"][0]["linhaDigitavel"])
+      try {
+        this.showGRUCode(req["itensGuia"][0]["linhaDigitavel"])
       } catch {
         this.showGRUCode("Não foi possível recuperar o código de barras")
       }
@@ -67,9 +67,9 @@ export class DebitsComponent {
 
   totalAmount = () => {
     let total = 0.0
-    for (let i = 0; i < this.debits.length; i++) {      
+    for (let i = 0; i < this.debits.length; i++) {
       total += Number(this.debits[i].valorAtualizadoFranquia)
-    }    
+    }
     return total;
   }
 

@@ -22,6 +22,8 @@ import { IonicStorageModule } from '@ionic/storage';
 import { IonicApp, IonicErrorHandler, IonicModule } from 'ionic-angular';
 import * as moment from 'moment';
 import { Clipboard } from '@ionic-native/clipboard';
+import { FileOpener } from '@ionic-native/file-opener';
+import { File } from '@ionic-native/file'
 
 import { AboutProviders } from './about/providers';
 import { ESPMComponent } from './app.component';
@@ -75,6 +77,8 @@ registerLocaleData(ptBr);
     PushService,
     StatusBar,
     Clipboard,
+    FileOpener,
+    File,
     SplashScreen,
     SocialSharing,
     ...AboutProviders,

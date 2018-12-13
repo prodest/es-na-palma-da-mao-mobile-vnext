@@ -54,7 +54,7 @@ const menus = [
         secure: true
       },
       {
-        title: 'Débitos por Veículo',
+        title: 'Consulta Veículos',
         icon: 'car',
         component: 'VehiclesPage',
         order: 2,
