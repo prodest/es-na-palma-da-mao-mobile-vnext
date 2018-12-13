@@ -32,12 +32,14 @@ export class SearchPage {
       content: 'Aguarde, buscando concursos'
     });
     loader.present();
+
     this.allConcursos = await this.searchProvider.search();
     loader.dismiss();
+
     this.clear();
   }
 
-  trackByStatus = (index: string, concurso: Concurso) => concurso.status;
+  trackByStatus = (index: string, concurso: Concurso) => {};
 
   search = e => {
     const search = this.normalize(e.target.value);
