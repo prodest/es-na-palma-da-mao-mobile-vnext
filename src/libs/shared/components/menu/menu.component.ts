@@ -54,7 +54,7 @@ const menus = [
         secure: true
       },
       {
-        title: 'Multas por Veículo',
+        title: 'Débitos por Veículo',
         icon: 'car',
         component: 'VehiclesPage',
         order: 2,

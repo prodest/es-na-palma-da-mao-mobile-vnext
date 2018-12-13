@@ -39,6 +39,13 @@
               item-end
               color-secondary-fg
               (click)="showTickets(vehicle)">MULTAS</button>
+      <button class="vehicle__button" 
+              *ngIf="!editing" 
+              ion-button 
+              clear 
+              item-end 
+              color-secondary-fg 
+              (click)="showDebits(vehicle)">DÉBITOS</button>
       <button class="vehicle__button"
               *ngIf="editing"
               ion-button

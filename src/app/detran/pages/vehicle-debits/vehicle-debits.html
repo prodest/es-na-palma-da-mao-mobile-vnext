@@ -3,12 +3,10 @@
     <button ion-button menuToggle>
       <ion-icon name="menu"></ion-icon>
     </button>
-    <ion-title>Multas do veículo</ion-title>
+    <ion-title>Débitos do veículo</ion-title>
   </ion-navbar>
 </ion-header>
 
-<ion-content>
-  <espm-vehicle [vehicle]="vehicle"></espm-vehicle>
-  <espm-tickets [tickets]="tickets"></espm-tickets>
+<ion-content>  
   <espm-debits [vehicle]="vehicle" [debits]="debits"></espm-debits>
 </ion-content>

@@ -7,6 +7,7 @@ export interface Environment {
     calendars: string;
     sep: string;
     detran: string;
+    detranInternetBanking: string;
     dio: string;
     ceturb: string;
     cbmes: string;

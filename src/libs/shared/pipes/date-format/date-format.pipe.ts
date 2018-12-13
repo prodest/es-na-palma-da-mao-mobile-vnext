@@ -19,3 +19,22 @@ export class DateFormatPipe implements PipeTransform {
     return this.datePipe.transform(new Date(dateString), format);
   }
 }
+
+@Pipe({ name: 'shortDateFormat' })
+export class ShortDateFormatPipe implements PipeTransform {
+  /**
+   * Creates an instance of DateBRPipe.
+   */
+  constructor(private datePipe: DatePipe) { }
+
+  /**
+   *
+   *
+   */
+  transform(dateString?: string, format = 'dd/MM/yyyy'): any {
+    if (!dateString) {
+      return '';
+    }
+    return this.datePipe.transform(new Date(dateString), format);
+  }
+}

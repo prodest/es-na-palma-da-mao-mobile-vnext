@@ -2,6 +2,7 @@ export * from './driver-status-name';
 export * from './charge';
 export * from './driver-license-process';
 export * from './ticket';
+export * from './debit';
 export * from './driver-status';
 export * from './vehicle';
 export * from './vehicle-info';
