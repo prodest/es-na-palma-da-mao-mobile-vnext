@@ -20,17 +20,9 @@
 
 <ion-content padding>
   <ion-list>
-    <ion-item>
-      <h2>516 - Terminal do Ibes</h2><h4>3 Km</h4>
-      <h3>Veículo: 12017</h3>
-    </ion-item>
-    <ion-item>
-      <h2>501 - Terminal de Vila Velha</h2><h4>3,2 Km</h4>
-      <h3>Veículo: 22057</h3>
-    </ion-item>
-    <ion-item>
-      <h2>501 - Terminal de Jacaraípe</h2><h4>3,3 Km</h4>
-      <h3>Veículo: 36123</h3>
+    <ion-item *ngFor="let veiculo of veiculos">
+      <h2>{{veiculo.linha}} - {{veiculo.destino}}</h2><h4>{{veiculo.distancia}} Km</h4>
+      <h3>Veículo: {{veiculo.numero}}</h3>
     </ion-item>
   </ion-list>
 </ion-content>

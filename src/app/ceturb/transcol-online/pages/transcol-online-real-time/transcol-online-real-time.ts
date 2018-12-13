@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { Geolocation, Geoposition } from '@ionic-native/geolocation';
 
 import { TranscolOnlineRealTimeService } from './../../providers';
 
@@ -22,20 +23,39 @@ export class TranscolOnlineRealTimePage {
     distancia: number
   }];
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, public transcolOnlineRealTimeService: TranscolOnlineRealTimeService) {
+  coordenadas: {
+    lat: number,
+    lon: number
+  };
+
+  constructor(public navCtrl: NavController, public navParams: NavParams, public transcolOnlineRealTimeService: TranscolOnlineRealTimeService, private geolocation: Geolocation) {
   }
 
-  ionViewDidLoad() {
-    console.log('ionViewDidLoad TranscolOnlineRealTimePage');
+  async ionViewWillLoad() {
+    /* TO DO: Colocar loading enquanto a lista de veículos não fica pronta */
+    await this.getCoordenadas();
+    this.veiculos = this.nearVehicles();
   }
 
-  /* getVeiculos() {
-    let veiculos = this.transcolOnlineRealTimeService.getNextVehicles(this.getCoordenadas());
-    this.veiculos = veiculos;
-  } */
+  async ionViewDidLoad() {
+    
+  }
+  
+  async getCoordenadas() {
+    let resp: Geoposition;
 
-  getCoordenadas() {
+    try {
+      resp = await this.geolocation.getCurrentPosition();
+    } catch (error) {
+      console.log("Erro ao obter as coordenadas", error);
+    }
+    
+    this.coordenadas = {lat: resp.coords.latitude, lon: resp.coords.longitude};
+  }
 
+  nearVehicles(): any {
+    let veiculos = this.transcolOnlineRealTimeService.getNextVehicles(this.coordenadas);
+    return veiculos;
   }
 
 }
