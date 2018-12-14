@@ -112,6 +112,15 @@ export class VehiclesPage implements OnDestroy {
       );
   };
 
+  showDebits = (vehicle: Vehicle) => {
+    this.detran
+      .getDebits(vehicle)
+      .subscribe(
+        debits => this.navCtrl.push('VehicleDebitsPage', { vehicle, plate: vehicle.plate, debits: debits }),
+        error => console.log(error)
+      );
+  };
+
   /**
    *
    *

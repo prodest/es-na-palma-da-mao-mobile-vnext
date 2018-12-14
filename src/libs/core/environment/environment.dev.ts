@@ -10,6 +10,7 @@ export const dev: Environment = {
     calendars: process.env.API_CALENDARS_URL || 'https://api.es.gov.br/developers/calendars',
     sep: process.env.API_SEP_URL || 'https://api.es.gov.br/developers/sep',
     detran: process.env.API_DETRAN_URL || 'https://api.es.gov.br/developers/detran',
+    detranInternetBanking: process.env.API_DETRAN_INTERNET_BANKING_URL || 'https://api.es.gov.br/api-detran-debitos',
     dio: process.env.API_DIO_URL || 'https://api.es.gov.br/developers/dio',
     ceturb: process.env.API_CETURB_URL || 'https://api.es.gov.br/developers/ceturb',
     cbmes: process.env.API_CBMES_URL || 'https://api.es.gov.br/developers/cbmes',

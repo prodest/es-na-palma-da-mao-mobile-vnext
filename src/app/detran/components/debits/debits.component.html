@@ -1,0 +1,19 @@
+<ion-list *ngIf="debits && debits.length"
+          class="debits">
+    <ion-list-header>
+        Histórico de multas ({{debits.length }} débitos) | {{ totalAmount() | currency:"BRL":true:"1.2" }}<button ion-button item-right (click)="generateBillet()">Gerar Guia</button>
+    </ion-list-header>
+    <ion-item *ngFor="let debit of debits">
+        <div item-start
+             class="debit__description">{{debit.dataVencimento | shortDateFormat}} </div>
+        <ion-note class="debit__date">{{debit.descricaoServico}}</ion-note>
+        <small color-secondary-fg>{{debit.valorAtualizadoFranquia | currency:"BRL":true:"1.2" }}</small>
+        
+    </ion-item>
+</ion-list>
+<ion-list *ngIf="debits && !debits.length"
+          class="debits">
+    <ion-list-header>
+        Nenhum débito encontrado
+    </ion-list-header>
+</ion-list>

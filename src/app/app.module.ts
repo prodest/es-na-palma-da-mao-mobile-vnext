@@ -21,6 +21,9 @@ import { AppAvailability } from '@ionic-native/app-availability';
 import { IonicStorageModule } from '@ionic/storage';
 import { IonicApp, IonicErrorHandler, IonicModule } from 'ionic-angular';
 import * as moment from 'moment';
+import { Clipboard } from '@ionic-native/clipboard';
+import { FileOpener } from '@ionic-native/file-opener';
+import { File } from '@ionic-native/file'
 
 import { AboutProviders } from './about/providers';
 import { ESPMComponent } from './app.component';
@@ -34,6 +37,7 @@ import { TransparencyProviders } from './secont/transparency/providers';
 import { SepProviders } from './sep/providers';
 import { SearchProvider } from './empregabilidade/providers/dt-search/dt-search';
 import { DtDetailsProvider } from './empregabilidade/providers/dt-details/dt-details';
+
 
 moment.locale('pt-br');
 registerLocaleData(ptBr);
@@ -74,6 +78,9 @@ registerLocaleData(ptBr);
     Push,
     PushService,
     StatusBar,
+    Clipboard,
+    FileOpener,
+    File,
     SplashScreen,
     SocialSharing,
     ...AboutProviders,
