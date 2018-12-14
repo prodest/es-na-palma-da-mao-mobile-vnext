@@ -14,28 +14,9 @@ export class TranscolOnlineRealTimeService {
     console.log('Hello TranscolOnlineRealTimeServices');
   }
 
-  getNextVehicles(coordenadas: {lat: number, lon: number}) {
-    /* let result = this.http.get("", ) */
-    return [
-      {
-        linha: 516,
-        destino: "Terminal do Ibes",
-        distancia: 3,
-        numero: 23012
-      },
-      {
-        linha: 501,
-        destino: "Terminal de Vila Velha",
-        distancia: 3.2,
-        numero: 23013
-      },
-      {
-        linha: 516,
-        destino: "Terminal de Jacaraípe",
-        distancia: 3.3,
-        numero: 23014
-      }
-    ];
+  async getNextVehicles(stopId: number) {
+    /* TO DO: Colocar URL nas variáveis de ambiente */
+    let result = await this.http.get(`https://api.es.gov.br/dev/realtime/nextbus/${stopId}`, )
+    return result;
   }
-
 }
