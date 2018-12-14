@@ -27,7 +27,7 @@ jobs:
             - ./
   publish-prod:
     docker:
-      - image: prodest/circleci-containers:mobile-android-v1
+      - image: prodest/circleci-containers:mobile-android-v1.1.0
     working_directory: ~/espm
     steps:
       - attach_workspace:
