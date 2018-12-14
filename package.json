@@ -20,7 +20,6 @@
     "run:prod:android": "npm run build:prod:android && cordova run android",
     "run:prod:ios": "npm run build:prod:ios && cordova run ios",
     "publish:ios": "DELIVER_ITMSTRANSPORTER_ADDITIONAL_UPLOAD_PARAMETERS='-t DAV' fastlane ios beta",
-    "ionic:serve": "ionic-app-scripts serve -p 3000",
     "htmlhint": "htmlhint --config .htmlhintrc",
     "format": "prettier --find-config-path --write",
     "format:check": "prettier --find-config-path --list-different \"src/{app,libs,theme}/**/*{.ts,.js,.json,.css,.scss}\"",
