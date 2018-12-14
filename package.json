@@ -147,7 +147,7 @@
   },
   "devDependencies": {
     "@angular/language-service": "^6.0.9",
-    "@ionic/app-scripts": "3.2.0",
+    "@ionic/app-scripts": "^3.2.1",
     "@ionic/cli-plugin-proxy": "^1.5.7",
     "@types/leaflet": "^1.2.7",
     "@types/leaflet.markercluster": "^1.0.3",
@@ -157,7 +157,7 @@
     "cz-conventional-changelog": "^2.1.0",
     "dotenv": "^4.0.0",
     "googleapis": "^28.1.0",
-    "htmlhint": "^0.9.13",
+    "htmlhint": "^0.10.1",
     "husky": "^0.14.3",
     "lint-staged": "^6.0.0",
     "lite-server": "^2.4.0",
