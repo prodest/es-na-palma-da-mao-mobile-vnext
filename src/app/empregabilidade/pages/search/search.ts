@@ -4,6 +4,7 @@ import { SearchProvider } from '../../providers/dt-search/dt-search';
 import deburr from 'lodash-es/deburr';
 import { Concurso } from '../../dto/Concurso';
 import { DtDetailsProvider } from '../../providers/dt-details/dt-details';
+import { finalize } from 'rxjs/operators';
 @IonicPage()
 @Component({
   selector: 'espm-page-search',
@@ -32,11 +33,17 @@ export class SearchPage {
       content: 'Aguarde, buscando concursos'
     });
     loader.present();
-
-    this.allConcursos = await this.searchProvider.search();
-    loader.dismiss();
-
-    this.clear();
+    this.searchProvider
+      .search()
+      .pipe(
+        finalize(() => {
+          loader.dismiss();
+          this.clear();
+        })
+      )
+      .subscribe(concurso => {
+        this.allConcursos = concurso;
+      });
   }
 
   trackByStatus = (index: string, concurso: Concurso) => {};
@@ -57,9 +64,17 @@ export class SearchPage {
       content: 'Aguarde, buscando detahes'
     });
     loader.present();
-    let concurso: Concurso = await this.provideDetail.concursoDetalhe(id);
-    loader.dismiss();
-    this.navCtrl.push('DetailsPage', concurso);
+
+    this.provideDetail
+      .concursoDetalhe(id)
+      .pipe(
+        finalize(() => {
+          loader.dismiss();
+        })
+      )
+      .subscribe(concurso => {
+        this.navCtrl.push('DetailsPage', concurso);
+      });
   }
 
   private normalize = (term: string) => (term ? deburr(term.toLowerCase()) : '');

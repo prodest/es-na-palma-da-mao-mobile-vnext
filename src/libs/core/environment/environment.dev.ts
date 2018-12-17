@@ -19,7 +19,7 @@ export const dev: Environment = {
     acessocidadaoApi: process.env.API_ACESSO_CIDADAO_URL || 'https://developers.es.gov.br/acessocidadao.webapi/api',
     acessocidadao: process.env.ACESSO_CIDADAO_URL || 'https://developers.es.gov.br/acessocidadao',
     feedback: process.env.API_FEEDBACK_URL || 'https://developers.es.gov.br/demandas',
-    empregabilidade: process.env.API_EMPREGABILIDADE || 'https://api.es.gov.br/dev/selecaodt/concursos/'
+    empregabilidade: process.env.API_EMPREGABILIDADE || 'https://api.es.gov.br/selecaodt/concursos/'
   },
   push: {
     senderId: process.env.PUSH_SENDER_ID,
