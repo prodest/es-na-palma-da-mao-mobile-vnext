@@ -1,7 +1,7 @@
 <ion-list *ngIf="debits && debits.length"
           class="debits">
     <ion-list-header>
-        Histórico de multas ({{debits.length }} débitos) | {{ totalAmount() | currency:"BRL":true:"1.2" }}<button ion-button item-right (click)="generateBillet()">Gerar Guia</button>
+        ({{debits.length }} débitos) | {{ totalAmount() | currency:"BRL":true:"1.2" }}<button ion-button item-right (click)="generateBillet()">Gerar Guia</button>
     </ion-list-header>
     <ion-item *ngFor="let debit of debits">
         <div item-start
