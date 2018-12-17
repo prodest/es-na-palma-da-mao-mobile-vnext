@@ -18,8 +18,8 @@ export class ClassificacaoPage {
   allClassificado: Classificado[];
   filteredClassificado: Classificado[];
   constructor(public navCtrl: NavController, public navParams: NavParams, public loadingCtrl: LoadingController) {}
-  async ionViewWillLoad() {
-    this.allClassificado = await this.navParams.data;
+  ionViewWillLoad() {
+    this.allClassificado = this.navParams.data;
     this.clear();
   }
   clear = () => {

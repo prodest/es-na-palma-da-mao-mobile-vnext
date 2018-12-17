@@ -16,14 +16,9 @@ export class DetailsPage {
     public navCtrl: NavController,
     public navParams: NavParams,
     public detailsProvide: DtDetailsProvider
-  ) {
-    this.inicializa();
-  }
-  async ionViewWillLoad() {
-    this.concurso = await this.navParams.data;
-  }
-  async inicializa() {
-    this.concurso = await this.navParams.data;
+  ) {}
+  ionViewWillLoad() {
+    this.concurso = this.navParams.data;
   }
 
   openLink(link) {

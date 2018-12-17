@@ -3,7 +3,7 @@ import { Injectable, Inject } from '@angular/core';
 import { Storage } from '@ionic/storage';
 import { Concurso } from '../../dto/Concurso';
 import { EnvVariables, Environment } from '@espm/core';
-import { Observable } from 'rxjs';
+import { Observable } from 'rxjs/Observable';
 @Injectable()
 export class SearchProvider {
   constructor(public http: HttpClient, private storage: Storage, @Inject(EnvVariables) private env: Environment) {}
