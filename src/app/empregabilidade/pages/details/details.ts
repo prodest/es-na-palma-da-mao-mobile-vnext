@@ -19,6 +19,9 @@ export class DetailsPage {
   ) {
     this.inicializa();
   }
+  async ionViewWillLoad() {
+    this.concurso = await this.navParams.data;
+  }
   async inicializa() {
     this.concurso = await this.navParams.data;
   }
