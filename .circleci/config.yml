@@ -18,7 +18,7 @@ jobs:
       - run:
           name: Get secrets
           command: |
-            git clone -q https://$GITLAB_USER:$GITLAB_PASSWORD@gitlab.es.gov.br/SGPRJ/espm-ci-secrets.git > /dev/null 2>&1
+            git clone -q https://gitlab-ci-token:$GITLAB_CI_TOKEN@gitlab.es.gov.br/SGPRJ/espm-ci-secrets.git > /dev/null 2>&1
             cp espm-ci-secrets/.env .
             cp espm-ci-secrets/android/* .
       - persist_to_workspace:
