@@ -33,9 +33,4 @@ export class AuthStore extends Store<AuthState> {
   constructor() {
     super(initialState);
   }
-
-  /**
-   *
-   */
-  reset = () => this.setState(() => initialState);
 }

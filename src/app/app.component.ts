@@ -1,5 +1,5 @@
 import { Component, Inject, NgZone, OnDestroy, ViewChild } from '@angular/core';
-import { akitaDevtools, enableAkitaProdMode } from '@datorama/akita';
+import { akitaDevtools, enableAkitaProdMode, akitaConfig } from '@datorama/akita';
 import { AuthQuery, AuthService, Environment, EnvVariables, PushService } from '@espm/core';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import { StatusBar } from '@ionic-native/status-bar';
@@ -41,8 +41,15 @@ export class ESPMComponent implements OnDestroy {
     if (environment.production) {
       enableAkitaProdMode();
     }
+
+    akitaConfig({
+      resettable: true
+    });
   }
 
+  /**
+   *
+   */
   ngOnDestroy() {
     // always unsubscribe your subscriptions to prevent leaks
     this.onResumeSub.unsubscribe();

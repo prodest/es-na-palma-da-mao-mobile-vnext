@@ -3,7 +3,7 @@ import { Observable } from 'rxjs/Observable';
 import { of } from 'rxjs/observable/of';
 import { _throw } from 'rxjs/observable/throw';
 import { flatMap, map, tap, finalize } from 'rxjs/operators';
-
+import { resetStores } from '@datorama/akita';
 import { Environment, EnvVariables } from './../environment';
 import { AcessoCidadaoApiService } from './acesso-cidadao-api.service';
 import { JwtHelper } from './jwt-helper';
@@ -43,12 +43,15 @@ export class AcessoCidadaoService {
   }
 
   /**
-   * Faz logout do usuário. Remove o token do localstore e os claims salvos.
+   * Limpa stores.
    */
   logout = () => {
-    this.authStore.reset();
+    resetStores();
   };
 
+  /**
+   *
+   */
   getAccessToken = (): Observable<Token> => {
     return of(this.authQuery.state.accessToken);
   };
