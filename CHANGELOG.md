@@ -2,6 +2,17 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+<a name="5.0.4"></a>
+## [5.0.4](https://github.com/prodest/es-na-palma-da-mao-mobile-vnext/compare/v5.0.3...v5.0.4) (2018-12-18)
+
+
+### Bug Fixes
+
+* **classificação:** melhorias no código ([c8d20f2](https://github.com/prodest/es-na-palma-da-mao-mobile-vnext/commit/c8d20f2))
+* **inicializa:** função estava ruim. ([3c873cf](https://github.com/prodest/es-na-palma-da-mao-mobile-vnext/commit/3c873cf))
+
+
+
 <a name="5.0.3"></a>
 ## [5.0.3](https://github.com/prodest/es-na-palma-da-mao-mobile-vnext/compare/v5.0.2...v5.0.3) (2018-12-17)
 
