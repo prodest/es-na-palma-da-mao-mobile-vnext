@@ -3,6 +3,7 @@ import { Injectable, Inject } from '@angular/core';
 import { Storage } from '@ionic/storage';
 import { Concurso } from '../../dto/Concurso';
 import { EnvVariables, Environment } from '@espm/core';
+import { Observable } from 'rxjs/Observable';
 @Injectable()
 export class SearchProvider {
   constructor(public http: HttpClient, private storage: Storage, @Inject(EnvVariables) private env: Environment) {}
@@ -25,11 +26,7 @@ export class SearchProvider {
     return concursos;
   }
 
-  async search(): Promise<Array<Concurso>> {
-    try {
-      return (await this.http.get(this.env.api.empregabilidade).toPromise()) as Array<Concurso>;
-    } catch (error) {
-      throw error;
-    }
+  search(): Observable<Array<Concurso>> {
+    return this.http.get<Array<Concurso>>(this.env.api.empregabilidade);
   }
 }

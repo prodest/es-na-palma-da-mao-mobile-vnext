@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams, LoadingController } from 'ionic-angular';
 import { Concurso } from '../../dto/Concurso';
 import { DtDetailsProvider } from '../../providers/dt-details/dt-details';
-import { Classificado } from '../../dto/Classificado';
+import { finalize } from 'rxjs/operators';
 @IonicPage()
 @Component({
   selector: 'espm-page-details',
@@ -16,11 +16,9 @@ export class DetailsPage {
     public navCtrl: NavController,
     public navParams: NavParams,
     public detailsProvide: DtDetailsProvider
-  ) {
-    this.inicializa();
-  }
-  async inicializa() {
-    this.concurso = await this.navParams.data;
+  ) {}
+  ionViewWillLoad() {
+    this.concurso = this.navParams.data;
   }
 
   openLink(link) {
@@ -31,8 +29,15 @@ export class DetailsPage {
       content: 'Aguarde, buscando classificados'
     });
     loader.present();
-    let classificados: Classificado[] = await this.detailsProvide.classificados(id);
-    loader.dismiss();
-    this.navCtrl.push('ClassificacaoPage', classificados);
+    this.detailsProvide
+      .classificados(id)
+      .pipe(
+        finalize(() => {
+          loader.dismiss();
+        })
+      )
+      .subscribe(classificados => {
+        this.navCtrl.push('ClassificacaoPage', classificados);
+      });
   }
 }
