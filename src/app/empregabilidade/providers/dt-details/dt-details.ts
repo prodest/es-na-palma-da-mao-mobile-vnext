@@ -3,7 +3,7 @@ import { Injectable, Inject } from '@angular/core';
 import { Concurso } from '../../dto/Concurso';
 import { Classificado } from '../../dto/Classificado';
 import { EnvVariables, Environment } from '@espm/core';
-import { Observable } from 'rxjs';
+import { Observable } from 'rxjs/Observable';
 
 /*
   Generated class for the DtDetailsProvider provider.
