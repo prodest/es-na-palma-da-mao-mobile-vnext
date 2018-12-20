@@ -63,6 +63,18 @@ const menus = [
     ]
   },
   {
+    name: 'E-Docs',
+    items: [
+      {
+        title: 'Documentos para assinar',
+        icon: 'create',
+        component: 'DocumentsToSignPage',
+        order: 2,
+        secure: false
+      }
+    ]
+  },
+  {
     name: 'Ceturb',
     items: [
       {

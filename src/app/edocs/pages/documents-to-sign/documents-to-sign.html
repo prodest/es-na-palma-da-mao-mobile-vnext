@@ -1,0 +1,41 @@
+<ion-header>
+  <ion-navbar>
+    <ion-title>E-docs - Assinatura de documentos</ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content>
+  <ion-list>
+    <ion-list-header>
+      Meus documentos
+    </ion-list-header>
+    <button ion-item
+            detail-push
+            (click)="openPage('WaitingForMySignaturePage')">
+      <ion-icon item-start
+                name="md-information-circle"></ion-icon>
+      <h3>Aguardando minha assinatura</h3>
+    </button>
+    <button ion-item
+            detail-push
+            (click)="openPage('')">
+      <ion-icon item-start
+                name="md-create"></ion-icon>
+      <h3>Assinei - aguardando os demais</h3>
+    </button>
+    <button ion-item
+            detail-push
+            (click)="openPage('')">
+      <ion-icon item-start
+                name="md-close-circle"></ion-icon>
+      <h3>Recusei - aguardando os demais</h3>
+    </button>
+    <button ion-item
+            detail-push
+            (click)="openPage('')">
+      <ion-icon item-start
+                name="md-cloud-upload"></ion-icon>
+      <h3>Captura iniciada por mim</h3>
+    </button>
+  </ion-list>
+</ion-content>

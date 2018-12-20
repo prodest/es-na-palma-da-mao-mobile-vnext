@@ -4,6 +4,9 @@ import { Environment } from './environment';
 export const dev: Environment = {
   production: false,
   envName: 'dev',
+  mocks: {
+    edocs: false
+  },
   api: {
     invalidTokenHttpCode: 498,
     news: process.env.API_NEWS_URL || 'https://api.es.gov.br/developers/news',
@@ -18,7 +21,8 @@ export const dev: Environment = {
     transparency: process.env.API_TRANSPARENCY_URL || 'https://api.es.gov.br/developers/transparency',
     acessocidadaoApi: process.env.API_ACESSO_CIDADAO_URL || 'https://developers.es.gov.br/acessocidadao.webapi/api',
     acessocidadao: process.env.ACESSO_CIDADAO_URL || 'https://developers.es.gov.br/acessocidadao',
-    feedback: process.env.API_FEEDBACK_URL || 'https://developers.es.gov.br/demandas'
+    feedback: process.env.API_FEEDBACK_URL || 'https://developers.es.gov.br/demandas',
+    edocs: process.env.API_EDOCS_URL || 'http://api.e-docs.des.es.gov.br'
   },
   push: {
     senderId: process.env.PUSH_SENDER_ID,

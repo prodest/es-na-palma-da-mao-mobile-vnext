@@ -1,5 +1,6 @@
 import { InjectionToken } from '@angular/core';
 
+import { Environment } from './environment';
 import { dev } from './environment.dev';
 import { prod } from './environment.prod';
 
@@ -14,6 +15,8 @@ export function environmentFactory() {
   console.log('env: ', env);
   return env;
 }
+
+export const environment: Environment = environmentFactory();
 
 // envronment provider
 export const EnvironmentProvider = {

@@ -1,0 +1,80 @@
+<ion-card>
+    <button ion-item
+            detail-none
+            class="doc-header">
+        <h2>
+            <ion-icon name="md-lock"
+                      *ngIf="document.isBloqueadoParaAssinaturas"></ion-icon> {{document.nome}}
+        </h2>
+        <small text-wrap
+               class="blocked"
+               *ngIf="document.isBloqueadoParaAssinaturas">
+            <strong>BLOQUEADO</strong> para assinaturas
+        </small>
+        <p class="doc-header-badges">
+            <button ion-button
+                    icon-start
+                    clear
+                    small>
+                <ion-icon name="md-copy"></ion-icon>
+                <div>{{document.paginas}} páginas</div>
+            </button>
+            <button ion-button
+                    icon-start
+                    clear
+                    small>
+                <ion-icon name="text"></ion-icon>
+                <div>{{document.tamanho}}</div>
+            </button>
+            <button *ngIf="document.soFaltaOUsuarioSeManifestar"
+                    ion-button
+                    icon-start
+                    clear
+                    small>
+                <ion-icon name="md-create"></ion-icon>
+                <div>Último</div>
+            </button>
+        </p>
+    </button>
+    <ion-card-content>
+
+        <small text-nowrap><strong>Carregado em</strong>
+            <ion-icon name="calendar"></ion-icon> {{document.dataEnvioLabel}}
+        </small>
+        <small text-nowrap><strong>Carregado por</strong>
+            <ion-icon name="person"></ion-icon> {{document.capturador.nome | capitalize }}
+        </small>
+        <small text-nowrap><strong>Para assinar como</strong> {{document.papelAssinatura }}</small>
+
+    </ion-card-content>
+    <div class="doc-footer">
+        <button ion-button
+                icon-start
+                clear
+                accent
+                small
+                (click)="donwload.emit(document)">
+            <ion-icon name="md-download"></ion-icon>
+            <div>DOWNLOAD</div>
+        </button>
+        <button *ngIf="!document.isBloqueadoParaAssinaturas"
+                ion-button
+                icon-start
+                clear
+                accent
+                small
+                (click)="sign.emit(document)">
+            <ion-icon name="md-create"></ion-icon>
+            <div>ASSINAR</div>
+        </button>
+        <button ion-button
+                icon-only
+                clear
+                accent
+                small
+                class="btn-more"
+                (click)="showDocumentOptions(document)">
+            <ion-icon name="md-more"></ion-icon>
+        </button>
+    </div>
+</ion-card>
