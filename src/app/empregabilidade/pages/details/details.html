@@ -11,11 +11,11 @@
         <p ion-item>{{ data.nome }}</p>
         <div ion-item *ngIf="data.inicio" style="padding-left: 15px;">
           <ion-label>Inicio</ion-label>
-          <ion-datetime disabled displayFormat="MM/DD/YYYY" [(ngModel)]="data.inicio"></ion-datetime>
+          <ion-datetime disabled displayFormat="DD/MM/YYYY" [(ngModel)]="data.inicio"></ion-datetime>
         </div>
         <div ion-item *ngIf="data.fim" style="padding-left: 15px;">
           <ion-label>Fim</ion-label>
-          <ion-datetime disabled displayFormat="MM/DD/YYYY" [(ngModel)]="data.fim"></ion-datetime>
+          <ion-datetime disabled displayFormat="DD/MM/YYYY" [(ngModel)]="data.fim"></ion-datetime>
         </div>
       </div>
     </div>
