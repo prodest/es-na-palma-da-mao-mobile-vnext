@@ -136,7 +136,7 @@ export class VehiclesService {
 
     return this.api
       .syncVehicles(syncData)
-      .pipe(flatMap((vehiclesData: VehiclesData) => this.storage.mergeValue('vehicles', vehiclesData.vehicles)));
+      .pipe(flatMap((vehiclesData: VehiclesData) => this.storage.mergeValue('vehicles', this.normalizeVehicle(vehiclesData.vehicles))));
   };
 
   /**
@@ -169,5 +169,23 @@ export class VehiclesService {
    */
   private showMessage = (message: string) => {
     this.toastCtrl.create({ message, duration: 4000 }).present();
+  };
+
+  /**
+   *
+   */
+  private normalizeVehicle = (data: any) => {
+    return data.map((vehicle: any) => {
+      if (vehicle.info) {
+        return {
+          color: vehicle.info.color,
+          model: vehicle.info.model,
+          plate: vehicle.plate,
+          renavam: vehicle.renavam
+        };
+      } else {
+        return vehicle;
+      }
+    });
   };
 }
