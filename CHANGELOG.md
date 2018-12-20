@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+<a name="5.0.6"></a>
+## [5.0.6](https://github.com/prodest/es-na-palma-da-mao-mobile-vnext/compare/v5.0.5...v5.0.6) (2018-12-20)
+
+
+### Bug Fixes
+
+* **veículo:** modelo e cor não aparecendo na listagem ([d5b5cbf](https://github.com/prodest/es-na-palma-da-mao-mobile-vnext/commit/d5b5cbf))
+
+
+
 <a name="5.0.5"></a>
 ## [5.0.5](https://github.com/prodest/es-na-palma-da-mao-mobile-vnext/compare/v5.0.4...v5.0.5) (2018-12-19)
 
