@@ -2,6 +2,23 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+<a name="5.1.0"></a>
+# [5.1.0](https://github.com/prodest/es-na-palma-da-mao-mobile-vnext/compare/v5.0.6...v5.1.0) (2018-12-21)
+
+
+### Features
+
+* **core:** adiciona loading service ([b96e3e4](https://github.com/prodest/es-na-palma-da-mao-mobile-vnext/commit/b96e3e4))
+* **core:** adiciona toast service ([03dacf1](https://github.com/prodest/es-na-palma-da-mao-mobile-vnext/commit/03dacf1))
+* **edocs:** adiciona documentos aguardando assinatura, assinados, recusados e capturados por mim ([da6230f](https://github.com/prodest/es-na-palma-da-mao-mobile-vnext/commit/da6230f))
+* **edocs:** adiciona visualização de documentos e melhora assinar ([e58a04c](https://github.com/prodest/es-na-palma-da-mao-mobile-vnext/commit/e58a04c))
+* **edocs:** versão inicial de documentos (wip) ([131d4d0](https://github.com/prodest/es-na-palma-da-mao-mobile-vnext/commit/131d4d0))
+* **shared:** adiciona in-view component ([5d8973c](https://github.com/prodest/es-na-palma-da-mao-mobile-vnext/commit/5d8973c))
+* **shared:** adiciona ngSubscribe directive ([9b105e6](https://github.com/prodest/es-na-palma-da-mao-mobile-vnext/commit/9b105e6))
+* **state:** limpa todas as stores no logout ([7e7f0d6](https://github.com/prodest/es-na-palma-da-mao-mobile-vnext/commit/7e7f0d6))
+
+
+
 <a name="5.0.6"></a>
 ## [5.0.6](https://github.com/prodest/es-na-palma-da-mao-mobile-vnext/compare/v5.0.5...v5.0.6) (2018-12-20)
 
