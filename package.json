@@ -9,6 +9,7 @@
     "serve": "lite-server --baseDir=\"www\"",
     "clean": "ionic-app-scripts clean",
     "build": "ionic-app-scripts build",
+    "ionic:serve": "ionic-app-scripts serve -p 3000",
     "lint": "ionic-app-scripts lint --bailOnLintError true",
     "build:android": "ionic-app-scripts build --platform android --target cordova",
     "build:ios": "ionic-app-scripts build --platform ios --target cordova",
