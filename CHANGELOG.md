@@ -2,6 +2,17 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+<a name="5.1.2"></a>
+## [5.1.2](https://github.com/prodest/es-na-palma-da-mao-mobile-vnext/compare/v5.1.1...v5.1.2) (2018-12-21)
+
+
+### Bug Fixes
+
+* **AoT:** erro de compilação aot ([d3975de](https://github.com/prodest/es-na-palma-da-mao-mobile-vnext/commit/d3975de))
+* **edocs:** usando injectable em class base ([27ccd45](https://github.com/prodest/es-na-palma-da-mao-mobile-vnext/commit/27ccd45))
+
+
+
 <a name="5.1.1"></a>
 ## [5.1.1](https://github.com/prodest/es-na-palma-da-mao-mobile-vnext/compare/v5.1.0...v5.1.1) (2018-12-21)
 
