@@ -1,0 +1,17 @@
+edocs-pdf-preview-page {
+  edocs-pdf-preview {
+    display: flex !important;
+    align-items: center;
+    justify-content: center;
+    width: 100vw !important;
+    height: 100vh !important;
+    pdf-viewer {
+      width: 100vw !important;
+      height: 100vh !important;
+      display: block;
+      * {
+        width: 100vw !important;
+      }
+    }
+  }
+}

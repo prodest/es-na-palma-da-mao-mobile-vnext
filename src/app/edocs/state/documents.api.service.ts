@@ -68,15 +68,15 @@ export class DocumentsApiService extends ApiBaseService<Document> {
   /**
    *
    */
-  sign = (id: ID): Observable<void> => {
-    return this.http.post<void>(this.endpoint(`${id}/assinar`), {}).pipe(share());
+  sign = (id: ID): Observable<string> => {
+    return this.http.post<string>(this.endpoint(`${id}/assinar`), {}).pipe(share());
   };
 
   /**
    *
    */
-  refuse = (id: ID): Observable<void> => {
-    return this.http.post<void>(this.endpoint(`${id}/recusar`), {}).pipe(share());
+  refuse = (id: ID): Observable<string> => {
+    return this.http.post<string>(this.endpoint(`${id}/recusar`), {}).pipe(share());
   };
 
   /**

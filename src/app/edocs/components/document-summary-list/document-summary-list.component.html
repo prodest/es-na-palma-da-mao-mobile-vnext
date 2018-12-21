@@ -18,19 +18,17 @@
             <ng-container *ngSubscribe="documents$ as documents">
                 <ion-spinner *ngIf="isLoading && !documents.length && !isRefreshing; else docs"></ion-spinner>
                 <ng-template #docs>
-                    <in-view>
-                        <ng-template>
-                            <edocs-document-summary [document]="doc"
-                                                    *ngFor="let doc of documents; trackBy:trackById"
-                                                    (sign)="sign($event)"
-                                                    (block)="block($event)"
-                                                    (unblock)="unblock($event)"
-                                                    (donwload)="donwload($event)"
-                                                    (showDetails)="showDetails($event)"
-                                                    (refuse)="refuse($event)">
-                            </edocs-document-summary>
-                        </ng-template>
-                    </in-view>
+
+                    <edocs-document-summary *ngFor="let doc of documents; trackBy:trackById"
+                                            [document]="doc"
+                                            (sign)="sign($event)"
+                                            (block)="block($event)"
+                                            (unblock)="unblock($event)"
+                                            (open)="open($event)"
+                                            (showDetails)="showDetails($event)"
+                                            (refuse)="refuse($event)">
+                    </edocs-document-summary>
+
                     <ion-item *ngIf="!documents.length"
                               text-center
                               padding>

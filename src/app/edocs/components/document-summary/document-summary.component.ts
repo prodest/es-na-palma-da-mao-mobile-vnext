@@ -1,5 +1,5 @@
 import { ChangeDetectionStrategy, Component, EventEmitter, Input, Output } from '@angular/core';
-import { ActionSheetController, AlertController } from 'ionic-angular';
+import { ActionSheetController } from 'ionic-angular';
 
 import { Document, ManifestacaoUsuario } from '../../state';
 
@@ -14,7 +14,7 @@ export class DocumentSummaryComponent {
   @Output() block = new EventEmitter<Document>();
   @Output() unblock = new EventEmitter<Document>();
   @Output() sign = new EventEmitter<Document>();
-  @Output() donwload = new EventEmitter<Document>();
+  @Output() open = new EventEmitter<Document>();
   @Output() showDetails = new EventEmitter<Document>();
 
   ManifestacaoUsuario = ManifestacaoUsuario;
@@ -22,7 +22,7 @@ export class DocumentSummaryComponent {
   /**
    *
    */
-  constructor(private actionSheetCtrl: ActionSheetController, private alertCtrl: AlertController) {}
+  constructor(private actionSheetCtrl: ActionSheetController) {}
 
   /**
    *
@@ -32,21 +32,22 @@ export class DocumentSummaryComponent {
 
     if (!document.isBloqueadoParaAssinaturas) {
       // só pode recusar se não se manifestou
-      if (document.manifestacaoUsuario === ManifestacaoUsuario.NaoSeManifestou) {
-        buttons.push({
-          text: 'Recusar',
-          icon: 'md-thumbs-down',
-          handler: () => {
-            this.refuse.emit(document);
-          }
-        });
-      }
+      // todo
+      // if (document.manifestacaoUsuario === ManifestacaoUsuario.NaoSeManifestou) {
+      //   buttons.push({
+      //     text: 'Recusar',
+      //     icon: 'md-thumbs-down',
+      //     handler: () => {
+      //       this.refuse.emit(document);
+      //     }
+      //   });
+      // }
 
       buttons.push({
         text: 'Bloquear assinaturas',
         icon: 'md-lock',
         handler: () => {
-          this.tryBlockDocument(document);
+          this.block.emit(document);
         }
       });
     }
@@ -56,75 +57,24 @@ export class DocumentSummaryComponent {
         text: 'Desbloquear assinaturas',
         icon: 'md-unlock',
         handler: () => {
-          this.tryUnblockDocument(document);
+          this.unblock.emit(document);
         }
       });
     }
 
-    buttons.push({
-      text: 'Ver detalhes',
-      icon: 'md-eye',
-      handler: () => {
-        this.showDetails.emit(document);
-      }
-    });
+    // todo
+    // buttons.push({
+    //   text: 'Ver detalhes',
+    //   icon: 'md-eye',
+    //   handler: () => {
+    //     this.showDetails.emit(document);
+    //   }
+    // });
 
     let actionSheet = this.actionSheetCtrl.create({
       title: `${document.nome}`,
       buttons
     });
     actionSheet.present();
-  };
-
-  /**
-   *
-   *
-   */
-  tryBlockDocument = (document: Document): void => {
-    let alert = this.alertCtrl.create({
-      title: 'Bloquear assinaturas',
-      message: `Ao bloquear o documento, não será possível assiná-lo ou recusá-lo enquanto o documento estiver bloqueado. Deseja bloquear assinaturas do documento ${
-        document.nome
-      }?`,
-      buttons: [
-        {
-          text: 'Cancelar',
-          role: 'cancel'
-        },
-        {
-          text: 'Bloquear',
-          handler: () => {
-            this.block.emit(document);
-          }
-        }
-      ]
-    });
-    alert.present();
-  };
-
-  /**
-   *
-   *
-   */
-  tryUnblockDocument = (document: Document): void => {
-    let alert = this.alertCtrl.create({
-      title: 'Desbloquear assinaturas',
-      message: `Ao desbloquear o documento, ele estará liberado para receber novas assinaturas ou recusas. Deseja desbloquear assinaturas do documento ${
-        document.nome
-      }?`,
-      buttons: [
-        {
-          text: 'Cancelar',
-          role: 'cancel'
-        },
-        {
-          text: 'Desbloquear',
-          handler: () => {
-            this.unblock.emit(document);
-          }
-        }
-      ]
-    });
-    alert.present();
   };
 }

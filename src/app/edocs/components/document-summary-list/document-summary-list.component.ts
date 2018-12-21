@@ -9,7 +9,7 @@ import {
   ViewChild,
 } from '@angular/core';
 import { trackById } from '@espm/core';
-import { InfiniteScroll, Refresher } from 'ionic-angular';
+import { InfiniteScroll, NavController, Refresher } from 'ionic-angular';
 import { untilDestroyed } from 'ngx-take-until-destroy';
 import { Observable } from 'rxjs/Observable';
 import { filter, tap } from 'rxjs/operators';
@@ -35,7 +35,7 @@ export class DocumentSummaryListComponent implements OnChanges, OnInit, OnDestro
   /**
    *
    */
-  constructor(private docsService: DocumentsService, private docsQuery: DocumentsQuery) {}
+  constructor(private docsService: DocumentsService, private docsQuery: DocumentsQuery, private navCtrl: NavController) {}
 
   /**
    *
@@ -106,7 +106,8 @@ export class DocumentSummaryListComponent implements OnChanges, OnInit, OnDestro
    *
    */
   sign = (document: Document) => {
-    this.docsService.sign(document);
+    this.docsService.setDocumentAsActive(document);
+    this.navCtrl.push('SignDocumentPage');
   };
 
   /**
@@ -126,10 +127,9 @@ export class DocumentSummaryListComponent implements OnChanges, OnInit, OnDestro
   /**
    *
    */
-  donwload = (document: Document) => {
-    this.docsService.generateUrl(document).subscribe((url: string) => {
-      window.open(url, '_system');
-    });
+  open = (document: Document) => {
+    this.docsService.setDocumentAsActive(document);
+    this.navCtrl.push('PdfPreviewPage');
   };
 
   /**

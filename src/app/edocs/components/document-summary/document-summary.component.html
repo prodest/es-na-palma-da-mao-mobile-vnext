@@ -17,9 +17,9 @@
                 clear
                 accent
                 small
-                (click)="donwload.emit(document)">
-            <ion-icon name="md-download"></ion-icon>
-            <div>DOWNLOAD</div>
+                (click)="open.emit(document)">
+            <ion-icon name="md-copy"></ion-icon>
+            <div>Ver documento</div>
         </button>
         <button *ngIf="!document.isBloqueadoParaAssinaturas && document.manifestacaoUsuario === ManifestacaoUsuario.NaoSeManifestou"
                 ion-button

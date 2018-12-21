@@ -1,0 +1,60 @@
+<ion-header>
+    <ion-navbar>
+        <ion-title>
+            Assinar documento
+        </ion-title>
+        <ion-buttons end>
+            <button ion-button
+                    icon-only
+                    (click)="dismiss()">
+                <ion-icon name="md-close"></ion-icon>
+            </button>
+        </ion-buttons>
+    </ion-navbar>
+</ion-header>
+<ion-content>
+    <div margin>
+        <ion-item>
+            <ion-icon name="md-copy"
+                      item-start></ion-icon>
+            <p>
+                {{document.nome}}
+            </p>
+        </ion-item>
+        <p>
+            Este documento será assinado eletronicamente na forma do art. 6º § 1º, e será considerado ORIGINAL para
+            todos
+            os efeitos legais, na forma do art. 10 (Decreto nº 4112-R, de 14/06/2017).
+        </p>
+
+        <div id="signature"
+             padding>
+            <h4>{{document.capturador.nome}} <br> {{document.papelAssinatura}}</h4>
+        </div>
+
+        <ion-note margin>
+            Ao assinar o documento, não será possível desfazer a assinatura.
+        </ion-note>
+
+        <div *ngIf="document.soFaltaOUsuarioSeManifestar">
+            <ion-item no-lines>
+                <ion-icon name="md-alert"
+                          item-start></ion-icon>
+                <p text-wrap>
+                    Você é o último indicado a assinar o documento.
+                    Desta forma, assim que você assinar, <strong>o documento será CAPTURADO no sistema.</strong>
+                </p>
+            </ion-item>
+        </div>
+    </div>
+</ion-content>
+<ion-footer>
+    <button ion-button
+            full
+            large
+            icon-left
+            color-secondary
+            (click)="sign(document)">
+        <ion-icon name="create"></ion-icon> Assinar
+    </button>
+</ion-footer>

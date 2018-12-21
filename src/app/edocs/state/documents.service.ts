@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { increment, transaction } from '@datorama/akita';
-import { LoadingService } from '@espm/core';
+import { LoadingService, ToastService } from '@espm/core';
+import { AlertController } from 'ionic-angular';
 import { Observable } from 'rxjs/Observable';
 import { finalize } from 'rxjs/operators';
 
@@ -28,6 +29,8 @@ export class DocumentsService {
     private docsStore: DocumentsStore,
     private docsQuery: DocumentsQuery,
     private loadingService: LoadingService,
+    private alertCtrl: AlertController,
+    private toast: ToastService,
     private api: DocumentsApiService // private loading: LoadingService
   ) {}
 
@@ -37,6 +40,13 @@ export class DocumentsService {
    */
   setActiveScope = (scope: ScopeName) => {
     this.docsStore.setActiveScope(scope);
+  };
+
+  /**
+   *
+   */
+  setDocumentAsActive = (document: Document) => {
+    this.docsStore.setActive(document.id);
   };
 
   /**
@@ -174,40 +184,104 @@ export class DocumentsService {
    *
    */
   sign = (document: Document) => {
-    // optmistic update
     this.docsStore.sign(document.id);
+    this.toast.show(`Você assinou o documento ${document.nome}`);
 
-    this.api.sign(document.id).subscribe(noop, () => this.docsStore.undoManifestation(document.id));
+    // api call
+    this.api.sign(document.id).subscribe(
+      (protocol?: string) => {
+        !!protocol && this.docsStore.remove(document.id);
+      },
+      () => this.docsStore.undoManifestation(document.id)
+    );
   };
 
   /**
    *
    */
   refuse = (document: Document) => {
-    // optmistic update
-    this.docsStore.refuse(document.id);
+    let alert = this.alertCtrl.create({
+      title: 'Recusar a assinar',
+      message: `Deseja mesmo recusar a assinar o documento ${document.nome}?`,
+      buttons: [
+        {
+          text: 'Cancelar',
+          role: 'cancel'
+        },
+        {
+          text: 'Recusar',
+          handler: () => {
+            // optmistic update
+            this.docsStore.refuse(document.id);
+            this.toast.show(`Você recusou asssinar o documento ${document.nome}`);
 
-    this.api.refuse(document.id).subscribe(noop, () => this.docsStore.undoManifestation(document.id));
+            // api call
+            this.api.refuse(document.id).subscribe(
+              (protocol?: string) => {
+                !!protocol && this.docsStore.remove(document.id);
+              },
+              () => this.docsStore.undoManifestation(document.id)
+            );
+          }
+        }
+      ]
+    });
+    alert.present();
   };
 
   /**
    *
    */
-  block = (document: Document) => {
-    // optmistic update
-    this.docsStore.block(document.id);
+  block = (document: Document): void => {
+    let alert = this.alertCtrl.create({
+      title: 'Bloquear assinaturas',
+      message: `Ao bloquear o documento, não será possível assiná-lo ou recusá-lo enquanto o documento estiver bloqueado. Deseja bloquear assinaturas do documento ${
+        document.nome
+      }?`,
+      buttons: [
+        {
+          text: 'Cancelar',
+          role: 'cancel'
+        },
+        {
+          text: 'Bloquear',
+          handler: () => {
+            // optmistic update
+            this.docsStore.block(document.id);
 
-    this.api.block(document.id).subscribe(noop, () => this.unblock(document));
+            this.api.block(document.id).subscribe(noop, () => this.unblock(document));
+          }
+        }
+      ]
+    });
+    alert.present();
   };
 
   /**
    *
    */
   unblock = (document: Document) => {
-    // optmistic update
-    this.docsStore.unblock(document.id);
-
-    this.api.unblock(document.id).subscribe(noop, () => this.block(document));
+    let alert = this.alertCtrl.create({
+      title: 'Desbloquear assinaturas',
+      message: `Ao desbloquear o documento, ele estará liberado para receber novas assinaturas ou recusas. Deseja desbloquear assinaturas do documento ${
+        document.nome
+      }?`,
+      buttons: [
+        {
+          text: 'Cancelar',
+          role: 'cancel'
+        },
+        {
+          text: 'Desbloquear',
+          handler: () => {
+            // optmistic update
+            this.docsStore.unblock(document.id);
+            this.api.unblock(document.id).subscribe(noop, () => this.block(document));
+          }
+        }
+      ]
+    });
+    alert.present();
   };
 
   /**

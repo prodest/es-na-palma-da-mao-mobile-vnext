@@ -132,6 +132,7 @@
     "lodash-es": "^4.17.5",
     "moment": "^2.20.1",
     "ng2-charts": "^1.6.0",
+    "ng2-pdf-viewer": "^5.2.3",
     "ngx-take-until-destroy": "^5.2.3",
     "phonegap-plugin-barcodescanner": "^7.1.2",
     "phonegap-plugin-multidex": "^1.0.0",

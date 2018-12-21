@@ -1,0 +1,29 @@
+edocs-sign-document-page {
+  ion-content {
+    background: #ffff;
+
+    #signature {
+      border: 3px dashed #333;
+      h4 {
+        font-size: 1.4rem;
+        text-transform: uppercase;
+        margin: 0;
+      }
+    }
+
+    .item-inner {
+      margin-left: 10px !important;
+    }
+
+    ion-note {
+      display: block;
+      color: darkred !important;
+    }
+  }
+
+  ion-footer {
+    button {
+      margin: 0 !important;
+    }
+  }
+}
