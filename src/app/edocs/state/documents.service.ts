@@ -1,25 +1,25 @@
 import { Injectable } from '@angular/core';
 import { increment, transaction } from '@datorama/akita';
-import { environment, Pagination } from '@espm/core';
-import { Loading } from 'ionic-angular';
+import { LoadingService } from '@espm/core';
+import { Observable } from 'rxjs/Observable';
 import { finalize } from 'rxjs/operators';
 
 import { DocumentsApiService } from './documents.api.service';
 import { Document } from './documents.model';
 import { DocumentsQuery } from './documents.query';
-import { DocumentsStore } from './documents.store';
+import { DocumentsStore, ScopeName } from './documents.store';
 
 export type PageInfo = {
-  pagination: Pagination;
+  page: number;
   documents: Document[];
 };
 
-const DEFAULT_FIRST_PAGE = environment.pagination.pageNumber;
+const noop = () => {};
+
+// const DEFAULT_FIRST_PAGE = environment.pagination.pageNumber;
 
 @Injectable()
 export class DocumentsService {
-  loading: Loading;
-
   /**
    *
    *
@@ -27,19 +27,124 @@ export class DocumentsService {
   constructor(
     private docsStore: DocumentsStore,
     private docsQuery: DocumentsQuery,
-    private api: DocumentsApiService // private loadingCtrl: LoadingController
+    private loadingService: LoadingService,
+    private api: DocumentsApiService // private loading: LoadingService
   ) {}
 
   /**
    *
    *
    */
-  getAllWaitingForMySignature = (pageNumber?: number): void => {
+  setActiveScope = (scope: ScopeName) => {
+    this.docsStore.setActiveScope(scope);
+  };
+
+  /**
+   * Force loading first page
+   */
+  refresh = (scope?: ScopeName) => {
+    this.loadPage(this.docsQuery.getFirstPage(), scope, true);
+  };
+
+  /**
+   *
+   */
+  loadFirstPage = (scope?: ScopeName) => {
+    this.loadPage(this.docsQuery.getFirstPage(), scope);
+  };
+
+  /**
+   *
+   */
+  loadNextPage = (scope?: ScopeName) => {
+    if (this.docsQuery.getHasMore()) {
+      this.loadPage(this.docsQuery.getNextPage(), scope);
+    }
+  };
+
+  /**
+   *
+   */
+  loadPage = (page: number, scope?: ScopeName, force = false) => {
+    if (force || this.docsQuery.getCurrentPage() !== page) {
+      this.getDocuments(page, scope);
+    }
+  };
+
+  /**
+   *
+   */
+  getDocuments = (page: number, scope: ScopeName = this.docsQuery.getActiveScopeName()) => {
+    if (!scope) {
+      throw new Error('[E-docs] - Não foi possível buscar os documentos. Escopo não encontrado');
+    }
+
+    switch (scope) {
+      case 'waitingForMySignature': {
+        this.getAllWaitingForMySignature(page);
+        break;
+      }
+      case 'capturedByMe': {
+        this.getAllCapturedByMe(page);
+        break;
+      }
+      case 'refusedByMe': {
+        this.getAllRefusedByMe(page);
+        break;
+      }
+      case 'signedByMe': {
+        this.getAllSignedByMe(page);
+        break;
+      }
+    }
+  };
+
+  /**
+   *
+   *
+   */
+  getAllWaitingForMySignature = (page?: number): void => {
     this.setLoading(true);
 
-    const pagination = { pageSize: this.docsQuery.getPageSize(), pageNumber };
+    this.api
+      .getAllWaitingForMySignature(page, this.docsQuery.getPageSize())
+      .subscribe(documents => this.updateDocuments(page, documents));
+  };
 
-    this.api.getAllWaitingForMySignature(pagination).subscribe(documents => this.updateDocuments({ pagination, documents }));
+  /**
+   *
+   *
+   */
+  getAllCapturedByMe = (page?: number): void => {
+    this.setLoading(true);
+
+    this.api
+      .getAllCapturedByMe(page, this.docsQuery.getPageSize())
+      .subscribe(documents => this.updateDocuments(page, documents));
+  };
+
+  /**
+   *
+   *
+   */
+  getAllSignedByMe = (page?: number): void => {
+    this.setLoading(true);
+
+    this.api
+      .getAllSignedByMe(page, this.docsQuery.getPageSize())
+      .subscribe(documents => this.updateDocuments(page, documents));
+  };
+
+  /**
+   *
+   *
+   */
+  getAllRefusedByMe = (page?: number): void => {
+    this.setLoading(true);
+
+    this.api
+      .getAllRefusedByMe(page, this.docsQuery.getPageSize())
+      .subscribe(documents => this.updateDocuments(page, documents));
   };
 
   /**
@@ -47,17 +152,19 @@ export class DocumentsService {
    *
    */
   @transaction()
-  private updateDocuments({ pagination, documents = [] }: PageInfo) {
+  private updateDocuments(page: number, documents: Document[] = []) {
     // se for a primeira página limpa a store e salva somente a primeira página, senão adiciona página ao final
-    pagination.pageNumber === DEFAULT_FIRST_PAGE ? this.docsStore.set(documents) : this.docsStore.add(documents);
+    // pagination.pageNumber === DEFAULT_FIRST_PAGE ? this.docsStore.set(documents) : this.docsStore.add(documents);
+
+    this.docsStore.addOrUpdate(documents);
 
     // existe mais enquanto quantidade retornada é igual à tam da página
-    const hasMore = documents.length >= pagination.pageSize;
+    const hasMore = documents.length >= this.docsQuery.getPageSize();
 
-    this.docsStore.updatePagination({
+    this.docsStore.updateScope({
       hasMore,
-      currentPage: pagination.pageNumber,
-      nextPage: hasMore ? increment(pagination.pageNumber) : null
+      currentPage: page,
+      nextPage: hasMore ? increment(page) : null
     });
 
     this.setLoading(false);
@@ -67,60 +174,56 @@ export class DocumentsService {
    *
    */
   sign = (document: Document) => {
-    this.setLoading(true);
-    this.api
-      .sign(document.id)
-      .pipe(finalize(() => this.setLoading(false)))
-      .subscribe(() => this.docsStore.remove(document.id));
-  };
+    // optmistic update
+    this.docsStore.sign(document.id);
 
-  /**
-   *
-   */
-  block = (document: Document) => {
-    this.setLoading(true);
-    this.api
-      .block(document.id)
-      .pipe(finalize(() => this.setLoading(false)))
-      .subscribe(() => this.docsStore.update(document.id, { isBloqueadoParaAssinaturas: true }));
-  };
-
-  /**
-   *
-   */
-  unblock = (document: Document) => {
-    this.setLoading(true);
-    this.api
-      .unblock(document.id)
-      .pipe(finalize(() => this.setLoading(false)))
-      .subscribe(() => this.docsStore.update(document.id, { isBloqueadoParaAssinaturas: false }));
-  };
-
-  /**
-   *
-   */
-  donwload = (document: Document) => {};
-
-  /**
-   *
-   */
-  getDetails = (document: Document) => {
-    this.setLoading(true);
-    this.api
-      .getDetails(document.id)
-      .pipe(finalize(() => this.setLoading(false)))
-      .subscribe((detailed: Document) => this.docsStore.upsert(detailed.id, detailed));
+    this.api.sign(document.id).subscribe(noop, () => this.docsStore.undoManifestation(document.id));
   };
 
   /**
    *
    */
   refuse = (document: Document) => {
+    // optmistic update
+    this.docsStore.refuse(document.id);
+
+    this.api.refuse(document.id).subscribe(noop, () => this.docsStore.undoManifestation(document.id));
+  };
+
+  /**
+   *
+   */
+  block = (document: Document) => {
+    // optmistic update
+    this.docsStore.block(document.id);
+
+    this.api.block(document.id).subscribe(noop, () => this.unblock(document));
+  };
+
+  /**
+   *
+   */
+  unblock = (document: Document) => {
+    // optmistic update
+    this.docsStore.unblock(document.id);
+
+    this.api.unblock(document.id).subscribe(noop, () => this.block(document));
+  };
+
+  /**
+   *
+   */
+  generateUrl = (document: Document): Observable<string> => {
+    const loading = this.loadingService.show('Aguarde', 500);
+    return this.api.generateUrl(document.id).pipe(finalize(() => loading.dismiss()));
+  };
+
+  /**
+   *
+   */
+  getDetails = (document: Document) => {
     this.setLoading(true);
-    this.api
-      .refuse(document.id)
-      .pipe(finalize(() => this.setLoading(false)))
-      .subscribe(() => this.docsStore.remove(document.id));
+    this.api.getDetails(document.id).subscribe((detailed: Document) => this.docsStore.upsert(detailed.id, detailed));
   };
 
   /**

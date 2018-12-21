@@ -1,10 +1,11 @@
-import { HttpClient, HttpParams } from '@angular/common/http';
+import { HttpClient } from '@angular/common/http';
 import { Inject, Injectable } from '@angular/core';
 import { ID } from '@datorama/akita';
-import { Environment, EnvVariables, Pagination } from '@espm/core';
+import { Environment, EnvVariables } from '@espm/core';
 import { Observable } from 'rxjs/Observable';
-import { share } from 'rxjs/operators';
+import { map, share } from 'rxjs/operators';
 
+import { ApiBaseService } from './api-base.service';
 import { Document } from './documents.model';
 
 /**
@@ -12,104 +13,90 @@ import { Document } from './documents.model';
  *
  */
 @Injectable()
-export class DocumentsApiService {
+export class DocumentsApiService extends ApiBaseService<Document> {
   /**
    *
    *
    */
-  constructor(private http: HttpClient, @Inject(EnvVariables) private env: Environment) {}
+  constructor(private http: HttpClient, @Inject(EnvVariables) env: Environment) {
+    super(`${env.api.edocs}/documento/fase-assinatura`);
+  }
 
   /**
    *
    */
-  getAllWaitingForMySignature = (pagination: Pagination): Observable<Document[]> => {
+  getAllWaitingForMySignature = (page: number, pageSize: number): Observable<Document[]> => {
     return this.http
-      .get<Document[]>(`${this.env.api.edocs}/documento/fase-assinatura/aguardando`, {
-        params: new HttpParams()
-          .set('page', pagination.pageNumber.toString())
-          .set('pageSize', pagination.pageSize.toString())
-      })
-      .pipe(share());
+      .get<Document[]>(this.endpoint(`aguardando`), { params: this.toParams({ page, pageSize }) })
+      .pipe(map(e => this.enhance(e)), share());
   };
 
   /**
    *
    */
-  getSignedByMe = (pagination: Pagination): Observable<Document[]> => {
+  getAllSignedByMe = (page: number, pageSize: number): Observable<Document[]> => {
     return this.http
-      .get<Document[]>(`${this.env.api.edocs}/documento/fase-assinatura/assinados`, {
-        params: new HttpParams()
-          .set('page', pagination.pageNumber.toString())
-          .set('pageSize', pagination.pageSize.toString())
-      })
-      .pipe(share());
+      .get<Document[]>(this.endpoint(`assinados`), { params: this.toParams({ page, pageSize }) })
+      .pipe(map(e => this.enhance(e)), share());
   };
 
   /**
    *
    */
-  getRefusedByMe = (pagination: Pagination): Observable<Document[]> => {
+  getAllRefusedByMe = (page: number, pageSize: number): Observable<Document[]> => {
     return this.http
-      .get<Document[]>(`${this.env.api.edocs}/documento/fase-assinatura/recusados`, {
-        params: new HttpParams()
-          .set('page', pagination.pageNumber.toString())
-          .set('pageSize', pagination.pageSize.toString())
-      })
-      .pipe(share());
+      .get<Document[]>(this.endpoint(`recusados`), { params: this.toParams({ page, pageSize }) })
+      .pipe(map(e => this.enhance(e)), share());
   };
 
   /**
    *
    */
-  getCapturedByMe = (pagination: Pagination): Observable<Document[]> => {
+  getAllCapturedByMe = (page: number, pageSize: number): Observable<Document[]> => {
     return this.http
-      .get<Document[]>(`${this.env.api.edocs}/documento/fase-assinatura/capturados`, {
-        params: new HttpParams()
-          .set('page', pagination.pageNumber.toString())
-          .set('pageSize', pagination.pageSize.toString())
-      })
-      .pipe(share());
+      .get<Document[]>(this.endpoint(`capturados`), { params: this.toParams({ page, pageSize }) })
+      .pipe(map(e => this.enhance(e)), share());
   };
 
   /**
    *
    */
   getDetails = (id: ID): Observable<Document> => {
-    return this.http.get<Document>(`${this.env.api.edocs}/documento/fase-assinatura/${id}`).pipe(share());
+    return this.http.get<Document>(this.endpoint(`${id}`)).pipe(share());
   };
-
-  // /**
-  //  *
-  //  */
-  // download = (document: Document): Observable<void> => {
-  //   return this.http.get<void>(`${this.env.api.edocs}/documento/fase-assinatura/${document.id}/assinar`, {}).pipe(share());
-  // };
 
   /**
    *
    */
   sign = (id: ID): Observable<void> => {
-    return this.http.post<void>(`${this.env.api.edocs}/documento/fase-assinatura/${id}/assinar`, {}).pipe(share());
+    return this.http.post<void>(this.endpoint(`${id}/assinar`), {}).pipe(share());
   };
 
   /**
    *
    */
   refuse = (id: ID): Observable<void> => {
-    return this.http.post<void>(`${this.env.api.edocs}/documento/fase-assinatura/${id}/recusar`, {}).pipe(share());
+    return this.http.post<void>(this.endpoint(`${id}/recusar`), {}).pipe(share());
   };
 
   /**
    *
    */
   block = (id: ID): Observable<void> => {
-    return this.http.post<void>(`${this.env.api.edocs}/documento/fase-assinatura/${id}/bloquear`, {}).pipe(share());
+    return this.http.post<void>(this.endpoint(`${id}/bloquear`), {}).pipe(share());
   };
 
   /**
    *
    */
   unblock = (id: ID): Observable<void> => {
-    return this.http.post<void>(`${this.env.api.edocs}/documento/fase-assinatura/${id}/desbloquear`, {}).pipe(share());
+    return this.http.post<void>(this.endpoint(`${id}/desbloquear`), {}).pipe(share());
+  };
+
+  /**
+   *
+   */
+  generateUrl = (id: ID): Observable<string> => {
+    return this.http.get<string>(this.endpoint(`${id}/download`), {}).pipe(share());
   };
 }

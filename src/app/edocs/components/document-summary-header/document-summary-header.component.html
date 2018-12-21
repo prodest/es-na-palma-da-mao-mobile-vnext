@@ -1,0 +1,36 @@
+<ion-item detail-none
+          class="doc-header">
+    <h2>
+        <ion-icon name="md-lock"
+                  *ngIf="isBloqueadoParaAssinaturas"></ion-icon> {{nome}}
+    </h2>
+    <small text-wrap
+           class="blocked"
+           *ngIf="isBloqueadoParaAssinaturas">
+        <strong>BLOQUEADO</strong> para assinaturas
+    </small>
+    <p class="doc-header-badges">
+        <button ion-button
+                icon-start
+                clear
+                small>
+            <ion-icon name="md-copy"></ion-icon>
+            <div>{{paginas}} páginas</div>
+        </button>
+        <button ion-button
+                icon-start
+                clear
+                small>
+            <ion-icon name="text"></ion-icon>
+            <div>{{tamanho}}</div>
+        </button>
+        <button *ngIf="soFaltaOUsuarioSeManifestar"
+                ion-button
+                icon-start
+                clear
+                small>
+            <ion-icon name="md-create"></ion-icon>
+            <div>Último</div>
+        </button>
+    </p>
+</ion-item>

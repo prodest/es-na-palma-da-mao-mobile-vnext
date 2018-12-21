@@ -1,5 +1,11 @@
 import { ID } from '@datorama/akita';
 
+export enum ManifestacaoUsuario {
+  Assinado = 1,
+  Recusado = 2,
+  NaoSeManifestou = 3
+}
+
 export interface Document {
   id: ID;
   nome: string;
@@ -16,6 +22,7 @@ export interface Document {
   qtdeFaltaAssinar: number;
   soFaltaOUsuarioSeManifestar: boolean;
   capturador: Capturador;
+  manifestacaoUsuario: ManifestacaoUsuario;
 }
 
 export interface Capturador {

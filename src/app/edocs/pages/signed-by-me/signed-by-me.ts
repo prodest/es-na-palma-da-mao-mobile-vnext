@@ -2,11 +2,11 @@ import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { IonicPage } from 'ionic-angular';
 
 @IonicPage({
-  segment: 'aguardando-minha-assinatura'
+  segment: 'assinados-por-mim'
 })
 @Component({
-  selector: 'waiting-for-my-signature',
-  templateUrl: './waiting-for-my-signature.html',
+  selector: 'signed-by-me',
+  templateUrl: './signed-by-me.html',
   changeDetection: ChangeDetectionStrategy.Default
 })
-export class WaitingForMySignaturePage {}
+export class SignedByMePage {}

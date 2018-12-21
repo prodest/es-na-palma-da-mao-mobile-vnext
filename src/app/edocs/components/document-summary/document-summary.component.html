@@ -1,51 +1,15 @@
 <ion-card>
-    <button ion-item
-            detail-none
-            class="doc-header">
-        <h2>
-            <ion-icon name="md-lock"
-                      *ngIf="document.isBloqueadoParaAssinaturas"></ion-icon> {{document.nome}}
-        </h2>
-        <small text-wrap
-               class="blocked"
-               *ngIf="document.isBloqueadoParaAssinaturas">
-            <strong>BLOQUEADO</strong> para assinaturas
-        </small>
-        <p class="doc-header-badges">
-            <button ion-button
-                    icon-start
-                    clear
-                    small>
-                <ion-icon name="md-copy"></ion-icon>
-                <div>{{document.paginas}} páginas</div>
-            </button>
-            <button ion-button
-                    icon-start
-                    clear
-                    small>
-                <ion-icon name="text"></ion-icon>
-                <div>{{document.tamanho}}</div>
-            </button>
-            <button *ngIf="document.soFaltaOUsuarioSeManifestar"
-                    ion-button
-                    icon-start
-                    clear
-                    small>
-                <ion-icon name="md-create"></ion-icon>
-                <div>Último</div>
-            </button>
-        </p>
-    </button>
+    <edocs-document-summary-header [nome]="document.nome"
+                                   [paginas]="document.paginas"
+                                   [tamanho]="document.tamanho"
+                                   [isBloqueadoParaAssinaturas]="document.isBloqueadoParaAssinaturas"
+                                   [soFaltaOUsuarioSeManifestar]="document.soFaltaOUsuarioSeManifestar">
+    </edocs-document-summary-header>
     <ion-card-content>
-
-        <small text-nowrap><strong>Carregado em</strong>
-            <ion-icon name="calendar"></ion-icon> {{document.dataEnvioLabel}}
-        </small>
-        <small text-nowrap><strong>Carregado por</strong>
-            <ion-icon name="person"></ion-icon> {{document.capturador.nome | capitalize }}
-        </small>
-        <small text-nowrap><strong>Para assinar como</strong> {{document.papelAssinatura }}</small>
-
+        <edocs-document-summary-info [dataEnvioLabel]="document.dataEnvioLabel"
+                                     [capturador]="document.capturador.nome"
+                                     [papelAssinatura]="document.papelAssinatura">
+        </edocs-document-summary-info>
     </ion-card-content>
     <div class="doc-footer">
         <button ion-button
@@ -57,7 +21,7 @@
             <ion-icon name="md-download"></ion-icon>
             <div>DOWNLOAD</div>
         </button>
-        <button *ngIf="!document.isBloqueadoParaAssinaturas"
+        <button *ngIf="!document.isBloqueadoParaAssinaturas && document.manifestacaoUsuario === ManifestacaoUsuario.NaoSeManifestou"
                 ion-button
                 icon-start
                 clear

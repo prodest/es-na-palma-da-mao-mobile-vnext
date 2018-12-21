@@ -1,7 +1,7 @@
 import { ChangeDetectionStrategy, Component, EventEmitter, Input, Output } from '@angular/core';
 import { ActionSheetController, AlertController } from 'ionic-angular';
 
-import { Document } from '../../state';
+import { Document, ManifestacaoUsuario } from '../../state';
 
 @Component({
   selector: 'edocs-document-summary',
@@ -17,6 +17,8 @@ export class DocumentSummaryComponent {
   @Output() donwload = new EventEmitter<Document>();
   @Output() showDetails = new EventEmitter<Document>();
 
+  ManifestacaoUsuario = ManifestacaoUsuario;
+
   /**
    *
    */
@@ -29,13 +31,16 @@ export class DocumentSummaryComponent {
     const buttons = [];
 
     if (!document.isBloqueadoParaAssinaturas) {
-      buttons.push({
-        text: 'Recusar',
-        icon: 'md-thumbs-down',
-        handler: () => {
-          this.refuse.emit(document);
-        }
-      });
+      // só pode recusar se não se manifestou
+      if (document.manifestacaoUsuario === ManifestacaoUsuario.NaoSeManifestou) {
+        buttons.push({
+          text: 'Recusar',
+          icon: 'md-thumbs-down',
+          handler: () => {
+            this.refuse.emit(document);
+          }
+        });
+      }
 
       buttons.push({
         text: 'Bloquear assinaturas',
