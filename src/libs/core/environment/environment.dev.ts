@@ -13,6 +13,7 @@ export const dev: Environment = {
     calendars: process.env.API_CALENDARS_URL || 'https://api.es.gov.br/developers/calendars',
     sep: process.env.API_SEP_URL || 'https://api.es.gov.br/developers/sep',
     detran: process.env.API_DETRAN_URL || 'https://api.es.gov.br/developers/detran',
+    detranInternetBanking: process.env.API_DETRAN_INTERNET_BANKING_URL || 'https://api.es.gov.br/api-detran-debitos',
     dio: process.env.API_DIO_URL || 'https://api.es.gov.br/developers/dio',
     ceturb: process.env.API_CETURB_URL || 'https://api.es.gov.br/developers/ceturb',
     cbmes: process.env.API_CBMES_URL || 'https://api.es.gov.br/developers/cbmes',
@@ -22,7 +23,8 @@ export const dev: Environment = {
     acessocidadaoApi: process.env.API_ACESSO_CIDADAO_URL || 'https://developers.es.gov.br/acessocidadao.webapi/api',
     acessocidadao: process.env.ACESSO_CIDADAO_URL || 'https://developers.es.gov.br/acessocidadao',
     feedback: process.env.API_FEEDBACK_URL || 'https://developers.es.gov.br/demandas',
-    edocs: process.env.API_EDOCS_URL || 'http://api.e-docs.des.es.gov.br'
+    edocs: process.env.API_EDOCS_URL || 'http://api.e-docs.des.es.gov.br',
+    empregabilidade: process.env.API_EMPREGABILIDADE || 'https://api.es.gov.br/selecaodt/concursos/'
   },
   push: {
     senderId: process.env.PUSH_SENDER_ID,

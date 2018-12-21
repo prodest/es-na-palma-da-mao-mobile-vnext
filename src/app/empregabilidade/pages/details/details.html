@@ -1,0 +1,34 @@
+<ion-header>
+  <ion-navbar> <ion-title>Detalhes</ion-title> </ion-navbar>
+</ion-header>
+
+<ion-content>
+  <h1 style="padding-left: 15px;">{{ concurso.nome }}</h1>
+  <ion-list *ngIf="concurso.datas">
+    <ion-item-divider color="light">DATAS</ion-item-divider>
+    <div *ngFor="let data of concurso.datas">
+      <div *ngIf="data.inicio || data.fim">
+        <p ion-item>{{ data.nome }}</p>
+        <div ion-item *ngIf="data.inicio" style="padding-left: 15px;">
+          <ion-label>Inicio</ion-label>
+          <ion-datetime disabled displayFormat="MM/DD/YYYY" [(ngModel)]="data.inicio"></ion-datetime>
+        </div>
+        <div ion-item *ngIf="data.fim" style="padding-left: 15px;">
+          <ion-label>Fim</ion-label>
+          <ion-datetime disabled displayFormat="MM/DD/YYYY" [(ngModel)]="data.fim"></ion-datetime>
+        </div>
+      </div>
+    </div>
+  </ion-list>
+  <ion-list>
+    <ion-item-divider color="light">CLASSIFICAÇÃO</ion-item-divider>
+    <button ion-item (click)="showclassificados(concurso.id)"><p>Lista de classificados</p></button>
+  </ion-list>
+  <ion-list *ngIf="concurso.anexos">
+    <ion-item-divider color="light">ANEXOS</ion-item-divider>
+
+    <button text-wrap ion-item *ngFor="let anexo of concurso.anexos" (click)="openLink(anexo.link)">
+      {{ anexo.documento }}
+    </button>
+  </ion-list>
+</ion-content>

@@ -1,0 +1,30 @@
+<ion-header color-primary-bg>
+  <ion-navbar hideBackButton>
+    <button ion-button menuToggle><ion-icon name="menu"></ion-icon></button>
+    <ion-title>Empregabilidade</ion-title>
+  </ion-navbar>
+  <ion-searchbar
+    placeholder="Pesquisar..."
+    [showCancelButton]="true"
+    cancelButtonText="Cancelar"
+    [animated]="false"
+    (ionInput)="search($event)"
+    (ionClear)="clear($event)"
+    (ionCancel)="clear($event)"
+  >
+  </ion-searchbar>
+</ion-header>
+
+  <ion-content>
+    <ion-list-header *ngIf="filteredConcursos">
+      <ng-container *ngIf="filteredConcursos.length"> Exibindo {{ filteredConcursos.length }} concursos</ng-container>
+      <ng-container *ngIf="!filteredConcursos.length"> Nenhuma concurso encontrado</ng-container>
+    </ion-list-header>
+    <ion-list [virtualScroll]="filteredConcursos" [virtualTrackBy]="trackByStatus" approxItemHeight="70px">
+      <button ion-item *virtualItem="let concurso" (click)="showDetails(concurso.id)">
+        <h3 text-wrap class="concursos_name">{{ concurso.orgao }}</h3>
+        <p text-wrap class="concursos_descricao">{{ concurso.descricao }}</p>
+        <concurso-status [status]="concurso.status"></concurso-status>
+      </button>
+    </ion-list>
+  </ion-content>

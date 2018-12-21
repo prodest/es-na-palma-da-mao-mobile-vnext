@@ -5,7 +5,7 @@ import { of } from 'rxjs/observable/of';
 import { _throw } from 'rxjs/observable/throw';
 import { catchError, finalize, flatMap, map, pluck } from 'rxjs/operators';
 
-import { Ticket, Vehicle, VehiclesData } from '../model';
+import { Ticket, Vehicle, VehiclesData, Debit } from '../model';
 import { DetranApiService } from './detran-api.service';
 import { DetranStorage } from './detran-storage.service';
 
@@ -109,6 +109,11 @@ export class VehiclesService {
     return this.api.getVehicleTickets(vehicle).pipe(finalize(this.dismissLoading));
   };
 
+  getDebits = (vehicle: Vehicle): Observable<Debit[]> => {
+    this.showLoading();
+    return this.api.getVehicleDebits(vehicle).pipe(finalize(this.dismissLoading));
+  };
+
   /**
    *
    *
@@ -131,7 +136,7 @@ export class VehiclesService {
 
     return this.api
       .syncVehicles(syncData)
-      .pipe(flatMap((vehiclesData: VehiclesData) => this.storage.mergeValue('vehicles', vehiclesData.vehicles)));
+      .pipe(flatMap((vehiclesData: VehiclesData) => this.storage.mergeValue('vehicles', this.normalizeVehicle(vehiclesData.vehicles))));
   };
 
   /**
@@ -164,5 +169,23 @@ export class VehiclesService {
    */
   private showMessage = (message: string) => {
     this.toastCtrl.create({ message, duration: 4000 }).present();
+  };
+
+  /**
+   *
+   */
+  private normalizeVehicle = (data: any) => {
+    return data.map((vehicle: any) => {
+      if (vehicle.info) {
+        return {
+          color: vehicle.info.color,
+          model: vehicle.info.model,
+          plate: vehicle.plate,
+          renavam: vehicle.renavam
+        };
+      } else {
+        return vehicle;
+      }
+    });
   };
 }

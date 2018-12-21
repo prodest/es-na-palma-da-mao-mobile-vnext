@@ -2,6 +2,81 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+<a name="5.0.6"></a>
+## [5.0.6](https://github.com/prodest/es-na-palma-da-mao-mobile-vnext/compare/v5.0.5...v5.0.6) (2018-12-20)
+
+
+### Bug Fixes
+
+* **veículo:** modelo e cor não aparecendo na listagem ([d5b5cbf](https://github.com/prodest/es-na-palma-da-mao-mobile-vnext/commit/d5b5cbf))
+
+
+
+<a name="5.0.5"></a>
+## [5.0.5](https://github.com/prodest/es-na-palma-da-mao-mobile-vnext/compare/v5.0.4...v5.0.5) (2018-12-19)
+
+
+### Bug Fixes
+
+* **empregabilidade:** provider import ([1a2522e](https://github.com/prodest/es-na-palma-da-mao-mobile-vnext/commit/1a2522e))
+
+
+
+<a name="5.0.4"></a>
+## [5.0.4](https://github.com/prodest/es-na-palma-da-mao-mobile-vnext/compare/v5.0.3...v5.0.4) (2018-12-18)
+
+
+### Bug Fixes
+
+* **classificação:** melhorias no código ([c8d20f2](https://github.com/prodest/es-na-palma-da-mao-mobile-vnext/commit/c8d20f2))
+* **inicializa:** função estava ruim. ([3c873cf](https://github.com/prodest/es-na-palma-da-mao-mobile-vnext/commit/3c873cf))
+
+
+
+<a name="5.0.3"></a>
+## [5.0.3](https://github.com/prodest/es-na-palma-da-mao-mobile-vnext/compare/v5.0.2...v5.0.3) (2018-12-17)
+
+
+
+<a name="5.0.2"></a>
+## [5.0.2](https://github.com/prodest/es-na-palma-da-mao-mobile-vnext/compare/v5.0.1...v5.0.2) (2018-12-14)
+
+
+
+<a name="5.0.1"></a>
+## [5.0.1](https://github.com/prodest/es-na-palma-da-mao-mobile-vnext/compare/v5.0.0...v5.0.1) (2018-12-14)
+
+
+
+<a name="5.0.0"></a>
+# [5.0.0](https://github.com/prodest/es-na-palma-da-mao-mobile-vnext/compare/v4.4.12...v5.0.0) (2018-12-14)
+
+
+### Bug Fixes
+
+* **Debits:** Fix tickets page ([e88f006](https://github.com/prodest/es-na-palma-da-mao-mobile-vnext/commit/e88f006))
+* **dotenv:** usando url na .env ([28d2a0f](https://github.com/prodest/es-na-palma-da-mao-mobile-vnext/commit/28d2a0f))
+* **empregabilidade:** ordenando por status ([728a2d3](https://github.com/prodest/es-na-palma-da-mao-mobile-vnext/commit/728a2d3))
+* **Vehicle.component:** Uncomment color attribute from page ([01b718e](https://github.com/prodest/es-na-palma-da-mao-mobile-vnext/commit/01b718e))
+
+
+### Features
+
+* **Debits:** Show debits from vehicle ([ece6cc1](https://github.com/prodest/es-na-palma-da-mao-mobile-vnext/commit/ece6cc1))
+* **detran:** vehicle debits ([05e8b9b](https://github.com/prodest/es-na-palma-da-mao-mobile-vnext/commit/05e8b9b))
+* **empregabilidade:** api empregabilidade funcionando ([539b830](https://github.com/prodest/es-na-palma-da-mao-mobile-vnext/commit/539b830))
+* **empregabilidade:** commit com correções ([3aeeed7](https://github.com/prodest/es-na-palma-da-mao-mobile-vnext/commit/3aeeed7))
+* **empregabilidade:** commit com correções ([132610e](https://github.com/prodest/es-na-palma-da-mao-mobile-vnext/commit/132610e))
+* **empregabilidade:** listagem do selecao-dt ([3171ec6](https://github.com/prodest/es-na-palma-da-mao-mobile-vnext/commit/3171ec6))
+* **Vehicles.html:** Change buttons position ([b774361](https://github.com/prodest/es-na-palma-da-mao-mobile-vnext/commit/b774361))
+
+
+### BREAKING CHANGES
+
+* **Debits:** Tickets page
+
+
+
 <a name="4.4.12"></a>
 ## [4.4.12](https://github.com/prodest/es-na-palma-da-mao-mobile-vnext/compare/v4.4.11...v4.4.12) (2018-11-13)
 

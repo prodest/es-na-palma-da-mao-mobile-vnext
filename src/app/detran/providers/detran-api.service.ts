@@ -4,7 +4,7 @@ import { Environment, EnvVariables } from '@espm/core';
 import { Observable } from 'rxjs/Observable';
 import { share } from 'rxjs/operators';
 
-import { DriverLicense, DriverStatus, Ticket, Vehicle, VehiclesData } from '../model';
+import { DriverLicense, DriverStatus, Ticket, Vehicle, VehiclesData, Debit } from '../model';
 
 /**
  *
@@ -51,6 +51,12 @@ export class DetranApiService {
       .pipe(share());
   };
 
+  getVehicleDebits = (vehicle: Vehicle): Observable<Debit[]> => {
+    return this.http
+      .get<Debit[]>(`${this.env.api.detranInternetBanking}/veiculos/${vehicle.plate}/${vehicle.renavam.toString()}/debitos`)
+      .pipe(share());
+  };
+
   /**
    *
    */
@@ -66,6 +72,12 @@ export class DetranApiService {
       .get<Partial<Vehicle>>(`${this.env.api.detran}/vehicle`, {
         params: new HttpParams().set('plate', vehicle.plate).set('renavam', vehicle.renavam.toString())
       })
+      .pipe(share());
+  };
+
+  generateGRU = (vehicle: Vehicle): Observable<any> => {   
+    return this.http
+      .get(`${this.env.api.detranInternetBanking}/veiculos/${vehicle.plate}/${vehicle.renavam.toString()}/debitos/guia`)
       .pipe(share());
   };
 }

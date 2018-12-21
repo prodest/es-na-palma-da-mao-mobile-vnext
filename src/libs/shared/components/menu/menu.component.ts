@@ -54,7 +54,7 @@ const menus = [
         secure: true
       },
       {
-        title: 'Multas por Veículo',
+        title: 'Consulta Veículos',
         icon: 'car',
         component: 'VehiclesPage',
         order: 2,
@@ -132,6 +132,16 @@ const menus = [
         deepLink: true,
         package: 'mb.taxi.meiabandeirada',
         uriScheme: 'mb://'
+      }
+    ]
+  },{
+    name: 'Empregabilidade',
+    items: [
+      {
+        title: 'Buscar concursos',
+        icon: 'search',
+        component: 'SearchPage',
+        order: 7
       }
     ]
   },
