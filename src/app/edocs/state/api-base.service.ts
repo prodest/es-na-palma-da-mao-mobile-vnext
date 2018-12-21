@@ -1,5 +1,4 @@
 import { HttpParams } from '@angular/common/http';
-import { Injectable } from '@angular/core';
 import { ID } from '@datorama/akita';
 
 export type Params = { [key: string]: any };
@@ -8,8 +7,7 @@ export interface EntityEnhancer<E> {
   enhance(e: E): E;
 }
 
-@Injectable()
-export class ApiBaseService<T extends { id: string | number | ID }> {
+export abstract class ApiBaseService<T extends { id: string | number | ID }> {
   private currentEnhancers = [];
 
   /**
