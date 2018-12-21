@@ -25,6 +25,7 @@
             [virtualTrackBy]="trackByNumber"
             approxItemHeight="70px">
     <button ion-item
+            detail-none
             *virtualItem="let line"
             class="busline"
             (click)="showDetails(line, $event)">
