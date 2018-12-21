@@ -1,5 +1,6 @@
 import { ErrorHandlerInterceptorProvider } from './errors-handler.interceptor';
+import { LoadingService } from './loading.service';
 
-export { ErrorHandlerInterceptorProvider };
+export { ErrorHandlerInterceptorProvider, LoadingService };
 
-export const Common = [ErrorHandlerInterceptorProvider];
+export const Common = [ErrorHandlerInterceptorProvider, LoadingService];
