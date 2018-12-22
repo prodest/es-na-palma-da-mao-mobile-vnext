@@ -134,7 +134,8 @@ const menus = [
         uriScheme: 'mb://'
       }
     ]
-  },{
+  },
+  {
     name: 'Empregabilidade',
     items: [
       {
@@ -221,11 +222,7 @@ export class MenuComponent implements OnInit, OnDestroy {
             );
         }
       } else {
-        if (route.component === 'DashboardPage') {
-          this.appCtrl.getRootNav().setRoot('DashboardPage');
-        } else {
-          this.appCtrl.getRootNav().push(route.component);
-        }
+        this.appCtrl.getRootNav().setRoot(route.component);
         this.menuCtrl.close();
       }
     }
