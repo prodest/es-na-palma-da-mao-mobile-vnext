@@ -2,6 +2,28 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+<a name="5.2.0"></a>
+# [5.2.0](https://github.com/prodest/es-na-palma-da-mao-mobile-vnext/compare/v5.1.2...v5.2.0) (2018-12-22)
+
+
+### Bug Fixes
+
+* **e-docs:** acesso aberto pra usuários deslogados ([dd1c665](https://github.com/prodest/es-na-palma-da-mao-mobile-vnext/commit/dd1c665))
+* **transcol-online:** exibindo item detail em stop-summary ([dbed352](https://github.com/prodest/es-na-palma-da-mao-mobile-vnext/commit/dbed352))
+* **transcol-online:** não exibe mapa na segunda vez que entra na tela ([6489ffa](https://github.com/prodest/es-na-palma-da-mao-mobile-vnext/commit/6489ffa))
+
+
+### Features
+
+* **dio:** adiciona loading spinner em edições recentes ([1da7461](https://github.com/prodest/es-na-palma-da-mao-mobile-vnext/commit/1da7461))
+* **dio:** ajusta styles ([d68702e](https://github.com/prodest/es-na-palma-da-mao-mobile-vnext/commit/d68702e))
+* **ion-spinner:** adiciona style para ion-spinner ([cb87716](https://github.com/prodest/es-na-palma-da-mao-mobile-vnext/commit/cb87716))
+* **scss:** cria css variables para scss ([48dc416](https://github.com/prodest/es-na-palma-da-mao-mobile-vnext/commit/48dc416))
+* **transcol-online:** adiciona loading no carregamento das previsões ([a0f1c40](https://github.com/prodest/es-na-palma-da-mao-mobile-vnext/commit/a0f1c40))
+* **transparencia:** adiciona loading nos detalhes de obras públicas ([df79031](https://github.com/prodest/es-na-palma-da-mao-mobile-vnext/commit/df79031))
+
+
+
 <a name="5.1.2"></a>
 ## [5.1.2](https://github.com/prodest/es-na-palma-da-mao-mobile-vnext/compare/v5.1.1...v5.1.2) (2018-12-21)
 
