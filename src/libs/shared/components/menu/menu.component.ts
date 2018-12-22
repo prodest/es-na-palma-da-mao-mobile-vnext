@@ -70,7 +70,7 @@ const menus = [
         icon: 'create',
         component: 'DocumentsToSignPage',
         order: 2,
-        secure: false
+        secure: true
       }
     ]
   },
