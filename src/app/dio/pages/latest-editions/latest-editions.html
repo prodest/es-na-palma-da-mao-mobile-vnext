@@ -9,23 +9,27 @@
 </ion-header>
 
 <ion-content>
-    <ion-list>
-        <ion-list-header>
-            Edições recentes
-        </ion-list-header>
-        <ion-item *ngFor="let edition of latestEditions$ | async">
-            <h3>
-                <strong>{{edition.date}}</strong> - Diário Oficial do ES</h3>
+    <ng-container *ngSubscribe="latestEditions$ as latestEditions">
+        <ion-list>
+            <ion-list-header>
+                Edições recentes
+            </ion-list-header>
+            <ion-item *ngFor="let edition of latestEditions">
+                <h3>
+                    <strong>{{edition.date}}</strong> - Diário Oficial do ES</h3>
 
-            <button ion-button
-                    item-end
-                    accent
-                    clear
-                    icon-start
-                    (click)="openEdition(edition.url)">
-                <ion-icon name="download"></ion-icon>
-                BAIXAR
-            </button>
-        </ion-item>
-    </ion-list>
+                <button ion-button
+                        item-end
+                        accent
+                        clear
+                        icon-start
+                        (click)="openEdition(edition.url)">
+                    <ion-icon name="download"></ion-icon>
+                    BAIXAR
+                </button>
+            </ion-item>
+        </ion-list>
+        <ion-spinner page-loading
+                     *ngIf="!latestEditions"></ion-spinner>
+    </ng-container>
 </ion-content>
