@@ -5,13 +5,16 @@
 </ion-header>
 
 <ion-content>
+  <ion-spinner page-loading
+               *ngIf="!detail"></ion-spinner>
   <div *ngIf="detail">
     <report-title [title]="detail.label"></report-title>
     <ion-list>
       <ion-item>
         <h2 class="subheader">Valor Total</h2>
         <h3 class="secondary-color">{{detail.value | currency: 'BRL': 'symbol'}}</h3>
-        <public-work-status item-end [status]="detail.status"></public-work-status>
+        <public-work-status item-end
+                            [status]="detail.status"></public-work-status>
       </ion-item>
       <ion-item>
         <h2 class="subheader">Município</h2>
