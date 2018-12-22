@@ -204,9 +204,9 @@ ion-spinner[page-loading] {
   right: 0;
   bottom: 0;
   margin: auto;
-  background: #fff;
-  border-radius: 50%;
-  box-shadow: 0 1px 5px 0 rgba(0, 0, 0, 0.2), 0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 3px 1px -2px rgba(0, 0, 0, 0.12);
+  // background: #fff;
+  // border-radius: 50%;
+  // box-shadow: 0 1px 5px 0 rgba(0, 0, 0, 0.2), 0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 3px 1px -2px rgba(0, 0, 0, 0.12);
   circle {
     stroke: var(--primary) !important;
   }
@@ -215,8 +215,8 @@ ion-spinner[page-loading] {
 ion-spinner[section-loading] {
   margin: 40px auto;
   width: 100%;
-  background: #fff;
-  border-radius: 50%;
+  // background: #fff;
+  // border-radius: 50%;
   circle {
     stroke: var(--primary) !important;
   }
