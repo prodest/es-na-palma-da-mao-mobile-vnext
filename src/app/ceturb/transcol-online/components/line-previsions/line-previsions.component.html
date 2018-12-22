@@ -15,6 +15,8 @@
         <ion-col text-center>Confiável</ion-col>
     </ion-row>
 </ion-grid>
+<ion-spinner section-loading
+             *ngIf="!previsions"></ion-spinner>
 <ion-scroll scrollY="true"
             *ngIf="previsions && previsions.length"
             class="line-previsions__grid">

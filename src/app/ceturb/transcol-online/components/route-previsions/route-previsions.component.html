@@ -4,6 +4,8 @@
   <span class="destination">Destino</span>
   <span>Confiável</span>
 </div>
+<ion-spinner section-loading
+             *ngIf="!previsions"></ion-spinner>
 <ion-scroll scrollY="true"
             *ngIf="previsions && previsions.length">
 
