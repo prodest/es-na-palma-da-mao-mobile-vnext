@@ -28,7 +28,7 @@ export class DioSearchPage {
   searchResults: SearchResult;
   hits: Hit[] | undefined;
   searched = false;
-  hasMoreHits = true;
+  hasMoreHits = false;
   totalHits: number = 0;
   filter: SearchFilter = { ...defaultFilter };
   lastQuery = '';
@@ -89,6 +89,9 @@ export class DioSearchPage {
    *
    */
   clear = () => {
+    if (this.hits && !this.hits.length) {
+      this.searched = false;
+    }
     this.filter = { ...defaultFilter };
   };
 

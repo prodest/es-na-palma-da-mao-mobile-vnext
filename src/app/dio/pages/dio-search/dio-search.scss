@@ -4,8 +4,16 @@ page-dio-search {
   //   margin-top: 156px !important;
   // }
 
+  .scroll-content {
+    display: flex;
+    flex-direction: column;
+    ion-item {
+      flex: 1;
+    }
+  }
+
   expandable-header {
-    background: #208baa url("../assets/imgs/sep/triangles.png") !important;
+    background: #208baa url('../assets/imgs/sep/triangles.png') !important;
     ion-item {
       width: 92% !important;
       margin: 4% !important;
@@ -65,14 +73,6 @@ page-dio-search {
   .hit-buttons button {
     ion-icon {
       margin-left: 5px;
-    }
-  }
-
-  .item-info {
-    border-bottom: 0.55px solid #c8c7cc;
-
-    .item-inner {
-      border-bottom: none !important;
     }
   }
 }
