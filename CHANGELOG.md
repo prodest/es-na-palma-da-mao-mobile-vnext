@@ -2,6 +2,21 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+<a name="5.3.0"></a>
+# [5.3.0](https://github.com/prodest/es-na-palma-da-mao-mobile-vnext/compare/v5.2.0...v5.3.0) (2018-12-23)
+
+
+### Bug Fixes
+
+* **dio:** botão limpar não reseta msg quando nenhum item é encontrado ([ed588ec](https://github.com/prodest/es-na-palma-da-mao-mobile-vnext/commit/ed588ec))
+
+
+### Features
+
+* **empregabilidade:** pequenos ajustes ([4e77506](https://github.com/prodest/es-na-palma-da-mao-mobile-vnext/commit/4e77506))
+
+
+
 <a name="5.2.0"></a>
 # [5.2.0](https://github.com/prodest/es-na-palma-da-mao-mobile-vnext/compare/v5.1.2...v5.2.0) (2018-12-22)
 
