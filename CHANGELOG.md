@@ -2,6 +2,18 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+<a name="5.3.1"></a>
+## [5.3.1](https://github.com/prodest/es-na-palma-da-mao-mobile-vnext/compare/v5.3.0...v5.3.1) (2018-12-23)
+
+
+### Bug Fixes
+
+* **e-docs:** loading fora do padrão ([4256c4b](https://github.com/prodest/es-na-palma-da-mao-mobile-vnext/commit/4256c4b))
+* **e-docs:** não exibindo menu hamburguer ([5f1fd4d](https://github.com/prodest/es-na-palma-da-mao-mobile-vnext/commit/5f1fd4d))
+* **noticias:** não exibindo loading ([272cde6](https://github.com/prodest/es-na-palma-da-mao-mobile-vnext/commit/272cde6))
+
+
+
 <a name="5.3.0"></a>
 # [5.3.0](https://github.com/prodest/es-na-palma-da-mao-mobile-vnext/compare/v5.2.0...v5.3.0) (2018-12-23)
 
