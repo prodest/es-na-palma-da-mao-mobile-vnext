@@ -16,7 +16,8 @@
         </ion-list-header>
         <ng-container *ngSubscribe="isLoading$ as isLoading">
             <ng-container *ngSubscribe="documents$ as documents">
-                <ion-spinner *ngIf="isLoading && !documents.length && !isRefreshing; else docs"></ion-spinner>
+                <ion-spinner page-loading
+                             *ngIf="isLoading && !documents.length && !isRefreshing; else docs"></ion-spinner>
                 <ng-template #docs>
 
                     <edocs-document-summary *ngFor="let doc of documents; trackBy:trackById"

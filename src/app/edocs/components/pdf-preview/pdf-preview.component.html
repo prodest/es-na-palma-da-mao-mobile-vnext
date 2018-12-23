@@ -1,4 +1,5 @@
-<ion-spinner *ngIf="isLoading"></ion-spinner>
+<ion-spinner page-loading
+             *ngIf="isLoading"></ion-spinner>
 
 <pdf-viewer *ngIf="!isLoading"
             [src]="resolvedUrl"
