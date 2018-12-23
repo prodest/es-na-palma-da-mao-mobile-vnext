@@ -116,10 +116,30 @@ export class VehiclesPage implements OnDestroy {
     this.detran
       .getDebits(vehicle)
       .subscribe(
-        debits => this.navCtrl.push('VehicleDebitsPage', { vehicle, plate: vehicle.plate, debits: debits }),
+        debits => this.ensureDebits(vehicle, debits),
         error => console.log(error)
       );
   };
+
+  ensureDebits = (vehicle, debits) => {
+    if (debits[0].hasOwnProperty('descricaoServico')) {
+      this.navCtrl.push('VehicleDebitsPage', { vehicle, plate: vehicle.plate, debits: debits })
+    } else {
+      let alert = this.alertCtrl.create({
+        title: 'Informações',
+        message: debits[0],
+        buttons: [
+          {
+            text: 'Ok',
+            handler: () => {
+              return true;
+            }
+          }
+        ]
+      });
+      alert.present();
+    }
+  }
 
   /**
    *
@@ -138,6 +158,7 @@ export class VehiclesPage implements OnDestroy {
     // carregamento inicial
     this.detran.load().subscribe();
   };
+
 
   /**
    *
