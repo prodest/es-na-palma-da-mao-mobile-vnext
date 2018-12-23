@@ -1,0 +1,60 @@
+<ion-header>
+  <ion-navbar>
+    <ion-title>{{ concurso?.nome }}</ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content>
+  <ion-list *ngIf="concurso; else loading"
+            no-margin>
+    <ng-container *ngFor="let data of concurso.datas">
+      <ion-item-divider color="light"
+                        text-uppercase>
+        <ion-icon item-start
+                  name="calendar"></ion-icon>{{ data.nome }}
+      </ion-item-divider>
+      <ion-item *ngIf="data.inicio">
+
+        <ion-label>Início</ion-label>
+        <h4 item-end
+            accent>{{data.inicio | shortDateFormat}}</h4>
+      </ion-item>
+      <ion-item no-lines
+                *ngIf="data.fim">
+        <ion-label>Fim</ion-label>
+        <h4 item-end
+            accent>{{data.fim | shortDateFormat }}</h4>
+      </ion-item>
+    </ng-container>
+    <ion-item-divider color="light">
+      <ion-icon item-start
+                name="people"></ion-icon>CLASSIFICAÇÃO
+    </ion-item-divider>
+    <button ion-item
+            no-lines
+            (click)="showClassificados(concurso)">
+
+      <ion-label>Lista de classificados</ion-label>
+    </button>
+    <ion-item-divider *ngIf="concurso.anexos"
+                      color="light">
+      <ion-icon name="attach"
+                item-start></ion-icon>
+      ANEXOS
+    </ion-item-divider>
+    <button ion-item
+            *ngFor="let anexo of concurso.anexos"
+            (click)="openLink(anexo.link)">
+
+      <p>
+        {{ anexo.documento }}
+      </p>
+    </button>
+  </ion-list>
+
+  <ng-template #loading>
+    <ion-spinner *ngIf="!filteredConcursos"
+                 page-loading></ion-spinner>
+  </ng-template>
+
+</ion-content>

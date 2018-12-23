@@ -141,7 +141,7 @@ const menus = [
       {
         title: 'Buscar concursos',
         icon: 'search',
-        component: 'SearchPage',
+        component: 'ConcursosPage',
         order: 7
       }
     ]

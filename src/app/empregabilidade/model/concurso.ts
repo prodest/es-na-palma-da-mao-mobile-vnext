@@ -1,3 +1,4 @@
+import { Anexo } from './anexo';
 import { Datas } from './datas';
 
 export class Concurso {
@@ -6,5 +7,6 @@ export class Concurso {
   orgao: string;
   descricao: string;
   datas: Datas[];
-  anexos: Object[];
+  anexos: Anexo[];
+  nome: string;
 }

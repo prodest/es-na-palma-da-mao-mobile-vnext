@@ -1,35 +1,63 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams, LoadingController } from 'ionic-angular';
-import { Classificado } from '../../dto/Classificado';
+import { IonicPage, NavParams } from 'ionic-angular';
 import deburr from 'lodash-es/deburr';
-/**
- * Generated class for the ClassificacaoPage page.
- *
- * See https://ionicframework.com/docs/components/#navigation for more info on
- * Ionic pages and navigation.
- */
 
-@IonicPage()
+import { Classificacao, Concurso } from '../../model';
+import { DtApiService } from '../../providers';
+
+@IonicPage({
+  segment: 'concursos/:id/classificados'
+})
 @Component({
-  selector: 'espm-page-classificacao',
+  selector: 'espm-dt-classificacao-page',
   templateUrl: 'classificacao.html'
 })
 export class ClassificacaoPage {
-  allClassificado: Classificado[];
-  filteredClassificado: Classificado[];
-  constructor(public navCtrl: NavController, public navParams: NavParams, public loadingCtrl: LoadingController) {}
+  all: Classificacao[];
+  filtered: Classificacao[];
+  concurso: Concurso;
+
+  /**
+   *
+   */
+  constructor(private navParams: NavParams, private api: DtApiService) {}
+
+  /**
+   *
+   */
   ionViewWillLoad() {
-    this.allClassificado = this.navParams.data;
-    this.clear();
+    this.concurso = this.navParams.data.concurso;
+    this.getClassificados(this.concurso.id);
   }
+
+  /**
+   *
+   */
   clear = () => {
-    this.filteredClassificado = this.allClassificado;
+    this.filtered = this.all;
   };
+
+  /**
+   *
+   */
   search = e => {
     const search = this.normalize(e.target.value);
-    this.filteredClassificado = this.allClassificado.filter(classificado => {
+    this.filtered = this.all.filter(classificado => {
       return this.normalize(classificado.nome).includes(search);
     });
   };
+
+  /**
+   *
+   */
+  getClassificados(id) {
+    this.api.getClassificacao(id).subscribe(classificados => {
+      this.all = this.filtered = classificados;
+    });
+  }
+
+  /**
+   *
+   */
   private normalize = (term: string) => (term ? deburr(term.toLowerCase()) : '');
 }

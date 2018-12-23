@@ -1,5 +1,5 @@
-import { SearchPageModule } from './pages/search/search.module';
+import { ConcursosPageModule } from './pages/concurso/concurso.module';
 
-export { SearchPageModule };
+export { ConcursosPageModule };
 
-export const EmpregabilidadeModules = [SearchPageModule];
+export const EmpregabilidadeModules = [ConcursosPageModule];

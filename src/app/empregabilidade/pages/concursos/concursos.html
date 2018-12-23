@@ -1,0 +1,47 @@
+<ion-header color-primary-bg>
+  <ion-navbar hideBackButton>
+    <button ion-button
+            menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    <ion-title>Concursos públicos</ion-title>
+  </ion-navbar>
+  <ion-searchbar placeholder="Pesquisar..."
+                 [showCancelButton]="true"
+                 cancelButtonText="Cancelar"
+                 [animated]="false"
+                 (ionInput)="search($event)"
+                 (ionClear)="clear($event)"
+                 (ionCancel)="clear($event)">
+  </ion-searchbar>
+</ion-header>
+
+<ion-content>
+  <ion-list-header *ngIf="filteredConcursos && filteredConcursos.length">
+    {{filteredConcursos.length}} encontrados
+  </ion-list-header>
+  <ion-list no-margin
+            [virtualScroll]="filteredConcursos"
+            [virtualTrackBy]="trackById"
+            approxItemHeight="70px">
+    <button ion-item
+            *virtualItem="let concurso"
+            (click)="showDetails(concurso.id)">
+      <h3 text-wrap
+          class="concursos_name">{{ concurso.orgao }}</h3>
+      <p text-wrap
+         class="concursos_descricao">{{ concurso.descricao }}</p>
+      <concurso-status [status]="concurso.status"></concurso-status>
+    </button>
+  </ion-list>
+  <ion-item *ngIf="filteredConcursos && !filteredConcursos.length"
+            text-center
+            no-lines
+            id="not-founded">
+    <h2>Nenhum concurso encontrado</h2>
+    <p>Tente mudar o filtro da consulta</p>
+  </ion-item>
+  <ion-spinner *ngIf="!filteredConcursos"
+               page-loading></ion-spinner>
+
+</ion-content>

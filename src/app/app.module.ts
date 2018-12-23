@@ -33,8 +33,7 @@ import { TranscolOnlineProviders } from './ceturb/transcol-online/providers';
 import { DetranProviders } from './detran/providers';
 import { DioProviders } from './dio/providers';
 import { EDocsProviders } from './edocs/state';
-import { DtDetailsProvider } from './empregabilidade/providers/dt-details/dt-details';
-import { SearchProvider } from './empregabilidade/providers/dt-search/dt-search';
+import { EmpregabilidadeProviders } from './empregabilidade/providers';
 import { NewsProviders } from './news/providers';
 import { TransparencyProviders } from './secont/transparency/providers';
 import { SepProviders } from './sep/providers';
@@ -93,6 +92,7 @@ registerLocaleData(ptBr);
     ...TranscolOnlineProviders,
     ...TransparencyProviders,
     ...EDocsProviders,
+    ...EmpregabilidadeProviders,
     {
       provide: ErrorHandler,
       useClass: IonicErrorHandler
@@ -111,9 +111,7 @@ registerLocaleData(ptBr);
     {
       provide: ErrorHandler,
       useClass: IonicErrorHandler
-    },
-    SearchProvider,
-    DtDetailsProvider
+    }
   ]
 })
 export class AppModule {}

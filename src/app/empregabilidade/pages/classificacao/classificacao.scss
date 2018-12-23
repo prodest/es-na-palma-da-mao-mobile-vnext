@@ -1,16 +1,20 @@
-page-classificacao {
-  .classificado_id {
-    font-weight: 700;
-    align-self: flex-start;
-    padding-top: 8px;
-  }
-  .classificado_name {
-    font-weight: 500;
-    font-size: 1.6rem;
-    text-align: justify;
-  }
-  .classificado_descricao {
-    font-weight: 300;
-    text-align: justify;
+espm-dt-classificacao-page {
+  .scroll-content {
+    #not-founded {
+      height: 100%;
+    }
+    .colocacao {
+      color: #208baa;
+      font-weight: 500;
+      font-size: 1.8rem;
+      margin-right: 10px;
+    }
+    ion-badge {
+      border-radius: 50% !important;
+      color: #fff !important;
+      background-color: #208baa !important;
+      padding: 5px 5px !important;
+      margin-right: 16px !important;
+    }
   }
 }
