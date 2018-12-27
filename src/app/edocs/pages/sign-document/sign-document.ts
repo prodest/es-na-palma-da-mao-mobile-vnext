@@ -2,6 +2,7 @@ import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
 import { IonicPage, ViewController } from 'ionic-angular';
 
 import { Document, DocumentsQuery, DocumentsService } from '../../state';
+import { AuthQuery } from '@espm/core';
 
 @IonicPage({
   segment: 'assinar-documento'
@@ -13,16 +14,23 @@ import { Document, DocumentsQuery, DocumentsService } from '../../state';
 })
 export class SignDocumentPage implements OnInit {
   document: Document;
+  userName: string;
 
   /**
    *
    */
-  constructor(private docsService: DocumentsService, private docsQuery: DocumentsQuery, private viewCtrl: ViewController) {}
+  constructor(
+    private docsService: DocumentsService,
+    private docsQuery: DocumentsQuery,
+    private viewCtrl: ViewController,
+    private authQuery: AuthQuery
+  ) {}
 
   /**
    *
    */
   ngOnInit() {
+    this.userName = this.authQuery.state.claims.nome;
     this.document = this.docsQuery.getActive();
   }
 
