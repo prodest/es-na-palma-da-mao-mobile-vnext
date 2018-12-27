@@ -2,6 +2,11 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+<a name="5.3.2"></a>
+## [5.3.2](https://github.com/prodest/es-na-palma-da-mao-mobile-vnext/compare/v5.3.1...v5.3.2) (2018-12-27)
+
+
+
 <a name="5.3.1"></a>
 ## [5.3.1](https://github.com/prodest/es-na-palma-da-mao-mobile-vnext/compare/v5.3.0...v5.3.1) (2018-12-23)
 
