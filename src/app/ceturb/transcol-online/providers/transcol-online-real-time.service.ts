@@ -16,7 +16,8 @@ export class TranscolOnlineRealTimeService {
 
   async getNextVehicles(stopId: number) {
     /* TO DO: Colocar URL nas variáveis de ambiente */
-    let result = await this.http.get(`https://api.es.gov.br/dev/realtime/nextbus/${stopId}`, )
+    let result = await this.http.get(`https://api.es.gov.br/realtime/ponto/${stopId}/veiculos`).toPromise();
+    console.log(result);
     return result;
   }
 }

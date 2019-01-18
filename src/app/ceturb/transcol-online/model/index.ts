@@ -3,3 +3,4 @@ export * from './prevision';
 export * from './favorite-stops';
 export * from './feedback';
 export * from './bus-line';
+export * from './vehicle';

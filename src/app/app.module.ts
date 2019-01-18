@@ -32,6 +32,7 @@ import { DioProviders } from './dio/providers';
 import { NewsProviders } from './news/providers';
 import { TransparencyProviders } from './secont/transparency/providers';
 import { SepProviders } from './sep/providers';
+import { HaversineService } from 'ng2-haversine';
 
 moment.locale('pt-br');
 registerLocaleData(ptBr);
@@ -66,6 +67,7 @@ registerLocaleData(ptBr);
     Facebook,
     Geolocation,
     GooglePlus,
+    HaversineService,
     InAppBrowser,
     LocaleService,
     LocalNotifications,
