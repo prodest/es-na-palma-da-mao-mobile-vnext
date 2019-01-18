@@ -4,5 +4,5 @@ export class Vehicle {
   ignicao: boolean
   linha: string
   destino: string
-  distancia: number
+  distancia: string
 }
