@@ -1,5 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { share } from 'rxjs/operators'
 
 @Injectable()
 export class ApiCeturbV2Service {
@@ -8,9 +9,9 @@ export class ApiCeturbV2Service {
 
   }
 
-  async allStops() {
+  allStops() {
     /* TO DO: Colocar URL nas variáveis de ambiente */
-    let result = await this.http.get(`https://api.es.gov.br/transcol/pontos`).toPromise();
-    return result;
+    return this.http.get(`https://api.es.gov.br/transcol/pontos`).pipe(share());
   }
 }
+  
