@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 
 import { DtApiService } from '../../providers';
-import { Concurso } from './../../model';
+import { Concurso } from '../../model/';
 
 @IonicPage({
   segment: 'concursos/:id'
@@ -42,8 +42,11 @@ export class ConcursoPage {
 
   /**
    *
-   */
-  showClassificados(concurso: Concurso) {
-    this.navCtrl.push('ClassificacaoPage', { concurso });
+   showClassificados(concurso: Concurso) {
+     this.navCtrl.push('ClassificacaoPage', { concurso });
+    }
+*/
+  showAreas(concurso: Concurso) {
+    this.navCtrl.push('AreasPage', { idConcurso: concurso.id, nomeConcurso: concurso.nome, areas: concurso.areas });
   }
 }
