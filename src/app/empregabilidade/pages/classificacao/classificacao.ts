@@ -2,20 +2,21 @@ import { Component } from '@angular/core';
 import { IonicPage, NavParams } from 'ionic-angular';
 import deburr from 'lodash-es/deburr';
 
-import { Classificacao, Concurso } from '../../model';
+import { Classificacao } from '../../model/';
 import { DtApiService } from '../../providers';
 
 @IonicPage({
-  segment: 'concursos/:id/classificados'
+  segment: 'idConcursos/:id/classificados'
 })
 @Component({
   selector: 'espm-dt-classificacao-page',
   templateUrl: 'classificacao.html'
 })
 export class ClassificacaoPage {
+  nomeConcurso: string;
   all: Classificacao[];
   filtered: Classificacao[];
-  concurso: Concurso;
+  classificados: Classificacao[];
 
   /**
    *
@@ -26,8 +27,8 @@ export class ClassificacaoPage {
    *
    */
   ionViewWillLoad() {
-    this.concurso = this.navParams.data.concurso;
-    this.getClassificados(this.concurso.id);
+    this.nomeConcurso = this.navParams.data.nomeConcurso;
+    this.getClassificados(this.navParams.data.idConcurso, this.navParams.data.idCargo);
   }
 
   /**
@@ -50,9 +51,9 @@ export class ClassificacaoPage {
   /**
    *
    */
-  getClassificados(id) {
-    this.api.getClassificacao(id).subscribe(classificados => {
-      this.all = this.filtered = classificados;
+  getClassificados(idConcurso, idCargo) {
+    this.api.getClassificacao(idConcurso, idCargo).subscribe(classificados => {
+      this.all = this.filtered = this.classificados = classificados;
     });
   }
 

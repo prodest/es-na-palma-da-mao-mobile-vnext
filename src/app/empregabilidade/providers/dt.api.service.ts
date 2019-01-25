@@ -3,7 +3,7 @@ import { Inject, Injectable } from '@angular/core';
 import { Environment, EnvVariables } from '@espm/core';
 import { Observable } from 'rxjs/Observable';
 
-import { Classificacao, Concurso } from './../model';
+import { Classificacao, Concurso } from '../model';
 
 /*
 *
@@ -25,8 +25,8 @@ export class DtApiService {
   /**
    *
    */
-  getClassificacao(id): Observable<Array<Classificacao>> {
-    return this.http.get<Classificacao[]>(`${this.env.api.empregabilidade}/${id}/classificacao`);
+  getClassificacao(idConcurso, idCargo): Observable<Array<Classificacao>> {
+    return this.http.get<Classificacao[]>(`${this.env.api.empregabilidade}/${idConcurso}/cargo/${idCargo}/classificacao`);
   }
 
   /**
