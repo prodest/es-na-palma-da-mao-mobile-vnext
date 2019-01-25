@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams, LoadingController } from 'ionic-angular';
 
-import { VehiclesQuery, Vehicle } from '../../state';
+import { VehiclesQuery, Vehicle, VehiclesService } from '../../state';
 import { Observable } from 'rxjs/Observable';
 
 
@@ -27,7 +27,8 @@ export class TranscolOnlineRealTimePage {
     public navCtrl: NavController,
     public navParams: NavParams,
     public loadingCtrl: LoadingController,
-    private vehiclesQuery: VehiclesQuery
+    private vehiclesQuery: VehiclesQuery,
+    private vehiclesService: VehiclesService
     ) {
 
   }

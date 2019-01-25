@@ -13,7 +13,7 @@ export class BusStopsService {
   myCoordinates: GeoCoord;
 
   constructor(
-    private store: BusStopsStore,
+    protected store: BusStopsStore,
     private apiCeturb: ApiCeturbV2Service,
     private geolocation: Geolocation,
     private haversineService: HaversineService
