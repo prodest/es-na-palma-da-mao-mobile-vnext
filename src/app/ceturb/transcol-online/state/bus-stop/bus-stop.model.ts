@@ -11,9 +11,10 @@ export type BusStop = {
   distancia: number
 }
 
-export function createBusStop({
-  id = null, codigo = '', municipio = '', logradouro = '', referencia = '', latitude = null, longitude = null, azimute = null, terminal = null, distancia = null
-}: BusStop): Partial<BusStop> {
+export function createBusStop(
+  {
+    id = null, codigo = '', municipio = '', logradouro = '', referencia = '', latitude = null, longitude = null, azimute = null, terminal = null, distancia = null
+  }: Partial<BusStop>): BusStop {
   return {
     id, codigo, municipio, logradouro, referencia, latitude, longitude, azimute, terminal, distancia
   } as BusStop;

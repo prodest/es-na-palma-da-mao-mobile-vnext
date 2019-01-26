@@ -1,30 +1,35 @@
 import { VehiclesStore } from './vehicle.store';
-import { Vehicle } from './vehicle.model';
+import { Vehicle, createVehicle } from './vehicle.model';
 import { Injectable } from '@angular/core';
 import { TranscolOnlineRealTimeService } from '../../providers';
-import { BusStopsQuery } from '../';
-import { Observable } from 'rxjs/Observable';
-import { ID } from '@datorama/akita';
+import { map } from 'rxjs/operators';
 
 @Injectable()
 export class VehiclesService {
-  nearestStop$: Observable<ID>;
-
   constructor(
     protected store: VehiclesStore,
-    private apiRealtime: TranscolOnlineRealTimeService,
-    private busStopsQuery: BusStopsQuery
+    private apiRealtime: TranscolOnlineRealTimeService
   ) {
-    this.nearestStop$ = this.busStopsQuery.selectActiveId();
-    this.updateVehicles();
+
   }
 
-  updateVehicles() {
-    this.nearestStop$.subscribe(
-      (id: number) => {
-        this.apiRealtime.getNextVehicles(id).subscribe((vehicles: Array<Vehicle>) => {
-          this.store.set(vehicles);
-        });
+  updateVehicles(stopId: number) {
+    this.apiRealtime.getNextVehicles(stopId)
+    .pipe(
+      map(
+        (vehicles: Vehicle[]) => {
+          vehicles.map(
+            (vehicle) => {
+              this.store.createOrReplace(vehicle.rotulo, createVehicle(vehicle))
+            }
+          );
+          return vehicles;
+        }
+      )
+    )
+    .subscribe(
+      (vehicles: Array<Vehicle>) => {
+        console.log("VehiclesStore loaded!");
       }
     );
   }

@@ -14,15 +14,26 @@
       </button>
     </ion-buttons>
     <ion-title>Ônibus perto de você</ion-title>
+    <ion-buttons end>
+      <button ion-button
+          icon-only
+          (click)="updateVehicles()">
+        <ion-icon name="refresh"></ion-icon>
+      </button>
+    </ion-buttons>
   </ion-navbar>
 </ion-header>
 
 
 <ion-content padding>
   <ion-list>
-    <ion-item *ngFor="let vehicle of vehicles">
-      <h2>{{vehicle.linha}} - {{vehicle.destino}}</h2><h4>{{vehicle.distancia}} Km</h4>
-      <h3>Veículo: {{vehicle.numero}}</h3>
+    <ion-item *ngFor="let vehicle of vehicles$ | async">
+      <h2>{{vehicle.linha.slice(0, 3)}} - {{vehicle.bandeira}}</h2>
+      <h4>
+        {{ vehicle.distancia >= 1000 ? (vehicle.distancia/1000).toFixed(2) : (vehicle.distancia/10000).toFixed(2) }}
+        {{ vehicle.distancia >= 1000 ? 'Km' : 'm' }}
+      </h4>
+      <h3>Veículo: {{vehicle.rotulo}}</h3>
     </ion-item>
   </ion-list>
 </ion-content>

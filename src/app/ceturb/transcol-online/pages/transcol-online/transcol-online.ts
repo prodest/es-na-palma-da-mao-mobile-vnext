@@ -8,11 +8,13 @@ import { IonicPage, ModalController, NavController, Searchbar } from 'ionic-angu
 import * as L from 'leaflet';
 import values from 'lodash-es/values';
 import { interval } from 'rxjs/observable/interval';
-import { filter, finalize, map, switchMap, takeUntil, tap } from 'rxjs/operators';
+import { filter, finalize, map, switchMap, takeUntil, tap, take } from 'rxjs/operators';
 import { Subject } from 'rxjs/Subject';
 
 import { BusLine, BusStop, Prevision } from '../../model';
 import { TranscolOnlineService } from '../../providers';
+import { BusStopsService } from '../../state';
+import { Geolocation } from '@ionic-native/geolocation';
 
 const VITORIA = L.latLng(-20.315894186649725, -40.29565483331681);
 const GRANDE_VITORIA = [-38.50708007812501, -17.14079039331664, -42.46215820312501, -23.725011735951796];
@@ -68,7 +70,9 @@ export class TranscolOnlinePage implements AfterViewInit, OnDestroy {
   constructor(
     private navCtrl: NavController,
     private modalCtrl: ModalController,
-    private transcolOnline: TranscolOnlineService
+    private transcolOnline: TranscolOnlineService,
+    private busStopsService: BusStopsService,
+    private geolocation: Geolocation
   ) {}
 
   /**
@@ -376,6 +380,10 @@ export class TranscolOnlinePage implements AfterViewInit, OnDestroy {
       .subscribe(this.refreshSelectedStops);
     this.transcolOnline.favorites$.pipe(takeUntil(this.destroyed$)).subscribe(favorites => (this.favorites = favorites));
     this.transcolOnline.getBusStopsByArea(GRANDE_VITORIA).subscribe();
+    
+    this.geolocation.watchPosition().pipe(take(1)).subscribe(
+      geoposition => this.busStopsService.updateStops(geoposition)
+    );
   };
 
   /**

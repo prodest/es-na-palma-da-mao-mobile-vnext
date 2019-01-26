@@ -5,13 +5,14 @@ export type Vehicle = {
   distancia: number
 }
 
-export function createVehicle({
-  bandeira = '',
-  linha = '',
-  rotulo = null,
-  distancia = null
-}: Vehicle): Partial<Vehicle> {
-  return {
-    bandeira, linha, rotulo, distancia
-  } as Vehicle;
+export function createVehicle(
+  {
+    bandeira = '',
+    linha = '',
+    rotulo = null,
+    distancia = 0
+  }: Partial<Vehicle>): Vehicle {
+    return {
+      bandeira, linha, rotulo, distancia
+    } as Vehicle;
 }
