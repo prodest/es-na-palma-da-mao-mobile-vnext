@@ -1,8 +1,15 @@
 <ion-list *ngIf="debits && debits.length"
           class="debits">
     <ion-list-header>
-        {{ countDebits() }} débitos | {{ totalAmount() | currency:"BRL":true:"1.2" }}<button ion-button item-right (click)="generateBillet()" ng-show="debits.length > 0">Gerar Guia</button>
+        {{ countDebits() }} débitos <button ion-button item-right (click)="generateBillet()" ng-show="debits.length > 0">Gerar Guia</button>
     </ion-list-header>
+    <ion-item text-wrap>
+        
+            <ion-label color="primary">
+                <strong>Não serão considerados parcalementos nesta versão do ESPM</strong>
+            </ion-label>
+            
+    </ion-item>
     <ion-item *ngFor="let debit of ensureDebits()">        
         <div item-start
             class="debit__description">{{debit.dataVencimento | shortDateFormat}} </div>

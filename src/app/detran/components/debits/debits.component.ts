@@ -36,17 +36,22 @@ export class DebitsComponent {
     this.api.generateGRU(this.vehicle).subscribe(req => {
       this.dismissLoading();
       try {
-        this.showGRUCode(req["itensGuia"][0]["linhaDigitavel"])
+        console.log(req["itensGuia"][0])
+        this.showGRUCode(req["itensGuia"][0]["linhaDigitavel"], "Valor: " + this.getFormattedPrice(req["itensGuia"][0]["valorGuia"]))
       } catch {
-        this.showGRUCode("Não foi possível recuperar o código de barras")
+        this.showGRUCode("Não foi possível recuperar o código de barras", "Código de barras")
       }
     });
 
   };
 
-  showGRUCode = (str) => {
+  getFormattedPrice(price: number) {    
+    return new Intl.NumberFormat('pt-BR', { style: 'currency', currency: 'BRL' }).format(price);
+  }
+
+  showGRUCode = (str: string, title: string) => {
     let alert = this.alertCtrl.create({
-      title: 'Código de barras',
+      title: title,
       message: str,
       buttons: [
         {
