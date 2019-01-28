@@ -22,8 +22,7 @@ export class DebitsComponent {
   ) { }
   @Input() vehicle: Vehicle;
   @Input() debits: Debit[];
-
-
+  
 
   loading: Loading;
 
@@ -67,10 +66,24 @@ export class DebitsComponent {
 
   totalAmount = () => {
     let total = 0.0
-    for (let i = 0; i < this.debits.length; i++) {
-      total += Number(this.debits[i].valorAtualizadoFranquia)
+    for (let i = 0; i < this.debits.length; i++) {      
+      if (!(this.debits[i].parcela > 0)){
+        total += Number(this.debits[i].valorAtualizadoFranquia)
+      }      
     }
     return total;
+  }
+
+  ensureDebits = () => {
+    return this.debits.filter(debit => !this.checkInstallment(debit));
+  }
+
+  checkInstallment = (debit) => {
+    return debit.parcela > 0;
+  }
+
+  countDebits = () => {
+    return this.ensureDebits().length;
   }
 
   private showLoading = (message: string = 'Aguarde') => {

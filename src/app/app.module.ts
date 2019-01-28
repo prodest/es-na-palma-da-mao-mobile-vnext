@@ -23,6 +23,7 @@ import { IonicApp, IonicErrorHandler, IonicModule } from 'ionic-angular';
 import * as moment from 'moment';
 import { Clipboard } from '@ionic-native/clipboard';
 import { FileOpener } from '@ionic-native/file-opener';
+import { DocumentViewer } from '@ionic-native/document-viewer';
 import { File } from '@ionic-native/file'
 
 import { AboutProviders } from './about/providers';
@@ -78,6 +79,7 @@ registerLocaleData(ptBr);
     StatusBar,
     Clipboard,
     FileOpener,
+    DocumentViewer,
     File,
     SplashScreen,
     SocialSharing,

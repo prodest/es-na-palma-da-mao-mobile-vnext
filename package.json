@@ -86,6 +86,7 @@
     "@ionic-native/clipboard": "^4.18.0",
     "@ionic-native/core": "^4.5.3",
     "@ionic-native/device": "^4.10.1",
+    "@ionic-native/document-viewer": "^4.18.0",
     "@ionic-native/facebook": "^4.4.2",
     "@ionic-native/file": "^4.18.0",
     "@ionic-native/file-opener": "^4.18.0",
@@ -110,6 +111,7 @@
     "cordova-plugin-badge": "^0.8.8",
     "cordova-plugin-compat": "^1.2.0",
     "cordova-plugin-device": "^1.1.7",
+    "cordova-plugin-document-viewer": "^0.9.10",
     "cordova-plugin-facebook4": "^1.10.1",
     "cordova-plugin-file": "^6.0.1",
     "cordova-plugin-file-opener2": "^2.1.0",
@@ -236,7 +238,8 @@
       "cordova-plugin-statusbar": {},
       "cordova-clipboard": {},
       "cordova-plugin-file-opener2": {},
-      "cordova-plugin-file": {}
+      "cordova-plugin-file": {},
+      "cordova-plugin-document-viewer": {}
     },
     "platforms": [
       "android",

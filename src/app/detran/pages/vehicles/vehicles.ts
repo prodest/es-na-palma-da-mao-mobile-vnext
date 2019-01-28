@@ -28,7 +28,7 @@ export class VehiclesPage implements OnDestroy {
     private authQuery: AuthQuery,
     private navCtrl: NavController,
     private alertCtrl: AlertController,
-    private modalCtrl: ModalController
+    private modalCtrl: ModalController    
   ) {}
 
   /**
@@ -122,7 +122,7 @@ export class VehiclesPage implements OnDestroy {
   };
 
   ensureDebits = (vehicle, debits) => {
-    if (debits[0].hasOwnProperty('descricaoServico')) {
+    if (debits[0].hasOwnProperty('descricaoServico')) {      
       this.navCtrl.push('VehicleDebitsPage', { vehicle, plate: vehicle.plate, debits: debits })
     } else {
       let alert = this.alertCtrl.create({

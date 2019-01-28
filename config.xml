@@ -150,4 +150,5 @@
     <plugin name="cordova-plugin-file" spec="^6.0.1" />
     <engine name="android" spec="^7.1.1" />
     <engine name="browser" spec="5.0.4" />
+    <plugin name="cordova-plugin-document-viewer" spec="^0.9.10" />
 </widget>

@@ -1,13 +1,13 @@
 <ion-list *ngIf="debits && debits.length"
           class="debits">
     <ion-list-header>
-        ({{ debits.length }} débitos) | {{ totalAmount() | currency:"BRL":true:"1.2" }}<button ion-button item-right (click)="generateBillet()" ng-show="debits.length > 0">Gerar Guia</button>
+        {{ countDebits() }} débitos | {{ totalAmount() | currency:"BRL":true:"1.2" }}<button ion-button item-right (click)="generateBillet()" ng-show="debits.length > 0">Gerar Guia</button>
     </ion-list-header>
-    <ion-item *ngFor="let debit of debits">
+    <ion-item *ngFor="let debit of ensureDebits()">        
         <div item-start
-             class="debit__description">{{debit.dataVencimento | shortDateFormat}} </div>
+            class="debit__description">{{debit.dataVencimento | shortDateFormat}} </div>
         <ion-note class="debit__date">{{debit.descricaoServico}}</ion-note>
-        <small color-secondary-fg>{{debit.valorAtualizadoFranquia | currency:"BRL":true:"1.2" }}</small>
+        <small color-secondary-fg>{{debit.valorAtualizadoFranquia | currency:"BRL":true:"1.2" }}</small>        
         
     </ion-item>
 </ion-list>
