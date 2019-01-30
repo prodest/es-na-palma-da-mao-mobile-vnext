@@ -5,6 +5,7 @@ import { VehiclesQuery, Vehicle, VehiclesService, BusStopsQuery, BusStopsService
 import { Observable } from 'rxjs/Observable';
 import { Geolocation, Geoposition } from '@ionic-native/geolocation';
 import { take } from 'rxjs/operators';
+import { Loading } from 'ionic-angular/components/loading/loading';
 
 
 /**
@@ -25,6 +26,8 @@ export class TranscolOnlineRealTimePage {
   deviceCoordinates$: Observable<Geoposition>;
   vehiclesAutoreloader: NodeJS.Timer;
   stopsAutoReloader: NodeJS.Timer;
+  loadingVehicles$: Observable<boolean>;
+  loader: Loading;
 
   constructor(
     public navCtrl: NavController,
@@ -40,14 +43,16 @@ export class TranscolOnlineRealTimePage {
       this.nearestStop$ = this.busStopsQuery.selectActiveId() as Observable<number>;
       console.log("ponto mais próximo: ", this.busStopsQuery.getActiveId());
       this.vehicles$ = this.vehiclesQuery.selectAll();
+      this.loadingVehicles$ = this.vehiclesQuery.selectLoading();
   }
 
   ionViewWillLoad() {
-    const loader = this.presentLoading();
     this.nearestStop$.subscribe(
       stopId => this.vehiclesService.updateVehicles(stopId)
     );
-    loader.dismiss();
+    this.loadingVehicles$.subscribe(
+      (loading: boolean) => loading ? this.presentLoading() : this.loader.dismiss()
+    );
   }
 
   ionViewDidLoad() {
@@ -62,8 +67,8 @@ export class TranscolOnlineRealTimePage {
     const loader = this.loadingCtrl.create({
       content: "Carregando..."
     });
+    this.loader = loader;
     loader.present();
-    return loader;
   }
 
   private getDeviceCoordinates(): Observable<Geoposition> {

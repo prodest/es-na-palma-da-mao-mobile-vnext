@@ -14,6 +14,7 @@ export class VehiclesService {
   }
 
   updateVehicles(stopId: number) {
+    this.store.setLoading(true);
     this.apiRealtime.getNextVehicles(stopId)
     .pipe(
       map(
@@ -30,6 +31,7 @@ export class VehiclesService {
     .subscribe(
       (vehicles: Array<Vehicle>) => {
         console.log("VehiclesStore loaded!");
+        this.store.setLoading(false);
       }
     );
   }
