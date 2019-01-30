@@ -1,5 +1,6 @@
 import { HttpClient } from '@angular/common/http';
-import { Injectable } from '@angular/core';
+import { Injectable, Inject } from '@angular/core';
+import { EnvVariables, Environment } from '@espm/core';
 
 /*
   Generated class for the TranscolOnlineRealTimeProvider provider.
@@ -10,10 +11,9 @@ import { Injectable } from '@angular/core';
 @Injectable()
 export class TranscolOnlineRealTimeService {
 
-  constructor(public http: HttpClient) {}
+  constructor(public http: HttpClient, @Inject(EnvVariables) private env: Environment) {}
 
   getNextVehicles(stopId: number) {
-    /* TO DO: Colocar URL nas variáveis de ambiente */
-    return this.http.get(`https://api.es.gov.br/realtime/ponto/${stopId}/veiculos`);
+    return this.http.get(`${this.env.api.realtime}/ponto/${stopId}/veiculos`);
   }
 }
