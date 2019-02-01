@@ -38,6 +38,8 @@ import { NewsProviders } from './news/providers';
 import { TransparencyProviders } from './secont/transparency/providers';
 import { SepProviders } from './sep/providers';
 
+import { TesteUsuario } from './empregabilidade/state';
+
 moment.locale('pt-br');
 
 registerLocaleData(ptBr);
@@ -93,6 +95,7 @@ registerLocaleData(ptBr);
     ...TransparencyProviders,
     ...EDocsProviders,
     ...EmpregabilidadeProviders,
+    ...TesteUsuario,
     {
       provide: ErrorHandler,
       useClass: IonicErrorHandler
