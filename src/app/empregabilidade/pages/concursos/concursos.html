@@ -17,23 +17,36 @@
 </ion-header>
 
 <ion-content>
-  <ion-list-header *ngIf="filteredConcursos && filteredConcursos.length">
-    {{filteredConcursos.length}} encontrados
+ 
+  <ion-list-header class="testo_negrito" *ngIf="filteredConcursos && filteredConcursos.length">
+    {{filteredConcursos.length}} ENCONTRADOS
   </ion-list-header>
-  <ion-list no-margin
+  
+  
+ 
+  <ion-list  no-margin
             [virtualScroll]="filteredConcursos"
             [virtualTrackBy]="trackById"
             approxItemHeight="70px">
-    <button ion-item
+              
+    <button class="radius_concursos" ion-item
             *virtualItem="let concurso"
             (click)="showDetails(concurso.id)">
-      <h3 text-wrap
+            
+              <h3 text-wrap
           class="concursos_name">{{ concurso.orgao }}</h3>
       <p text-wrap
          class="concursos_descricao">{{ concurso.descricao }}</p>
-      <concurso-status [status]="concurso.status"></concurso-status>
+           
+         
+         <p class="status_float">
+          <concurso-status  [status]="concurso.status"></concurso-status>
+         </p>
+         
     </button>
+  
   </ion-list>
+
   <ion-item *ngIf="filteredConcursos && !filteredConcursos.length"
             text-center
             no-lines
@@ -43,5 +56,5 @@
   </ion-item>
   <ion-spinner *ngIf="!filteredConcursos"
                page-loading></ion-spinner>
-
+              
 </ion-content>

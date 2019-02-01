@@ -1,0 +1,43 @@
+
+<ion-header>
+
+  <ion-navbar>
+    <ion-title>homeIvonildo</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content padding>
+    
+  <ion-item><ion-img width="80" height="80" src="https://lh3.googleusercontent.com/-8IRTChB-MgQ/Vv_b-kqkHuE/AAAAAAAAACY/xHOAbkRX5LQObCLlFgWhBUjfEUO7r1PTQCEwYCg/w163-h110-p/ProfilePhotos02"></ion-img></ion-item>
+  
+  <ion-item>
+    <ion-label floating>Id informar</ion-label>
+    <ion-input [(ngModel)]="id"></ion-input>
+  </ion-item>
+  <button ion-button color="danger" (click)="buscarUsuario(id)"> 
+    buscar
+  </button>
+  <ion-list> 
+  
+      <ion-item *ngFor="let usuario of (usuarios$ | async)">
+        
+      <p>
+      userId : {{ usuario.userId }} 
+      </p>
+      <p> 
+      Id  : {{ usuario.id }}
+      </p>
+      <p>
+      Title : {{ usuario.title }}
+      </p>
+        <p>
+        body : {{ usuario.body }}
+        </p>
+      
+      </ion-item>
+      
+  
+      </ion-list>
+</ion-content>
