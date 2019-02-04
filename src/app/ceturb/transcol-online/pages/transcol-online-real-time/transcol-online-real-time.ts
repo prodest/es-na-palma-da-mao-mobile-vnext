@@ -1,11 +1,11 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams, LoadingController } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, LoadingController, Loading } from 'ionic-angular';
+import { Geolocation, Geoposition } from '@ionic-native/geolocation';
+import { Observable } from 'rxjs/Observable';
+import { Subscription } from 'rxjs/Subscription';
+import { take } from 'rxjs/operators';
 
 import { VehiclesQuery, Vehicle, VehiclesService, BusStopsQuery, BusStopsService } from '../../state';
-import { Observable } from 'rxjs/Observable';
-import { Geolocation, Geoposition } from '@ionic-native/geolocation';
-import { take } from 'rxjs/operators';
-import { Loading } from 'ionic-angular/components/loading/loading';
 
 
 /**
@@ -23,10 +23,12 @@ import { Loading } from 'ionic-angular/components/loading/loading';
 export class TranscolOnlineRealTimePage {
   vehicles$: Observable<Vehicle[]>;
   nearestStop$: Observable<number>;
+  nearestStopSubscription: Subscription;
   deviceCoordinates$: Observable<Geoposition>;
-  vehiclesAutoreloader: NodeJS.Timer;
+  vehiclesAutoReloader: NodeJS.Timer;
   stopsAutoReloader: NodeJS.Timer;
   loadingVehicles$: Observable<boolean>;
+  loadingVehiclesSubscription: Subscription;
   loader: Loading;
 
   constructor(
@@ -44,15 +46,18 @@ export class TranscolOnlineRealTimePage {
       console.log("ponto mais próximo: ", this.busStopsQuery.getActiveId());
       this.vehicles$ = this.vehiclesQuery.selectAll();
       this.loadingVehicles$ = this.vehiclesQuery.selectLoading();
+      this.createLoading();
   }
 
   ionViewWillLoad() {
-    this.nearestStop$.subscribe(
+    this.nearestStopSubscription = this.nearestStop$
+    .subscribe(
       stopId => this.vehiclesService.updateVehicles(stopId)
     );
-    this.loadingVehicles$.subscribe(
-      (loading: boolean) => loading ? this.presentLoading() : this.loader.dismiss()
-    );
+    this.loadingVehiclesSubscription = this.loadingVehicles$
+    .subscribe((loading: boolean) => {
+        loading ? this.loader.present() : this.loader.dismiss();
+    });
   }
 
   ionViewDidLoad() {
@@ -61,14 +66,17 @@ export class TranscolOnlineRealTimePage {
 
   ionViewWillLeave() {
     this.stopAutoReload();
+    this.loadingVehiclesSubscription.unsubscribe();
+    this.nearestStopSubscription.unsubscribe();
   }
   
-  presentLoading() {
-    const loader = this.loadingCtrl.create({
+  createLoading() {
+    this.loader = this.loadingCtrl.create({
       content: "Carregando..."
     });
-    this.loader = loader;
-    loader.present();
+    this.loader.onDidDismiss(() => {
+      this.createLoading();
+    });
   }
 
   private getDeviceCoordinates(): Observable<Geoposition> {
@@ -80,7 +88,7 @@ export class TranscolOnlineRealTimePage {
   }
 
   startAutoReload() {
-    this.vehiclesAutoreloader = setInterval(() => {
+    this.vehiclesAutoReloader = setInterval(() => {
       console.log("reloading vehicles");
       this.updateVehicles();
     }, 15 * 1000);
@@ -96,7 +104,7 @@ export class TranscolOnlineRealTimePage {
   }
 
   stopAutoReload() {
-    clearInterval(this.vehiclesAutoreloader);
+    clearInterval(this.vehiclesAutoReloader);
     clearInterval(this.stopsAutoReloader);
     console.log("Auto reload stopped.");
   }
