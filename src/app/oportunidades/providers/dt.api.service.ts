@@ -4,6 +4,7 @@ import { Environment, EnvVariables } from '@espm/core';
 import { Observable } from 'rxjs/Observable';
 
 import { Classificacao, Concurso } from '../model';
+import { SelecaoStore } from '../state';
 
 /*
 *
@@ -13,7 +14,11 @@ export class DtApiService {
   /**
    *
    */
-  constructor(private http: HttpClient, @Inject(EnvVariables) private env: Environment) {}
+  constructor(
+    private http: HttpClient,
+    @Inject(EnvVariables) private env: Environment,
+    @Inject(SelecaoStore) private favoritosStore: SelecaoStore
+  ) {}
 
   /**
    *
@@ -34,5 +39,13 @@ export class DtApiService {
    */
   gelAllConcursos(): Observable<Array<Concurso>> {
     return this.http.get<Concurso[]>(this.env.api.empregabilidade);
+  }
+  /**
+   *
+   */
+  getFavoritos() {
+    this.http.get(this.env.api.empregabilidade).subscribe(response => {
+      this.favoritosStore.set(response);
+    });
   }
 }
