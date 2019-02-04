@@ -21,7 +21,15 @@ export class VehiclesService {
         (vehicles: Vehicle[]) => {
           vehicles.map(
             (vehicle) => {
-              this.store.createOrReplace(vehicle.rotulo, createVehicle(vehicle))
+              let newVehicle: Vehicle = createVehicle(vehicle);
+              this.store.upsert(newVehicle.rotulo, (vehicle: Vehicle): Vehicle => ({
+                ...newVehicle,
+                passou: vehicle.distancia &&
+                        vehicle.distancia < 50 && 
+                        vehicle.distancia < newVehicle.distancia && 
+                        !vehicle.passou 
+                        ? true : false
+              } as Vehicle));
             }
           );
           return vehicles;
