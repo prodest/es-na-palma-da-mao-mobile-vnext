@@ -136,7 +136,7 @@ const menus = [
     ]
   },
   {
-    name: 'Empregabilidade',
+    name: 'Oportunidades',
     items: [
       {
         title: 'Buscar concursos',
