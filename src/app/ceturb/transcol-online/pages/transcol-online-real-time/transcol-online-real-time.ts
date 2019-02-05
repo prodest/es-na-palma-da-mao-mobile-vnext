@@ -50,14 +50,12 @@ export class TranscolOnlineRealTimePage {
   }
 
   ionViewWillLoad() {
-    this.nearestStopSubscription = this.nearestStop$
-    .subscribe(
-      stopId => this.vehiclesService.updateVehicles(stopId)
+    this.nearestStopSubscription = this.nearestStop$.subscribe(
+      (stopId: number) => this.vehiclesService.updateVehicles(stopId)
     );
-    this.loadingVehiclesSubscription = this.loadingVehicles$
-    .subscribe((loading: boolean) => {
-        loading ? this.loader.present() : this.loader.dismiss();
-    });
+    this.loadingVehiclesSubscription = this.loadingVehicles$.subscribe(
+      (loading: boolean) => loading ? this.loader.present() : this.loader.dismiss()
+    );
   }
 
   ionViewDidLoad() {

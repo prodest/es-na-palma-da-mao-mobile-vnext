@@ -40,6 +40,10 @@ export class VehiclesService {
       (vehicles: Array<Vehicle>) => {
         console.log("VehiclesStore loaded!");
         this.store.setLoading(false);
+      },
+      (error) => {
+        console.error("ERROR", error);
+        this.store.setLoading(false);
       }
     );
   }
