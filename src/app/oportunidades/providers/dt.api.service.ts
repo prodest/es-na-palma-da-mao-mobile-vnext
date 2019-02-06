@@ -4,7 +4,7 @@ import { Environment, EnvVariables } from '@espm/core';
 import { Observable } from 'rxjs/Observable';
 
 import { Classificacao, Concurso } from '../model';
-import { SelecaoStore } from '../state';
+import { SelecaoStore, SelecaoQuery } from '../state';
 
 /*
 *
@@ -17,7 +17,8 @@ export class DtApiService {
   constructor(
     private http: HttpClient,
     @Inject(EnvVariables) private env: Environment,
-    @Inject(SelecaoStore) private favoritosStore: SelecaoStore
+    @Inject(SelecaoStore) private favoritosStore: SelecaoStore,
+    @Inject(SelecaoQuery) private favoritosQuery: SelecaoQuery
   ) {}
 
   /**
@@ -47,5 +48,10 @@ export class DtApiService {
     this.http.get(this.env.api.empregabilidade).subscribe(response => {
       this.favoritosStore.set(response);
     });
+  }
+  setFavoritos(concurso) {
+    concurso.favorito = concurso.favorito === null ? false : concurso.favorito;
+    this.favoritosStore.update(concurso.id, { favorito: !concurso.favorito });
+    concurso = this.favoritosQuery.getEntity(concurso.id);
   }
 }

@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, ToastController } from 'ionic-angular';
 
 import { DtApiService } from '../../providers';
 import { Concurso } from '../../model/';
@@ -17,7 +17,12 @@ export class ConcursoPage {
   /**
    *
    */
-  constructor(private navCtrl: NavController, private navParams: NavParams, private api: DtApiService) {}
+  constructor(
+    private toastCtrl: ToastController,
+    private navCtrl: NavController,
+    private navParams: NavParams,
+    private api: DtApiService
+  ) {}
 
   /**
    *
@@ -49,4 +54,13 @@ export class ConcursoPage {
   showAreas(concurso: Concurso) {
     this.navCtrl.push('AreasPage', { idConcurso: concurso.id, nomeConcurso: concurso.nome, areas: concurso.areas });
   }
+  favoritar(concurso) {
+    console.log('CLICOU EM FAVORITOS!', concurso.favorito);
+    this.api.setFavoritos(concurso);
+    this.showMessage(`Concurso ${concurso.nome} ${concurso.favorito ? 'adicionada aos' : 'removida dos'} favoritos`);
+    return concurso;
+  }
+  showMessage = (message: string) => {
+    this.toastCtrl.create({ message, duration: 4000 }).present();
+  };
 }

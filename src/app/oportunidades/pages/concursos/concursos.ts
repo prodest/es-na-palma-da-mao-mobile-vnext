@@ -2,7 +2,6 @@ import { Component } from '@angular/core';
 import { trackById } from '@espm/core';
 import { IonicPage, NavController } from 'ionic-angular';
 import deburr from 'lodash-es/deburr';
-
 import { Concurso } from '../../model';
 import { DtApiService } from '../../providers';
 import { Observable } from 'rxjs/Observable';
@@ -38,6 +37,9 @@ export class ConcursosPage {
   ionViewWillEnter() {
     this.loading$ = this.favoritosQuery.selectLoading();
     this.concursos$ = this.favoritosQuery.selectAll();
+    this.concursos$.pipe().subscribe(concurso => {
+      this.allConcursos = this.filteredConcursos = concurso;
+    });
     this.api.getFavoritos();
     // this.getAllConcursos();
   }
@@ -46,7 +48,10 @@ export class ConcursosPage {
    *
    */
   search = e => {
-    // implementar
+    const search = this.normalize(e.target.value);
+    this.filteredConcursos = this.allConcursos.filter(concurso => {
+      return this.normalize(concurso.orgao).includes(search) || this.normalize(concurso.descricao).includes(search);
+    });
   };
 
   /**
@@ -76,4 +81,8 @@ export class ConcursosPage {
    *
    */
   private normalize = (term: string) => (term ? deburr(term.toLowerCase()) : '');
+
+  /**
+   *
+   */
 }
