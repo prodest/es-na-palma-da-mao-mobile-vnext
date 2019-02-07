@@ -1,6 +1,8 @@
-import { DtApiService } from './dt.api.service';
-import { FavoritosDtService, SelecaoQuery, SelecaoStore } from '../state';
+import { SelecaoApiService } from './selecao.api.service';
+import { SelecaoService } from './selecao.service';
+import { SelecaoQuery } from './selecao.query';
+import { SelecaoStore } from './selecao.store';
 
-export { DtApiService };
+export { SelecaoApiService as DtApiService, SelecaoService, SelecaoQuery, SelecaoStore };
 
-export const OportunidadesProviders = [DtApiService, FavoritosDtService, SelecaoQuery, SelecaoStore];
+export const OportunidadesProviders = [SelecaoApiService, SelecaoService, SelecaoQuery, SelecaoStore];

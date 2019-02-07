@@ -26,7 +26,7 @@
       <h3 text-wrap class="concursos_name">{{ concurso.orgao }}</h3>
       <p text-wrap class="concursos_descricao">{{ concurso.descricao }}</p>
       <ion-icon *ngIf="concurso.favorito" class="favorito_icon" item-end name="md-star"></ion-icon>
-      <ion-icon *ngIf="!concurso.favotiro" class="favorito_icon" item-end name="md-star-outline"></ion-icon>
+      <ion-icon *ngIf="!concurso.favorito" class="favorito_icon" item-end name="md-star-outline"></ion-icon>
       <concurso-status [status]="concurso.status"></concurso-status>
     </button>
   </ion-list>

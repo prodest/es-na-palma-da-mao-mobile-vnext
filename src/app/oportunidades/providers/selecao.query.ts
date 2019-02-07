@@ -5,6 +5,10 @@ import { Concurso } from '../model';
 
 @Injectable()
 export class SelecaoQuery extends QueryEntity<State, Concurso> {
+  /**
+   *
+   *
+   */
   constructor(protected store: SelecaoStore) {
     super(store);
   }

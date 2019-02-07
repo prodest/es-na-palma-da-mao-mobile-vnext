@@ -43,7 +43,7 @@ export class ExpandableHeaderComponent implements OnInit, OnDestroy {
    */
   ngOnDestroy() {
     this.destroyed$.next(true);
-    this.destroyed$.unsubscribe();
+    this.destroyed$.complete();
   }
 
   /**

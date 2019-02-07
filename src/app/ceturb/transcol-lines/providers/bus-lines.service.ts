@@ -59,7 +59,7 @@ export class BusLinesService implements OnDestroy {
    */
   ngOnDestroy() {
     this.destroyed$.next();
-    this.destroyed$.unsubscribe();
+    this.destroyed$.complete();
   }
 
   /**

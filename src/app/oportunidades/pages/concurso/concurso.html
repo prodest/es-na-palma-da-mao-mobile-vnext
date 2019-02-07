@@ -11,7 +11,7 @@
 </ion-header>
 
 <ion-content>
-  <ion-list *ngIf="concurso; else loading" no-margin>
+  <ion-list *ngIf="concurso?.areas" no-margin>
     <ng-container *ngFor="let data of concurso.datas">
       <ion-item-divider color="light" text-uppercase>
         <ion-icon item-start name="calendar"></ion-icon>{{ data.nome }}
@@ -40,5 +40,4 @@
       <p>{{ anexo.documento }}</p>
     </button>
   </ion-list>
-  <ng-template #loading> <ion-spinner *ngIf="!filteredConcursos" page-loading></ion-spinner> </ng-template>
 </ion-content>

@@ -3,9 +3,7 @@ import { trackById } from '@espm/core';
 import { IonicPage, NavController } from 'ionic-angular';
 import deburr from 'lodash-es/deburr';
 import { Concurso } from '../../model';
-import { DtApiService } from '../../providers';
-import { Observable } from 'rxjs/Observable';
-import { SelecaoQuery } from '../../state';
+import { SelecaoQuery, SelecaoService } from '../../providers';
 @IonicPage({
   segment: 'concursos'
 })
@@ -20,28 +18,22 @@ export class ConcursosPage {
   allConcursos: Concurso[];
   filteredConcursos: Concurso[];
   trackById = trackById;
-  /**
-   *
-   */
-  concursos$: Observable<Concurso[]>;
-  loading$: Observable<boolean>;
 
   /**
    *
    */
-  constructor(private navCtrl: NavController, private api: DtApiService, private favoritosQuery: SelecaoQuery) {}
+  constructor(private navCtrl: NavController, private service: SelecaoService, private query: SelecaoQuery) {}
 
   /**
    *
    */
-  ionViewWillEnter() {
-    this.loading$ = this.favoritosQuery.selectLoading();
-    this.concursos$ = this.favoritosQuery.selectAll();
-    this.concursos$.pipe().subscribe(concurso => {
-      this.allConcursos = this.filteredConcursos = concurso;
+  ionViewWillLoad() {
+    this.query.selectAll().subscribe(concursos => {
+      this.allConcursos = this.filteredConcursos = concursos;
     });
-    this.api.getFavoritos();
-    // this.getAllConcursos();
+
+    // carrega dados
+    this.service.loadAll();
   }
 
   /**
@@ -71,18 +63,5 @@ export class ConcursosPage {
   /**
    *
    */
-  getAllConcursos() {
-    this.api.gelAllConcursos().subscribe(concursos => {
-      this.allConcursos = this.filteredConcursos = concursos;
-    });
-  }
-
-  /**
-   *
-   */
   private normalize = (term: string) => (term ? deburr(term.toLowerCase()) : '');
-
-  /**
-   *
-   */
 }

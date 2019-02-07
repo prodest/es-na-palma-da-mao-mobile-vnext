@@ -1,8 +1,11 @@
-import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams, ToastController } from 'ionic-angular';
+import { Component, OnDestroy } from '@angular/core';
+import { IonicPage, NavController, NavParams } from 'ionic-angular';
 
-import { DtApiService } from '../../providers';
 import { Concurso } from '../../model/';
+import { AuthQuery, AuthNeededService } from '@espm/core';
+import { SelecaoService, SelecaoQuery } from '../../providers';
+import { Subject } from 'rxjs/Subject';
+import { takeUntil } from 'rxjs/operators';
 
 @IonicPage({
   segment: 'concursos/:id'
@@ -11,32 +14,42 @@ import { Concurso } from '../../model/';
   selector: 'espm-dt-concurso-page',
   templateUrl: 'concurso.html'
 })
-export class ConcursoPage {
+export class ConcursoPage implements OnDestroy {
+  private destroyed$ = new Subject();
   concurso: Concurso;
 
   /**
    *
    */
   constructor(
-    private toastCtrl: ToastController,
     private navCtrl: NavController,
     private navParams: NavParams,
-    private api: DtApiService
+    private authQuery: AuthQuery,
+    private selecaoService: SelecaoService,
+    private selecaoQuery: SelecaoQuery,
+    private authNeeded: AuthNeededService
   ) {}
 
   /**
    *
    */
   ionViewWillLoad() {
-    this.getConcurso(this.navParams.data.id);
+    this.selecaoQuery
+      .selectEntity(this.navParams.data.id)
+      .pipe(takeUntil(this.destroyed$))
+      .subscribe(concurso => (this.concurso = concurso));
+
+    this.selecaoService.loadConcurso(this.navParams.data.id);
   }
 
   /**
    *
+   *
    */
-  getConcurso = (id: number) => {
-    this.api.getConcurso(id).subscribe(concurso => (this.concurso = concurso));
-  };
+  ngOnDestroy() {
+    this.destroyed$.next();
+    this.destroyed$.complete();
+  }
 
   /**
    *
@@ -54,13 +67,18 @@ export class ConcursoPage {
   showAreas(concurso: Concurso) {
     this.navCtrl.push('AreasPage', { idConcurso: concurso.id, nomeConcurso: concurso.nome, areas: concurso.areas });
   }
-  favoritar(concurso) {
-    console.log('CLICOU EM FAVORITOS!', concurso.favorito);
-    this.api.setFavoritos(concurso);
-    this.showMessage(`Concurso ${concurso.nome} ${concurso.favorito ? 'adicionada aos' : 'removida dos'} favoritos`);
-    return concurso;
+  /**
+   *
+   *
+   */
+  favoritar(concurso: Concurso) {
+    if (!this.authQuery.isLoggedIn) {
+      this.authNeeded.showAuthNeededModal();
+    } else {
+      this.selecaoService.toggleFavorite(concurso);
+    }
   }
-  showMessage = (message: string) => {
-    this.toastCtrl.create({ message, duration: 4000 }).present();
-  };
+  /**
+   *
+   */
 }
