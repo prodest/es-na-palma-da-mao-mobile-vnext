@@ -1,31 +1,73 @@
 import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
 
 import { Debit, Vehicle } from '../../model';
-import { AlertController, LoadingController, ToastController, Loading } from 'ionic-angular';
+import { AlertController, LoadingController, ToastController, Loading, Platform } from 'ionic-angular';
 import { DetranApiService } from '../../providers';
 import { Clipboard } from '@ionic-native/clipboard';
-
+import { FileOpener } from '@ionic-native/file-opener';
+declare var cordova: any;
 
 @Component({
   selector: 'espm-debits',
   templateUrl: 'debits.component.html',
-  changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush  
 })
-export class DebitsComponent {
-
+export class DebitsComponent {   
   constructor(
     private alertCtrl: AlertController,
     private api: DetranApiService,
     private loadingCtrl: LoadingController,
     private clipboard: Clipboard,
     private toastCtrl: ToastController,
-  ) { }
+    private opener: FileOpener,    
+    private platform: Platform,
+  ) {}  
+
   @Input() vehicle: Vehicle;
   @Input() debits: Debit[];
-  
-
+  ids = [];
   loading: Loading;
 
+  saveAndOpenPdf(pdf: string, filename: string) {        
+    const writeDirectory = this.platform.is('ios') ? cordova.file.dataDirectory : cordova.file.externalDataDirectory;
+    console.log(writeDirectory)
+    
+    cordova.file.writeFile(writeDirectory, filename, this.convertBase64ToBlob(pdf, 'application/pdf'), {replace: true})    
+      .then(() => {
+        
+        this.dismissLoading();
+        this.opener.open(writeDirectory + filename, 'application/pdf')
+          .catch(() => {
+            console.log('Error opening pdf file');
+            this.dismissLoading()
+          });
+      })
+      .catch(() => {
+        
+        console.error('Error writing pdf file');
+        this.dismissLoading()
+      });
+  }
+
+  convertBase64ToBlob(b64Data, contentType): Blob {
+    contentType = contentType || '';
+    const sliceSize = 512;
+    b64Data = b64Data.replace(/^[^,]+,/, '');
+    b64Data = b64Data.replace(/\s/g, '');
+    const byteCharacters = window.atob(b64Data);
+    const byteArrays = [];
+    for (let offset = 0; offset < byteCharacters.length; offset += sliceSize) {
+      const slice = byteCharacters.slice(offset, offset + sliceSize);
+      const byteNumbers = new Array(slice.length);
+      for (let i = 0; i < slice.length; i++) {
+        byteNumbers[i] = slice.charCodeAt(i);
+      }
+      const byteArray = new Uint8Array(byteNumbers);
+      byteArrays.push(byteArray);
+    }
+    return new Blob(byteArrays, { type: contentType });
+  }
+  
   generateBillet = () => {
     this.showLoading();
     /* let ids = [];
@@ -33,14 +75,14 @@ export class DebitsComponent {
       ids.push(this.debits[i].idDebito)
     }*/
     // this.api.generateGRU(this.vehicle, ids).subscribe(req => {
-    this.api.generateGRU(this.vehicle).subscribe(req => {
+    this.api.generateGRU(this.vehicle, String(this.ids.join())).subscribe(req => {
       this.dismissLoading();
-      try {
-        console.log(req["itensGuia"][0])
-        this.showGRUCode(req["itensGuia"][0]["linhaDigitavel"], "Valor: " + this.getFormattedPrice(req["itensGuia"][0]["valorGuia"]))
+      try {        
+        this.saveAndOpenPdf(req["guiaPDF"], String(Date.now() + ".pdf"))
+        this.showGRUCode(req["itensGuia"][0]["linhaDigitavel"], "Valor: " + this.getFormattedPrice(req["itensGuia"][0]["valorGuia"]))        
       } catch {
         this.showGRUCode("Não foi possível recuperar o código de barras", "Código de barras")
-      }
+      }      
     });
 
   };
@@ -91,6 +133,16 @@ export class DebitsComponent {
     return this.ensureDebits().length;
   }
 
+  addOrRemoveDebitsIdsToArray = () => {
+    this.ids = [];    
+    console.log(this.debits)
+    for (let i = 0; i < this.debits.length; ++i) {
+      if (this.debits[i].isChecked) {
+        this.ids.push(this.debits[i].idDebito);
+      }
+    }
+    console.log(this.ids)
+  }
   private showLoading = (message: string = 'Aguarde') => {
     if (this.loading) {
       this.loading.setContent(message);

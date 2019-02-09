@@ -24,7 +24,8 @@ import * as moment from 'moment';
 import { Clipboard } from '@ionic-native/clipboard';
 import { FileOpener } from '@ionic-native/file-opener';
 import { DocumentViewer } from '@ionic-native/document-viewer';
-import { File } from '@ionic-native/file'
+
+
 
 import { AboutProviders } from './about/providers';
 import { ESPMComponent } from './app.component';

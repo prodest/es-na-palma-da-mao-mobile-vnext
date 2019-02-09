@@ -1,4 +1,4 @@
-export interface Debit {
+export interface Debit {    
     descricaoServico: string;
     valorAtualizadoFranquia: number;
     dataVencimento: string;
@@ -20,5 +20,6 @@ export interface Debit {
     classe: number;
     exercicio: number;
     parcela: number;
-    ipvaCotas: string;
+    ipvaCotas: string;    
+    isChecked: boolean;
 }

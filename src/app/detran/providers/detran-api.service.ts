@@ -75,7 +75,17 @@ export class DetranApiService {
       .pipe(share());
   };
 
-  generateGRU = (vehicle: Vehicle): Observable<any> => {   
+  generateGRU = (vehicle: Vehicle, ids: String): Observable<any> => {  
+    /*
+    if (ids) {
+      return this.http
+        .get(`${this.env.api.detranInternetBanking}/veiculos/${vehicle.plate}/${vehicle.renavam.toString()}/debitos/guia/${ids}`)
+        .pipe(share());
+    } else {
+      return this.http
+        .get(`${this.env.api.detranInternetBanking}/veiculos/${vehicle.plate}/${vehicle.renavam.toString()}/debitos/guia`)
+        .pipe(share());
+    }*/
     return this.http
       .get(`${this.env.api.detranInternetBanking}/veiculos/${vehicle.plate}/${vehicle.renavam.toString()}/debitos/guia`)
       .pipe(share());

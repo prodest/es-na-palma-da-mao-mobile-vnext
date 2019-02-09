@@ -121,7 +121,11 @@ export class VehiclesPage implements OnDestroy {
       );
   };
 
-  ensureDebits = (vehicle, debits) => {
+  ensureDebits = (vehicle, debits) => {    
+    debits.map((obj) => {
+      obj.isChecked = false;
+      return obj;
+    })    
     if (debits[0].hasOwnProperty('descricaoServico')) {      
       this.navCtrl.push('VehicleDebitsPage', { vehicle, plate: vehicle.plate, debits: debits })
     } else {
