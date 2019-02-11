@@ -10,6 +10,9 @@ export class ApiCeturbV2Service {
 
   }
 
+  /**
+   * Retorna todos os pontos de ônibus.
+   */
   allStops() {
     return this.http.get(`${this.env.api.ceturbv2}/pontos`).pipe(share());
   }

@@ -8,6 +8,9 @@ import { Injectable } from '@angular/core';
   sortByOrder: Order.ASC
 } as QueryConfigOptions)
 @Injectable()
+/**
+ * Entidade que consome os recursos da VehiclesStore.
+ */
 export class VehiclesQuery extends QueryEntity<VehiclesState, Vehicle> {
   constructor(protected store: VehiclesStore) {
     super(store);

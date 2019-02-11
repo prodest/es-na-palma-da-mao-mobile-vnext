@@ -6,6 +6,9 @@ import { interval } from 'rxjs/observable/interval';
 import { Subscription } from 'rxjs/Subscription';
 
 @Injectable()
+/**
+ * Entidade que alimenta a VehiclesStore.
+ */
 export class VehiclesService {
   private autoReloadSubscription: Subscription;
 
@@ -15,13 +18,17 @@ export class VehiclesService {
   ) {
 
   }
-
-  updateVehicles(stopId: number) {
+  /**
+   * Atualiza os veículos na Store à partir de um ponto de ônibus dado como referência.
+   * @param {number} stopId - ID do ponto que deve ser usado como referência para carregar a Store.
+   * @param {boolean} autoReload - Define se o serviço deve atualizar automaticamente a Store com o stopId fornecido. Opcional. Default: false.
+   */
   updateVehicles(stopId: number, autoReload: boolean = false) {
     this.store.setLoading(true);
     this.apiRealtime.getNextVehicles(stopId)
     .subscribe({
       next: (vehicles: Array<Vehicle>) => {
+        
         // marca todos os veículos como "não atualizado"
         this.store.updateAll({
           atualizado: false

@@ -12,6 +12,9 @@ const initialState = {
 
 @Injectable()
 @StoreConfig({name: 'BusStops', idKey: 'id'})
+/**
+ * Entidade que armazena os pontos de ônibus.
+ */
 export class BusStopsStore extends EntityStore<BusStopsState, BusStop> {
   constructor() {
     super(initialState);
