@@ -2,9 +2,13 @@ import { VehiclesStore } from './vehicle.store';
 import { Vehicle, createVehicle } from './vehicle.model';
 import { Injectable } from '@angular/core';
 import { TranscolOnlineRealTimeService } from '../../providers';
+import { interval } from 'rxjs/observable/interval';
+import { Subscription } from 'rxjs/Subscription';
 
 @Injectable()
 export class VehiclesService {
+  private autoReloadSubscription: Subscription;
+
   constructor(
     protected store: VehiclesStore,
     private apiRealtime: TranscolOnlineRealTimeService
@@ -13,6 +17,7 @@ export class VehiclesService {
   }
 
   updateVehicles(stopId: number) {
+  updateVehicles(stopId: number, autoReload: boolean = false) {
     this.store.setLoading(true);
     this.apiRealtime.getNextVehicles(stopId)
     .subscribe({
@@ -40,6 +45,10 @@ export class VehiclesService {
         // remove todos os veículos que não foram atualizados
         this.store.remove(vehicle => !vehicle.atualizado);
         console.log("VehiclesStore loaded!");
+        this.store.setLoading(false);
+
+        // se necessário, inicia o reload automático
+        if (autoReload) this.startAutoReload(30, stopId);
       },
       error: (error) => {
         console.error("ERROR", error);
@@ -49,4 +58,28 @@ export class VehiclesService {
       }
     });
   }
+
+  /**
+   * Inicia o reload automático
+   * @param {number} intervalInSeconds - Intervalo, em segundos, que o reload será excutado.
+   * @param {number} stopId - ID do ponto que deve ser usado como referência para carregar a Store.
+   */
+  startAutoReload(intervalInSeconds: number, stopId: number) {
+    // checa (e finaliza) se já houver um reload
+    this.stopAutoReload();
+
+    // define um novo reload com o stopId informado
+    this.autoReloadSubscription = interval(intervalInSeconds * 1000).subscribe(() => this.updateVehicles(stopId));
+  }
+
+  /**
+   * Finaliza o reload automático
+   */
+  stopAutoReload() {
+    // se houver um reload e não estiver "closed", ele será finalizado
+    if (this.autoReloadSubscription !== undefined && !this.autoReloadSubscription.closed) {
+      this.autoReloadSubscription.unsubscribe();
+    }
+  }
+
 }
