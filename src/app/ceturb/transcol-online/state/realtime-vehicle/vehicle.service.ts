@@ -52,8 +52,6 @@ export class VehiclesService {
       },
       error: (error) => {
         console.error("ERROR", error);
-      },
-      complete: () => {
         this.store.setLoading(false);
       }
     });
@@ -82,4 +80,10 @@ export class VehiclesService {
     }
   }
 
+  /**
+   * Remove todos os veículos da Store.
+   */
+  clearVehicles() {
+    this.store.remove(e => e.rotulo !== undefined)
+  }
 }
