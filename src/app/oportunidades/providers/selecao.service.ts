@@ -64,16 +64,35 @@ export class SelecaoService {
    */
   toggleFavorite(concurso: Concurso) {
     this.store.update(concurso.id, { favorito: !concurso.favorito });
+    let favoritos = {
+      idTender: this.getFavoritosArray(),
+      date: new Date().toISOString()
+    };
+    console.log('>>>>>>>', favoritos);
+    this.api.syncFavorites(favoritos).subscribe();
+
     this.showMessage(`Acompanhando o Concurso ${concurso.nome}`);
   }
 
   /**
    *
    */
+
   private getFavoritos() {
     return of(this.query.getAll().filter(c => c.favorito));
   }
 
+  private getFavoritosArray() {
+    let favoritos = [];
+    of(
+      this.query.getAll().map(c => {
+        if (c.favorito) {
+          favoritos.push(c.id);
+        }
+      })
+    );
+    return favoritos;
+  }
   /**
    *
    */
