@@ -5,7 +5,7 @@ import { Observable } from 'rxjs/Observable';
 
 import { Classificacao, Concurso } from '../model';
 import { share } from 'rxjs/operators';
-import { ID } from '@datorama/akita';
+import { ConcursoFavorito } from '../model/concurso-favorito.mode';
 
 /*
 *
@@ -42,10 +42,10 @@ export class SelecaoApiService {
   /**
    *
    */
-  getFavorites = (): Observable<ID[]> => {
-    return this.http.get<ID[]>(`${this.env.api.espm}/publicTender/data/favorite`).pipe(share());
+  getFavorites = (): Observable<ConcursoFavorito> => {
+    return this.http.get<ConcursoFavorito>(`${this.env.api.espm}/publicTender/data/favorite`).pipe(share());
   };
-  syncFavorites = (favoritos): Observable<ID[]> => {
-    return this.http.post<ID[]>(`${this.env.api.espm}/publicTender/data/favorite`, favoritos).pipe(share());
+  syncFavorites = (favoritos): Observable<ConcursoFavorito> => {
+    return this.http.post<ConcursoFavorito>(`${this.env.api.espm}/publicTender/data/favorite`, favoritos).pipe(share());
   };
 }

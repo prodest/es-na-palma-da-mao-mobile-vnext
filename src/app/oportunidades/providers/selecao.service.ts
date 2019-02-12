@@ -1,6 +1,5 @@
 import { Injectable } from '@angular/core';
 import { ToastController, LoadingController, Loading } from 'ionic-angular';
-import { forkJoin } from 'rxjs/observable/forkJoin';
 import { tap, finalize, map } from 'rxjs/operators';
 import { SelecaoStore } from './selecao.store';
 import { SelecaoQuery } from './selecao.query';
@@ -9,12 +8,14 @@ import { Concurso } from '../model';
 import { Observable } from 'rxjs/Observable';
 import { SelecaoApiService } from './selecao.api.service';
 import { of } from 'rxjs/observable/of';
+import { forkJoin } from 'rxjs/observable/forkJoin';
+import { ConcursoFavorito } from '../model/concurso-favorito.mode';
 
-const markFavorites = ([concursos, favorites = []]: [Concurso[], Concurso[]]): Concurso[] => {
+const markFavorites = ([concursos, favorites]: [Concurso[], ConcursoFavorito]): Concurso[] => {
   return concursos.map(concurso => {
     return {
       ...concurso,
-      favorito: !!favorites.find(f => f.id === concurso.id)
+      favorito: !!favorites.idTender.find(f => f === concurso.id)
     };
   });
 };
@@ -53,7 +54,7 @@ export class SelecaoService {
     this.showLoading();
 
     const concursos$ = this.authQuery.isLoggedIn
-      ? forkJoin(this.getAllConcursos(), this.getFavoritos()).pipe(map(markFavorites))
+      ? forkJoin(this.getAllConcursos(), this.api.getFavorites()).pipe(map(markFavorites))
       : this.getAllConcursos();
 
     concursos$.pipe(finalize(() => this.dismissLoading())).subscribe(concursos => this.store.set(concursos));
@@ -65,10 +66,9 @@ export class SelecaoService {
   toggleFavorite(concurso: Concurso) {
     this.store.update(concurso.id, { favorito: !concurso.favorito });
     let favoritos = {
-      idTender: this.getFavoritosArray(),
+      idTender: this.getFavoritos(),
       date: new Date().toISOString()
     };
-    console.log('>>>>>>>', favoritos);
     this.api.syncFavorites(favoritos).subscribe();
 
     this.showMessage(`Acompanhando o Concurso ${concurso.nome}`);
@@ -77,12 +77,13 @@ export class SelecaoService {
   /**
    *
    */
-
+  /*
   private getFavoritos() {
     return of(this.query.getAll().filter(c => c.favorito));
   }
+*/
 
-  private getFavoritosArray() {
+  private getFavoritos() {
     let favoritos = [];
     of(
       this.query.getAll().map(c => {
