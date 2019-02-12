@@ -2,6 +2,30 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+<a name="5.4.0"></a>
+# [5.4.0](https://github.com/prodest/es-na-palma-da-mao-mobile-vnext/compare/v5.3.3...v5.4.0) (2019-02-12)
+
+
+### Bug Fixes
+
+* **app:** invalid_grant ([43e040c](https://github.com/prodest/es-na-palma-da-mao-mobile-vnext/commit/43e040c))
+* **ceturb:** takeUntil destroy in the beginning of pipeline ([0f3fc58](https://github.com/prodest/es-na-palma-da-mao-mobile-vnext/commit/0f3fc58))
+* **login:** corrigido erro de favoritos ([1111ab9](https://github.com/prodest/es-na-palma-da-mao-mobile-vnext/commit/1111ab9))
+* **ordenaçao:** ordenando concursos por favoritos. ([be6ebb1](https://github.com/prodest/es-na-palma-da-mao-mobile-vnext/commit/be6ebb1))
+
+
+### Features
+
+* **empregabilidade:** classificação por area e cargos. ([a49eda9](https://github.com/prodest/es-na-palma-da-mao-mobile-vnext/commit/a49eda9))
+* **empregabilidade:** classificação por area e cargos. ([326e60f](https://github.com/prodest/es-na-palma-da-mao-mobile-vnext/commit/326e60f))
+* **favoritos:** favoritos funcionando offline ([6d96ad7](https://github.com/prodest/es-na-palma-da-mao-mobile-vnext/commit/6d96ad7))
+* **favoritos:** favoritos salvando online ([4767394](https://github.com/prodest/es-na-palma-da-mao-mobile-vnext/commit/4767394))
+* **favoritos:** implementando favoritos usando akita ([a545f83](https://github.com/prodest/es-na-palma-da-mao-mobile-vnext/commit/a545f83))
+* **favoritos:** salvando no backend ([b9affc2](https://github.com/prodest/es-na-palma-da-mao-mobile-vnext/commit/b9affc2))
+* **favortos:** implementando favoritos nos concursos ([9631157](https://github.com/prodest/es-na-palma-da-mao-mobile-vnext/commit/9631157))
+
+
+
 <a name="5.3.3"></a>
 ## [5.3.3](https://github.com/prodest/es-na-palma-da-mao-mobile-vnext/compare/v5.3.2...v5.3.3) (2018-12-27)
 
