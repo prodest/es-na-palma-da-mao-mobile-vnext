@@ -49,7 +49,7 @@ export class BusLinesService implements OnDestroy {
     // salva favoritos no server todas as vezes que os favoritos forem atualizados após o carregamento
     // inicial da loja
     this.busLinesQuery.favorites$
-      .pipe(takeUntil(this.destroyed$), filter(() => !this.busLinesStore.isPristine), flatMap(this.saveFavorites))
+      .pipe(filter(() => !this.busLinesStore.isPristine), flatMap(this.saveFavorites), takeUntil(this.destroyed$))
       .subscribe();
   }
 
