@@ -44,13 +44,13 @@ export class ConcursosPage {
    */
   private sortConcursos = (a: Concurso, b: Concurso) => {
     if (a.favorito && b.favorito) {
-      return a.id < b.id ? -1 : 1;
+      return 1;
     } else if (a.favorito) {
       return -1;
     } else if (b.favorito) {
       return 1;
     } else {
-      return a.id < b.id ? -1 : 1;
+      return 1;
     }
   };
 
