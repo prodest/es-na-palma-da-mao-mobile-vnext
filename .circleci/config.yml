@@ -1,8 +1,8 @@
 version: 2
 jobs:
-  create-enviroment:
+  build-ionic:
     docker:
-      - image: circleci/node:8
+      - image: prodest/circleci-containers:node-ionic-aws-v1.1.0
     working_directory: ~/espm
     steps:
       - checkout
@@ -11,6 +11,7 @@ jobs:
           - v5-dependencies-node_modules-{{ checksum "package-lock.json" }}
           - v5-dependencies-node_modules
       - run: npm install
+      - run: npm run build:prod:android
       - save_cache:
           paths:
             - node_modules
@@ -32,7 +33,6 @@ jobs:
     steps:
       - attach_workspace:
           at: ./
-      - run: npm run build:prod:android
       - run: cordova platform add android@7.1.1
       - run: cordova prepare android -f
       - run: cordova build android --release --buildconfig=build.json
@@ -46,7 +46,7 @@ workflows:
   version: 2
   main-workflow:
     jobs:
-      - create-enviroment:
+      - build-ionic:
           filters:
             branches:
               ignore: /.*/
@@ -54,7 +54,7 @@ workflows:
               only: /.*/
       - publish-prod:
           requires:
-            - create-enviroment
+            - build-ionic
           filters:
             branches:
               ignore: /.*/
