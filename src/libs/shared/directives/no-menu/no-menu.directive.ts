@@ -24,7 +24,7 @@ export class NoMenuDirective implements OnDestroy {
    */
   ngOnDestroy(): void {
     this.destroyed$.next(true);
-    this.destroyed$.unsubscribe();
+    this.destroyed$.complete();
   }
 
   /**

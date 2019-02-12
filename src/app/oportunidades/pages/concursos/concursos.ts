@@ -2,10 +2,9 @@ import { Component } from '@angular/core';
 import { trackById } from '@espm/core';
 import { IonicPage, NavController } from 'ionic-angular';
 import deburr from 'lodash-es/deburr';
-
 import { Concurso } from '../../model';
-import { DtApiService } from '../../providers';
-
+import { SelecaoQuery, SelecaoService } from '../../providers';
+import { map } from 'rxjs/operators';
 @IonicPage({
   segment: 'concursos'
 })
@@ -14,20 +13,46 @@ import { DtApiService } from '../../providers';
   templateUrl: 'concursos.html'
 })
 export class ConcursosPage {
-  allConcursos: Concurso[];
-  filteredConcursos: Concurso[];
-  trackById = trackById;
   /**
    *
    */
-  constructor(private navCtrl: NavController, private api: DtApiService) {}
+  allConcursos: Concurso[];
+  filteredConcursos: Concurso[];
+  trackById = trackById;
 
   /**
    *
    */
-  ionViewWillEnter() {
-    this.getAllConcursos();
+  constructor(private navCtrl: NavController, private service: SelecaoService, private query: SelecaoQuery) {}
+
+  /**
+   *
+   */
+  ionViewWillLoad() {
+    this.query
+      .selectAll()
+      .pipe(map(concursos => concursos.sort(this.sortConcursos)))
+      .subscribe(concursos => {
+        this.allConcursos = this.filteredConcursos = concursos;
+      });
+
+    // carrega dados
+    this.service.loadAll();
   }
+  /**
+   *
+   */
+  private sortConcursos = (a: Concurso, b: Concurso) => {
+    if (a.favorito && b.favorito) {
+      return 1;
+    } else if (a.favorito) {
+      return -1;
+    } else if (b.favorito) {
+      return 1;
+    } else {
+      return 1;
+    }
+  };
 
   /**
    *
@@ -51,15 +76,6 @@ export class ConcursosPage {
    */
   showDetails(id) {
     this.navCtrl.push('ConcursoPage', { id });
-  }
-
-  /**
-   *
-   */
-  private getAllConcursos() {
-    this.api.gelAllConcursos().subscribe(concursos => {
-      this.allConcursos = this.filteredConcursos = concursos;
-    });
   }
 
   /**

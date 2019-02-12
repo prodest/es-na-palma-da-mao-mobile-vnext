@@ -33,7 +33,7 @@ import { TranscolOnlineProviders } from './ceturb/transcol-online/providers';
 import { DetranProviders } from './detran/providers';
 import { DioProviders } from './dio/providers';
 import { EDocsProviders } from './edocs/state';
-import { EmpregabilidadeProviders } from './empregabilidade/providers';
+import { OportunidadesProviders } from './oportunidades/providers';
 import { NewsProviders } from './news/providers';
 import { TransparencyProviders } from './secont/transparency/providers';
 import { SepProviders } from './sep/providers';
@@ -92,7 +92,7 @@ registerLocaleData(ptBr);
     ...TranscolOnlineProviders,
     ...TransparencyProviders,
     ...EDocsProviders,
-    ...EmpregabilidadeProviders,
+    ...OportunidadesProviders,
     {
       provide: ErrorHandler,
       useClass: IonicErrorHandler

@@ -136,7 +136,7 @@ const menus = [
     ]
   },
   {
-    name: 'Empregabilidade',
+    name: 'Oportunidades',
     items: [
       {
         title: 'Buscar concursos',
@@ -199,7 +199,7 @@ export class MenuComponent implements OnInit, OnDestroy {
    */
   ngOnDestroy(): void {
     this.destroyed$.next(true);
-    this.destroyed$.unsubscribe();
+    this.destroyed$.complete();
   }
 
   /**
