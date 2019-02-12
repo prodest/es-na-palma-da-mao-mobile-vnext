@@ -4,6 +4,7 @@ import { IonicPage, NavController } from 'ionic-angular';
 import deburr from 'lodash-es/deburr';
 import { Concurso } from '../../model';
 import { SelecaoQuery, SelecaoService } from '../../providers';
+import { map } from 'rxjs/operators';
 @IonicPage({
   segment: 'concursos'
 })
@@ -28,13 +29,30 @@ export class ConcursosPage {
    *
    */
   ionViewWillLoad() {
-    this.query.selectAll().subscribe(concursos => {
-      this.allConcursos = this.filteredConcursos = concursos;
-    });
+    this.query
+      .selectAll()
+      .pipe(map(concursos => concursos.sort(this.sortConcursos)))
+      .subscribe(concursos => {
+        this.allConcursos = this.filteredConcursos = concursos;
+      });
 
     // carrega dados
     this.service.loadAll();
   }
+  /**
+   *
+   */
+  private sortConcursos = (a: Concurso, b: Concurso) => {
+    if (a.favorito && b.favorito) {
+      return a.id < b.id ? -1 : 1;
+    } else if (a.favorito) {
+      return -1;
+    } else if (b.favorito) {
+      return 1;
+    } else {
+      return a.id < b.id ? -1 : 1;
+    }
+  };
 
   /**
    *

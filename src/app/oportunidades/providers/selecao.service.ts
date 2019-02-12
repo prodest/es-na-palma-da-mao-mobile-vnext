@@ -71,7 +71,7 @@ export class SelecaoService {
     };
     this.api.syncFavorites(favoritos).subscribe();
 
-    this.showMessage(`Acompanhando o Concurso ${concurso.nome}`);
+    this.showMessage(`${concurso.nome} ${concurso.favorito ? 'removido dos' : 'adicionado aos'} favoritos`);
   }
 
   /**
