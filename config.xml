@@ -37,6 +37,7 @@
     <platform name="android">
         <resource-file src="google-services.json" target="app/google-services.json" />
         <hook src="scripts/resolve-project-properties-dependencies.sh" type="before_build" />
+        <hook src="scripts/resolve-project-properties-dependencies.sh" type="before_run" />
         <hook src="scripts/copy-plugins-from-node_modules.js" type="before_platform_add" />
         <hook src="scripts/manually-set-plugin-params.sh" type="before_platform_add" />
         <hook src="scripts/copy_resource_files.js" type="after_prepare" />
