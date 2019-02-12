@@ -135,7 +135,7 @@
     <plugin name="cordova-plugin-android-permissions" spec="^1.0.0" />
     <plugin name="phonegap-plugin-push" spec="^2.2.3">
         <variable name="ANDROID_SUPPORT_V13_VERSION" value="27.+" />
-        <variable name="FCM_VERSION" value="11.6.2" />
+        <variable name="FCM_VERSION" value="11.8.0" />
     </plugin>
     <plugin name="cordova-plugin-appavailability" spec="^0.4.2" />
     <plugin name="cordova-plugin-geolocation" spec="^4.0.1" />
