@@ -13,7 +13,7 @@ import { Subject } from 'rxjs/Subject';
 
 import { BusLine, BusStop, Prevision } from '../../model';
 import { TranscolOnlineService } from '../../providers';
-import { BusStopsService } from '../../state';
+import { BusStopsService, VehiclesService, VehiclesQuery } from '../../state';
 import { Geolocation } from '@ionic-native/geolocation';
 
 const VITORIA = L.latLng(-20.315894186649725, -40.29565483331681);
@@ -72,6 +72,8 @@ export class TranscolOnlinePage implements AfterViewInit, OnDestroy {
     private modalCtrl: ModalController,
     private transcolOnline: TranscolOnlineService,
     private busStopsService: BusStopsService,
+    private vehiclesQuery: VehiclesQuery,
+    private vehiclesService: VehiclesService,
     private geolocation: Geolocation
   ) {}
 
@@ -86,6 +88,14 @@ export class TranscolOnlinePage implements AfterViewInit, OnDestroy {
     this.navCtrl.getActive().name === 'TranscolOnlinePage'
       ? window.setTimeout(() => this.initialize(), 200)
       : this.initialize();
+  }
+
+  /**
+   * 
+   */
+  ionViewWillLeave() {
+    // Finaliza qualquer reload automatizado que tenha ficado ativo na VehiclesStore.
+    this.vehiclesService.stopAutoReload();
   }
 
   /**
@@ -428,7 +438,17 @@ export class TranscolOnlinePage implements AfterViewInit, OnDestroy {
   private loadOriginPrevisions = (stop: BusStop) => {
     this.transcolOnline
       .getOriginPrevisions(this.selectedOrigin.id)
-      .pipe(tap(this.setPrevisions))
+      .pipe(
+        map((previsions: Prevision[]) => 
+          previsions.map((prevision: Prevision) => {            
+            if (this.vehiclesQuery.hasEntity(prevision.veiculo)) {
+              prevision.distancia = this.vehiclesQuery.getEntity(prevision.veiculo).distancia
+            }
+            return prevision;
+          })
+        ),
+        tap(this.setPrevisions)
+      )
       .subscribe();
   };
 
@@ -469,7 +489,8 @@ export class TranscolOnlinePage implements AfterViewInit, OnDestroy {
    */
   private selectOrigin = (origin: BusStop) => {
     this.unselectAll();
-
+    this.vehiclesService.clearVehicles();
+    this.vehiclesService.updateVehicles(origin.id, true); // atualiza a Store COM autoreload.
     // todo this.$rootScope.footerPanel = this;
 
     this.selectedOrigin = origin;
