@@ -51,7 +51,7 @@ export class VehiclesService {
 
         // remove todos os veículos que não foram atualizados
         this.store.remove(vehicle => !vehicle.atualizado);
-        console.log("VehiclesStore loaded!");
+        // console.log("VehiclesStore loaded!");
         this.store.setLoading(false);
 
         // se necessário, inicia o reload automático
