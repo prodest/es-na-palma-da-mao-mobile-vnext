@@ -24,7 +24,10 @@ export class VehiclesService {
    * @param {boolean} autoReload - Define se o serviço deve atualizar automaticamente a Store com o stopId fornecido. Opcional. Default: false.
    */
   updateVehicles(stopId: number, autoReload: boolean = false) {
+    if (stopId === null) return;
+
     this.store.setLoading(true);
+    
     this.apiRealtime.getNextVehicles(stopId)
     .subscribe({
       next: (vehicles: Array<Vehicle>) => {

@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams, LoadingController, Loading } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, LoadingController, Loading, AlertController, AlertOptions, Alert } from 'ionic-angular';
 import { Geolocation, Geoposition } from '@ionic-native/geolocation';
 import { Observable } from 'rxjs/Observable';
 import { Subscription } from 'rxjs/Subscription';
@@ -7,6 +7,7 @@ import { take } from 'rxjs/operators';
 
 import { VehiclesQuery, Vehicle, VehiclesService, BusStopsQuery, BusStopsService } from '../../state';
 import { ApiCeturbV2Service } from '../../providers';
+import { interval } from 'rxjs/observable/interval';
 
 
 /**
@@ -27,8 +28,8 @@ export class TranscolOnlineRealTimePage {
   nearestStop$: Observable<number>;
   nearestStopSubscription: Subscription;
   deviceCoordinates$: Observable<Geoposition>;
-  vehiclesAutoReloader: NodeJS.Timer;
-  stopsAutoReloader: NodeJS.Timer;
+  expectedVehiclesAutoReloader: Subscription;
+  stopsAutoReloader: Subscription;
   loadingVehicles$: Observable<boolean>;
   loadingVehiclesSubscription: Subscription;
   loader: Loading;
@@ -37,6 +38,7 @@ export class TranscolOnlineRealTimePage {
     public navCtrl: NavController,
     public navParams: NavParams,
     public loadingCtrl: LoadingController,
+    public alertCtrl: AlertController,
     private geolocation: Geolocation,
     private vehiclesQuery: VehiclesQuery,
     private vehiclesService: VehiclesService,
@@ -52,9 +54,16 @@ export class TranscolOnlineRealTimePage {
   }
 
   ionViewWillLoad() {
+    // verifica se o gps está ativado, se não estiver, avisa ao usuário
+    this.deviceCoordinates$.subscribe(response => {
+      if (response['code']) {
+        this.createMissingLocationAlert().present();
+      }
+    });
+
     // quando o ponto mais próximo muda, atualizamos a Store com a nova referência
     this.nearestStopSubscription = this.nearestStop$.subscribe(
-      (stopId: number) => this.vehiclesService.updateVehicles(stopId)
+      (stopId: number) => stopId === null ? null : this.vehiclesService.updateVehicles(stopId, true)
     );
 
     // condiciona a exibição do Loader ao loading da VehiclesStore
@@ -90,6 +99,24 @@ export class TranscolOnlineRealTimePage {
   }
 
   /**
+   * Cria um alert.
+   */
+  private createMissingLocationAlert(): Alert {
+    return this.alertCtrl.create({
+      header: 'Localização desativada',
+      message: 'Para usar esta funcionalidade, ative a localização do seu dispositivo',
+      buttons: [
+        {
+          text:'Entendi',
+          handler: () => {
+            this.navCtrl.pop()
+          }
+        }
+      ]
+    } as AlertOptions);
+  }
+
+  /**
    * Obtém as coordenadas (lat, lon) do dispositivo.
    */
   private getDeviceCoordinates(): Observable<Geoposition> {
@@ -111,39 +138,39 @@ export class TranscolOnlineRealTimePage {
     const interval = 20; // minutos
 
     this.expectedVehicles = [];
-    this.apiCeturbV2Service.previsionsByStopOnInterval(this.busStopsQuery.getActiveId() as number, interval).subscribe((previsions: Array<any>) => {
-      // console.log("Previsões em 20 minutos", previsions);
-      previsions.map(prevision => {
-        this.expectedVehicles.push(prevision['veiculo'])
-      });
-    });
+    this.apiCeturbV2Service.previsionsByStopOnInterval(this.busStopsQuery.getActiveId() as number, interval).subscribe(
+      {
+        next: (previsions: Array<any>) => {
+          // console.log("Previsões em 20 minutos", previsions);
+          previsions.map(prevision => {
+            this.expectedVehicles.push(prevision['veiculo'])
+          });
+        },
+        error: error => console.error("ERROR", error)        
+      }
+    );
   }
 
   /**
    * Inicia o reload automatizado
    */
   startAutoReload() {
-    this.vehiclesAutoReloader = setInterval(() => {
-      // console.log("Atualizando veículos");
-      this.updateVehicles();
-    }, 30 * 1000); // 30 segundos
+    // a cada 30 segundos atualiza os veículos esperados
+    this.expectedVehiclesAutoReloader = interval(30 * 1000).subscribe(() => this.updateExpectedVehicles());
 
-    this.stopsAutoReloader = setInterval(() => {
-      this.deviceCoordinates$.subscribe(
-        (coords) => {
-          // console.log("Atualizando pontos.");
-          this.busStopsService.updateStops(coords);
-        }
-      );
-    }, 300 * 1000); // 5 minutos
+    // a cada 5 minutos atualiza os pontos de ônibus
+    this.stopsAutoReloader = interval(300 * 1000).subscribe(() => this.deviceCoordinates$.subscribe(
+      response => response['code'] ? null : this.busStopsService.updateStops(response)
+    ));
   }
 
   /**
    * Finaliza o reload automatizado.
    */
   stopAutoReload() {
-    clearInterval(this.vehiclesAutoReloader);
-    clearInterval(this.stopsAutoReloader);
+    this.vehiclesService.stopAutoReload(); // desativa o autoload do VehiclesService
+    this.stopsAutoReloader.unsubscribe(); // desativa o autoload criado em startAutoLoad()
+    this.expectedVehiclesAutoReloader.unsubscribe(); // desativa o autoload criado em startAutoload()
     // console.log("Auto reload stopped.");
   }
 

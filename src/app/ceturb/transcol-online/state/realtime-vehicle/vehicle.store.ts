@@ -14,5 +14,6 @@ export interface VehiclesState extends EntityState<Vehicle> {
 export class VehiclesStore extends EntityStore<VehiclesState, Vehicle> {
   constructor() {
     super();
+    this.setLoading(false);
   }
 }
