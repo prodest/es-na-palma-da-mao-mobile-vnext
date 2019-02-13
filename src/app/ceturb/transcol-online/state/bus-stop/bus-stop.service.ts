@@ -41,12 +41,15 @@ export class BusStopsService {
     .pipe()
     .subscribe(
       (stops: BusStop[]) => {
-        stops.map((stop: BusStop) => {
-          stop.distancia = this.calcDistance(coordinates.coords, {latitude: stop.latitude, longitude: stop.longitude});
-        });
+        if (coordinates.coords) {
+          stops.map((stop: BusStop) => {
+            stop.distancia = this.calcDistance(coordinates.coords, {latitude: stop.latitude, longitude: stop.longitude});
+          });
+        }
         sort(stops).by([{asc: 'distancia'}]);
         this.store.set(stops);
         this.store.setActive(stops[0].id); // o ponto mais próximo é o 'Active State' desta Store.
+        
         console.log("BusStopsStore loaded!");
       }
     );

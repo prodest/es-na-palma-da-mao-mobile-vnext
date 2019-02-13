@@ -5,7 +5,7 @@ import { Observable } from 'rxjs/Observable';
 import { Subscription } from 'rxjs/Subscription';
 import { take } from 'rxjs/operators';
 
-import { VehiclesQuery, Vehicle, VehiclesService, BusStopsQuery, BusStopsService } from '../../state';
+import { VehiclesQuery, Vehicle, VehiclesService, BusStopsQuery, BusStopsService, BusStop } from '../../state';
 import { ApiCeturbV2Service } from '../../providers';
 import { interval } from 'rxjs/observable/interval';
 
@@ -25,7 +25,8 @@ import { interval } from 'rxjs/observable/interval';
 export class TranscolOnlineRealTimePage {
   expectedVehicles: string[] = [];
   vehicles$: Observable<Vehicle[]>;
-  nearestStop$: Observable<number>;
+  nearestStop$: Observable<BusStop>;
+  nearestStopId$: Observable<number>;
   nearestStopSubscription: Subscription;
   deviceCoordinates$: Observable<Geoposition>;
   expectedVehiclesAutoReloader: Subscription;
@@ -48,7 +49,8 @@ export class TranscolOnlineRealTimePage {
   ) {
     this.updateExpectedVehicles();
     this.deviceCoordinates$ = this.getDeviceCoordinates();
-    this.nearestStop$ = this.busStopsQuery.selectActiveId() as Observable<number>;
+    this.nearestStop$ = this.busStopsQuery.selectActive();
+    this.nearestStopId$ = this.busStopsQuery.selectActiveId() as Observable<number>;
     this.loadingVehicles$ = this.vehiclesQuery.selectLoading();
     this.createLoading();
   }
@@ -62,7 +64,7 @@ export class TranscolOnlineRealTimePage {
     });
 
     // quando o ponto mais próximo muda, atualizamos a Store com a nova referência
-    this.nearestStopSubscription = this.nearestStop$.subscribe(
+    this.nearestStopSubscription = this.nearestStopId$.subscribe(
       (stopId: number) => stopId === null ? null : this.vehiclesService.updateVehicles(stopId, true)
     );
 

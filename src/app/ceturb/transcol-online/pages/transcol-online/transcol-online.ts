@@ -392,8 +392,7 @@ export class TranscolOnlinePage implements AfterViewInit, OnDestroy {
     this.transcolOnline.getBusStopsByArea(GRANDE_VITORIA).subscribe();
     
     this.geolocation.watchPosition().pipe(take(1)).subscribe(
-      // só autaliza a Store se a localização for obtida
-      geoposition => geoposition['code'] ? console.error("ERROR", geoposition) : this.busStopsService.updateStops(geoposition)
+      geoposition => this.busStopsService.updateStops(geoposition)
     );
   };
 

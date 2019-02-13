@@ -26,6 +26,9 @@
 
 
 <ion-content padding>
+  <stop-summary
+    [stop]="((nearestStop$ | async) | busStopAdapter)"
+  ></stop-summary>
   <ion-list>
     <ion-item *ngFor="let vehicle of vehicles$ | async">
       <h2>{{vehicle.linha.slice(0,3)}} - {{vehicle.bandeira}}</h2>
