@@ -11,17 +11,17 @@ jobs:
           - v6-dependencies-node_modules-{{ checksum "package-lock.json" }}
           - v6-dependencies-node_modules
       - run: npm install
-      - run: npm run build:prod:android
-      - save_cache:
-          paths:
-            - node_modules
-          key: v5-dependencies-node_modules-{{ checksum "package-lock.json" }}
       - run:
           name: Get secrets
           command: |
             git clone -q https://gitlab-ci-token:$GITLAB_CI_TOKEN@gitlab.es.gov.br/SGPRJ/espm-ci-secrets.git > /dev/null 2>&1
             cp espm-ci-secrets/.env .
             cp espm-ci-secrets/android/* .
+      - run: npm run build:prod:android
+      - save_cache:
+          paths:
+            - node_modules
+          key: v6-dependencies-node_modules-{{ checksum "package-lock.json" }}
       - persist_to_workspace:
           root: ~/espm
           paths:
