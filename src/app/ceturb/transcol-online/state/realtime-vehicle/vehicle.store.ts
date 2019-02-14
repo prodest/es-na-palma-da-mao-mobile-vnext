@@ -7,7 +7,7 @@ export interface VehiclesState extends EntityState<Vehicle> {
 }
 
 @Injectable()
-@StoreConfig({name: 'Vehicles', idKey: 'rotulo'})
+@StoreConfig({name: 'Vehicles', idKey: 'rotulo', resettable: true})
 /**
  * Entidade que armazena os ônibus em tempo real.
  */

@@ -3,7 +3,7 @@ import { IonicPage, NavController, NavParams, LoadingController, Loading, AlertC
 import { Geolocation, Geoposition } from '@ionic-native/geolocation';
 import { Observable } from 'rxjs/Observable';
 import { Subscription } from 'rxjs/Subscription';
-import { take } from 'rxjs/operators';
+import { take, map } from 'rxjs/operators';
 
 import { VehiclesQuery, Vehicle, VehiclesService, BusStopsQuery, BusStopsService, BusStop } from '../../state';
 import { ApiCeturbV2Service } from '../../providers';
@@ -49,7 +49,7 @@ export class TranscolOnlineRealTimePage {
   ) {
     this.updateExpectedVehicles();
     this.deviceCoordinates$ = this.getDeviceCoordinates();
-    this.nearestStop$ = this.busStopsQuery.selectActive();
+    this.nearestStop$ = this.busStopsQuery.selectActive().pipe(map(stop => stop === undefined ? {} as BusStop : stop));
     this.nearestStopId$ = this.busStopsQuery.selectActiveId() as Observable<number>;
     this.loadingVehicles$ = this.vehiclesQuery.selectLoading();
     this.createLoading();
@@ -60,12 +60,13 @@ export class TranscolOnlineRealTimePage {
     this.deviceCoordinates$.subscribe(response => {
       if (response['code']) {
         this.createMissingLocationAlert().present();
+        return;
       }
     });
 
     // quando o ponto mais próximo muda, atualizamos a Store com a nova referência
     this.nearestStopSubscription = this.nearestStopId$.subscribe(
-      (stopId: number) => stopId === null ? null : this.vehiclesService.updateVehicles(stopId, true)
+      (stopId: number) => this.vehiclesService.updateVehicles(stopId, {autoReload: true})
     );
 
     // condiciona a exibição do Loader ao loading da VehiclesStore
@@ -143,7 +144,6 @@ export class TranscolOnlineRealTimePage {
     this.apiCeturbV2Service.previsionsByStopOnInterval(this.busStopsQuery.getActiveId() as number, interval).subscribe(
       {
         next: (previsions: Array<any>) => {
-          // console.log("Previsões em 20 minutos", previsions);
           previsions.map(prevision => {
             this.expectedVehicles.push(prevision['veiculo'])
           });
@@ -173,7 +173,6 @@ export class TranscolOnlineRealTimePage {
     this.vehiclesService.stopAutoReload(); // desativa o autoload do VehiclesService
     this.stopsAutoReloader.unsubscribe(); // desativa o autoload criado em startAutoLoad()
     this.expectedVehiclesAutoReloader.unsubscribe(); // desativa o autoload criado em startAutoload()
-    // console.log("Auto reload stopped.");
   }
 
 }

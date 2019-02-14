@@ -392,7 +392,7 @@ export class TranscolOnlinePage implements AfterViewInit, OnDestroy {
     this.transcolOnline.getBusStopsByArea(GRANDE_VITORIA).subscribe();
     
     this.geolocation.watchPosition().pipe(take(1)).subscribe(
-      geoposition => this.busStopsService.updateStops(geoposition)
+      geoposition => geoposition['code'] ? null : this.busStopsService.updateStops(geoposition)
     );
   };
 
@@ -490,7 +490,7 @@ export class TranscolOnlinePage implements AfterViewInit, OnDestroy {
   private selectOrigin = (origin: BusStop) => {
     this.unselectAll();
     this.vehiclesService.clearVehicles();
-    this.vehiclesService.updateVehicles(origin.id, true); // atualiza a Store COM autoreload.
+    this.vehiclesService.updateVehicles(origin.id, {autoReload: true}); // atualiza a Store COM autoreload.
     // todo this.$rootScope.footerPanel = this;
 
     this.selectedOrigin = origin;

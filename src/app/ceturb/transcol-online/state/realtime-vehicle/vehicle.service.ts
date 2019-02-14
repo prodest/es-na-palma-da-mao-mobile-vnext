@@ -5,6 +5,9 @@ import { TranscolOnlineRealTimeService } from '../../providers';
 import { interval } from 'rxjs/observable/interval';
 import { Subscription } from 'rxjs/Subscription';
 
+type UpdateOptions = {
+  autoReload: boolean
+}
 @Injectable()
 /**
  * Entidade que alimenta a VehiclesStore.
@@ -21,9 +24,10 @@ export class VehiclesService {
   /**
    * Atualiza os veículos na Store à partir de um ponto de ônibus dado como referência.
    * @param {number} stopId - ID do ponto que deve ser usado como referência para carregar a Store.
-   * @param {boolean} autoReload - Define se o serviço deve atualizar automaticamente a Store com o stopId fornecido. Opcional. Default: false.
+   * @param {UpdateOptions} opts - Modificadores de comportamento.
+   * @param opts.autoReload - Define se o serviço deve atualizar automaticamente a Store com o stopId fornecido. Opcional. Default: false.
    */
-  updateVehicles(stopId: number, autoReload: boolean = false) {
+  updateVehicles(stopId: number, opts: UpdateOptions = {autoReload: false}) {
     if (stopId === null) return;
 
     this.store.setLoading(true);
@@ -58,7 +62,7 @@ export class VehiclesService {
         this.store.setLoading(false);
 
         // se necessário, inicia o reload automático
-        if (autoReload) this.startAutoReload(30, stopId);
+        if (opts.autoReload) this.startAutoReload(30, stopId);
       },
       error: (error) => {
         console.error("ERROR", error);
@@ -94,6 +98,6 @@ export class VehiclesService {
    * Remove todos os veículos da Store.
    */
   clearVehicles() {
-    this.store.remove(e => e.rotulo !== undefined)
+    this.store.reset();
   }
 }
