@@ -15,7 +15,7 @@ const markFavorites = ([concursos, favorites]: [Concurso[], ConcursoFavorito]): 
   return concursos.map(concurso => {
     return {
       ...concurso,
-      favorito: !!favorites.idTender.find(f => f === concurso.id)
+      favorito: !!(favorites.idTender || []).find(f => f === concurso.id)
     };
   });
 };
