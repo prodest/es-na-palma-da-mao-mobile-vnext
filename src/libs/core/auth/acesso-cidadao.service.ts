@@ -2,13 +2,14 @@ import { Inject, Injectable } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
 import { of } from 'rxjs/observable/of';
 import { _throw } from 'rxjs/observable/throw';
-import { flatMap, map, tap, finalize } from 'rxjs/operators';
-
+import { flatMap, map, tap, finalize, catchError } from 'rxjs/operators';
+import { resetStores } from '@datorama/akita';
 import { Environment, EnvVariables } from './../environment';
 import { AcessoCidadaoApiService } from './acesso-cidadao-api.service';
 import { JwtHelper } from './jwt-helper';
 import { AcessoCidadaoClaims, AcessoCidadaoIdentity, AcessoCidadaoResponse, Identity, Token } from './models';
 import { AuthQuery, AuthStore } from './state';
+import { empty } from 'rxjs/observable/empty';
 
 /**
  * Classe para autenticação usando IdentityServer3 no acessso cidadão
@@ -43,12 +44,15 @@ export class AcessoCidadaoService {
   }
 
   /**
-   * Faz logout do usuário. Remove o token do localstore e os claims salvos.
+   * Limpa stores.
    */
   logout = () => {
-    this.authStore.reset();
+    resetStores();
   };
 
+  /**
+   *
+   */
   getAccessToken = (): Observable<Token> => {
     return of(this.authQuery.state.accessToken);
   };
@@ -68,12 +72,24 @@ export class AcessoCidadaoService {
 
     // Usa o token ainda válido e faz um refresh token em background (não-bloqueante)
     if (accessToken && this.jwt.isTokenIsExpiringIn(accessToken, now)) {
-      this.refreshAccessToken().subscribe();
+      this.refreshAccessToken()
+        .pipe(
+          catchError(error => {
+            console.error(error);
+            return empty();
+          })
+        )
+        .subscribe();
     }
 
     // Faz um refresh token e espera pra retornar o novo token "refreshado"
     if (accessToken && this.jwt.isTokenExpired(accessToken, now)) {
-      accessToken$ = this.refreshAccessToken();
+      accessToken$ = this.refreshAccessToken().pipe(
+        catchError(() => {
+          this.logout();
+          return _throw({ message: 'Login expirado' });
+        })
+      );
     }
 
     return accessToken$;

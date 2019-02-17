@@ -32,6 +32,18 @@ $color-light: #fff;
 $color-error: darkred;
 $color-danger: darkred;
 
+:root {
+  --menu-bg: #2286a2;
+  --primary: #208baa;
+  --primary-light: rgb(84, 157, 178);
+  --secondary: #c86673;
+  --text: #333;
+  --gray: #51514f;
+  --light: #fff;
+  --error: darkred;
+  --danger: darkred;
+}
+
 $app-colors: (
   primary: ($color-primary, $color-light),
   primary-inverse: ($color-light, $color-primary),
@@ -95,6 +107,8 @@ $searchbar-ios-background-color: transparent;
 /************* Ion-Note component ************************************/
 $note-md-color: #999;
 $note-ios-color: #999;
+
+$item-md-detail-push-show: true;
 
 // App Theme
 // --------------------------------------------------

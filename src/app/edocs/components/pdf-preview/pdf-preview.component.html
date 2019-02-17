@@ -1,0 +1,10 @@
+<ion-spinner page-loading
+             *ngIf="isLoading"></ion-spinner>
+
+<pdf-viewer *ngIf="!isLoading"
+            [src]="resolvedUrl"
+            [page]="page"
+            [render-text]="false"
+            [original-size]="true"
+            [fit-to-page]="true"
+            [show-all]="showAll"></pdf-viewer>

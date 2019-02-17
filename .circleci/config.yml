@@ -1,38 +1,38 @@
 version: 2
 jobs:
-  create-enviroment:
+  build-ionic:
     docker:
-      - image: circleci/node:8
+      - image: prodest/circleci-containers:node-ionic-aws-v1.1.0
     working_directory: ~/espm
     steps:
       - checkout
       - restore_cache:
           keys:
-          - v5-dependencies-node_modules-{{ checksum "package-lock.json" }}
-          - v5-dependencies-node_modules
+          - v6-dependencies-node_modules-{{ checksum "package-lock.json" }}
+          - v6-dependencies-node_modules
       - run: npm install
-      - save_cache:
-          paths:
-            - node_modules
-          key: v5-dependencies-node_modules-{{ checksum "package-lock.json" }}
       - run:
           name: Get secrets
           command: |
-            git clone -q https://$GITLAB_USER:$GITLAB_PASSWORD@gitlab.es.gov.br/SGPRJ/espm-ci-secrets.git > /dev/null 2>&1
+            git clone -q https://gitlab-ci-token:$GITLAB_CI_TOKEN@gitlab.es.gov.br/SGPRJ/espm-ci-secrets.git > /dev/null 2>&1
             cp espm-ci-secrets/.env .
             cp espm-ci-secrets/android/* .
+      - run: npm run build:prod:android
+      - save_cache:
+          paths:
+            - node_modules
+          key: v6-dependencies-node_modules-{{ checksum "package-lock.json" }}
       - persist_to_workspace:
           root: ~/espm
           paths:
             - ./
   publish-prod:
     docker:
-      - image: prodest/circleci-containers:mobile-android-v1
+      - image: prodest/circleci-containers:mobile-android-v2.0.0
     working_directory: ~/espm
     steps:
       - attach_workspace:
           at: ./
-      - run: npm run build:prod:android
       - run: cordova platform add android@7.1.1
       - run: cordova prepare android -f
       - run: cordova build android --release --buildconfig=build.json
@@ -46,7 +46,7 @@ workflows:
   version: 2
   main-workflow:
     jobs:
-      - create-enviroment:
+      - build-ionic:
           filters:
             branches:
               ignore: /.*/
@@ -54,7 +54,7 @@ workflows:
               only: /.*/
       - publish-prod:
           requires:
-            - create-enviroment
+            - build-ionic
           filters:
             branches:
               ignore: /.*/

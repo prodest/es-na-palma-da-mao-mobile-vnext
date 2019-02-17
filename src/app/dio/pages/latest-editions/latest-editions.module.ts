@@ -1,11 +1,11 @@
 import { NgModule } from '@angular/core';
+import { NgSubscribeDirectiveModule } from '@espm/shared/directives';
 import { IonicPageModule } from 'ionic-angular';
 
-// import { VehicleComponentModule } from '../../components'
 import { LatestEditionsPage } from './latest-editions';
 
 @NgModule({
   declarations: [LatestEditionsPage],
-  imports: [IonicPageModule.forChild(LatestEditionsPage)]
+  imports: [NgSubscribeDirectiveModule, IonicPageModule.forChild(LatestEditionsPage)]
 })
 export class LatestEditionsPageModule {}

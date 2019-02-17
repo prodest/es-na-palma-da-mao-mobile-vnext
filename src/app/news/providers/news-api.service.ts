@@ -1,11 +1,11 @@
 import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Inject, Injectable } from '@angular/core';
-import { Environment, EnvVariables } from '@espm/core';
+import { Environment, EnvVariables, Pagination } from '@espm/core';
 import { ANONYMOUS_HEADER } from '@espm/core/auth';
 import { Observable } from 'rxjs/Observable';
 import { share } from 'rxjs/operators';
 
-import { Filter, News, NewsDetails, Pagination } from '../model';
+import { Filter, News, NewsDetails } from '../model';
 
 @Injectable()
 export class NewsApiService {

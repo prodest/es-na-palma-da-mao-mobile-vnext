@@ -111,7 +111,7 @@ export class TranscolOnlinePage implements AfterViewInit, OnDestroy {
    */
   ngOnDestroy() {
     this.destroyed$.next();
-    this.destroyed$.unsubscribe();
+    this.destroyed$.complete();
   }
 
   /**

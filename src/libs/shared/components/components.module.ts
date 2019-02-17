@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 
 import { HighlightModule } from './highlight';
+import { InViewComponentModule } from './in-view';
 import { RemarkModule } from './remark/remark.module';
 import { SectionTitleModule } from './section-title';
 import { TemplatesModule } from './templates';
@@ -10,7 +11,14 @@ import { ValidationMessageModule } from './validation-message';
 // import { ValidationMessageComponent } from './validation-message'
 // const components  = [ ValidationMessageComponent, SectionTitleComponent]
 
-const modules = [ValidationMessageModule, SectionTitleModule, RemarkModule, HighlightModule, TemplatesModule];
+const modules = [
+  ValidationMessageModule,
+  SectionTitleModule,
+  RemarkModule,
+  HighlightModule,
+  TemplatesModule,
+  InViewComponentModule
+];
 
 @NgModule({
   imports: [...modules],

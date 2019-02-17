@@ -1,0 +1,20 @@
+edocs-document-summary {
+  display: block;
+
+  .doc-footer {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 8px 16px;
+
+    .btn-more {
+      font-size: 1.8rem;
+    }
+  }
+
+  ion-card-content {
+    border-bottom: 1px solid #f5f5f5 !important;
+    border-top: 1px solid #f5f5f5 !important;
+    padding-top: 10px !important;
+  }
+}

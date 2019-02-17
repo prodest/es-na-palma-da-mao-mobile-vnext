@@ -1,11 +1,11 @@
 import { HTTP_INTERCEPTORS, HttpEvent, HttpHandler, HttpInterceptor, HttpRequest } from '@angular/common/http';
-import { Injectable, Injector, Inject } from '@angular/core';
+import { Inject, Injectable, Injector } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
 import { flatMap } from 'rxjs/operators';
 
 import { ANONYMOUS_HEADER } from '.';
-import { AuthService } from './auth.service';
 import { Environment, EnvVariables } from '../environment';
+import { AuthService } from './auth.service';
 
 @Injectable()
 export class JwtInterceptor implements HttpInterceptor {
@@ -40,8 +40,8 @@ export class JwtInterceptor implements HttpInterceptor {
    *
    *
    */
-  protected createAuthRequest(req: HttpRequest<any>, next: HttpHandler, refresToken: boolean = true) {
-    const accessToken$ = refresToken ? this.auth.refreshAccessTokenIfNeeded() : this.auth.getAccessToken();
+  protected createAuthRequest(req: HttpRequest<any>, next: HttpHandler, refreshToken: boolean = true) {
+    const accessToken$ = refreshToken ? this.auth.refreshAccessTokenIfNeeded() : this.auth.getAccessToken();
 
     return accessToken$.pipe(
       flatMap(token =>

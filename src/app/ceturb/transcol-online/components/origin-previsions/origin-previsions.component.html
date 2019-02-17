@@ -9,9 +9,12 @@
     <span>Linha</span>
     <span class="origin">Próximo</span>
 </div>
+<ion-spinner section-loading
+             *ngIf="!previsions"></ion-spinner>
 <ion-scroll scrollY="true"
             *ngIf="previsions && previsions.length">
     <ion-list class="prevision-list">
+
         <button ion-item
                 *ngFor="let prevision of previsions"
                 (click)="selectLine.emit(prevision)">
@@ -22,6 +25,7 @@
                 [ngStyle]="{'color': prevision.confiabilidade}">{{ prevision.previsaoNaOrigem }}</h4>
         </button>
     </ion-list>
+
 </ion-scroll>
 <div class="not-founded"
      *ngIf="previsions && !previsions.length">Nenhuma previsão encontrada</div>

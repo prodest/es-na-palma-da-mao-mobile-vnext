@@ -1,0 +1,18 @@
+espm-dt-concursos-page {
+  .scroll-content {
+    #not-founded {
+      height: 100%;
+    }
+  }
+
+  .concursos_name {
+    font-weight: 500;
+    font-size: 1.6rem;
+  }
+  .concursos_descricao {
+    font-weight: 300;
+  }
+  .favorito_icon {
+    color: $color-secondary;
+  }
+}

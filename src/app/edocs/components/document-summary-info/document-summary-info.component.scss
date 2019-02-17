@@ -1,0 +1,27 @@
+edocs-document-summary-info {
+  ion-icon {
+    margin-right: 5px;
+  }
+  small {
+    min-width: 0;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    margin-bottom: 15px;
+    display: block;
+    font-size: 90%;
+    strong {
+      font-size: 1.2rem;
+      margin-bottom: 3px;
+    }
+
+    &[text-nowrap] {
+      strong {
+        display: block;
+      }
+    }
+
+    &:last-child {
+      margin-bottom: 0px;
+    }
+  }
+}

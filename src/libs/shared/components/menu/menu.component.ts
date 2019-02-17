@@ -63,6 +63,18 @@ const menus = [
     ]
   },
   {
+    name: 'E-Docs',
+    items: [
+      {
+        title: 'Documentos para assinar',
+        icon: 'create',
+        component: 'DocumentsToSignPage',
+        order: 2,
+        secure: true
+      }
+    ]
+  },
+  {
     name: 'Ceturb',
     items: [
       {
@@ -124,6 +136,17 @@ const menus = [
     ]
   },
   {
+    name: 'Oportunidades',
+    items: [
+      {
+        title: 'Buscar concursos',
+        icon: 'search',
+        component: 'ConcursosPage',
+        order: 7
+      }
+    ]
+  },
+  {
     name: 'Outros',
     items: [
       {
@@ -176,7 +199,7 @@ export class MenuComponent implements OnInit, OnDestroy {
    */
   ngOnDestroy(): void {
     this.destroyed$.next(true);
-    this.destroyed$.unsubscribe();
+    this.destroyed$.complete();
   }
 
   /**
@@ -199,11 +222,7 @@ export class MenuComponent implements OnInit, OnDestroy {
             );
         }
       } else {
-        if (route.component === 'DashboardPage') {
-          this.appCtrl.getRootNav().setRoot('DashboardPage');
-        } else {
-          this.appCtrl.getRootNav().push(route.component);
-        }
+        this.appCtrl.getRootNav().setRoot(route.component);
         this.menuCtrl.close();
       }
     }

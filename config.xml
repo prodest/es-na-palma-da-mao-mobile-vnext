@@ -1,5 +1,5 @@
 <?xml version='1.0' encoding='utf-8'?>
-<widget android-versionCode="400037" id="br.gov.es.prodest.espm" version="4.4.12" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
+<widget android-versionCode="400058" id="br.gov.es.prodest.espm" version="5.4.5" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
     <name>ES na Palma da Mao</name>
     <description>O ES NA PALMA DA MÃO é um programa do Governo do Estado do Espírito Santo que reúne iniciativas e serviços do Governo em plataforma móvel (aplicativo) e web, com unidade de experiência do cidadão. Por meio do ES NA PALMA DA MÃO, diversos serviços governamentais podem ser acessados através da web e dispositivos móveis (sistemas operacionais iOS e Android) utilizando uma interface comum.</description>
     <author email="atendimento@prodest.es.gov.br" href="https://prodest.es.gov.br/">PRODEST</author>
@@ -36,6 +36,7 @@
     <preference name="Orientation" value="portrait" />
     <platform name="android">
         <hook src="scripts/resolve-project-properties-dependencies.sh" type="before_build" />
+        <hook src="scripts/resolve-project-properties-dependencies.sh" type="before_run" />
         <hook src="scripts/copy-plugins-from-node_modules.js" type="before_platform_add" />
         <hook src="scripts/manually-set-plugin-params.sh" type="before_platform_add" />
         <hook src="scripts/copy_resource_files.js" type="after_prepare" />
@@ -136,7 +137,7 @@
     </plugin>
     <plugin name="phonegap-plugin-push" spec="^2.2.3">
         <variable name="ANDROID_SUPPORT_V13_VERSION" value="27.+" />
-        <variable name="FCM_VERSION" value="11.6.2" />
+        <variable name="FCM_VERSION" value="11.8.0" />
     </plugin>
     <plugin name="cordova-plugin-appavailability" spec="^0.4.2" />
     <plugin name="cordova-plugin-geolocation" spec="^4.0.1" />

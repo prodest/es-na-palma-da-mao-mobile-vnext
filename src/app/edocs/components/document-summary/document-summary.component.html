@@ -1,0 +1,44 @@
+<ion-card>
+    <edocs-document-summary-header [nome]="document.nome"
+                                   [paginas]="document.paginas"
+                                   [tamanho]="document.tamanho"
+                                   [isBloqueadoParaAssinaturas]="document.isBloqueadoParaAssinaturas"
+                                   [soFaltaOUsuarioSeManifestar]="document.soFaltaOUsuarioSeManifestar">
+    </edocs-document-summary-header>
+    <ion-card-content>
+        <edocs-document-summary-info [dataEnvioLabel]="document.dataEnvioLabel"
+                                     [capturador]="document.capturador.nome"
+                                     [papelAssinatura]="document.papelAssinatura">
+        </edocs-document-summary-info>
+    </ion-card-content>
+    <div class="doc-footer">
+        <button ion-button
+                icon-start
+                clear
+                accent
+                small
+                (click)="open.emit(document)">
+            <ion-icon name="md-copy"></ion-icon>
+            <div>Ver documento</div>
+        </button>
+        <button *ngIf="!document.isBloqueadoParaAssinaturas && document.manifestacaoUsuario === ManifestacaoUsuario.NaoSeManifestou"
+                ion-button
+                icon-start
+                clear
+                accent
+                small
+                (click)="sign.emit(document)">
+            <ion-icon name="md-create"></ion-icon>
+            <div>ASSINAR</div>
+        </button>
+        <button ion-button
+                icon-only
+                clear
+                accent
+                small
+                class="btn-more"
+                (click)="showDocumentOptions(document)">
+            <ion-icon name="md-more"></ion-icon>
+        </button>
+    </div>
+</ion-card>

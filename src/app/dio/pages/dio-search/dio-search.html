@@ -78,7 +78,6 @@
   </ion-list>
 
   <ion-item *ngIf="!searched"
-            class="item-info"
             text-center>
     <h2>Selecione um filtro</h2>
     <p>Todos os campos são obrigatórios</p>
@@ -90,6 +89,7 @@
     <highlight>"{{filter.query}}"</highlight>
     <p>Tente mudar o filtro da consulta</p>
   </ion-item>
+
   <ion-infinite-scroll *ngIf="hasMoreHits"
                        (ionInfinite)="search({pageNumber:filter.pageNumber+1}, $event)">
     <ion-infinite-scroll-content></ion-infinite-scroll-content>

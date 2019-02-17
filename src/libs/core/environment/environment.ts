@@ -1,6 +1,9 @@
 export interface Environment {
   production: boolean;
   envName: string;
+  mocks: {
+    edocs: boolean;
+  };
   api: {
     invalidTokenHttpCode: number;
     news: string;
@@ -17,6 +20,8 @@ export interface Environment {
     acessocidadaoApi: string;
     transparency: string;
     feedback: string;
+    edocs: string;
+    empregabilidade: string;
   };
   push: {
     senderId: string;

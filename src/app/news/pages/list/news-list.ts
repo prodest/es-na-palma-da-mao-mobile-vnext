@@ -1,10 +1,10 @@
 import { ChangeDetectionStrategy, ChangeDetectorRef, Component, Inject } from '@angular/core';
-import { Environment, EnvVariables, trackById } from '@espm/core';
+import { Environment, EnvVariables, Pagination, trackById } from '@espm/core';
 import { IonicPage, ModalController, NavController } from 'ionic-angular';
 import { tap } from 'rxjs/operators';
 
 import { NewsApiService } from '../../providers';
-import { Filter, News, Pagination } from './../../model';
+import { Filter, News } from './../../model';
 
 @IonicPage({
   segment: 'noticias'
@@ -94,6 +94,9 @@ export class NewsListPage {
     this.navCtrl.push('NewsDetailsPage', { id });
   }
 
+  /**
+   *
+   */
   trackById = trackById;
 
   /**

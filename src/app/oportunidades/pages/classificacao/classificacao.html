@@ -1,0 +1,31 @@
+<ion-header color-primary-bg>
+  <ion-navbar>
+    <ion-title>{{ nomeConcurso }} - Classificação</ion-title>
+  </ion-navbar>
+
+  <ion-searchbar
+    placeholder="Pesquisar..."
+    [showCancelButton]="true"
+    cancelButtonText="Cancelar"
+    [animated]="false"
+    (ionInput)="search($event)"
+    (ionClear)="clear($event)"
+    (ionCancel)="clear($event)"
+  >
+  </ion-searchbar>
+</ion-header>
+
+<ion-content>
+  <ion-list-header *ngIf="filtered && filtered.length"> {{ filtered.length }} encontrados </ion-list-header>
+  <ion-list no-margin [virtualScroll]="filtered" approxItemHeight="70px">
+    <ion-item *virtualItem="let classificados">
+      <span item-start class="colocacao"> {{ classificados.posicao }}º</span>
+      <h3 text-wrap>{{ classificados.nome }}</h3>
+    </ion-item>
+    <ion-item *ngIf="filtered && !filtered.length" text-center no-lines id="not-founded">
+      <h2>Nenhum encontrado</h2>
+      <p>Tente mudar o filtro da consulta</p>
+    </ion-item>
+  </ion-list>
+  <ion-spinner *ngIf="!filtered" page-loading></ion-spinner>
+</ion-content>

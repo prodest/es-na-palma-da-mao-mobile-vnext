@@ -1,0 +1,17 @@
+<ion-header>
+    <ion-navbar>
+        <ion-title>{{document?.nome }}</ion-title>
+    </ion-navbar>
+</ion-header>
+<ion-content>
+    <edocs-pdf-preview *ngIf="document"
+                       [id]="document.id"></edocs-pdf-preview>
+    <ion-fab right
+             bottom>
+        <button ion-fab
+                (click)="download(document)"
+                color="light">
+            <ion-icon name="md-download"></ion-icon>
+        </button>
+    </ion-fab>
+</ion-content>

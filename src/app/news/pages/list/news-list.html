@@ -21,6 +21,8 @@
                     *ngFor="let newsItem of news; trackBy:trackById"
                     (click)="goToNews(newsItem.id)">
     </news-list-item>
+    <ion-spinner page-loading
+                 *ngIf="!news"></ion-spinner>
   </ion-list>
   <ion-list *ngIf="news && !news.length">
     <ion-list-header>
