@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+<a name="5.4.6"></a>
+## [5.4.6](https://github.com/prodest/es-na-palma-da-mao-mobile-vnext/compare/v5.4.5...v5.4.6) (2019-02-18)
+
+
+### Bug Fixes
+
+* **transparency:** filtro não abria por depender da primeira busca ([9db2958](https://github.com/prodest/es-na-palma-da-mao-mobile-vnext/commit/9db2958))
+
+
+
 <a name="5.4.5"></a>
 ## [5.4.5](https://github.com/prodest/es-na-palma-da-mao-mobile-vnext/compare/v5.4.4...v5.4.5) (2019-02-13)
 
