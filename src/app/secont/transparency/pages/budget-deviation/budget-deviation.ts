@@ -32,7 +32,8 @@ export class BudgetDeviationPage extends TransparencyPage<YearFilter, BudgetDevi
    *
    */
   ngOnInit() {
-    this.doFilter({ filter: YearFilter.currentYear() }).subscribe(this.setChartDataset);
+    this.filter = YearFilter.currentYear();
+    this.doFilter({ filter: this.filter }).subscribe(this.setChartDataset);
   }
 
   openFilter() {

@@ -29,7 +29,8 @@ export class ExpensesByOriginPage extends MoneyFlowListPage<DateRangeFilter> imp
    *
    */
   ngOnInit() {
-    this.doFilter({ filter: DateRangeFilter.currentYear() }).subscribe();
+    this.filter = DateRangeFilter.currentYear();
+    this.doFilter({ filter: this.filter }).subscribe();
   }
 
   openFilter() {

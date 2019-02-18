@@ -25,7 +25,8 @@ export class BudgetsPage extends MoneyFlowPage<YearFilter> implements OnInit {
    *
    */
   ngOnInit() {
-    this.doFilter({ filter: YearFilter.currentYear() }).subscribe();
+    this.filter = YearFilter.currentYear();
+    this.doFilter({ filter: this.filter }).subscribe();
   }
 
   /**

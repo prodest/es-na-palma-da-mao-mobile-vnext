@@ -30,7 +30,8 @@ export class RevenuesPage extends MoneyFlowListPage<DateRangeFilter> implements 
    *
    */
   ngOnInit() {
-    this.doFilter({ filter: DateRangeFilter.currentYear() }).subscribe();
+    this.filter = DateRangeFilter.currentYear();
+    this.doFilter({ filter: this.filter }).subscribe();
   }
 
   openFilter() {

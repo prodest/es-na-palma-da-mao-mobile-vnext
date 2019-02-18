@@ -26,7 +26,8 @@ export class PublicWorksPage extends TransparencyPage<YearFilter, PublicWorks> i
    *
    */
   ngOnInit() {
-    this.doFilter({ filter: YearFilter.currentYear() }).subscribe();
+    this.filter = YearFilter.currentYear();
+    this.doFilter({ filter: this.filter }).subscribe();
   }
 
   openFilter() {

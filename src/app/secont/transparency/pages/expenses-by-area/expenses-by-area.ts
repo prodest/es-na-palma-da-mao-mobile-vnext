@@ -30,7 +30,8 @@ export class ExpensesByAreaPage extends MoneyFlowListPage<DateRangeFilter> imple
    *
    */
   ngOnInit() {
-    this.doFilter({ filter: DateRangeFilter.currentYear() }).subscribe();
+    this.filter = DateRangeFilter.currentYear();
+    this.doFilter({ filter: this.filter }).subscribe();
   }
 
   openFilter() {
