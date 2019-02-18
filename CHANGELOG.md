@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+<a name="5.4.7"></a>
+## [5.4.7](https://github.com/prodest/es-na-palma-da-mao-mobile-vnext/compare/v5.4.6...v5.4.7) (2019-02-18)
+
+
+### Bug Fixes
+
+* **empregabilidade:** empty idTender ([30612c3](https://github.com/prodest/es-na-palma-da-mao-mobile-vnext/commit/30612c3))
+
+
+
 <a name="5.4.6"></a>
 ## [5.4.6](https://github.com/prodest/es-na-palma-da-mao-mobile-vnext/compare/v5.4.5...v5.4.6) (2019-02-18)
 
