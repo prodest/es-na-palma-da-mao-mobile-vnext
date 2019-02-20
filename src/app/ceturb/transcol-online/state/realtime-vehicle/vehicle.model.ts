@@ -4,7 +4,8 @@ export type Vehicle = {
   rotulo: number,
   distancia: number,
   passou: boolean,
-  atualizado: boolean
+  atualizado: boolean,
+  ignicao: boolean
 }
 
 export function createVehicle(
@@ -14,9 +15,10 @@ export function createVehicle(
     rotulo = null,
     distancia = 0,
     passou = false,
-    atualizado = true
+    atualizado = true,
+    ignicao = false
   }: Partial<Vehicle>): Vehicle {
     return {
-      bandeira, linha, rotulo, distancia, passou, atualizado
+      bandeira, linha, rotulo, distancia, passou, atualizado, ignicao
     } as Vehicle;
 }

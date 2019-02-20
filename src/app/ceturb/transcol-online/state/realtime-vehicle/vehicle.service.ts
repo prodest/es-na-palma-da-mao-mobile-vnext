@@ -30,6 +30,9 @@ export class VehiclesService {
   updateVehicles(stopId: number, opts: UpdateOptions = {autoReload: false}) {
     if (stopId === null) return;
 
+    // console.log(stopId);
+    
+
     this.store.setLoading(true);
     
     this.apiRealtime.getNextVehicles(stopId)
@@ -44,15 +47,20 @@ export class VehiclesService {
         // insere ou atualiza os veículos na store
         vehicles.map(
           (vehicle) => {
-            let newVehicle: Vehicle = createVehicle(vehicle);
-            this.store.upsert(newVehicle.rotulo, (vehicle: Vehicle): Vehicle => ({
-              ...newVehicle,
-              passou: vehicle.distancia &&
-                      vehicle.distancia < 50 && 
-                      vehicle.distancia < newVehicle.distancia && 
-                      !vehicle.passou
-                      ? true : vehicle.passou
-            } as Vehicle));
+            const newVehicle: Vehicle = createVehicle(vehicle);
+            if (newVehicle.ignicao) {
+              this.store.upsert(
+                newVehicle.rotulo, 
+                (vehicle: Vehicle): Vehicle => ({
+                  ...newVehicle,
+                  passou: vehicle.distancia &&
+                          vehicle.distancia < 50 && 
+                          vehicle.distancia < newVehicle.distancia && 
+                          !vehicle.passou
+                          ? true : vehicle.passou
+                } as Vehicle)
+              );
+            }
           }
         );
 

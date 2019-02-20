@@ -58,10 +58,7 @@ export class TranscolOnlineRealTimePage {
   ionViewWillLoad() {
     // verifica se o gps está ativado, se não estiver, avisa ao usuário
     this.deviceCoordinates$.subscribe(response => {
-      if (response['code']) {
-        this.createMissingLocationAlert().present();
-        return;
-      }
+      if (response['code']) this.createMissingLocationAlert().present()
     });
 
     // quando o ponto mais próximo muda, atualizamos a Store com a nova referência
@@ -139,9 +136,10 @@ export class TranscolOnlineRealTimePage {
    */
   private updateExpectedVehicles() {
     const interval = 20; // minutos
+    const stop = this.busStopsQuery.getActiveId() as number;
 
     this.expectedVehicles = [];
-    this.apiCeturbV2Service.previsionsByStopOnInterval(this.busStopsQuery.getActiveId() as number, interval).subscribe(
+    this.apiCeturbV2Service.previsionsByStopOnInterval(stop, interval).subscribe(
       {
         next: (previsions: Array<any>) => {
           previsions.map(prevision => {
@@ -170,7 +168,6 @@ export class TranscolOnlineRealTimePage {
    * Finaliza o reload automatizado.
    */
   stopAutoReload() {
-    this.vehiclesService.stopAutoReload(); // desativa o autoload do VehiclesService
     this.stopsAutoReloader.unsubscribe(); // desativa o autoload criado em startAutoLoad()
     this.expectedVehiclesAutoReloader.unsubscribe(); // desativa o autoload criado em startAutoload()
   }
