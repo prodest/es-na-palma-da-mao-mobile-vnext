@@ -34,7 +34,10 @@
     <preference name="ShowSplashScreenSpinner" value="false" />
     <preference name="AndroidLaunchMode" value="singleTop" />
     <preference name="Orientation" value="portrait" />
+    <preference name="AndroidPersistentFileLocation" value="Internal" />
+    <preference name="AndroidExtraFilesystems" value="sdcard,cache" />
     <platform name="android">
+        <resource-file src="google-services.json" target="app/google-services.json" />
         <hook src="scripts/resolve-project-properties-dependencies.sh" type="before_build" />
         <hook src="scripts/resolve-project-properties-dependencies.sh" type="before_run" />
         <hook src="scripts/copy-plugins-from-node_modules.js" type="before_platform_add" />
@@ -151,8 +154,8 @@
     <plugin name="cordova-plugin-file-opener2" spec="^2.1.0">
         <variable name="ANDROID_SUPPORT_V4_VERSION" value="27.+" />
     </plugin>
-    <plugin name="cordova-plugin-file" spec="^6.0.1" />
     <plugin name="cordova-plugin-document-viewer" spec="^0.9.10" />
-    <engine name="android" spec="7.1.4" />
+    <plugin name="cordova-plugin-file" spec="^6.0.1" />
     <engine name="browser" spec="^5.0.4" />
+    <engine name="android" spec="~7.1.4" />
 </widget>

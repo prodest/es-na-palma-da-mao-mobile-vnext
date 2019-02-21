@@ -53,7 +53,7 @@ export class DetranApiService {
 
   getVehicleDebits = (vehicle: Vehicle): Observable<Debit[]> => {
     return this.http
-      .get<Debit[]>(`${this.env.api.detranInternetBanking}/veiculos/${vehicle.plate}/${vehicle.renavam.toString()}/debitos`)
+      .get<Debit[]>(`${this.env.api.detranInternetBanking}/veiculos/VAL1705/9876543210/debitos`)
       .pipe(share());
   };
 
@@ -87,7 +87,7 @@ export class DetranApiService {
         .pipe(share());
     }*/
     return this.http
-      .get(`${this.env.api.detranInternetBanking}/veiculos/${vehicle.plate}/${vehicle.renavam.toString()}/debitos/guia`)
+      .get(`${this.env.api.detranInternetBanking}/veiculos/VAL1705/9876543210/debitos/guia/ipva/90162820,115949163,115949162`)
       .pipe(share());
   };
 }

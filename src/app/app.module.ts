@@ -11,7 +11,7 @@ import { BarcodeScanner } from '@ionic-native/barcode-scanner';
 import { Clipboard } from '@ionic-native/clipboard';
 import { Device } from '@ionic-native/device';
 import { Facebook } from '@ionic-native/facebook';
-import { File } from '@ionic-native/file';
+import { File } from '@ionic-native/file/ngx';
 import { FileOpener } from '@ionic-native/file-opener';
 import { Geolocation } from '@ionic-native/geolocation';
 import { GooglePlus } from '@ionic-native/google-plus';
