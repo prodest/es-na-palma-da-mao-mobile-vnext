@@ -1,11 +1,5 @@
 <ion-header color-primary-bg>
-  <ion-navbar hideBackButton>
-    <button ion-button
-            menuToggle>
-      <ion-icon name="menu"></ion-icon>
-    </button>
-    <ion-title>Concursos públicos</ion-title>
-  </ion-navbar>
+  
   <ion-searchbar placeholder="Pesquisar..."
                  [showCancelButton]="true"
                  cancelButtonText="Cancelar"
@@ -14,35 +8,48 @@
                  (ionClear)="clear($event)"
                  (ionCancel)="clear($event)">
   </ion-searchbar>
+  <ion-navbar hideBackButton>
+      <!-- <button ion-button
+              menuToggle>
+        <ion-icon name="menu"></ion-icon>
+      </button> -->
+      <ion-title>CONCURSOS </ion-title>
+    </ion-navbar>
+  <div class="efeito_css"></div>
 </ion-header>
 
 <ion-content>
- 
+  
   <ion-list-header class="testo_negrito" *ngIf="filteredConcursos && filteredConcursos.length">
     {{filteredConcursos.length}} ENCONTRADOS
   </ion-list-header>
-  
-  
- 
-  <ion-list  no-margin
+   <ion-list  no-margin
             [virtualScroll]="filteredConcursos"
             [virtualTrackBy]="trackById"
-            approxItemHeight="70px">
+            approxItemHeight="">
               
-    <button class="radius_concursos" ion-item
+    <button class="radius_concursos" 
             *virtualItem="let concurso"
             (click)="showDetails(concurso.id)">
+            <div>
+            <div>
+              <h3 text-wrap class="concursos_name">
+                {{limite(concurso.orgao) }}  
+              </h3>
+            </div>
             
-              <h3 text-wrap
-          class="concursos_name">{{ concurso.orgao }}</h3>
-      <p text-wrap
-         class="concursos_descricao">{{ concurso.descricao }}</p>
-           
-         
-         <p class="status_float">
+              <p text-wrap class="concursos_descricao">
+                {{ concurso.descricao }}
+              </p>
+            <div class="status_float">
+            <p class="center_css" >
           <concurso-status  [status]="concurso.status"></concurso-status>
-         </p>
-         
+            </p>
+            <p>
+            <ion-icon class="star_css" name="star"></ion-icon>
+           </p>
+          </div>
+        </div>
     </button>
   </ion-list>
 

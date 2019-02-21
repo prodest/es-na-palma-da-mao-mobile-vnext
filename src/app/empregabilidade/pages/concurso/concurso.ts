@@ -1,8 +1,13 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
+ 
 
 import { DtApiService } from '../../providers';
 import { Concurso } from './../../model';
+
+
+
+
 
 @IonicPage({
   segment: 'concursos/:id'
@@ -13,11 +18,12 @@ import { Concurso } from './../../model';
 })
 export class ConcursoPage {
   concurso: Concurso;
-
-  /**
-   *
-   */
-  constructor(private navCtrl: NavController, private navParams: NavParams, private api: DtApiService) {}
+  
+ 
+  constructor(private navCtrl: NavController, private navParams: NavParams, private api: DtApiService) {
+    
+   
+  } 
 
   /**
    *
@@ -26,10 +32,12 @@ export class ConcursoPage {
     this.getConcurso(this.navParams.data.id);
   }
 
+  
   /**
    *
    */
   getConcurso = (id: number) => {
+    
     this.api.getConcurso(id).subscribe(concurso => (this.concurso = concurso));
   };
 
@@ -39,11 +47,20 @@ export class ConcursoPage {
   openLink(link) {
     window.open(link, '_system', 'location=yes');
   }
-
   /**
    *
    */
   showClassificados(concurso: Concurso) {
+   
     this.navCtrl.push('ClassificacaoPage', { concurso });
   }
+
+  openPage() {
+   
+    this.navCtrl.push('Home2Page');
+  }
+
+  
+
+  
 }

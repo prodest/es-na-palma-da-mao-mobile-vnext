@@ -12,29 +12,42 @@ espm-dt-concursos-page {
     font-size: 1.6rem;
     float: left;
     margin: 0 auto; 
-    margin-left: 30px;
+    margin-left: 15px;
     font-variant: small-caps ;
+  
   }
   .concursos_descricao {
-    font-weight: 300;
+    width: 60%;
     margin-top: 10%;
     float: left;
     margin: 30px; 
-    position: absolute !important;   
+    position: absolute !important; 
+    border-right-style: outset;
+    border-right-color: #d3ddf0;
+    border-right-width: 1px;
+    margin-left: 2px;
+   
   }
+  
   .testo_negrito{
     color: black;
     font-weight:bold;
     font-size:30px; 
     font-style: italic;
+    background-color: #d3ddf0;
  }
  .radius_concursos{
   border-radius: 10px;
-  padding-left: 5px;
+  padding-left: 0px;
   padding-right: 5px;
+  margin-bottom: 20px;
+  width: 90%;
+  background-color: white;
+  height: 70px ;
  }
 .status_float{
-  float:right; 
+  float:right;
+  
 }
 .badge  {
   border-radius: 10px;
@@ -42,15 +55,29 @@ espm-dt-concursos-page {
  .item-inner{
   padding-bottom: 20px;
  }
- concurso-status .andamento ion-badge {
+ .andamento ion-badge {
   background-color: #2BACE2 !important;
 }
-concurso-status .encerrado ion-badge {
+.encerrado ion-badge {
   background-color: #bf0065 !important;
 }
 .virtual-scroll .virtual-position, .virtual-scroll .virtual-position.item {
   left: 15px;
   
 }
-  
+.efeito_css{
+  background: linear-gradient(45deg, red 50%, #208baa 50%);
+  height: 2px;
+}
+.header, .toolbar-background, .toolbar-title  {
+  background-color: #003aab !important ;
+ 
+}
+.list-md {
+  background-color: #d3ddf0 ;
+} 
+.center_css{
+  margin-top: 1px;
+}
+ 
 }

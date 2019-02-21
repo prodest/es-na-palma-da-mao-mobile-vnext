@@ -62,6 +62,15 @@ export class ConcursosPage {
     });
   }
 
+  // tamanho do nome "orgão" limitado 
+  limite = (valor) => {
+    if (valor.length > 12){
+      return valor.substring(0, 12)+"…";
+      }else{
+      return valor;
+      }
+  }
+
   /**
    *
    */
