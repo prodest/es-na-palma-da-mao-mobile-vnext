@@ -50,7 +50,7 @@ export class BusStopsService {
         this.store.set(stops);
         this.store.setActive(stops[0].id); // o ponto mais próximo é o 'Active State' desta Store.
         
-        console.log("BusStopsStore loaded!");
+        // console.log("BusStopsStore loaded!");
       }
     );
   }

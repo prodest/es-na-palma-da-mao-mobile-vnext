@@ -30,8 +30,8 @@ export class VehiclesService {
    * Atualiza os veículos na Store à partir de um ponto de ônibus dado como referência.
    * @param {number} stopId - ID do ponto que deve ser usado como referência para carregar a Store.
    * @param {UpdateOptions} opts - Modificadores de comportamento.
-   * @param opts.autoReloadInterval - Define o intervalo em segundos para atualizar automaticamente a Store com o stopId fornecido. Opcional. Default: false.
-   * @param opts.vehicleMaxAge - Define um prazo de expiração para o veículo armazenado.
+   * @param opts.autoReloadInterval - Define o intervalo em segundos para atualizar automaticamente a Store com o stopId fornecido. Opcional. Default: undefined.
+   * @param opts.vehicleMaxAge - Define um prazo de expiração para o veículo armazenado. Opcional. Default: undefined.
    */
   updateVehicles(stopId: number, opts?: UpdateOptions) {
     // atualiza as opções de comportamento do update
@@ -78,7 +78,7 @@ export class VehiclesService {
         this.store.remove(vehicle => !vehicle.atualizado);
 
         // remove os dados que expiraram
-        if (this.options.vehicleMaxAge) this.store.remove(vehicle => Date.now() - vehicle.datahora < opts.vehicleMaxAge);
+        if (this.options.vehicleMaxAge) this.store.remove(vehicle => Date.now() - vehicle.datahora < this.options.vehicleMaxAge);
 
         // console.log("VehiclesStore loaded!");
         this.store.setLoading(false);
