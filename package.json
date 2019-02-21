@@ -78,7 +78,7 @@
     "@angular/http": "^5.2.11",
     "@angular/platform-browser": "^5.2.11",
     "@angular/platform-browser-dynamic": "^5.2.11",
-    "@datorama/akita": "^1.6.2",
+    "@datorama/akita": "^1.24.3",
     "@ionic-native/android-permissions": "^4.9.1",
     "@ionic-native/app-availability": "^4.10.1",
     "@ionic-native/barcode-scanner": "^4.7.0",
@@ -86,7 +86,7 @@
     "@ionic-native/core": "^4.5.3",
     "@ionic-native/device": "^4.10.1",
     "@ionic-native/facebook": "^4.4.2",
-    "@ionic-native/geolocation": "^4.11.0",
+    "@ionic-native/geolocation": "^4.18.0",
     "@ionic-native/google-plus": "^4.9.2",
     "@ionic-native/in-app-browser": "^4.4.2",
     "@ionic-native/local-notifications": "^4.11.0",
@@ -106,7 +106,7 @@
     "cordova-plugin-compat": "^1.2.0",
     "cordova-plugin-device": "^1.1.7",
     "cordova-plugin-facebook4": "^1.10.1",
-    "cordova-plugin-geolocation": "^4.0.1",
+    "cordova-plugin-geolocation": "4.0.1",
     "cordova-plugin-googleplus": "^5.3.0",
     "cordova-plugin-inappbrowser": "^1.7.2",
     "cordova-plugin-ionic-webview": "^1.2.1",
@@ -119,6 +119,7 @@
     "cordova-support-google-services": "^1.1.0",
     "cpf_cnpj": "^0.2.0",
     "es6-promise-plugin": "^4.2.2",
+    "fast-sort": "^1.5.4",
     "font-awesome": "^4.7.0",
     "helpful-decorators": "^1.7.2",
     "intl": "^1.2.5",
@@ -132,6 +133,7 @@
     "lodash-es": "^4.17.5",
     "moment": "^2.20.1",
     "ng2-charts": "^1.6.0",
+    "ng2-haversine": "^0.1.1",
     "phonegap-plugin-barcodescanner": "^7.1.2",
     "phonegap-plugin-multidex": "^1.0.0",
     "phonegap-plugin-push": "^2.2.3",
@@ -220,7 +222,9 @@
         "FCM_VERSION": "11.6.2"
       },
       "cordova-plugin-appavailability": {},
-      "cordova-plugin-geolocation": {},
+      "cordova-plugin-geolocation": {
+        "GEOLOCATION_USAGE_DESCRIPTION": "To locate you"
+      },
       "cordova-plugin-local-notification": {},
       "cordova-plugin-googleplus": {
         "WEB_APPLICATION_CLIENT_ID": "716051840979-96738cri764kv9vhih0d41ug07sroibv.apps.googleusercontent.com",

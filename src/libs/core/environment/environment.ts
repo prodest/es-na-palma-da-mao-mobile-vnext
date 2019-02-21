@@ -9,6 +9,8 @@ export interface Environment {
     detran: string;
     dio: string;
     ceturb: string;
+    ceturbv2: string;
+    realtime: string;
     cbmes: string;
     push: string;
     espm: string;

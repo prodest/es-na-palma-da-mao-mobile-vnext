@@ -11,6 +11,7 @@ import { Device } from '@ionic-native/device';
 import { Facebook } from '@ionic-native/facebook';
 import { GooglePlus } from '@ionic-native/google-plus';
 import { Geolocation } from '@ionic-native/geolocation';
+import { HaversineService } from 'ng2-haversine';
 import { InAppBrowser } from '@ionic-native/in-app-browser';
 import { LocalNotifications } from '@ionic-native/local-notifications';
 import { Push } from '@ionic-native/push';
@@ -32,6 +33,8 @@ import { DioProviders } from './dio/providers';
 import { NewsProviders } from './news/providers';
 import { TransparencyProviders } from './secont/transparency/providers';
 import { SepProviders } from './sep/providers';
+
+import { TranscolOnlineStores } from './ceturb/transcol-online/state';
 
 moment.locale('pt-br');
 registerLocaleData(ptBr);
@@ -66,6 +69,7 @@ registerLocaleData(ptBr);
     Facebook,
     Geolocation,
     GooglePlus,
+    HaversineService,
     InAppBrowser,
     LocaleService,
     LocalNotifications,
@@ -83,6 +87,7 @@ registerLocaleData(ptBr);
     ...SepProviders,
     ...TranscolOnlineProviders,
     ...TransparencyProviders,
+    ...TranscolOnlineStores,
     { 
       provide: ErrorHandler, 
       useClass: IonicErrorHandler 

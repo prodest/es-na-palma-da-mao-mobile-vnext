@@ -16,6 +16,11 @@
               (click)="showHelp()">
         <ion-icon name="help"></ion-icon>
       </button>
+      <button ion-button
+              icon-only
+              (click)="showRealTime()">
+        <ion-icon ios="md-alarm" md="md-alarm"></ion-icon>
+      </button>
     </ion-buttons>
   </ion-navbar>
 </ion-header>
@@ -32,7 +37,8 @@
                  placeholder="Pesquisar ponto de origem"
                  [ngClass]="{ 'hide-search': (selectedOrigin && selectedDestination) || isDetailsOpenned }"
                  (ionClear)="clearSearchResults()"
-                 (ionCancel)="clearSearchResults()"></ion-searchbar>
+                 (ionCancel)="clearSearchResults()">
+  </ion-searchbar>
 
   <ion-list [style.display]="isDetailsOpenned ? 'none':'inherit'"
             class="search-results-list"
@@ -57,7 +63,8 @@
                            (onLocationUpdate)="onLocationFound($event)"
                            (onLocationUpdateFinished)="onLocationUpdateFinished()"
                            (onFirstHit)="onLocationFirstHit($event)"
-                           (click)="getUserLocation()"></espm-geolocation-status>
+                           (click)="getUserLocation()">
+  </espm-geolocation-status>
 
   <div class="stop-info"
        [ngClass]="{ 

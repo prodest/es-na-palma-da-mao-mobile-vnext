@@ -19,7 +19,10 @@
             <p>{{ prevision.bandeira }}</p>
             <ion-note>{{ prevision.observacaoLinha }}</ion-note>
             <h4 item-end
-                [ngStyle]="{'color': prevision.confiabilidade}">{{ prevision.previsaoNaOrigem }}</h4>
+                [ngStyle]="{'color': prevision.confiabilidade}">
+                {{ prevision.previsaoNaOrigem }}<br>
+                {{ prevision.distancia | distanceFormat }}
+            </h4>
         </button>
     </ion-list>
 </ion-scroll>

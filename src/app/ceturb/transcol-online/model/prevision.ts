@@ -19,4 +19,5 @@ export interface Prevision {
   pontoDeDestinoId: number;
   previsaoNaOrigem: string;
   previsaoNoDestino: string;
+  distancia: number;
 }
