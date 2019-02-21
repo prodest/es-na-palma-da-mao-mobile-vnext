@@ -490,7 +490,7 @@ export class TranscolOnlinePage implements AfterViewInit, OnDestroy {
   private selectOrigin = (origin: BusStop) => {
     this.unselectAll();
     this.vehiclesService.clearVehicles();
-    this.vehiclesService.updateVehicles(origin.id, {autoReload: true}); // atualiza a Store COM autoreload.
+    this.vehiclesService.updateVehicles(origin.id, {autoReloadInterval: 30}); // atualiza a Store COM autoreload a cada 30 segundos.
     // todo this.$rootScope.footerPanel = this;
 
     this.selectedOrigin = origin;

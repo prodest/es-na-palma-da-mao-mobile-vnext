@@ -6,7 +6,8 @@ import { interval } from 'rxjs/observable/interval';
 import { Subscription } from 'rxjs/Subscription';
 
 type UpdateOptions = {
-  autoReload: boolean
+  autoReloadInterval?: number,
+  vehicleMaxAge?: number
 }
 @Injectable()
 /**
@@ -14,6 +15,10 @@ type UpdateOptions = {
  */
 export class VehiclesService {
   private autoReloadSubscription: Subscription;
+  private options: UpdateOptions = {
+    autoReloadInterval: undefined,
+    vehicleMaxAge: undefined
+  };
 
   constructor(
     protected store: VehiclesStore,
@@ -25,14 +30,19 @@ export class VehiclesService {
    * Atualiza os veículos na Store à partir de um ponto de ônibus dado como referência.
    * @param {number} stopId - ID do ponto que deve ser usado como referência para carregar a Store.
    * @param {UpdateOptions} opts - Modificadores de comportamento.
-   * @param opts.autoReload - Define se o serviço deve atualizar automaticamente a Store com o stopId fornecido. Opcional. Default: false.
+   * @param opts.autoReloadInterval - Define o intervalo em segundos para atualizar automaticamente a Store com o stopId fornecido. Opcional. Default: false.
+   * @param opts.vehicleMaxAge - Define um prazo de expiração para o veículo armazenado.
    */
-  updateVehicles(stopId: number, opts: UpdateOptions = {autoReload: false}) {
+  updateVehicles(stopId: number, opts?: UpdateOptions) {
+    // atualiza as opções de comportamento do update
+    if (opts) this.options = {...this.options, opts} as UpdateOptions;
+
+    // checa se há um ponto como referência
     if (stopId === null) return;
 
     // console.log(stopId);
-    
 
+    // ativa o estado de Loading da Store
     this.store.setLoading(true);
     
     this.apiRealtime.getNextVehicles(stopId)
@@ -66,11 +76,15 @@ export class VehiclesService {
 
         // remove todos os veículos que não foram atualizados
         this.store.remove(vehicle => !vehicle.atualizado);
+
+        // remove os dados que expiraram
+        if (this.options.vehicleMaxAge) this.store.remove(vehicle => Date.now() - vehicle.datahora < opts.vehicleMaxAge);
+
         // console.log("VehiclesStore loaded!");
         this.store.setLoading(false);
 
-        // se necessário, inicia o reload automático
-        if (opts.autoReload) this.startAutoReload(30, stopId);
+        // se configurado, inicia o reload automático
+        if (this.options.autoReloadInterval) this.startAutoReload(this.options.autoReloadInterval, stopId);
       },
       error: (error) => {
         console.error("ERROR", error);

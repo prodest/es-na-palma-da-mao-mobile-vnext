@@ -9,6 +9,7 @@ import { VehiclesQuery, Vehicle, VehiclesService, BusStopsQuery, BusStopsService
 import { ApiCeturbV2Service } from '../../providers';
 import { interval } from 'rxjs/observable/interval';
 
+const CINCO_MINUTOS = 5*60*1000;
 
 /**
  * Generated class for the TranscolOnlineRealTimePage page.
@@ -63,7 +64,7 @@ export class TranscolOnlineRealTimePage {
 
     // quando o ponto mais próximo muda, atualizamos a Store com a nova referência
     this.nearestStopSubscription = this.nearestStopId$.subscribe(
-      (stopId: number) => this.vehiclesService.updateVehicles(stopId, {autoReload: true})
+      (stopId: number) => this.vehiclesService.updateVehicles(stopId, {autoReloadInterval: 30})
     );
 
     // condiciona a exibição do Loader ao loading da VehiclesStore
@@ -73,7 +74,12 @@ export class TranscolOnlineRealTimePage {
 
     // somente veículos que aparecem nas estimativas dos próximos 20 minutos (expectedVehicles) são exibidos ao usuário
     this.vehicles$ = this.vehiclesQuery.selectAll({
-      filterBy: (vehicle: Vehicle) => (this.expectedVehicles.includes(vehicle.rotulo.toString()))
+      filterBy: (vehicle: Vehicle) => {
+        return ( 
+          this.expectedVehicles.includes(vehicle.rotulo.toString()) && 
+          Date.now() - vehicle.datahora < CINCO_MINUTOS
+        );
+      }
     });
   }
 
