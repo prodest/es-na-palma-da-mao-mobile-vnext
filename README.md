@@ -28,8 +28,8 @@ Essas são as principais ferramentas, *frameworks* e *libraries* que dão suport
 ## [Typescript](https://www.typescriptlang.org/)
 TypeScript é uma linguagem para desenvolvimento JavaScript em larga escala. 
 Com TypeScript podemos escrever código utilizando uma estrutura fortemente tipada e ter este código compilado para JavaScript puro. 
-Nem todas as features do ES2105 já são suportados pelos browsers. TypeScript permite desfrutar de todas as novas características da linguage hoje, 
-covertendo código ES2105 em código equivalente em ES5. Qualquer navegador. Qualquer host.
+Nem todas as features do ES2105 já são suportados pelos browsers. TypeScript permite desfrutar de todas as novas características da linguagem hoje, 
+covertendo código ES2015 em código equivalente em ES5. Qualquer navegador. Qualquer host.
 
 ## [Angular](https://angular.io)
 Angular é um framework estrutural para aplicações web dinâmicas.

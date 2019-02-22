@@ -1,0 +1,42 @@
+<!--
+  Generated template for the TranscolOnlineRealTimePage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+  <ion-navbar>
+    <ion-buttons left>
+      <button ion-button
+              icon-only
+              (click)="navCtrl.pop()">
+        <ion-icon name="arrow-back"></ion-icon>
+      </button>
+    </ion-buttons>
+    <ion-title>Ônibus perto de você</ion-title>
+    <ion-buttons end>
+      <button ion-button
+          icon-only
+          (click)="updateVehicles()">
+        <ion-icon name="refresh"></ion-icon>
+      </button>
+    </ion-buttons>
+  </ion-navbar>
+</ion-header>
+
+
+<ion-content padding>
+  <stop-summary
+    [stop]="((nearestStop$ | async) | busStopAdapter)"
+  ></stop-summary>
+  <ion-list>
+    <ion-item *ngFor="let vehicle of vehicles$ | async">
+      <h2>{{vehicle.linha.slice(0,3)}} - {{vehicle.bandeira}}</h2>
+      <h4>
+        {{ vehicle.distancia | distanceFormat }}
+      </h4>
+      <!-- <h4>{{ vehicle.passou ? 'passou' : 'não passou' }}</h4> -->
+      <h3>Veículo: {{vehicle.rotulo}}</h3>
+    </ion-item>
+  </ion-list>
+</ion-content>
