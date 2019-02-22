@@ -130,14 +130,6 @@ export class TranscolOnlineRealTimePage {
   }
 
   /**
-   * Atualiza os veículos esperados e a Store.
-   */
-  private updateVehicles() {
-    this.updateExpectedVehicles();
-    this.vehiclesService.updateVehicles(this.busStopsQuery.getActiveId() as number);
-  }
-
-  /**
    * Atualiza conjunto de veículos presentes nas estimativas dos próximos 20 minutos.
    */
   private updateExpectedVehicles() {
