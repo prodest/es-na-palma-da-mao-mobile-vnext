@@ -16,6 +16,8 @@ export const dev: Environment = {
     detranInternetBanking: process.env.API_DETRAN_INTERNET_BANKING_URL || 'https://api.es.gov.br/api-detran-debitos',
     dio: process.env.API_DIO_URL || 'https://api.es.gov.br/developers/dio',
     ceturb: process.env.API_CETURB_URL || 'https://api.es.gov.br/developers/ceturb',
+    ceturbv2: process.env.API_CETURBV2_URL || 'https://api.es.gov.br/transcol',
+    realtime: process.env.API_REALTIME_URL || 'https://api.es.gov.br/realtime',
     cbmes: process.env.API_CBMES_URL || 'https://api.es.gov.br/developers/cbmes',
     push: process.env.API_PUSH_URL || 'https://api.es.gov.br/developers/push/api/v1/',
     espm: process.env.API_ESPM_URL || 'https://api.es.gov.br/developers/espm',
