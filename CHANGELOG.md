@@ -2,6 +2,50 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+<a name="5.5.0"></a>
+# [5.5.0](https://github.com/prodest/es-na-palma-da-mao-mobile-vnext/compare/v5.4.7...v5.5.0) (2019-02-22)
+
+
+### Bug Fixes
+
+* **loading:** Corrigido bug dos N loaders. ([6118ed8](https://github.com/prodest/es-na-palma-da-mao-mobile-vnext/commit/6118ed8))
+* **realtime:** alterando ordem do export no index ([c0e3449](https://github.com/prodest/es-na-palma-da-mao-mobile-vnext/commit/c0e3449))
+* **realtime:** melhorando tratamento do gps desligado ([c5bb553](https://github.com/prodest/es-na-palma-da-mao-mobile-vnext/commit/c5bb553))
+* **realtime:** removendo console log e corrigindo docs ([f1ebcca](https://github.com/prodest/es-na-palma-da-mao-mobile-vnext/commit/f1ebcca))
+* **realtime:** removendo texto "passou" / "nao passou" ([a328781](https://github.com/prodest/es-na-palma-da-mao-mobile-vnext/commit/a328781))
+
+
+### Features
+
+* **apiceturbv2:** Add métodos pra obter previsões com e sem intervalo ([8a267b3](https://github.com/prodest/es-na-palma-da-mao-mobile-vnext/commit/8a267b3))
+* **distance-pipe:** Criando pipe pra formatar distância. ([598b961](https://github.com/prodest/es-na-palma-da-mao-mobile-vnext/commit/598b961))
+* **loading:** Configurando loading vinculado à Store ([433b0eb](https://github.com/prodest/es-na-palma-da-mao-mobile-vnext/commit/433b0eb))
+* **provider-realtime:** Provider consumindo da API mockada ([4024489](https://github.com/prodest/es-na-palma-da-mao-mobile-vnext/commit/4024489))
+* **providers:** usando variáveis de ambiente ([f85d56f](https://github.com/prodest/es-na-palma-da-mao-mobile-vnext/commit/f85d56f))
+* **realtime:** app consumindo api ([167c0ff](https://github.com/prodest/es-na-palma-da-mao-mobile-vnext/commit/167c0ff))
+* **realtime:** atualizando promises e TODOs ([d1046dc](https://github.com/prodest/es-na-palma-da-mao-mobile-vnext/commit/d1046dc))
+* **realtime:** Componente de view concluido, usando dados mockados no provider ([a957943](https://github.com/prodest/es-na-palma-da-mao-mobile-vnext/commit/a957943))
+* **realtime:** console limpo, html atualizado, vehicle atualizado ([5144ecf](https://github.com/prodest/es-na-palma-da-mao-mobile-vnext/commit/5144ecf))
+* **realtime:** Data Store de pontos de ônibus ([ea62938](https://github.com/prodest/es-na-palma-da-mao-mobile-vnext/commit/ea62938))
+* **realtime:** Data Store de veiculos realtime ([97f8539](https://github.com/prodest/es-na-palma-da-mao-mobile-vnext/commit/97f8539))
+* **realtime:** Exibindo informações do ponto na tela realtime ([ce283c2](https://github.com/prodest/es-na-palma-da-mao-mobile-vnext/commit/ce283c2))
+* **realtime:** Filtrando ônibus que passam em 20 minutos. ([e15bfe0](https://github.com/prodest/es-na-palma-da-mao-mobile-vnext/commit/e15bfe0))
+* **realtime:** Filtro de validade dos dados e refactor no updatevehicle ([1c70a05](https://github.com/prodest/es-na-palma-da-mao-mobile-vnext/commit/1c70a05))
+* **realtime:** Implementando o upsert na store com passou/não passou ([b4c03ad](https://github.com/prodest/es-na-palma-da-mao-mobile-vnext/commit/b4c03ad))
+* **realtime:** Incorporando ignição à lógica do update vehicles ([cce3bc3](https://github.com/prodest/es-na-palma-da-mao-mobile-vnext/commit/cce3bc3))
+* **realtime:** Refatoração das Stores e page do realtime ([4bace95](https://github.com/prodest/es-na-palma-da-mao-mobile-vnext/commit/4bace95))
+* **realtime:** Refatorando VehiclesService ([20833fa](https://github.com/prodest/es-na-palma-da-mao-mobile-vnext/commit/20833fa))
+* **realtime:** Transcol online real time page ([5d385b8](https://github.com/prodest/es-na-palma-da-mao-mobile-vnext/commit/5d385b8))
+* **realtime:** Transcol online real time service provider ([d072eb4](https://github.com/prodest/es-na-palma-da-mao-mobile-vnext/commit/d072eb4))
+* **realtime:** Tratando erro de localização desativada. ([968298a](https://github.com/prodest/es-na-palma-da-mao-mobile-vnext/commit/968298a))
+* **realtime:** tratando erro do 504 da api realtime ([0878981](https://github.com/prodest/es-na-palma-da-mao-mobile-vnext/commit/0878981))
+* **transcol-online:** Adicionando informação de distância às previsões. ([2407c03](https://github.com/prodest/es-na-palma-da-mao-mobile-vnext/commit/2407c03))
+* **vehicles-service:** Criando método para limpar store. ([0745609](https://github.com/prodest/es-na-palma-da-mao-mobile-vnext/commit/0745609))
+* **vehicles-store-reload:** Criando mecanismo de autoload no Service ([14a7dda](https://github.com/prodest/es-na-palma-da-mao-mobile-vnext/commit/14a7dda))
+* **vehiclesQuery:** configurando SortBy distancia ([7e27cdc](https://github.com/prodest/es-na-palma-da-mao-mobile-vnext/commit/7e27cdc))
+
+
+
 <a name="5.4.7"></a>
 ## [5.4.7](https://github.com/prodest/es-na-palma-da-mao-mobile-vnext/compare/v5.4.6...v5.4.7) (2019-02-18)
 
