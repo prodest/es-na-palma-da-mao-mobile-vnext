@@ -41,7 +41,6 @@
         <hook src="scripts/resolve-project-properties-dependencies.sh" type="before_build" />
         <hook src="scripts/resolve-project-properties-dependencies.sh" type="before_run" />
         <hook src="scripts/copy-plugins-from-node_modules.js" type="before_platform_add" />
-        <hook src="scripts/manually-set-plugin-params.sh" type="before_platform_add" />
         <hook src="scripts/copy_resource_files.js" type="after_prepare" />
         <config-file parent="/resources" target="./res/values/strings.xml">
             <string name="fb_app_id">926428880739042</string>
@@ -134,10 +133,6 @@
     <plugin name="phonegap-plugin-barcodescanner" spec="^7.1.2">
         <variable name="ANDROID_SUPPORT_V4_VERSION" value="27.+" />
     </plugin>
-    <plugin name="cordova-plugin-facebook4" spec="^1.10.1">
-        <variable name="APP_ID" value="926428880739042" />
-        <variable name="APP_NAME" value="Acesso Cidadão" />
-    </plugin>
     <plugin name="phonegap-plugin-push" spec="^2.2.3">
         <variable name="ANDROID_SUPPORT_V13_VERSION" value="27.+" />
         <variable name="FCM_VERSION" value="11.8.0" />
@@ -156,6 +151,10 @@
     </plugin>
     <plugin name="cordova-plugin-document-viewer" spec="^0.9.10" />
     <plugin name="cordova-plugin-file" spec="^6.0.1" />
+    <plugin name="cordova-plugin-facebook4" spec="^1.10.1">
+        <variable name="APP_ID" value="926428880739042" />
+        <variable name="APP_NAME" value="Acesso Cidadão" />
+    </plugin>
     <engine name="browser" spec="^5.0.4" />
-    <engine name="android" spec="~7.1.4" />
+    <engine name="android" spec="7.1.4" />
 </widget>

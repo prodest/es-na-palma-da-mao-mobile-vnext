@@ -26,8 +26,6 @@ import { IonicApp, IonicErrorHandler, IonicModule } from 'ionic-angular';
 import * as moment from 'moment';
 import { DocumentViewer } from '@ionic-native/document-viewer';
 
-
-
 import { AboutProviders } from './about/providers';
 import { ESPMComponent } from './app.component';
 import { CalendarProviders } from './calendar/providers';

@@ -4,9 +4,10 @@ import { Debit, Vehicle } from '../../model';
 import { AlertController, LoadingController, ToastController, Loading } from 'ionic-angular';
 import { DetranApiService } from '../../providers';
 import { Clipboard } from '@ionic-native/clipboard';
-import { FileOpener } from '@ionic-native/file-opener';
-import { File } from '@ionic-native/file/ngx';
-// declare var cordova: any;
+//import { FileOpener } from '@ionic-native/file-opener';
+import { DocumentViewer } from '@ionic-native/document-viewer';
+//import { File } from '@ionic-native/file/ngx';
+//declare var cordova: any;
 
 @Component({
   selector: 'espm-debits',
@@ -20,9 +21,10 @@ export class DebitsComponent {
     private loadingCtrl: LoadingController,
     private clipboard: Clipboard,
     private toastCtrl: ToastController,
-    private fileOpener: FileOpener,    
-    //private platform: Platform,
-    private file: File,
+    //private opener: FileOpener,    
+    //private platform: Platform,    
+    //private file: File,
+    private document: DocumentViewer,
   ) {}  
 
   @Input() vehicle: Vehicle;
@@ -30,48 +32,33 @@ export class DebitsComponent {
   ids = [];
   loading: Loading;
 
-  // saveAndOpenPdf(pdf: string, filename: string) { 
-  //   this.showGRUCode('writeDirectory', 'Directory');       
-  //   const writeDirectory = this.platform.is('ios') ? cordova.file.dataDirectory : cordova.file.externalDataDirectory;
-  //   this.showGRUCode(writeDirectory, 'Directory');
+  saveAndOpenPdf(pdf: string, filename: string) {
+    //const writeDirectory = this.platform.is('ios') ? cordova.file.documentsDirectory : cordova.file.dataDirectory;
+    this.dismissLoading()
+    this.document.viewDocument('http://www.africau.edu/images/default/sample.pdf', 'application/pdf', {})
     
-  //   cordova.file.writeFile(writeDirectory, filename, this.convertBase64ToBlob(pdf, 'application/pdf'), {replace: true})    
-  //     .then(() => {
-        
-  //       this.dismissLoading();
-  //       this.opener.open(writeDirectory + filename, 'application/pdf')
-  //         .catch(() => {
-  //           console.log('Error opening pdf file');
-  //           this.dismissLoading()
-  //         });
-  //     })
-  //     .catch(() => {
-        
-  //       console.error('Error writing pdf file');
-  //       this.dismissLoading()
-  //     });
-  // }
+  }
 
-  // convertBase64ToBlob(b64Data, contentType): Blob {
-  //   contentType = contentType || '';
-  //   const sliceSize = 512;
-  //   b64Data = b64Data.replace(/^[^,]+,/, '');
-  //   b64Data = b64Data.replace(/\s/g, '');
-  //   const byteCharacters = window.atob(b64Data);
-  //   const byteArrays = [];
-  //   for (let offset = 0; offset < byteCharacters.length; offset += sliceSize) {
-  //     const slice = byteCharacters.slice(offset, offset + sliceSize);
-  //     const byteNumbers = new Array(slice.length);
-  //     for (let i = 0; i < slice.length; i++) {
-  //       byteNumbers[i] = slice.charCodeAt(i);
-  //     }
-  //     const byteArray = new Uint8Array(byteNumbers);
-  //     byteArrays.push(byteArray);
-  //   }
-  //   return new Blob(byteArrays, { type: contentType });
-  // }
+  convertBase64ToBlob(b64Data, contentType): Blob {
+    contentType = contentType || '';
+    const sliceSize = 512;
+    b64Data = b64Data.replace(/^[^,]+,/, '');
+    b64Data = b64Data.replace(/\s/g, '');
+    const byteCharacters = window.atob(b64Data);
+    const byteArrays = [];
+    for (let offset = 0; offset < byteCharacters.length; offset += sliceSize) {
+      const slice = byteCharacters.slice(offset, offset + sliceSize);
+      const byteNumbers = new Array(slice.length);
+      for (let i = 0; i < slice.length; i++) {
+        byteNumbers[i] = slice.charCodeAt(i);
+      }
+      const byteArray = new Uint8Array(byteNumbers);
+      byteArrays.push(byteArray);
+    }
+    return new Blob(byteArrays, { type: contentType });
+  }
 
-  saveAndOpenPdf(pdf: string, filename: string){
+  /*saveAndOpenPdf(pdf: string, filename: string){
 
     let downloadPDF: any = pdf;
     let base64pdf = downloadPDF;
@@ -84,10 +71,10 @@ export class DebitsComponent {
     }
 
     var blobPdf = new Blob([view], { type: "application/pdf" });
-    this.file.writeFile(this.file.externalRootDirectory, filename, blobPdf, { replace: true })
+    cordova.file.writeFile(cordova.file.externalRootDirectory, filename, blobPdf, { replace: true })
       .then(res => {
         console.log('wres', res);
-        this.fileOpener.open(res.toInternalURL(), 'application/pdf').then((ores) => {
+        cordova.fileOpener.open(res.toInternalURL(), 'application/pdf').then((ores) => {
           console.log('ores', ores)
         }).catch(err => {
           console.log('open error');
@@ -96,7 +83,7 @@ export class DebitsComponent {
         console.log('save error');
       });
   }
-  
+  */
   
   
   generateBillet = () => {
@@ -110,7 +97,8 @@ export class DebitsComponent {
       this.dismissLoading();
       console.log('GUIA_PDF >>>>>> ', req["guiaPDF"]);
       console.log("guia_" + String(Date.now()) + ".pdf");
-      this.saveAndOpenPdf(req["guiaPDF"], "guia_" + String(Date.now()) + ".pdf")
+      console.log("Info", req["itensGuia"][0]);      
+      this.saveAndOpenPdf(req["guiaPDF"], "guia_" + String(Date.now()) + ".pdf");
       /*try {        
         this.saveAndOpenPdf(req["guiaPDF"], String(Date.now() + ".pdf"))
         this.showGRUCode(req["itensGuia"][0]["linhaDigitavel"], "Valor: " + this.getFormattedPrice(req["itensGuia"][0]["valorGuia"]))        
