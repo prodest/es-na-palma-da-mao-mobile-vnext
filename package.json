@@ -102,7 +102,6 @@
     "angular2-text-mask": "^8.0.2",
     "chart.js": "^2.7.2",
     "cordova-android": "^7.1.1",
-    "cordova-browser": "5.0.4",
     "cordova-clipboard": "^1.2.1",
     "cordova-ios": "^4.5.5",
     "cordova-plugin-android-permissions": "^1.0.0",
@@ -243,8 +242,7 @@
       "cordova-plugin-geolocation": {}
     },
     "platforms": [
-      "android",
-      "browser"
+      "android"
     ]
   }
 }

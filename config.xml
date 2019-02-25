@@ -66,6 +66,7 @@
         <splash density="port-xxxhdpi" src="resources/android/splash/drawable-port-xxxhdpi-screen.png" />
     </platform>
     <platform name="ios">
+        <hook src="scripts/copy-plugins-from-node_modules.js" type="before_platform_add" />
         <allow-intent href="itms:*" />
         <allow-intent href="itms-apps:*" />
         <edit-config file="*-Info.plist" mode="merge" target="NSCameraUsageDescription">
@@ -148,7 +149,6 @@
     <plugin name="cordova-plugin-file-opener2" spec="^2.1.0" />
     <plugin name="cordova-plugin-file" spec="^6.0.1" />
     <engine name="android" spec="^7.1.1" />
-    <engine name="browser" spec="5.0.4" />
     <plugin name="cordova-plugin-geolocation" spec="4.0.1">
         <variable name="GEOLOCATION_USAGE_DESCRIPTION" value="O app precisa de acesso a sua localização para poder prover uma melhor experiências na consulta de transporte público." />
     </plugin>
