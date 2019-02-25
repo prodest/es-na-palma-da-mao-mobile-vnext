@@ -3,7 +3,7 @@ stages:
   - publish
   
 cache:
-  key: ${CI_COMMIT_REF_SLUG}
+  key: npm-cache-v1
   paths:
     - node_modules
 
