@@ -91,6 +91,7 @@
     "@ionic-native/geolocation": "^4.18.0",
     "@ionic-native/google-plus": "^4.9.2",
     "@ionic-native/in-app-browser": "^4.4.2",
+    "@ionic-native/ionic-webview": "^5.2.0",
     "@ionic-native/local-notifications": "^4.11.0",
     "@ionic-native/push": "^4.10.1",
     "@ionic-native/social-sharing": "^4.6.0",
