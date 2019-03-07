@@ -70,7 +70,6 @@ export class ConcursosPage {
       return valor;
       }
   }
-
   /**
    *
    */

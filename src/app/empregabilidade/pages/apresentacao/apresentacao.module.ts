@@ -3,7 +3,7 @@ import { IonicPageModule } from 'ionic-angular';
 import { Apresentacao  } from './apresentacao';
 
 @NgModule({
-  declarations: [
+  declarations:[
     Apresentacao ,
   ],
   imports: [

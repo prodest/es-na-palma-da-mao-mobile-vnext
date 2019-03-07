@@ -2,23 +2,19 @@ espm-dt-concurso-page {
   ion-item-divider ion-icon[item-start] {
     font-size: 2.5rem;
   }
-
   .item ion-icon[item-start] + .item-inner {
     margin-left: 0;
   }
   ._css{
     background: linear-gradient(45deg, red 50%, #208baa 50%);
     height: 2px;
-   
   }
   .title{
      text-align: center;
-    
   }
   .toolbar-background, .toolbar-title{
     background-color: #003aab;  
-    
-}
+    }
 .botao_classificados{
   position: fixed;
 	float: bottom;
@@ -33,7 +29,6 @@ espm-dt-concurso-page {
   font-weight: bold;
   width: 90%;
   height: 70px ;
- 
 }
 ion-label {
   font-size: 20px;

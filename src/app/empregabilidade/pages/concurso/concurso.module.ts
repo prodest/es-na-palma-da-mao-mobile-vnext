@@ -8,7 +8,7 @@ import { HttpClientModule } from '@angular/common/http';
 
 
 @NgModule({
-  declarations: [ConcursoPage],
+  declarations: [ ConcursoPage ],
   imports: [DateFormatPipeModule, IonicPageModule.forChild(ConcursoPage),HttpClientModule], 
   
 })

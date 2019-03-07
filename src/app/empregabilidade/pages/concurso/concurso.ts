@@ -31,8 +31,6 @@ export class ConcursoPage {
   ionViewWillLoad() {
     this.getConcurso(this.navParams.data.id);
   }
-
-  
   /**
    *
    */
@@ -53,14 +51,4 @@ export class ConcursoPage {
   showClassificados(concurso: Concurso) {
    
     this.navCtrl.push('ClassificacaoPage', { concurso });
-  }
-
-  openPage() {
-   
-    this.navCtrl.push('Home2Page');
-  }
-
-  
-
-  
-}
+  }}

@@ -15,5 +15,4 @@ export class Apresentacao {
   open() {
     this.navCtrl.push('ConcursosPage');
   }
-
 }
