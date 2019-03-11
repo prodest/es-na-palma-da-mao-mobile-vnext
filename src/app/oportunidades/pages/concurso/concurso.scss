@@ -9,4 +9,32 @@ espm-dt-concurso-page {
   #not-founded {
     color: rgb(240, 162, 162);
   }
+  ._css{
+    background: linear-gradient(45deg, red 50%, #208baa 50%);
+    height: 2px;
+  }
+  .title{
+     text-align: center;
+  }
+  .toolbar-background, .toolbar-title{
+    background-color: #003aab;  
+    }
+  .botao_classificados{
+    position: fixed;
+    float: bottom;
+    bottom: 25px;
+    right: 15px ;
+    left: 15px ;
+    z-index: 100;
+    background-color: #002c80;
+    color:white;
+    border-radius: 5px;
+    text-align: center;
+    font-weight: bold;
+    width: 90%;
+    height: 70px ;
+  }
+  ion-label {
+    font-size: 20px;
+  }
 }
