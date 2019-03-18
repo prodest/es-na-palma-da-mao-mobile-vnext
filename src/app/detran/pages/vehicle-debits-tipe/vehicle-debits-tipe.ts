@@ -4,16 +4,23 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { Vehicle, Debit } from '../../model';
 
 @IonicPage({
-  segment: 'detran/veiculos/:plate/debitos'
+  segment: 'detran/veiculos/:plate/debitos-tipo'
 })
 @Component({
-  selector: 'page-vehicle-debits',
-  templateUrl: 'vehicle-debits.html'
+  selector: 'page-vehicle-debits-tipe',
+  templateUrl: 'vehicle-debits-tipe.html'
 })
-export class VehicleDebitsPage {
+export class VehicleDebitsTipePage {
   debits: Debit[];
   vehicle: Vehicle;
-
+  botoes = [
+    {nome:'Licenciamento',tipo:'LICENCIAMENTOATUAL'},
+    {nome:'IPVA',tipo:'IPVA'},
+    {nome:'DPVAT',tipo:'DPVAT'},
+    {nome:'IPVA anterior',tipo:'IPVAANTERIOR'},
+    {nome:'Licenciamento anterior',tipo:'LICENCIAMENTOANTERIOR'},
+    {nome:'DPVAT anterior',tipo:'DPVATANTERIOR'},
+  ]
   /**
    *
    *
@@ -43,4 +50,7 @@ export class VehicleDebitsPage {
     this.debits = this.params.get('debits');
   }
 
+  pushNext(tipe){
+    this.navCtrl.push('VehicleDebitsTipePage', { vehicle:this.vehicle, debitTipe:tipe })
+  }
 }

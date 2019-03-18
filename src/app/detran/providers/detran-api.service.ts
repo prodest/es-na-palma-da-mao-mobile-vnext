@@ -53,7 +53,7 @@ export class DetranApiService {
 
   getVehicleDebits = (vehicle: Vehicle): Observable<Debit[]> => {
     return this.http
-      .get<Debit[]>(`${this.env.api.detranInternetBanking}/veiculos/VAL1705/9876543210/debitos`)
+      .get<Debit[]>(`${this.env.api.detranInternetBanking}/veiculos/${vehicle.plate}/${vehicle.renavam}/debitos`)
       .pipe(share());
   };
 

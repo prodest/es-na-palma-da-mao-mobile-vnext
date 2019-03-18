@@ -112,22 +112,22 @@ export class VehiclesPage implements OnDestroy {
       );
   };
 
-  showDebits = (vehicle: Vehicle) => {
+  showDebitTipe = (vehicle: Vehicle) => {
     this.detran
       .getDebits(vehicle)
       .subscribe(
-        debits => this.ensureDebits(vehicle, debits),
+        debits => this.ensureDebitsTipe(vehicle, debits),
         error => console.log(error)
       );
   };
 
-  ensureDebits = (vehicle, debits) => {    
+  ensureDebitsTipe = (vehicle, debits) => {    
     debits.map((obj) => {
       obj.isChecked = false;
       return obj;
     })    
     if (debits[0].hasOwnProperty('descricaoServico')) {      
-      this.navCtrl.push('VehicleDebitsPage', { vehicle, plate: vehicle.plate, debits: debits })
+      this.navCtrl.push('VehicleDebitsTipePage', { vehicle, plate: vehicle.plate, debits: debits })
     } else {
       let alert = this.alertCtrl.create({
         title: 'Informações',
