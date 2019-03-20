@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 
 import { Vehicle, Debit } from '../../model';
+import { VehiclesService } from '../../providers';
 
 @IonicPage({
   segment: 'detran/veiculos/:plate/debitos-tipo'
@@ -25,7 +26,7 @@ export class VehicleDebitsTipePage {
    *
    *
    */
-  constructor(private navCtrl: NavController, private params: NavParams) {}
+  constructor(private navCtrl: NavController, private params: NavParams,private service: VehiclesService,) {}
 
   /**
    * ref: https://github.com/ionic-team/ionic/issues/11459#issuecomment-365224107
@@ -51,6 +52,12 @@ export class VehicleDebitsTipePage {
   }
 
   pushNext(tipe){
-    this.navCtrl.push('VehicleDebitsTipePage', { vehicle:this.vehicle, debitTipe:tipe })
+
+    this.service
+    .getDebitsTipe(this.vehicle,tipe)
+    .subscribe(
+      debits => this.navCtrl.push('VehicleDebitsPage', {vehicle:this.vehicle, plate: this.vehicle.plate, debits }),
+      error => console.log(error)
+    );
   }
 }

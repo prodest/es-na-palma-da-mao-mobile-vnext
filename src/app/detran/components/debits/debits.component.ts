@@ -148,7 +148,7 @@ export class DebitsComponent {
   }
 
   checkInstallment = (debit) => {
-    return debit.parcela > 0;
+    return (debit.parcela > 0 );
   }
 
   countDebits = () => {

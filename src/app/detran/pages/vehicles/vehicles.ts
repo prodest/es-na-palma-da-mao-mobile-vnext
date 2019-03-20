@@ -127,7 +127,7 @@ export class VehiclesPage implements OnDestroy {
       return obj;
     })    
     if (debits[0].hasOwnProperty('descricaoServico')) {      
-      this.navCtrl.push('VehicleDebitsTipePage', { vehicle, plate: vehicle.plate, debits: debits })
+      this.navCtrl.push('VehicleDebitsTipePage', { vehicle })
     } else {
       let alert = this.alertCtrl.create({
         title: 'Informações',
