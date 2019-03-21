@@ -15,18 +15,18 @@ export class VehicleDebitsTipePage {
   debits: Debit[];
   vehicle: Vehicle;
   botoes = [
-    {nome:'Licenciamento',tipo:'LICENCIAMENTOATUAL'},
-    {nome:'IPVA',tipo:'IPVA'},
-    {nome:'DPVAT',tipo:'DPVAT'},
-    {nome:'IPVA anterior',tipo:'IPVAANTERIOR'},
-    {nome:'Licenciamento anterior',tipo:'LICENCIAMENTOANTERIOR'},
-    {nome:'DPVAT anterior',tipo:'DPVATANTERIOR'},
-  ]
+    { nome: 'Todos', tipo: 'LICENCIAMENTOATUAL' },
+    { nome: 'IPVA', tipo: 'IPVA' },
+    { nome: 'DPVAT', tipo: 'DPVAT' },
+    { nome: 'IPVA anterior', tipo: 'IPVAANTERIOR' },
+    { nome: 'Todos anteriores', tipo: 'LICENCIAMENTOANTERIOR' },
+    { nome: 'DPVAT anterior', tipo: 'DPVATANTERIOR' }
+  ];
   /**
    *
    *
    */
-  constructor(private navCtrl: NavController, private params: NavParams,private service: VehiclesService,) {}
+  constructor(private navCtrl: NavController, private params: NavParams, private service: VehiclesService) {}
 
   /**
    * ref: https://github.com/ionic-team/ionic/issues/11459#issuecomment-365224107
@@ -51,13 +51,12 @@ export class VehicleDebitsTipePage {
     this.debits = this.params.get('debits');
   }
 
-  pushNext(tipe){
-
+  pushNext(tipe) {
     this.service
-    .getDebitsTipe(this.vehicle,tipe)
-    .subscribe(
-      debits => this.navCtrl.push('VehicleDebitsPage', {vehicle:this.vehicle, plate: this.vehicle.plate, debits }),
-      error => console.log(error)
-    );
+      .getDebitsTipe(this.vehicle, tipe)
+      .subscribe(
+        debits => this.navCtrl.push('VehicleDebitsPage', { vehicle: this.vehicle, plate: this.vehicle.plate, debits }),
+        error => console.log(error)
+      );
   }
 }
