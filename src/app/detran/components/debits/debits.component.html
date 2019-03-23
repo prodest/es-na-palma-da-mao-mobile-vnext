@@ -17,7 +17,9 @@
   <div *ngFor="let debit of debits">
     <ion-item>
       <ion-checkbox
-        (ionChange)="toggleItem($event, debit)"
+        ngModel
+        [ngModelOptions]="{ standalone: true }"
+        (ionChange)="toggleItem(debit)"
         checked="{{ debit.flag.checked }}"
         disabled="{{ debit.flag.disabled }}"
       ></ion-checkbox>

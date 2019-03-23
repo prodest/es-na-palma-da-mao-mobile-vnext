@@ -46,23 +46,24 @@ export class DebitsComponent {
     return new Blob(byteArrays, { type: contentType });
   }
 
-  toggleItem = ($event, debit: Debit) => {
-    console.log('EEEE', $event);
-    console.log('DEBIT', debit);
-    debit.flag.checked = $event.checked;
-    // if (debit.flag.checked === true && !this.ids.some(i => i === debit.idDebito)) {
-    //   this.ids.push(debit.idDebito);
-    // } else {
-    //   this.ids = this.ids.filter(id => id !== debit.idDebito);
-    // }
-    // console.log(this.ids);
-  };
-  adicionaDebitos() {
-    this.debits.map(debit => {
-      if (debit.flag.checked === true && !this.ids.some(id => id === debit.idDebito)) {
-        this.ids.push(debit.idDebito);
+  toggleItem = (debit: Debit) => {
+    debit.flag.checked = debit.flag.checked ? false : true;
+
+    this.debits = this.debits.map(mdebit => {
+      if (mdebit.idDebito === debit.idDebito) {
+        mdebit.flag.checked = debit.flag.checked;
+        console.log('Trocou>>>>', mdebit.idDebito);
       }
+      return mdebit;
     });
+
+    this.adicionaDebitos();
+  };
+
+  adicionaDebitos() {
+    this.ids = this.debits.filter(debit => debit.flag.checked);
+    this.ids = this.ids.map(id => id.idDebito);
+    console.log('ids>>>', this.ids);
   }
   generateBillet = () => {
     this.showLoading();
