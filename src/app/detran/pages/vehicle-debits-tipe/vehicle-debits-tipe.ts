@@ -55,7 +55,8 @@ export class VehicleDebitsTipePage {
     this.service
       .getDebitsTipe(this.vehicle, tipe)
       .subscribe(
-        debits => this.navCtrl.push('VehicleDebitsPage', { vehicle: this.vehicle, plate: this.vehicle.plate, debits }),
+        debits =>
+          this.navCtrl.push('VehicleDebitsPage', { tipe: tipe, vehicle: this.vehicle, plate: this.vehicle.plate, debits }),
         error => console.log(error)
       );
   }

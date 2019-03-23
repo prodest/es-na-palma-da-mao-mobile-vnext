@@ -5,7 +5,7 @@ import { Observable } from 'rxjs/Observable';
 import { share } from 'rxjs/operators';
 
 import { DriverLicense, DriverStatus, Ticket, Vehicle, VehiclesData, Debit } from '../model';
-
+import { InAppBrowser } from '@ionic-native/in-app-browser';
 /**
  *
  *
@@ -56,12 +56,14 @@ export class DetranApiService {
       .get<Debit[]>(`${this.env.api.detranInternetBanking}/veiculos/${vehicle.plate}/${vehicle.renavam}/debitos`)
       .pipe(share());
   };
-   /**
+  /**
    *
    */
-  getVehicleDebitsTipe = (vehicle: Vehicle, tipe:string): Observable<Debit[]> => {
+  getVehicleDebitsTipe = (vehicle: Vehicle, tipe: string): Observable<Debit[]> => {
     return this.http
-      .get<Debit[]>(`${this.env.api.detranInternetBanking}/veiculos/${vehicle.plate}/${vehicle.renavam}/debitos-tipo/${tipe}`)
+      .get<Debit[]>(
+        `${this.env.api.detranInternetBanking}/veiculos/${vehicle.plate}/${vehicle.renavam}/debitos-tipo/${tipe}`
+      )
       .pipe(share());
   };
   /**
@@ -82,19 +84,28 @@ export class DetranApiService {
       .pipe(share());
   };
 
-  generateGRU = (vehicle: Vehicle, ids: String): Observable<any> => {  
-    /*
+  generateGRU = (vehicle: Vehicle, ids: String[], tipo: string): Observable<any> => {
     if (ids) {
       return this.http
-        .get(`${this.env.api.detranInternetBanking}/veiculos/${vehicle.plate}/${vehicle.renavam.toString()}/debitos/guia/${ids}`)
+        .post(
+          `${this.env.api.detranInternetBanking}/veiculos/${
+            vehicle.plate
+          }/${vehicle.renavam.toString()}/debitos/guia/${tipo}`,
+          { lista: ids },
+          {}
+        )
         .pipe(share());
     } else {
       return this.http
         .get(`${this.env.api.detranInternetBanking}/veiculos/${vehicle.plate}/${vehicle.renavam.toString()}/debitos/guia`)
         .pipe(share());
-    }*/
-    return this.http
-      .get(`${this.env.api.detranInternetBanking}/veiculos/VAL1705/9876543210/debitos/guia/ipva/90162820,115949163,115949162`)
-      .pipe(share());
+    }
+    // return this.http
+    //   .get(`${this.env.api.detranInternetBanking}/veiculos/VAL1705/9876543210/debitos/guia/ipva/90162820,115949163,115949162`)
+    //   .pipe(share());
+  };
+  generatePDF = codigo => {
+    let browser = new InAppBrowser();
+    browser.create(`${this.env.api.detranInternetBanking}/veiculos/debitos/getGuia/${codigo}`, '_blank');
   };
 }
