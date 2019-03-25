@@ -9,15 +9,9 @@
       Gerar Guia
     </button>
   </ion-list-header>
-  <!-- <ion-item text-wrap>
-    <ion-label color="primary">
-      <strong>Não serão considerados Parcelamentos nesta versão do ESPM</strong>
-    </ion-label>
-  </ion-item> -->
   <div *ngFor="let debit of debits">
     <ion-item>
       <ion-checkbox
-        [name]="debit.idDebito"
         [disabled]="debit.flag.disabled"
         (ionChange)="adicionaDebitos()"
         [(ngModel)]="debit.flag.checked"

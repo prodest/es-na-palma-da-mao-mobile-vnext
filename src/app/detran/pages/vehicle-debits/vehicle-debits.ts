@@ -14,12 +14,7 @@ export class VehicleDebitsPage {
   debits: Debit[];
   vehicle: Vehicle;
   tipe: string;
-  tipoFlag = {
-    '0': { checked: false, disabled: false },
-    '1': { checked: true, disabled: true },
-    '2': { checked: true, disabled: false },
-    '3': { checked: false, disabled: false }
-  };
+
   /**
    *
    *
@@ -46,35 +41,13 @@ export class VehicleDebitsPage {
    */
   ionViewWillLoad() {
     this.vehicle = this.params.get('vehicle');
-    // this.debits = this.params.get('debits');
-    this.debits = this.tranforma_dados(this.params.get('debits'));
+    this.debits = this.params.get('debits')
     this.tipe = this.params.get('tipe');
   }
-  tranforma_dados(debitos: Debit[]) {
-    if (typeof debitos[0] === 'string') {
-      return [];
-    }
-    debitos.map(debito => {
-      debito = this.testaFlags(debito);
-      if (debito.parcela !== 0) {
-        debito.flag.disabled = true;
-      }
-      return;
-    });
-    return debitos;
+
+  
+  ionViewDidLoad(){
+   this.debits = this.debits.map(d => d)
   }
 
-  testaFlags(debito) {
-    debito.flag = debito.flagDpvatAnterior > -1 ? this.geraFlag(debito.flagDpvatAnterior) : debito.flag;
-    debito.flag = debito.flagDpvatExercicio > -1 ? this.geraFlag(debito.flagDpvatExercicio) : debito.flag;
-    debito.flag = debito.flagIpvaAnterior > -1 ? this.geraFlag(debito.flagIpvaAnterior) : debito.flag;
-    debito.flag = debito.flagIpvaExercicio > -1 ? this.geraFlag(debito.flagIpvaExercicio) : debito.flag;
-    debito.flag = debito.flagLicenciamentoAnterior > -1 ? this.geraFlag(debito.flagLicenciamentoAnterior) : debito.flag;
-    debito.flag = debito.flagLicenciamentoExercicio > -1 ? this.geraFlag(debito.flagLicenciamentoExercicio) : debito.flag;
-    debito.flag = debito.flagIpvaParcelamento > -1 ? this.geraFlag(debito.flagIpvaParcelamento) : debito.flag;
-    return debito;
-  }
-  geraFlag(flag) {
-    return this.tipoFlag[flag];
-  }
 }

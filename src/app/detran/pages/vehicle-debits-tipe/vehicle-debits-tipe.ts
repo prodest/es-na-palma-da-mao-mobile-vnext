@@ -15,11 +15,11 @@ export class VehicleDebitsTipePage {
   debits: Debit[];
   vehicle: Vehicle;
   botoes = [
-    { nome: 'Todos', tipo: 'LICENCIAMENTOATUAL' },
+    { nome: 'Licenciamento', tipo: 'LICENCIAMENTOATUAL' },
     { nome: 'IPVA', tipo: 'IPVA' },
     { nome: 'DPVAT', tipo: 'DPVAT' },
     { nome: 'IPVA anterior', tipo: 'IPVAANTERIOR' },
-    { nome: 'Todos anteriores', tipo: 'LICENCIAMENTOANTERIOR' },
+    { nome: 'Licenciamento anterior', tipo: 'LICENCIAMENTOANTERIOR' },
     { nome: 'DPVAT anterior', tipo: 'DPVATANTERIOR' }
   ];
   /**

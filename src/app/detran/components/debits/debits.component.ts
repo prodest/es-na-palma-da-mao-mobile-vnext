@@ -27,45 +27,11 @@ export class DebitsComponent {
   ids = [];
   loading: Loading;
 
-  convertBase64ToBlob(b64Data, contentType): Blob {
-    contentType = contentType || '';
-    const sliceSize = 512;
-    b64Data = b64Data.replace(/^[^,]+,/, '');
-    b64Data = b64Data.replace(/\s/g, '');
-    const byteCharacters = window.atob(b64Data);
-    const byteArrays = [];
-    for (let offset = 0; offset < byteCharacters.length; offset += sliceSize) {
-      const slice = byteCharacters.slice(offset, offset + sliceSize);
-      const byteNumbers = new Array(slice.length);
-      for (let i = 0; i < slice.length; i++) {
-        byteNumbers[i] = slice.charCodeAt(i);
-      }
-      const byteArray = new Uint8Array(byteNumbers);
-      byteArrays.push(byteArray);
-    }
-    return new Blob(byteArrays, { type: contentType });
-  }
-
-  toggleItem = (debit: Debit) => {
-    // debit.flag.checked = !debit.flag.checked;
-
-    // this.debits = this.debits.map(mdebit => {
-    //   if (mdebit.idDebito === debit.idDebito) {
-    //     mdebit.flag.checked = debit.flag.checked;
-    //     console.log('Trocou>>>>', mdebit.idDebito);
-    //   }
-    //   return mdebit;
-    // });
-
-    this.adicionaDebitos();
-  };
-
-
 
   adicionaDebitos() {
     this.ids = this.debits.filter(debit => !!debit.flag.checked).map(id => id.idDebito);
-    console.log('ids>>>', this.ids);
-    console.log('debits>>>', this.debits);
+    console.log(this.ids)
+    console.log(this.debits)
   }
   generateBillet = () => {
     this.showLoading();
@@ -132,6 +98,7 @@ export class DebitsComponent {
   ensureDebits = () => {
     return this.debits.filter(debit => !this.checkInstallment(debit));
   };
+
 
   checkInstallment = debit => {
     return debit.parcela > 0;

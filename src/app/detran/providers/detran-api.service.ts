@@ -106,6 +106,6 @@ export class DetranApiService {
   };
   generatePDF = codigo => {
     let browser = new InAppBrowser();
-    browser.create(`${this.env.api.detranInternetBanking}/veiculos/debitos/getGuia/${codigo}`, '_blank');
+    browser.create(`${this.env.api.detranInternetBanking}/veiculos/debitos/get-guia/${codigo}`, '_blank');
   };
 }
