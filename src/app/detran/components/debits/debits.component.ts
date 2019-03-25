@@ -47,23 +47,25 @@ export class DebitsComponent {
   }
 
   toggleItem = (debit: Debit) => {
-   // debit.flag.checked = debit.flag.checked ? false : true;
-/*
-    this.debits = this.debits.map(mdebit => {
-      if (mdebit.idDebito === debit.idDebito) {
-        mdebit.flag.checked = debit.flag.checked;
-        console.log('Trocou>>>>', mdebit.idDebito);
-      }
-      return mdebit;
-    });
-*/
+    // debit.flag.checked = !debit.flag.checked;
+
+    // this.debits = this.debits.map(mdebit => {
+    //   if (mdebit.idDebito === debit.idDebito) {
+    //     mdebit.flag.checked = debit.flag.checked;
+    //     console.log('Trocou>>>>', mdebit.idDebito);
+    //   }
+    //   return mdebit;
+    // });
+
     this.adicionaDebitos();
   };
 
+
+
   adicionaDebitos() {
-    this.ids = this.debits.filter(debit => debit.flag.checked);
-    this.ids = this.ids.map(id => id.idDebito);
+    this.ids = this.debits.filter(debit => !!debit.flag.checked).map(id => id.idDebito);
     console.log('ids>>>', this.ids);
+    console.log('debits>>>', this.debits);
   }
   generateBillet = () => {
     this.showLoading();

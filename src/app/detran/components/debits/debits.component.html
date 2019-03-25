@@ -17,12 +17,10 @@
   <div *ngFor="let debit of debits">
     <ion-item>
       <ion-checkbox
-        ngModel
         [name]="debit.idDebito"
-        [ngModelOptions]="{ standalone: true }"
-        (ionChange)="toggleItem(debit)"
-        checked="{{ debit.flag.checked }}"
-        disabled="{{ debit.flag.disabled }}"
+        [disabled]="debit.flag.disabled"
+        (ionChange)="adicionaDebitos()"
+        [(ngModel)]="debit.flag.checked"
       ></ion-checkbox>
       <ion-label
         >{{ debit.dataVencimento | shortDateFormat }} |
