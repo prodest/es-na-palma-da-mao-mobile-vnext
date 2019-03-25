@@ -47,8 +47,8 @@ export class DebitsComponent {
   }
 
   toggleItem = (debit: Debit) => {
-    debit.flag.checked = debit.flag.checked ? false : true;
-
+   // debit.flag.checked = debit.flag.checked ? false : true;
+/*
     this.debits = this.debits.map(mdebit => {
       if (mdebit.idDebito === debit.idDebito) {
         mdebit.flag.checked = debit.flag.checked;
@@ -56,7 +56,7 @@ export class DebitsComponent {
       }
       return mdebit;
     });
-
+*/
     this.adicionaDebitos();
   };
 
