@@ -1,22 +1,31 @@
-<ion-list *ngIf="debits && debits.length"
-          class="debits">
-    <ion-list-header>
-        {{ countDebits() }} débitos | selecionados<button ion-button item-right (click)="generateBillet()" ng-show="debits.length > 0">Gerar Guia</button>
-    </ion-list-header>
-    <ion-item text-wrap>        
-        <ion-label color="primary">
-            <strong>Não serão considerados parcalementos nesta versão do ESPM</strong>
-        </ion-label>            
+<ion-list *ngIf="debits && debits.length" class="debits">
+  <ion-list-header>
+    {{ countDebits() }} débitos | selecionados<button
+      ion-button
+      item-right
+      (click)="generateBillet()"
+      ng-show="debits.length > 0"
+    >
+      Gerar Guia
+    </button>
+  </ion-list-header>
+  <div *ngFor="let debit of debits">
+    <ion-item>
+      <ion-checkbox
+        [disabled]="debit.flag.disabled"
+        (ionChange)="adicionaDebitos()"
+        [(ngModel)]="debit.flag.checked"
+      ></ion-checkbox>
+      <ion-label
+        >{{ debit.dataVencimento | shortDateFormat }} |
+        <span color-secondary-fg>{{ debit.valorAtualizadoFranquia | currency: 'BRL':true:'1.2' }}</span> |
+        {{ debit.descricaoServico }}</ion-label
+      >
     </ion-item>
-    <ion-item *ngFor="let debit of ensureDebits()">                
-        <ion-checkbox [(ngModel)]="debit.isChecked" (ionChange)="addOrRemoveDebitsIdsToArray()"></ion-checkbox>
-        <ion-label>{{debit.dataVencimento | shortDateFormat}} | <span color-secondary-fg>{{debit.valorAtualizadoFranquia | currency:"BRL":true:"1.2" }}</span> | {{debit.descricaoServico}}</ion-label>        
-        
-    </ion-item>
+  </div>
 </ion-list>
-<ion-list *ngIf="debits && !debits.length"
-          class="debits">
-    <ion-list-header>
-        Nenhum débito encontrado
-    </ion-list-header>
+<ion-list *ngIf="debits && !debits.length" class="debits">
+  <ion-list-header>
+    Nenhum débito encontrado
+  </ion-list-header>
 </ion-list>

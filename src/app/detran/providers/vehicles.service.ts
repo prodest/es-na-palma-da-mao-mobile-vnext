@@ -109,11 +109,15 @@ export class VehiclesService {
     return this.api.getVehicleTickets(vehicle).pipe(finalize(this.dismissLoading));
   };
 
+
   getDebits = (vehicle: Vehicle): Observable<Debit[]> => {
     this.showLoading();
     return this.api.getVehicleDebits(vehicle).pipe(finalize(this.dismissLoading));
   };
-
+  getDebitsTipe = (vehicle: Vehicle, tipe:string): Observable<Debit[]> => {
+    this.showLoading();
+    return this.api.getVehicleDebitsTipe(vehicle, tipe).pipe(finalize(this.dismissLoading));
+  };
   /**
    *
    *
