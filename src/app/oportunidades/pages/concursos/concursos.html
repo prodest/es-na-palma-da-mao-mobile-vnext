@@ -11,10 +11,8 @@
   >
   </ion-searchbar>
   <ion-navbar hideBackButton>
-    <!-- <button ion-button
-            menuToggle>
-      <ion-icon name="menu"></ion-icon>
-    </button> -->
+      <button ion-button (click)="backPageOne()"><ion-icon name="md-arrow-back"></ion-icon></button>
+    
     <ion-title>CONCURSOS </ion-title>
   </ion-navbar>
 <div class="efeito_css"></div>
@@ -43,7 +41,6 @@
             </p>
             <concurso-status [status]="concurso.status"></concurso-status>
             <p>
-            <!-- <ion-icon class="star_css" name="star"></ion-icon> -->
             <ion-icon *ngIf="concurso.favorito" class="star_css" item-end name="md-star"></ion-icon>
       <ion-icon *ngIf="!concurso.favorito" class="star_css" item-end name="md-star-outline"></ion-icon>
       
