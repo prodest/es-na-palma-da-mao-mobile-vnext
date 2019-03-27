@@ -13,6 +13,6 @@ export class Apresentacao {
   }
 
   open() {
-    this.navCtrl.push('ConcursosPage');
+    this.navCtrl.setRoot('ConcursosPage');
   }
 }

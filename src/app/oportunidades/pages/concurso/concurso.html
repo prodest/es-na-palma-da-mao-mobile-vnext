@@ -8,7 +8,6 @@
       </button>
     </ion-buttons>
   </ion-navbar>
-  <div class="_css"></div>
 </ion-header>
 
 <ion-content>
@@ -27,11 +26,11 @@
       </ion-item>
     </ng-container>
     <button class="botao_classificados" *ngIf="concurso.liberarClassificacao"  no-lines (click)="showAreas(concurso)">
-        <ion-label>LISTA DE CLASSIFICADOS</ion-label>
-      </button>
-      <button *ngIf="!concurso.liberarClassificacao" ion-item no-lines>
-        <ion-label id="not-founded"></ion-label>
-      </button>
+      <ion-label>LISTA DE CLASSIFICADOS</ion-label>
+    </button>
+    <button *ngIf="!concurso.liberarClassificacao" ion-item no-lines>
+      <ion-label id="not-founded"></ion-label>
+    </button>
     <ion-item-divider *ngIf="concurso.anexos" color="light">
       <ion-icon name="attach" item-start></ion-icon>
       ANEXOS

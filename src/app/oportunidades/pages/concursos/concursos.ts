@@ -63,6 +63,12 @@ export class ConcursosPage {
       return this.normalize(concurso.orgao).includes(search) || this.normalize(concurso.descricao).includes(search);
     });
   };
+  /**
+   *  volta para pagina de apresentação
+   */
+  backPageOne(){
+    this.navCtrl.push('Apresentacao')
+  }
 
   /**
    *
