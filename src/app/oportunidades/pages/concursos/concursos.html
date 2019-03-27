@@ -1,5 +1,10 @@
 <ion-header color-primary-bg>
-  
+  <ion-navbar hideBackButton>
+    <button ion-button menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    <ion-title>CONCURSOS </ion-title>
+  </ion-navbar>
   <ion-searchbar
     placeholder="Pesquisar..."
     [showCancelButton]="true"
@@ -7,15 +12,8 @@
     [animated]="false"
     (ionInput)="search($event)"
     (ionClear)="clear($event)"
-    (ionCancel)="clear($event)"
-  >
+    (ionCancel)="clear($event)">
   </ion-searchbar>
-  <ion-navbar hideBackButton>
-      <button ion-button (click)="backPageOne()"><ion-icon name="md-arrow-back"></ion-icon></button>
-    
-    <ion-title>CONCURSOS </ion-title>
-  </ion-navbar>
-<div class="efeito_css"></div>
 </ion-header>
 
 <ion-content>
@@ -48,8 +46,6 @@
            
           </div>
         </div>
-      
-      
     </button>
   </ion-list>
   <ion-item *ngIf="filteredConcursos && !filteredConcursos.length" text-center no-lines id="not-founded">
