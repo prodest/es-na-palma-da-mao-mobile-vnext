@@ -28,7 +28,7 @@ export class VehiclesPage implements OnDestroy {
     private authQuery: AuthQuery,
     private navCtrl: NavController,
     private alertCtrl: AlertController,
-    private modalCtrl: ModalController
+    private modalCtrl: ModalController    
   ) {}
 
   /**
@@ -112,14 +112,38 @@ export class VehiclesPage implements OnDestroy {
       );
   };
 
-  showDebits = (vehicle: Vehicle) => {
+  showDebitTipe = (vehicle: Vehicle) => {
     this.detran
       .getDebits(vehicle)
       .subscribe(
-        debits => this.navCtrl.push('VehicleDebitsPage', { vehicle, plate: vehicle.plate, debits: debits }),
+        debits => this.ensureDebitsTipe(vehicle, debits),
         error => console.log(error)
       );
   };
+
+  ensureDebitsTipe = (vehicle, debits) => {    
+    debits.map((obj) => {
+      obj.isChecked = false;
+      return obj;
+    })    
+    if (debits[0].hasOwnProperty('descricaoServico')) {      
+      this.navCtrl.push('VehicleDebitsTipePage', { vehicle })
+    } else {
+      let alert = this.alertCtrl.create({
+        title: 'Informações',
+        message: debits[0],
+        buttons: [
+          {
+            text: 'Ok',
+            handler: () => {
+              return true;
+            }
+          }
+        ]
+      });
+      alert.present();
+    }
+  }
 
   /**
    *
