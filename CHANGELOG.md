@@ -2,6 +2,18 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+<a name="5.6.0"></a>
+# [5.6.0](https://github.com/prodest/es-na-palma-da-mao-mobile-vnext/compare/v5.5.6...v5.6.0) (2019-04-04)
+
+
+### Features
+
+* **debitos:** Tela de com tipos de debitos e download da guia em pdf ([84ff640](https://github.com/prodest/es-na-palma-da-mao-mobile-vnext/commit/84ff640))
+* **empregabilidade:** correçoes das breanchs ([d2cb069](https://github.com/prodest/es-na-palma-da-mao-mobile-vnext/commit/d2cb069))
+* **Empregabilidade:** correção das guidelines cores e botões ([f0cce3d](https://github.com/prodest/es-na-palma-da-mao-mobile-vnext/commit/f0cce3d))
+
+
+
 <a name="5.5.6"></a>
 ## [5.5.6](https://github.com/prodest/es-na-palma-da-mao-mobile-vnext/compare/v5.5.5...v5.5.6) (2019-02-25)
 
