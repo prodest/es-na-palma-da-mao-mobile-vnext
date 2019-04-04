@@ -1,10 +1,8 @@
 import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
-
 import { Debit, Vehicle } from '../../model';
 import { AlertController, LoadingController, ToastController, Loading } from 'ionic-angular';
 import { DetranApiService } from '../../providers';
 import { Clipboard } from '@ionic-native/clipboard';
-
 
 @Component({
   selector: 'espm-debits',
@@ -12,50 +10,66 @@ import { Clipboard } from '@ionic-native/clipboard';
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class DebitsComponent {
-
   constructor(
     private alertCtrl: AlertController,
     private api: DetranApiService,
     private loadingCtrl: LoadingController,
     private clipboard: Clipboard,
     private toastCtrl: ToastController,
-  ) { }
+  ) {}
+
   @Input() vehicle: Vehicle;
+  @Input() tipe: string;
   @Input() debits: Debit[];
-
-
-
+  ids = [];
   loading: Loading;
 
+
+  adicionaDebitos() {
+    this.ids = this.debits.filter(debit => !!debit.flag.checked).map(id => id.idDebito);
+    console.log(this.ids)
+    console.log(this.debits)
+  }
   generateBillet = () => {
     this.showLoading();
-    /* let ids = [];
-    for (let i = 0; i < this.debits.length; i++) {
-      ids.push(this.debits[i].idDebito)
-    }*/
-    // this.api.generateGRU(this.vehicle, ids).subscribe(req => {
-    this.api.generateGRU(this.vehicle).subscribe(req => {
+    this.adicionaDebitos();
+
+    this.api.generateGRU(this.vehicle, this.ids, this.tipe).subscribe(req => {
       this.dismissLoading();
       try {
-        this.showGRUCode(req["itensGuia"][0]["linhaDigitavel"])
+        this.showGRUCode(
+          req['itensGuia'][0]['codigoBarra'],
+          req['itensGuia'][0]['linhaDigitavel'],
+          'Valor: ' + this.getFormattedPrice(req['itensGuia'][0]['valorGuia'])
+        );
       } catch {
-        this.showGRUCode("Não foi possível recuperar o código de barras")
+        this.showGRUCode('', 'Não foi possível recuperar o código de barras', 'Código de barras');
       }
     });
-
   };
 
-  showGRUCode = (str) => {
+  getFormattedPrice(price: number) {
+    return new Intl.NumberFormat('pt-BR', { style: 'currency', currency: 'BRL' }).format(price);
+  }
+
+  showGRUCode = (codigo: string, str: string, title: string) => {
     let alert = this.alertCtrl.create({
-      title: 'Código de barras',
+      title: title,
       message: str,
       buttons: [
         {
-          text: 'Ok',
+          text: 'Baixar PDF',
+          handler: () => {
+            this.api.generatePDF(codigo);
+            return true;
+          }
+        },
+        {
+          text: 'Copiar',
           handler: () => {
             if (str.match(/\d+/g)) {
               this.clipboard.copy(str);
-              this.showMessage("Código de barras copiado!");
+              this.showMessage('Código de barras copiado!');
             }
             return true;
           }
@@ -63,15 +77,30 @@ export class DebitsComponent {
       ]
     });
     alert.present();
-  }
+  };
 
   totalAmount = () => {
-    let total = 0.0
+    let total = 0.0;
     for (let i = 0; i < this.debits.length; i++) {
-      total += Number(this.debits[i].valorAtualizadoFranquia)
+      if (!(this.debits[i].parcela > 0)) {
+        total += Number(this.debits[i].valorAtualizadoFranquia);
+      }
     }
     return total;
-  }
+  };
+
+  ensureDebits = () => {
+    return this.debits.filter(debit => !this.checkInstallment(debit));
+  };
+
+
+  checkInstallment = debit => {
+    return debit.parcela > 0;
+  };
+
+  countDebits = () => {
+    return this.ensureDebits().length;
+  };
 
   private showLoading = (message: string = 'Aguarde') => {
     if (this.loading) {

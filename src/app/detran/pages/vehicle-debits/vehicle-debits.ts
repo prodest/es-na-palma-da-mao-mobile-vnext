@@ -13,6 +13,7 @@ import { Vehicle, Debit } from '../../model';
 export class VehicleDebitsPage {
   debits: Debit[];
   vehicle: Vehicle;
+  tipe: string;
 
   /**
    *
@@ -40,6 +41,13 @@ export class VehicleDebitsPage {
    */
   ionViewWillLoad() {
     this.vehicle = this.params.get('vehicle');
-    this.debits = this.params.get('debits');
+    this.debits = this.params.get('debits')
+    this.tipe = this.params.get('tipe');
   }
+
+  
+  ionViewDidLoad(){
+   this.debits = this.debits.map(d => d)
+  }
+
 }

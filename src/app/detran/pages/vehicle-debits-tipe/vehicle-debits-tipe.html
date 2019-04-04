@@ -8,5 +8,5 @@
 </ion-header>
 
 <ion-content>
-  <espm-debits [vehicle]="vehicle" [debits]="debits" [tipe]="tipe"></espm-debits>
+    <ion-list><button ion-item *ngFor="let item of botoes" (click)="pushNext(item.tipo)" >{{ item.nome }}</button></ion-list>  
 </ion-content>
