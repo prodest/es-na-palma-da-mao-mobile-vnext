@@ -5,7 +5,6 @@ import { Observable } from 'rxjs/Observable';
 import { share } from 'rxjs/operators';
 
 import { DriverLicense, DriverStatus, Ticket, Vehicle, VehiclesData, Debit } from '../model';
-import { InAppBrowser } from '@ionic-native/in-app-browser';
 
 /**
  *
@@ -106,7 +105,6 @@ export class DetranApiService {
   };
 
   generatePDF = codigo => {
-    let browser = new InAppBrowser();
-    browser.create(`${this.env.api.detranInternetBanking}/veiculos/debitos/get-guia/${codigo}`, '_blank');
+    window.open(`${this.env.api.detranInternetBanking}/veiculos/debitos/get-guia/${codigo}`, '_system', 'location=yes');
   };
 }
