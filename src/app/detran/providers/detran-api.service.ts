@@ -17,7 +17,7 @@ export class DetranApiService {
    *
    *
    */
-  constructor(private http: HttpClient, @Inject(EnvVariables) private env: Environment) {}
+  constructor(private iab: InAppBrowser, private http: HttpClient, @Inject(EnvVariables) private env: Environment) {}
 
   /**
    *
@@ -106,7 +106,6 @@ export class DetranApiService {
   };
 
   generatePDF = codigo => {
-    let browser = new InAppBrowser();
-    browser.create(`${this.env.api.detranInternetBanking}/veiculos/debitos/get-guia/${codigo}`, '_blank');
+    this.iab.create(`${this.env.api.detranInternetBanking}/veiculos/debitos/get-guia/${codigo}`, '_system');
   };
 }
