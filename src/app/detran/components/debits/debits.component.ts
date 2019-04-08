@@ -3,6 +3,7 @@ import { Debit, Vehicle } from '../../model';
 import { AlertController, LoadingController, ToastController, Loading } from 'ionic-angular';
 import { DetranApiService } from '../../providers';
 import { Clipboard } from '@ionic-native/clipboard';
+import { finalize } from 'rxjs/operators';
 
 @Component({
   selector: 'espm-debits',
@@ -15,7 +16,7 @@ export class DebitsComponent {
     private api: DetranApiService,
     private loadingCtrl: LoadingController,
     private clipboard: Clipboard,
-    private toastCtrl: ToastController,
+    private toastCtrl: ToastController
   ) {}
 
   @Input() vehicle: Vehicle;
@@ -24,28 +25,28 @@ export class DebitsComponent {
   ids = [];
   loading: Loading;
 
-
   adicionaDebitos() {
     this.ids = this.debits.filter(debit => !!debit.flag.checked).map(id => id.idDebito);
-    console.log(this.ids)
-    console.log(this.debits)
   }
   generateBillet = () => {
     this.showLoading();
     this.adicionaDebitos();
 
-    this.api.generateGRU(this.vehicle, this.ids, this.tipe).subscribe(req => {
-      this.dismissLoading();
-      try {
-        this.showGRUCode(
-          req['itensGuia'][0]['codigoBarra'],
-          req['itensGuia'][0]['linhaDigitavel'],
-          'Valor: ' + this.getFormattedPrice(req['itensGuia'][0]['valorGuia'])
-        );
-      } catch {
-        this.showGRUCode('', 'Não foi possível recuperar o código de barras', 'Código de barras');
-      }
-    });
+    this.api
+      .generateGRU(this.vehicle, this.ids, this.tipe)
+      .pipe(finalize(this.dismissLoading))
+      .subscribe(req => {
+        this.dismissLoading();
+        try {
+          this.showGRUCode(
+            req['itensGuia'][0]['codigoBarra'],
+            req['itensGuia'][0]['linhaDigitavel'],
+            'Valor: ' + this.getFormattedPrice(req['itensGuia'][0]['valorGuia'])
+          );
+        } catch {
+          this.showGRUCode('', 'Não foi possível recuperar o código de barras', 'Código de barras');
+        }
+      });
   };
 
   getFormattedPrice(price: number) {
@@ -92,7 +93,6 @@ export class DebitsComponent {
   ensureDebits = () => {
     return this.debits.filter(debit => !this.checkInstallment(debit));
   };
-
 
   checkInstallment = debit => {
     return debit.parcela > 0;
