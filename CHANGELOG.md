@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+<a name="5.6.1"></a>
+## [5.6.1](https://github.com/prodest/es-na-palma-da-mao-mobile-vnext/compare/v5.6.0...v5.6.1) (2019-04-08)
+
+
+### Bug Fixes
+
+* **debits:** pdf download browser target ([daac3ef](https://github.com/prodest/es-na-palma-da-mao-mobile-vnext/commit/daac3ef))
+
+
+
 <a name="5.6.0"></a>
 # [5.6.0](https://github.com/prodest/es-na-palma-da-mao-mobile-vnext/compare/v5.5.6...v5.6.0) (2019-04-04)
 
