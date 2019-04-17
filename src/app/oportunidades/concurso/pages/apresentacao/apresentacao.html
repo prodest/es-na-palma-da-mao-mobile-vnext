@@ -1,0 +1,18 @@
+<ion-content>
+  <ion-slides pager>
+    <ion-slide class="apres_conc">
+      <ion-header>
+        <div>
+          <p class="styles_css">Concursos</p>
+        </div>
+        <div class="list_css"></div>
+        <p class="style">Encontre novos rumos para sua carreira</p>
+      </ion-header>
+    </ion-slide>
+    <ion-list>
+      <button ion-item class="botao_page" *ngFor="let item of botoes" (click)="open(item.pagina)">
+        {{ item.nome }}
+      </button>
+    </ion-list>
+  </ion-slides>
+</ion-content>

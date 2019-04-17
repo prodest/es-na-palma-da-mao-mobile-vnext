@@ -1,4 +1,4 @@
-import { ConcursosPageModule } from './pages/concurso/concurso.module';
+import { ConcursosPageModule } from './concurso/pages/concurso/concurso.module';
 
 export { ConcursosPageModule };
 

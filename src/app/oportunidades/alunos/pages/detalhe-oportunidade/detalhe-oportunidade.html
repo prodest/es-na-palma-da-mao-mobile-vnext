@@ -1,0 +1,42 @@
+<ion-header>
+  <ion-navbar>
+    <ion-title>{{ concurso?.nome }}</ion-title>
+    <ion-buttons end>
+      <button ion-button icon-only (click)="favoritar(concurso)">
+        <ion-icon name="md-star" *ngIf="concurso?.favorito"></ion-icon>
+        <ion-icon name="md-star-outline" *ngIf="!concurso?.favorito"></ion-icon>
+      </button>
+    </ion-buttons>
+  </ion-navbar>
+</ion-header>
+
+<ion-content>
+  <ion-list *ngIf="concurso" no-margin>
+    <ng-container *ngFor="let data of concurso.datas">
+      <ion-item-divider color="light" text-uppercase>
+        <ion-icon item-start name="calendar"></ion-icon>{{ data.nome }}
+      </ion-item-divider>
+      <ion-item *ngIf="data.inicio">
+        <ion-label>Início</ion-label>
+        <h4 item-end accent>{{ data.inicio | shortDateFormat }}</h4>
+      </ion-item>
+      <ion-item no-lines *ngIf="data.fim">
+        <ion-label>Fim</ion-label>
+        <h4 item-end accent>{{ data.fim | shortDateFormat }}</h4>
+      </ion-item>
+    </ng-container>
+    <button class="botao_classificados" *ngIf="concurso.liberarClassificacao" no-lines (click)="showAreas(concurso)">
+      <ion-label>LISTA DE CLASSIFICADOS</ion-label>
+    </button>
+    <button *ngIf="!concurso.liberarClassificacao" ion-item no-lines>
+      <ion-label id="not-founded"></ion-label>
+    </button>
+    <ion-item-divider *ngIf="concurso.anexos" color="light">
+      <ion-icon name="attach" item-start></ion-icon>
+      ANEXOS
+    </ion-item-divider>
+    <button ion-item *ngFor="let anexo of concurso.anexos" (click)="openLink(anexo.link)">
+      <p>{{ anexo.documento }}</p>
+    </button>
+  </ion-list>
+</ion-content>
