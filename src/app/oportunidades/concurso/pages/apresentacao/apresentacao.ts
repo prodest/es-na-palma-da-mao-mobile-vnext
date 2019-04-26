@@ -19,6 +19,6 @@ export class ApresentacaoPage {
     }
   ];
   open(pagina) {
-    this.navCtrl.setRoot(pagina);
+    this.navCtrl.push(pagina)
   }
 }

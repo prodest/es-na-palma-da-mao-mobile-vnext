@@ -1,6 +1,6 @@
 <ion-content>
   <ion-slides pager>
-    <ion-slide class="apres_conc">
+    <ion-slide >
       <ion-header>
         <div>
           <p class="styles_css">Concursos</p>
@@ -8,11 +8,21 @@
         <div class="list_css"></div>
         <p class="style">Encontre novos rumos para sua carreira</p>
       </ion-header>
-    </ion-slide>
-    <ion-list>
-      <button ion-item class="botao_page" *ngFor="let item of botoes" (click)="open(item.pagina)">
-        {{ item.nome }}
+      <button class="botao_page"  (click)="open(botoes[0].pagina)">
+        {{ botoes[0].nome }}
       </button>
-    </ion-list>
+    </ion-slide>
+    <ion-slide >
+      <ion-header>
+        <div>
+          <p class="styles_css">Cursos</p>
+        </div>
+        <div class="list_css"></div>
+        <p class="style">Encontre novos cursos</p>
+      </ion-header>
+        <button class="botao_page"  (click)="open(botoes[1].pagina)">
+          {{ botoes[1].nome }}
+        </button>
+    </ion-slide>
   </ion-slides>
 </ion-content>
