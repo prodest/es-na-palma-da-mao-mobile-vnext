@@ -3,10 +3,11 @@ import { Inject, Injectable } from '@angular/core';
 import { Environment, EnvVariables } from '@espm/core';
 import { Observable } from 'rxjs/Observable';
 import { Concurso } from '../model';
-import { share, finalize } from 'rxjs/operators';
+import { share, finalize, tap } from 'rxjs/operators';
 import { ConcursoFavorito } from '../model/concurso-favorito.mode';
 import { LoadingController, Loading } from 'ionic-angular';
 import { AlunosStore } from './alunos.store';
+import { Curso } from '../model/curso.model';
 
 /*
 *
@@ -32,6 +33,9 @@ export class AlunoService {
     return this.http.get<Concurso>(`${this.env.api.selecaoalunos}/${id}`).pipe(share());
   }
 
+  getCursos(link): Observable<Curso[]> {
+    return this.http.get<Curso[]>(`${link}`).pipe(share());
+  }
   /**
    *
    */
@@ -46,7 +50,6 @@ export class AlunoService {
     const concursos$ = this.getAllConcursos();
 
     concursos$.pipe(finalize(() => this.dismissLoading())).subscribe(concursos => {
-      concursos.map(c => (c.id = Math.round(Math.random() * 1000)));
       this.store.set(concursos);
     });
   };
@@ -54,8 +57,12 @@ export class AlunoService {
   /**
    *
    */
-  // private showMessage = (message: string) => this.toastCtrl.create({ message, duration: 4000 }).present();
-
+  loadConcurso = (id): void => {
+    this.showLoading();
+    this.getConcurso(id)
+      .pipe(finalize(() => this.dismissLoading()), tap(concurso => this.store.upsert(concurso.id, concurso)))
+      .subscribe();
+  };
   /**
    *
    *

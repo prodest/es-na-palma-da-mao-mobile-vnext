@@ -34,13 +34,13 @@ export class DetalheOportunidadePage implements OnDestroy {
    *
    */
   ionViewWillLoad() {
-    this.AlunoService.getConcurso(this.navParams.data.id);
-    this.AlunosQuery.selectEntity(this.navParams.data.id)
+    let id = this.navParams.data.id;
+    this.AlunosQuery.selectEntity(id)
       .pipe(takeUntil(this.destroyed$))
       .subscribe(concurso => {
         this.concurso = concurso;
-        console.log('aaaaa', this.concurso);
       });
+    this.AlunoService.loadConcurso(id);
   }
 
   /**

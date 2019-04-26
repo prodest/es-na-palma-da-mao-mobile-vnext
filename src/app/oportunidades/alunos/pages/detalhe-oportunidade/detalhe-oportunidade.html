@@ -12,17 +12,17 @@
 
 <ion-content>
   <ion-list *ngIf="concurso" no-margin>
-    <ng-container *ngFor="let data of concurso.datas">
+    <ng-container>
       <ion-item-divider color="light" text-uppercase>
-        <ion-icon item-start name="calendar"></ion-icon>{{ data.nome }}
+        <ion-icon item-start name="calendar"></ion-icon>{{ concurso.datas.nome }}
       </ion-item-divider>
-      <ion-item *ngIf="data.inicio">
+      <ion-item *ngIf="concurso.datas.inicio">
         <ion-label>Início</ion-label>
-        <h4 item-end accent>{{ data.inicio | shortDateFormat }}</h4>
+        <h4 item-end accent>{{ concurso.datas.inicio | shortDateFormat }}</h4>
       </ion-item>
-      <ion-item no-lines *ngIf="data.fim">
+      <ion-item no-lines *ngIf="concurso.datas.fim">
         <ion-label>Fim</ion-label>
-        <h4 item-end accent>{{ data.fim | shortDateFormat }}</h4>
+        <h4 item-end accent>{{ concurso.datas.fim | shortDateFormat }}</h4>
       </ion-item>
     </ng-container>
     <button class="botao_classificados" *ngIf="concurso.liberarClassificacao" no-lines (click)="showAreas(concurso)">

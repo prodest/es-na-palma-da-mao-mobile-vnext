@@ -3,7 +3,7 @@ import { DateFormatPipeModule } from '@espm/shared/pipes';
 import { IonicPageModule } from 'ionic-angular';
 
 import { ListaOportunidadesPage } from './lista-oportunidades';
-import { ConcursoStatusComponentModule } from '../../../concurso/components';
+import { ConcursoStatusComponentModule } from '../../../components';
 
 @NgModule({
   declarations: [ListaOportunidadesPage],
