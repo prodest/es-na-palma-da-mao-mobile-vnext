@@ -6,11 +6,13 @@ export class Concurso {
   id: ID;
   status: string;
   nome: string;
+  descricao: string;
   anoBase?: Date;
   categoria?: string;
   tipo?: string;
-  datas?: Datas[];
+  datas?: Datas;
   anexos?: Anexo[];
   favorito?: boolean;
-  cursos?: string | Curso[];
+  cursos?: string;
+  listaCursos?: Curso[];
 }

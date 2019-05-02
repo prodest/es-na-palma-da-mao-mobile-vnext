@@ -3,7 +3,7 @@ import { Inject, Injectable } from '@angular/core';
 import { Environment, EnvVariables } from '@espm/core';
 import { Observable } from 'rxjs/Observable';
 import { Concurso } from '../model';
-import { share, finalize, tap } from 'rxjs/operators';
+import { share, finalize, map } from 'rxjs/operators';
 import { ConcursoFavorito } from '../model/concurso-favorito.mode';
 import { LoadingController, Loading } from 'ionic-angular';
 import { AlunosStore } from './alunos.store';
@@ -60,8 +60,23 @@ export class AlunoService {
   loadConcurso = (id): void => {
     this.showLoading();
     this.getConcurso(id)
-      .pipe(finalize(() => this.dismissLoading()), tap(concurso => this.store.upsert(concurso.id, concurso)))
+      .pipe(
+        finalize(() => this.dismissLoading()),
+        map(concurso => {
+          concurso.listaCursos = this.loadCursos(concurso);
+          this.store.upsert(concurso.id, concurso);
+        })
+      )
       .subscribe();
+  };
+
+  loadCursos = (concurso: Concurso): Curso[] => {
+    let lista: Curso[];
+    this.getCursos(concurso.cursos)
+      .pipe(finalize(() => console.log(concurso)))
+      .subscribe(cursos => (lista = cursos));
+
+    return lista;
   };
   /**
    *

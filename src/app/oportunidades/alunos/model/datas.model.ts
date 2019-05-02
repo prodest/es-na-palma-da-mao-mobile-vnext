@@ -1,4 +1,5 @@
 export class Datas {
   nome: string;
-  data: Date;
+  inicio: Date;
+  fim: Date;
 }

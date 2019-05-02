@@ -14,15 +14,23 @@
   <ion-list *ngIf="concurso" no-margin>
     <ng-container>
       <ion-item-divider color="light" text-uppercase>
-        <ion-icon item-start name="calendar"></ion-icon>{{ concurso.datas.nome }}
+        <ion-icon item-start name="paper"></ion-icon>DESCRIÇÃO
       </ion-item-divider>
-      <ion-item *ngIf="concurso.datas.inicio">
-        <ion-label>Início</ion-label>
-        <h4 item-end accent>{{ concurso.datas.inicio | shortDateFormat }}</h4>
+      <ion-item>
+        <h4 text-wrap accent>{{ concurso?.descricao }}</h4>
       </ion-item>
-      <ion-item no-lines *ngIf="concurso.datas.fim">
+    </ng-container>
+    <ng-container>
+      <ion-item-divider color="light" text-uppercase>
+        <ion-icon item-start name="calendar"></ion-icon>{{ concurso?.datas?.nome }}
+      </ion-item-divider>
+      <ion-item *ngIf="concurso?.datas?.inicio">
+        <ion-label>Início</ion-label>
+        <h4 item-end accent>{{ concurso?.datas?.inicio | shortDateFormat }}</h4>
+      </ion-item>
+      <ion-item no-lines *ngIf="concurso?.datas.fim">
         <ion-label>Fim</ion-label>
-        <h4 item-end accent>{{ concurso.datas.fim | shortDateFormat }}</h4>
+        <h4 item-end accent>{{ concurso?.datas?.fim | shortDateFormat }}</h4>
       </ion-item>
     </ng-container>
     <button class="botao_classificados" *ngIf="concurso.liberarClassificacao" no-lines (click)="showAreas(concurso)">
@@ -31,12 +39,14 @@
     <button *ngIf="!concurso.liberarClassificacao" ion-item no-lines>
       <ion-label id="not-founded"></ion-label>
     </button>
-    <ion-item-divider *ngIf="concurso.anexos" color="light">
-      <ion-icon name="attach" item-start></ion-icon>
-      ANEXOS
+    <ion-item-divider *ngIf="concurso?.listaCursos" color="light">
+      <ion-icon name="book" item-start></ion-icon>
+      Cursos ofertados
     </ion-item-divider>
-    <button ion-item *ngFor="let anexo of concurso.anexos" (click)="openLink(anexo.link)">
-      <p>{{ anexo.documento }}</p>
+    <button ion-item *ngFor="let curso of concurso?.listaCursos">
+      <p>{{ curso.nome }}</p>
+      <p>vagas: {{ curso.vagas }}</p>
+      <p>turno: {{ curso.turno }}</p>
     </button>
   </ion-list>
 </ion-content>
