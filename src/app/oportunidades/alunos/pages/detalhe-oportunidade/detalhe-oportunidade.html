@@ -20,33 +20,29 @@
         <h4 text-wrap accent>{{ concurso?.descricao }}</h4>
       </ion-item>
     </ng-container>
-    <ng-container>
+    <ng-container *ngFor="let data of concurso.datas">
       <ion-item-divider color="light" text-uppercase>
-        <ion-icon item-start name="calendar"></ion-icon>{{ concurso?.datas?.nome }}
+        <ion-icon item-start name="calendar"></ion-icon>{{ data.nome }}
       </ion-item-divider>
-      <ion-item *ngIf="concurso?.datas?.inicio">
+      <ion-item *ngIf="data.inicio">
         <ion-label>Início</ion-label>
-        <h4 item-end accent>{{ concurso?.datas?.inicio | shortDateFormat }}</h4>
+        <h4 item-end accent>{{ data.inicio | shortDateFormat }}</h4>
       </ion-item>
-      <ion-item no-lines *ngIf="concurso?.datas.fim">
+      <ion-item no-lines *ngIf="data.fim">
         <ion-label>Fim</ion-label>
-        <h4 item-end accent>{{ concurso?.datas?.fim | shortDateFormat }}</h4>
+        <h4 item-end accent>{{ data.fim | shortDateFormat }}</h4>
       </ion-item>
     </ng-container>
-    <button class="botao_classificados" *ngIf="concurso.liberarClassificacao" no-lines (click)="showAreas(concurso)">
-      <ion-label>LISTA DE CLASSIFICADOS</ion-label>
-    </button>
-    <button *ngIf="!concurso.liberarClassificacao" ion-item no-lines>
-      <ion-label id="not-founded"></ion-label>
-    </button>
-    <ion-item-divider *ngIf="concurso?.listaCursos" color="light">
+    <ion-item-divider *ngIf="concurso?.cursos" color="light">
       <ion-icon name="book" item-start></ion-icon>
       Cursos ofertados
     </ion-item-divider>
-    <button ion-item *ngFor="let curso of concurso?.listaCursos">
-      <p>{{ curso.nome }}</p>
-      <p>vagas: {{ curso.vagas }}</p>
-      <p>turno: {{ curso.turno }}</p>
+    <button ion-item *ngFor="let curso of concurso?.cursos">
+      <p>Curso: {{ curso.nome }}</p>
+      <p>Carga Horaria: {{ curso.cargaHoraria }}</p>
+      <p>Vagas: {{ curso.vagas }}</p>
+      <p>Turno: {{ curso.turno }}</p>
+      <p>Municipio: {{ curso.municipio }}</p>
     </button>
   </ion-list>
 </ion-content>

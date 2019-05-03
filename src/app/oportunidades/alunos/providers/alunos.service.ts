@@ -63,21 +63,13 @@ export class AlunoService {
       .pipe(
         finalize(() => this.dismissLoading()),
         map(concurso => {
-          concurso.listaCursos = this.loadCursos(concurso);
           this.store.upsert(concurso.id, concurso);
         })
       )
       .subscribe();
   };
 
-  loadCursos = (concurso: Concurso): Curso[] => {
-    let lista: Curso[];
-    this.getCursos(concurso.cursos)
-      .pipe(finalize(() => console.log(concurso)))
-      .subscribe(cursos => (lista = cursos));
 
-    return lista;
-  };
   /**
    *
    *

@@ -10,9 +10,8 @@ export class Concurso {
   anoBase?: Date;
   categoria?: string;
   tipo?: string;
-  datas?: Datas;
+  datas?: Datas[];
   anexos?: Anexo[];
   favorito?: boolean;
-  cursos?: string;
-  listaCursos?: Curso[];
+  cursos?: Curso[];
 }
