@@ -81,6 +81,7 @@ export class DetalheOportunidadePage implements OnDestroy {
       this.AlunoService.toggleFavorite(concurso);
     }*/
   }
+  
   /**
    *
    */

@@ -1,4 +1,4 @@
 export class Anexo {
-  documento: string;
-  link: string;
+  nome: string;
+  url: string;
 }

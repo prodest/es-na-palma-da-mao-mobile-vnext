@@ -14,15 +14,15 @@
   <ion-list *ngIf="concurso" no-margin>
     <ng-container>
       <ion-item-divider color="light" text-uppercase>
-        <ion-icon item-start name="paper"></ion-icon>DESCRIÇÃO
+        <ion-icon item-start name="paper"></ion-icon>DESCRIÇÃO:
       </ion-item-divider>
       <ion-item>
         <h4 text-wrap accent>{{ concurso?.descricao }}</h4>
       </ion-item>
     </ng-container>
-    <ng-container *ngFor="let data of concurso.datas">
+    <ng-container *ngFor="let data of concurso.cronograma">
       <ion-item-divider color="light" text-uppercase>
-        <ion-icon item-start name="calendar"></ion-icon>{{ data.nome }}
+        <ion-icon item-start name="calendar"></ion-icon>{{ data.nome }}:
       </ion-item-divider>
       <ion-item *ngIf="data.inicio">
         <ion-label>Início</ion-label>
@@ -43,6 +43,14 @@
       <p>Vagas: {{ curso.vagas }}</p>
       <p>Turno: {{ curso.turno }}</p>
       <p>Municipio: {{ curso.municipio }}</p>
+    </button>
+
+    <ion-item-divider *ngIf="concurso.anexos" color="light">
+      <ion-icon name="attach" item-start></ion-icon>
+      ANEXOS
+    </ion-item-divider>
+    <button ion-item *ngFor="let anexo of concurso.anexos" (click)="openLink(anexo.url)">
+      <p>{{ anexo.nome }}</p>
     </button>
   </ion-list>
 </ion-content>
