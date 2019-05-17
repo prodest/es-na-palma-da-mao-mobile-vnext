@@ -1,4 +1,4 @@
-import { Datas, Anexo } from '../../concurso/model';
+import { Datas, Anexo } from '../../alunos/model';
 import { ID } from '@datorama/akita';
 import { Curso } from './curso.model';
 
@@ -10,9 +10,8 @@ export class Concurso {
   anoBase?: Date;
   categoria?: string;
   tipo?: string;
-  datas?: Datas;
+  cronograma?: Datas[];
   anexos?: Anexo[];
   favorito?: boolean;
-  cursos?: string;
-  listaCursos?: Curso[];
+  cursos?: Curso[];
 }
