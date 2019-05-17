@@ -6,7 +6,6 @@ import { AlunoService, AlunosQuery } from '../../providers';
 import { Subject } from 'rxjs/Subject';
 import { AuthQuery, AuthNeededService } from '@espm/core';
 import { takeUntil } from 'rxjs/operators';
-
 @IonicPage({
   segment: 'detalhe/:id'
 })
@@ -115,9 +114,9 @@ export class DetalheOportunidadePage implements OnDestroy {
   favoritar(concurso: Concurso) {
     if (!this.authQuery.isLoggedIn) {
       this.authNeeded.showAuthNeededModal();
-    } /*else {
+    } else {
       this.AlunoService.toggleFavorite(concurso);
-    }*/
+    }
   }
   /**
    *

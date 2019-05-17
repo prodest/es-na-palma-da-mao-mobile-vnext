@@ -4,6 +4,7 @@ import { Environment, EnvVariables } from '@espm/core';
 import { Observable } from 'rxjs/Observable';
 import { Concurso } from '../model';
 import { share } from 'rxjs/operators';
+import { ConcursoFavorito } from '../model/concurso-favorito.model';
 /*
 *
 */
@@ -24,5 +25,10 @@ export class AlunosApiService {
    */
   getAllConcursos = (): Observable<Concurso[]> => {
     return this.http.get<Concurso[]>(this.env.api.selecaoalunos).pipe(share());
+  };
+  syncFavorites = (favoritos): Observable<ConcursoFavorito> => {
+    return this.http
+      .post<ConcursoFavorito>(`${this.env.api.espm}/studentOpportunities/data/favorite`, favoritos)
+      .pipe(share());
   };
 }

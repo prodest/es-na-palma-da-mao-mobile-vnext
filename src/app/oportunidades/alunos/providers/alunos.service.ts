@@ -4,24 +4,25 @@ import { Environment, EnvVariables } from '@espm/core';
 import { Observable } from 'rxjs/Observable';
 import { Concurso } from '../model';
 import { share, finalize, map } from 'rxjs/operators';
-import { ConcursoFavorito } from '../model/concurso-favorito.mode';
-import { LoadingController, Loading } from 'ionic-angular';
-import { AlunosStore } from './alunos.store';
+import { LoadingController, Loading, ToastController } from 'ionic-angular';
 import { Curso } from '../model/curso.model';
+import { of } from 'rxjs/observable/of';
+import { AlunosStore } from './alunos.store';
+import { AlunosQuery } from './alunos.query';
+import { AlunosApiService } from './alunos.api.service';
 
 /*
 *
 */
 @Injectable()
 export class AlunoService {
-  /**
-   *
-   */
   constructor(
-    // private toastCtrl: ToastController,
+    private toastCtrl: ToastController,
     private store: AlunosStore,
     private loadingCtrl: LoadingController,
     private http: HttpClient,
+    private query: AlunosQuery,
+    private api: AlunosApiService,
     @Inject(EnvVariables) private env: Environment
   ) {}
   loading: Loading;
@@ -36,6 +37,35 @@ export class AlunoService {
   getCursos(link): Observable<Curso[]> {
     return this.http.get<Curso[]>(`${link}`).pipe(share());
   }
+  /**
+   *
+   */
+  toggleFavorite(concurso: Concurso) {
+    this.store.update(concurso.id, { favorito: !concurso.favorito });
+    let favoritos = {
+      idTender: this.getFavoritos(),
+      date: new Date().toISOString()
+    };
+    this.api.syncFavorites(favoritos).subscribe();
+
+    this.showMessage(`${concurso.nome} ${concurso.favorito ? 'removido dos' : 'adicionado aos'} favoritos`);
+  }
+  private getFavoritos() {
+    let favoritos = [];
+    of(
+      this.query.getAll().map(c => {
+        if (c.favorito) {
+          favoritos.push(c.id);
+        }
+      })
+    );
+    return favoritos;
+  }
+  /**
+   *
+   */
+  private showMessage = (message: string) => this.toastCtrl.create({ message, duration: 4000 }).present();
+
   /**
    *
    */
@@ -105,10 +135,4 @@ export class AlunoService {
   /**
    *
    */
-  getFavorites = (): Observable<ConcursoFavorito> => {
-    return this.http.get<ConcursoFavorito>(`${this.env.api.espm}/publicTender/data/favorite`).pipe(share());
-  };
-  syncFavorites = (favoritos): Observable<ConcursoFavorito> => {
-    return this.http.post<ConcursoFavorito>(`${this.env.api.espm}/publicTender/data/favorite`, favoritos).pipe(share());
-  };
 }
