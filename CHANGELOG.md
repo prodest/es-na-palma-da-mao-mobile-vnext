@@ -2,6 +2,36 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+<a name="5.6.3"></a>
+## [5.6.3](https://github.com/prodest/es-na-palma-da-mao-mobile-vnext/compare/v5.6.2...v5.6.3) (2019-04-16)
+
+
+### Bug Fixes
+
+* **transcol-online:** Ocultando a distância do 'origin-previsions' ([717a041](https://github.com/prodest/es-na-palma-da-mao-mobile-vnext/commit/717a041))
+
+
+
+<a name="5.6.2"></a>
+## [5.6.2](https://github.com/prodest/es-na-palma-da-mao-mobile-vnext/compare/v5.6.1...v5.6.2) (2019-04-08)
+
+
+### Bug Fixes
+
+* **debits:** loading não some em erro de geração de gru ([6202db8](https://github.com/prodest/es-na-palma-da-mao-mobile-vnext/commit/6202db8))
+
+
+
+<a name="5.6.1"></a>
+## [5.6.1](https://github.com/prodest/es-na-palma-da-mao-mobile-vnext/compare/v5.6.0...v5.6.1) (2019-04-08)
+
+
+### Bug Fixes
+
+* **debits:** pdf download browser target ([daac3ef](https://github.com/prodest/es-na-palma-da-mao-mobile-vnext/commit/daac3ef))
+
+
+
 <a name="5.6.0"></a>
 # [5.6.0](https://github.com/prodest/es-na-palma-da-mao-mobile-vnext/compare/v5.5.6...v5.6.0) (2019-04-04)
 
