@@ -43,7 +43,7 @@ export class AlunoService {
   toggleFavorite(concurso: Concurso) {
     this.store.update(concurso.id, { favorito: !concurso.favorito });
     let favoritos = {
-      idTender: this.getFavoritos(),
+      idOpportunity: this.getFavoritos(),
       date: new Date().toISOString()
     };
     this.api.syncFavorites(favoritos).subscribe();
@@ -98,7 +98,6 @@ export class AlunoService {
       )
       .subscribe();
   };
-
 
   /**
    *
