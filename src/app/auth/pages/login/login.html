@@ -1,14 +1,10 @@
-<ion-header>
-  <ion-navbar>
-    <button ion-button
-            menuToggle>
-      <ion-icon name="menu"></ion-icon>
-    </button>
-    <ion-title>Acesse sua conta</ion-title>
-  </ion-navbar>
-</ion-header>
-<ion-content padding
-             color-primary>
+
+<ion-content padding >
+    <button (click)="back()"> 
+    <ion-icon ios="ios-arrow-round-back" md="md-arrow-round-back"></ion-icon>
+</button>
+  <div class="style">ENTRAR</div>
+    
   <form (submit)="login(username, password)">
     <ion-list no-padding
               margin-top>
@@ -32,11 +28,14 @@
                 (click)="openUrlForgotPassword()">Esqueceu sua senha?</button>
       </ion-item>
     </ion-list>
-    <button ion-button
+    <button ion-button 
             full
             large
             color-primary-inverse
-            type="submit">ENTRAR</button>
+            type="submit" >ENTRAR</button>
+    <button ion-button 
+            full
+            large (click)="createAccount()">CRIAR CONTA</button>
   </form>
   <div class="social-login"
        showWhen="cordova">
@@ -59,7 +58,22 @@
       Facebook
     </button>
   </div>
-  <espm-section-title (click)="createAccount()">
-    Ainda não tem conta? Cadastre-se
+  <espm-section-title >
+    Ou acesse com        
   </espm-section-title>
+  <button 
+            block
+            icon-start
+            color-primary-light
+            (click)="facebookLogin()">
+      <ion-icon name="logo-facebook"></ion-icon>
+      Facebook
+    </button>
+    <button 
+            large
+            block
+            (click)="googleLogin()" class="buton">
+      <ion-icon name="logo-google"></ion-icon>
+      Google
+    </button>
 </ion-content>

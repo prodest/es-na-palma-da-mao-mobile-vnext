@@ -1,14 +1,12 @@
 page-login {
   ion-content {
-    background-image: url('../assets/imgs/background.png');
-    background-size: 100% 100%;
 
     .item {
       background-color: transparent !important;
 
       ion-label,
       .text-input {
-        color: #fff !important;
+        color: #343434 !important;
       }
 
       &.item-block {
@@ -23,4 +21,39 @@ page-login {
       }
     }
   }
+
+
+[color-primary-inverse], .color-primary-inverse {
+  background-color: #ff0087 !important;
+  color: white;
+  border-radius: 25px;
+}
+.button-ios {
+  background-color: rgb(0,66,152);
+  border-radius: 25px;
+  color: white;
+}
+.style {
+  font-size: 30px;
+  font-weight: bold;
+  color:rgb(0,66,152);
+}
+.button-full-md{
+  border-radius: 25px;
+}
+button {
+  background-color: white;
+  font-size: 25px;
+  color:rgb(0,174,239);
+}
+espm-section-title .section__title {
+  padding: 50px;
+}
+[color-primary-light], .color-primary-light {
+  background-color: white;
+  color: rgb(65,114,177);
+}
+.button-ios {
+  margin-bottom: 10px;
+}
 }

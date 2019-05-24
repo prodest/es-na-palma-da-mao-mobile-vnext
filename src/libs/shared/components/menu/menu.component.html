@@ -9,7 +9,6 @@
     Login / Cadastre-se
   </button>
   <ng-container *ngFor="let menu of menus">
-    <ion-list-header>{{menu.name}}</ion-list-header>
     <button ion-item
             *ngFor="let page of menu.items;let last = last"
             [ngClass]="{ last: last, accessDenied: !isLoggedIn && page.secure }"

@@ -1,0 +1,118 @@
+page-page-visitors {
+  .header-cs{
+    background-image:  url('../assets/imgs/bg-menu-principal-topo (1).jpg' );
+    height: 200px; 
+    background-size: cover !important;
+
+            img {
+              width: 200px;
+              margin: 15px auto 10px auto;
+              display: block;
+            }
+          }
+      
+          ion-slides {
+            height: auto;
+      
+            .swiper-container {
+              height: auto;
+              padding-top: 10px;
+              .swiper-pagination {
+                top: 0;
+                .swiper-pagination-bullet-active {
+                  background: #fff;
+                }
+              }
+            }
+            .dashboard-icons {
+              display: flex;
+              flex-wrap: wrap;
+              padding: 8px;
+      
+              ion-card {
+                margin: 5px;
+                flex: 1 1 130px;
+                min-height: 130px;
+                font-size: 1.4rem;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                flex-direction: column;
+                color: #fff;
+                background: rgba(4, 33, 51, 0.27);
+                text-shadow: 1px 1px 4px #000000;
+                ion-icon {
+                  font-size: 5rem;
+                  margin-bottom: 10px;
+                  text-shadow: 1px 1px 4px #000000;
+                }
+                small {
+                  margin-top: 2px;
+                }
+              }
+            }
+          }
+.scroll-content{
+  background-color: rgb(233, 247, 254); 
+}
+h2{
+  padding-top: 40px;
+  color: #fff;
+  padding-left: 20px
+}
+.searchbar-ios {
+  padding-top: 80px;
+}
+.searchbar-ios.searchbar-left-aligned .searchbar-input {
+  border-radius: 25px;
+}
+.searchbar-md .searchbar-input {
+  margin-top: 60px;
+  border-radius: 25px;
+}
+h2 {
+  margin-top: 3px;
+}
+.button-md {
+  margin-top: 40px;
+  background-color:#e9f7fe;
+  box-shadow:none ;
+  color: #003069; 
+  font-size: x-large;
+}
+.icon_fav{
+  background-image:  url('../assets/icon/icone-reordenar-escuro.svg' );
+  background-repeat: no-repeat;
+  width: 24%; 
+  float: right;
+  margin-top: 35px;
+  height: 20px;
+  padding: 15px; 
+}
+.rith-css{
+float: right;
+}
+.bot{
+  background-image:  url('../assets/icon/icone-chatbot.svg' );
+  background-repeat: no-repeat;
+  float: right; 
+  width: 42%; 
+  margin-top: 40px;
+}
+.notif-cs{
+  background-image:  url('../assets/icon/icone-notificacao-vazio.svg' );
+  background-repeat: no-repeat;
+    float: right; 
+    width: 15%;
+    margin-top: 40px;
+    
+}
+page-page-visitors .h2 {
+  width: 74%;
+}
+
+}
+
+
+
+

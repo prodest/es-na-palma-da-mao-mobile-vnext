@@ -41,7 +41,7 @@ export class LoginPage {
    *
    */
   ionViewCanEnter(): boolean | Promise<any> {
-    const isAllowed = !this.authQuery.isLoggedIn;
+    const isAllowed = ! this.authQuery.isLoggedIn;
 
     if (!isAllowed) {
       setTimeout(this.goToDashboard, 0);
@@ -77,6 +77,9 @@ export class LoginPage {
    */
   openUrlForgotPassword = () => this.openInAppBrowser(`${this.environment.api.acessocidadao}/Conta/SolicitarReinicioSenha`);
 
+  back(){
+    this.navCtrl.setRoot('DashboardPage');
+  }
   /************************************* Private API *************************************/
 
   /**
@@ -102,7 +105,7 @@ export class LoginPage {
     }
   };
 
-  /**
+  /**DashboardFavoritePage
    *
    *
    */
@@ -133,9 +136,9 @@ export class LoginPage {
   private isAccountNotLinkedError = (data): boolean => data.error === this.errorMsgs.accountNotLinked;
 
   /**
-   * Redireciona usuário para o dashboard
+   * Redireciona usuário para o dashboard-Favorite
    */
-  private goToDashboard = () => this.navCtrl.setRoot('DashboardPage');
+ private goToDashboard = () => this.navCtrl.setRoot('SelectFavoritePage');
 
   /**
    *
@@ -164,4 +167,8 @@ export class LoginPage {
   public createAccount(): void {
     this.openInAppBrowser(`${this.environment.api.acessocidadao}/Conta/VerificarCPF`);
   }
+  /**
+   * 
+   */
+  
 }

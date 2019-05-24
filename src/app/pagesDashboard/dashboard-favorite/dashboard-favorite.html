@@ -1,0 +1,41 @@
+
+  
+<ion-header>
+  <div class="header-cs">
+  <ion-searchbar
+  placeholder="Pesquisar..."
+  [showCancelButton]="true"
+  cancelButtonText="Cancelar"
+  [animated]="false"
+  (ionInput)="search($event)"
+  (ionClear)="clear($event)"
+  (ionCancel)="clear($event)">
+</ion-searchbar>
+<h2 class="icon_favorite" (click)="backDashboard()"> </h2>
+<h2 > Meus Serviços Favoritos </h2>
+</div>
+</ion-header>
+<ion-content padding>
+ <ion-list>
+  <ion-slides [pager]="true">
+    <ion-slide class="lim-css" *ngFor = "let slid of serveSelect" >
+      <div class="dashboard-icons">
+        <ion-card *ngFor = "let lista of slid" (click)="openPage(lista.component)">
+          <ion-icon class="pop-in"
+                    name="{{lista.icon}}"></ion-icon>
+                    {{lista.title}}        
+        </ion-card>  
+      </div>
+    </ion-slide>
+  </ion-slides>         
+ </ion-list>
+ <div>
+    <button ion-button
+    menuToggle>
+<ion-icon name="menu"></ion-icon>
+</button>
+   <h2 class="notif-cs"></h2>
+   <h2 class="bot"></h2>
+ </div>
+</ion-content>  
+

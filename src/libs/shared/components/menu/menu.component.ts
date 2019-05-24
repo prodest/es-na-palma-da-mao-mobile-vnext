@@ -9,151 +9,37 @@ import { Subject } from 'rxjs/Subject';
 
 const menus = [
   {
-    name: 'Principal',
+    name: 'Principal ',
     items: [
       {
-        title: 'Principal',
+        title: 'Meus Serviços',
         icon: 'apps',
         component: 'DashboardPage',
         order: 1
       },
       {
-        title: 'Notícias Destaques',
-        icon: 'paper',
+        title: 'Meu Perfil',
+        icon: 'contact',
         component: 'NewsHighlightsPage',
         order: 1
       },
       {
-        title: 'Notícias',
-        icon: 'paper',
+        title: 'Ajuda',
+        icon: 'help-circle',
         component: 'NewsListPage',
         order: 1
       },
       {
-        title: 'Agenda ES',
-        icon: 'calendar',
+        title: 'Contato',
+        icon: 'mail',
         component: 'CalendarPage',
         order: 6
       },
       {
-        title: 'Consulta Processo',
+        title: 'Desenvolvedores',
         icon: 'search',
         component: 'SepSearchPage',
         order: 8
-      }
-    ]
-  },
-  {
-    name: 'Detran',
-    items: [
-      {
-        title: 'Situação CNH',
-        icon: 'car',
-        component: 'DriverLicensePage',
-        order: 2,
-        secure: true
-      },
-      {
-        title: 'Consulta Veículos',
-        icon: 'car',
-        component: 'VehiclesPage',
-        order: 2,
-        secure: true
-      }
-    ]
-  },
-  {
-    name: 'E-Docs',
-    items: [
-      {
-        title: 'Documentos para assinar',
-        icon: 'create',
-        component: 'DocumentsToSignPage',
-        order: 2,
-        secure: true
-      }
-    ]
-  },
-  {
-    name: 'Ceturb',
-    items: [
-      {
-        title: 'Consulta Ônibus',
-        icon: 'bus',
-        component: 'BusLinesPage',
-        order: 3
-      },
-      {
-        title: 'Transcol Online',
-        icon: 'bus',
-        component: 'TranscolOnlinePage',
-        order: 2
-      }
-    ]
-  },
-  {
-    name: 'Transparência',
-    items: [
-      {
-        title: 'Portal da Transparência',
-        icon: 'pie',
-        component: 'TransparencyDashboardPage',
-        order: 2
-      }
-    ]
-  },
-  {
-    name: 'Diário Oficial ES',
-    items: [
-      {
-        title: 'Consultas',
-        icon: 'search',
-        component: 'DioSearchPage',
-        order: 4
-      },
-      {
-        title: 'Edições Recentes',
-        icon: 'time',
-        component: 'LatestEditionsPage',
-        order: 5
-      }
-    ]
-  },
-  {
-    name: 'Servidor',
-    items: [
-      {
-        title: 'Táxi Gov',
-        icon: 'car',
-        component: '',
-        order: 6,
-        url: 'mb://action=login',
-        name: 'app.mb',
-        deepLink: true,
-        package: 'mb.taxi.meiabandeirada',
-        uriScheme: 'mb://'
-      }
-    ]
-  },
-  {
-    name: 'Oportunidades',
-    items: [
-      {
-        title: 'Buscar concursos',
-        icon: 'search',
-        component: 'Apresentacao',
-        order: 7
-      }
-    ]
-  },
-  {
-    name: 'Outros',
-    items: [
-      {
-        title: 'Sobre',
-        icon: 'information-circle',
-        component: 'AboutPage',
-        order: 99
       }
     ]
   }
@@ -227,7 +113,6 @@ export class MenuComponent implements OnInit, OnDestroy {
       }
     }
   };
-
   /*
    *
    */
