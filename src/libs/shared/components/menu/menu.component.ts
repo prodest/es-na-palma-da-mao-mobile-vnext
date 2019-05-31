@@ -13,31 +13,31 @@ const menus = [
     items: [
       {
         title: 'Meus Serviços',
-        icon: 'apps',
+        icon: 'custom-menu-meus-servicos',
         component: 'DashboardPage',
         order: 1
       },
       {
         title: 'Meu Perfil',
-        icon: 'contact',
+        icon: 'custom-menu-meu-perfil',
         component: 'NewsHighlightsPage',
         order: 1
       },
       {
         title: 'Ajuda',
-        icon: 'help-circle',
+        icon: 'custom-menu-ajuda',
         component: 'NewsListPage',
         order: 1
       },
       {
         title: 'Contato',
-        icon: 'mail',
+        icon: 'custom-menu-contato',
         component: 'CalendarPage',
         order: 6
       },
       {
         title: 'Desenvolvedores',
-        icon: 'search',
+        icon: 'custom-menu-desenvolvedores',
         component: 'SepSearchPage',
         order: 8
       }
