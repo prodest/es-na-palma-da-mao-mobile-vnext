@@ -25,6 +25,7 @@
     "format:check": "prettier --find-config-path --list-different \"src/{app,libs,theme}/**/*{.ts,.js,.json,.css,.scss}\"",
     "workbox": "workbox generate:sw",
     "release": "standard-version -a",
+    "release:pre": "standard-version -a --release-as patch",
     "cordova:release": "cordova build android --release --buildconfig=build.json",
     "release:preview": "standard-version --dry-run -a",
     "precommit": "exit 0",
