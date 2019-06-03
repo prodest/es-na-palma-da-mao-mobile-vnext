@@ -16,7 +16,7 @@ export class DetranApiService {
    *
    *
    */
-  constructor(private iab: InAppBrowser, private http: HttpClient, @Inject(EnvVariables) private env: Environment) {}
+  constructor(private http: HttpClient, @Inject(EnvVariables) private env: Environment) {}
 
   /**
    *
