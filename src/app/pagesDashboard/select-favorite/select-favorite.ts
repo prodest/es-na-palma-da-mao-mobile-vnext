@@ -165,7 +165,7 @@ export class SelectFavoritePage {
   
   markUncheckList(){
     
-    if(this.markAll == true){
+    if(this.markAll === true){
       this.listaDeSelecionados = [];
       for(let i = 0; i < this.menus.length; ++i){
         this.menus[i].isChecked =true;

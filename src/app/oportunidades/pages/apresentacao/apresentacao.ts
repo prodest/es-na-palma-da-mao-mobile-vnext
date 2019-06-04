@@ -7,7 +7,7 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
   selector: 'apresentacao',
   templateUrl: 'apresentacao.html',
 })
-export class Apresentacao {
+export class ApresentacaoPage {
 
   constructor(public navCtrl: NavController, public navParams: NavParams) {
   }
