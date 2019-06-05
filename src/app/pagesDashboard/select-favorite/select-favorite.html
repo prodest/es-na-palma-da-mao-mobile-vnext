@@ -1,0 +1,48 @@
+
+<ion-content padding>
+    <button (click)="backDashboard()">
+    <ion-icon ios="ios-arrow-round-back" md="md-arrow-round-back"></ion-icon>
+  </button>
+  
+      <div class = "espace">
+    <div>
+      <p class="styles_css">Selecione os</p>
+    </div>
+    <div>
+      <p class="second_color">seus serviços</p>
+    </div>
+    <div>
+      <p class="second_color">favoritos</p>
+    </div>
+</div> 
+ <div  class="fixo">
+  <ion-list class="rolavel" no-margin 
+  approxItemHeight="70px">
+      <button ion-button full >
+          <ion-label>Todos</ion-label>
+          <ion-checkbox 
+        color="dark"
+        checked="false"
+        mode = "ios"
+        [(ngModel)]="markAll"
+        (ionChange)= "markUncheckList()"
+       ></ion-checkbox>
+      </button>
+       <button class="radius_css" ion-button full *ngFor=" let lista of menus ">
+        <h2> {{ lista.title }} </h2>
+        <ion-checkbox 
+        color="green"
+        checked="false"
+        mode = "ios"
+        [(ngModel)]="lista.isChecked"
+        (ionChange)= "markList()"
+       ></ion-checkbox>
+       
+      </button>
+      <button class="fixed_button" (click)=" goToDashboard() ">
+        <ion-icon ios="ios-arrow-round-forward" md="md-arrow-round-forward"></ion-icon>
+      </button>
+      </ion-list>
+    </div>
+</ion-content>  
+

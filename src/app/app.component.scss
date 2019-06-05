@@ -98,6 +98,46 @@ ion-icon[name='exit'] {
   }
 }
 
+ion-icon {
+  &[class*="custom-"] {
+    mask-size: contain;
+    mask-position: 50% 50%;
+    mask-repeat: no-repeat;
+    background: #004297;
+    width: 1em;
+    height: 1em;
+  }
+
+  &[class*="menu-ajuda"] {
+    mask-image: url(../assets/icon/icone-menu-ajuda.svg);
+  }
+  &[class*="menu-contato"] {
+    mask-image: url(../assets/icon/icone-menu-contato.svg);
+  }
+  &[class*="menu-desenvolvedores"] {
+    mask-image: url(../assets/icon/icone-menu-desenvolvedores.svg);
+  }
+  &[class*="menu-facebook"] {
+    mask-image: url(../assets/icon/icone-menu-facebook.svg);
+  }
+  &[class*="menu-instagram"] {
+    mask-image: url(../assets/icon/icone-menu-instagram.svg);
+  }
+  &[class*="menu-meu-perfil"] {
+    mask-image: url(../assets/icon/icone-menu-meu-perfil.svg);
+  }
+  &[class*="menu-meus-servicos"] {
+    mask-image: url(../assets/icon/icone-menu-meus-serviços.svg);
+  }
+  &[class*="menu-sair"] {
+    mask-image: url(../assets/icon/icone-menu-sair-da-conta.svg);
+  }
+  &[class*="menu-youtube"] {
+    mask-image: url(../assets/icon/icone-menu-youtube.svg);
+  }
+
+}
+
 .text-right {
   text-align: right;
 }

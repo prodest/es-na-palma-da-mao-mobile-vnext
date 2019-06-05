@@ -1,0 +1,135 @@
+page-dashboard-favorite {
+.header-cs{
+  background-image:  url('../assets/imgs/bg-menu-principal-topo (1).jpg' );
+  height: 200px; 
+  background-size: cover !important;
+}
+ 
+ion-content {
+  background-size: cover !important;
+  
+      #brasao-governo {
+        border-top: 2px solid #c86673;
+        border-bottom: 2px solid #27b3dc;
+        padding: 6px 14px;
+        margin: 10px 0 20px 0;
+        img {
+          width: 200px;
+          margin: 15px auto 10px auto;
+          display: block;
+        }
+      }
+      ion-slides {
+        height: auto;
+  
+        .swiper-container {
+          height: auto;
+          padding-top: 10px;
+          .swiper-pagination {
+            top: 0;
+            .swiper-pagination-bullet-active {
+              background: #fff;
+            }
+          }
+        }
+        .dashboard-icons {
+          display: flex;
+          flex-wrap: wrap;
+          padding: 8px;
+  
+          ion-card {
+            margin: 5px;
+            flex: 1 1 130px;
+            min-height: 130px;
+            font-size: 1.4rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+            color: #fff;
+            background: rgba(4, 33, 51, 0.27);
+            text-shadow: 1px 1px 4px #000000;
+            ion-icon {
+              font-size: 5rem;
+              margin-bottom: 10px;
+              text-shadow: 1px 1px 4px #000000;
+            }
+            small {
+              margin-top: 2px;
+            }
+          }
+        }
+      }
+    }
+h2 {
+  margin-top: 1.8rem;
+  font-size: 2.4rem;
+  color: #fff;
+  padding-top: 15px;
+  padding-left: 10px;
+}
+.searchbar-ios{
+  padding-top: 80px;
+}
+.searchbar-ios.searchbar-left-aligned .searchbar-input {
+  padding-left: 30px;
+  border-radius: 25px;
+}
+.fixed-content {
+  background-color: rgb(233, 247, 254)
+}
+.searchbar-md .searchbar-input {
+  border-radius: 25px;
+  margin-top: 45px;
+}
+.searchbar-md{
+  padding: 22px;
+} 
+.icon_favorite{
+  background-image:  url('../assets/icon/icone-reordenar-escuro.svg' );
+  background-repeat: no-repeat;
+  width: 14%; 
+  float: right;
+  margin-top: 25px;
+  padding: 15px;
+}
+.bot{
+  background-image:  url('../assets/icon/icone-chatbot.svg' );
+  background-repeat: no-repeat;
+  float: right; 
+  width: 40%;
+  padding: 20px;
+  margin: auto;
+}
+.notif-cs{
+  background-image:  url('../assets/icon/icone-notificacao-vazio.svg' );
+  background-repeat: no-repeat;
+    float: right; 
+    width: 15%;
+    background-size: 30px;
+    padding: 20px;
+    margin: auto;
+}
+page-dashboard-favorite .h2 {
+  width: 84%;
+}
+.lim-css{
+  height: 354px;
+  width: 340px;
+  overflow-y: scroll;
+}
+.button-md {
+  background-color:#e9f7fe;
+  box-shadow:none;
+  -webkit-box-shadow:none;
+  font-size: xx-large;
+  color: #003069;
+  margin-top: 20px; 
+  margin: auto;
+}
+
+
+      }
+      
+
+

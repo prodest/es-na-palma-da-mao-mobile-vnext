@@ -66,7 +66,6 @@ export class ConcursosPage {
   backPageOne(){
     this.navCtrl.push('Apresentacao')
   }
-
   /**
    *
    */

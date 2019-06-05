@@ -9,13 +9,12 @@
     Login / Cadastre-se
   </button>
   <ng-container *ngFor="let menu of menus">
-    <ion-list-header>{{menu.name}}</ion-list-header>
-    <button ion-item
+    <button ion-item icon-start
             *ngFor="let page of menu.items;let last = last"
             [ngClass]="{ last: last, accessDenied: !isLoggedIn && page.secure }"
             (click)="openPage(page, !isLoggedIn && page.secure )">
       <ion-icon item-start
-                name="md-{{page.icon}}"></ion-icon>
+                name="md-{{page.icon}}"></ion-icon>            
       {{page.title}}
     </button>
   </ng-container>
