@@ -7,10 +7,10 @@ import { AuthNeededService } from '@espm/core/auth/auth-needed.service';
 
 @IonicPage()
 @Component({
-  selector: 'page-dashboard',
-  templateUrl: 'dashboard.html'
+  selector: 'page-home-screen',
+  templateUrl: 'home-screen.html'
 })
-export class DashboardPage implements OnInit, OnDestroy {
+export class HomeScreenPage implements OnInit, OnDestroy {
   @ViewChild('slides') slides: Slides;
   isLoggedIn: boolean;
   private destroyed$ = new Subject<boolean>();
@@ -157,7 +157,6 @@ export class DashboardPage implements OnInit, OnDestroy {
       }
     ];
   }
-
   /**
    *
    */
@@ -166,7 +165,6 @@ export class DashboardPage implements OnInit, OnDestroy {
       .pipe(tap(() => takeUntil(this.destroyed$)))
       .subscribe(isLoggedIn => (this.isLoggedIn = isLoggedIn));
   }
-
   /**
    *            
    */
@@ -207,14 +205,14 @@ export class DashboardPage implements OnInit, OnDestroy {
  /**
   * direciona para pagina de login
   */
- OpenPageLogin() {
+ openPageLogin() {
   this.navCtrl.setRoot('LoginPage');
 }
 /**
  * direciona para paginas de visitantes pasando paramentros array menus
  */
-OpenPageVisitors() {
-  this.navCtrl.setRoot('PageVisitorsPage', this.menus);
+openPageMyServices() {
+  this.navCtrl.setRoot('MyServicesPage', this.menus);
 }
   /*
    *

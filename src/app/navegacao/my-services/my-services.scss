@@ -1,4 +1,4 @@
-page-dashboard-favorite {
+page-my-services {
 .header-cs{
   background-image:  url('../assets/imgs/bg-menu-principal-topo (1).jpg' );
   height: 200px; 
@@ -93,23 +93,23 @@ h2 {
   margin-top: 25px;
   padding: 15px;
 }
-.bot{
-  background-image:  url('../assets/icon/icone-chatbot.svg' );
-  background-repeat: no-repeat;
-  float: right; 
-  width: 40%;
-  padding: 20px;
-  margin: auto;
-}
-.notif-cs{
-  background-image:  url('../assets/icon/icone-notificacao-vazio.svg' );
-  background-repeat: no-repeat;
-    float: right; 
-    width: 15%;
-    background-size: 30px;
-    padding: 20px;
-    margin: auto;
-}
+// .bot{
+//   background-image:  url('../assets/icon/icone-chatbot.svg' );
+//   background-repeat: no-repeat;
+//   float: right; 
+//   width: 40%;
+//   padding: 20px;
+//   margin: auto;
+// }
+// .notif-cs{
+//   background-image:  url('../assets/icon/icone-notificacao-vazio.svg' );
+//   background-repeat: no-repeat;
+//     float: right; 
+//     width: 15%;
+//     background-size: 30px;
+//     padding: 20px;
+//     margin: auto;
+// }
 page-dashboard-favorite .h2 {
   width: 84%;
 }
@@ -119,7 +119,6 @@ page-dashboard-favorite .h2 {
   overflow-y: scroll;
 }
 .button-md {
-  background-color:#e9f7fe;
   box-shadow:none;
   -webkit-box-shadow:none;
   font-size: xx-large;
@@ -127,9 +126,22 @@ page-dashboard-favorite .h2 {
   margin-top: 20px; 
   margin: auto;
 }
-
+.scroll-content {
+  background-color: #e9f7fe !important;
+}
 
       }
-      
-
+.bar-buttons-md {
+  font-size: 30px;
+  padding-left: 25px;
+  
+}  
+.foot-css{
+background-color: #e9f7fe;
+color: #003069;
+}   
+page-dashboard-favorite .button-md {
+  font-size: 20px;
+  padding-top: 40px;
+}
 

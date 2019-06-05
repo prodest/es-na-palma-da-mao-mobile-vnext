@@ -1,9 +1,10 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { IonicPage, App, NavController, NavParams } from 'ionic-angular';
 import { Subject } from 'rxjs/Subject';
-import { AuthQuery } from '@espm/core';
+import { AuthQuery} from '@espm/core';
 import { tap, takeUntil } from 'rxjs/operators';
 import { AuthNeededService } from '@espm/core/auth/auth-needed.service';
+import deburr from 'lodash-es/deburr';
 
 type Favorite = {
   title: string;
@@ -24,7 +25,8 @@ type Favorite = {
   templateUrl: 'page-visitors.html',
 })
 export class PageVisitorsPage implements OnInit, OnDestroy {
-
+ 
+  filteredConcursos: Favorite[]; 
   
   private serviceSelects:Array<Favorite>;
   private slides: Array<Favorite[]> = [];
@@ -39,13 +41,22 @@ export class PageVisitorsPage implements OnInit, OnDestroy {
     private navParams: NavParams) {
       
       this.serviceSelects = this.navParams.data;
-      
-      this.serviceSelects.map((elemento: Favorite, index: number) => {
+      this.filteredConcursos = this.serviceSelects;
+
+      this.filteredConcursos.map((elemento: Favorite, index: number) => {
         if (index%4 === 0) {
           this.slides.push([])
         }
         this.slides[this.slides.length-1].push(elemento);
       });
+      
+      // this.serviceSelects.map((elemento: Favorite, index: number) => {
+      //   if (index%4 === 0) {
+      //     this.slides.push([])
+      //   }
+      //   this.slides[this.slides.length-1].push(elemento);
+      // });
+      
   }
   /**
    *
@@ -55,7 +66,6 @@ export class PageVisitorsPage implements OnInit, OnDestroy {
       .pipe(tap(() => takeUntil(this.destroyed$)))
       .subscribe(isLoggedIn => (this.isLoggedIn = isLoggedIn));
   }
-
   /**
    *
    */
@@ -77,4 +87,22 @@ export class PageVisitorsPage implements OnInit, OnDestroy {
   goSelect(){
     this.navCtrl.push('SelectFavoritePage')
   }
+  
+  search = e => {
+    const search = this.normalize(e.target.value);
+    this.filteredConcursos = this.filteredConcursos.filter(select => {
+      return this.normalize(select.title).includes(search) || this.normalize(select.title).includes(search);
+    });
+  };
+  /**
+   *
+   */
+  clear = () => {
+    this.filteredConcursos = [...this.filteredConcursos];
+  };
+
+  /**
+   *
+   */
+  private normalize = (term: string) => (term ? deburr(term.toLowerCase()) : '');
 }

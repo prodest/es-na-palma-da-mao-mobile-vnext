@@ -1,10 +1,16 @@
 page-page-visitors {
-  .header-cs{
+  .scroll-content {
+    #not-founded {
+      height: 100%;
+    }
+    background-color: #f5f5f5;
+  }
+.header-cs{
     background-image:  url('../assets/imgs/bg-menu-principal-topo (1).jpg' );
     height: 200px; 
     background-size: cover !important;
 
-            img {
+            img { 
               width: 200px;
               margin: 15px auto 10px auto;
               display: block;
@@ -75,44 +81,55 @@ h2 {
 }
 .button-md {
   margin-top: 40px;
-  background-color:#e9f7fe;
   box-shadow:none ;
   color: #003069; 
-  font-size: x-large;
+  font-size: 20px;
+}
+.bar-buttons-md {
+  font-size: 30px;
+  color: #003069;
+  padding-top: 45px;
+  padding-left: 25px;
+  background-color: #e9f7fe;
 }
 .icon_fav{
   background-image:  url('../assets/icon/icone-reordenar-escuro.svg' );
   background-repeat: no-repeat;
-  width: 24%; 
+  width: 14%; 
   float: right;
-  margin-top: 35px;
-  height: 20px;
+  margin-top: 40px;
   padding: 15px; 
 }
 .rith-css{
 float: right;
 }
-.bot{
-  background-image:  url('../assets/icon/icone-chatbot.svg' );
-  background-repeat: no-repeat;
-  float: right; 
-  width: 42%; 
-  margin-top: 40px;
-}
-.notif-cs{
-  background-image:  url('../assets/icon/icone-notificacao-vazio.svg' );
-  background-repeat: no-repeat;
-    float: right; 
-    width: 15%;
-    margin-top: 40px;
+// .bot{
+//   background-image:  url('../assets/icon/icone-chatbot.svg' );
+//   background-repeat: no-repeat;
+//   float: right; 
+//   width: 42%; 
+//   margin-top: 40px;
+// }
+// .notif-cs{
+//   background-image:  url('../assets/icon/icone-notificacao-vazio.svg' );
+//   background-repeat: no-repeat;
+//     float: right; 
+//     width: 15%;
+//     margin-top: 40px;
     
-}
+// }
 page-page-visitors .h2 {
   width: 74%;
 }
-
+}
+.scroll-content {
+  #not-founded {
+    height: 100%;
+  }
+  background-color: #f5f5f5;
 }
 
-
-
+page-page-visitors .button-md {
+  padding-top: 60px;
+}
 

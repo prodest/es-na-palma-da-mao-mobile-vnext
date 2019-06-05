@@ -17,10 +17,10 @@ type Favorite = {
 
 @IonicPage()
 @Component({
-  selector: 'page-dashboard-favorite',
-  templateUrl: 'dashboard-favorite.html',
+  selector: 'page-my-services',
+  templateUrl: 'my-services.html',
 })
-export class DashboardFavoritePage{
+export class MyServicesPage{
     
     private servicosSelecionados:Array<Favorite>;
     private serveSelect:Array<Favorite[]> = [];
@@ -50,7 +50,7 @@ export class DashboardFavoritePage{
       this.appCtrl.getRootNav().push(page);
     }
   };
-  backDashboard(){
+  goToSelectFavorites(){
     this.navCtrl.push('SelectFavoritePage')
   }
 }

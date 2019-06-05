@@ -14,7 +14,7 @@ const menus = [
       {
         title: 'Meus Serviços',
         icon: 'apps',
-        component: 'DashboardPage',
+        component: 'MyServicesPage',
         order: 1
       },
       {
@@ -22,24 +22,6 @@ const menus = [
         icon: 'contact',
         component: 'NewsHighlightsPage',
         order: 1
-      },
-      {
-        title: 'Ajuda',
-        icon: 'help-circle',
-        component: 'NewsListPage',
-        order: 1
-      },
-      {
-        title: 'Contato',
-        icon: 'mail',
-        component: 'CalendarPage',
-        order: 6
-      },
-      {
-        title: 'Desenvolvedores',
-        icon: 'search',
-        component: 'SepSearchPage',
-        order: 8
       }
     ]
   }

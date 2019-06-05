@@ -35,7 +35,6 @@ export class LoginPage {
     private loadingCtrl: LoadingController,
     @Inject(EnvVariables) private environment: Environment
   ) {}
-
   /**
    * ref: https://github.com/ionic-team/ionic/issues/11459#issuecomment-365224107
    *

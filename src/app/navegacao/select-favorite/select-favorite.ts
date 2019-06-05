@@ -14,6 +14,7 @@ export class SelectFavoritePage {
   public markAll: boolean;
 
   public menus: Array<{
+    id: number;
     title: string;
     icon: string;
     component: string;
@@ -45,31 +46,36 @@ export class SelectFavoritePage {
     protected navCtrl: NavController
   ) {
     this.menus = [
-      {   
+      { 
+        id: 1,  
         title: 'Notícias Destaques',
         icon: 'paper',
         component: 'NewsHighlightsPage',
         isChecked: false
       },
       {
+        id: 2, 
         title: 'Notícias',
         icon: 'paper',
         component: 'NewsListPage',
         isChecked: false
       },
       {
+        id: 3, 
         title: 'Agenda ES',
         icon: 'calendar',
         component: 'CalendarPage',
         isChecked: false
       },
       {
+        id: 4, 
         title: 'Consulta Processo',
         icon: 'search',
         component: 'SearchPage',
         isChecked: false
       },
       {
+        id: 5, 
         title: 'Situação CNH',
         icon: 'car',
         component: 'DriverLicensePage',
@@ -77,6 +83,7 @@ export class SelectFavoritePage {
         isChecked: false
       },
       {
+        id: 6, 
         title: 'Consulta Veículos',
         icon: 'car',
         component: 'VehiclesPage',
@@ -85,6 +92,7 @@ export class SelectFavoritePage {
       },
 
       {
+        id: 7, 
         title: 'Documentos para assinar',
         icon: 'create',
         component: 'DocumentsToSignPage',
@@ -93,12 +101,14 @@ export class SelectFavoritePage {
       },
 
       {
+        id: 8, 
         title: 'Consulta Ônibus',
         icon: 'bus',
         component: 'BusLinesPage',
         isChecked: false
       },
       {
+        id: 9, 
         title: 'Transcol Online',
         icon: 'bus',
         component: 'TranscolOnlinePage',
@@ -106,6 +116,7 @@ export class SelectFavoritePage {
       },
 
       {
+        id: 10, 
         title: 'Portal da Transparência',
         icon: 'pie',
         component: 'TransparencyDashboardmatlabPage',
@@ -113,12 +124,14 @@ export class SelectFavoritePage {
       },
 
       {
+        id: 11, 
         title: 'Consultas',
         icon: 'search',
         component: 'DioSearchPage',
         isChecked: false
       },
       {
+        id: 12, 
         title: 'Edições Recentes',
         icon: 'time',
         component: 'LatestEditionsPage',
@@ -126,6 +139,7 @@ export class SelectFavoritePage {
       },
 
       {
+        id: 13, 
         title: 'Táxi Gov',
         icon: 'car',
         component: '',
@@ -138,6 +152,7 @@ export class SelectFavoritePage {
       },
 
       {
+        id: 14, 
         title: 'Buscar concursos',
         icon: 'search',
         component: 'Apresentacao',
@@ -145,6 +160,7 @@ export class SelectFavoritePage {
       },
 
       {
+        id: 15, 
         title: 'Sobre',
         icon: 'information-circle',
         component: 'AboutPage',
@@ -165,7 +181,7 @@ export class SelectFavoritePage {
   
   markUncheckList(){
     
-    if(this.markAll == true){
+    if(this.markAll === true){
       this.listaDeSelecionados = [];
       for(let i = 0; i < this.menus.length; ++i){
         this.menus[i].isChecked =true;
@@ -198,12 +214,12 @@ export class SelectFavoritePage {
   /**
    * 
    */
-  goToDashboard(){
-    this.navCtrl.push('DashboardFavoritePage', this.listaDeSelecionados)
+  saveFavorites(){
+    this.navCtrl.push('MyServicesPage', this.listaDeSelecionados)
   }
   
-  backDashboard(){
-    this.navCtrl.push('DashboardPage')
+  back(){
+    this.navCtrl.pop()
   }
 }
 

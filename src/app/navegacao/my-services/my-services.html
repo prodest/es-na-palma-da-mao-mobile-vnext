@@ -11,8 +11,8 @@
   (ionClear)="clear($event)"
   (ionCancel)="clear($event)">
 </ion-searchbar>
-<h2 class="icon_favorite" (click)="backDashboard()"> </h2>
-<h2 > Meus Serviços Favoritos </h2>
+<h2 class="icon_favorite" (click)="goToSelectFavorites()"> </h2>
+<h2 > Meus Serviços </h2>
 </div>
 </ion-header>
 <ion-content padding>
@@ -30,8 +30,8 @@
   </ion-slides>         
  </ion-list>
  <div>
-    <button ion-button
-    menuToggle>
+    <button 
+    menuToggle class="foot-css">
 <ion-icon name="menu"></ion-icon>
 </button>
    <h2 class="notif-cs"></h2>
