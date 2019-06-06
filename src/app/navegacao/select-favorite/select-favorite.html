@@ -1,8 +1,7 @@
-
 <ion-content padding>
-    <button (click)="back()">
-      <ion-icon ios="ios-arrow-round-back" md="md-arrow-round-back"></ion-icon>
-    </button>
+  <button (click)="back()">
+    <ion-icon ios="ios-arrow-round-back" md="md-arrow-round-back"></ion-icon>
+  </button>
   
   <div class = "espace">
     <div>
@@ -12,38 +11,42 @@
       <p class="second_color">seus serviços</p>
       <p class="second_color">favoritos</p>
     </div>
-  </div> 
+  </div>
   <div class="fixo">
-    <ion-list class="rolavel" no-margin 
-    approxItemHeight="70px">
-      <button ion-button full >
-          <ion-label>Todos</ion-label>
-          <ion-checkbox 
-        color="dark"
-        checked="false"
-        mode = "ios"
-        [(ngModel)]="markAll"
-        (ionChange)= "markUncheckList()"
-       ></ion-checkbox>
+    <ion-list
+      class="rolavel"
+      no-margin 
+      approxItemHeight="70px">
+      
+      <button ion-button full>
+        <ion-label>Todos</ion-label>
+        <ion-checkbox 
+          color="dark"
+          checked="false"
+          mode = "ios"
+          [(ngModel)]="markAll"
+          (ionChange)= "markUncheckList()"
+        ></ion-checkbox>
       </button>
-       <button class="radius_css" ion-button full *ngFor=" let lista of menus ">
+      <button class="radius_css" ion-button full *ngFor=" let lista of menus ">
         <h2> {{ lista.title }} </h2>
         <ion-checkbox 
-        color="green"
-        checked="false"
-        mode = "ios"
-        [(ngModel)]="lista.isChecked"
-        (ionChange)= "markList()"
-       ></ion-checkbox>
+          color="green"
+          checked="false"
+          mode = "ios"
+          [(ngModel)]="lista.isChecked"
+          (ionChange)= "markList()"
+        ></ion-checkbox>
        
       </button>
-      
+
     </ion-list>
   </div>
-  <div id="footer">
-    <button ion-button color= "secondary" id="save-button"  (click)=" saveFavorites() ">
-      SALVAR
-    </button>
-  </div>
 </ion-content>  
-
+<ion-footer>
+  <ion-toolbar color="primary">
+    <button ion-button id="save-button" (click)="saveFavorites()">
+      Salvar Favoritos
+    </button>
+  </ion-toolbar>
+</ion-footer>

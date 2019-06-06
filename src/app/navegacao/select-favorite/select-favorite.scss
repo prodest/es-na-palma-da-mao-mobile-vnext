@@ -1,111 +1,124 @@
 page-select-favorite {
-    .button-inner{
-        justify-content: end;
-        text-transform: none;
-      }
-      h2{
-        margin: auto;
-        color: #2e74eb;
-        font-size: initial;
-      }
-      .radius_css{
-        border-radius: 25px;
-      }
-      .styles_css{
-        color: #2BACE2;
-        font-weight: bold;
-        font-size: 35px;
-        text-align: left;
-        margin-left: 20px;
-        margin: 0 auto;
-      }
-      .second_color{
-       font-size: 35px;
-       color: #002c80;
-       text-align: left;
-       margin-left: 20px;
-       margin: 0 auto;
-       font-weight: bold;
-      }
-.espace{
-        top:2px;
-}
-.col_foot{
-        color: #ff0087;
-        font-size: 20px;
-        
-}
-.fixed_button{
-        position: fixed;
-            float: bottom;
-            bottom: 5px;
-            right: 15px;
-            z-index: 100;
-            background-color: #f4f4f4;
-            color:#208baa;
-            border-radius: 5px;
-            text-align: center;
-            font-weight: bold;
-            height: 70px;
-            font-size: 30px;
-}
-.button-ios {
-        background-color: rgb(233, 247, 254);
-        color: rgb(67, 118, 180);
-}
-.thx-under{
-        width: 720px;
-        height: 540px;
-}
-.fixo {
-        height: 65%;
-        overflow: scroll;
-        padding-top: 10px;
-}
-.rolavel {
-}
-element.style {
-        background-color: rgb(218,218,218);
-}
-.label-ios {
-      font-size: 25px;
-      font-weight: bold;
+  .button-inner {
+    justify-content: end;
+    text-transform: none;
   }
-.button-ios {
-  background-color: #e9f7fe;
-  color: #4376b4;
-  border-radius: 25px; 
-}
-.ion-ios-arrow-round-forward:before {
-  font-size: -webkit-xxx-large;
-  font-weight: bold;
-  color: rgb(0,170,239);
-}   
-.button-md {
-  background-color: #e9f7fe;
-  height: 4.6rem;
-  color: #2e74eb;
-  box-shadow:none;
-} 
-[padding] h2:first-child{
-margin-top: auto;
-} 
-button {
-  background-color: #f4f4f4;
-}  
-.ion-md-arrow-round-back:before {
-  font-size: 30px;
-  color: #208baa;
-} 
-}
-#footer {
-  position: fixed;
-  bottom: 0;
-  right: 0;
-  padding: 5%;
-}
-#save-button{
-  float: right;
-  background-color: #002c80;
-  color: #e9f7fe;
+
+  h2{
+    margin: auto;
+    color: #2e74eb;
+    font-size: initial;
+  }
+
+  .radius_css{
+    border-radius: 25px;
+  }
+
+  .styles_css{
+    color: #2BACE2;
+    font-weight: bold;
+    font-size: 35px;
+    text-align: left;
+    margin-left: 20px;
+    margin: 0 auto;
+  }
+
+  .second_color{
+    font-size: 35px;
+    color: #002c80;
+    text-align: left;
+    margin-left: 20px;
+    margin: 0 auto;
+    font-weight: bold;
+  }
+
+  .espace{
+    top:2px;
+  }
+
+  .col_foot{
+    color: #ff0087;
+    font-size: 20px;
+  }
+
+  .fixed_button{
+    position: fixed;
+    float: bottom;
+    bottom: 5px;
+    right: 15px;
+    z-index: 100;
+    background-color: #f4f4f4;
+    color:#208baa;
+    border-radius: 5px;
+    text-align: center;
+    font-weight: bold;
+    height: 70px;
+    font-size: 30px;
+  }
+  
+  .button-ios {
+    background-color: rgb(233, 247, 254);
+    color: rgb(67, 118, 180);
+  }
+
+  .thx-under{
+    width: 720px;
+    height: 540px;
+  }
+
+  .fixo {
+    padding-top: 10px;
+  }
+
+  element.style {
+    background-color: rgb(218,218,218);
+  }
+
+  .label-ios {
+    font-size: 25px;
+    font-weight: bold;
+  }
+
+  .button-ios {
+    background-color: #e9f7fe;
+    color: #4376b4;
+    border-radius: 25px; 
+  }
+
+  .ion-ios-arrow-round-forward:before {
+    font-size: -webkit-xxx-large;
+    font-weight: bold;
+    color: rgb(0,170,239);
+  }   
+
+  .button-md {
+    background-color: #e9f7fe;
+   height: 4.6rem;
+   color: #2e74eb;
+   box-shadow:none;
+  } 
+
+  [padding] h2:first-child{
+    margin-top: auto;
+  }
+
+  button {
+    background-color: #f4f4f4;
+  }
+
+  .ion-md-arrow-round-back:before {
+    font-size: 30px;
+    color: #208baa;
+  }
+
+  ion-footer {
+
+    ion-toolbar {
+      #save-button{
+        float: right;
+        background-color: #002c80;
+        color: #e9f7fe;
+      }
+    }
+  }
 }
