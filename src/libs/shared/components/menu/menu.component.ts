@@ -22,7 +22,6 @@ const menus = [
         icon: 'custom-menu-meu-perfil',
         component: 'NewsHighlightsPage',
         order: 1
-
       }
     ]
   }
