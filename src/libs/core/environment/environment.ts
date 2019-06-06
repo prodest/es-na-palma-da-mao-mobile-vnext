@@ -23,6 +23,7 @@ export interface Environment {
     transparency: string;
     feedback: string;
     edocs: string;
+    selecaoalunos: string;
     empregabilidade: string;
   };
   push: {

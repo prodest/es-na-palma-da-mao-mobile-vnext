@@ -1,6 +1,6 @@
 {
   "name": "espm",
-  "version": "5.6.2",
+  "version": "5.6.4",
   "displayName": "ES na Palma da Mao",
   "description": "O ES NA PALMA DA MÃO é um programa do Governo do Estado do Espírito Santo que reúne iniciativas e serviços do Governo em plataforma móvel (aplicativo) e web, com unidade de experiência do cidadão. Por meio do ES NA PALMA DA MÃO, diversos serviços governamentais podem ser acessados através da web e dispositivos móveis (sistemas operacionais iOS e Android) utilizando uma interface comum.",
   "private": true,
@@ -25,6 +25,7 @@
     "format:check": "prettier --find-config-path --list-different \"src/{app,libs,theme}/**/*{.ts,.js,.json,.css,.scss}\"",
     "workbox": "workbox generate:sw",
     "release": "standard-version -a",
+    "release:pre": "standard-version -a --release-as patch",
     "cordova:release": "cordova build android --release --buildconfig=build.json",
     "release:preview": "standard-version --dry-run -a",
     "precommit": "exit 0",

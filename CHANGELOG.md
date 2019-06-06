@@ -2,6 +2,37 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+<a name="5.6.4"></a>
+## [5.6.4](https://github.com/prodest/es-na-palma-da-mao-mobile-vnext/compare/v5.6.3...v5.6.4) (2019-06-03)
+
+
+### Bug Fixes
+
+* **detran:** abrindo pdf no broser sem depender do cordova. ([970dbe6](https://github.com/prodest/es-na-palma-da-mao-mobile-vnext/commit/970dbe6))
+* **detran:** inAppBrowser unused reference ([d371d3f](https://github.com/prodest/es-na-palma-da-mao-mobile-vnext/commit/d371d3f))
+
+
+### Features
+
+* **detalhes:** detalhe da oportunidade consumindo dados ([007a71f](https://github.com/prodest/es-na-palma-da-mao-mobile-vnext/commit/007a71f))
+* **favoritos:** favoritos do seleção aluno funcionando ([cf9520d](https://github.com/prodest/es-na-palma-da-mao-mobile-vnext/commit/cf9520d))
+* **favoritos:** implementação dos favoritos ([5bdc2d9](https://github.com/prodest/es-na-palma-da-mao-mobile-vnext/commit/5bdc2d9))
+* **oportunidades:** consumindo da api ([eceafed](https://github.com/prodest/es-na-palma-da-mao-mobile-vnext/commit/eceafed))
+* **processo-seletivo:** agora mostra os anexos dos processos seletivos ([c320713](https://github.com/prodest/es-na-palma-da-mao-mobile-vnext/commit/c320713))
+* **seleçãoAlunos:** Criado o seleção alunos listando os concursos do mesmo. ([3b656d6](https://github.com/prodest/es-na-palma-da-mao-mobile-vnext/commit/3b656d6))
+
+
+
+<a name="5.6.3"></a>
+## [5.6.3](https://github.com/prodest/es-na-palma-da-mao-mobile-vnext/compare/v5.6.2...v5.6.3) (2019-04-16)
+
+
+### Bug Fixes
+
+* **transcol-online:** Ocultando a distância do 'origin-previsions' ([717a041](https://github.com/prodest/es-na-palma-da-mao-mobile-vnext/commit/717a041))
+
+
+
 <a name="5.6.2"></a>
 ## [5.6.2](https://github.com/prodest/es-na-palma-da-mao-mobile-vnext/compare/v5.6.1...v5.6.2) (2019-04-08)
 

@@ -34,7 +34,8 @@ import { TranscolOnlineProviders } from './ceturb/transcol-online/providers';
 import { DetranProviders } from './detran/providers';
 import { DioProviders } from './dio/providers';
 import { EDocsProviders } from './edocs/state';
-import { OportunidadesProviders } from './oportunidades/providers';
+import { OportunidadesProviders } from './oportunidades/concurso/providers';
+import { AlunosProviders } from './oportunidades/alunos/providers';
 import { NewsProviders } from './news/providers';
 import { TransparencyProviders } from './secont/transparency/providers';
 import { SepProviders } from './sep/providers';
@@ -97,10 +98,11 @@ registerLocaleData(ptBr);
     ...TransparencyProviders,
     ...EDocsProviders,
     ...OportunidadesProviders,
+    ...AlunosProviders,
     ...TranscolOnlineStores,
-    { 
-      provide: ErrorHandler, 
-      useClass: IonicErrorHandler 
+    {
+      provide: ErrorHandler,
+      useClass: IonicErrorHandler
     },
     {
       provide: LOCALE_ID,

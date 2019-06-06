@@ -1,0 +1,78 @@
+espm-lista-oportunidades-page {
+  .scroll-content {
+    #not-founded {
+      height: 100%;
+    }
+    background-color: #f5f5f5;
+  }
+  concurso-status {
+    margin: 0px !important;
+  }
+  .concursos_name {
+    font-weight: 500;
+    font-size: 1.6rem;
+    float: left;
+    margin: 0 auto;
+    margin-left: 15px;
+    font-variant: small-caps;
+  }
+  .concursos_descricao {
+    width: 60%;
+    margin-top: 10%;
+    float: left;
+    margin: 30px;
+    position: absolute !important;
+    border-right-style: outset;
+    border-right-color: #d3ddf0;
+    border-right-width: 1px;
+    margin-left: 2px;
+  }
+  .texto_negrito {
+    color: black;
+    font-weight: bold;
+    font-size: 30px;
+    font-style: italic;
+    background-color: #d3ddf0;
+  }
+  .radius_concursos {
+    border-radius: 10px;
+    padding-left: 0px;
+    padding-right: 5px;
+    margin-bottom: 20px;
+    width: 90%;
+    background-color: white;
+    height: 100px;
+  }
+  .status_float {
+    float: right;
+  }
+  .badge {
+    border-radius: 10px;
+  }
+  .item-inner {
+    padding-bottom: 20px;
+  }
+  .andamento ion-badge {
+    background-color: #2bace2 !important;
+  }
+  .encerrado ion-badge {
+    background-color: #bf0065 !important;
+  }
+  .virtual-scroll .virtual-position,
+  .virtual-scroll .virtual-position.item {
+    left: 15px;
+  }
+  .efeito_css {
+    background: linear-gradient(45deg, red 50%, #208baa 50%);
+    height: 2px;
+  }
+  .list-md {
+    background-color: #d3ddf0;
+  }
+  .center_css {
+    margin-top: 1px;
+  }
+  .favorito_icon {
+    color: $color-secondary;
+  }
+}
