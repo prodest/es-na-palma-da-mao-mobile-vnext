@@ -77,7 +77,7 @@ export class LoginPage {
   openUrlForgotPassword = () => this.openInAppBrowser(`${this.environment.api.acessocidadao}/Conta/SolicitarReinicioSenha`);
 
   back(){
-    this.navCtrl.setRoot('DashboardPage');
+    this.navCtrl.pop()
   }
   /************************************* Private API *************************************/
 

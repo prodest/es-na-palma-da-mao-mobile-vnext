@@ -13,15 +13,16 @@ const menus = [
     items: [
       {
         title: 'Meus Serviços',
-        icon: 'apps',
+        icon: 'custom-menu-meus-servicos',
         component: 'MyServicesPage',
         order: 1
       },
       {
         title: 'Meu Perfil',
-        icon: 'contact',
+        icon: 'custom-menu-meu-perfil',
         component: 'NewsHighlightsPage',
         order: 1
+
       }
     ]
   }
