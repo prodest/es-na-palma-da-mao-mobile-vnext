@@ -6,7 +6,7 @@ import { Observable } from 'rxjs/Observable';
 import { map, share } from 'rxjs/operators';
 
 import { ApiBaseService } from './api-base.service';
-import { Document } from './documents.model';
+import { Document, ManifestacaoUsuario } from './documents.model';
 
 /**
  *
@@ -28,7 +28,7 @@ export class DocumentsApiService extends ApiBaseService<Document> {
   getAllWaitingForMySignature = (page: number, pageSize: number): Observable<Document[]> => {
     return this.http
       .get<Document[]>(this.endpoint(`aguardando`), { params: this.toParams({ page, pageSize }) })
-      .pipe(map(e => this.enhance(e)), share());
+      .pipe(map(e => this.mapDocumentScope(e, ManifestacaoUsuario.NaoSeManifestou)), map(e => this.enhance(e)), share());
   };
 
   /**
@@ -37,7 +37,7 @@ export class DocumentsApiService extends ApiBaseService<Document> {
   getAllSignedByMe = (page: number, pageSize: number): Observable<Document[]> => {
     return this.http
       .get<Document[]>(this.endpoint(`assinados`), { params: this.toParams({ page, pageSize }) })
-      .pipe(map(e => this.enhance(e)), share());
+      .pipe(map(e => this.mapDocumentScope(e, ManifestacaoUsuario.Assinado)), map(e => this.enhance(e)), share());
   };
 
   /**
@@ -46,7 +46,7 @@ export class DocumentsApiService extends ApiBaseService<Document> {
   getAllRefusedByMe = (page: number, pageSize: number): Observable<Document[]> => {
     return this.http
       .get<Document[]>(this.endpoint(`recusados`), { params: this.toParams({ page, pageSize }) })
-      .pipe(map(e => this.enhance(e)), share());
+      .pipe(map(e => this.mapDocumentScope(e, ManifestacaoUsuario.Recusado)), map(e => this.enhance(e)), share());
   };
 
   /**
@@ -99,4 +99,11 @@ export class DocumentsApiService extends ApiBaseService<Document> {
   generateUrl = (id: ID): Observable<string> => {
     return this.http.get<string>(this.endpoint(`${id}/download`), {}).pipe(share());
   };
+
+  /**
+   *
+   */
+  private mapDocumentScope(documents: Document[], tipoManifestacao: ManifestacaoUsuario): Document[] {
+    return documents.map(d => ({ ...d, manifestacaoUsuario: tipoManifestacao }));
+  }
 }
