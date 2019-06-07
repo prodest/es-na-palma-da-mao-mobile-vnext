@@ -42,6 +42,9 @@ export class HomeScreenPage implements OnInit, OnDestroy {
     uriScheme?: string;
   }> = [];
 
+  headerContentWelcome: Array<string> = ['Bem vindo ao','Espírito Santo','na Palma da Mão'];
+  headerContentAccess: Array<string> = ['Acesse','seus serviços','digitais'];
+
   constructor(
     private appCtrl: App,
     private authQuery: AuthQuery,

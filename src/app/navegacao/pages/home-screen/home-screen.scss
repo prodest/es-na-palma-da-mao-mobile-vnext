@@ -1,0 +1,109 @@
+page-home-screen {
+  
+  ion-slide {
+    height: 100%;
+  }
+
+  .button-inner{
+    justify-content: end;
+    text-transform: none; 
+  }
+  h2{
+    margin: auto;
+  }
+  .radius_css{
+    border-radius: 25px;
+  }
+  .styles_css{
+    color: #2BACE2;
+    font-weight: bold;
+    font-size: 35px;
+    text-align: left;
+    margin-left: 20px;
+    margin-top: auto;
+  }
+  .second_color{
+    font-size: 35px;
+    color: #002c80;
+    text-align: left;
+    margin-left: 20px;
+    font-weight: bold;
+  }
+  page-select-favorite .second_color {
+    margin-top: auto;
+  }
+  .espace{
+    top:2px;
+  }
+  .col_foot{
+    color: #ff0087;
+    font-size: 20px;
+    margin: 20px;
+  }
+  .fixed_button{
+    position: fixed;
+    float: bottom;
+    bottom: 25px;
+    right: 15px;
+    z-index: 100;
+    background-color: white;
+    color:#208baa;
+    border-radius: 5px;
+    text-align: center;
+    font-weight: bold;
+    height: 70px;
+    font-size: 30px;
+  }
+  .styletwo{
+    text-align: center;
+  }
+  .button-inner {
+    display:contents;
+  }
+  .button-ios {
+    background-color: rgb(0, 66, 151);
+  }
+  .button-outline-md-danger {
+    color: white;
+    background-color:#ff0087; 
+    border-radius: 25px;
+    width: 220px;
+  }
+  .button-block-md {
+    border-radius: 25px;
+    width: 320px;
+    color: white;
+    margin-left: 20px;
+  }
+  .img-cs{
+    background-image:  url('../assets/imgs/ilustracao-tela-bem-vindo.png' );
+    height: 350px;
+    background-size: cover !important;
+    width: 300px;
+    margin-left: 40px;
+    margin-bottom: 30px;
+    margin-top: 10px;
+  }
+  * {
+    margin: 0 auto;
+  }
+  element.style {
+    padding-bottom: 80px;
+  }
+  .img-ser{
+    background-image:  url('../assets/imgs/ilustracao-tela-login.png' );
+    height: 250px;
+    background-size: cover !important;
+    width: 300px;
+    margin-left: 40px;
+    margin-bottom: 30px;
+    margin-top: 10px;
+  }
+  .but-foot{
+    float: right;
+    color: #00aeef;
+    font-size: 30px;
+    background-color: #f4f4f4;
+    margin-right: 10px;
+  }
+}
