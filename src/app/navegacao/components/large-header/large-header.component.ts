@@ -11,6 +11,9 @@ import { Component, Input } from '@angular/core';
   templateUrl: 'large-header.component.html'
 })
 export class LargeHeaderComponent {
+  /**
+   * Input do texto pra ser exibido. Cada linha deve ser uma string no array.
+   */
   @Input() content: Array<string>;
 
   constructor() {}

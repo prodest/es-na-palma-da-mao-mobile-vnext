@@ -1,15 +1,57 @@
 large-header {
-    font-family: 'Poppins';
-    font-weight: 700;
-    font-size: 40px;
-    text-align: left;
-    color: #004297; // primary-dark
-    
-    p {
-        height: 40px;
+    // TODO: Aplicar as variáveis de cores
+    .sign {
+        height: 35px;
+        width: 7px;
+        background-color: #ba0084; // $secondary-dark
+        border-radius: 2px;
+        float: left;
+        margin-top: 12px;
     }
 
-    .first-line {
-        color: #00aeef; // primary mid
+    .content {
+        display: flow-root;
+        padding-left: 30px;
+
+        p {
+            font-family: 'Poppins';
+            font-weight: 700;
+            font-size: 40px;
+            text-align: left;
+            color: #004297; // $primary-dark
+            height: 40px;
+        }
+
+        .first-line {
+            color: #00aeef; // $primary-mid
+        }
+    }
+
+    // Galaxy S5
+    @media screen and (max-width: 399px) {
+        .sign {
+            height: 30px;
+        }
+        .content {
+            padding-left: 25px;
+            p {
+                font-size: 35px;
+                height: 35px;
+            }
+        }
+    }
+
+    // iPhone 5/SE
+    @media screen and (max-width: 349px) {
+        .sign {
+            height: 25px;
+        }
+        .content {
+            padding-left: 20px;
+            p {
+                font-size: 30px;
+                height: 30px;
+            }
+        }
     }
 }

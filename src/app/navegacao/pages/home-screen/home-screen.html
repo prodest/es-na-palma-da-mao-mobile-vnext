@@ -1,19 +1,27 @@
  
  <ion-content>
-  <ion-slides pager>
-    <ion-slide class="apres_conc">
+  <ion-slides pager #slides>
+    <!-- Primeiro Slide -->
+    <ion-slide id="slide-welcome" class="apres_conc">
+      <!-- Header: Boas Vindas -->
       <large-header [content]="headerContentWelcome"></large-header>
 
+      <!-- Imagem -->
       <div class="img-cs"></div>
+      
+      <!-- Legenda -->
       <div>
         <p class="col_foot">Serviços públicos digitais que melhoram a vida do cidadão</p>
       </div>
+
+      <!-- Botão: Próximo slide -->
       <button class="but-foot" (click)="next()"> 
         <ion-icon md="md-arrow-round-forward"></ion-icon>
       </button>
     </ion-slide>
     
-    <ion-slide>
+    <!-- Segundo Slide -->
+    <ion-slide id="slide-access">
       <large-header [content]="headerContentAccess"></large-header>
       <div class="img-ser"></div>
       <div class="footer-botton">
