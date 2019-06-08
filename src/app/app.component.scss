@@ -100,43 +100,61 @@ ion-icon[name='exit'] {
 }
 
 ion-icon {
-  &[class*="custom-"] {
+  /* Ícones do menu */
+  &[class*="custom-menu-"] {
     mask-size: contain;
     mask-position: 50% 50%;
     mask-repeat: no-repeat;
-    background: #004297;
+    background: #004297; // $primary-dark
     width: 1em;
     height: 1em;
   }
 
-  &[class*="menu-ajuda"] {
+  &[class*="ajuda"] {
     mask-image: url(../assets/icon/icone-menu-ajuda.svg);
   }
-  &[class*="menu-contato"] {
+  &[class*="contato"] {
     mask-image: url(../assets/icon/icone-menu-contato.svg);
   }
-  &[class*="menu-desenvolvedores"] {
+  &[class*="desenvolvedores"] {
     mask-image: url(../assets/icon/icone-menu-desenvolvedores.svg);
   }
-  &[class*="menu-facebook"] {
+  &[class*="facebook"] {
     mask-image: url(../assets/icon/icone-menu-facebook.svg);
   }
-  &[class*="menu-instagram"] {
+  &[class*="instagram"] {
     mask-image: url(../assets/icon/icone-menu-instagram.svg);
   }
-  &[class*="menu-meu-perfil"] {
+  &[class*="meu-perfil"] {
     mask-image: url(../assets/icon/icone-menu-meu-perfil.svg);
   }
-  &[class*="menu-meus-servicos"] {
+  &[class*="meus-servicos"] {
     mask-image: url(../assets/icon/icone-menu-meus-serviços.svg);
   }
-  &[class*="menu-sair"] {
+  &[class*="sair"] {
     mask-image: url(../assets/icon/icone-menu-sair-da-conta.svg);
   }
-  &[class*="menu-youtube"] {
+  &[class*="youtube"] {
     mask-image: url(../assets/icon/icone-menu-youtube.svg);
   }
 
+  /* Ícones de navegação */
+  &[class*="custom-nav-"] {
+    mask-size: contain;
+    mask-position: 50% 50%;
+    mask-repeat: no-repeat;
+    background: #00aeef; // $primary-mid
+    width: 1em;
+    height: 1em;
+  }
+
+  &[class*="avancar"] {
+    mask-image: url(../assets/icon/icone-avançar.svg);
+  }
+
+  &[class*="voltar"] {
+    mask-image: url(../assets/icon/icone-voltar.svg);
+  }
 }
 
 .text-right {
