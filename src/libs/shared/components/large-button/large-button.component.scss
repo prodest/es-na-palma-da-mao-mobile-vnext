@@ -1,0 +1,37 @@
+large-button {
+    // TODO: Aplicar as variáveis de cores
+    button {
+        font-family: 'Poppins';
+        font-weight: 600 !important; // semi-bold
+        width: 75%;
+        text-transform: none !important;
+
+        border-width: 0.75px;
+        border-style: solid;
+    }
+
+    .secondary-dark > button {
+        background-color: #ff0083; // $secondary-dark
+        border-color: #f8c1d9; // $secondary-light
+    }
+    .secondary-dark > button:active, .secondary-dark .activated { 
+        background-color: #820043; // $secondary-very-dark
+    }
+    
+    .primary-dark > button {
+        background-color: #004297; // $primary-dark
+        border-color: #abe1fa; // $primary-light
+    }
+    .primary-dark > button:active, .primary-dark .activated {
+        background-color: #003069; // $primary-very-dark
+    }
+
+    /* Em telas maiores */
+    // iPad
+    @media screen and (min-width: 550px) {
+        // menor largura dos botões do slide 2
+        button {
+            width: 40%;
+        }
+    }
+}
