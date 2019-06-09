@@ -14,9 +14,9 @@ export class HomeScreenPage implements OnInit, OnDestroy {
   @ViewChild('slides') slides: Slides;
   isLoggedIn: boolean;
   private destroyed$ = new Subject<boolean>();
-
+  
   public markAll: boolean;
-
+  
   public menus: Array<{
     title: string;
     icon: string;
@@ -29,7 +29,7 @@ export class HomeScreenPage implements OnInit, OnDestroy {
     package?: string;
     uriScheme?: string;
   }> = [];
- 
+  
   public listaDeSelecionados: Array<{
     title: string;
     icon: string;
@@ -41,11 +41,11 @@ export class HomeScreenPage implements OnInit, OnDestroy {
     package?: string;
     uriScheme?: string;
   }> = [];
-
+  
   headerContentWelcome: Array<string> = ['Bem vindo ao','Espírito Santo','na Palma da Mão'];
   headerContentAccess: Array<string> = ['Acesse','seus serviços','digitais'];
-
-  constructor(
+  
+  constructor (
     private appCtrl: App,
     private authQuery: AuthQuery,
     private authNeeded: AuthNeededService,
@@ -76,7 +76,7 @@ export class HomeScreenPage implements OnInit, OnDestroy {
         component: 'SearchPage',
         isChecked: false
       },
-
+      
       {
         title: 'Situação CNH',
         icon: 'car',
@@ -91,7 +91,7 @@ export class HomeScreenPage implements OnInit, OnDestroy {
         secure: true,
         isChecked: false
       },
-
+      
       {
         title: 'Documentos para assinar',
         icon: 'create',
@@ -99,7 +99,7 @@ export class HomeScreenPage implements OnInit, OnDestroy {
         secure: true,
         isChecked: false
       },
-
+      
       {
         title: 'Consulta Ônibus',
         icon: 'bus',
@@ -112,14 +112,14 @@ export class HomeScreenPage implements OnInit, OnDestroy {
         component: 'TranscolOnlinePage',
         isChecked: false
       },
-
+      
       {
         title: 'Portal da Transparência',
         icon: 'pie',
         component: 'TransparencyDashboardPage',
         isChecked: false
       },
-
+      
       {
         title: 'Consultas',
         icon: 'search',
@@ -132,7 +132,7 @@ export class HomeScreenPage implements OnInit, OnDestroy {
         component: 'LatestEditionsPage',
         isChecked: false
       },
-
+      
       {
         title: 'Táxi Gov',
         icon: 'car',
@@ -144,14 +144,14 @@ export class HomeScreenPage implements OnInit, OnDestroy {
         uriScheme: 'mb://',
         isChecked: false
       },
-
+      
       {
         title: 'Buscar concursos',
         icon: 'search',
         component: 'Apresentacao',
         isChecked: false
       },
-
+      
       {
         title: 'Sobre',
         icon: 'information-circle',
@@ -160,66 +160,76 @@ export class HomeScreenPage implements OnInit, OnDestroy {
       }
     ];
   }
+
   /**
-   *
-   */
+  *
+  */
   ngOnInit() {
     this.authQuery.isLoggedIn$
-      .pipe(tap(() => takeUntil(this.destroyed$)))
-      .subscribe(isLoggedIn => (this.isLoggedIn = isLoggedIn));
+    .pipe(tap(() => takeUntil(this.destroyed$)))
+    .subscribe(isLoggedIn => (this.isLoggedIn = isLoggedIn));
   }
+  
   /**
-   *            
-   */
+  *            
+  */
   ngOnDestroy(): void {
     this.destroyed$.next(true);
     this.destroyed$.complete();
   }
+  
   /**
-   * //seleciona os serviços favoritos
-   */
+  * //seleciona os serviços favoritos
+  */
   marcarLista() {
     this.listaDeSelecionados = this.menus.filter(this.isChecked);
   }
+  
   /**
-   *
-   */
+  *
+  */
   // marcar e desmarcar todos os checkebox
-  marcarTodos(){
-    if(this.markAll === true){
-    this.listaDeSelecionados = [];
-    for(let i = 0; i < this.menus.length; ++i){
-      this.menus[i].isChecked =true;
-      this.listaDeSelecionados.push(this.menus[i]);
+  marcarTodos() {
+    if (this.markAll === true) {
+      this.listaDeSelecionados = [];
+
+      for (let i = 0; i < this.menus.length; ++i) {
+        this.menus[i].isChecked =true;
+        this.listaDeSelecionados.push(this.menus[i]);
+      }
+    } else {
+      for (let i = 0; i < this.menus.length; ++i) {
+        this.menus[i].isChecked =false;
+      }
+
+      this.listaDeSelecionados = [];
     }
-  }else{
-    for(let i = 0; i < this.menus.length; ++i){
-      this.menus[i].isChecked =false;
-    }
-    this.listaDeSelecionados = [];
   }
-  }
+
   /**
-   *
-   */
+  *
+  */
   isChecked(item) { 
     if (item.isChecked) return item;
- }
- /**
+  }
+
+  /**
   * direciona para pagina de login
   */
- openPageLogin() {
-  this.navCtrl.setRoot('LoginPage');
-}
-/**
- * direciona para paginas de visitantes pasando paramentros array menus
- */
-openPageMyServices() {
-  this.navCtrl.setRoot('MyServicesPage', this.menus);
-}
+  openPageLogin() {
+    this.navCtrl.setRoot('LoginPage');
+  }
+
+  /**
+  * direciona para paginas de visitantes pasando paramentros array menus
+  */
+  openPageMyServices() {
+    this.navCtrl.setRoot('MyServicesPage', this.menus);
+  }
+
   /*
-   *
-   */
+  *
+  */
   openPage = (page: string, accessDenied: boolean = false) => {
     if (accessDenied) {
       this.authNeeded.showAuthNeededModal();
@@ -227,6 +237,7 @@ openPageMyServices() {
       this.appCtrl.getRootNav().push(page);
     }
   };
+  
   next() {
     this.slides.slideNext();
   }  
