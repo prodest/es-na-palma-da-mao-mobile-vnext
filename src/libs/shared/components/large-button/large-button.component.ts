@@ -1,18 +1,16 @@
 import { Component, Input } from '@angular/core';
 
-/**
- * Generated class for the LargeHeaderComponent component.
- *
- * See https://angular.io/api/core/Component for more info on Angular
- * Components.
- */
 @Component({
   selector: 'large-button',
   templateUrl: 'large-button.component.html'
 })
 export class LargeButtonComponent {
   /**
-   * Input do texto pra ser exibido. Cada linha deve ser uma string no array.
+   * Inputs do componente:
+   * leftIcon: Ícone que ficará à esquerda do botão
+   * rightIcon: Ícone que ficará à direita do botão
+   * text: o conteúdo do botão
+   * color: o esquema de cores a ser usado conforme os guidelines
    */
   @Input() leftIcon: string;
   @Input() rightIcon: string;
