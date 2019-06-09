@@ -56,35 +56,6 @@ page-home-screen {
     margin-bottom: 10%;
   }
 
-  .slide-2-button {
-    font-family: 'Poppins';
-    font-weight: 600; // semi-bold
-    width: 75%;
-    text-transform: none;
-  }
-
-  #btn-my-account {
-    background-color: #ff0083; // $secondary-dark
-    border-width: 0.75px;
-    border-style: solid;
-    border-color: #f8c1d9; // $secondary-ligth
-  }
-
-  #btn-my-account:active {
-    background-color: #820043; // $secondary-very-dark
-  }
-
-  #btn-visitor {
-    background-color: #004297; // $primary-dark
-    border-width: 0.75px;
-    border-style: solid;
-    border-color: #abe1fa; // $primary-light
-  }
-
-  #btn-visitor:active {
-    background-color: #003069; // $primary-very-dark
-  }
-
   /* Em telas menores */
   // Galaxy S5
   @media screen and (max-width: 399px) {
@@ -101,15 +72,6 @@ page-home-screen {
     // menor tamanho do texto de descrição
     #description {
       font-size: 17px;
-    }
-  }
-
-  /* Em telas maiores */
-  // iPad
-  @media screen and (min-width: 550px) {
-    // menor largura dos botões do slide 2
-    .slide-2-button {
-      width: 40%;
     }
   }
 }

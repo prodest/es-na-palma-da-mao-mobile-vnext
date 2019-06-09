@@ -62,45 +62,25 @@
             <ion-row class="row-2">
               <ion-col col-12>
                 <!-- Botão: Minha conta -->
-                <div class="button-wrapper">
-                  <button id="btn-my-account" class="slide-2-button" ion-button round large (click)="openPageLogin()">
-                    <ion-grid>
-                      <ion-row>
-                        <ion-col col-2>
-                          <p><ion-icon name="ios-lock"></ion-icon></p>
-                        </ion-col>
-                        <ion-col col-8>
-                          <p>Minha Conta</p>
-                        </ion-col>
-                        <ion-col col-2>
-                          <p><ion-icon name="ios-arrow-forward-outline"></ion-icon></p>
-                        </ion-col>
-                      </ion-row>
-                    </ion-grid>
-                  </button> 
-                </div>
+                <large-button
+                  [color]="'secondary-dark'"
+                  [leftIcon]="'ios-lock'"
+                  [rightIcon]="'ios-arrow-forward-outline'"
+                  [text]="'Minha Conta'"
+                  (click)="openPageLogin()"
+                ></large-button>
               </ion-col>
             </ion-row>
             <ion-row class="row-3">
               <ion-col col12>
                 <!-- Botão: Visitante -->
-                <div class="button-wrapper">
-                  <button id="btn-visitor" class="slide-2-button" ion-button round large (click)="openPageMyServices()">
-                    <ion-grid>
-                      <ion-row>
-                        <ion-col col-2>
-                          <p><ion-icon name="ios-eye"></ion-icon></p>
-                        </ion-col>
-                        <ion-col col-8>
-                          <p>Visitante</p>
-                        </ion-col>
-                        <ion-col col-2>
-                          <p><ion-icon name="ios-arrow-forward-outline"></ion-icon></p>
-                        </ion-col>
-                      </ion-row>
-                    </ion-grid>
-                  </button>
-                </div> <!-- Fim da div button-wrapper -->
+                <large-button
+                  [color]="'primary-dark'"
+                  [leftIcon]="'ios-eye'"
+                  [rightIcon]="'ios-arrow-forward-outline'"
+                  [text]="'Visitante'"
+                  (click)="openPageMyServices()"
+                ></large-button>
               </ion-col>
             </ion-row>
           </ion-grid> <!-- Fim do grid wrapper -->
