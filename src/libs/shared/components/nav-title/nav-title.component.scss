@@ -1,0 +1,62 @@
+nav-title {
+    // TODO: Aplicar as variáveis de cores
+    // TODO: Implementar classes dos esquemas de cores
+    
+    .nav-title {
+        margin-top: 0;
+        background-color: white;
+    }
+
+    .sign {
+        height: 35px;
+        width: 7px;
+        background-color: #ff0083; // $secondary-dark
+        border-radius: 2px;
+        float: left;
+        margin-top: 12px;
+    }
+
+    .content {
+        display: flow-root;
+        padding-left: 30px;
+        margin-bottom: 20px;
+
+        p {
+            font-family: 'Poppins';
+            font-weight: 700;
+            font-size: 40px;
+            text-align: left;
+            color: #004297; // $primary-dark
+            height: 40px;
+            margin: 0;
+        }
+    }
+
+    // Galaxy S5
+    @media screen and (max-width: 399px) {
+        .sign {
+            height: 30px;
+        }
+        .content {
+            padding-left: 25px;
+            p {
+                font-size: 35px;
+                height: 35px;
+            }
+        }
+    }
+
+    // iPhone 5/SE
+    @media screen and (max-width: 349px) {
+        .sign {
+            height: 25px;
+        }
+        .content {
+            padding-left: 20px;
+            p {
+                font-size: 30px;
+                height: 30px;
+            }
+        }
+    }
+}
