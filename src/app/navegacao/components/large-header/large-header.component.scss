@@ -1,9 +1,13 @@
 large-header {
     // TODO: Aplicar as variáveis de cores
+    .large-header {
+        margin-top: 40px;
+    }
+
     .sign {
         height: 35px;
         width: 7px;
-        background-color: #ba0084; // $secondary-dark
+        background-color: #ff0083; // $secondary-dark
         border-radius: 2px;
         float: left;
         margin-top: 12px;
@@ -12,6 +16,7 @@ large-header {
     .content {
         display: flow-root;
         padding-left: 30px;
+        margin-bottom: 20px;
 
         p {
             font-family: 'Poppins';
@@ -20,6 +25,7 @@ large-header {
             text-align: left;
             color: #004297; // $primary-dark
             height: 40px;
+            margin: 0;
         }
 
         .first-line {
