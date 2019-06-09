@@ -1,109 +1,115 @@
 page-home-screen {
-  
-  ion-slide {
+  // TODO: Aplicar as varuáveis de cores
+
+  /* Geral */
+  .scroll-content {
+    background-color: white;
+  }
+  height: 100%;
+
+  .slide-zoom, .slide-zoom > ion-grid {
     height: 100%;
   }
 
-  .button-inner{
-    justify-content: end;
-    text-transform: none; 
+  .row-content {
+    height: 70%;
   }
-  h2{
-    margin: auto;
+
+  ion-grid, ion-col {
+    padding: 0 !important;
   }
-  .radius_css{
-    border-radius: 25px;
+
+  .wrapper {
+    display: flex;
+    justify-content: center;
   }
-  .styles_css{
-    color: #2BACE2;
-    font-weight: bold;
-    font-size: 35px;
-    text-align: left;
-    margin-left: 20px;
-    margin-top: auto;
+
+  .img-home-screen {
+    img {
+      width: 70%;
+    }
   }
-  .second_color{
-    font-size: 35px;
-    color: #002c80;
-    text-align: left;
-    margin-left: 20px;
-    font-weight: bold;
+
+  /* Slide 1 - Boas vindas */
+  #img-welcome {
+    max-width: 520px;
   }
-  page-select-favorite .second_color {
-    margin-top: auto;
-  }
-  .espace{
-    top:2px;
-  }
-  .col_foot{
-    color: #ff0087;
+
+  #description {
+    font-family: 'Poppins';
+    font-weight: 600; // semi-bold
     font-size: 20px;
-    margin: 20px;
+    color: #ff0083; // $secondary-dark
   }
-  .fixed_button{
+
+  #next-slide{
     position: fixed;
-    float: bottom;
-    bottom: 25px;
-    right: 15px;
-    z-index: 100;
-    background-color: white;
-    color:#208baa;
-    border-radius: 5px;
-    text-align: center;
-    font-weight: bold;
-    height: 70px;
-    font-size: 30px;
+    right: 20px;
+    bottom: 20px;
+    font-size: 20px;
+    background-color: transparent;
   }
-  .styletwo{
-    text-align: center;
+
+  /* Slide 2 - Acesso */
+  #img-login {
+    max-width: 459px;
+    margin-bottom: 10%;
   }
-  .button-inner {
-    display:contents;
+
+  .slide-2-button {
+    font-family: 'Poppins';
+    font-weight: 600; // semi-bold
+    width: 75%;
+    text-transform: none;
   }
-  .button-ios {
-    background-color: rgb(0, 66, 151);
+
+  #btn-my-account {
+    background-color: #ff0083; // $secondary-dark
+    border-width: 0.75px;
+    border-style: solid;
+    border-color: #f8c1d9; // $secondary-ligth
   }
-  .button-outline-md-danger {
-    color: white;
-    background-color:#ff0087; 
-    border-radius: 25px;
-    width: 220px;
+
+  #btn-my-account:active {
+    background-color: #820043; // $secondary-very-dark
   }
-  .button-block-md {
-    border-radius: 25px;
-    width: 320px;
-    color: white;
-    margin-left: 20px;
+
+  #btn-visitor {
+    background-color: #004297; // $primary-dark
+    border-width: 0.75px;
+    border-style: solid;
+    border-color: #abe1fa; // $primary-light
   }
-  .img-cs{
-    background-image:  url('../assets/imgs/ilustracao-tela-bem-vindo.png' );
-    height: 350px;
-    background-size: cover !important;
-    width: 300px;
-    margin-left: 40px;
-    margin-bottom: 30px;
-    margin-top: 10px;
+
+  #btn-visitor:active {
+    background-color: #003069; // $primary-very-dark
   }
-  * {
-    margin: 0 auto;
+
+  /* Em telas menores */
+  // Galaxy S5
+  @media screen and (max-width: 399px) {
+    // menor tamanho do botão "next slide"
+    #next-slide{
+      font-size: 15px;
+      right: 15px;
+      bottom: 15px;
+    }
   }
-  element.style {
-    padding-bottom: 80px;
+
+  // iPhone 5/SE
+  @media screen and (max-width: 349px) {
+    // menor tamanho do texto de descrição
+    #description {
+      font-size: 17px;
+    }
   }
-  .img-ser{
-    background-image:  url('../assets/imgs/ilustracao-tela-login.png' );
-    height: 250px;
-    background-size: cover !important;
-    width: 300px;
-    margin-left: 40px;
-    margin-bottom: 30px;
-    margin-top: 10px;
-  }
-  .but-foot{
-    float: right;
-    color: #00aeef;
-    font-size: 30px;
-    background-color: #f4f4f4;
-    margin-right: 10px;
+
+  /* Em telas maiores */
+  // iPad
+  @media screen and (min-width: 550px) {
+    // menor largura dos botões do slide 2
+    .slide-2-button {
+      width: 40%;
+    }
   }
 }

@@ -14,7 +14,7 @@
             [ngClass]="{ last: last, accessDenied: !isLoggedIn && page.secure }"
             (click)="openPage(page, !isLoggedIn && page.secure )">
       <ion-icon item-start
-                name="md-{{page.icon}}"></ion-icon>            
+                name="{{page.icon}}"></ion-icon>            
       {{page.title}}
     </button>
   </ng-container>
