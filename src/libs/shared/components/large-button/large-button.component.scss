@@ -8,6 +8,8 @@ large-button {
 
         border-width: 0.75px;
         border-style: solid;
+
+        color: white;
     }
 
     .secondary-dark > button {
@@ -28,7 +30,7 @@ large-button {
 
     /* Em telas maiores */
     // iPad
-    @media screen and (min-width: 550px) {
+    @media screen and (min-width: 650px) {
         // menor largura dos botões do slide 2
         button {
             width: 40%;
