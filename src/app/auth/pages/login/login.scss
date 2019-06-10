@@ -1,5 +1,20 @@
 page-login {
+  .scroll-content, ion-header {
+    background-color: white;
+  }
+
+  #return {
+    margin-top: 15px;
+    margin-left: 15px;
+    font-size: 15px;
+    background-color: transparent;
+    padding: 0;
+  }
+  /* 
+  
   ion-content {
+
+    
 
     .item {
       background-color: transparent !important;
@@ -55,5 +70,5 @@ espm-section-title .section__title {
 }
 .button-ios {
   margin-bottom: 10px;
-}
+} */
 }

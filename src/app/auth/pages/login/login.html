@@ -1,41 +1,58 @@
-
-<ion-content padding >
-    <button (click)="back()"> 
-    <ion-icon ios="ios-arrow-round-back" md="md-arrow-round-back"></ion-icon>
-</button>
-  <div class="style">ENTRAR</div>
+<ion-header>
+  <!-- Botão voltar -->
+  <button icon-only id="return" (click)="back()"> 
+    <ion-icon name="custom-nav-voltar"></ion-icon>
+  </button>
+  <nav-title
+    [title]="'Minha conta'"
+  ></nav-title>
+</ion-header>
+<ion-content>
     
-  <form (submit)="login(username, password)">
-    <ion-list no-padding
-              margin-top>
+  <form>
+    <ion-list no-padding margin-top>
       <ion-item>
         <ion-label floating>CPF ou Email</ion-label>
-        <ion-input type="email"
-                   [(ngModel)]="username"
-                   name="email"></ion-input>
+        <ion-input
+          type="email"
+          [(ngModel)]="username"
+          name="email">
+        </ion-input>
       </ion-item>
       <ion-item>
         <ion-label floating>Senha</ion-label>
-        <ion-input type="password"
-                   [(ngModel)]="password"
-                   name="password"></ion-input>
+        <ion-input
+          type="password"
+          [(ngModel)]="password"
+          name="password">
+        </ion-input>
       </ion-item>
       <ion-item no-lines>
-        <button ion-button
-                item-end
-                clear
-                color-light
-                (click)="openUrlForgotPassword()">Esqueceu sua senha?</button>
+        <button
+          ion-button
+          item-end
+          clear
+          color-light
+          (click)="openUrlForgotPassword()">Esqueceu sua senha?</button>
       </ion-item>
     </ion-list>
-    <button ion-button 
-            full
-            large
-            color-primary-inverse
-            type="submit" >ENTRAR</button>
-    <button ion-button 
-            full
-            large (click)="createAccount()">CRIAR CONTA</button>
+    <!-- Botão ENTRAR -->
+    <large-button
+      [color]="'secondary-dark'"
+      [leftIcon]="'md-finger-print'"
+      [rightIcon]="'ios-arrow-forward-outline'"
+      [text]="'Entrar'"
+      (click)="login(username, password)"
+    ></large-button>
+    
+    <!-- Botão CRIAR CONTA -->
+    <large-button
+      [color]="'primary-dark'"
+      [leftIcon]="'ios-add-circle-outline'"
+      [rightIcon]="'ios-arrow-forward-outline'"
+      [text]="'Criar conta'"
+      (click)="createAccount()"
+    ></large-button>
   </form>
   <div class="social-login"
        showWhen="cordova">
