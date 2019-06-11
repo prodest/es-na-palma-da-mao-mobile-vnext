@@ -209,7 +209,7 @@ export class HomeScreenPage implements OnInit, OnDestroy {
   this.navCtrl.setRoot('LoginPage');
 }
 /**
- * direciona para paginas de visitantes pasando paramentros array menus
+ * direciona para paginas de serviços pasando paramentros array menus
  */
 openPageMyServices() {
   this.navCtrl.setRoot('MyServicesPage', this.menus);
