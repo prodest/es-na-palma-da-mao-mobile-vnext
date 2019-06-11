@@ -1,15 +1,35 @@
 large-button {
     // TODO: Aplicar as variáveis de cores
+
+    .large-button {
+        width: 75%;
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+    .large-button-grid, .large-button-grid > ion-row {
+        height: 100%;
+    }
+
+    ion-col {
+        display: flex;
+        justify-content: center;
+    }
+
     button {
         font-family: 'Poppins';
         font-weight: 600 !important; // semi-bold
-        width: 75%;
+        width: 100%;
         text-transform: none !important;
 
         border-width: 0.75px;
         border-style: solid;
 
         color: white;
+    }
+
+    button p {
+        margin: auto;
     }
 
     .secondary-dark > button {
@@ -32,8 +52,14 @@ large-button {
     // iPad
     @media screen and (min-width: 650px) {
         // menor largura dos botões do slide 2
-        button {
+        .large-button {
             width: 40%;
+        }
+    }
+
+    @media screen and (max-width: 349px) {
+        button p {
+            font-size: 1.75rem;
         }
     }
 }
