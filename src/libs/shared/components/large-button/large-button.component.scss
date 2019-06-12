@@ -2,9 +2,7 @@ large-button {
     // TODO: Aplicar as variáveis de cores
 
     .large-button {
-        width: 75%;
-        margin-left: auto;
-        margin-right: auto;
+        width: 100%;
     }
 
     .large-button-grid, .large-button-grid > ion-row {
@@ -26,6 +24,9 @@ large-button {
         border-style: solid;
 
         color: white;
+
+        margin-left: 0 !important;
+        margin-right: 0 !important;
     }
 
     button p {
@@ -57,6 +58,8 @@ large-button {
         }
     }
 
+    /* Em telas menores */
+    // iPhone 5/SE
     @media screen and (max-width: 349px) {
         button p {
             font-size: 1.75rem;
