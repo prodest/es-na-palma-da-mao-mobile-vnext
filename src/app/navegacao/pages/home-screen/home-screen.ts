@@ -217,7 +217,7 @@ export class HomeScreenPage implements OnInit, OnDestroy {
   * direciona para pagina de login
   */
   openPageLogin() {
-    this.navCtrl.setRoot('LoginPage');
+    this.navCtrl.push('LoginPage');
   }
 
   /**

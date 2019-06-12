@@ -1,11 +1,12 @@
 page-home-screen {
-  // TODO: Aplicar as varuáveis de cores
+  // TODO: Aplicar as variáveis de cores
 
   /* Geral */
+  height: 100%;
+
   .scroll-content {
     background-color: white;
   }
-  height: 100%;
 
   .slide-zoom, .slide-zoom > ion-grid {
     height: 100%;
