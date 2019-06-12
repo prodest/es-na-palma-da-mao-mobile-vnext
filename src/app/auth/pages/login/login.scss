@@ -1,7 +1,32 @@
 page-login {
-  .scroll-content, ion-header {
-    background-color: white;
+
+  /* Geral */
+
+  ion-content, .scroll-content {
+    height: 100%;
   }
+
+  .scroll-content {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+
+    background-color: white;
+    overflow: hidden;
+  }
+
+  ion-grid, ion-col {
+    padding: 0 !important;
+  }
+
+  .wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+  }
+
+  /* Header */
 
   #return {
     margin-top: 15px;
@@ -10,6 +35,27 @@ page-login {
     background-color: transparent;
     padding: 0;
   }
+
+  /* Inputs */
+  // TODO: Formatar os campos de input conforme Guideline
+
+  #inputs {
+    width: 90%;
+  }
+
+  ion-item, ion-input {
+    width: 100%;
+  }
+
+  /* Botões */
+
+  .login-button {
+    width: 75%;
+  }
+
+
+
+  
   /* 
   
   ion-content {
