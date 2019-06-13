@@ -8,21 +8,15 @@ page-home-screen {
     background-color: white;
   }
 
-  .slide-zoom, .slide-zoom > ion-grid {
+  ion-slide {
+    display: block;
+  }
+
+  .slide-zoom {
     height: 100%;
-  }
-
-  .row-content {
-    height: 70%;
-  }
-
-  ion-grid, ion-col {
-    padding: 0 !important;
-  }
-
-  .wrapper {
     display: flex;
-    justify-content: center;
+    flex-direction: column;
+    justify-content: space-between;
   }
 
   .img-home-screen {
@@ -32,8 +26,9 @@ page-home-screen {
   }
 
   /* Slide 1 - Boas vindas */
-  #img-welcome {
-    max-width: 520px;
+
+  #slide-welcome {
+    padding-bottom: 10rem;
   }
 
   #description {
@@ -52,9 +47,34 @@ page-home-screen {
   }
 
   /* Slide 2 - Acesso */
-  #img-login {
-    max-width: 459px;
-    margin-bottom: 10%;
+  #slide-access {
+    padding-bottom: 7rem;
+  }
+
+  #home-buttons {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+
+  .home-button {
+    width: 75%;
+    margin: auto;
+  }
+
+  /* Em telas maiores */
+  // iPad
+  @media screen and (min-width: 650px) {
+    // menor largura da imagem
+    .img-home-screen {
+      img {
+        max-width: 320px;
+      }
+    }
+
+    .home-button {
+      width: 40%;
+    }
   }
 
   /* Em telas menores */

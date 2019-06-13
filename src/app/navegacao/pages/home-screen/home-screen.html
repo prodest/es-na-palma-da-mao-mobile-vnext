@@ -2,91 +2,57 @@
   <ion-slides pager #slides>
     <!-- Primeiro Slide -->
     <ion-slide id="slide-welcome">
-      <!-- TODO: Remover os ion-grid's e alinhar com flex -->
-      <ion-grid>
-        <ion-row class="row-header">
-          <ion-col col-12>
-            <!-- Header: Boas Vindas -->
-            <large-header [content]="headerContentWelcome"></large-header>
-          </ion-col>
-        </ion-row>
-        <ion-row class="row-content">
-          <ion-grid class="wrapper">
-            <ion-row>
-              <ion-col col-12>
-                <!-- Imagem -->
-                <div class="img-home-screen">
-                  <img src="./assets/imgs/ilustracao-tela-bem-vindo.png" id="img-welcome">
-                </div>
-              </ion-col>
-            </ion-row>
-            <ion-row>
-              <ion-col col-12>
-                <!-- Legenda -->
-                <div id="description">
-                  <p>Serviços públicos digitais <br> que melhoram <br> a vida do cidadão</p>
-                </div>
-              </ion-col>
-            </ion-row>
-          </ion-grid> <!-- Fim do grid wrapper -->
-        </ion-row>
-        <ion-row class="row-footer">
-          <ion-col col-12>
-            <!-- Botão: Próximo slide -->
-            <button icon-only id="next-slide" (click)="next()">
-              <ion-icon name="custom-nav-avancar"></ion-icon>
-            </button>
-          </ion-col>
-        </ion-row>
-      </ion-grid> <!-- Fim do grid do primeiro slide -->
+      <!-- Header: Boas Vindas -->
+      <div>
+        <large-header [content]="headerContentWelcome"></large-header>
+      </div>
+      <!-- Imagem -->
+      <div class="img-home-screen">
+        <img src="./assets/imgs/ilustracao-tela-bem-vindo.png" id="img-welcome">
+      </div>
+      <!-- Legenda -->
+      <div id="description">
+        <p>Serviços públicos digitais <br> que melhoram <br> a vida do cidadão</p>
+      </div>
+      <!-- Botão: Próximo slide -->
+      <button icon-only id="next-slide" (click)="next()">
+        <ion-icon name="custom-nav-avancar"></ion-icon>
+      </button>
     </ion-slide> <!-- Fim primeiro slide -->
     
     <!-- Segundo Slide -->
-    <ion-slide id="slide-access">
-      <ion-grid>
-        <ion-row class="row-header">
-          <ion-col col-12>
-            <!--  Header: Acesso -->
-            <large-header [content]="headerContentAccess"></large-header>
-          </ion-col>
-        </ion-row>
-        <ion-row class="row-content">
-          <ion-grid class="wrapper">
-            <ion-row class="row-1">
-              <ion-col col-12>
-                <!-- Imagem -->
-                <div class="img-home-screen">
-                  <img src="./assets/imgs/ilustracao-tela-login.png" id="img-login">
-                </div>
-              </ion-col>
-            </ion-row>
-            <ion-row class="row-2">
-              <ion-col col-12>
-                <!-- Botão: Minha conta -->
-                <large-button
-                  [color]="'secondary-dark'"
-                  [leftIcon]="'ios-lock'"
-                  [rightIcon]="'ios-arrow-forward-outline'"
-                  [text]="'Minha Conta'"
-                  (click)="openPageLogin()"
-                ></large-button>
-              </ion-col>
-            </ion-row>
-            <ion-row class="row-3">
-              <ion-col col12>
-                <!-- Botão: Visitante -->
-                <large-button
-                  [color]="'primary-dark'"
-                  [leftIcon]="'ios-eye'"
-                  [rightIcon]="'ios-arrow-forward-outline'"
-                  [text]="'Visitante'"
-                  (click)="openPageMyServices()"
-                ></large-button>
-              </ion-col>
-            </ion-row>
-          </ion-grid> <!-- Fim do grid wrapper -->
-        </ion-row>
-      </ion-grid> <!-- Fim do grid do segundo slide -->
+    <ion-slide id="slide-access" class="wrapper">
+      <!--  Header: Acesso -->
+      <div>
+        <large-header [content]="headerContentAccess"></large-header>
+      </div>
+      <!-- Imagem -->
+      <div class="img-home-screen">
+        <img src="./assets/imgs/ilustracao-tela-login.png" id="img-login">
+      </div>
+      
+      <div id="home-buttons">
+        <div class="home-button">
+          <!-- Botão: Minha conta -->
+          <large-button
+            [color]="'secondary-dark'"
+            [leftIcon]="'ios-lock'"
+            [rightIcon]="'ios-arrow-forward-outline'"
+            [text]="'Minha Conta'"
+            (click)="openPageLogin()"
+          ></large-button>
+        </div>
+        <div class="home-button">
+          <!-- Botão: Visitante -->
+          <large-button
+            [color]="'primary-dark'"
+            [leftIcon]="'ios-eye'"
+            [rightIcon]="'ios-arrow-forward-outline'"
+            [text]="'Visitante'"
+            (click)="openPageMyServices()"
+          ></large-button>
+        </div>
+      </div>
     </ion-slide> <!-- Fim segundo slide -->
 
   </ion-slides>
