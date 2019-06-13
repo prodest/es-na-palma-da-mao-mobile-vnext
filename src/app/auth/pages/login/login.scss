@@ -13,6 +13,8 @@ page-login {
 
     background-color: white;
     overflow: hidden;
+
+    padding-bottom: 15%;
   }
 
   ion-grid, ion-col {
@@ -37,14 +39,56 @@ page-login {
   }
 
   /* Inputs */
-  // TODO: Formatar os campos de input conforme Guideline
 
   #inputs {
-    width: 90%;
+    width: 85%;
+    
+    ion-item, ion-input {
+      width: 100%;
+    }
+
+    #ion-item-email {
+      margin-bottom: 20px;
+    }
+
+    .item {
+      padding: 0;
+    
+      .input-wrapper {
+        font-family: 'Poppins';
+
+        .label {
+          color: #6584cc; // $primary-mid-dark
+          font-weight: 600;
+          font-size: 1.75rem;
+        }
+
+        input {
+          color: #999999; // $gray-mid
+          font-size: 2.2rem;
+          font-weight: 400;
+        }
+      }
+    }
   }
 
-  ion-item, ion-input {
-    width: 100%;
+  #forgot-password {
+    height: 2.5rem;
+    width: 85%;
+    align-items: flex-end;
+    margin-top: 1.5rem;
+    padding-right: 1rem;
+    color: #00aeef; // $primary-mid
+    font-weight: 400;
+    font-family: 'Poppins';
+
+    p {
+      font-size: 1.5rem;
+    }
+
+    .icon {
+      font-size: 2rem;
+    }
   }
 
   /* Botões */
@@ -53,7 +97,43 @@ page-login {
     width: 75%;
   }
 
+  /* Final da página */
 
+  #access-with {
+    font-family: 'Poppins';
+    font-weight: 400;
+    font-size: 1.5rem;
+    color: #999999; // $gray-mid
+
+    p {
+      margin: 0;
+    }
+  }
+
+  #social-login {
+    flex-direction: row;
+    justify-content: center;
+
+    .social-login {
+      width: 42%;
+      height: fit-content;
+      // border: 1px solid red;
+      padding: 0;
+      
+      img {
+        height: 4.5rem;
+      }
+    }
+  }
+
+  /* Em telas maiores */
+  // iPad
+  @media screen and (min-width: 650px) {
+
+    .login-button {
+      width: 40%;
+    }
+  }
 
   
   /* 

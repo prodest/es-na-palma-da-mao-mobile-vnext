@@ -1,63 +1,76 @@
 <ion-content>
-    <div id="header">
-      <!-- Botão voltar -->
-      <button icon-only id="return" (click)="back()">
-        <ion-icon name="custom-nav-voltar"></ion-icon>
-      </button>
-      <nav-title
-        [title]="'Minha conta'"
-      ></nav-title>
+  <div id="header">
+    <!-- Botão voltar -->
+    <button icon-only id="return" (click)="back()">
+      <ion-icon name="custom-nav-voltar"></ion-icon>
+    </button>
+    <nav-title
+      [title]="'Minha conta'"
+    ></nav-title>
+  </div>
+  <div class="wrapper">
+    <!-- Inputs -->
+    <div id="inputs">
+      <ion-item id="ion-item-email">
+        <ion-label stacked>E-mail ou CPF</ion-label>
+        <ion-input
+          type="email"
+          [(ngModel)]="username"
+          name="email"
+        ></ion-input>
+      </ion-item>
+      <ion-item id="ion-item-password">
+        <ion-label stacked>Senha</ion-label>
+        <ion-input
+          type="password"
+          [(ngModel)]="password"
+          name="password"
+        ></ion-input>
+      </ion-item>
     </div>
-    <div class="wrapper">
-      <!-- Inputs -->
-      <div id="inputs">
-        <ion-item>
-          <ion-label stacked>E-mail ou CPF</ion-label>
-          <ion-input
-            type="email"
-            [(ngModel)]="username"
-            name="email"
-          ></ion-input>
-        </ion-item>
-        <ion-item>
-          <ion-label stacked>Senha</ion-label>
-          <ion-input
-            type="password"
-            [(ngModel)]="password"
-            name="password"
-          ></ion-input>
-        </ion-item>
-      </div>
+    <div class="wrapper" id="forgot-password">
+      <p>Esqueceu a senha <ion-icon name="md-help-circle"></ion-icon></p>
     </div>
-    <div class="wrapper">
-      <div class="login-button">
-        <!-- Botão ENTRAR -->
+  </div>
+  <div class="wrapper">
+    <div class="login-button">
+      <!-- Botão ENTRAR -->
+      <large-button
+        [color]="'secondary-dark'"
+        [leftIcon]="'md-finger-print'"
+        [rightIcon]="'ios-arrow-forward-outline'"
+        [text]="'Entrar'"
+        (click)="login(username, password)"
+      ></large-button>
+    </div>
+    <div class="login-button">
+        <!-- Botão CRIAR CONTA -->
         <large-button
-          [color]="'secondary-dark'"
-          [leftIcon]="'md-finger-print'"
+          [color]="'primary-dark'"
+          [leftIcon]="'ios-add-circle-outline'"
           [rightIcon]="'ios-arrow-forward-outline'"
-          [text]="'Entrar'"
-          (click)="login(username, password)"
+          [text]="'Criar conta'"
+          (click)="createAccount()"
         ></large-button>
       </div>
-      <div class="login-button">
-          <!-- Botão CRIAR CONTA -->
-          <large-button
-            [color]="'primary-dark'"
-            [leftIcon]="'ios-add-circle-outline'"
-            [rightIcon]="'ios-arrow-forward-outline'"
-            [text]="'Criar conta'"
-            (click)="createAccount()"
-          ></large-button>
-        </div>
-    </div>
-    <div class="wrapper">
-      <p>Ou acesse com</p>
-    </div>
-    <div class="wrapper">
-      <!-- TODO: Colocar os botões para as redes sociais -->
-    </div>
-
+  </div>
+  <div class="wrapper" id="access-with">
+    <p>ou acesse com:</p>
+  </div>
+  <div class="wrapper" id="social-login">
+    <button ion-button icon-start clear
+      class="social-login"
+      id="button-login-facebook"
+      (click)="facebookLogin()">
+      <img src="../assets/imgs/botao-login-com-facebook.svg">
+    </button>
+    <button ion-button icon-start clear
+      class="social-login"
+      id="button-login-google"
+      (click)="googleLogin()">
+      <img src="../assets/imgs/botao-login-com-google.svg">
+    </button>
+  </div>
   
   <!-- 
   <div class="social-login"
