@@ -53,7 +53,7 @@ export class LoginPage {
    */
   login = (username?: string, password?: string) => {
     if (!username || !password) {
-      this.toastCtrl.create({ message: 'Login e senha são obrigatórios' }).present();
+      this.toastCtrl.create({ message: 'Login e senha são obrigatórios', duration: 3000 }).present();
       return;
     }
 
