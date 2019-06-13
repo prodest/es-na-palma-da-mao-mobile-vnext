@@ -49,15 +49,6 @@ large-button {
         background-color: #003069; // $primary-very-dark
     }
 
-    /* Em telas maiores */
-    // iPad
-    @media screen and (min-width: 650px) {
-        // menor largura dos botões do slide 2
-        .large-button {
-            width: 40%;
-        }
-    }
-
     /* Em telas menores */
     // iPhone 5/SE
     @media screen and (max-width: 349px) {
