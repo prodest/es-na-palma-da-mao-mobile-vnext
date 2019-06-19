@@ -119,10 +119,24 @@ page-login {
       height: fit-content;
       // border: 1px solid red;
       padding: 0;
-      
-      img {
-        height: 4.5rem;
+
+      font-family: 'Poppins';
+      font-weight: 500;
+      font-size: 1.9rem;
+
+      text-transform: none;
+
+      ion-icon {
+        margin-right: 5px;
       }
+    }
+
+    #button-login-facebook {
+      color: #004297; // $primary-dark
+    }
+
+    #button-login-google {
+      color: #ed1c24;
     }
   }
 
@@ -132,6 +146,20 @@ page-login {
 
     .login-button {
       width: 40%;
+    }
+  }
+
+  /* Em telas menores */
+  // iPhone 5/SE
+  @media screen and (max-width: 349px) {
+    .scroll-content {
+      padding-bottom: 5%;
+    }
+
+    #social-login {
+      .social-login {
+        font-size: 1.5rem;
+      }
     }
   }
 

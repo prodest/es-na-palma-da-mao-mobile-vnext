@@ -155,6 +155,26 @@ ion-icon {
   &[class*="voltar"] {
     mask-image: url(../assets/icon/icone-voltar.svg);
   }
+
+  /* Ícones redes sociais */
+
+  &[class*="custom-social-"] {
+    mask-size: contain;
+    mask-position: 50% 50%;
+    mask-repeat: no-repeat;
+    width: 1.5em;
+    height: 1.5em;
+  }
+
+  &[class*="facebook"] {
+    mask-image: url(../assets/icon/botao-facebook.svg);
+    background: #004297;
+  }
+
+  &[class*="google"] {
+    mask-image: url(../assets/icon/botao-google.svg);
+    background: #ed1c24;
+  }
 }
 
 .text-right {
