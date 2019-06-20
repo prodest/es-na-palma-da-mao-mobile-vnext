@@ -1,0 +1,41 @@
+<ion-header>
+  <ion-navbar hideBackButton>
+    <button ion-button menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    <ion-title>Encaminhamento</ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content padding>
+  <ion-list>
+    <ion-list-header>
+      Encaminhar Documentos
+    </ion-list-header>
+    <ion-item>
+      <ion-label stacked>Título</ion-label>
+      <ion-input type="text"></ion-input>
+    </ion-item>
+  
+    <ion-item>
+      <ion-label stacked>Usuário Remetente</ion-label>
+      <ion-input type="text"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label stacked>Cargo/Função Rementente</ion-label>
+      <ion-select [(ngModel)]="gaming">
+        <ion-option>Cidadão</ion-option>
+        <ion-option>Bolsista Fapes</ion-option>
+      </ion-select>
+    </ion-item>
+  </ion-list>
+  
+  <ion-footer>
+    <button horizontal-align="center" ion-button color="dark" clear>
+      <ion-icon item-start name="md-arrow-round-back"></ion-icon>
+    </button>
+    <button ion-button color="dark" clear>
+      <ion-icon item-start name="md-arrow-round-forward"></ion-icon>
+    </button>
+  </ion-footer>
+</ion-content>
