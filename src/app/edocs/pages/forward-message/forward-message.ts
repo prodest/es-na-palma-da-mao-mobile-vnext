@@ -2,11 +2,11 @@ import { Component, ChangeDetectionStrategy } from '@angular/core';
 import { IonicPage } from 'ionic-angular';
 
 @IonicPage({
-  segment: 'encaminhamento-basico'
+  segment: 'encaminhamento-mensagem'
 })
 @Component({
-  selector: 'forward-basic',
-  templateUrl: 'forward-basic.html',
+  selector: 'forward-message',
+  templateUrl: 'forward-message.html',
   changeDetection: ChangeDetectionStrategy.Default
 })
-export class ForwardBasicPage {}
+export class ForwardMessagePage {}

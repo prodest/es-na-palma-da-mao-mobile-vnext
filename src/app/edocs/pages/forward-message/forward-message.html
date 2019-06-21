@@ -1,0 +1,31 @@
+<ion-header>
+  <ion-navbar hideBackButton>
+    <button ion-button menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    <ion-title>Encaminhamento</ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content padding>
+  <ion-list>
+    <ion-list-header>
+      Encaminhar Documentos
+    </ion-list-header>
+    <ion-item >
+      <ion-label stacked>Mensagem</ion-label>
+      <ion-textarea rows="5" [(ngModel)]="message"  required></ion-textarea>
+    </ion-item>
+  </ion-list>
+  
+  <ion-footer>
+    <ion-toolbar>
+      <button horizontal-align="center" ion-button color="dark" clear>
+        <ion-icon item-start name="md-arrow-round-back"></ion-icon>
+      </button>
+      <button ion-button color="dark" clear>
+        <ion-icon item-start name="md-arrow-round-forward"></ion-icon>
+      </button>
+    </ion-toolbar>
+  </ion-footer>
+</ion-content>

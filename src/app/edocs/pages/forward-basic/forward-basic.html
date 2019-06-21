@@ -14,16 +14,18 @@
     </ion-list-header>
     <ion-item>
       <ion-label stacked>Título</ion-label>
-      <ion-input type="text"></ion-input>
+      <ion-input type="text" [(ngModel)]="title" required></ion-input>
     </ion-item>
-  
+    <!--TODO: 1 - Tornar campos obrigatorios
+              2 - Buscar nome do remetente
+              3 - Buscar cargo/função -->
     <ion-item>
       <ion-label stacked>Usuário Remetente</ion-label>
-      <ion-input type="text"></ion-input>
+      <ion-input type="text" [(ngModel)]="sender" required></ion-input>
     </ion-item>
     <ion-item>
       <ion-label stacked>Cargo/Função Rementente</ion-label>
-      <ion-select [(ngModel)]="gaming">
+      <ion-select [(ngModel)]="role" required>
         <ion-option>Cidadão</ion-option>
         <ion-option>Bolsista Fapes</ion-option>
       </ion-select>
