@@ -6,7 +6,7 @@ import { IonicPage } from 'ionic-angular';
 })
 @Component({
   selector: 'forward-message',
-  templateUrl: 'forward-message.html',
+  templateUrl: './forward-message.html',
   changeDetection: ChangeDetectionStrategy.Default
 })
 export class ForwardMessagePage {}

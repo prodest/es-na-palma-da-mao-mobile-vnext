@@ -6,7 +6,7 @@ import { IonicPage } from 'ionic-angular';
 })
 @Component({
   selector: 'forward-basic',
-  templateUrl: 'forward-basic.html',
+  templateUrl: './forward-basic.html',
   changeDetection: ChangeDetectionStrategy.Default
 })
 export class ForwardBasicPage {}
