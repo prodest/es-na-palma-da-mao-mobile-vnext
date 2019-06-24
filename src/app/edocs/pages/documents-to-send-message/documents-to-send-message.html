@@ -1,0 +1,21 @@
+<edocs-documents-to-send-header></edocs-documents-to-send-header>
+
+<ion-content >
+    <ion-refresher (ionRefresh)="refresh()"
+          #refresher>
+      <ion-refresher-content>
+      </ion-refresher-content>
+    </ion-refresher>
+
+  <ion-list class="padding-r">
+    <ion-list-header>
+      Encaminhar Documentos
+    </ion-list-header>
+      <ion-item >
+        <ion-label floating>Mensagem</ion-label>
+        <ion-textarea rows="5" [(ngModel)]="message" name="message" required></ion-textarea>
+      </ion-item>
+    </ion-list>
+  
+  <edocs-documents-to-send-footer></edocs-documents-to-send-footer>
+</ion-content>

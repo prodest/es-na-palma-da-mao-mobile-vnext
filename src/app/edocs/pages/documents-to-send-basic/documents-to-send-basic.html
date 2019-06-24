@@ -1,0 +1,36 @@
+<edocs-documents-to-send-header></edocs-documents-to-send-header>
+
+<ion-content>
+    <ion-refresher (ionRefresh)="refresh()"
+          #refresher>
+      <ion-refresher-content>
+      </ion-refresher-content>
+    </ion-refresher>
+
+  <ion-list class="padding-r">
+    <ion-list-header>
+      Encaminhar Documentos
+    </ion-list-header>
+    <ng-container>
+      <ion-item>
+        <ion-label floating>Título</ion-label>
+        <ion-input type="text" [(ngModel)]="sendTitle" name="sendTitle" required></ion-input>
+      </ion-item>
+      <!--TODO: 2 - Buscar nome do remetente
+                3 - Buscar cargo/função -->
+      <ion-item *ngIf="sendTitle">
+        <ion-label floating>Usuário Remetente</ion-label>
+        <ion-input type="text" [(ngModel)]="sender" name="sender" required></ion-input>
+      </ion-item>
+      <ion-item *ngIf="sendTitle && sender">
+        <ion-label>Cargo/Função</ion-label>
+        <ion-select cancelText="Cancelar" [(ngModel)]="role" [selectOptions]="roleOptions" required>
+          <ion-option value="a">Cidadão</ion-option>
+          <ion-option value="b">Bolsista Fapes</ion-option>
+        </ion-select>
+      </ion-item>
+    </ng-container>
+  </ion-list>
+  
+  <edocs-documents-to-send-footer></edocs-documents-to-send-footer>
+</ion-content>

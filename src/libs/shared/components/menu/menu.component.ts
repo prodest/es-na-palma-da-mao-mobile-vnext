@@ -71,6 +71,13 @@ const menus = [
         component: 'DocumentsToSignPage',
         order: 2,
         secure: true
+      },
+      {
+        title: 'Documentos para enviar',
+        icon: 'create',
+        component: 'DocumentsToSendBasicPage',
+        order: 2,
+        secure: true
       }
     ]
   },
