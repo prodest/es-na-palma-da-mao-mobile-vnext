@@ -39,6 +39,8 @@ export class SelectFavoritePage {
     uriScheme?: string;
   }> = [];
 
+  headerContent: Array<string> = ['Selecione os', 'seus serviços', 'favoritos'];
+
   constructor(
     protected appCtrl: App,
     protected authQuery: AuthQuery,
@@ -168,6 +170,7 @@ export class SelectFavoritePage {
       }
     ];
   }
+
   /**
    * seleciona os serviços favoritos
    */

@@ -1,9 +1,34 @@
-<ion-content padding>
-  <button (click)="back()">
-    <ion-icon ios="ios-arrow-round-back" md="md-arrow-round-back"></ion-icon>
+<ion-content>
+  <!-- Botão voltar -->
+  <button icon-only id="return" (click)="back()">
+    <ion-icon name="custom-nav-voltar"></ion-icon>
   </button>
+  <!-- Header -->
+  <div>
+    <large-header [content]="headerContent"></large-header>
+  </div>
+
+  <!-- Check: Marcar todos -->
+  <div id="mark-all">
+    <span>
+      <input type="checkbox" id="check-all">
+      <label for="check-all">Todos</label>
+    </span>
+  </div>
+
+  <!-- Lista de módulos -->
+  <div id="modules-list">
+    <ion-list>
+      <ion-item>
+        <button ion-button full large round>
+          Teste
+          <ion-checkbox></ion-checkbox>
+        </button>
+      </ion-item>
+    </ion-list>
+  </div>
   
-  <div class = "espace">
+  <!-- <div class = "espace">
     <div>
       <p class="styles_css">Selecione os</p>
     </div>
@@ -41,12 +66,5 @@
       </button>
 
     </ion-list>
-  </div>
-</ion-content>  
-<ion-footer>
-  <ion-toolbar color="primary">
-    <button ion-button id="save-button" (click)="saveFavorites()">
-      Salvar Favoritos
-    </button>
-  </ion-toolbar>
-</ion-footer>
+  </div> -->
+</ion-content>

@@ -1,5 +1,69 @@
 page-select-favorite {
-  .button-inner {
+  /* Geral */
+
+  ion-content, .scroll-content {
+    height: 100%;
+  }
+
+  .scroll-content {
+    background-color: white;
+  }
+
+  /* Header */
+
+  #return {
+    margin-top: 15px;
+    margin-left: 15px;
+    font-size: 15px;
+    background-color: transparent;
+    padding: 0;
+  }
+
+  #mark-all {
+    display: flex;
+    justify-content: flex-end;
+
+    label {
+      display: inline-flex;
+      position: relative;
+      font-family: 'Poppins';
+      font-size: 1.7rem;
+      font-weight: 600;
+      color: #6584cc; // $primary-mid-dark
+    }
+
+    label::after {
+      content: "";
+      height: 1.7rem;
+      width: 1.7rem;
+      border: 2px solid #abe1fa; // $primary-light
+      border-radius: 100%;
+      background-color: #e9f7fe; // $primary-very-light
+      display: inline-block;
+      margin-left: 5px;
+      align-self: center;
+    }
+
+    input:checked + label::after {
+      background-color: green;
+    }
+
+    #check-all {
+      display: none;
+    }
+
+  }
+
+  /* Lista de módulos */
+  #modules-list {
+    padding: 0px 15px;
+    button {
+      background-color: #e9f7fe;
+    }
+  }
+
+
+  /* .button-inner {
     justify-content: end;
     text-transform: none;
   }
@@ -120,5 +184,5 @@ page-select-favorite {
         color: #e9f7fe;
       }
     }
-  }
+  } */
 }
