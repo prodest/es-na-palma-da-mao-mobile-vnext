@@ -1,4 +1,6 @@
-<edocs-documents-to-send-header></edocs-documents-to-send-header>
+<ion-header>
+    <edocs-documents-to-send-header></edocs-documents-to-send-header>
+</ion-header>
 
 <ion-content>
   <ion-refresher (ionRefresh)="refresh()"
@@ -59,5 +61,8 @@
           </ion-item>
       </ng-container>
   </ion-list>
-  <edocs-documents-to-send-footer></edocs-documents-to-send-footer>
+  
+  <ion-footer>
+      <edocs-documents-to-send-footer></edocs-documents-to-send-footer>
+  </ion-footer>
 </ion-content>
