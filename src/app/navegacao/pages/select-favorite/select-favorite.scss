@@ -7,10 +7,10 @@ page-select-favorite {
 
   .scroll-content {
     background-color: white;
+    display: flexbox;
   }
 
   /* Header */
-
   #return {
     margin-top: 15px;
     margin-left: 15px;
@@ -19,23 +19,31 @@ page-select-favorite {
     padding: 0;
   }
 
+  /* Marcar todos como favoritos */
   #mark-all {
     display: flex;
     justify-content: flex-end;
+    padding: 0px 30px;
+    margin: 20px 0px;
 
+    /* o checkbox */
+    #check-all {
+      display: none;
+    }
+    
     label {
       display: inline-flex;
       position: relative;
       font-family: 'Poppins';
-      font-size: 1.7rem;
+      font-size: 1.9rem;
       font-weight: 600;
       color: #6584cc; // $primary-mid-dark
     }
 
     label::after {
       content: "";
-      height: 1.7rem;
-      width: 1.7rem;
+      height: 1.9rem;
+      width: 1.9rem;
       border: 2px solid #abe1fa; // $primary-light
       border-radius: 100%;
       background-color: #e9f7fe; // $primary-very-light
@@ -45,20 +53,61 @@ page-select-favorite {
     }
 
     input:checked + label::after {
-      background-color: green;
+      background-color: #004297; // $primary-mid
+      border: 5px solid #abe1fa; // $primary-light
+      height: 1.3rem;
+      width: 1.3rem;
     }
-
-    #check-all {
-      display: none;
-    }
-
   }
 
   /* Lista de módulos */
   #modules-list {
     padding: 0px 15px;
-    button {
-      background-color: #e9f7fe;
+
+    .fav-item {
+      display: flex;
+      background-color: #e9f7fe; // $primary-very-light,
+      border-radius: 50px;
+      box-shadow: 0px 1px 3px #cccccc;
+      margin: 10px 0px;
+      min-height: 70px;
+
+      .fav-checkbox {
+        display: none;
+      }
+
+      label {
+        min-height: 100%;
+        width: 100%;
+        display: inline-flex;
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
+        position: relative;
+        font-family: 'Poppins';
+        font-size: 2rem;
+        font-weight: 600;
+        color: #004297; // $primary-dark
+        margin: 0px 40px;
+      }
+
+      label::after {
+        content: "";
+        height: 1.9rem;
+        width: 1.9rem;
+        border: 2px solid #abe1fa; // $primary-light
+        border-radius: 100%;
+        background-color: white;
+        display: inline-block;
+        align-self: center;
+      }
+
+      input:checked + label::after {
+        background-color: #004297; // $primary-mid
+        border: 5px solid #abe1fa; // $primary-light
+        height: 1.3rem;
+        width: 1.3rem;
+      }
     }
   }
 

@@ -11,7 +11,12 @@
   <!-- Check: Marcar todos -->
   <div id="mark-all">
     <span>
-      <input type="checkbox" id="check-all">
+      <input
+        type="checkbox"
+        id="check-all"
+        [(ngModel)]="markAll"
+        (ionChange)= "markUncheckList()"
+      >
       <label for="check-all">Todos</label>
     </span>
   </div>
@@ -19,52 +24,16 @@
   <!-- Lista de módulos -->
   <div id="modules-list">
     <ion-list>
-      <ion-item>
-        <button ion-button full large round>
-          Teste
-          <ion-checkbox></ion-checkbox>
-        </button>
-      </ion-item>
+      <div class="fav-item" *ngFor="let menu of menus">
+        <input
+          type="checkbox"
+          id="bt-{{menu.id}}"
+          class="fav-checkbox"
+          [(ngModel)]="menu.isChecked"
+          (ionChange)="markList()"
+        >
+        <label for="bt-{{menu.id}}">{{menu.title}}</label>
+      </div>
     </ion-list>
   </div>
-  
-  <!-- <div class = "espace">
-    <div>
-      <p class="styles_css">Selecione os</p>
-    </div>
-    <div>
-      <p class="second_color">seus serviços</p>
-      <p class="second_color">favoritos</p>
-    </div>
-  </div>
-  <div class="fixo">
-    <ion-list
-      class="rolavel"
-      no-margin 
-      approxItemHeight="70px">
-      
-      <button ion-button full>
-        <ion-label>Todos</ion-label>
-        <ion-checkbox 
-          color="dark"
-          checked="false"
-          mode = "ios"
-          [(ngModel)]="markAll"
-          (ionChange)= "markUncheckList()"
-        ></ion-checkbox>
-      </button>
-      <button class="radius_css" ion-button full *ngFor=" let lista of menus ">
-        <h2> {{ lista.title }} </h2>
-        <ion-checkbox 
-          color="green"
-          checked="false"
-          mode = "ios"
-          [(ngModel)]="lista.isChecked"
-          (ionChange)= "markList()"
-        ></ion-checkbox>
-       
-      </button>
-
-    </ion-list>
-  </div> -->
 </ion-content>
