@@ -26,18 +26,16 @@
         (ionChange)= "markUncheckList()"
        ></ion-checkbox>
       </button>
-       <button class="radius_css" ion-button full *ngFor=" let lista of menus ">
-        <h2> {{ lista.title }} </h2>
+       <button class="radius_css" ion-button full *ngFor="let itemMenu of menus">
+        <h2> {{ itemMenu.title }} </h2>
         <ion-checkbox 
         color="green"
         checked="false"
         mode = "ios"
-        [(ngModel)]="lista.isChecked"
-        (ionChange)= "markList()"
+        [(ngModel)]="itemMenu.isChecked"
+        (ionChange)= "markItem(itemMenu, $event.value)"
        ></ion-checkbox>
-       
       </button>
-      
     </ion-list>
   </div>
   <div id="footer">

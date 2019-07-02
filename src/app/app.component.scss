@@ -136,6 +136,39 @@ ion-icon {
     mask-image: url(../assets/icon/icone-menu-youtube.svg);
   }
 
+  /* Ícones dos módulos */
+  &[class*="custom-"] {
+    mask-size: contain;
+    mask-position: 50% 50%;
+    mask-repeat: no-repeat;
+    width: 1em;
+    height: 1em;
+  }
+  &[class*="modulo-noticias"] {
+    background: transparent url(../assets/icon/icone-noticias.png)no-repeat left bottom;
+    background-size: contain;
+  }
+  &[class*="modulo-agendamento"] {
+    background: transparent url(../assets/icon/icone-agendamento.png)no-repeat left bottom;
+    background-size: contain;
+  }
+  &[class*="modulo-consultas"] {
+    background: transparent url(../assets/icon/icone-consultas.png)no-repeat left bottom;
+    background-size: contain;
+  }
+  &[class*="modulo-onibus"] {
+    background: transparent url(../assets/icon/icone-onibus.png)no-repeat left bottom;
+    background-size: contain;
+  }
+  &[class*="modulo-oportunidades"] {
+    background: transparent url(../assets/icon/icone-oportunidades.png)no-repeat left bottom;
+    background-size: contain;
+  }
+  &[class*="modulo-taxi"] {
+    background: transparent url(../assets/icon/icone-detran.png)no-repeat left bottom;
+    background-size: contain;
+  }
+
 }
 
 .text-right {

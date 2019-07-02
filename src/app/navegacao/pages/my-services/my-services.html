@@ -20,10 +20,10 @@
         <p>Nenhum serviço encontrado</p>
         <p>Tente mudar o filtro da consulta</p>
       </ion-item>
-      <ion-spinner *ngIf="!filteredMenus" page-loading></ion-spinner>
-    <ion-list-header class="testo_negrito" *ngIf="slides && slides.length">
+      <ion-list-header class="testo_negrito" *ngIf="filteredMenus && filteredMenus.length">
         {{filteredMenus.length}} ENCONTRADOS
       </ion-list-header>
+      <ion-spinner *ngIf="!filteredMenus" page-loading></ion-spinner>
  <ion-list>
   <ion-slides [pager]="true">
     <ion-slide class="lim-css" *ngFor = "let slide of slides">
