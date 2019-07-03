@@ -34,7 +34,7 @@ const menus = [
 })
 export class MenuComponent implements OnInit, OnDestroy {
   menus = menus;
-  rootPage: any = 'DashboardPage';
+  rootPage: any = 'MyServicesPage';
   isLoggedIn: boolean;
   private destroyed$ = new Subject<boolean>();
 
@@ -90,7 +90,7 @@ export class MenuComponent implements OnInit, OnDestroy {
             );
         }
       } else {
-        this.appCtrl.getRootNav().setRoot(route.component);
+        this.appCtrl.getRootNav().push(route.component);
         this.menuCtrl.close();
       }
     }
@@ -101,11 +101,11 @@ export class MenuComponent implements OnInit, OnDestroy {
   login = () => {
     this.openPage({ component: 'LoginPage' });
   };
-
   /**
    *
    */
   logout = () => {
-    this.auth.logout().then(() => this.appCtrl.getRootNav().setRoot('DashboardPage'));
+    this.auth.logout().then(() => this.appCtrl.getRootNav().setRoot('MyServicesPage'));
   };
+  
 }

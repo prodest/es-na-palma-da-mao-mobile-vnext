@@ -1,4 +1,10 @@
 page-my-services {
+  .scroll-content {
+    #not-founded {
+      height: 100%;
+    }
+    background-color: #f5f5f5;
+  }
 .header-cs{
   background-image:  url('../assets/imgs/bg-menu-principal-topo (1).jpg' );
   height: 200px; 
@@ -46,9 +52,8 @@ ion-content {
             align-items: center;
             justify-content: center;
             flex-direction: column;
-            color: #fff;
-            background: rgba(4, 33, 51, 0.27);
-            text-shadow: 1px 1px 4px #000000;
+            color: #004297;
+            background: #f4f4f4;
             ion-icon {
               font-size: 5rem;
               margin-bottom: 10px;
@@ -144,4 +149,13 @@ page-dashboard-favorite .button-md {
   font-size: 20px;
   padding-top: 40px;
 }
-
+.searchbar-md .searchbar-search-icon {
+top: 57px !important;
+}
+page-my-services .button-md {
+  padding-top: 0px;
+  font-size: large !important;
+  }
+  page-my-services .button-md {
+    margin-top: 23px !important;
+  }  

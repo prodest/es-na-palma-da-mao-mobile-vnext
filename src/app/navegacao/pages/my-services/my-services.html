@@ -16,16 +16,26 @@
 </div>
 </ion-header>
 <ion-content padding>
+    <ion-item *ngIf="!filteredMenus.length" text-center no-lines id="not-founded">
+        <p>Nenhum serviço encontrado</p>
+        <p>Tente mudar o filtro da consulta</p>
+      </ion-item>
+      <ion-list-header class="testo_negrito" *ngIf="filteredMenus && filteredMenus.length">
+        {{filteredMenus.length}} ENCONTRADOS
+      </ion-list-header>
+      <ion-spinner *ngIf="!filteredMenus" page-loading></ion-spinner>
  <ion-list>
   <ion-slides [pager]="true">
-    <ion-slide class="lim-css" *ngFor = "let slid of serveSelect" >
+    <ion-slide class="lim-css" *ngFor = "let slide of slides">
       <div class="dashboard-icons">
-        <ion-card *ngFor = "let lista of slid" (click)="openPage(lista.component)">
+        <ion-card *ngFor = "let lista of slide" (click)="openPage(lista.component)">
+         
           <ion-icon class="pop-in"
                     name="{{lista.icon}}"></ion-icon>
-                    {{lista.title}}        
-        </ion-card>  
-      </div>
+                    {{lista.title}}       
+        </ion-card> 
+      
+      </div>  
     </ion-slide>
   </ion-slides>         
  </ion-list>
