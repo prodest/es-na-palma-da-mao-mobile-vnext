@@ -1,7 +1,7 @@
 import { share } from 'rxjs/operators';
 import { HttpClient } from '@angular/common/http';
 import { Environment, EnvVariables } from '@espm/core';
-import { Observable } from 'rxjs';
+import { Observable } from 'rxjs/Observable';
 import { FavoriteMenusData } from '../models/favorite-menus-date';
 import { Injectable, Inject } from '@angular/core';
 

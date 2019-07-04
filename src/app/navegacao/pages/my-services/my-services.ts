@@ -1,4 +1,4 @@
-import { Component, Inject } from '@angular/core';
+import { Component, Inject, OnDestroy } from '@angular/core';
 import { IonicPage, NavController, App } from 'ionic-angular';
 import { AuthQuery, AuthNeededService } from '@espm/core';
 import deburr from 'lodash-es/deburr';
@@ -7,14 +7,14 @@ import { MenuService } from '../../providers/menu.service';
 import { MenuToken } from '@espm/core/menu';
 import { MenusQuery, MenusStore } from '../../providers';
 import { filter, takeUntil } from 'rxjs/operators';
-import { Subject } from 'rxjs';
+import { Subject } from 'rxjs/Subject';
 
 @IonicPage()
 @Component({
   selector: 'page-my-services',
   templateUrl: 'my-services.html',
 })
-export class MyServicesPage {
+export class MyServicesPage implements OnDestroy {
     
   private destroyed$ = new Subject();
     filteredMenus: ItemMenu[];

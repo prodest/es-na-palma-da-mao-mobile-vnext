@@ -4,7 +4,7 @@ import { AuthQuery } from '@espm/core';
 import { AuthNeededService } from '@espm/core/auth/auth-needed.service';
 import { ItemMenu } from '../../models';
 import { MenuService } from '../../providers/menu.service';
-import { Subject } from 'rxjs';
+import { Subject } from 'rxjs/Subject';
 import { takeUntil, tap } from 'rxjs/operators';
 
 @IonicPage()
@@ -13,13 +13,14 @@ import { takeUntil, tap } from 'rxjs/operators';
   templateUrl: 'select-favorite.html'
 })
 export class SelectFavoritePage implements OnDestroy {
-  public noticias = '../assets/imgs/bg-menu-principal-topo (1).jpg';
   isLoggedIn: boolean;
   public markAll: boolean;
 
   private destroyed$ = new Subject();
 
   public menus: Array<ItemMenu> = [];
+
+  headerContent: Array<string> = ['Selecione os', 'seus serviços', 'favoritos'];
 
   constructor(
     protected appCtrl: App,
@@ -34,14 +35,14 @@ export class SelectFavoritePage implements OnDestroy {
   */
   ionViewWillLoad() {
     this.menuService.menus$
-      .pipe(
-        takeUntil(this.destroyed$),
-        tap(menus => (this.menus = menus || []))
-      )
-      .subscribe();
+    .pipe(
+      takeUntil(this.destroyed$),
+      tap(menus => (this.menus = menus || []))
+    )
+    .subscribe();
   }
 
-    /**
+  /**
    *
    */
   ngOnDestroy() {
@@ -87,7 +88,7 @@ export class SelectFavoritePage implements OnDestroy {
     this.back();
   }
 
-   /**
+  /**
    *
    */
   back() {
