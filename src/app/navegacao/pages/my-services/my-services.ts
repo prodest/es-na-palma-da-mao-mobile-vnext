@@ -17,10 +17,10 @@ import { Subject } from 'rxjs/Subject';
 export class MyServicesPage implements OnDestroy {
     
   private destroyed$ = new Subject();
-    filteredMenus: ItemMenu[];
-    private slides: Array<ItemMenu[]> = [];
-   
-    constructor(
+  filteredMenus: ItemMenu[];
+  private slides: Array<ItemMenu[]> = [];
+  
+  constructor(
     protected appCtrl: App,
     protected authQuery: AuthQuery,
     protected authNeeded: AuthNeededService,
@@ -28,39 +28,40 @@ export class MyServicesPage implements OnDestroy {
     @Inject(MenuToken) private menus: ItemMenu[],
     private menuService: MenuService,
     private menusStore: MenusStore,
-    private menuQuery: MenusQuery) {
+    private menuQuery: MenusQuery
+  ) {
+    this.menuQuery.favorites$
+    .pipe(filter(() => !this.menusStore.isPristine), 
+    //  tap((elemento: ItemMenu, index: number) => {
+    //   if (index%4 === 0) {
+    //     this.slides.push([])
+    //   }
+    //   this.slides[this.slides.length-1].push(elemento);
+    // }), 
+      takeUntil(this.destroyed$))
+    .subscribe();
 
-      this.menuQuery.favorites$
-      .pipe(filter(() => !this.menusStore.isPristine), 
-      //  tap((elemento: ItemMenu, index: number) => {
-      //   if (index%4 === 0) {
-      //     this.slides.push([])
-      //   }
-      //   this.slides[this.slides.length-1].push(elemento);
-      // }), 
-       takeUntil(this.destroyed$))
-      .subscribe();
-
-      this.menuService.loadMenu();
-
-
-      this.filteredMenus = this.menuService.getMenus();
-      this.filteredMenus.map((elemento: ItemMenu, index: number) => {
-        if (index%4 === 0) {
-          this.slides.push([])
-        }
-        this.slides[this.slides.length-1].push(elemento);
-      });
-
+    this.menuService.loadMenu();
+    this.filteredMenus = this.menuService.getMenus();
+    this.filteredMenus.map((elemento: ItemMenu, index: number) => {
+      if (index%4 === 0) {
+        this.slides.push([])
+      }
+      this.slides[this.slides.length-1].push(elemento);
+    });
   }
+
+  /**
+   * 
+   */
   ngOnDestroy() {
     this.destroyed$.next();
     this.destroyed$.complete();
   }
+
   /**
    * 
    */
-  
   openPage = (page: string, accessDenied: boolean = false) => {
     if (accessDenied) {
       this.authNeeded.showAuthNeededModal();
@@ -69,9 +70,13 @@ export class MyServicesPage implements OnDestroy {
     }
   };
 
+  /**
+   * 
+   */
   goToSelectFavorites(){
     this.navCtrl.push('SelectFavoritePage')
   }
+
   /**
    *
    */
@@ -91,20 +96,16 @@ export class MyServicesPage implements OnDestroy {
       this.slides[this.slides.length-1].push(elemento);
     });
   };
+  
   /**
    *
    */
   clear = () => {
     this.filteredMenus = [...this.filteredMenus];
   };
+  
   /**
    *
    */
   private normalize = (term: string) => (term ? deburr(term.toLowerCase()) : '');
-    /**
-   *
-   */
-  
-  
-
 }

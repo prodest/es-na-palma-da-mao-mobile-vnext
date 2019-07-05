@@ -100,7 +100,7 @@ export class MenuService implements OnDestroy {
   storeMenus = (m: ItemMenu[]) =>{
     this.menusStore.set(m);
     console.log("MENUS_STORE>>> ",this.menusStore)
-  } 
+  }
 
   /**
    * 
