@@ -1,0 +1,42 @@
+<ion-header>
+    <edocs-documents-to-send-header></edocs-documents-to-send-header>
+</ion-header>
+
+<ion-content>
+  <ion-refresher (ionRefresh)="refresh()" #refresher>
+    <ion-refresher-content> </ion-refresher-content>
+  </ion-refresher>
+
+  <ion-list>
+    <ion-list-header>
+      Encaminhar Documentos
+    </ion-list-header>
+    <ion-item>
+      <ion-list style ='border-style: solid;' >
+        <ion-list-header>
+          Destinatários
+        </ion-list-header>
+        <ion-item style ='height: 200px; border-style: solid;' >
+          <ion-card *ngFor='let addressee of addressees'>
+            <ion-card-header>
+              {{ addressee.nome }}
+            </ion-card-header>
+            <ion-card-content>
+              {{ addressee.tipo }}
+            </ion-card-content>
+            <button ion-button detail-none [color]="colorCloseIcon" clear item-end>
+              <ion-icon item-start [name]="closeIcon"></ion-icon>
+            </button>
+          </ion-card>
+        </ion-item>
+      </ion-list>
+    </ion-item>
+  </ion-list>
+  <button ion-button detail-none [color]="colorAddIcon" outline >
+    Adicionar 
+    <ion-icon item-start [name]="addIcon" item></ion-icon>
+  </button>
+</ion-content>
+<ion-footer>
+  <edocs-documents-to-send-footer></edocs-documents-to-send-footer>
+</ion-footer>
