@@ -137,7 +137,7 @@ export class LoginPage {
   /**
    * Redireciona usuário para o dashboard-Favorite
    */
- private goToDashboard = () => this.navCtrl.setRoot('SelectFavoritePage');
+ private goToDashboard = () => this.navCtrl.push('SelectFavoritePage');
 
   /**
    *

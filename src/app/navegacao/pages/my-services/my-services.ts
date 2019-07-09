@@ -12,15 +12,14 @@ import { Subject } from 'rxjs';
 @IonicPage()
 @Component({
   selector: 'page-my-services',
-  templateUrl: 'my-services.html',
+  templateUrl: 'my-services.html'
 })
 export class MyServicesPage {
-    
   private destroyed$ = new Subject();
-    filteredMenus: ItemMenu[];
-    private slides: Array<ItemMenu[]> = [];
-   
-    constructor(
+  filteredMenus: ItemMenu[];
+  private slides: Array<ItemMenu[]> = [];
+
+  constructor(
     protected appCtrl: App,
     protected authQuery: AuthQuery,
     protected authNeeded: AuthNeededService,
@@ -28,39 +27,39 @@ export class MyServicesPage {
     @Inject(MenuToken) private menus: ItemMenu[],
     private menuService: MenuService,
     private menusStore: MenusStore,
-    private menuQuery: MenusQuery) {
-
-      this.menuQuery.favorites$
-      .pipe(filter(() => !this.menusStore.isPristine), 
-      //  tap((elemento: ItemMenu, index: number) => {
-      //   if (index%4 === 0) {
-      //     this.slides.push([])
-      //   }
-      //   this.slides[this.slides.length-1].push(elemento);
-      // }), 
-       takeUntil(this.destroyed$))
+    private menuQuery: MenusQuery
+  ) {
+    this.menuQuery.favorites$
+      .pipe(
+        filter(() => !this.menusStore.isPristine),
+        // tap(favorites$.map((elemento: ItemMenu, index: number) => {
+        //   if (index % 4 === 0) {
+        //     this.slides.push([]);
+        //   }
+        //   this.slides[this.slides.length - 1].push(elemento);
+        // })),
+        takeUntil(this.destroyed$),
+      )
       .subscribe();
 
-      this.menuService.loadMenu();
+    this.menuService.loadMenu();
 
-
-      this.filteredMenus = this.menuService.getMenus();
-      this.filteredMenus.map((elemento: ItemMenu, index: number) => {
-        if (index%4 === 0) {
-          this.slides.push([])
-        }
-        this.slides[this.slides.length-1].push(elemento);
-      });
-
+    this.filteredMenus = this.menuService.getMenus();
+    this.filteredMenus.map((elemento: ItemMenu, index: number) => {
+      if (index % 4 === 0) {
+        this.slides.push([]);
+      }
+      this.slides[this.slides.length - 1].push(elemento);
+    });
   }
   ngOnDestroy() {
     this.destroyed$.next();
     this.destroyed$.complete();
   }
   /**
-   * 
+   *
    */
-  
+
   openPage = (page: string, accessDenied: boolean = false) => {
     if (accessDenied) {
       this.authNeeded.showAuthNeededModal();
@@ -69,8 +68,8 @@ export class MyServicesPage {
     }
   };
 
-  goToSelectFavorites(){
-    this.navCtrl.push('SelectFavoritePage')
+  goToSelectFavorites() {
+    this.navCtrl.push('SelectFavoritePage');
   }
   /**
    *
@@ -78,17 +77,16 @@ export class MyServicesPage {
   search = e => {
     const search = this.normalize(e.target.value);
     this.filteredMenus = this.menus.filter(select => {
-        return this.normalize(select.title).includes(search) || this.normalize(select.title).includes(search); 
-        
+      return this.normalize(select.title).includes(search) || this.normalize(select.title).includes(search);
     });
     console.log(this.filteredMenus);
-    
-    this.slides = []
+
+    this.slides = [];
     this.filteredMenus.map((elemento: ItemMenu, index: number) => {
-      if (index%4 === 0) {
-        this.slides.push([])
+      if (index % 4 === 0) {
+        this.slides.push([]);
       }
-      this.slides[this.slides.length-1].push(elemento);
+      this.slides[this.slides.length - 1].push(elemento);
     });
   };
   /**
@@ -101,10 +99,7 @@ export class MyServicesPage {
    *
    */
   private normalize = (term: string) => (term ? deburr(term.toLowerCase()) : '');
-    /**
+  /**
    *
    */
-  
-  
-
 }

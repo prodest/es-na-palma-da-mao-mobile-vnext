@@ -61,6 +61,9 @@ openPageMyServices() {
     }
   };
   next() {
+    if (this.authQuery.isLoggedIn) {
+      this.navCtrl.setRoot('MyServicesPage');
+    }
     this.slides.slideNext();
   }  
 }

@@ -32,17 +32,9 @@ export const MENUS: ItemMenu[] = [
     },
     {
       id: 5,
-      title: 'Situação CNH',
+      title: 'Detran',
       icon: 'custom-modulo-taxi',
-      component: 'DriverLicensePage',
-      secure: true,
-      isChecked: false
-    },
-    {
-      id: 6,
-      title: 'Consulta Veículos',
-      icon: 'custom-modulo-taxi',
-      component: 'VehiclesPage',
+      component: 'DetranServicePage',
       secure: true,
       isChecked: false
     },

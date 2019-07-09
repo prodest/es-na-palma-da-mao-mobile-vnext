@@ -1,51 +1,45 @@
-
-  
 <ion-header>
   <div class="header-cs">
-  <ion-searchbar
-  placeholder="Pesquisar..."
-  [showCancelButton]="true"
-  cancelButtonText="Cancelar"
-  [animated]="false"
-  (ionInput)="search($event)"
-  (ionClear)="clear($event)"
-  (ionCancel)="clear($event)">
-</ion-searchbar>
-<h2 class="icon_favorite" (click)="goToSelectFavorites()"> </h2>
-<h2 > Meus Serviços </h2>
-</div>
+    <ion-searchbar
+      placeholder="Pesquisar..."
+      [showCancelButton]="true"
+      cancelButtonText="Cancelar"
+      [animated]="false"
+      (ionInput)="search($event)"
+      (ionClear)="clear($event)"
+      (ionCancel)="clear($event)"
+    >
+    </ion-searchbar>
+    <h2 class="icon_favorite" (click)="goToSelectFavorites()"></h2>
+    <h2>Meus Serviços</h2>
+  </div>
 </ion-header>
 <ion-content padding>
-    <ion-item *ngIf="!filteredMenus.length" text-center no-lines id="not-founded">
-        <p>Nenhum serviço encontrado</p>
-        <p>Tente mudar o filtro da consulta</p>
-      </ion-item>
-      <ion-list-header class="testo_negrito" *ngIf="filteredMenus && filteredMenus.length">
-        {{filteredMenus.length}} ENCONTRADOS
-      </ion-list-header>
-      <ion-spinner *ngIf="!filteredMenus" page-loading></ion-spinner>
- <ion-list>
-  <ion-slides [pager]="true">
-    <ion-slide class="lim-css" *ngFor = "let slide of slides">
-      <div class="dashboard-icons">
-        <ion-card *ngFor = "let lista of slide" (click)="openPage(lista.component)">
-         
-          <ion-icon class="pop-in"
-                    name="{{lista.icon}}"></ion-icon>
-                    {{lista.title}}       
-        </ion-card> 
-      
-      </div>  
-    </ion-slide>
-  </ion-slides>         
- </ion-list>
- <div>
-    <button 
-    menuToggle class="foot-css">
-<ion-icon name="menu"></ion-icon>
-</button>
-   <h2 class="notif-cs"></h2>
-   <h2 class="bot"></h2>
- </div>
-</ion-content>  
-
+  <ion-item *ngIf="!filteredMenus.length" text-center no-lines id="not-founded">
+    <p>Nenhum serviço encontrado</p>
+    <p>Tente mudar o filtro da consulta</p>
+  </ion-item>
+  <ion-list-header class="testo_negrito" *ngIf="filteredMenus && filteredMenus.length">
+    {{ filteredMenus.length }} ENCONTRADOS
+  </ion-list-header>
+  <ion-spinner *ngIf="!filteredMenus" page-loading></ion-spinner>
+  <ion-list>
+    <ion-slides [pager]="true">
+      <ion-slide class="lim-css" *ngFor="let slide of slides">
+        <div class="dashboard-icons">
+          <ion-card *ngFor="let lista of slide" (click)="openPage(lista.component)">
+            <ion-icon class="pop-in" name="{{ lista.icon }}"></ion-icon>
+            {{ lista.title }}
+          </ion-card>
+        </div>
+      </ion-slide>
+    </ion-slides>
+  </ion-list>
+  <div>
+    <button menuToggle class="foot-css">
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    <h2 class="notif-cs"></h2>
+    <h2 class="bot"></h2>
+  </div>
+</ion-content>

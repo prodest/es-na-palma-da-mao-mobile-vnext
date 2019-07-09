@@ -83,8 +83,7 @@ export class SelectFavoritePage implements OnDestroy {
    */
   saveFavorites() {
     this.menuService.storeMenus(this.menus);
-    console.log('AKI>>>>>>>>>>======  ', this.menus);
-    this.back();
+    this.navCtrl.push('MyServicesPage');
   }
 
    /**
