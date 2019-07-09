@@ -1,7 +1,33 @@
 
 documents-to-send-addressees {
-    .scroll-content {
-        overflow-x: hidden;
+   
+    ion-scroll { 
+        white-space: nowrap; 
     }
-  
+
+    .scrollable{
+        height: 300px;
+        border: 1px solid black;
+    }
+
+    .closeDest{
+        width: 10%;
+        float: right
+    }
+
+    .headerDest{
+        width: 50%;
+        float: left
+    }
+
+    .contentDest {
+        width: 50%;
+        float: left;
+        clear: left;
+    }
+
+    .addButton {
+        float: left;
+    }
+
 }

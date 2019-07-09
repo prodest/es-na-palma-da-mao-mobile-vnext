@@ -1,5 +1,5 @@
 <ion-header>
-    <edocs-documents-to-send-header></edocs-documents-to-send-header>
+  <edocs-documents-to-send-header></edocs-documents-to-send-header>
 </ion-header>
 
 <ion-content>
@@ -12,29 +12,28 @@
       Encaminhar Documentos
     </ion-list-header>
     <ion-item>
-      <ion-list style ='border-style: solid;' >
-        <ion-list-header>
-          Destinatários
-        </ion-list-header>
-        <ion-item style ='height: 200px; border-style: solid;' >
-          <ion-card *ngFor='let addressee of addressees'>
-            <ion-card-header>
-              {{ addressee.nome }}
-            </ion-card-header>
-            <ion-card-content>
-              {{ addressee.tipo }}
-            </ion-card-content>
-            <button ion-button detail-none [color]="colorCloseIcon" clear item-end>
-              <ion-icon item-start [name]="closeIcon"></ion-icon>
-            </button>
-          </ion-card>
-        </ion-item>
-      </ion-list>
+      Destinatários
+      <ion-scroll class="scrollable" scrollY="true">
+        <ion-list>
+          <ion-item>
+            <ion-card *ngFor="let addressee of addressees">
+              <ion-card-header class="headerDest">
+                {{ addressee.nome }}
+              </ion-card-header>
+              <ion-card-content class="contentDest">
+                {{ addressee.tipo }}
+              </ion-card-content>
+              <button ion-button class="closeDest" detail-none [color]="colorCloseIcon" clear item-end>
+                <ion-icon item-start [name]="closeIcon"></ion-icon>
+              </button>
+            </ion-card>
+          </ion-item>
+        </ion-list>
+      </ion-scroll>
     </ion-item>
   </ion-list>
-  <button ion-button detail-none [color]="colorAddIcon" outline >
-    Adicionar 
-    <ion-icon item-start [name]="addIcon" item></ion-icon>
+  <button ion-button class="addButton" detail-none [color]="colorAddIcon" outline>
+    Adicionar
   </button>
 </ion-content>
 <ion-footer>

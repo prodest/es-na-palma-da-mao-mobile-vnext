@@ -5,7 +5,7 @@ import { IonicPage } from 'ionic-angular';
   segment: 'documentos-para-enviar'
 })
 @Component({
-  selector: 'documentos-para-enviar',
+  selector: 'documents-to-send',
   templateUrl: './documents-to-send.html',
   changeDetection: ChangeDetectionStrategy.Default
 })
