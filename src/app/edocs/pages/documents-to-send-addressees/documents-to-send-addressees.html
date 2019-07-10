@@ -15,19 +15,23 @@
       Destinatários
       <ion-scroll class="scrollable" scrollY="true">
         <ion-list>
-          <ion-item>
-            <ion-card *ngFor="let addressee of addressees">
-              <ion-card-header class="headerDest">
-                {{ addressee.nome }}
-              </ion-card-header>
-              <ion-card-content class="contentDest">
-                {{ addressee.tipo }}
-              </ion-card-content>
-              <button ion-button class="closeDest" detail-none [color]="colorCloseIcon" clear item-end>
-                <ion-icon item-start [name]="closeIcon"></ion-icon>
-              </button>
-            </ion-card>
-          </ion-item>
+          <ion-grid fixed>
+            <ion-row wrap responsive-xs>
+              <ion-col *ngFor="let addressee of addressees;">
+                <ion-card class="cardDest" >
+                  <div class="headerDest" item-start>
+                    {{ addressee.nome }}
+                  </div>
+                  <div class="contentDest" item-start>
+                    {{ addressee.tipo }}
+                  </div>
+                  <button ion-button class="closeDest" detail-none [color]="colorCloseIcon" clear>
+                    <ion-icon [name]="closeIcon"></ion-icon>
+                  </button>
+                </ion-card>
+              </ion-col>
+            </ion-row>
+          </ion-grid>
         </ion-list>
       </ion-scroll>
     </ion-item>

@@ -12,21 +12,20 @@ documents-to-send-addressees {
 
     .closeDest{
         width: 10%;
-        float: right
     }
 
-    .headerDest{
-        width: 50%;
-        float: left
+    ion-card.cardDest {
+        border-radius: 1em;
+        background-color: darkgray;
     }
 
-    .contentDest {
-        width: 50%;
-        float: left;
-        clear: left;
+    div.headerDest{
     }
 
-    .addButton {
+    div.contentDest {
+    }
+
+    button.addButton {
         float: left;
     }
 
