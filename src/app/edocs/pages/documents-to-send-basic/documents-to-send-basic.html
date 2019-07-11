@@ -1,5 +1,5 @@
 <ion-header>
-    <edocs-documents-to-send-header></edocs-documents-to-send-header>
+  <edocs-documents-to-send-header></edocs-documents-to-send-header>
 </ion-header>
 
 <ion-content>
@@ -11,26 +11,28 @@
       Encaminhar Documentos
     </ion-list-header>
     <ng-container>
-      <ion-item>
-        <ion-label floating>Título do encaminhamento</ion-label>
-        <ion-input type="text" [(ngModel)]="sendTitle" name="sendTitle" required></ion-input>
-      </ion-item>
-      <!--TODO: 2 - Buscar nome do remetente
-                3 - Buscar cargo/função -->
-      <ion-item *ngIf="sendTitle">
-        <ion-label floating>Usuário Remetente</ion-label>
-        <ion-input type="text" [(ngModel)]="sender" name="sender" required></ion-input>
-      </ion-item>
-      <ion-item *ngIf="sendTitle && sender">
-        <ion-label>Cargo/Função</ion-label>
-        <ion-select cancelText="Cancelar" [(ngModel)]="role" [selectOptions]="roleOptions" required>
-          <ion-option value="a">Cidadão</ion-option>
-          <ion-option value="b">Bolsista Fapes</ion-option>
-        </ion-select>
-      </ion-item>
+      <form novalidate [formGroup]="form" (ngSubmit)="onSubmitClick(form.value)">
+        <ion-item>
+          <ion-label floating>Título do encaminhamento</ion-label>
+          <ion-input type="text" formControlName="title" name="title"></ion-input>
+        </ion-item>
+        <espm-validation-message [errors]="validationErrors['title']"></espm-validation-message>
+        <ion-item class="forever-valid" *ngIf="form.get('title')?.value">
+          <ion-label floating>Usuário Remetente</ion-label>
+          <ion-input type="text" formControlName="sender" name="sender"></ion-input>
+        </ion-item>
+        <espm-validation-message *ngIf="form.get('title')?.value" [errors]="validationErrors['sender']"></espm-validation-message>
+        <ion-item *ngIf="form.get('title')?.value && form.get('sender')?.value">
+          <ion-label>Cargo/Função</ion-label>
+          <ion-select cancelText="Cancelar" formControlName="role" name="role" [selectOptions]="roleOptions">
+            <ion-option *ngFor="let role of roles">{{role.Nome}}</ion-option>
+          </ion-select>
+        </ion-item>
+        <espm-validation-message *ngIf="form.get('title')?.value && form.get('sender')?.value" [errors]="validationErrors['role']"></espm-validation-message>
+      </form>
     </ng-container>
   </ion-list>
 </ion-content>
 <ion-footer>
-    <edocs-documents-to-send-footer></edocs-documents-to-send-footer>
+  <edocs-documents-to-send-footer></edocs-documents-to-send-footer>
 </ion-footer>

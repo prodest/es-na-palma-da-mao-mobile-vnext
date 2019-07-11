@@ -9,7 +9,7 @@ import { DocumentsToSendFooterComponentModule } from '../../components/documents
   imports: [
     DocumentsToSendHeaderComponentModule,
     DocumentsToSendFooterComponentModule,
-    IonicPageModule.forChild(DocumentsToSendMessagePage),
+    IonicPageModule.forChild(DocumentsToSendMessagePage)
   ],
 })
 export class DocumentsToSendMessagePageModule {}
