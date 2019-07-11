@@ -13,20 +13,18 @@
     </ion-list-header>
     <ion-item>
       Destinatários
-      <ion-scroll class="scrollable" scrollY="true">
+      <ion-scroll class="scrollable" scrollY="true" detail-none>
         <ion-list>
           <ion-grid fixed>
-            <ion-row wrap responsive-xs>
-              <ion-col *ngFor="let addressee of addressees;">
-                <ion-card class="cardDest" >
-                  <div class="headerDest" item-start>
-                    {{ addressee.nome }}
+            <ion-row>
+              <ion-col class="colAddr" *ngFor="let addressee of addressees;">
+                <ion-card class="cardAddr" >
+                  <div class="contentCardAddr" item-start>
+                    <p class="titleAddr" >{{ addressee.nome }}</p>
+                    <p class="subtitleAddr">{{ addressee.tipo }}</p>
                   </div>
-                  <div class="contentDest" item-start>
-                    {{ addressee.tipo }}
-                  </div>
-                  <button ion-button class="closeDest" detail-none [color]="colorCloseIcon" clear>
-                    <ion-icon [name]="closeIcon"></ion-icon>
+                  <button ion-button class="closeAddr" [color]="colorCloseIcon" no-padding clear>
+                    <ion-icon [ios]="iosCloseIcon" [md]="mdCloseIcon"></ion-icon>
                   </button>
                 </ion-card>
               </ion-col>
@@ -34,11 +32,12 @@
           </ion-grid>
         </ion-list>
       </ion-scroll>
+      <button ion-button class="addButton" detail-none [color]="colorAddIcon" outline>
+        Adicionar
+      </button>
     </ion-item>
+    
   </ion-list>
-  <button ion-button class="addButton" detail-none [color]="colorAddIcon" outline>
-    Adicionar
-  </button>
 </ion-content>
 <ion-footer>
   <edocs-documents-to-send-footer></edocs-documents-to-send-footer>

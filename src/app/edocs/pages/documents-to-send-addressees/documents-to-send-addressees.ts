@@ -11,7 +11,8 @@ import { IonicPage } from 'ionic-angular';
 })
 export class DocumentsToSendAddresseesPage implements OnInit {
 
-  closeIcon: string = 'md-close';
+  mdCloseIcon: string = 'ios-trash';
+  iosCloseIcon: string = 'md-trash';
   colorCloseIcon: string = 'danger';
   addIcon: string = 'md-add-circle';
   colorAddIcon: string = 'dark';
@@ -36,11 +37,44 @@ export class DocumentsToSendAddresseesPage implements OnInit {
       nome: 'SEGER',
       tipo: 'Órgão'
 
+    },
+    {
+      nome: 'DETRAN',
+      tipo: 'Órgão'
+
+    },
+    {
+      nome: 'IPEM-ES',
+      tipo: 'Órgão'
+
+    },
+    {
+      nome: 'PMES',
+      tipo: 'Órgão'
+
+    },
+    {
+      nome: 'SEJUS',
+      tipo: 'Órgão'
+
+    },
+    {
+      nome: 'SETUR',
+      tipo: 'Órgão'
+
+    },
+    {
+      nome: 'IEMA',
+      tipo: 'Órgão'
+
     }
   ]
 
   constructor() { }
 
+  delAddresses() {
+    
+  }
   ngOnInit(): void { }
 
   refresh(): void { }
