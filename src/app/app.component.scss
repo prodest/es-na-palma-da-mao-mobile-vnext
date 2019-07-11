@@ -175,6 +175,7 @@ ion-icon {
     mask-image: url(../assets/icon/botao-google.svg);
     background: #ed1c24;
   }
+
   /* Ícones dos módulos */
   &[class*="custom-"] {
     mask-size: contain;
@@ -183,6 +184,7 @@ ion-icon {
     width: 1em;
     height: 1em;
   }
+
   &[class*="modulo-noticias"] {
     background: transparent url(../assets/icon/icone-noticias.png)no-repeat left bottom;
     background-size: contain;
@@ -206,6 +208,17 @@ ion-icon {
   &[class*="modulo-taxi"] {
     background: transparent url(../assets/icon/icone-detran.png)no-repeat left bottom;
     background-size: contain;
+  }
+
+  /* Ícone Selecionar favoritos */
+  &[class*="custom-selecionar-favoritos"] {
+    mask-size: contain;
+    mask-position: 50% 50%;
+    mask-repeat: no-repeat;
+    background: white;
+    width: 1em;
+    height: 1em;
+    mask-image: url(../assets/icon/icone-reordenar-claro.svg);
   }
 
 }

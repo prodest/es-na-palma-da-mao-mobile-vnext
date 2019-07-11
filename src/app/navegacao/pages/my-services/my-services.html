@@ -1,51 +1,85 @@
-
-  
 <ion-header>
-  <div class="header-cs">
-  <ion-searchbar
-  placeholder="Pesquisar..."
-  [showCancelButton]="true"
-  cancelButtonText="Cancelar"
-  [animated]="false"
-  (ionInput)="search($event)"
-  (ionClear)="clear($event)"
-  (ionCancel)="clear($event)">
-</ion-searchbar>
-<h2 class="icon_favorite" (click)="goToSelectFavorites()"> </h2>
-<h2 > Meus Serviços </h2>
-</div>
+  <!-- SEARCHBAR -->
+  <div id="searchbar-wrapper">
+    <ion-searchbar
+      placeholder="Buscar"
+      [showCancelButton]="true"
+      cancelButtonText="Cancelar"
+      [animated]="false"
+      (ionInput)="search($event)"
+      (ionClear)="clear($event)"
+      (ionCancel)="clear($event)">
+    </ion-searchbar>
+  </div>
+
+  <!-- TÍTULO DA PÁGINA -->
+  <nav-title
+    [title]="'Meus serviços'"
+    class="sign-primary content-white"
+  ></nav-title>
+
+  <!-- BOTÃO PARA A TELA DE SELEÇÃO DE FAVORITOS -->
+  <div id="button-wrapper">
+    <button ion-button icon-only id="select-favorite" (click)="goToSelectFavorites()">
+      <ion-icon name="custom-selecionar-favoritos"></ion-icon>
+    </button>
+  </div>
 </ion-header>
-<ion-content padding>
-    <ion-item *ngIf="!filteredMenus.length" text-center no-lines id="not-founded">
-        <p>Nenhum serviço encontrado</p>
-        <p>Tente mudar o filtro da consulta</p>
-      </ion-item>
-      <ion-list-header class="testo_negrito" *ngIf="filteredMenus && filteredMenus.length">
-        {{filteredMenus.length}} ENCONTRADOS
-      </ion-list-header>
-      <ion-spinner *ngIf="!filteredMenus" page-loading></ion-spinner>
- <ion-list>
+
+<ion-content>
+  <!-- SLIDES -->
   <ion-slides [pager]="true">
-    <ion-slide class="lim-css" *ngFor = "let slide of slides">
-      <div class="dashboard-icons">
-        <ion-card *ngFor = "let lista of slide" (click)="openPage(lista.component)">
-         
+    
+    <ion-slide>
+      <div class="slide-line">
+        <p>linha 1</p>
+      </div>
+      <div class="slide-line">
+        <p>linha 2</p>
+      </div>
+      <div class="slide-line">
+        <p>linha 3</p>
+      </div>
+    </ion-slide>
+
+    <ion-slide>
+      <div>slide 2</div>
+    </ion-slide>
+    
+    <ion-slide>
+      <div>slide 3</div>
+    </ion-slide>
+  </ion-slides>
+
+  <!-- BARRA INFERIOR -->
+  <div>
+    <button menuToggle icon-only id="menu-button">
+      <ion-icon name="menu"></ion-icon>
+    </button>
+  </div>
+  <!-- <ion-item *ngIf="!filteredMenus.length" text-center no-lines id="not-founded">
+    <p>Nenhum serviço encontrado</p>
+    <p>Tente mudar o filtro da consulta</p>
+  </ion-item>
+  <ion-spinner *ngIf="!filteredMenus" page-loading></ion-spinner>
+  <ion-list>
+    <ion-slides [pager]="true">
+      <ion-slide class="lim-css" *ngFor = "let slide of slides">
+        <div class="dashboard-icons">
+          <ion-card *ngFor = "let lista of slide" (click)="openPage(lista.component)">
           <ion-icon class="pop-in"
                     name="{{lista.icon}}"></ion-icon>
-                    {{lista.title}}       
-        </ion-card> 
-      
-      </div>  
-    </ion-slide>
-  </ion-slides>         
- </ion-list>
- <div>
-    <button 
-    menuToggle class="foot-css">
-<ion-icon name="menu"></ion-icon>
-</button>
-   <h2 class="notif-cs"></h2>
-   <h2 class="bot"></h2>
- </div>
-</ion-content>  
-
+                    {{lista.title}}
+          </ion-card>
+        </div>  
+      </ion-slide>
+    </ion-slides>         
+  </ion-list>
+  <div>
+    <button menuToggle class="foot-css">
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    <h2 class="notif-cs"></h2>
+    <h2 class="bot"></h2>
+  </div> -->
+</ion-content>

@@ -73,7 +73,7 @@ export class MyServicesPage implements OnDestroy {
   /**
    * 
    */
-  goToSelectFavorites(){
+  goToSelectFavorites() {
     this.navCtrl.push('SelectFavoritePage')
   }
 
