@@ -8,41 +8,27 @@ nav-title {
     }
 
     .sign {
-        height: 35px;
+        height: 30px;
         width: 7px;
         background-color: #ff0083; // $secondary-dark
         border-radius: 2px;
         float: left;
-        margin-top: 12px;
+        margin-top: 10px;
     }
 
     .content {
         display: flow-root;
-        padding-left: 30px;
+        padding-left: 25px;
         margin-bottom: 20px;
 
         p {
             font-family: 'Poppins';
             font-weight: 700;
-            font-size: 40px;
+            font-size: 35px;
             text-align: left;
             color: #004297; // $primary-dark
-            height: 40px;
+            height: 35px;
             margin: 0;
-        }
-    }
-
-    // Galaxy S5
-    @media screen and (max-width: 399px) {
-        .sign {
-            height: 30px;
-        }
-        .content {
-            padding-left: 25px;
-            p {
-                font-size: 35px;
-                height: 35px;
-            }
         }
     }
 
@@ -58,6 +44,34 @@ nav-title {
                 font-size: 30px;
                 height: 30px;
             }
+        }
+    }
+}
+
+.sign-primary {
+    .sign  {
+        background-color: #00aeef; // $primary-mid
+    }
+}
+
+.sign-secondary {
+    .sign  {
+        background-color: #ff0083; // $secondary-dark
+    }
+}
+
+.content-white {
+    .content {
+        p {
+            color: white;
+        }
+    }
+}
+
+.content-primary {
+    .content {
+        p {
+            color: #004297; // $primary-dark
         }
     }
 }
