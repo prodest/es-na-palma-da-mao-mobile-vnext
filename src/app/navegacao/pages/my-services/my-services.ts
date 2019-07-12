@@ -6,7 +6,7 @@ import { ItemMenu } from '../../models';
 import { MenuService } from '../../providers/menu.service';
 import { MenuToken } from '@espm/core/menu';
 import { MenusQuery, MenusStore } from '../../providers';
-import { filter, takeUntil } from 'rxjs/operators';
+import {  takeUntil, filter, tap } from 'rxjs/operators';
 import { Subject } from 'rxjs';
 
 @IonicPage()
@@ -29,19 +29,26 @@ export class MyServicesPage {
     private menusStore: MenusStore,
     private menuQuery: MenusQuery
   ) {
-    this.menuQuery.favorites$
-      .pipe(
-        filter(() => !this.menusStore.isPristine),
-        // tap(favorites$.map((elemento: ItemMenu, index: number) => {
-        //   if (index % 4 === 0) {
-        //     this.slides.push([]);
-        //   }
-        //   this.slides[this.slides.length - 1].push(elemento);
-        // })),
+    
+    /**
+     * 
+     */
+     this.menuQuery.favorites$
+     .pipe(filter(() => !this.menusStore.isPristine),
+       tap((favoritos) => {
+          favoritos.map((elemento:ItemMenu,index:number)=> {
+            if (index % 4 === 0) {
+             this.slides.push([]);
+            }
+            this.slides[this.slides.length - 1].push(elemento)
+          }
+       )}),
         takeUntil(this.destroyed$),
       )
       .subscribe();
-
+/** 
+ * 
+ */
     this.menuService.loadMenu();
 
     this.filteredMenus = this.menuService.getMenus();
@@ -52,6 +59,9 @@ export class MyServicesPage {
       this.slides[this.slides.length - 1].push(elemento);
     });
   }
+  /**
+   * 
+   */
   ngOnDestroy() {
     this.destroyed$.next();
     this.destroyed$.complete();

@@ -20,6 +20,7 @@ export class VehicleDebitsTipePage {
     { nome: 'DPVAT', tipo: 'DPVAT' },
     { nome: 'IPVA anterior', tipo: 'IPVAANTERIOR' },
     { nome: 'Licenciamento anterior', tipo: 'LICENCIAMENTOANTERIOR' },
+    { nome: 'Multas', tipo: 'MULTA' },
     { nome: 'DPVAT anterior', tipo: 'DPVATANTERIOR' }
   ];
   /**

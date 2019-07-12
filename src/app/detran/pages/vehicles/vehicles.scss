@@ -17,4 +17,54 @@ page-vehicles {
       }
     }
   }
+  ion-title {
+    width: 50%;
+  }  
+  .scroll-content {
+    background-color: rgb(233, 247, 254) ;
+  }
+  .item-md {
+    border-radius: 25px;
+    margin-top: 3%;
+    width: 90%;
+    margin-left: 15px;
+  }
+  .toolbar-title{
+    background-color: rgb(233, 247, 254);
+    margin-top: 5%;
+    font-size: x-large;
+    font-weight: bold;
+    font-size: x-large;
+  }
+  button{
+    background-color: rgb(233, 247, 254);
+    font-size: x-large;
+    color: rgb(0,174,239);
+    margin-left: 15px;
+    margin-top: 10px;
+  }
+  .back {
+     float: left;
+      width: 30%; 
+    }
+.remove {
+   float: right;
+    width: 60%;
+   }
+
+.button-md {
+  background-color: rgb(233, 247, 254);
+  color: black;
+  box-shadow: none;
+}
+.foot-css{
+  position: fixed;
+  bottom: 0;
+  }
+  .toolbar-title  {
+    color: #004297;
+  }
+  .vehicle__model{
+    color: #2BACE2;
+}
 }

@@ -60,10 +60,18 @@ openPageMyServices() {
       this.appCtrl.getRootNav().push(page);
     }
   };
+  /**
+   * 
+   */
   next() {
     if (this.authQuery.isLoggedIn) {
-      this.navCtrl.setRoot('MyServicesPage');
+      console.log("Entrou como logado")
+      this.navCtrl.push('MyServicesPage');
+    }else{
+      console.log("Nao logado")
+      this.slides.slideNext();
     }
-    this.slides.slideNext();
+    
+    
   }  
 }

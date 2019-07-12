@@ -1,2 +1,33 @@
-page-vehicle-debits {
+page-vehicle-debits-tipe {
+  .content-md {
+    background-color: rgb(233, 247, 254);
+  }
+  .item-md {
+    border-radius: 25px;
+    margin-top: 1px;
+  }
+  .foot-css{
+    position: fixed;
+    bottom: 0;
+    }
+    button{
+        background-color: rgb(233, 247, 254);
+        font-size: x-large;
+        color: rgb(0,174,239);
+        margin-left: 15px;
+        margin-top: 10px;
+      } 
+      
+      .toolbar-title{
+          background-color: rgb(233, 247, 254);
+          color:  #004297;
+          font-weight: bold;
+          font-size: x-large;
+      }
+      .debit{
+          margin-bottom:5px; 
+      }
+      .label-md {
+        color:  #004297;
+      }
 }

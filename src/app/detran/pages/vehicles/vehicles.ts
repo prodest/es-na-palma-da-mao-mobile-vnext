@@ -178,4 +178,10 @@ export class VehiclesPage implements OnDestroy {
   private removeVehicle(vehicle: Vehicle) {
     this.editing && this.detran.remove(vehicle).subscribe();
   }
+  /**
+   * 
+   */
+  goBack(){
+    this.navCtrl.pop();
+  }
 }
