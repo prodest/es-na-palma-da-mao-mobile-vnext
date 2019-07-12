@@ -11,28 +11,12 @@
       Encaminhar Documentos
     </ion-list-header>
     <ng-container>
-      <form novalidate [formGroup]="form" (ngSubmit)="onSubmitClick(form.value)">
-        <ion-item>
-          <ion-label floating>Título do encaminhamento</ion-label>
-          <ion-input type="text" formControlName="title" name="title"></ion-input>
-        </ion-item>
-        <espm-validation-message [errors]="validationErrors['title']"></espm-validation-message>
-        <ion-item class="forever-valid" *ngIf="form.get('title')?.value">
-          <ion-label floating>Usuário Remetente</ion-label>
-          <ion-input type="text" formControlName="sender" name="sender"></ion-input>
-        </ion-item>
-        <espm-validation-message *ngIf="form.get('title')?.value" [errors]="validationErrors['sender']"></espm-validation-message>
-        <ion-item *ngIf="form.get('title')?.value && form.get('sender')?.value">
-          <ion-label>Cargo/Função</ion-label>
-          <ion-select cancelText="Cancelar" formControlName="role" name="role" [selectOptions]="roleOptions">
-            <ion-option *ngFor="let role of roles">{{role.Nome}}</ion-option>
-          </ion-select>
-        </ion-item>
-        <espm-validation-message *ngIf="form.get('title')?.value && form.get('sender')?.value" [errors]="validationErrors['role']"></espm-validation-message>
-      </form>
+      <edocs-documents-to-send-basic-form [sender]="sender$ | async" [roles]="roles$ | async"
+        (onSubmit)="submitForm($event)" #basicForm>
+      </edocs-documents-to-send-basic-form>
     </ng-container>
   </ion-list>
 </ion-content>
 <ion-footer>
-  <edocs-documents-to-send-footer></edocs-documents-to-send-footer>
+  <edocs-documents-to-send-footer (onNextClick)="basicForm?.submit()"></edocs-documents-to-send-footer>
 </ion-footer>
