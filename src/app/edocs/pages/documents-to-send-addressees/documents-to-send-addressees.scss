@@ -54,9 +54,10 @@ documents-to-send-addressees {
 
     .addButton {
         float: right;
+        margin-right: 0em;
     }
 
-    @media screen and (max-width: 360px) {
+    @media screen and (max-width: 359px) {
         .colAddr {
             max-width: 100%;
         }

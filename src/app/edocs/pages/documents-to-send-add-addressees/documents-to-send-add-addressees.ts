@@ -1,5 +1,5 @@
 import { Component, ChangeDetectionStrategy, OnInit } from '@angular/core';
-import { IonicPage } from 'ionic-angular';
+import { IonicPage, NavController } from 'ionic-angular';
 
 @IonicPage({
   segment: 'documentos-para-enviar-adicionar-destinatarios'
@@ -13,9 +13,9 @@ export class DocumentsToSendAddAddresseesPage implements OnInit {
 
   // addressees: string = ''
 
-  // constructor() { }
+  constructor(public navCtrl: NavController) { }
 
   ngOnInit(): void { }
 
-  // refresh(): void { }
+  refresh(): void { }
 }

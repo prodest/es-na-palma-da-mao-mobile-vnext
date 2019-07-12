@@ -1,5 +1,5 @@
 import { Component, ChangeDetectionStrategy, OnInit } from '@angular/core';
-import { IonicPage } from 'ionic-angular';
+import { IonicPage, NavController } from 'ionic-angular';
 
 @IonicPage({
   segment: 'documentos-para-enviar-destinatarios'
@@ -11,11 +11,11 @@ import { IonicPage } from 'ionic-angular';
 })
 export class DocumentsToSendAddresseesPage implements OnInit {
 
-  mdCloseIcon: string = 'ios-trash';
-  iosCloseIcon: string = 'md-trash';
+  closeIcon: string = 'close';
   colorCloseIcon: string = 'danger';
   addIcon: string = 'md-add-circle';
   colorAddIcon: string = 'dark';
+  addAddresseesPage: string = 'DocumentsToSendAddAddresseesPage';
 
   addressees: Array<{nome: string, tipo: string}> = [
     {
@@ -70,11 +70,18 @@ export class DocumentsToSendAddresseesPage implements OnInit {
     }
   ]
 
-  constructor() { }
+  constructor(public navCtrl: NavController) { }
 
-  delAddresses() {
-    
+  delAddresses(addressee: {nome: string; tipo: string}) {
+    const index = this.addressees.indexOf(addressee);
+    this.addressees.splice(index, 1);
   }
+
+  addAddresses() {
+    this.navCtrl.push(this.addAddresseesPage);
+  }
+
+
   ngOnInit(): void { }
 
   refresh(): void { }

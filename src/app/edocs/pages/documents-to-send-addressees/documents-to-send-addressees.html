@@ -23,8 +23,8 @@
                     <p class="titleAddr" >{{ addressee.nome }}</p>
                     <p class="subtitleAddr">{{ addressee.tipo }}</p>
                   </div>
-                  <button ion-button class="closeAddr" [color]="colorCloseIcon" no-padding clear>
-                    <ion-icon [ios]="iosCloseIcon" [md]="mdCloseIcon"></ion-icon>
+                  <button ion-button (click)="delAddresses(addressee)" class="closeAddr" [color]="colorCloseIcon" no-padding clear>
+                    <ion-icon [name]="closeIcon"></ion-icon>
                   </button>
                 </ion-card>
               </ion-col>
@@ -32,7 +32,7 @@
           </ion-grid>
         </ion-list>
       </ion-scroll>
-      <button ion-button class="addButton" detail-none [color]="colorAddIcon" outline>
+      <button ion-button (click)="addAddresses()" class="addButton" detail-none [color]="colorAddIcon" default outline>
         Adicionar
       </button>
     </ion-item>

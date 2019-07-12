@@ -16,9 +16,11 @@
       <ion-textarea rows="5" [(ngModel)]="message" name="message" required></ion-textarea>
     </ion-item>
   </ion-list>
-  <button ion-button>
+  <div class="sendButton">
+    <button ion-button default >
       Enviar
-  </button>
+    </button>
+  </div>
 </ion-content>
 <ion-footer>
     <edocs-documents-to-send-footer></edocs-documents-to-send-footer>
