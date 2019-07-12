@@ -67,12 +67,30 @@ page-my-services {
   }
 
   ion-slides {
-    display: flex;
+    padding-bottom: 40px;
     
+    .slide-zoom {
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+
+      .slide-line {
+        border: 1px solid;
+      }
+    }
     
   }
 
   /* RODAPÉ */
+  .footer {
+    display: block;
+    height: 40px;
+    width: 100%;
+    position: absolute;
+    bottom: 0;
+    border: 1px solid black;
+  }
 
   /* Em telas menores */
   // Galaxy S5
