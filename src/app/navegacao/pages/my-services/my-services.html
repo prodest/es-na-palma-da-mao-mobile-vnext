@@ -29,25 +29,13 @@
 <ion-content>
   <!-- SLIDES -->
   <ion-slides [pager]="true">
-    
-    <ion-slide>
-      <div class="slide-line">
-        <p>linha 1</p>
+    <ion-slide *ngFor="let slide of slides">
+      <div class="slide-line" *ngFor="let line of slide">
+        <button ion-button clear icon-start *ngFor="let item of line">
+          <ion-icon name="{{item.icon}}"></ion-icon>
+          {{item.title}}
+        </button>
       </div>
-      <div class="slide-line">
-        <p>linha 2</p>
-      </div>
-      <div class="slide-line">
-        <p>linha 3</p>
-      </div>
-    </ion-slide>
-
-    <ion-slide>
-      <div>slide 2</div>
-    </ion-slide>
-    
-    <ion-slide>
-      <div>slide 3</div>
     </ion-slide>
   </ion-slides>
 

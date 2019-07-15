@@ -18,7 +18,7 @@ export class MyServicesPage implements OnDestroy {
     
   private destroyed$ = new Subject();
   filteredMenus: ItemMenu[];
-  private slides: Array<ItemMenu[]> = [];
+  private slides: Array<Array<ItemMenu[]>> = [];
   
   constructor(
     protected appCtrl: App,
@@ -44,10 +44,13 @@ export class MyServicesPage implements OnDestroy {
     this.menuService.loadMenu();
     this.filteredMenus = this.menuService.getMenus();
     this.filteredMenus.map((elemento: ItemMenu, index: number) => {
-      if (index%4 === 0) {
-        this.slides.push([])
-      }
-      this.slides[this.slides.length-1].push(elemento);
+      if (index%6 === 0) this.slides.push([]);
+      let lastSlideIndex: number = this.slides.length - 1;
+
+      if (index%2 === 0) this.slides[lastSlideIndex].push([]);
+      let lastLineIndex: number = this.slides[lastSlideIndex].length - 1;
+
+      this.slides[lastSlideIndex][lastLineIndex].push(elemento);
     });
   }
 
@@ -90,10 +93,13 @@ export class MyServicesPage implements OnDestroy {
     
     this.slides = []
     this.filteredMenus.map((elemento: ItemMenu, index: number) => {
-      if (index%4 === 0) {
-        this.slides.push([])
-      }
-      this.slides[this.slides.length-1].push(elemento);
+      if (index%6 === 0) this.slides.push([]);
+      let lastSlideIndex: number = this.slides.length - 1;
+
+      if (index%2 === 0) this.slides[lastSlideIndex].push([]);
+      let lastLineIndex: number = this.slides[lastSlideIndex].length - 1;
+
+      this.slides[lastSlideIndex][lastLineIndex].push(elemento);
     });
   };
   
