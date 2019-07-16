@@ -1,5 +1,5 @@
 <ion-header>
-    <edocs-documents-to-send-header></edocs-documents-to-send-header>
+  <edocs-documents-to-send-header></edocs-documents-to-send-header>
 </ion-header>
 
 <ion-content>
@@ -11,8 +11,39 @@
     <ion-list-header>
       Encaminhar Documentos
     </ion-list-header>
-    <ion-item>
-      <ion-label>Adicionar Destinatários</ion-label>
-    </ion-item>
+    <ng-container>
+      <ion-item>
+        <div class="pageTitle">Adicionar Destinatário</div>
+      </ion-item>
+      <ion-item>
+        <ion-label >Filtrar por:</ion-label>
+        <ion-select cancelText="Cancelar" [(ngModel)]="selAddresseesTypeFilter" required>
+          <ion-option *ngFor="let addTypeFilter of addresseesTypeFilter" [value]="addTypeFilter">{{
+            addTypeFilter.type
+          }}</ion-option>
+        </ion-select>
+      </ion-item>
+
+      <ion-card class="alert-card">
+        <ion-card-content>
+          {{ selAddresseesTypeFilter.notice }}
+        </ion-card-content>
+      </ion-card>
+      <p padding >Filtrar Órgão</p>
+      <ion-searchbar [(ngModel)]="govAgency" (ionInput)="searchInput($event)"></ion-searchbar>
+      <ion-item>
+        <ion-scroll class="scrollable" scrollY="true" detail-none>
+          <ion-list> </ion-list>
+        </ion-scroll>
+      </ion-item>
+      <!--ion-item *ngIf="selAddresseesTypeFilter && govAgency && selAddresseesTypeFilter === 1">
+        <p>Filtrar Setor</p>
+        <ion-searchbar [(ngModel)]="govSector" (ionInput)="searchInput($event)"></ion-searchbar>
+      </ion-item>
+      <ion-item *ngIf="selAddresseesTypeFilter && govAgency && selAddresseesTypeFilter === 2">
+        <p>Filtrar Grupos de Trabalho</p>
+        <ion-searchbar [(ngModel)]="govGroup" (ionInput)="searchInput($event)"></ion-searchbar>
+      </ion-item-->
+    </ng-container>
   </ion-list>
 </ion-content>
