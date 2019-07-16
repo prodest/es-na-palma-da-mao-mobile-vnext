@@ -5,29 +5,38 @@ page-vehicle-debits-tipe {
   .item-md {
     border-radius: 25px;
     margin-top: 1px;
+    width: 90%;
+    margin-left: 15px;
   }
-  .foot-css{
+  .foot-css {
     position: fixed;
-    bottom: 0;
-    }
-    button{
-        background-color: rgb(233, 247, 254);
-        font-size: x-large;
-        color: rgb(0,174,239);
-        margin-left: 15px;
-        margin-top: 10px;
-      } 
-      
-      .toolbar-title{
-          background-color: rgb(233, 247, 254);
-          color:  #004297;
-          font-weight: bold;
-          font-size: x-large;
-      }
-      .debit{
-          margin-bottom:5px; 
-      }
-      .label-md {
-        color:  #004297;
-      }
+    bottom: 10px;
+  }
+  button {
+    background-color: rgb(233, 247, 254);
+    font-size: x-large;
+    color: rgb(0, 174, 239);
+    margin-left: 15px;
+    margin-top: 10px;
+  }
+
+  .toolbar-title {
+    background-color: rgb(233, 247, 254);
+    color: #004297;
+    font-weight: bold;
+    font-size: x-large;
+  }
+  .debit {
+    margin-bottom: 5px;
+  }
+  .label-md {
+    color: #004297;
+  }
+  .componente {
+    margin-bottom: 15px;
+  }
+  ion-title {
+    margin-top: 5px;
+    margin-bottom: 20px;
+  }
 }

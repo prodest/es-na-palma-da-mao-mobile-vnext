@@ -1,6 +1,8 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams, App } from 'ionic-angular';
 import { AuthNeededService, AuthQuery} from '@espm/core';
+import { Vehicle } from '../../model';
+import { VehiclesService } from '../../providers';
 
 @IonicPage()
 @Component({
@@ -11,6 +13,7 @@ export class DetranServicePage {
   
 
   constructor(public navCtrl: NavController,
+              private detran: VehiclesService,
               private authQuery: AuthQuery,
               protected appCtrl: App,
               protected authNeeded: AuthNeededService,
@@ -26,10 +29,10 @@ export class DetranServicePage {
     const isAllowed = this.authQuery.isLoggedIn;
 
     if (!isAllowed) {
-      this.authNeeded.showAuthNeededModal();
-      
+      this.authNeeded.showAuthNeededModal();  
     }
-   // setTimeout(() => this.navCtrl.push('MyServicesPage'));
+    
+   // setTimeout(() => this.navCtrl.push('MyServicesPage'),10000);
    
     return isAllowed;
   }
@@ -56,9 +59,15 @@ export class DetranServicePage {
   /**
    * 
    */
-  infractionsVehicle(){
-    this.appCtrl.getRootNav().push('');
-  }
+  
+  infractionsVehicle = (vehicle: Vehicle) => {
+    this.detran
+      .getTickets(vehicle)
+      .subscribe(
+        tickets => this.navCtrl.push('VehicleTicketsPage', { vehicle, plate: vehicle.plate, tickets: tickets }),
+        error => console.log(error)
+      );
+  };
   /**
    * 
    */

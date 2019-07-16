@@ -61,4 +61,10 @@ export class VehicleDebitsTipePage {
         error => console.log(error)
       );
   }
+  /**
+   * 
+   */
+  goBack(){
+    this.navCtrl.pop();
+  }
 }

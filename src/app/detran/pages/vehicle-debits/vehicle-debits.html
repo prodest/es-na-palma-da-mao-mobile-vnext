@@ -1,12 +1,12 @@
-<ion-header>
-  <ion-navbar>
-    <button ion-button menuToggle>
-      <ion-icon name="menu"></ion-icon>
-    </button>
-    <ion-title>Débitos do veículo</ion-title>
-  </ion-navbar>
-</ion-header>
+
 
 <ion-content>
+    <div class="back"><button (click)="goBack()"> 
+        <ion-icon ios="ios-arrow-round-back" md="md-arrow-round-back"></ion-icon>
+    </button>
+  </div>
+  <div class="debit">
+      <ion-title >Débitos </ion-title>
+  </div>
   <espm-debits [vehicle]="vehicle" [debits]="debits" [tipe]="tipe"></espm-debits>
 </ion-content>

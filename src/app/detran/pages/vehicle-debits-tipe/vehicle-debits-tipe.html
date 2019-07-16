@@ -5,9 +5,11 @@
     </button>
   </div>
   <div class="debit">
-      <ion-title >Débitos </ion-title>
+      <ion-title >Débitos</ion-title>
   </div>
-    
+  <div class="componente">
+  <espm-vehicle [vehicle]="vehicle"></espm-vehicle>
+</div>
     <ion-list><button ion-item *ngFor="let item of botoes" (click)="pushNext(item.tipo)" >{{ item.nome }}</button></ion-list>  
     <button menuToggle class="foot-css">
         <ion-icon name="menu"></ion-icon>
