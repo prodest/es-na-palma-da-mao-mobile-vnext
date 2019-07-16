@@ -31,7 +31,7 @@
   <ion-slides [pager]="true">
     <ion-slide *ngFor="let slide of slides">
       <div class="slide-line" *ngFor="let line of slide">
-        <button ion-button clear icon-start *ngFor="let item of line">
+        <button ion-button clear icon-start *ngFor="let item of line" (click)="openPage(item.component)">
           <ion-icon name="{{item.icon}}"></ion-icon>
           {{item.title}}
         </button>

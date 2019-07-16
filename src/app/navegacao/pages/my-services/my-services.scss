@@ -64,12 +64,12 @@ page-my-services {
 
   .scroll-content {
     background-color: #e9f7fe; // $primary-very-light
-    
+    padding-bottom: 0 !important;
   }
 
   ion-slides {
     padding-bottom: 50px;
-    flex-shrink: 0;
+    // min-height: 100vh;
     
     .slide-zoom {
       height: 100%;
@@ -83,22 +83,46 @@ page-my-services {
 
       .slide-line {
         //border: 1px solid;
-        border-radius: 3vh;
         height: 30%;
         display: flex;
         justify-content: space-between;
-        contain: content;
-        box-shadow: 0px 0px 5px #cccccc;
+        flex-shrink: 0;
 
         button {
+          font-family: 'Poppins';
+          font-size: 2.5vh;
+          font-weight: 700;
+          color: #004297; // $primary-dark
+          text-transform: none;
           background-color: white;
           height: 100%;
           width: 49.7%;
           margin: 0;
-          box-shadow: inherit;
-          // display: flex;
-          // flex-direction: column;
+          box-shadow: 0px 0px 5px #cccccc;
+          white-space: normal;
+
+          .button-inner {
+            display: flex;
+            flex-direction: column;
+            
+            .icon {
+              height: 6.5vh;
+              width: 6.5vh;
+              padding: 0;
+              margin-bottom: 1vh;
+            }
+          }
         }
+
+      }
+      .slide-line > :first-child {
+        border-top-left-radius: 3vh;
+        border-bottom-left-radius: 3vh;
+      }
+
+      .slide-line > :last-child {
+        border-top-right-radius: 3vh;
+        border-bottom-right-radius: 3vh;
       }
     }
   }
