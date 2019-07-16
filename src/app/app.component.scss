@@ -209,6 +209,14 @@ ion-icon {
     background: transparent url(../assets/icon/icone-detran.png)no-repeat left bottom;
     background-size: contain;
   }
+  &[class*="modulo-processos"] {
+    background: transparent url(../assets/icon/icone-processos.png)no-repeat left bottom;
+    background-size: contain;
+  }
+  &[class*="modulo-documentos"] {
+    background: transparent url(../assets/icon/icone-servidor-publico.png)no-repeat left bottom;
+    background-size: contain;
+  }
 
   /* Ícone Selecionar favoritos */
   &[class*="custom-selecionar-favoritos"] {
