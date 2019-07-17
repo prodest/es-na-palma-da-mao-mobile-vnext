@@ -1,8 +1,10 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams, App } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, App, AlertController, MenuController } from 'ionic-angular';
 import { AuthNeededService, AuthQuery} from '@espm/core';
-import { Vehicle } from '../../model';
+import { Vehicle, Ticket } from '../../model';
 import { VehiclesService } from '../../providers';
+
+import { DriverService } from './../../providers';
 
 @IonicPage()
 @Component({
@@ -10,16 +12,22 @@ import { VehiclesService } from '../../providers';
   templateUrl: 'detran-service.html',
 })
 export class DetranServicePage {
+  tickets: Ticket[];
+  loaded: boolean = false;
   
 
   constructor(public navCtrl: NavController,
+              private detra: DriverService,
               private detran: VehiclesService,
               private authQuery: AuthQuery,
+              private alertCtrl: AlertController,
               protected appCtrl: App,
               protected authNeeded: AuthNeededService,
-              public navParams: NavParams) {
+              public navParams: NavParams,
+              private menuCtrl: MenuController) {
 
                 
+
   }
   /**
    * 
@@ -29,14 +37,58 @@ export class DetranServicePage {
     const isAllowed = this.authQuery.isLoggedIn;
 
     if (!isAllowed) {
-      this.authNeeded.showAuthNeededModal();  
+      this.showAuthNeededModal();
     }
-    
-   // setTimeout(() => this.navCtrl.push('MyServicesPage'),10000);
-   
     return isAllowed;
   }
+  /**
+   * 
+   */
+  showAuthNeededModal = () => {
+    let alert = this.alertCtrl.create({
+      title: 'Login necessário',
+      message: 'Você deve estar autenticado no <strong>ES na palma da mão</strong> para acessar essa funcionalidade.',
+      buttons: [
+        {
+          text: 'Entendi',
+          handler: () => {
+            this.appCtrl
+              .getRootNav()
+              .setRoot('MyServicesPage')
+              .then(() => {
+                alert.dismiss();
+                this.menuCtrl.close();
+              });
+            return false;
+          },
+          role: 'cancel'
+        },
+        {
+          text: 'Autenticar',
+          handler: () => {
+            this.appCtrl
+              .getRootNav()
+              .setRoot('LoginPage')
+              .then(() => {
+                alert.dismiss();
+                this.menuCtrl.close();
+              });
+            return false;
+          }
+        }
+      ]
+    });
+    return alert.present();
+  };
+/**
+ * 
+ */
+
+loadData(){
+  this.detra.getDriverTickets().subscribe(tickets => (this.tickets = tickets), () => (this.tickets = null));
+}
   
+
   /**
    * 
    */

@@ -1,19 +1,20 @@
 page-vehicle-debits {
     .scroll-content {
-    background-color: rgb(233, 247, 254);
+    background-color: #ffffff;
     }
     .item-md {
         border-radius: 25px;
-        margin-top: 3px;    
+        margin-top: 3px; 
+        background-color: rgb(233, 247, 254);  
     }
     .toolbar-title{
-        background-color: rgb(233, 247, 254);
+        background-color: #ffffff;
         color: #004297;
         font-weight: bold;
         font-size: x-large;
       }
       button {
-        background-color: rgb(233, 247, 254); 
+        background-color: #ffffff; 
         color: rgb(0,174,239);
         font-size: x-large;
         margin-top: 10px;

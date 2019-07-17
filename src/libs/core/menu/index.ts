@@ -27,7 +27,7 @@ export const MENUS: ItemMenu[] = [
       id: 4,
       title: 'Consulta Processo',
       icon: 'custom-modulo-consultas',
-      component: 'SearchPage',
+      component: 'SepSearchPage',
       isChecked: false
     },
     {
@@ -67,7 +67,7 @@ export const MENUS: ItemMenu[] = [
       id: 10,
       title: 'Portal da Transparência',
       icon: 'pie',
-      component: 'TransparencyDashboardmatlabPage',
+      component: 'TransparencyDashboardPage',
       isChecked: false
     },
   
@@ -103,7 +103,7 @@ export const MENUS: ItemMenu[] = [
       id: 14,
       title: 'Buscar concursos',
       icon: 'custom-modulo-oportunidades',
-      component: 'Apresentacao',
+      component: 'ApresentacaoPage',
       isChecked: false
     },
   
