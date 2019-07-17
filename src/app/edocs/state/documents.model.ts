@@ -33,5 +33,5 @@ export interface Capturador {
 export interface Destination {
   id: string;
   descricao: string; 
-  type?: string;
+  tipo?: string;
 }

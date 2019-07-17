@@ -42,7 +42,6 @@ export class DocumentsToSendAddAddresseesPage implements OnInit {
     this.api.getDestinations().subscribe(destination => {
       this.govAgencies = this.filteredGovAgencies = destination;
     });
-    console.log(this.navParams.data);
     this.addressees = this.navParams.data;
   }
 
@@ -68,11 +67,21 @@ export class DocumentsToSendAddAddresseesPage implements OnInit {
    */
   addAddressees(agency: Destination) {
     if (this.addressees.findIndex(ad => ad.id === agency.id) === -1 ){
+      agency.tipo = 'Órgão'
       this.addressees.push(agency);
     }
     
     this.navCtrl.pop();
   }
+
+  limite = (valor: string) => {
+    if (valor.length > 35) {
+      return valor.substring(0, 35) + '…';
+    } else {
+      return valor;
+    }
+  };
+
 
   ngOnInit(): void {}
 

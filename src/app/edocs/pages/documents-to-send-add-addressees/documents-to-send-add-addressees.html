@@ -43,10 +43,10 @@
         <ion-scroll class="scrollable" scrollY="true" detail-none>
           <ion-list>
             <ion-item *ngFor="let agency of filteredGovAgencies" no-padding no-margin>
-              <button ion-button color="light" round (click)="addAddressees(agency)">{{ agency.descricao }}</button>
+              <button ion-button color="light" block (click)="addAddressees(agency)">{{ limite(agency.descricao) }}</button>
             </ion-item>
           </ion-list>
-          <ion-item *ngIf="filteredGovAgencies && !filteredGovAgencies.length" text-center no-lines id="not-founded">
+          <ion-item *ngIf="filteredGovAgencies && !filteredGovAgencies.length" text-center no-lines>
               <h2>Nenhum Órgão encontrado</h2>
               <p>Tente mudar o filtro da consulta</p>
           </ion-item>

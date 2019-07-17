@@ -31,7 +31,7 @@ export class DocumentsToSendAddresseesPage implements OnInit {
   }
 
   limite = (valor: string) => {
-    if (valor.length > 12) {
+    if (valor.length > 7) {
       return valor.substring(0, 7) + '…';
     } else {
       return valor;
