@@ -1,5 +1,6 @@
 import { Component, ChangeDetectionStrategy, OnInit } from '@angular/core';
 import { IonicPage, NavController } from 'ionic-angular';
+import { Destination } from '../../state';
 
 @IonicPage({
   segment: 'documentos-para-enviar-destinatarios'
@@ -10,81 +11,34 @@ import { IonicPage, NavController } from 'ionic-angular';
   changeDetection: ChangeDetectionStrategy.Default
 })
 export class DocumentsToSendAddresseesPage implements OnInit {
-
   closeIcon: string = 'close';
   colorCloseIcon: string = 'danger';
   addIcon: string = 'md-add-circle';
   colorAddIcon: string = 'dark';
   addAddresseesPage: string = 'DocumentsToSendAddAddresseesPage';
 
-  addressees: Array<{nome: string, tipo: string}> = [
-    {
-      nome: 'PRODEST',
-      tipo: 'Órgão'
+  addressees: Destination[] = [];
 
-    },
-    {
-      nome: 'SEDU',
-      tipo: 'Órgão'
+  constructor(public navCtrl: NavController) {}
 
-    },
-    {
-      nome: 'CEASA',
-      tipo: 'Órgão'
-
-    },
-    {
-      nome: 'SEGER',
-      tipo: 'Órgão'
-
-    },
-    {
-      nome: 'DETRAN',
-      tipo: 'Órgão'
-
-    },
-    {
-      nome: 'IPEM-ES',
-      tipo: 'Órgão'
-
-    },
-    {
-      nome: 'PMES',
-      tipo: 'Órgão'
-
-    },
-    {
-      nome: 'SEJUS',
-      tipo: 'Órgão'
-
-    },
-    {
-      nome: 'SETUR',
-      tipo: 'Órgão'
-
-    },
-    {
-      nome: 'IEMA',
-      tipo: 'Órgão'
-
-    }
-  ]
-
-  constructor(public navCtrl: NavController) { }
-
-  delAddresses(addressee: {nome: string; tipo: string}) {
-    const index = this.addressees.indexOf(addressee);
+  delAddresses(addressees) {
+    const index = this.addressees.indexOf(addressees);
     this.addressees.splice(index, 1);
   }
 
   addAddresses() {
-    this.navCtrl.push(this.addAddresseesPage);
+    this.navCtrl.push(this.addAddresseesPage, this.addressees);
   }
 
+  limite = (valor: string) => {
+    if (valor.length > 12) {
+      return valor.substring(0, 7) + '…';
+    } else {
+      return valor;
+    }
+  };
 
-  ngOnInit(): void { }
+  ngOnInit(): void {}
 
-  refresh(): void { }
-
-
+  refresh(): void {}
 }

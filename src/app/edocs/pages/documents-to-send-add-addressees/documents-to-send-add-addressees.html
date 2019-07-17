@@ -7,7 +7,7 @@
     <ion-refresher-content> </ion-refresher-content>
   </ion-refresher>
 
-  <ion-list>
+  <ion-list no-lines>
     <ion-list-header>
       Encaminhar Documentos
     </ion-list-header>
@@ -16,8 +16,8 @@
         <div class="pageTitle">Adicionar Destinatário</div>
       </ion-item>
       <ion-item>
-        <ion-label >Filtrar por:</ion-label>
-        <ion-select cancelText="Cancelar" [(ngModel)]="selAddresseesTypeFilter" required>
+        <ion-label>Filtrar por:</ion-label>
+        <ion-select cancelText="Cancelar" [(ngModel)]="selAddresseesTypeFilter" disabled required>
           <ion-option *ngFor="let addTypeFilter of addresseesTypeFilter" [value]="addTypeFilter">{{
             addTypeFilter.type
           }}</ion-option>
@@ -29,11 +29,28 @@
           {{ selAddresseesTypeFilter.notice }}
         </ion-card-content>
       </ion-card>
-      <p padding >Filtrar Órgão</p>
-      <ion-searchbar [(ngModel)]="govAgency" (ionInput)="searchInput($event)"></ion-searchbar>
+      <p padding>Filtrar Órgão</p>
+      <ion-searchbar
+        placeholder="Digite para filtrar pelo Órgão"
+        [showCancelButton]="true"
+        cancelButtonText="Cancelar"
+        [animated]="false"
+        (ionInput)="search($event)"
+        (ionClear)="clear($event)"
+        (ionCancel)="clear($event)"
+      ></ion-searchbar>
       <ion-item>
         <ion-scroll class="scrollable" scrollY="true" detail-none>
-          <ion-list> </ion-list>
+          <ion-list>
+            <ion-item *ngFor="let agency of filteredGovAgencies" no-padding no-margin>
+              <button ion-button color="light" round (click)="addAddressees(agency)">{{ agency.descricao }}</button>
+            </ion-item>
+          </ion-list>
+          <ion-item *ngIf="filteredGovAgencies && !filteredGovAgencies.length" text-center no-lines id="not-founded">
+              <h2>Nenhum Órgão encontrado</h2>
+              <p>Tente mudar o filtro da consulta</p>
+          </ion-item>
+          <ion-spinner *ngIf="!filteredGovAgencies" page-loading></ion-spinner>
         </ion-scroll>
       </ion-item>
       <!--ion-item *ngIf="selAddresseesTypeFilter && govAgency && selAddresseesTypeFilter === 1">

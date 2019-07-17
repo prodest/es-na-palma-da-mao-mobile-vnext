@@ -1,5 +1,7 @@
 import { Component, ChangeDetectionStrategy, OnInit } from '@angular/core';
-import { IonicPage, NavController } from 'ionic-angular';
+import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { DocumentsToSendApiService, Destination } from '../../state';
+import deburr from 'lodash-es/deburr';
 
 @IonicPage({
   segment: 'documentos-para-enviar-adicionar-destinatarios'
@@ -10,8 +12,7 @@ import { IonicPage, NavController } from 'ionic-angular';
   changeDetection: ChangeDetectionStrategy.Default
 })
 export class DocumentsToSendAddAddresseesPage implements OnInit {
-  // addressees: string = ''
-
+  
   addresseesTypeFilter = [
     {
       id: 0,
@@ -31,16 +32,46 @@ export class DocumentsToSendAddAddresseesPage implements OnInit {
       notice: 'Ao enviar para um grupo, TODOS os membros do grupo terão acesso ao trâmite.'
     }
   ];
-  selAddresseesTypeFilter: {id: number; type: string; notice: string} = this.addresseesTypeFilter[0];
-  
-  govAgency: string = '';
-  govSector: string = '';
-  govGroups: string = '';
+  selAddresseesTypeFilter: { id: number; type: string; notice: string } = this.addresseesTypeFilter[0];
 
-  constructor(public navCtrl: NavController) {}
+  addressees: Destination[] = [];
+  govAgencies: Destination[] = [];
+  filteredGovAgencies: Destination[];
 
-  searchInput(event) {
-    console.log(event);
+  constructor(public navCtrl: NavController, public navParams: NavParams, private api: DocumentsToSendApiService) {
+    this.api.getDestinations().subscribe(destination => {
+      this.govAgencies = this.filteredGovAgencies = destination;
+    });
+    console.log(this.navParams.data);
+    this.addressees = this.navParams.data;
+  }
+
+  /**
+   *
+   */
+  search = e => {
+    const search = this.normalize(e.target.value);
+    this.filteredGovAgencies = this.govAgencies.filter(agency => {
+      return this.normalize(agency.descricao).includes(search);
+    });
+  };
+
+  /**
+   *
+   */
+  clear = () => {
+    this.filteredGovAgencies = [...this.govAgencies];
+  };
+
+  /**
+   *
+   */
+  addAddressees(agency: Destination) {
+    if (this.addressees.findIndex(ad => ad.id === agency.id) === -1 ){
+      this.addressees.push(agency);
+    }
+    
+    this.navCtrl.pop();
   }
 
   ngOnInit(): void {}
@@ -50,4 +81,6 @@ export class DocumentsToSendAddAddresseesPage implements OnInit {
   isValidNumber(value: any) {
     return typeof value === 'number' && !isNaN(value);
   }
+
+  private normalize = (term: string) => (term ? deburr(term.toLowerCase()) : '');
 }
