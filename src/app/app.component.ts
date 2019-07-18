@@ -7,6 +7,15 @@ import { Nav, Platform } from 'ionic-angular';
 import { finalize } from 'rxjs/operators';
 import { Subscription } from 'rxjs/Subscription';
 
+
+type WindowWithIntent = Window & {
+  plugins: {
+    intentShim: {
+      getIntent: Function
+    }
+  }
+};
+
 @Component({
   templateUrl: 'app.component.html'
 })
@@ -69,13 +78,37 @@ export class ESPMComponent implements OnDestroy {
     this.resumeApplication();
   };
 
-  private resumeApplication = () => {
+  private getIntentClip = () => new Promise<string>(resolve => {
+    (window as WindowWithIntent).plugins.intentShim.getIntent(
+      data => {
+        if (!data || !data.clipItems) {
+          resolve(null);
+          return;
+        }
+        const clip = data.clipItems[0];
+        if (clip) {
+          resolve(clip.uri);
+          return;
+        }
+        resolve(null);
+      },
+      () => resolve(null)
+    );
+  });
+
+  private resumeApplication = async () => {
+    const clip = await this.getIntentClip();
     if (this.authQuery.isLoggedIn) {
       this.auth
         .refreshAccessTokenIfNeeded()
         .pipe(finalize(this.push.init))
         .subscribe(
-          () => {},
+          () => {
+            if (clip) {
+              this.nav.setRoot('DocumentsToSendBasicPage', { filePath: clip });
+              return;
+            }
+          },
           error => {
             if (error.message === 'no-token') {
               this.auth.logout().then(() => this.nav.setRoot(this.rootPage));
