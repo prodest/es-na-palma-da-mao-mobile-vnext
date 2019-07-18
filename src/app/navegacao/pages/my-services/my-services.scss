@@ -2,10 +2,11 @@ page-my-services {
 
   /* HEADER */
 
-  ion-header {
+  #custom-header {
     background-image: url('../assets/imgs/bg-menu-principal-topo.jpg');
     background-size: cover;
     min-height: 250px;
+    position: relative;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -20,6 +21,7 @@ page-my-services {
         font-family: 'Poppins';
         background: transparent !important;
         padding: 15px;
+        border: 0;
 
         .searchbar-input-container {
           display: flex;
@@ -29,12 +31,37 @@ page-my-services {
             top: unset;
             left: 20px;
           }
+          
           .searchbar-input{
             height: 60px;
             border-radius: 30px;
+            padding: 6px 55px;
           }
+
+        }
+        
+        .searchbar-ios-cancel {
+          position: absolute;
+          right: 40px;
+          margin: 0;
+          padding: 0;
+          font-family: 'Poppins';
+          font-size: 1.5rem;
+          font-weight: 500;
+          height: unset;
         }
       }
+
+      .searchbar-ios {
+        .searchbar-input {
+          padding-right: 130px !important;
+        }
+
+        .searchbar-clear-icon {
+          right: 100px;
+        }
+      }
+
     }
 
     /* Título da página */
@@ -64,33 +91,36 @@ page-my-services {
 
   .scroll-content {
     background-color: #e9f7fe; // $primary-very-light
-    padding-bottom: 0 !important;
+    display: flex;
+    flex-basis: 'height';
+    flex-direction: column;
+    justify-content: space-between;
+    overflow: hidden;
   }
 
   ion-slides {
-    padding-bottom: 50px;
-    // min-height: 100vh;
+    position: relative;
+    height: unset;
+    flex: 1 0;
     
     .slide-zoom {
-      height: 100%;
-      min-height: 100%;
       display: flex;
       flex-direction: column;
-      justify-content: space-evenly;
       padding: 20px;
+      padding-top: 30px;
       margin-bottom: 20px;
-      // border: 1px solid;
+      height: 100%;
 
       .slide-line {
-        //border: 1px solid;
-        height: 30%;
         display: flex;
+        flex: 1 0;
         justify-content: space-between;
-        flex-shrink: 0;
+        max-height: 30%;
+        margin-bottom: 3vw;
 
         button {
           font-family: 'Poppins';
-          font-size: 2.5vh;
+          font-size: 4.5vw;
           font-weight: 700;
           color: #004297; // $primary-dark
           text-transform: none;
@@ -106,48 +136,52 @@ page-my-services {
             flex-direction: column;
             
             .icon {
-              height: 6.5vh;
-              width: 6.5vh;
+              height: 12vw;
+              width: 12vw;
               padding: 0;
-              margin-bottom: 1vh;
+              margin-bottom: 2vw;
             }
           }
         }
 
       }
       .slide-line > :first-child {
-        border-top-left-radius: 3vh;
-        border-bottom-left-radius: 3vh;
+        border-top-left-radius: 6vw;
+        border-bottom-left-radius: 6vw;
       }
 
       .slide-line > :last-child {
-        border-top-right-radius: 3vh;
-        border-bottom-right-radius: 3vh;
+        border-top-right-radius: 6vw;
+        border-bottom-right-radius: 6vw;
       }
     }
   }
 
   /* RODAPÉ */
   .footer {
-    display: block;
+    display: flex;
     height: 50px;
     width: 100%;
-    position: absolute;
-    bottom: 0;
-    // border: 1px solid black;
+    position: relative;
+    padding: 0 10vw;
+
+    button {
+      background: transparent;
+      margin-bottom: 4vw;
+    }
   }
 
   /* Em telas menores */
   // Galaxy S5
   @media screen and (max-width: 399px) {
-    ion-header {
+    #custom-header {
       min-height: 230px;
     }
   }
 
   // iPhone 5/SE
   @media screen and (max-width: 349px) {
-    ion-header {
+    #custom-header {
       min-height: 200px;
 
       #searchbar-wrapper {

@@ -110,6 +110,10 @@ ion-icon {
     height: 1em;
   }
 
+  &[class*="menu-bar"] {
+    mask-image: url(../assets/icon/icone-menu.svg);
+  }
+
   &[class*="ajuda"] {
     mask-image: url(../assets/icon/icone-menu-ajuda.svg);
   }
