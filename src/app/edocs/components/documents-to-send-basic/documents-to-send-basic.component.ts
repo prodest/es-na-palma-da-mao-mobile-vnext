@@ -1,18 +1,15 @@
 import { Component, ChangeDetectionStrategy, OnInit } from '@angular/core';
-import { IonicPage, Loading } from 'ionic-angular';
+import { Loading } from 'ionic-angular';
 import { Observable } from 'rxjs/Observable';
 import { finalize } from 'rxjs/operators';
 import { AuthService, CidadaoRole, AcessoCidadaoClaims, LoadingService } from '@espm/core';
 
-@IonicPage({
-  segment: 'documentos-para-enviar-basico'
-})
 @Component({
   selector: 'edocs-documents-to-send-basic',
-  templateUrl: './documents-to-send-basic.html',
+  templateUrl: './documents-to-send-basic.component.html',
   changeDetection: ChangeDetectionStrategy.Default
 })
-export class DocumentsToSendBasicPage implements OnInit {
+export class DocumentsToSendBasicComponent implements OnInit {
 
   documents = [];
   sender$: Observable<AcessoCidadaoClaims>;

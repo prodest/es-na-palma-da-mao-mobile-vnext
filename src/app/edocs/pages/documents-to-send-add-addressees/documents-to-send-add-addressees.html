@@ -18,37 +18,38 @@
       <ion-item>
         <ion-label>Filtrar por:</ion-label>
         <ion-select cancelText="Cancelar" [(ngModel)]="selAddresseesTypeFilter" disabled required>
-          <ion-option *ngFor="let addTypeFilter of addresseesTypeFilter" [value]="addTypeFilter">{{
-            addTypeFilter.type
-          }}</ion-option>
+          <ion-option *ngFor="let addTypeFilter of addresseesTypeFilter" [value]="addTypeFilter">
+            {{ addTypeFilter.type }}
+          </ion-option>
         </ion-select>
       </ion-item>
-
       <ion-card class="alert-card">
         <ion-card-content>
-          {{ selAddresseesTypeFilter.notice }}
+          <p>{{ selAddresseesTypeFilter.notice }}</p>
         </ion-card-content>
       </ion-card>
-      <p padding>Filtrar Órgão</p>
-      <ion-searchbar
-        placeholder="Digite para filtrar pelo Órgão"
-        [showCancelButton]="true"
-        cancelButtonText="Cancelar"
-        [animated]="false"
-        (ionInput)="search($event)"
-        (ionClear)="clear($event)"
-        (ionCancel)="clear($event)"
-      ></ion-searchbar>
+      <ion-item>
+        <p class="title-search">Filtrar Órgão</p>
+        <ion-searchbar
+          placeholder="Digite para filtrar pelo Órgão"
+          [showCancelButton]="true"
+          cancelButtonText="Cancelar"
+          [animated]="false"
+          (ionInput)="search($event)"
+          (ionClear)="clear($event)"
+          (ionCancel)="clear($event)">
+        </ion-searchbar>
+      </ion-item>
       <ion-item>
         <ion-scroll class="scrollable" scrollY="true" detail-none>
           <ion-list>
-            <ion-item *ngFor="let agency of filteredGovAgencies" no-padding no-margin>
-              <button ion-button color="light" block (click)="addAddressees(agency)">{{ limite(agency.descricao) }}</button>
-            </ion-item>
+            <button ion-item *ngFor="let agency of filteredGovAgencies" (click)="addAddressees(agency)">
+              {{ limite(agency.descricao) }}
+            </button>
           </ion-list>
           <ion-item *ngIf="filteredGovAgencies && !filteredGovAgencies.length" text-center no-lines>
-              <h2>Nenhum Órgão encontrado</h2>
-              <p>Tente mudar o filtro da consulta</p>
+            <h2>Nenhum Órgão encontrado</h2>
+            <p>Tente mudar o filtro da consulta</p>
           </ion-item>
           <ion-spinner *ngIf="!filteredGovAgencies" page-loading></ion-spinner>
         </ion-scroll>

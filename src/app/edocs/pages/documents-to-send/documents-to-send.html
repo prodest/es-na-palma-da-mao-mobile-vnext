@@ -1,67 +1,26 @@
 <ion-header>
-    <edocs-documents-to-send-header></edocs-documents-to-send-header>
+  <edocs-documents-to-send-header></edocs-documents-to-send-header>
 </ion-header>
 
 <ion-content>
-  <ion-refresher (ionRefresh)="refresh()"
-                 #refresher>
-      <ion-refresher-content>
-      </ion-refresher-content>
+  <ion-refresher (ionRefresh)="refresh()" #refresher>
+    <ion-refresher-content> </ion-refresher-content>
   </ion-refresher>
-
-  <ion-list class="padding-r">
-      <ion-list-header>
-          Encaminhar documentos
-      </ion-list-header>
-      <ng-container>
-          <ion-item>
-            <ion-label floating>Nome do documento</ion-label>
-            <ion-input type="text" [(ngModel)]="name" name="name" required></ion-input>
-          </ion-item>
-          <ion-item *ngIf="name">
-            <ion-label>Tipo de documento</ion-label>
-            <ion-select cancelText="Cancelar" [(ngModel)]="documentType" [selectOptions]="documentTypeOptions" required>
-              <ion-option [value]="0">Documento Eletrônico</ion-option>
-              <ion-option [value]="1">Documento Escaneado</ion-option>
-            </ion-select>
-          </ion-item>
-          <ion-item *ngIf="name && isValidNumber(documentType) && documentType === 1">
-            <ion-label>Como é o documento em papel?</ion-label>
-            <ion-select cancelText="Cancelar" [(ngModel)]="documentPaperType" [selectOptions]="documentPaperTypeOptions" required>
-              <ion-option [value]="0">Documento Original</ion-option>
-              <ion-option [value]="1">Cópia Simples</ion-option>
-              <ion-option [value]="2">Cópia Autenticada em Cartório</ion-option>
-              <ion-option [value]="3">Cópia Autenticada Administrativamente</ion-option>
-            </ion-select>
-          </ion-item>
-          <ion-item *ngIf="name && isValidNumber(documentType) && documentType === 0">
-            <ion-label>Qual tipo de assinatura?</ion-label>
-            <ion-select cancelText="Cancelar" [(ngModel)]="documentAssignType" [selectOptions]="documentAssignTypeOptions" required>
-              <ion-option [value]="0">E-Docs</ion-option>
-              <ion-option [value]="1">Sem assinatura</ion-option>
-            </ion-select>
-          </ion-item>
-          <ion-item *ngIf="name && isValidNumber(documentType)">
-            <ion-card class="success-card">
-              <ion-card-content>
-                <p class="success-text">
-                  <ion-icon name="information-circle"></ion-icon>&nbsp;
-                  <strong *ngIf="documentPaperType === 0 && documentType === 1; else notOriginal">Valor Legal: Cópia Autenticada Administrativamente</strong>
-                  <ng-template #notOriginal>
-                    <strong>Valor Legal: Cópia Simples</strong>
-                  </ng-template>
-                </p>
-              </ion-card-content>
-            </ion-card>
-            <ion-card class="alert-card" *ngIf="documentType === 1">
-              <ion-card-content>
-                <p class="alert-text"><strong>IMPORTANTE:</strong> Por ser uma cópia de um documento em papel, <strong>você deve manter a guarda do documento original em papel</strong> para eventual apresentação caso solicitado, na forma do art. 11, § 3º do Decreto nº 4410-R, de 18/04/2019.</p>
-              </ion-card-content>
-            </ion-card>
-          </ion-item>
-      </ng-container>
-  </ion-list>
+  <ion-slides pager>
+    <ion-slide>
+      <edocs-documents-to-send-basic></edocs-documents-to-send-basic>
+    </ion-slide>
+    <ion-slide>
+      <edocs-documents-to-send-addressees></edocs-documents-to-send-addressees>
+    </ion-slide>
+    <ion-slide>
+      <edocs-documents-to-send-doc></edocs-documents-to-send-doc>
+    </ion-slide>
+    <ion-slide>
+      <edocs-documents-to-send-message></edocs-documents-to-send-message>
+    </ion-slide>
+  </ion-slides>
 </ion-content>
-<ion-footer>
-    <edocs-documents-to-send-footer></edocs-documents-to-send-footer>
-</ion-footer>
+<!--ion-footer>
+  <edocs-documents-to-send-footer (onNextClick)="basicForm?.submit()"></edocs-documents-to-send-footer>
+</ion-footer-->

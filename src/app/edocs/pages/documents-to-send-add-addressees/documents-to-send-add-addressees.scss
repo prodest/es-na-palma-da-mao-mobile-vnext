@@ -1,5 +1,5 @@
 
-documents-to-send-add-addressees {
+documents-to-send-add-addressees {  
   div.pageTitle{
     text-align: center; 
     font-weight: bold;
@@ -10,7 +10,7 @@ documents-to-send-add-addressees {
   }
 
   .scrollable{
-    height: 40vh;
+    height: 300px;
     border: 1px solid black;
     padding: 1em;
   }
@@ -20,5 +20,9 @@ documents-to-send-add-addressees {
     box-shadow: none;
     margin: 0;
     width: 100%;
+  }
+
+  .title-search {
+    padding-left: 1em;
   }
 }

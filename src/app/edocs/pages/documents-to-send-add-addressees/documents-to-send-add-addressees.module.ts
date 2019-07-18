@@ -9,5 +9,6 @@ import { DocumentsToSendHeaderComponentModule } from '../../components/documents
     DocumentsToSendHeaderComponentModule,
     IonicPageModule.forChild(DocumentsToSendAddAddresseesPage),
   ],
+  exports: [DocumentsToSendAddAddresseesPage],
 })
 export class DocumentsToSendAddAddresseesPageModule {}

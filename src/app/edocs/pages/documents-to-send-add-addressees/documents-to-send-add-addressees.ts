@@ -1,10 +1,10 @@
 import { Component, ChangeDetectionStrategy, OnInit } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { NavController, NavParams, IonicPage } from 'ionic-angular';
 import { DocumentsToSendApiService, Destination } from '../../state';
 import deburr from 'lodash-es/deburr';
 
 @IonicPage({
-  segment: 'documentos-para-enviar-adicionar-destinatarios'
+  segment: 'documentos-para-enviar-adicionar-destinatario'
 })
 @Component({
   selector: 'documents-to-send-add-addressees',
@@ -48,7 +48,7 @@ export class DocumentsToSendAddAddresseesPage implements OnInit {
   /**
    *
    */
-  search = e => {
+  search(e) {
     const search = this.normalize(e.target.value);
     this.filteredGovAgencies = this.govAgencies.filter(agency => {
       return this.normalize(agency.descricao).includes(search);
@@ -58,7 +58,7 @@ export class DocumentsToSendAddAddresseesPage implements OnInit {
   /**
    *
    */
-  clear = () => {
+  clear() {
     this.filteredGovAgencies = [...this.govAgencies];
   };
 
@@ -74,7 +74,7 @@ export class DocumentsToSendAddAddresseesPage implements OnInit {
     this.navCtrl.pop();
   }
 
-  limite = (valor: string) => {
+  limite(valor: string) {
     if (valor.length > 35) {
       return valor.substring(0, 35) + '…';
     } else {

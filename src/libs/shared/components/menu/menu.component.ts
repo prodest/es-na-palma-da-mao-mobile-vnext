@@ -75,7 +75,7 @@ const menus = [
       {
         title: 'Documentos para enviar',
         icon: 'create',
-        component: 'DocumentsToSendBasicPage',
+        component: 'DocumentsToSendPage',
         order: 2,
         secure: true
       }

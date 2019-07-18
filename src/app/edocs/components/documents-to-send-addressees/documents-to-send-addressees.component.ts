@@ -1,16 +1,13 @@
 import { Component, ChangeDetectionStrategy, OnInit } from '@angular/core';
-import { IonicPage, NavController } from 'ionic-angular';
+import { NavController } from 'ionic-angular';
 import { Destination } from '../../state';
 
-@IonicPage({
-  segment: 'documentos-para-enviar-destinatarios'
-})
 @Component({
-  selector: 'documents-to-send-addressees',
-  templateUrl: './documents-to-send-addressees.html',
+  selector: 'edocs-documents-to-send-addressees',
+  templateUrl: './documents-to-send-addressees.component.html',
   changeDetection: ChangeDetectionStrategy.Default
 })
-export class DocumentsToSendAddresseesPage implements OnInit {
+export class DocumentsToSendAddresseesComponent implements OnInit {
   closeIcon: string = 'close';
   colorCloseIcon: string = 'danger';
   addIcon: string = 'md-add-circle';
