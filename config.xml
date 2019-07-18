@@ -40,6 +40,7 @@
         <hook src="scripts/resolve-project-properties-dependencies.sh" type="before_run" />
         <hook src="scripts/copy-plugins-from-node_modules.js" type="before_platform_add" />
         <hook src="scripts/manually-set-plugin-params.sh" type="before_platform_add" />
+        <hook src="scripts/add_intent_filters.js" type="after_platform_add" />
         <hook src="scripts/copy_resource_files.js" type="after_prepare" />
         <config-file parent="/resources" target="./res/values/strings.xml">
             <string name="fb_app_id">926428880739042</string>
@@ -152,4 +153,5 @@
         <variable name="GEOLOCATION_USAGE_DESCRIPTION" value="O app precisa de acesso a sua localização para poder prover uma melhor experiências na consulta de transporte público." />
     </plugin>
     <plugin name="cordova-plugin-ionic-webview" spec="4.0.0" />
+    <plugin name="com-darryncampbell-cordova-plugin-intent" spec="git+https://github.com/darryncampbell/darryncampbell-cordova-plugin-intent.git" />
 </widget>
