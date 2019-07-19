@@ -104,7 +104,7 @@ export class LoginPage {
     }
   };
 
-  /**DashboardFavoritePage
+  /**
    *
    *
    */
@@ -135,9 +135,9 @@ export class LoginPage {
   private isAccountNotLinkedError = (data): boolean => data.error === this.errorMsgs.accountNotLinked;
 
   /**
-   * Redireciona usuário para o dashboard-Favorite
+   * Redireciona usuário para o MyServicesPage
    */
- private goToDashboard = () => this.navCtrl.setRoot('SelectFavoritePage');
+ private goToDashboard = () => this.navCtrl.push('MyServicesPage');
 
   /**
    *

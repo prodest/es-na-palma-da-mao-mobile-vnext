@@ -1,0 +1,28 @@
+<ion-content padding class="color-primaria">
+  <button (click)="back()">
+    <ion-icon ios="ios-arrow-round-back" md="md-arrow-round-back"></ion-icon>
+  </button>
+  <div>
+    <h1>Detran</h1>
+  </div>
+  <div class="car-css">
+    <ion-icon name="custom-modulo-taxi"></ion-icon>
+  </div>
+  <h2 class="selectmenu" (click)="goFavorites()"></h2>
+  <div>
+    <ion-list>
+      <button ion-item (click)="cnhVehicle()">
+        CNH
+      </button>
+      <button ion-item (click)="loadData()">
+        Infrações
+      </button>
+      <button ion-item (click)="myVehicle()">
+        Meus Veículos
+      </button>
+    </ion-list>
+  </div>
+  <button menuToggle class="foot-css">
+    <ion-icon name="menu"></ion-icon>
+  </button>
+</ion-content>

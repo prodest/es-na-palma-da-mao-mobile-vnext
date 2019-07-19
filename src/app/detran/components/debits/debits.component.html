@@ -1,14 +1,7 @@
 <ion-list *ngIf="debits && debits.length" class="debits">
-  <ion-list-header>
-    {{ countDebits() }} débitos | selecionados<button
-      ion-button
-      item-right
-      (click)="generateBillet()"
-      ng-show="debits.length > 0"
-    >
-      Gerar Guia
-    </button>
-  </ion-list-header>
+  
+    <!-- {{ countDebits() }} débitos | selecionados -->
+    
   <div *ngFor="let debit of debits">
     <ion-item>
       <ion-checkbox
@@ -23,6 +16,13 @@
       </ion-label>
     </ion-item>
   </div>
+  <button
+      ion-button
+      item-right
+      (click)="generateBillet()"
+      ng-show="debits.length > 0">
+      Pagamento
+    </button>
 </ion-list>
 <ion-list *ngIf="debits && !debits.length" class="debits">
   <ion-list-header>

@@ -15,11 +15,12 @@ export class VehicleDebitsTipePage {
   debits: Debit[];
   vehicle: Vehicle;
   botoes = [
-    { nome: 'Licenciamento', tipo: 'LICENCIAMENTOATUAL' },
+    { nome: 'Pagar Tudo', tipo: 'LICENCIAMENTOATUAL' },
     { nome: 'IPVA', tipo: 'IPVA' },
     { nome: 'DPVAT', tipo: 'DPVAT' },
     { nome: 'IPVA anterior', tipo: 'IPVAANTERIOR' },
     { nome: 'Licenciamento anterior', tipo: 'LICENCIAMENTOANTERIOR' },
+    { nome: 'Multas', tipo: 'MULTA' },
     { nome: 'DPVAT anterior', tipo: 'DPVATANTERIOR' }
   ];
   /**
@@ -59,5 +60,11 @@ export class VehicleDebitsTipePage {
           this.navCtrl.push('VehicleDebitsPage', { tipe: tipe, vehicle: this.vehicle, plate: this.vehicle.plate, debits }),
         error => console.log(error)
       );
+  }
+  /**
+   * 
+   */
+  goBack(){
+    this.navCtrl.pop();
   }
 }

@@ -12,7 +12,7 @@ import { Subject } from 'rxjs/Subject';
 @IonicPage()
 @Component({
   selector: 'page-my-services',
-  templateUrl: 'my-services.html',
+  templateUrl: 'my-services.html'
 })
 export class MyServicesPage implements OnDestroy {
     
@@ -63,7 +63,7 @@ export class MyServicesPage implements OnDestroy {
   }
 
   /**
-   * 
+   *
    */
   openPage = (page: string, accessDenied: boolean = false) => {
     if (accessDenied) {
@@ -86,12 +86,11 @@ export class MyServicesPage implements OnDestroy {
   search = e => {
     const search = this.normalize(e.target.value);
     this.filteredMenus = this.menus.filter(select => {
-        return this.normalize(select.title).includes(search) || this.normalize(select.title).includes(search); 
-        
+      return this.normalize(select.title).includes(search) || this.normalize(select.title).includes(search);
     });
     console.log(this.filteredMenus);
-    
-    this.slides = []
+
+    this.slides = [];
     this.filteredMenus.map((elemento: ItemMenu, index: number) => {
       if (index%6 === 0) this.slides.push([]);
       let lastSlideIndex: number = this.slides.length - 1;

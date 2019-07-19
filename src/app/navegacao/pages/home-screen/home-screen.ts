@@ -68,7 +68,18 @@ export class HomeScreenPage implements OnInit, OnDestroy {
     }
   };
 
+  /**
+   * 
+   */
   next() {
-    this.slides.slideNext();
+    // if (this.authQuery.isLoggedIn) {
+    //   console.log("Entrou como logado")
+    //   this.navCtrl.push('MyServicesPage');
+    // }else{
+    //   console.log("Nao logado")
+       this.slides.slideNext();
+    // }
+    
+    
   }  
 }

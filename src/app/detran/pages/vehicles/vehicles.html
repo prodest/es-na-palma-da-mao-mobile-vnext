@@ -1,45 +1,45 @@
-<ion-header>
-  <ion-navbar hideBackButton>
-    <button ion-button
-            menuToggle>
-      <ion-icon name="menu"></ion-icon>
-    </button>
-    <ion-title>Meus veículos</ion-title>
-    <ion-buttons *ngIf="(vehicles$ | async )?.length"
-                 end>
-      <button *ngIf="!editing"
-              ion-button
-              icon-only
-              (click)="toggleEditMode($event)">
-        <ion-icon name="md-create"></ion-icon>
-      </button>
-      <button *ngIf="editing"
-              ion-button
-              icon-only
-              (click)="toggleEditMode($event)">
-        <ion-icon name="close"></ion-icon>
-      </button>
-    </ion-buttons>
-  </ion-navbar>
-</ion-header>
+
 
 <ion-content *ngIf="(vehicles$ | async ) as vehicles">
-  <ion-list *ngIf="vehicles && vehicles.length">
-    <ion-list-header>
-      Veículos cadastrados
-      <ng-container *ngIf="vehicles.length > 1"> ({{vehicles.length }} veículos)</ng-container>
-    </ion-list-header>
+    
+    <div>
+      <div class="back"><button (click)="goBack()"> 
+          <ion-icon ios="ios-arrow-round-back" md="md-arrow-round-back"></ion-icon>
+      </button>
+    </div>
+    <div class="remove"><ion-buttons *ngIf="(vehicles$ | async )?.length"
+      end>
+<button *ngIf="!editing"
+   ion-button
+   icon-only
+   (click)="toggleEditMode($event)">
+<ion-icon name="md-create"></ion-icon>
+</button>
+<button *ngIf="editing"
+   ion-button
+   icon-only
+   (click)="toggleEditMode($event)">
+<ion-icon name="close"></ion-icon>
+</button>
+</ion-buttons></div>
+        
+         </div>
+    <div>
+        <ion-title>Meus veículos</ion-title>
+    </div>
+  <ion-list *ngIf="vehicles && vehicles.length" >
     <espm-vehicle [vehicle]="vehicle"
                   *ngFor="let vehicle of vehicles"
-                  [class.disabled]="editing">
-      <ion-list *ngIf="vehicles && vehicles.length">
+                  [class.disabled]="editing"
+                  (click)="showDebitTipe(vehicle)">
+      <!-- <ion-list *ngIf="vehicles && vehicles.length">
         <ion-item>
           <button class="vehicle__button" *ngIf="!editing" ion-button clear item-end color-secondary-fg (click)="showTickets(vehicle)">MULTAS</button>
         </ion-item>
         <ion-item>
           <button class="vehicle__button" *ngIf="!editing" ion-button clear item-end color-secondary-fg (click)="showDebitTipe(vehicle)">DÉBITOS</button>
         </ion-item>
-      </ion-list>      
+      </ion-list>       -->
       <button class="vehicle__button"
               *ngIf="editing"
               ion-button
@@ -67,4 +67,7 @@
       <ion-icon name="add"></ion-icon>
     </button>
   </ion-fab>
+  <button menuToggle class="foot-css">
+      <ion-icon name="menu"></ion-icon>
+    </button>
 </ion-content>

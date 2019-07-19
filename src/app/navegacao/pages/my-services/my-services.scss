@@ -116,11 +116,11 @@ page-my-services {
         flex: 1 0;
         justify-content: space-between;
         max-height: 30%;
-        margin-bottom: 3vw;
+        margin-bottom: 3vmin;
 
         button {
           font-family: 'Poppins';
-          font-size: 4.5vw;
+          font-size: 4.5vmin;
           font-weight: 700;
           color: #004297; // $primary-dark
           text-transform: none;
@@ -136,23 +136,23 @@ page-my-services {
             flex-direction: column;
             
             .icon {
-              height: 12vw;
-              width: 12vw;
+              height: 12vmin;
+              width: 12vmin;
               padding: 0;
-              margin-bottom: 2vw;
+              margin-bottom: 2vmin;
             }
           }
         }
 
       }
       .slide-line > :first-child {
-        border-top-left-radius: 6vw;
-        border-bottom-left-radius: 6vw;
+        border-top-left-radius: 6vmin;
+        border-bottom-left-radius: 6vmin;
       }
 
       .slide-line > :last-child {
-        border-top-right-radius: 6vw;
-        border-bottom-right-radius: 6vw;
+        border-top-right-radius: 6vmin;
+        border-bottom-right-radius: 6vmin;
       }
     }
   }
@@ -163,11 +163,11 @@ page-my-services {
     height: 50px;
     width: 100%;
     position: relative;
-    padding: 0 10vw;
+    padding: 0 10vmin;
 
     button {
       background: transparent;
-      margin-bottom: 4vw;
+      margin-bottom: 4vmin;
     }
   }
 

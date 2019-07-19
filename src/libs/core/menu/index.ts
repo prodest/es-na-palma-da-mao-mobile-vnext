@@ -27,22 +27,14 @@ export const MENUS: ItemMenu[] = [
       id: 4,
       title: 'Consulta Processo',
       icon: 'custom-modulo-processos',
-      component: 'SearchPage',
+      component: 'SepSearchPage',
       isChecked: false
     },
     {
       id: 5,
-      title: 'Situação CNH',
+      title: 'Detran',
       icon: 'custom-modulo-taxi',
-      component: 'DriverLicensePage',
-      secure: true,
-      isChecked: false
-    },
-    {
-      id: 6,
-      title: 'Consulta Veículos',
-      icon: 'custom-modulo-taxi',
-      component: 'VehiclesPage',
+      component: 'DetranServicePage',
       secure: true,
       isChecked: false
     },
@@ -75,7 +67,7 @@ export const MENUS: ItemMenu[] = [
       id: 10,
       title: 'Portal da Transparência',
       icon: 'custom-modulo-consultas',
-      component: 'TransparencyDashboardmatlabPage',
+      component: 'TransparencyDashboardPage',
       isChecked: false
     },
   
@@ -111,7 +103,7 @@ export const MENUS: ItemMenu[] = [
       id: 14,
       title: 'Buscar concursos',
       icon: 'custom-modulo-oportunidades',
-      component: 'Apresentacao',
+      component: 'ApresentacaoPage',
       isChecked: false
     },
   

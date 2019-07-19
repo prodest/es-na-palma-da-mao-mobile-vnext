@@ -1,5 +1,4 @@
 import { Component, OnDestroy } from '@angular/core';
-import { AuthQuery } from '@espm/core';
 import { AlertController, IonicPage, ModalController, NavController } from 'ionic-angular';
 import { Observable } from 'rxjs/Observable';
 import { Subject } from 'rxjs/Subject';
@@ -25,25 +24,10 @@ export class VehiclesPage implements OnDestroy {
    */
   constructor(
     private detran: VehiclesService,
-    private authQuery: AuthQuery,
     private navCtrl: NavController,
     private alertCtrl: AlertController,
     private modalCtrl: ModalController    
   ) {}
-
-  /**
-   * ref: https://github.com/ionic-team/ionic/issues/11459#issuecomment-365224107
-   *
-   */
-  ionViewCanEnter(): boolean | Promise<any> {
-    // permite acesso à tela se autenticados
-    const isAllowed = this.authQuery.isLoggedIn;
-
-    if (!isAllowed) {
-      setTimeout(() => this.navCtrl.setRoot('DashboardPage'));
-    }
-    return isAllowed;
-  }
 
   /**
    *
@@ -177,5 +161,11 @@ export class VehiclesPage implements OnDestroy {
    */
   private removeVehicle(vehicle: Vehicle) {
     this.editing && this.detran.remove(vehicle).subscribe();
+  }
+  /**
+   * 
+   */
+  goBack(){
+    this.navCtrl.pop();
   }
 }
