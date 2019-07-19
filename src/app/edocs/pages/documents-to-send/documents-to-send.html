@@ -3,24 +3,36 @@
 </ion-header>
 
 <ion-content>
-  <ion-refresher (ionRefresh)="refresh()" #refresher>
+  <!--ion-refresher (ionRefresh)="refresh()" #refresher>
     <ion-refresher-content> </ion-refresher-content>
-  </ion-refresher>
-  <ion-slides pager>
-    <ion-slide>
-      <edocs-documents-to-send-basic></edocs-documents-to-send-basic>
-    </ion-slide>
-    <ion-slide>
-      <edocs-documents-to-send-addressees></edocs-documents-to-send-addressees>
-    </ion-slide>
-    <ion-slide>
-      <edocs-documents-to-send-doc></edocs-documents-to-send-doc>
-    </ion-slide>
-    <ion-slide>
-      <edocs-documents-to-send-message></edocs-documents-to-send-message>
-    </ion-slide>
-  </ion-slides>
+  </ion-refresher-->
+  <ion-list no-lines>
+    <ion-list-header>
+      Encaminhar Documentos
+    </ion-list-header>
+    <ion-slides pager="false">
+      <ion-slide>
+        <edocs-documents-to-send-basic></edocs-documents-to-send-basic>
+      </ion-slide>
+      <ion-slide>
+        <edocs-documents-to-send-addressees></edocs-documents-to-send-addressees>
+      </ion-slide>
+      <ion-slide>
+        <edocs-documents-to-send-doc></edocs-documents-to-send-doc>
+      </ion-slide>
+      <ion-slide>
+        <edocs-documents-to-send-message></edocs-documents-to-send-message>
+      </ion-slide>
+    </ion-slides>
+  </ion-list>
 </ion-content>
-<!--ion-footer>
-  <edocs-documents-to-send-footer (onNextClick)="basicForm?.submit()"></edocs-documents-to-send-footer>
-</ion-footer-->
+<ion-footer>
+  <ion-toolbar text-center="" class="foot-toolbar">
+    <button ion-button color="dark" (click)="prevSlide()" [disabled]="slides.isBeginning()" clear>
+      <ion-icon item-start name="md-arrow-round-back"></ion-icon>
+    </button>
+    <button ion-button color="dark" (click)="nextSlide()" [disabled]="slides.isEnd()" clear>
+      <ion-icon item-start name="md-arrow-round-forward"></ion-icon>
+    </button>
+  </ion-toolbar>
+</ion-footer>

@@ -25,7 +25,7 @@ export class DocumentsToSendApiService extends ApiBaseService<Document> {
   /**
    *
    */
-  getDestinations = (): Observable<Destination[]> => {
+  getDestinations(): Observable<Destination[]> {
     return this.http.get<Destination[]>(this.endpoint(`Destinos`), {}).pipe(share());
   }
 }

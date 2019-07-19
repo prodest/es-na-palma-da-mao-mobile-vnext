@@ -10,7 +10,7 @@
   </ion-item>
   <espm-validation-message *ngIf="form.get('titleForward')?.value" [errors]="validationErrors['sender']"></espm-validation-message>
   <ion-item *ngIf="form.get('titleForward')?.value && form.get('sender')?.value">
-    <ion-label>Cargo/Função</ion-label>
+    <ion-label floating>Cargo/Função</ion-label>
     <ion-select cancelText="Cancelar" formControlName="role" name="role" [selectOptions]="roleSelectOptions" (ionChange)="roleSelectChange()">
       <ion-option *ngFor="let role of roles" [value]="role.Guid">{{role.Nome}}</ion-option>
     </ion-select>

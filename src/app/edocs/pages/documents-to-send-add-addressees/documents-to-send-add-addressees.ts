@@ -1,6 +1,6 @@
 import { Component, ChangeDetectionStrategy, OnInit } from '@angular/core';
 import { NavController, NavParams, IonicPage } from 'ionic-angular';
-import { DocumentsToSendApiService, Destination } from '../../state';
+import { Destination, DocumentsToSendService } from '../../state';
 import deburr from 'lodash-es/deburr';
 
 @IonicPage({
@@ -38,8 +38,8 @@ export class DocumentsToSendAddAddresseesPage implements OnInit {
   govAgencies: Destination[] = [];
   filteredGovAgencies: Destination[];
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, private api: DocumentsToSendApiService) {
-    this.api.getDestinations().subscribe(destination => {
+  constructor(public navCtrl: NavController, public navParams: NavParams, private service: DocumentsToSendService) {
+    this.service.getDestinations().subscribe(destination => {
       this.govAgencies = this.filteredGovAgencies = destination;
     });
     this.addressees = this.navParams.data;

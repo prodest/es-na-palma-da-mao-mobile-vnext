@@ -1,5 +1,5 @@
-import { Component, ChangeDetectionStrategy, OnInit } from '@angular/core';
-import { IonicPage} from 'ionic-angular';
+import { Component, ChangeDetectionStrategy, OnInit, ViewChild } from '@angular/core';
+import { IonicPage, Slides} from 'ionic-angular';
 
 @IonicPage({
   segment: 'documentos-para-enviar'
@@ -11,7 +11,16 @@ import { IonicPage} from 'ionic-angular';
 })
 export class DocumentsToSendPage implements OnInit {
 
+  @ViewChild(Slides) slides: Slides;
   constructor() { }
+
+  nextSlide() {
+    this.slides.slideNext();
+  }
+
+  prevSlide() {
+    this.slides.slidePrev();
+  }
 
   ngOnInit(): void {
   }
