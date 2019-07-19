@@ -4,8 +4,9 @@ import { AuthQuery } from '@espm/core';
 import { AuthNeededService } from '@espm/core/auth/auth-needed.service';
 import { ItemMenu } from '../../models';
 import { MenuService } from '../../providers/menu.service';
-import { Subject } from 'rxjs';
+import { Subject } from 'rxjs/Subject';
 import { takeUntil, tap } from 'rxjs/operators';
+import { MenusQuery } from '../../providers';
 
 @IonicPage()
 @Component({
@@ -13,7 +14,6 @@ import { takeUntil, tap } from 'rxjs/operators';
   templateUrl: 'select-favorite.html'
 })
 export class SelectFavoritePage implements OnDestroy {
-  public noticias = '../assets/imgs/bg-menu-principal-topo (1).jpg';
   isLoggedIn: boolean;
   public markAll: boolean;
 
@@ -21,27 +21,39 @@ export class SelectFavoritePage implements OnDestroy {
 
   public menus: Array<ItemMenu> = [];
 
+  headerContent: Array<string> = ['Selecione os', 'seus serviços', 'favoritos'];
+
   constructor(
     protected appCtrl: App,
     protected authQuery: AuthQuery,
     protected authNeeded: AuthNeededService,
     protected navCtrl: NavController,
-    private menuService: MenuService
+    private menuService: MenuService,
+    private menusQuery: MenusQuery
   ) {
+    
   }
- /**
-  *  atualiza "menus" com os dados menuQuery
-  */
+  
+  /**
+   *  atualiza "menus" com os dados menuQuery
+   */
   ionViewWillLoad() {
     this.menuService.menus$
-      .pipe(
-        takeUntil(this.destroyed$),
-        tap(menus => (this.menus = menus || []))
-      )
-      .subscribe();
+    .pipe(
+      takeUntil(this.destroyed$),
+      tap(menus => (this.menus = menus || []))
+    )
+    .subscribe();
+
+    this.menusQuery.favorites$
+    .pipe(
+      takeUntil(this.destroyed$),
+      tap(favorites => this.markAll = favorites.length === this.menus.length)
+    )
+    .subscribe();
   }
 
-    /**
+  /**
    *
    */
   ngOnDestroy() {
@@ -52,21 +64,22 @@ export class SelectFavoritePage implements OnDestroy {
   /**
    * seleciona os serviços favoritos
    */
-  markItem(item, value) {
+  markItem(item: ItemMenu, value: boolean) {
     this.menuService.updateMenu(item.id, value);
     console.log(this.menus);
   }
   
   /**
-   * // marcar e desmarcar todos os checkebox
+   * marcar e desmarcar todos os checkbox
    */
-
   markUncheckList() {
     if (this.markAll === true) {
       this.menus = this.checkAllItemMenu(true);
     } else {
       this.menus = this.checkAllItemMenu(false);
     }
+
+    this.saveFavorites();
   }
 
   /**
@@ -83,10 +96,11 @@ export class SelectFavoritePage implements OnDestroy {
    */
   saveFavorites() {
     this.menuService.storeMenus(this.menus);
-    this.navCtrl.push('MyServicesPage');
+    console.log('AKI>>>>>>>>>>======  ', this.menus);
+    // this.back();
   }
 
-   /**
+  /**
    *
    */
   back() {

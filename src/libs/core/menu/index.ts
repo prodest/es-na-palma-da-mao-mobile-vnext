@@ -26,7 +26,7 @@ export const MENUS: ItemMenu[] = [
     {
       id: 4,
       title: 'Consulta Processo',
-      icon: 'custom-modulo-consultas',
+      icon: 'custom-modulo-processos',
       component: 'SepSearchPage',
       isChecked: false
     },
@@ -42,7 +42,7 @@ export const MENUS: ItemMenu[] = [
     {
       id: 7,
       title: 'Documentos para assinar',
-      icon: 'create',
+      icon: 'custom-modulo-documentos',
       component: 'DocumentsToSignPage',
       secure: true,
       isChecked: false
@@ -66,7 +66,7 @@ export const MENUS: ItemMenu[] = [
     {
       id: 10,
       title: 'Portal da Transparência',
-      icon: 'pie',
+      icon: 'custom-modulo-consultas',
       component: 'TransparencyDashboardPage',
       isChecked: false
     },
@@ -81,7 +81,7 @@ export const MENUS: ItemMenu[] = [
     {
       id: 12,
       title: 'Edições Recentes',
-      icon: 'time',
+      icon: 'custom-modulo-noticias',
       component: 'LatestEditionsPage',
       isChecked: false
     },

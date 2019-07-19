@@ -1,4 +1,4 @@
-import { Component, Inject } from '@angular/core';
+import { Component, Inject, OnDestroy } from '@angular/core';
 import { IonicPage, NavController, App } from 'ionic-angular';
 import { AuthQuery, AuthNeededService } from '@espm/core';
 import deburr from 'lodash-es/deburr';
@@ -6,19 +6,20 @@ import { ItemMenu } from '../../models';
 import { MenuService } from '../../providers/menu.service';
 import { MenuToken } from '@espm/core/menu';
 import { MenusQuery, MenusStore } from '../../providers';
-import {  takeUntil, filter, tap } from 'rxjs/operators';
-import { Subject } from 'rxjs';
+import { filter, takeUntil } from 'rxjs/operators';
+import { Subject } from 'rxjs/Subject';
 
 @IonicPage()
 @Component({
   selector: 'page-my-services',
   templateUrl: 'my-services.html'
 })
-export class MyServicesPage {
+export class MyServicesPage implements OnDestroy {
+    
   private destroyed$ = new Subject();
   filteredMenus: ItemMenu[];
-  private slides: Array<ItemMenu[]> = [];
-
+  private slides: Array<Array<ItemMenu[]>> = [];
+  
   constructor(
     protected appCtrl: App,
     protected authQuery: AuthQuery,
@@ -29,36 +30,30 @@ export class MyServicesPage {
     private menusStore: MenusStore,
     private menuQuery: MenusQuery
   ) {
-    
-    /**
-     * 
-     */
-     this.menuQuery.favorites$
-     .pipe(filter(() => !this.menusStore.isPristine),
-       tap((favoritos) => {
-          favoritos.map((elemento:ItemMenu,index:number)=> {
-            if (index % 4 === 0) {
-             this.slides.push([]);
-            }
-            this.slides[this.slides.length - 1].push(elemento)
-          }
-       )}),
-        takeUntil(this.destroyed$),
-      )
-      .subscribe();
-/** 
- * 
- */
-    this.menuService.loadMenu();
+    this.menuQuery.favorites$
+    .pipe(filter(() => !this.menusStore.isPristine), 
+    //  tap((elemento: ItemMenu, index: number) => {
+    //   if (index%4 === 0) {
+    //     this.slides.push([])
+    //   }
+    //   this.slides[this.slides.length-1].push(elemento);
+    // }), 
+      takeUntil(this.destroyed$))
+    .subscribe();
 
+    this.menuService.loadMenu();
     this.filteredMenus = this.menuService.getMenus();
     this.filteredMenus.map((elemento: ItemMenu, index: number) => {
-      if (index % 4 === 0) {
-        this.slides.push([]);
-      }
-      this.slides[this.slides.length - 1].push(elemento);
+      if (index%6 === 0) this.slides.push([]);
+      let lastSlideIndex: number = this.slides.length - 1;
+
+      if (index%2 === 0) this.slides[lastSlideIndex].push([]);
+      let lastLineIndex: number = this.slides[lastSlideIndex].length - 1;
+
+      this.slides[lastSlideIndex][lastLineIndex].push(elemento);
     });
   }
+
   /**
    * 
    */
@@ -66,10 +61,10 @@ export class MyServicesPage {
     this.destroyed$.next();
     this.destroyed$.complete();
   }
+
   /**
    *
    */
-
   openPage = (page: string, accessDenied: boolean = false) => {
     if (accessDenied) {
       this.authNeeded.showAuthNeededModal();
@@ -78,9 +73,13 @@ export class MyServicesPage {
     }
   };
 
+  /**
+   * 
+   */
   goToSelectFavorites() {
-    this.navCtrl.push('SelectFavoritePage');
+    this.navCtrl.push('SelectFavoritePage')
   }
+
   /**
    *
    */
@@ -93,23 +92,25 @@ export class MyServicesPage {
 
     this.slides = [];
     this.filteredMenus.map((elemento: ItemMenu, index: number) => {
-      if (index % 4 === 0) {
-        this.slides.push([]);
-      }
-      this.slides[this.slides.length - 1].push(elemento);
+      if (index%6 === 0) this.slides.push([]);
+      let lastSlideIndex: number = this.slides.length - 1;
+
+      if (index%2 === 0) this.slides[lastSlideIndex].push([]);
+      let lastLineIndex: number = this.slides[lastSlideIndex].length - 1;
+
+      this.slides[lastSlideIndex][lastLineIndex].push(elemento);
     });
   };
+  
   /**
    *
    */
   clear = () => {
     this.filteredMenus = [...this.filteredMenus];
   };
+  
   /**
    *
    */
   private normalize = (term: string) => (term ? deburr(term.toLowerCase()) : '');
-  /**
-   *
-   */
 }

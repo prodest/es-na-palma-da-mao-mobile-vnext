@@ -5,7 +5,7 @@ import isEqual from 'lodash-es/isEqual';
 import { ItemMenu } from '../models';
 import { MenusStore, MenusState } from './menus-store';
 import { distinctUntilChanged, map } from 'rxjs/operators';
-import { Observable } from 'rxjs';
+import { Observable } from 'rxjs/Observable';
 
 @Injectable()
 export class MenusQuery extends QueryEntity<MenusState, ItemMenu> {

@@ -3,7 +3,8 @@ import { Loading, LoadingController } from 'ionic-angular';
 import { MenuApiService } from './menu-api-service';
 import { MenusStore } from './menus-store';
 import { MenusQuery } from './menus-query';
-import { Subject, Observable } from 'rxjs';
+import { Observable } from 'rxjs/Observable';
+import { Subject } from 'rxjs/Subject';
 import { takeUntil, filter, map, finalize, tap } from 'rxjs/operators';
 import { AuthQuery } from '@espm/core';
 import { ItemMenu, FavoriteMenusData } from '../models';
@@ -102,7 +103,7 @@ export class MenuService implements OnDestroy {
   storeMenus = (m: ItemMenu[]) =>{
     this.menusStore.set(m);
     console.log("MENUS_STORE>>> ",this.menusStore)
-  } 
+  }
 
   /**
    * 

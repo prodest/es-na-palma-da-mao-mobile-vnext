@@ -1,54 +1,59 @@
 <ion-content>
   <ion-slides pager #slides>
-    <ion-slide class="apres_conc">
-      <div class="text.read">
-        <div>
-          <p class="styles_css">Bem-Vindo</p>
-        </div>
-        <div>
-          <p class="second_color">Espírito Santo</p>
-        </div>
-        <div>
-          <p class="second_color">na Palma da Mão</p>
-        </div>
-      </div>
-      <div class="img-cs"></div>
+    <!-- Primeiro Slide -->
+    <ion-slide id="slide-welcome">
+      <!-- Header: Boas Vindas -->
       <div>
-        <p class="col_foot">Serviços públicos digitais que melhoram a vida do cidadão</p>
+        <large-header [content]="headerContentWelcome"></large-header>
       </div>
-      <button menuToggle class="foot-css">
-        <ion-icon name="menu"></ion-icon>
+      <!-- Imagem -->
+      <div class="img-home-screen">
+        <img src="./assets/imgs/ilustracao-tela-bem-vindo.png" id="img-welcome">
+      </div>
+      <!-- Legenda -->
+      <div id="description">
+        <p>Serviços públicos digitais <br> que melhoram <br> a vida do cidadão</p>
+      </div>
+      <!-- Botão: Próximo slide -->
+      <button icon-only id="next-slide" (click)="next()">
+        <ion-icon name="custom-nav-avancar"></ion-icon>
       </button>
-      <button class="but-foot" (click)="next()">
-        <ion-icon md="md-arrow-round-forward"></ion-icon>
-      </button>
-    </ion-slide>
+    </ion-slide> <!-- Fim primeiro slide -->
+    
+    <!-- Segundo Slide -->
+    <ion-slide id="slide-access" class="wrapper">
+      <!--  Header: Acesso -->
+      <div>
+        <large-header [content]="headerContentAccess"></large-header>
+      </div>
+      <!-- Imagem -->
+      <div class="img-home-screen">
+        <img src="./assets/imgs/ilustracao-tela-login.png" id="img-login">
+      </div>
+      
+      <div id="home-buttons">
+        <div class="home-button">
+          <!-- Botão: Minha conta -->
+          <large-button
+            [color]="'secondary-dark'"
+            [leftIcon]="'ios-lock'"
+            [rightIcon]="'ios-arrow-forward-outline'"
+            [text]="'Minha Conta'"
+            (click)="openPageLogin()"
+          ></large-button>
+        </div>
+        <div class="home-button">
+          <!-- Botão: Visitante -->
+          <large-button
+            [color]="'primary-dark'"
+            [leftIcon]="'ios-eye'"
+            [rightIcon]="'ios-arrow-forward-outline'"
+            [text]="'Visitante'"
+            (click)="openPageMyServices()"
+          ></large-button>
+        </div>
+      </div>
+    </ion-slide> <!-- Fim segundo slide -->
 
-    <ion-slide>
-      <div>
-        <div>
-          <p class="styles_css">Acesse</p>
-        </div>
-        <div>
-          <p class="second_color">seus serviços</p>
-        </div>
-        <div>
-          <p class="second_color">digitais</p>
-        </div>
-      </div>
-      <div class="img-ser"></div>
-      <div class="footer-bzotton">
-        <div class="style" z>
-          <button ion-butzton lazrge blzock cozlor="danger" (click)="openPageLogin()" outline>
-            Minha Conta
-          </button>
-        </div>
-        <div class="styletwo">
-          <button ion-button large block (click)="openPageMyServices()">
-            Visitante
-          </button>
-        </div>
-      </div>
-    </ion-slide>
   </ion-slides>
 </ion-content>

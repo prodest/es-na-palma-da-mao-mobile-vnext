@@ -1,47 +1,40 @@
+<ion-content>
+  <!-- Botão voltar -->
+  <button icon-only id="return" (click)="back()">
+    <ion-icon name="custom-nav-voltar"></ion-icon>
+  </button>
+  <!-- Header -->
+  <div>
+    <large-header [content]="headerContent"></large-header>
+  </div>
 
-<ion-content padding>
-    <button (click)="back()">
-      <ion-icon ios="ios-arrow-round-back" md="md-arrow-round-back"></ion-icon>
-    </button>
-  
-  <div class = "espace">
-    <div>
-      <p class="styles_css">Selecione os</p>
-    </div>
-    <div>
-      <p class="second_color">seus serviços</p>
-      <p class="second_color">favoritos</p>
-    </div>
-  </div> 
-  <div class="fixo">
-    <ion-list class="rolavel" no-margin 
-    approxItemHeight="70px">
-      <button ion-button full >
-          <ion-label>Todos</ion-label>
-          <ion-checkbox 
-        color="dark"
+  <!-- Check: Marcar todos -->
+  <div id="mark-all">
+    <ion-item>
+      <ion-label>Todos</ion-label>
+      <ion-checkbox
         checked="false"
-        mode = "ios"
+        id="check-all"
         [(ngModel)]="markAll"
-        (ionChange)= "markUncheckList()"
-       ></ion-checkbox>
-      </button>
-       <button class="radius_css" ion-button full *ngFor="let itemMenu of menus">
-        <h2> {{ itemMenu.title }} </h2>
-        <ion-checkbox 
-        color="green"
-        checked="false"
-        mode = "ios"
-        [(ngModel)]="itemMenu.isChecked"
-        (ionChange)= "markItem(itemMenu, $event.value)"
-       ></ion-checkbox>
-      </button>
+        (click)="markUncheckList()"
+      ></ion-checkbox>
+    </ion-item>
+  </div>
+
+  <!-- Lista de módulos -->
+  <div id="modules-list">
+    <ion-list>
+      <ion-item class="fav-item" *ngFor="let itemMenu of menus">
+        <ion-label>{{itemMenu.title}}</ion-label>
+        <ion-checkbox
+          id="bt-{{itemMenu.id}}"
+          class=""
+          checked="false"
+          [(ngModel)]="itemMenu.isChecked"
+          (ionChange)="markItem(itemMenu, $event.value)"
+        ></ion-checkbox>
+      </ion-item>
     </ion-list>
   </div>
-  <div id="footer">
-    <button ion-button color= "secondary" id="save-button"  (click)=" saveFavorites() ">
-      SALVAR
-    </button>
-  </div>
-</ion-content>  
-
+</ion-content>
+<!-- (ionChange)= "markItem(itemMenu, $event.value)" -->

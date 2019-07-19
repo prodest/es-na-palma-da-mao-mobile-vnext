@@ -1,42 +1,80 @@
-
-<ion-content padding >
-    <button (click)="back()"> 
-    <ion-icon ios="ios-arrow-round-back" md="md-arrow-round-back"></ion-icon>
-</button>
-  <div class="style">ENTRAR</div>
-    
-  <form (submit)="login(username, password)">
-    <ion-list no-padding
-              margin-top>
-      <ion-item>
-        <ion-label floating>CPF ou Email</ion-label>
-        <ion-input type="email"
-                   [(ngModel)]="username"
-                   name="email"></ion-input>
+<ion-content>
+  <div id="header">
+    <!-- Botão voltar -->
+    <button icon-only id="return" (click)="back()">
+      <ion-icon name="custom-nav-voltar"></ion-icon>
+    </button>
+    <nav-title
+      [title]="'Minha conta'"
+    ></nav-title>
+  </div>
+  <div class="wrapper">
+    <!-- Inputs -->
+    <div id="inputs">
+      <ion-item id="ion-item-email">
+        <ion-label stacked>E-mail ou CPF</ion-label>
+        <ion-input
+          type="email"
+          [(ngModel)]="username"
+          name="email"
+        ></ion-input>
       </ion-item>
-      <ion-item>
-        <ion-label floating>Senha</ion-label>
-        <ion-input type="password"
-                   [(ngModel)]="password"
-                   name="password"></ion-input>
+      <ion-item id="ion-item-password">
+        <ion-label stacked>Senha</ion-label>
+        <ion-input
+          type="password"
+          [(ngModel)]="password"
+          name="password"
+        ></ion-input>
       </ion-item>
-      <ion-item no-lines>
-        <button ion-button
-                item-end
-                clear
-                color-light
-                (click)="openUrlForgotPassword()">Esqueceu sua senha?</button>
-      </ion-item>
-    </ion-list>
-    <button ion-button 
-            full
-            large
-            color-primary-inverse
-            type="submit" >ENTRAR</button>
-    <button ion-button 
-            full
-            large (click)="createAccount()">CRIAR CONTA</button>
-  </form>
+    </div>
+    <div class="wrapper" id="forgot-password">
+      <p>Esqueceu a senha <ion-icon name="md-help-circle"></ion-icon></p>
+    </div>
+  </div>
+  <div class="wrapper">
+    <div class="login-button">
+      <!-- Botão ENTRAR -->
+      <large-button
+        [color]="'secondary-dark'"
+        [leftIcon]="'md-finger-print'"
+        [rightIcon]="'ios-arrow-forward-outline'"
+        [text]="'Entrar'"
+        (click)="login(username, password)"
+      ></large-button>
+    </div>
+    <div class="login-button">
+        <!-- Botão CRIAR CONTA -->
+        <large-button
+          [color]="'primary-dark'"
+          [leftIcon]="'ios-add-circle-outline'"
+          [rightIcon]="'ios-arrow-forward-outline'"
+          [text]="'Criar conta'"
+          (click)="createAccount()"
+        ></large-button>
+      </div>
+  </div>
+  <div class="wrapper" id="access-with">
+    <p>ou acesse com:</p>
+  </div>
+  <div class="wrapper" id="social-login">
+    <button ion-button icon-start clear large
+      class="social-login"
+      id="button-login-facebook"
+      (click)="facebookLogin()">
+      <ion-icon name="custom-social-facebook"></ion-icon>
+      Facebook
+    </button>
+    <button ion-button icon-start clear large
+      class="social-login"
+      id="button-login-google"
+      (click)="googleLogin()">
+      <ion-icon name="custom-social-google"></ion-icon>
+      Google
+    </button>
+  </div>
+  
+  <!-- 
   <div class="social-login"
        showWhen="cordova">
     <button ion-button
@@ -75,7 +113,6 @@
             (click)="googleLogin()" class="buton">
       <ion-icon name="logo-google"></ion-icon>
       Google
-    </button>
-    
+    </button> -->
 </ion-content>
 
