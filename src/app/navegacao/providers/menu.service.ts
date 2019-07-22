@@ -27,7 +27,7 @@ export class MenuService implements OnDestroy {
     private loadingCtrl: LoadingController,
     private authQuery: AuthQuery,
     @Inject(MenuToken) private menus: ItemMenu[],
-    private   menusStore: MenusStore,
+    private menusStore: MenusStore,
     private menuQuery: MenusQuery
   ) {
     // salva favoritos no server todas as vezes que os favoritos forem atualizados após o carregamento
