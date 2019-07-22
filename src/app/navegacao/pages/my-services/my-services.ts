@@ -31,27 +31,17 @@ export class MyServicesPage implements OnDestroy {
     private menuQuery: MenusQuery
   ) {
     this.menuQuery.favorites$
-    .pipe(filter(() => !this.menusStore.isPristine), 
-    //  tap((elemento: ItemMenu, index: number) => {
-    //   if (index%4 === 0) {
-    //     this.slides.push([])
-    //   }
-    //   this.slides[this.slides.length-1].push(elemento);
-    // }), 
+    .pipe(
+      filter(() => !this.menusStore.isPristine),
       takeUntil(this.destroyed$))
-    .subscribe();
+    .subscribe(() => {
+      this.filteredMenus = this.menuService.getMenus().sort(this.sortModules);
+      this.updateSlides()
+    });
 
     this.menuService.loadMenu();
-    this.filteredMenus = this.menuService.getMenus();
-    this.filteredMenus.map((elemento: ItemMenu, index: number) => {
-      if (index%6 === 0) this.slides.push([]);
-      let lastSlideIndex: number = this.slides.length - 1;
-
-      if (index%2 === 0) this.slides[lastSlideIndex].push([]);
-      let lastLineIndex: number = this.slides[lastSlideIndex].length - 1;
-
-      this.slides[lastSlideIndex][lastLineIndex].push(elemento);
-    });
+    this.filteredMenus = this.menuService.getMenus().sort(this.sortModules);
+    this.updateSlides();
   }
 
   /**
@@ -60,6 +50,15 @@ export class MyServicesPage implements OnDestroy {
   ngOnDestroy() {
     this.destroyed$.next();
     this.destroyed$.complete();
+  }
+
+  /**
+   * 
+   */
+  private sortModules(moduleA, moduleB) {
+    if (moduleA.isChecked === moduleB.isChecked) return 0;
+    if (moduleA.isChecked && !moduleB.isChecked) return -1;
+    if (!moduleA.isChecked && moduleB.isChecked) return 1; 
   }
 
   /**
@@ -81,15 +80,9 @@ export class MyServicesPage implements OnDestroy {
   }
 
   /**
-   *
+   * 
    */
-  search = e => {
-    const search = this.normalize(e.target.value);
-    this.filteredMenus = this.menus.filter(select => {
-      return this.normalize(select.title).includes(search) || this.normalize(select.title).includes(search);
-    });
-    console.log(this.filteredMenus);
-
+  updateSlides = () => {
     this.slides = [];
     this.filteredMenus.map((elemento: ItemMenu, index: number) => {
       if (index%6 === 0) this.slides.push([]);
@@ -100,6 +93,19 @@ export class MyServicesPage implements OnDestroy {
 
       this.slides[lastSlideIndex][lastLineIndex].push(elemento);
     });
+  }
+
+  /**
+   *
+   */
+  search = e => {
+    const search = this.normalize(e.target.value);
+    this.filteredMenus = this.menus.filter(select => {
+      return this.normalize(select.title).includes(search) || this.normalize(select.title).includes(search);
+    });
+    console.log(this.filteredMenus);
+
+    this.updateSlides();
   };
   
   /**
