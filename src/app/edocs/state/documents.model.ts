@@ -29,9 +29,3 @@ export interface Capturador {
   id: number;
   nome: string;
 }
-
-export interface Destination {
-  id: string;
-  descricao: string; 
-  tipo?: string;
-}

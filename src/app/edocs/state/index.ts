@@ -6,6 +6,7 @@ import { DocumentsToSendApiService } from './documents-to-send.api.service';
 import { DocumentsToSendService } from './documents-to-send.service';
 
 export * from './documents.model';
+export * from './documents-to-send.model';
 
 export { DocumentsService, DocumentsApiService, DocumentsStore, DocumentsQuery, DocumentsToSendApiService, DocumentsToSendService };
 

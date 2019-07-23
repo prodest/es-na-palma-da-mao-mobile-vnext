@@ -12,7 +12,6 @@ import deburr from 'lodash-es/deburr';
   changeDetection: ChangeDetectionStrategy.Default
 })
 export class DocumentsToSendAddAddresseesPage implements OnInit {
-  
   addresseesTypeFilter = [
     {
       id: 0,
@@ -53,24 +52,24 @@ export class DocumentsToSendAddAddresseesPage implements OnInit {
     this.filteredGovAgencies = this.govAgencies.filter(agency => {
       return this.normalize(agency.descricao).includes(search);
     });
-  };
+  }
 
   /**
    *
    */
   clear() {
     this.filteredGovAgencies = [...this.govAgencies];
-  };
+  }
 
   /**
    *
    */
   addAddressees(agency: Destination) {
-    if (this.addressees.findIndex(ad => ad.id === agency.id) === -1 ){
-      agency.tipo = 'Órgão'
+    if (this.addressees.findIndex(ad => ad.id === agency.id) === -1) {
+      agency.tipo = 'Órgão';
       this.addressees.push(agency);
     }
-    
+
     this.navCtrl.pop();
   }
 
@@ -80,8 +79,7 @@ export class DocumentsToSendAddAddresseesPage implements OnInit {
     } else {
       return valor;
     }
-  };
-
+  }
 
   ngOnInit(): void {}
 

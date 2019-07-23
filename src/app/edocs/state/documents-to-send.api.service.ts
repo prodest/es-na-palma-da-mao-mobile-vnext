@@ -6,7 +6,8 @@ import { Observable } from 'rxjs/Observable';
 import { share } from 'rxjs/operators';
 
 import { ApiBaseService } from './api-base.service';
-import { Document, Destination } from './documents.model';
+import { Document } from './documents.model';
+import { Destination } from './documents-to-send.model';
 
 /**
  *
@@ -28,4 +29,26 @@ export class DocumentsToSendApiService extends ApiBaseService<Document> {
   getDestinations(): Observable<Destination[]> {
     return this.http.get<Destination[]>(this.endpoint(`Destinos`), {}).pipe(share());
   }
+
+  
+
+  /**
+   *
+   */
+  /*getForwards(): Observable<Forwards[]> {
+    const tolkien = this.auth.getAccessToken().subscribe(
+      token => {
+        return token;
+      }
+    );
+    const id = this.auth.refreshUser().subscribe(
+      (user: AcessoCidadaoClaims) => {
+        return user.subNovo;
+      }
+    )
+    let header = new HttpHeaders();
+    header.append('Authorization', 'Bearer ' + tolkien);
+
+    return this.http.get<Forwards[]>(this.endpoint(`Encaminhamentos/${id}`), {headers: header}).pipe(share());
+  }*/
 }
