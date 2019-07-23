@@ -1,23 +1,29 @@
-import { Component, ChangeDetectionStrategy, OnInit } from '@angular/core';
+import { Component, ChangeDetectionStrategy, OnInit, ViewChild } from '@angular/core';
 import { Loading } from 'ionic-angular';
 import { Observable } from 'rxjs/Observable';
 import { finalize } from 'rxjs/operators';
 import { AuthService, CidadaoRole, AcessoCidadaoClaims, LoadingService } from '@espm/core';
+import { WizardStep } from '../../providers';
+import { IBaseStepOutput } from '../../interfaces';
+import { DocumentsToSendBasicFormComponent } from '../documents-to-send-basic-form';
 
 @Component({
   selector: 'edocs-documents-to-send-basic',
   templateUrl: './documents-to-send-basic.component.html',
   changeDetection: ChangeDetectionStrategy.Default
 })
-export class DocumentsToSendBasicComponent implements OnInit {
+export class DocumentsToSendBasicComponent extends WizardStep<IBaseStepOutput> implements OnInit {
 
   documents = [];
   sender$: Observable<AcessoCidadaoClaims>;
   roles$: Observable<CidadaoRole[]>;
+  @ViewChild('basicForm') protected form: DocumentsToSendBasicFormComponent;
   private loading: Loading;
   private loadCount = 0;
 
-  constructor(private auth: AuthService, private loadingService: LoadingService) { }
+  constructor(private auth: AuthService, private loadingService: LoadingService) {
+    super();
+  }
 
   ngOnInit(): void {
     let loadEndIn = 2;
@@ -29,13 +35,6 @@ export class DocumentsToSendBasicComponent implements OnInit {
     this.roles$ = this.auth.getUserRoles().pipe(
       finalize(this.dismissLoading.bind(this, loadEndIn))
     );
-  }
-
-  refresh(): void { }
-
-  submitForm(value: any): void {
-    // TODO: comportamento wizard (next step)
-    console.log({ value })
   }
 
   /**
@@ -54,7 +53,4 @@ export class DocumentsToSendBasicComponent implements OnInit {
     }
   }
 
-  // private onError(_: any): void {
-  //   // TODO: redirecionar ou deixar wizard desabilitado
-  // }
 }
