@@ -68,9 +68,11 @@ export class MenuService implements OnDestroy {
    */
   private markFavorites = ([menus, favorites]: [ItemMenu[], FavoriteMenusData]): ItemMenu[] => {
     console.log("entrou no menu service marcado favoritos")
+    
     return menus.map(item => {
+      console.log("ppppp ",item.isChecked);
       item.isChecked = favorites.favoriteMenus.some(idMenu => idMenu === item.id);
-      console.log("entrou no menu ,,,,,,,,s")
+      console.log("iiiiii+++++ ", item.isChecked)
       return item;
       
     });

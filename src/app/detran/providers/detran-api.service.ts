@@ -4,7 +4,7 @@ import { Environment, EnvVariables } from '@espm/core';
 import { Observable } from 'rxjs/Observable';
 import { share } from 'rxjs/operators';
 
-import { DriverLicense, DriverStatus, Ticket, Vehicle, VehiclesData, Debit } from '../model';
+import { DriverLicense, DriverStatus, Ticket, Vehicle, VehiclesData, Debit, DebitPreview } from '../model';
 
 /**
  *
@@ -65,6 +65,16 @@ export class DetranApiService {
       .pipe(share());
   };
 
+  /**
+   * 
+   */
+  getDebitsPreview = (vehicle: Vehicle): Observable<DebitPreview[]> => {
+    return this.http
+      .get<DebitPreview[]>(
+        `${this.env.api.detranInternetBanking}/veiculos/${vehicle.plate}/${vehicle.renavam}/debitos-preview`
+      )
+      .pipe(share());
+  };
   /**
    *
    */

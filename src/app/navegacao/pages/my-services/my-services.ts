@@ -6,7 +6,7 @@ import { ItemMenu } from '../../models';
 import { MenuService } from '../../providers/menu.service';
 import { MenuToken } from '@espm/core/menu';
 import { MenusQuery, MenusStore } from '../../providers';
-import { filter, takeUntil } from 'rxjs/operators';
+import { filter, takeUntil, tap } from 'rxjs/operators';
 import { Subject } from 'rxjs/Subject';
 
 @IonicPage()
@@ -31,18 +31,17 @@ export class MyServicesPage implements OnDestroy {
     private menuQuery: MenusQuery
   ) {
     this.menuQuery.favorites$
-    .pipe(filter(() => !this.menusStore.isPristine), 
-    //  tap((elemento: ItemMenu, index: number) => {
-    //   if (index%4 === 0) {
-    //     this.slides.push([])
-    //   }
-    //   this.slides[this.slides.length-1].push(elemento);
-    // }), 
-      takeUntil(this.destroyed$))
-    .subscribe();
+    // .pipe( filter(() => !this.menusStore.isPristine),	
+    //     takeUntil(this.destroyed$))	
+    //      .subscribe(() => {
+    //     this.filteredMenus = this.menuService.getMenus().sort(this.sortModules);
+    //     this.updateSlides()
+    //   });
 
     this.menuService.loadMenu();
     this.filteredMenus = this.menuService.getMenus();
+    console.log('FilteredMenus', this.filteredMenus);
+    
     this.filteredMenus.map((elemento: ItemMenu, index: number) => {
       if (index%6 === 0) this.slides.push([]);
       let lastSlideIndex: number = this.slides.length - 1;
