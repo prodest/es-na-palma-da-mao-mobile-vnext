@@ -79,6 +79,7 @@ export class ESPMComponent implements OnDestroy {
   };
 
   private getIntentClip = () => new Promise<string>(resolve => {
+    if (!(window as WindowWithIntent).plugins) { return resolve(null); }
     (window as WindowWithIntent).plugins.intentShim.getIntent(
       data => {
         if (!data || !data.clipItems) {
@@ -105,7 +106,7 @@ export class ESPMComponent implements OnDestroy {
         .subscribe(
           () => {
             if (clip) {
-              this.nav.setRoot('DocumentsToSendBasicPage', { filePath: clip });
+              this.nav.setRoot('DocumentsToSendPage', { filePath: clip });
               return;
             }
           },
