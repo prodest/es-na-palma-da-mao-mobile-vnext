@@ -22,3 +22,18 @@ export interface IBaseStepOutput {
  * @extends {Array<Destination>}
  */
 export interface IAddresseesStepOutput extends Array<Destination> {}
+
+/**
+ * @description wizard doc step output interface
+ * @author David Vilaça
+ * @date 2019-07-24
+ * @export
+ * @interface IDocStepOutput
+ */
+export interface IDocStepOutput {
+  name: string;
+  documentType: number;
+  documentPaperType: number;
+  documentAssignType: number;
+  file: string;
+}

@@ -1,7 +1,7 @@
 import { Component, ChangeDetectionStrategy, OnInit, ViewChild, OnDestroy } from '@angular/core';
-import { IonicPage, Slides } from 'ionic-angular';
+import { IonicPage, Slides, NavParams } from 'ionic-angular';
 import { Subscription } from 'rxjs/Subscription';
-import { IBaseStepOutput, IAddresseesStepOutput } from '../../interfaces';
+import { IBaseStepOutput, IAddresseesStepOutput, IDocStepOutput } from '../../interfaces';
 import { WizardStep } from '../../providers';
 import { DocumentsToSendBasicComponent, DocumentsToSendAddresseesComponent, DocumentsToSendDocComponent, DocumentsToSendMessageComponent } from '../../components';
 
@@ -16,6 +16,8 @@ import { DocumentsToSendBasicComponent, DocumentsToSendAddresseesComponent, Docu
 export class DocumentsToSendPage implements OnInit, OnDestroy {
 
   @ViewChild(Slides) slides: Slides;
+  // file path
+  file: string;
   // active step
   activeStep: WizardStep<any>;
 
@@ -27,20 +29,23 @@ export class DocumentsToSendPage implements OnInit, OnDestroy {
   @ViewChild('message') private messageStep: DocumentsToSendMessageComponent;
 
   // all steps values on submit
-  private stepsValue: {
+  public stepsValue: {
     basic?: IBaseStepOutput;
-    addressees?: IAddresseesStepOutput
+    addressees?: IAddresseesStepOutput;
+    doc?: IDocStepOutput;
   } = {};
 
   // subscriptions
   private subscriptions: Subscription[] = [];
+
+  constructor (private navParams: NavParams) {}
 
   nextSlide() {
     this.activeStep.submit();
     if (this.activeStep instanceof DocumentsToSendBasicComponent) {
       this.activeStep = this.addresseesStep;
     } else if (this.activeStep instanceof DocumentsToSendAddresseesComponent) {
-      this.activeStep = this.docStep as any; // TODO: remover any type após normalizar steps
+      this.activeStep = this.docStep;
     } else if (this.activeStep instanceof DocumentsToSendMessageComponent) {
       this.activeStep = this.messageStep as any; // TODO: remover any type após normalizar steps
     }
@@ -51,9 +56,9 @@ export class DocumentsToSendPage implements OnInit, OnDestroy {
     if (this.activeStep instanceof DocumentsToSendAddresseesComponent) {
       this.activeStep = this.basicStep;
     } else if (this.activeStep instanceof DocumentsToSendDocComponent) {
-      this.activeStep = this.addresseesStep as any; // TODO: remover any type após normalizar steps
+      this.activeStep = this.addresseesStep;
     } else if (this.activeStep instanceof DocumentsToSendMessageComponent) {
-      this.activeStep = this.docStep as any; // TODO: remover any type após normalizar steps
+      this.activeStep = this.docStep;
     }
     this.slides.slidePrev();
   }
@@ -65,9 +70,13 @@ export class DocumentsToSendPage implements OnInit, OnDestroy {
       ),
       this.addresseesStep.onComplete.subscribe(
         (value: { addressees: IAddresseesStepOutput}) => this.stepsValue.addressees = value.addressees
+      ),
+      this.docStep.onComplete.subscribe(
+        (value: IDocStepOutput) => this.stepsValue.doc = value
       )
     ];
     this.activeStep = this.basicStep;
+    this.file = this.navParams.get('filePath');
   }
 
   refresh(): void { }
