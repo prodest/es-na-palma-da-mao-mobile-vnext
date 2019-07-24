@@ -12,6 +12,7 @@ import deburr from 'lodash-es/deburr';
   changeDetection: ChangeDetectionStrategy.Default
 })
 export class DocumentsToSendAddAddresseesPage implements OnInit {
+
   addresseesTypeFilter = [
     {
       id: 0,
@@ -69,7 +70,6 @@ export class DocumentsToSendAddAddresseesPage implements OnInit {
       agency.tipo = 'Órgão';
       this.addressees.push(agency);
     }
-
     this.navCtrl.pop();
   }
 

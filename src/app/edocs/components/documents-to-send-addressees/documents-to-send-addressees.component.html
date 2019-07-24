@@ -1,34 +1,9 @@
 <ion-item>
   Destinatários
   <ion-scroll class="scrollable" scrollY="true" detail-none>
-    <ion-list>
-      <ion-grid fixed>
-        <ion-row>
-          <ion-col class="colAddr" *ngFor="let addressee of addressees">
-            <ion-card class="cardAddr">
-              <div class="contentCardAddr" item-start>
-                <p class="titleAddr">{{ limite(addressee.descricao) }}</p>
-                <p class="subtitleAddr">{{ addressee.tipo }}</p>
-              </div>
-              <button
-                ion-button
-                (click)="delAddresses(addressee)"
-                class="closeAddr"
-                [color]="colorCloseIcon"
-                no-padding
-                clear
-              >
-                <ion-icon [name]="closeIcon"></ion-icon>
-              </button>
-            </ion-card>
-          </ion-col>
-        </ion-row>
-      </ion-grid>
-    </ion-list>
-    <ion-item *ngIf="addressees && !addressees.length" text-center no-lines>
-      <h2>Nenhum destinatário adicionado.</h2>
-      <p text-wrap>Clique no botão "Adicionar" abaixo para incluir destinatários.</p>
-    </ion-item>
+    <edocs-documents-to-send-addressees-form [addressees]="addressees" (onSubmit)="completeStep($event)"
+      #addresseesForm>
+    </edocs-documents-to-send-addressees-form>
   </ion-scroll>
   <button ion-button (click)="addAddresses()" class="addButton" detail-none [color]="colorAddIcon" default outline>
     Adicionar

@@ -12,16 +12,16 @@
     </ion-list-header>
     <ion-slides pager="false">
       <ion-slide>
-        <edocs-documents-to-send-basic></edocs-documents-to-send-basic>
+        <edocs-documents-to-send-basic #basic></edocs-documents-to-send-basic>
       </ion-slide>
       <ion-slide>
-        <edocs-documents-to-send-addressees></edocs-documents-to-send-addressees>
+        <edocs-documents-to-send-addressees #addressees></edocs-documents-to-send-addressees>
       </ion-slide>
       <ion-slide>
-        <edocs-documents-to-send-doc></edocs-documents-to-send-doc>
+        <edocs-documents-to-send-doc #doc></edocs-documents-to-send-doc>
       </ion-slide>
       <ion-slide>
-        <edocs-documents-to-send-message></edocs-documents-to-send-message>
+        <edocs-documents-to-send-message #message></edocs-documents-to-send-message>
       </ion-slide>
     </ion-slides>
   </ion-list>
@@ -31,7 +31,7 @@
     <button ion-button color="dark" (click)="prevSlide()" [disabled]="slides.isBeginning()" clear>
       <ion-icon item-start name="md-arrow-round-back"></ion-icon>
     </button>
-    <button ion-button color="dark" (click)="nextSlide()" [disabled]="slides.isEnd()" clear>
+    <button ion-button color="dark" (click)="nextSlide()" [disabled]="slides.isEnd() || !activeStep?.isValid" clear>
       <ion-icon item-start name="md-arrow-round-forward"></ion-icon>
     </button>
   </ion-toolbar>
