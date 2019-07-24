@@ -1,15 +1,22 @@
-import { Component, ChangeDetectionStrategy, OnInit } from '@angular/core';
+import { Component, ChangeDetectionStrategy, OnInit, ViewChild } from '@angular/core';
+import { FormBase } from '@espm/core';
+import { WizardStep } from '../../providers';
+import { IMessageOutput } from '../../interfaces';
 
 @Component({
   selector: 'edocs-documents-to-send-message',
   templateUrl: './documents-to-send-message.component.html',
   changeDetection: ChangeDetectionStrategy.Default
 })
-export class DocumentsToSendMessageComponent implements OnInit {
+export class DocumentsToSendMessageComponent extends WizardStep<IMessageOutput> implements OnInit {
 
-  message: string = ''
+  defaultMessage: string = ''
 
-  constructor() { }
+  @ViewChild('messageForm') protected form: FormBase;
+
+  constructor() {
+    super();
+  }
 
   ngOnInit(): void { }
 

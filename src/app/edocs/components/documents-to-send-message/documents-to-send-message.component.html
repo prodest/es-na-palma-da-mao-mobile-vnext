@@ -1,9 +1,3 @@
 <ion-item>
-  <ion-label floating>Mensagem</ion-label>
-  <ion-textarea rows="5" [(ngModel)]="message" name="message" required></ion-textarea>
+  <edocs-documents-to-send-message-form [message]="defaultMessage" #messageForm></edocs-documents-to-send-message-form>
 </ion-item>
-<div class="sendButton">
-  <button ion-button default >
-    Enviar
-  </button>
-</div>

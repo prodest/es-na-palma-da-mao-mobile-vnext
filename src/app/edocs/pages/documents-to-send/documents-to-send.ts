@@ -1,7 +1,7 @@
 import { Component, ChangeDetectionStrategy, OnInit, ViewChild, OnDestroy } from '@angular/core';
 import { IonicPage, Slides, NavParams } from 'ionic-angular';
 import { Subscription } from 'rxjs/Subscription';
-import { IBaseStepOutput, IAddresseesStepOutput, IDocStepOutput } from '../../interfaces';
+import { IBaseStepOutput, IAddresseesStepOutput, IDocStepOutput, IMessageOutput } from '../../interfaces';
 import { WizardStep } from '../../providers';
 import { DocumentsToSendBasicComponent, DocumentsToSendAddresseesComponent, DocumentsToSendDocComponent, DocumentsToSendMessageComponent } from '../../components';
 
@@ -29,16 +29,17 @@ export class DocumentsToSendPage implements OnInit, OnDestroy {
   @ViewChild('message') private messageStep: DocumentsToSendMessageComponent;
 
   // all steps values on submit
-  public stepsValue: {
+  private stepsValue: {
     basic?: IBaseStepOutput;
     addressees?: IAddresseesStepOutput;
     doc?: IDocStepOutput;
+    message?: IMessageOutput;
   } = {};
 
   // subscriptions
   private subscriptions: Subscription[] = [];
 
-  constructor (private navParams: NavParams) {}
+  constructor(private navParams: NavParams) { }
 
   nextSlide() {
     this.activeStep.submit();
@@ -47,7 +48,7 @@ export class DocumentsToSendPage implements OnInit, OnDestroy {
     } else if (this.activeStep instanceof DocumentsToSendAddresseesComponent) {
       this.activeStep = this.docStep;
     } else if (this.activeStep instanceof DocumentsToSendMessageComponent) {
-      this.activeStep = this.messageStep as any; // TODO: remover any type após normalizar steps
+      this.activeStep = this.messageStep;
     }
     this.slides.slideNext();
   }
@@ -69,19 +70,31 @@ export class DocumentsToSendPage implements OnInit, OnDestroy {
         (value: IBaseStepOutput) => this.stepsValue.basic = value
       ),
       this.addresseesStep.onComplete.subscribe(
-        (value: { addressees: IAddresseesStepOutput}) => this.stepsValue.addressees = value.addressees
+        (value: { addressees: IAddresseesStepOutput }) => this.stepsValue.addressees = value.addressees
       ),
       this.docStep.onComplete.subscribe(
         (value: IDocStepOutput) => this.stepsValue.doc = value
+      ),
+      this.messageStep.onComplete.subscribe(
+        (value: IMessageOutput) => {
+          this.stepsValue.message = value
+          this.send();
+        }
       )
     ];
     this.activeStep = this.basicStep;
     this.file = this.navParams.get('filePath');
+    this.file = 'file.pdf';
   }
 
   refresh(): void { }
 
   ngOnDestroy(): void {
     this.subscriptions.forEach(sub => sub ? sub.unsubscribe() : void 0);
+  }
+
+  private send(): void {
+    console.log('TODO: ENVIAR ARQUIVOS PARA API(S)')
+    console.log({ stepsValue: this.stepsValue})
   }
 }

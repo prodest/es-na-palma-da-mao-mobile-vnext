@@ -22,6 +22,13 @@
       </ion-slide>
       <ion-slide>
         <edocs-documents-to-send-message #message></edocs-documents-to-send-message>
+        <ion-item>
+          <div class="sendButton">
+            <button [disabled]="!message.isValid" (click)="message.submit()" ion-button default>
+              Enviar
+            </button>
+          </div>
+        </ion-item>
       </ion-slide>
     </ion-slides>
   </ion-list>

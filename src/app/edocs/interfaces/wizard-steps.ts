@@ -37,3 +37,14 @@ export interface IDocStepOutput {
   documentAssignType: number;
   file: string;
 }
+
+/**
+ * @description wizard message step output interface
+ * @author David Vilaça
+ * @date 2019-07-24
+ * @export
+ * @interface IMessageOutput
+ */
+export interface IMessageOutput {
+  message: string;
+}
