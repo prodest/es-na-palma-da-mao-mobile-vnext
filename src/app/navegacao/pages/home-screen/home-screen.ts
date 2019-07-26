@@ -55,7 +55,7 @@ export class HomeScreenPage implements OnInit, OnDestroy {
   */
   openPageMyServices() {
     this.navCtrl.push('MyServicesPage');
-    }
+  }
 
   /*
   *

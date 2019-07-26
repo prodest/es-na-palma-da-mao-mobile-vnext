@@ -17,9 +17,11 @@ import { Subject } from 'rxjs/Subject';
 export class MyServicesPage implements OnDestroy {
     
   private destroyed$ = new Subject();
-  filteredMenus: ItemMenu[];
+  private favorites: ItemMenu[] = [];
   private slides: Array<Array<ItemMenu[]>> = [];
-  
+  private menuToShow$: Subject<ItemMenu[]>;
+  private searching: boolean = false;
+
   constructor(
     protected appCtrl: App,
     protected authQuery: AuthQuery,
@@ -30,18 +32,26 @@ export class MyServicesPage implements OnDestroy {
     private menusStore: MenusStore,
     private menuQuery: MenusQuery
   ) {
+
+    /* Este Subject é responsável por atualizar a lista de módulos a serem exibidos */
+    this.menuToShow$ = new Subject();
+    this.menuToShow$.subscribe((menus: ItemMenu[]) => {
+      this.updateSlides(menus);
+    });
+
     this.menuQuery.favorites$
     .pipe(
       filter(() => !this.menusStore.isPristine),
       takeUntil(this.destroyed$))
-    .subscribe(() => {
-      this.filteredMenus = this.menuService.getMenus().sort(this.sortModules);
-      this.updateSlides()
+    .subscribe((favorites: ItemMenu[]) => {
+      /* Sempre que os favoritos mudam, atualizamos o "backup" e a lista de módulos para exibir */
+      this.favorites = favorites;
+      this.menuToShow$.next(favorites);
     });
 
+    /* Primeira carga dos módulos */
     this.menuService.loadMenu();
-    this.filteredMenus = this.menuService.getMenus().sort(this.sortModules);
-    this.updateSlides();
+    this.menuToShow$.next(this.menuService.getMenus());
   }
 
   /**
@@ -55,7 +65,7 @@ export class MyServicesPage implements OnDestroy {
   /**
    * 
    */
-  private sortModules(moduleA, moduleB) {
+  sortModules(moduleA, moduleB) {
     if (moduleA.isChecked === moduleB.isChecked) return 0;
     if (moduleA.isChecked && !moduleB.isChecked) return -1;
     if (!moduleA.isChecked && moduleB.isChecked) return 1; 
@@ -82,9 +92,14 @@ export class MyServicesPage implements OnDestroy {
   /**
    * 
    */
-  updateSlides = () => {
+  updateSlides = (menus: ItemMenu[]) => {
+    let _menus: ItemMenu[] = menus;
+
+    /* Se o array fornecido estiver vazio, todos os módulos serão exibidos, a menos que seja o resultado de uma busca */
+    if (menus.length === 0 && !this.searching) _menus = this.menuService.getMenus();
+
     this.slides = [];
-    this.filteredMenus.map((elemento: ItemMenu, index: number) => {
+    _menus.map((elemento: ItemMenu, index: number) => {
       if (index%6 === 0) this.slides.push([]);
       let lastSlideIndex: number = this.slides.length - 1;
 
@@ -100,19 +115,28 @@ export class MyServicesPage implements OnDestroy {
    */
   search = e => {
     const search = this.normalize(e.target.value);
-    this.filteredMenus = this.menus.filter(select => {
+    
+    /* Se a busca estiver vazia, torna a exibir os favoritos */
+    if (search === '') {
+      this.menuToShow$.next(this.favorites);
+      return;
+    }
+
+    this.searching = true; // indica que uma busca está em andamento
+    let filteredMenus = this.menus.filter(select => {
       return this.normalize(select.title).includes(search) || this.normalize(select.title).includes(search);
     });
-    console.log(this.filteredMenus);
+    console.log(filteredMenus);
 
-    this.updateSlides();
+    this.menuToShow$.next(filteredMenus);
+    this.searching = false; // finaliza a busca
   };
   
   /**
    *
    */
   clear = () => {
-    this.filteredMenus = [...this.filteredMenus];
+    this.menuToShow$.next(this.favorites);
   };
   
   /**
