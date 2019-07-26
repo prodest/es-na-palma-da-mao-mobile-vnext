@@ -1,7 +1,7 @@
 import { Component, ChangeDetectionStrategy, OnInit, ViewChild, OnDestroy } from '@angular/core';
 import { IonicPage, Slides, NavParams } from 'ionic-angular';
 import { Subscription } from 'rxjs/Subscription';
-import { IBaseStepOutput, IAddresseesStepOutput, IDocStepOutput, IMessageOutput } from '../../interfaces';
+import { IBaseStepOutput, IAddresseesStepOutput, IDocStepOutput, IMessageOutput, IDocumentsToSendWizardValue } from '../../interfaces';
 import { WizardStep } from '../../providers';
 import { DocumentsToSendBasicComponent, DocumentsToSendAddresseesComponent, DocumentsToSendDocComponent, DocumentsToSendMessageComponent } from '../../components';
 
@@ -29,12 +29,7 @@ export class DocumentsToSendPage implements OnInit, OnDestroy {
   @ViewChild('message') private messageStep: DocumentsToSendMessageComponent;
 
   // all steps values on submit
-  private stepsValue: {
-    basicStep?: IBaseStepOutput;
-    addresseesStep?: IAddresseesStepOutput;
-    docStep?: IDocStepOutput;
-    messageStep?: IMessageOutput;
-  } = {};
+  private stepsValue: IDocumentsToSendWizardValue = {};
 
   // subscriptions
   private subscriptions: Subscription[] = [];

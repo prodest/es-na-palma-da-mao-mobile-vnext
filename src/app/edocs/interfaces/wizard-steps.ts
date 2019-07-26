@@ -48,3 +48,17 @@ export interface IDocStepOutput {
 export interface IMessageOutput {
   message: string;
 }
+
+/**
+ * @description all steps wizard value
+ * @author David Vilaça
+ * @date 2019-07-26
+ * @export
+ * @interface IDocumentsToSendWizardValue
+ */
+export interface IDocumentsToSendWizardValue {
+  basicStep?: IBaseStepOutput;
+  addresseesStep?: IAddresseesStepOutput;
+  docStep?: IDocStepOutput;
+  messageStep?: IMessageOutput;
+}
