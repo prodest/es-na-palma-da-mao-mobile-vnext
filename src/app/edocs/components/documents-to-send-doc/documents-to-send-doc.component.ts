@@ -22,4 +22,8 @@ export class DocumentsToSendDocComponent extends WizardStep<IDocStepOutput> impl
 
   refresh(): void { }
 
+  async viewFile() {
+    window.open(this.file, '_system', 'location=yes');
+  }
+
 }
