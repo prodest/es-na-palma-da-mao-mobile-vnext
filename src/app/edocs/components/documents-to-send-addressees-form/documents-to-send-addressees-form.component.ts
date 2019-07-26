@@ -24,7 +24,7 @@ export class DocumentsToSendAddresseesFormComponent extends FormBase implements 
       const addressees: Destination[] = changes['addressees'].currentValue;
       if (addressees) {
         this.form.reset({ addressees });
-        setTimeout(() => this.cdr.detectChanges(), 200)
+        this.cdr.detectChanges();
       }
     }
     this.showErrors();
@@ -32,7 +32,7 @@ export class DocumentsToSendAddresseesFormComponent extends FormBase implements 
 
   submit() {
     this.onSubmitClick(this.form.value);
-    setTimeout(() => this.cdr.detectChanges())
+    this.cdr.detectChanges();
   }
 
   delAddresses(addressees) {

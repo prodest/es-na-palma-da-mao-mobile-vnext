@@ -1,4 +1,4 @@
-import { Component, OnInit, OnChanges, SimpleChanges, Input, ChangeDetectionStrategy, ChangeDetectorRef } from '@angular/core';
+import { Component, OnInit, OnChanges, SimpleChanges, Input, ChangeDetectionStrategy } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { FormBase, AcessoCidadaoClaims } from '@espm/core';
 
@@ -17,7 +17,7 @@ export class DocumentsToSendMessageFormComponent extends FormBase implements OnI
     }
   };
 
-  constructor(formBuilder: FormBuilder, private cdr: ChangeDetectorRef) {
+  constructor(formBuilder: FormBuilder) {
     super(formBuilder);
   }
 
@@ -30,11 +30,6 @@ export class DocumentsToSendMessageFormComponent extends FormBase implements OnI
         this.form.reset({ message })
       }
     }
-  }
-
-  submit() {
-    this.onSubmitClick(this.form.value);
-    setTimeout(() => this.cdr.detectChanges())
   }
 
   protected createFormModel(): FormGroup {

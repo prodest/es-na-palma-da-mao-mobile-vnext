@@ -66,10 +66,11 @@ export class DocumentsToSendBasicFormComponent extends FormBase implements OnIni
         documentPaperType.clearValidators();
         documentAssignType.clearValidators();
         if (value === 0) { // Documento Eletrônico
-          documentAssignType.setValidators(Validators.required);
+          documentAssignType.setValidators([Validators.required]);
         } else if (value === 1) { // Documento Escaneado
-          documentPaperType.setValidators(Validators.required);
+          documentPaperType.setValidators([Validators.required]);
         }
+        this.selectChange();
       });
   }
 
@@ -88,17 +89,12 @@ export class DocumentsToSendBasicFormComponent extends FormBase implements OnIni
     }
   }
 
-  submit() {
-    this.onSubmitClick(this.form.value);
-    setTimeout(() => this.cdr.detectChanges())
-  }
-
   isValidNumber(value: any) {
     return typeof value === 'number' && !isNaN(value)
   }
 
   selectChange(): void {
-    setTimeout(() => this.cdr.detectChanges())
+    this.cdr.detectChanges()
   }
 
   protected createFormModel(): FormGroup {
@@ -109,5 +105,15 @@ export class DocumentsToSendBasicFormComponent extends FormBase implements OnIni
       documentPaperType: [null, []],
       documentAssignType: [null, []]
     });
+  }
+
+  protected prepareFormModel(formModel: any) {
+    const model = super.prepareFormModel(formModel);
+    if (model.documentType === 0) {
+      delete model.documentPaperType;
+    } else if (model.documentType === 1) {
+      delete model.documentAssignType;
+    }
+    return model;
   }
 }

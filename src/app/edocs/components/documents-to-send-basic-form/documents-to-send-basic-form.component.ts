@@ -42,12 +42,7 @@ export class DocumentsToSendBasicFormComponent extends FormBase implements OnIni
   }
 
   roleSelectChange(): void {
-    setTimeout(() => this.cdr.detectChanges())
-  }
-
-  submit() {
-    this.onSubmitClick(this.form.value);
-    setTimeout(() => this.cdr.detectChanges())
+    this.cdr.detectChanges();
   }
 
   protected createFormModel(): FormGroup {

@@ -30,10 +30,10 @@ export class DocumentsToSendPage implements OnInit, OnDestroy {
 
   // all steps values on submit
   private stepsValue: {
-    basic?: IBaseStepOutput;
-    addressees?: IAddresseesStepOutput;
-    doc?: IDocStepOutput;
-    message?: IMessageOutput;
+    basicStep?: IBaseStepOutput;
+    addresseesStep?: IAddresseesStepOutput;
+    docStep?: IDocStepOutput;
+    messageStep?: IMessageOutput;
   } = {};
 
   // subscriptions
@@ -47,10 +47,12 @@ export class DocumentsToSendPage implements OnInit, OnDestroy {
       this.activeStep = this.addresseesStep;
     } else if (this.activeStep instanceof DocumentsToSendAddresseesComponent) {
       this.activeStep = this.docStep;
-    } else if (this.activeStep instanceof DocumentsToSendMessageComponent) {
+    } else if (this.activeStep instanceof DocumentsToSendDocComponent) {
       this.activeStep = this.messageStep;
     }
+    this.slides.lockSwipes(false);
     this.slides.slideNext();
+    this.slides.lockSwipes(true);
   }
 
   prevSlide() {
@@ -61,23 +63,25 @@ export class DocumentsToSendPage implements OnInit, OnDestroy {
     } else if (this.activeStep instanceof DocumentsToSendMessageComponent) {
       this.activeStep = this.docStep;
     }
+    this.slides.lockSwipes(false);
     this.slides.slidePrev();
+    this.slides.lockSwipes(true);
   }
 
   ngOnInit(): void {
     this.subscriptions = [
       this.basicStep.onComplete.subscribe(
-        (value: IBaseStepOutput) => this.stepsValue.basic = value
+        (value: IBaseStepOutput) => this.stepsValue.basicStep = value
       ),
       this.addresseesStep.onComplete.subscribe(
-        (value: { addressees: IAddresseesStepOutput }) => this.stepsValue.addressees = value.addressees
+        (value: { addressees: IAddresseesStepOutput }) => this.stepsValue.addresseesStep = value.addressees
       ),
       this.docStep.onComplete.subscribe(
-        (value: IDocStepOutput) => this.stepsValue.doc = value
+        (value: IDocStepOutput) => this.stepsValue.docStep = value
       ),
       this.messageStep.onComplete.subscribe(
         (value: IMessageOutput) => {
-          this.stepsValue.message = value
+          this.stepsValue.messageStep = value
           this.send();
         }
       )
@@ -85,6 +89,7 @@ export class DocumentsToSendPage implements OnInit, OnDestroy {
     this.activeStep = this.basicStep;
     this.file = this.navParams.get('filePath');
     this.file = 'file.pdf';
+    this.slides.lockSwipes(true);
   }
 
   refresh(): void { }

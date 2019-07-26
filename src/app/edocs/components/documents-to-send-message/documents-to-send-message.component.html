@@ -1,3 +1,4 @@
 <ion-item>
-  <edocs-documents-to-send-message-form [message]="defaultMessage" #messageForm></edocs-documents-to-send-message-form>
+  <edocs-documents-to-send-message-form [message]="defaultMessage" (onSubmit)="completeStep($event)" #messageForm>
+  </edocs-documents-to-send-message-form>
 </ion-item>
