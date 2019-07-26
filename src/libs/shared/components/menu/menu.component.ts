@@ -16,13 +16,8 @@ const menus = [
         icon: 'custom-menu-meus-servicos',
         component: 'MyServicesPage',
         order: 1
-      },
-      {
-        title: 'Meu Perfil',
-        icon: 'custom-menu-meu-perfil',
-        component: 'NewsHighlightsPage',
-        order: 1
       }
+      
     ]
   }
 ];

@@ -1,5 +1,4 @@
 page-my-services {
-
   /* HEADER */
 
   #custom-header {
@@ -31,15 +30,14 @@ page-my-services {
             top: unset;
             left: 20px;
           }
-          
-          .searchbar-input{
+
+          .searchbar-input {
             height: 60px;
             border-radius: 30px;
             padding: 6px 55px;
           }
-
         }
-        
+
         .searchbar-ios-cancel {
           position: absolute;
           right: 40px;
@@ -61,7 +59,6 @@ page-my-services {
           right: 100px;
         }
       }
-
     }
 
     /* Título da página */
@@ -102,7 +99,7 @@ page-my-services {
     position: relative;
     height: unset;
     flex: 1 0;
-    
+
     .slide-zoom {
       display: flex;
       flex-direction: column;
@@ -110,6 +107,7 @@ page-my-services {
       padding-top: 30px;
       margin-bottom: 20px;
       height: 100%;
+      max-width: 100vmin;
 
       .slide-line {
         display: flex;
@@ -134,7 +132,7 @@ page-my-services {
           .button-inner {
             display: flex;
             flex-direction: column;
-            
+
             .icon {
               height: 12vmin;
               width: 12vmin;
@@ -143,7 +141,6 @@ page-my-services {
             }
           }
         }
-
       }
       .slide-line > :first-child {
         border-top-left-radius: 6vmin;
@@ -185,9 +182,9 @@ page-my-services {
       min-height: 200px;
 
       #searchbar-wrapper {
-        ion-searchbar {  
+        ion-searchbar {
           .searchbar-input-container {
-            .searchbar-input{
+            .searchbar-input {
               height: 50px;
               border-radius: 25px;
             }
@@ -196,4 +193,7 @@ page-my-services {
       }
     }
   }
+}
+#not-founded {
+  height: 100%;
 }

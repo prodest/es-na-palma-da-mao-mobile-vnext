@@ -138,7 +138,7 @@ export class LoginPage {
    * Redireciona usuário para o MyServicesPage
    */
  private goToDashboard = () => this.navCtrl.push('MyServicesPage');
-
+  
   /**
    *
    *

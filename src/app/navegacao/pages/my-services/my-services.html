@@ -39,6 +39,11 @@
     </ion-slide>
   </ion-slides>
 
+  <ion-item *ngIf="!filteredMenus.length" text-center no-lines id="not-founded">
+    <p>Nenhum serviço encontrado</p>
+    <p>Tente mudar o filtro da consulta</p>
+  </ion-item>
+
   <!-- BARRA INFERIOR -->
   <div class="footer">
     <button menuToggle icon-only id="menu-button">
@@ -46,8 +51,5 @@
     </button>
   </div>
   
-  <!-- <ion-item *ngIf="!filteredMenus.length" text-center no-lines id="not-founded">
-    <p>Nenhum serviço encontrado</p>
-    <p>Tente mudar o filtro da consulta</p>
-  </ion-item> -->
+  
 </ion-content>

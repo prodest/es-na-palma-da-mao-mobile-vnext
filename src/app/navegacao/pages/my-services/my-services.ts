@@ -6,7 +6,7 @@ import { ItemMenu } from '../../models';
 import { MenuService } from '../../providers/menu.service';
 import { MenuToken } from '@espm/core/menu';
 import { MenusQuery, MenusStore } from '../../providers';
-import { filter, takeUntil, tap } from 'rxjs/operators';
+import { filter, takeUntil } from 'rxjs/operators';
 import { Subject } from 'rxjs/Subject';
 
 @IonicPage()
@@ -15,11 +15,11 @@ import { Subject } from 'rxjs/Subject';
   templateUrl: 'my-services.html'
 })
 export class MyServicesPage implements OnDestroy {
-    
+
   private destroyed$ = new Subject();
   filteredMenus: ItemMenu[];
   private slides: Array<Array<ItemMenu[]>> = [];
-  
+
   constructor(
     protected appCtrl: App,
     protected authQuery: AuthQuery,
@@ -31,26 +31,21 @@ export class MyServicesPage implements OnDestroy {
     private menuQuery: MenusQuery
   ) {
     this.menuQuery.favorites$
-    // .pipe( filter(() => !this.menusStore.isPristine),	
-    //     takeUntil(this.destroyed$))	
-    //      .subscribe(() => {
-    //     this.filteredMenus = this.menuService.getMenus().sort(this.sortModules);
-    //     this.updateSlides()
-    //   });
+      .pipe(
+        filter(() => !this.menusStore.isPristine),
+        takeUntil(this.destroyed$))
+      .subscribe(() => {
+        this.filteredMenus = this.menuService.getMenus().sort(this.sortModules);
+        this.updateSlides()
+      });
 
     this.menuService.loadMenu();
-    this.filteredMenus = this.menuService.getMenus();
-    console.log('FilteredMenus', this.filteredMenus);
-    
-    this.filteredMenus.map((elemento: ItemMenu, index: number) => {
-      if (index%6 === 0) this.slides.push([]);
-      let lastSlideIndex: number = this.slides.length - 1;
-
-      if (index%2 === 0) this.slides[lastSlideIndex].push([]);
-      let lastLineIndex: number = this.slides[lastSlideIndex].length - 1;
-
-      this.slides[lastSlideIndex][lastLineIndex].push(elemento);
-    });
+    if(this.filteredMenus === undefined){
+      this.filteredMenus = menus;
+      this.updateSlides();  
+    }
+   
+  
   }
 
   /**
@@ -59,6 +54,15 @@ export class MyServicesPage implements OnDestroy {
   ngOnDestroy() {
     this.destroyed$.next();
     this.destroyed$.complete();
+  }
+
+  /**
+   * 
+   */
+  private sortModules(moduleA, moduleB) {
+    if (moduleA.isChecked === moduleB.isChecked) return 0;
+    if (moduleA.isChecked && !moduleB.isChecked) return -1;
+    if (!moduleA.isChecked && moduleB.isChecked) return 1;
   }
 
   /**
@@ -80,34 +84,41 @@ export class MyServicesPage implements OnDestroy {
   }
 
   /**
+   * 
+   */
+  updateSlides = () => {
+    this.slides = [];
+    this.filteredMenus.map((elemento: ItemMenu, index: number) => {
+      if (index % 6 === 0) this.slides.push([]);
+      let lastSlideIndex: number = this.slides.length - 1;
+
+      if (index % 2 === 0) this.slides[lastSlideIndex].push([]);
+      let lastLineIndex: number = this.slides[lastSlideIndex].length - 1;
+
+      this.slides[lastSlideIndex][lastLineIndex].push(elemento);
+    });
+  }
+
+  /**
    *
    */
   search = e => {
     const search = this.normalize(e.target.value);
     this.filteredMenus = this.menus.filter(select => {
-      return this.normalize(select.title).includes(search) || this.normalize(select.title).includes(search);
+      return this.normalize(select.title).includes(search) ;
     });
     console.log(this.filteredMenus);
 
-    this.slides = [];
-    this.filteredMenus.map((elemento: ItemMenu, index: number) => {
-      if (index%6 === 0) this.slides.push([]);
-      let lastSlideIndex: number = this.slides.length - 1;
-
-      if (index%2 === 0) this.slides[lastSlideIndex].push([]);
-      let lastLineIndex: number = this.slides[lastSlideIndex].length - 1;
-
-      this.slides[lastSlideIndex][lastLineIndex].push(elemento);
-    });
+    this.updateSlides();
   };
-  
+
   /**
    *
    */
   clear = () => {
     this.filteredMenus = [...this.filteredMenus];
   };
-  
+
   /**
    *
    */
