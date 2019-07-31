@@ -49,6 +49,7 @@ export class MyServicesPage implements OnDestroy {
       this.menuToShow$.next(favorites);
     });
 
+
     /* Primeira carga dos módulos */
     this.menuService.loadMenu();
     this.menuToShow$.next(this.menuService.getMenus());

@@ -1,26 +1,27 @@
-<ion-header>
-  <ion-navbar>
-    <ion-buttons left>
-      <button ion-button
-              icon-only
-              (click)="navCtrl.pop()">
-        <ion-icon name="arrow-back"></ion-icon>
-      </button>
-    </ion-buttons>
-    <ion-title>Agenda ES</ion-title>
-  </ion-navbar>
-</ion-header>
+
 
 <ion-content>
+  <ion-navbar>
+    <ion-buttons left>
+        <button ion-button
+                icon-only
+                (click)="navCtrl.pop()">
+          <ion-icon name="arrow-back"></ion-icon>
+        </button>
+      </ion-buttons>
+      <ion-title>Órgãos</ion-title>
+    </ion-navbar>
+
   <ion-list>
     <ion-list-header>
-      Órgãos
+      <button ion-button>
       <span *ngIf="isAllChecked()"
             (click)="toggleAllChecked()"
             class="label-button">Desmarcar todos</span>
       <span *ngIf="!isAllChecked()"
             (click)="toggleAllChecked()"
             class="label-button">Selecionar todos</span>
+          </button>
     </ion-list-header>
     <ion-item *ngFor="let origin of availableOrigins">
       <ion-label>{{origin}}</ion-label>

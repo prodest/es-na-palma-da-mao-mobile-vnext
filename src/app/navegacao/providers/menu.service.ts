@@ -69,7 +69,7 @@ export class MenuService implements OnDestroy {
    */
   private markFavorites = ([menus, favorites]: [ItemMenu[], FavoriteMenusData]): ItemMenu[] => {
     return menus.map(item => {
-      if(item.isChecked != false){
+      if(item.isChecked !== false){
         item.isChecked = favorites.favoriteMenus.some(idMenu => idMenu === item.id);
       return item;
       } 

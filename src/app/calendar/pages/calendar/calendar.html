@@ -1,25 +1,26 @@
-<ion-header>
-  <ion-navbar hideBackButton>
-    <button ion-button
-            menuToggle>
-      <ion-icon name="menu"></ion-icon>
-    </button>
-    <ion-title>
-      {{viewTitle}}
-      <ng-container *ngIf="!calendar.eventSources">Agenda ES</ng-container>
-    </ion-title>
-    <ion-buttons end>
-      <button ion-button
-              icon-only
-              (click)="openFilter()">
-        <ion-icon name="options"></ion-icon>
-      </button>
-    </ion-buttons>
-  </ion-navbar>
-
-</ion-header>
 
 <ion-content>
+  <header>
+      <button (click)="back()">
+          <ion-icon ios="ios-arrow-round-back" md="md-arrow-round-back"></ion-icon>
+        </button>
+    <h1>Agenda ES</h1></header>
+    
+    <ion-navbar hideBackButton>
+        
+        
+        <ion-title>
+          {{viewTitle}}
+          <ng-container *ngIf="!calendar.eventSources">Agenda ES</ng-container>
+        </ion-title>
+        <ion-buttons end>
+          <button ion-button
+                  icon-only
+                  (click)="openFilter()">
+            <ion-icon name="options"></ion-icon>
+          </button>
+        </ion-buttons>
+      </ion-navbar>
   <calendar #CalendarComponent
             calendarMode="month"
             step="30"
@@ -60,4 +61,7 @@
       </ion-item>
     </ion-list>
   </ng-template>
+  <button menuToggle class="foot-css">
+    <ion-icon name="menu"></ion-icon>
+  </button>
 </ion-content>
