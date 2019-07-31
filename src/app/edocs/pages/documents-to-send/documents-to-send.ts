@@ -4,6 +4,8 @@ import { Subscription } from 'rxjs/Subscription';
 import { IBaseStepOutput, IAddresseesStepOutput, IDocStepOutput, IMessageOutput, IDocumentsToSendWizardValue } from '../../interfaces';
 import { WizardStep } from '../../providers';
 import { DocumentsToSendBasicComponent, DocumentsToSendAddresseesComponent, DocumentsToSendDocComponent, DocumentsToSendMessageComponent } from '../../components';
+import { dev } from '@espm/core/environment/environment.dev';
+import { ForwardPostBody, Destination, DocumentsToSendService } from '../../state';
 
 @IonicPage({
   segment: 'documentos-para-enviar'
@@ -34,7 +36,7 @@ export class DocumentsToSendPage implements OnInit, OnDestroy {
   // subscriptions
   private subscriptions: Subscription[] = [];
 
-  constructor(private navParams: NavParams) { }
+  constructor(private navParams: NavParams, private service: DocumentsToSendService) { }
 
   nextSlide() {
     this.activeStep.submit();
@@ -64,6 +66,7 @@ export class DocumentsToSendPage implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
+    console.log(dev.api.edocs)
     this.subscriptions = [
       this.basicStep.onComplete.subscribe(
         (value: IBaseStepOutput) => this.stepsValue.basicStep = value
@@ -94,7 +97,28 @@ export class DocumentsToSendPage implements OnInit, OnDestroy {
   }
 
   private send(): void {
-    console.log('TODO: ENVIAR ARQUIVOS PARA API(S)')
-    console.log({ stepsValue: this.stepsValue})
+    let body: ForwardPostBody;
+
+    body = {
+      titulo: this.stepsValue.basicStep.titleForward,
+      destinosIds: this.stepsValue.addresseesStep.map( 
+        (dest: Destination) => {
+          return dest.id;
+      }),
+      conteudo: this.stepsValue.messageStep.message,
+      documentosIds: [process.env.DOC_ID],
+      encaminhamentoAnteriorId: null,
+      enviarEmailNotificacoes: false,
+      responsavelId: this.stepsValue.basicStep.role,
+    }
+
+    console.log(`Body: `, {body: body});
+    
+    // console.log('TODO: ENVIAR ARQUIVOS PARA API(S)')
+    // console.log({ stepsValue: this.stepsValue})
+
+    this.service.createForwards(body).subscribe(
+      retorno => console.log(retorno)
+    );
   }
 }

@@ -24,13 +24,14 @@ export interface Forward {
     valorLegal: string;
 }
 
-export interface ForwardSend {
+export interface ForwardPostBody {
   titulo: string;
-  destinosIds: [string];
+  destinosIds: string[];
   conteudo: string;
-  documentosIds: [string];
-  encaminhamentoAnteriorId: string;
+  documentosIds: string[];
+  encaminhamentoAnteriorId?: string;
   enviarEmailNotificacoes: boolean;
+  responsavelId?: string;
 }
 
 export interface ForwardsRecieve {
