@@ -1,5 +1,5 @@
 <ion-item>
-  <edocs-documents-to-send-basic-form [sender]="sender$ | async" [roles]="roles$ | async"
+  <edocs-documents-to-send-basic-form [sender]="sender$ | async" [roles]="roles$ | async" [notification]="notification$"
     (onSubmit)="completeStep($event)" #basicForm>
   </edocs-documents-to-send-basic-form>
 </ion-item>

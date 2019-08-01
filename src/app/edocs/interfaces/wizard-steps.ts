@@ -11,6 +11,7 @@ export interface IBaseStepOutput {
   titleForward: string;
   sender: string;
   role: string;
+  notification: boolean;
 }
 
 /**

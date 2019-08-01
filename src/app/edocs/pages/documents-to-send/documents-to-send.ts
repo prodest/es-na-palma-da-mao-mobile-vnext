@@ -86,7 +86,7 @@ export class DocumentsToSendPage implements OnInit, OnDestroy {
     ];
     this.activeStep = this.basicStep;
     this.file = this.navParams.get('filePath');
-    // this.file = 'file.pdf'; // UNCOMENT TO TEST AND DEBUG WITH IONIC SERVE (BROWSER PLATFORM)
+    this.file = 'file.pdf'; // UNCOMENT TO TEST AND DEBUG WITH IONIC SERVE (BROWSER PLATFORM)
     this.slides.lockSwipes(true);
   }
 
@@ -108,17 +108,18 @@ export class DocumentsToSendPage implements OnInit, OnDestroy {
       conteudo: this.stepsValue.messageStep.message,
       documentosIds: [process.env.DOC_ID],
       encaminhamentoAnteriorId: null,
-      enviarEmailNotificacoes: false,
+      enviarEmailNotificacoes: this.stepsValue.basicStep.notification,
       responsavelId: this.stepsValue.basicStep.role,
     }
 
     console.log(`Body: `, {body: body});
     
-    // console.log('TODO: ENVIAR ARQUIVOS PARA API(S)')
-    // console.log({ stepsValue: this.stepsValue})
+    console.log('TODO: ENVIAR ARQUIVOS PARA API(S)')
+    console.log({ stepsValue: this.stepsValue})
 
-    this.service.createForwards(body).subscribe(
-      retorno => console.log(retorno)
-    );
+    console.log(this.service);
+    // this.service.createForwards(body).subscribe(
+    //   retorno => console.log(retorno)
+    // );
   }
 }

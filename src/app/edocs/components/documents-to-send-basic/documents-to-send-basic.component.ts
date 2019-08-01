@@ -17,6 +17,8 @@ export class DocumentsToSendBasicComponent extends WizardStep<IBaseStepOutput> i
   documents = [];
   sender$: Observable<AcessoCidadaoClaims>;
   roles$: Observable<CidadaoRole[]>;
+  notification$: boolean = true;
+
   @ViewChild('basicForm') protected form: DocumentsToSendBasicFormComponent;
   private loading: Loading;
   private loadCount = 0;

@@ -8,12 +8,40 @@
     <ion-label floating>Usuário Remetente</ion-label>
     <ion-input type="text" formControlName="sender" name="sender"></ion-input>
   </ion-item>
-  <espm-validation-message *ngIf="form.get('titleForward')?.value" [errors]="validationErrors['sender']"></espm-validation-message>
+  <espm-validation-message
+    *ngIf="form.get('titleForward')?.value"
+    [errors]="validationErrors['sender']"
+  >
+  </espm-validation-message>
   <ion-item *ngIf="form.get('titleForward')?.value && form.get('sender')?.value">
     <ion-label floating>Cargo/Função</ion-label>
-    <ion-select cancelText="Cancelar" formControlName="role" name="role" [selectOptions]="roleSelectOptions" (ionChange)="roleSelectChange()">
-      <ion-option *ngFor="let role of roles" [value]="role.Guid">{{role.Nome}}</ion-option>
+    <ion-select
+      cancelText="Cancelar"
+      formControlName="role"
+      name="role"
+      [selectOptions]="roleSelectOptions"
+      (ionChange)="roleSelectChange()"
+    >
+      <ion-option *ngFor="let role of roles" [value]="role.Guid">{{ role.Nome }}</ion-option>
     </ion-select>
   </ion-item>
-  <espm-validation-message *ngIf="form.get('titleForward')?.value && form.get('sender')?.value" [errors]="validationErrors['role']"></espm-validation-message>
+  <espm-validation-message
+    *ngIf="form.get('titleForward')?.value && form.get('sender')?.value"
+    [errors]="validationErrors['role']"
+  ></espm-validation-message>
+  <ion-item *ngIf="form.get('titleForward')?.value && form.get('sender')?.value">
+    <ion-label>Notificação por email</ion-label>
+    <ion-toggle
+      [(ngModel)]="notification"
+      formControlName="notification"
+      name="notification"
+      (ionChange)="notificationChange()"
+    >
+    </ion-toggle>
+  </ion-item>
+  <espm-validation-message
+    *ngIf="form.get('titleForward')?.value && form.get('sender')?.value"
+    [errors]="validationErrors['notification']"
+  >
+  </espm-validation-message>
 </form>

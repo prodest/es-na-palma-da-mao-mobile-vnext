@@ -11,6 +11,7 @@ export class DocumentsToSendBasicFormComponent extends FormBase implements OnIni
 
   @Input() sender: AcessoCidadaoClaims;
   @Input() roles: CidadaoRole[] = [];
+  @Input() notification: boolean = true;
 
   roleSelectOptions = {
     title: 'Cargo / Função',
@@ -27,7 +28,7 @@ export class DocumentsToSendBasicFormComponent extends FormBase implements OnIni
   };
 
   constructor(formBuilder: FormBuilder, private cdr: ChangeDetectorRef) {
-    super(formBuilder);
+    super(formBuilder); 
   }
 
   ngOnInit(): void { }
@@ -45,11 +46,16 @@ export class DocumentsToSendBasicFormComponent extends FormBase implements OnIni
     this.cdr.detectChanges();
   }
 
+  notificationChange(): void {
+    this.cdr.detectChanges();
+  }
+
   protected createFormModel(): FormGroup {
     return this.formBuilder.group({
       titleForward: ['', [Validators.required]],
       sender: [{ value: '', disabled: true }],
-      role: ['', [Validators.required]]
+      role: ['', [Validators.required]],
+      notification: ''
     });
   }
 
