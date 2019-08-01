@@ -3,6 +3,7 @@ import { akitaDevtools, enableAkitaProdMode, akitaConfig } from '@datorama/akita
 import { AuthQuery, AuthService, Environment, EnvVariables, PushService } from '@espm/core';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import { StatusBar } from '@ionic-native/status-bar';
+import { FilePath } from '@ionic-native/file-path';
 import { Nav, Platform } from 'ionic-angular';
 import { finalize } from 'rxjs/operators';
 import { Subscription } from 'rxjs/Subscription';
@@ -35,6 +36,7 @@ export class ESPMComponent implements OnDestroy {
     private platform: Platform,
     private push: PushService,
     private auth: AuthService,
+    private filePath: FilePath,
     ngZone: NgZone,
     @Inject(EnvVariables) environment: Environment
   ) {
@@ -81,14 +83,15 @@ export class ESPMComponent implements OnDestroy {
   private getIntentClip = () => new Promise<string>(resolve => {
     if (!(window as WindowWithIntent).plugins) { return resolve(null); }
     (window as WindowWithIntent).plugins.intentShim.getIntent(
-      data => {
+      async data => {
         if (!data || !data.clipItems) {
           resolve(null);
           return;
         }
         const clip = data.clipItems[0];
         if (clip) {
-          resolve(clip.uri);
+          const path = await this.filePath.resolveNativePath(clip.uri);
+          resolve(path);
           return;
         }
         resolve(null);
