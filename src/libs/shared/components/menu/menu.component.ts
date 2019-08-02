@@ -16,7 +16,15 @@ const menus = [
         icon: 'custom-menu-meus-servicos',
         component: 'MyServicesPage',
         order: 1
-      }
+      },
+
+    {
+      id: 15,
+      title: 'Sobre',
+      icon: 'information-circle',
+      component: 'AboutPage',
+      isChecked: false
+    }
       
     ]
   }

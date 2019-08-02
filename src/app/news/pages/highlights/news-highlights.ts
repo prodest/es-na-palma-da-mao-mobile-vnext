@@ -32,4 +32,13 @@ export class NewsHighlightsPage {
   goToNews(id: string) {
     this.navCtrl.push('NewsDetailsPage', { id });
   }
+  /**
+   * 
+   */
+  back = () => {this.navCtrl.pop()};
+  /**
+   * 
+   */
+
+  allNews = () =>{this.navCtrl.push("NewsListPage")}
 }

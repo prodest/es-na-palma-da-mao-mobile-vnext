@@ -2,18 +2,12 @@ import { InjectionToken } from "@angular/core";
 import { ItemMenu } from "../../../app/navegacao/models";
 
 export const MENUS: ItemMenu[] = [
-    {
-      id: 1,
-      title: 'Notícias Destaques',
-      icon: 'custom-modulo-noticias',
-      component: 'NewsHighlightsPage',
-      isChecked: false
-    },
+    
     {
       id: 2,
-      title: 'Notícias',
+      title: 'Notícias ',
       icon: 'custom-modulo-noticias',
-      component: 'NewsListPage',
+      component: 'NewsHighlightsPage',
       isChecked: false
     },
     {
@@ -105,15 +99,8 @@ export const MENUS: ItemMenu[] = [
       icon: 'custom-modulo-oportunidades',
       component: 'ApresentacaoPage',
       isChecked: false
-    },
-  
-    {
-      id: 15,
-      title: 'Sobre',
-      icon: 'information-circle',
-      component: 'AboutPage',
-      isChecked: false
     }
+  
   ];
   
   export function menusFactory() {

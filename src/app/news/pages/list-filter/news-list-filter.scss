@@ -4,4 +4,29 @@ page-news-list-filter {
     text-transform: uppercase;
     color: $color-primary;
   }
+  [color-secondary], .color-secondary {
+    background-color: #004297;
+    color: #fff;
+    border-radius: 25px;
+    width: 50%;
+    margin-left: 27%;
+}
+.active, [active], .toolbar-title, ion-navbar.toolbar, .toolbar-background {
+  background-color: #e9f7fe;
+  color: #004297;
+  text-align: center;
+  font-weight: bold;
+}
+.bar-button-md[icon-only] ion-icon {
+  color: #2BACE2;
+  font-size: x-large;
+}
+.button-md {
+  background-color: #004297;
+  border-radius: 25px;
+
+}
+.label-button {
+  color: #ffff;
+}
 }
