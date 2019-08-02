@@ -59,12 +59,24 @@ export interface ForwardsRecieve {
 }
 
 export enum TipoDestino {
-    Orgao = 0,
-    Setor = 1,
-    GrupoDeTrabalho = 2,
-    Comissao = 3,
-    Lotacao = 4,
-    Ocupacao = 5,
-    Servidor = 6,
-    Cidadao = 7
+  Orgao = 0,
+  Setor = 1,
+  GrupoDeTrabalho = 2,
+  Comissao = 3,
+  Lotacao = 4,
+  Ocupacao = 5,
+  Servidor = 6,
+  Cidadao = 7
+}
+
+export enum DocumentoNatureza{
+  Natodigital = 1,
+  Digitalizado = 2
+}
+
+export enum DocumentoValorLegal {
+  Original = 1,
+  CopiaAutenticadaCartorio = 2,
+  CopiaAutenticadaAdministrativamente = 3,
+  CopiaSimples = 4
 }
