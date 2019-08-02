@@ -8,24 +8,24 @@
     <ion-label floating>Tipo de documento</ion-label>
     <ion-select cancelText="Cancelar" formControlName="documentType" name="documentType" (ionChange)="selectChange()"
       [selectOptions]="documentTypeOptions" required>
-      <ion-option [value]="0">Documento Eletrônico</ion-option>
-      <ion-option [value]="1">Documento Escaneado</ion-option>
+      <ion-option [value]="1">Documento Eletrônico</ion-option>
+      <ion-option [value]="2">Documento Escaneado</ion-option>
     </ion-select>
   </ion-item>
   <espm-validation-message *ngIf="form?.get('name').value" [errors]="validationErrors['documentType']"></espm-validation-message>
-  <ion-item *ngIf="form?.get('name').value && isValidNumber(form?.get('documentType').value) && form?.get('documentType').value === 1">
+  <ion-item *ngIf="form?.get('name').value && isValidNumber(form?.get('documentType').value) && form?.get('documentType').value === 2">
     <ion-label floating>Como é o documento em papel?</ion-label>
     <ion-select cancelText="Cancelar" formControlName="documentPaperType" name="documentPaperType"
       (ionChange)="selectChange()" [selectOptions]="documentPaperTypeOptions" required>
-      <ion-option [value]="0">Documento Original</ion-option>
-      <ion-option [value]="1">Cópia Simples</ion-option>
+      <ion-option [value]="1">Documento Original</ion-option>
       <ion-option [value]="2">Cópia Autenticada em Cartório</ion-option>
       <ion-option [value]="3">Cópia Autenticada Administrativamente</ion-option>
+      <ion-option [value]="4">Cópia Simples</ion-option>
     </ion-select>
   </ion-item>
-  <espm-validation-message *ngIf="form?.get('name').value && isValidNumber(form?.get('documentType').value) && form?.get('documentType').value === 1"
+  <espm-validation-message *ngIf="form?.get('name').value && isValidNumber(form?.get('documentType').value) && form?.get('documentType').value === 2"
     [errors]="validationErrors['documentPaperType']"></espm-validation-message>
-  <ion-item *ngIf="form?.get('name').value && isValidNumber(form?.get('documentType').value) && form?.get('documentType').value === 0">
+  <ion-item *ngIf="form?.get('name').value && isValidNumber(form?.get('documentType').value) && form?.get('documentType').value === 1">
     <ion-label floating>Qual tipo de assinatura?</ion-label>
     <ion-select cancelText="Cancelar" formControlName="documentAssignType" name="documentAssignType"
       (ionChange)="selectChange()" [selectOptions]="documentAssignTypeOptions" required>

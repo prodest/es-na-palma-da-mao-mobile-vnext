@@ -2,6 +2,7 @@ import { Component, OnInit, OnChanges, SimpleChanges, Input, ChangeDetectionStra
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Subscription } from 'rxjs/Subscription';
 import { FormBase } from '@espm/core';
+import { DocumentoNatureza } from '../../state';
 
 @Component({
   selector: 'edocs-documents-to-send-doc-form',
@@ -65,9 +66,11 @@ export class DocumentsToSendBasicFormComponent extends FormBase implements OnIni
         const documentAssignType = this.form.get('documentAssignType');
         documentPaperType.clearValidators();
         documentAssignType.clearValidators();
-        if (value === 0) { // Documento Eletrônico
+        documentPaperType.reset(null);
+        documentAssignType.reset(null);
+        if (value === DocumentoNatureza.Natodigital) { // Documento Eletrônico
           documentAssignType.setValidators([Validators.required]);
-        } else if (value === 1) { // Documento Escaneado
+        } else if (value === DocumentoNatureza.Digitalizado) { // Documento Escaneado
           documentPaperType.setValidators([Validators.required]);
         }
         this.selectChange();
@@ -94,6 +97,7 @@ export class DocumentsToSendBasicFormComponent extends FormBase implements OnIni
   }
 
   selectChange(): void {
+    console.log('Form: ', this.form)
     this.cdr.detectChanges()
   }
 
