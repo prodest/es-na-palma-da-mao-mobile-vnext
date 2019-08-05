@@ -17,12 +17,15 @@ const menus = [
         component: 'MyServicesPage',
         order: 1
       },
-      {
-        title: 'Meu Perfil',
-        icon: 'custom-menu-meu-perfil',
-        component: 'NewsHighlightsPage',
-        order: 1
-      }
+
+    {
+      id: 15,
+      title: 'Sobre',
+      icon: 'information-circle',
+      component: 'AboutPage',
+      isChecked: false
+    }
+      
     ]
   }
 ];

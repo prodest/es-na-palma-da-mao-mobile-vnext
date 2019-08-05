@@ -1,5 +1,5 @@
 import { Injectable, OnDestroy, Inject } from '@angular/core';
-import { Loading, LoadingController } from 'ionic-angular';
+import { Loading, LoadingController} from 'ionic-angular';
 import { MenuApiService } from './menu-api-service';
 import { MenusStore } from './menus-store';
 import { MenusQuery } from './menus-query';
@@ -54,29 +54,32 @@ export class MenuService implements OnDestroy {
     this.showLoading();
 
     let menus = [...this.menus];
-
+   
     let menus$ = this.authQuery.isLoggedIn
-      ? forkJoin(of(menus), this.api.getFavoriteMenusData()).pipe(map(this.markFavorites))
+      ?forkJoin(of(menus), this.api.getFavoriteMenusData()).pipe(map(this.markFavorites))
       : of(menus);
-
+    
     menus$.pipe(finalize(this.dismissLoading)).subscribe(this.storeMenus);
   };
 
   /**
+   * 
    *
    *
    */
   private markFavorites = ([menus, favorites]: [ItemMenu[], FavoriteMenusData]): ItemMenu[] => {
-    console.log("entrou no menu service marcado favoritos")
     return menus.map(item => {
-      item.isChecked = favorites.favoriteMenus.some(idMenu => idMenu === item.id);
-      console.log("entrou no menu ,,,,,,,,s")
+      if(item.isChecked !== false){
+        item.isChecked = favorites.favoriteMenus.some(idMenu => idMenu === item.id);
       return item;
-      
+      } 
+      return item;
+        
     });
   };
 
   /**
+   * 
    *
    *
    */

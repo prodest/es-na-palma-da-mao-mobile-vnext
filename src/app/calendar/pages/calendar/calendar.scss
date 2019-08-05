@@ -10,6 +10,7 @@ page-calendar {
   .monthview-datetable {
     &.table-bordered {
       border: 0;
+      
     }
 
     .monthview-selected {
@@ -55,4 +56,38 @@ page-calendar {
       font-weight: bold;
     }
   }
+  .foot-css{
+    position: fixed;
+    bottom: 0;
+    color: #004297;
+    background-color: #fff;
+    font-size: x-large;
+    margin-left: 15px;
+    margin-bottom: 10px;
+    }
+    ion-navbar.toolbar, .toolbar-background, .toolbar-title {
+      background-color: #ffff ;
+      color: #2e74eb;
+      font-weight: bold;
+  }  
+  .bar-button-md[icon-only] ion-icon {
+    color: #004297;
+  }
+  .table[_ngcontent-c1] > thead[_ngcontent-c1]:first-child > tr[_ngcontent-c1]:first-child > th[_ngcontent-c1], .table[_ngcontent-c1] > thead[_ngcontent-c1]:first-child > tr[_ngcontent-c1]:first-child > td[_ngcontent-c1] {
+   background-color: #DDD;
+   color: #004297;
+
+}
+button{
+
+  float: left;
+  background-color: #fff;
+  font-size: x-large;
+  color: #2BACE2;
+}
+h1{
+  text-align: center;
+  color: #004297;
+
+}
 }

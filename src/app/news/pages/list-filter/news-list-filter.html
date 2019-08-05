@@ -7,7 +7,7 @@
         <ion-icon name="arrow-back"></ion-icon>
       </button>
     </ion-buttons>
-    <ion-title>Notícias</ion-title>
+    <ion-title>Notícias dos Órgãos</ion-title>
   </ion-navbar>
 </ion-header>
 
@@ -44,13 +44,15 @@
       </ion-datetime>
     </ion-item>
     <ion-list-header>
-      Órgãos
+      <button ion-button>
       <span *ngIf="isAllChecked()"
             (click)="toggleAllChecked()"
-            class="label-button">Desmarcar todos</span>
+            class="label-button">Desmarcar todos os Órgãos</span>
+
       <span *ngIf="!isAllChecked()"
             (click)="toggleAllChecked()"
-            class="label-button">Selecionar todos</span>
+            class="label-button">Selecionar todos os Órgãos</span>
+    </button>
     </ion-list-header>
     <ion-item *ngFor="let origin of availableOrigins">
       <ion-label>{{origin}}</ion-label>

@@ -1,16 +1,27 @@
-<ion-header>
-  <ion-navbar hideBackButton>
-    <button ion-button
-            menuToggle>
-      <ion-icon name="menu"></ion-icon>
-    </button>
-    <ion-title>Destaques</ion-title>
-  </ion-navbar>
-</ion-header>
 
-<ion-content>
+
+<ion-content >
+    <div class="header">
+        <ion-header>
+            
+          <ion-navbar hideBackButton>
+            <div><button (click)="back()">
+                <ion-icon ios="ios-arrow-round-back" md="md-arrow-round-back"></ion-icon>
+              </button></div>
+              
+            <h1>Nóticias em Destaque
+                
+            </h1>
+            
+          </ion-navbar>
+        
+        </ion-header>
+        </div>
+  <div class="content">
+      <button ion-button (click)="allNews()">Ver todas</button>
   <card-noticia *ngFor="let news of highlights"
                 [news]="news"
                 highlight="true"
                 (click)="goToNews(news.id)"></card-noticia>
+              </div>
 </ion-content>

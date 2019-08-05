@@ -15,7 +15,7 @@ import { Subject } from 'rxjs/Subject';
   templateUrl: 'my-services.html'
 })
 export class MyServicesPage implements OnDestroy {
-    
+
   private destroyed$ = new Subject();
   private favorites: ItemMenu[] = [];
   private slides: Array<Array<ItemMenu[]>> = [];
@@ -49,6 +49,7 @@ export class MyServicesPage implements OnDestroy {
       this.menuToShow$.next(favorites);
     });
 
+
     /* Primeira carga dos módulos */
     this.menuService.loadMenu();
     this.menuToShow$.next(this.menuService.getMenus());
@@ -68,7 +69,7 @@ export class MyServicesPage implements OnDestroy {
   sortModules(moduleA, moduleB) {
     if (moduleA.isChecked === moduleB.isChecked) return 0;
     if (moduleA.isChecked && !moduleB.isChecked) return -1;
-    if (!moduleA.isChecked && moduleB.isChecked) return 1; 
+    if (!moduleA.isChecked && moduleB.isChecked) return 1;
   }
 
   /**
@@ -103,7 +104,7 @@ export class MyServicesPage implements OnDestroy {
       if (index%6 === 0) this.slides.push([]);
       let lastSlideIndex: number = this.slides.length - 1;
 
-      if (index%2 === 0) this.slides[lastSlideIndex].push([]);
+      if (index % 2 === 0) this.slides[lastSlideIndex].push([]);
       let lastLineIndex: number = this.slides[lastSlideIndex].length - 1;
 
       this.slides[lastSlideIndex][lastLineIndex].push(elemento);
@@ -131,14 +132,14 @@ export class MyServicesPage implements OnDestroy {
     this.menuToShow$.next(filteredMenus);
     this.searching = false; // finaliza a busca
   };
-  
+
   /**
    *
    */
   clear = () => {
     this.menuToShow$.next(this.favorites);
   };
-  
+
   /**
    *
    */

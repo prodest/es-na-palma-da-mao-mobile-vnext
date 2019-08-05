@@ -5,7 +5,7 @@ import { of } from 'rxjs/observable/of';
 import { _throw } from 'rxjs/observable/throw';
 import { catchError, finalize, flatMap, map, pluck } from 'rxjs/operators';
 
-import { Ticket, Vehicle, VehiclesData, Debit } from '../model';
+import { Ticket, Vehicle, VehiclesData, Debit, DebitPreview } from '../model';
 import { DetranApiService } from './detran-api.service';
 import { DetranStorage } from './detran-storage.service';
 
@@ -106,13 +106,24 @@ export class VehiclesService {
    */
   getTickets = (vehicle: Vehicle): Observable<Ticket[]> => {
     this.showLoading();
-    return this.api.getVehicleTickets(vehicle).pipe(finalize(this.dismissLoading));
+  return this.api.getVehicleTickets(vehicle).pipe(finalize(this.dismissLoading));
   };
 
   getDebits = (vehicle: Vehicle): Observable<Debit[]> => {
     this.showLoading();
     return this.api.getVehicleDebits(vehicle).pipe(finalize(this.dismissLoading));
   };
+  /**
+   * 
+   */
+  getPreview = (vehicle: Vehicle): Observable<DebitPreview[]> => {
+    this.showLoading();
+    return this.api.getDebitsPreview(vehicle).pipe(finalize(this.dismissLoading));
+  };
+
+  /**
+   * 
+   */
   getDebitsTipe = (vehicle: Vehicle, tipe:string): Observable<Debit[]> => {
     this.showLoading();
     return this.api.getVehicleDebitsTipe(vehicle, tipe).pipe(finalize(this.dismissLoading));

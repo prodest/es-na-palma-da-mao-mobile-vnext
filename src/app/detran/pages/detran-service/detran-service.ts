@@ -4,7 +4,6 @@ import { AuthNeededService, AuthQuery} from '@espm/core';
 import { Vehicle, Ticket } from '../../model';
 import { VehiclesService } from '../../providers';
 
-import { DriverService } from './../../providers';
 
 @IonicPage()
 @Component({
@@ -17,7 +16,6 @@ export class DetranServicePage {
   
 
   constructor(public navCtrl: NavController,
-              private detra: DriverService,
               private detran: VehiclesService,
               private authQuery: AuthQuery,
               private alertCtrl: AlertController,
@@ -85,10 +83,8 @@ export class DetranServicePage {
  */
 
 loadData(){
-  this.detra.getDriverTickets().subscribe(tickets => (this.tickets = tickets), () => (this.tickets = null));
+  this.appCtrl.getRootNav().push('DriverLicenseStatusPage');
 }
-  
-
   /**
    * 
    */
@@ -129,11 +125,5 @@ loadData(){
   /**
    * 
    */
-  // openPage = (page: string, accessDenied: boolean = false) => {
-  //   if (accessDenied) {
-  //     this.authNeeded.showAuthNeededModal();
-  //   } else {
-  //     this.appCtrl.getRootNav().push(page);
-  //   }
-  // };
+  
 }

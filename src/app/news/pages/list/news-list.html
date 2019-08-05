@@ -1,10 +1,9 @@
 <ion-header>
   <ion-navbar hideBackButton>
-    <button ion-button
-            menuToggle>
-      <ion-icon name="menu"></ion-icon>
-    </button>
-    <ion-title>Notícias</ion-title>
+      <button (click)="back()">
+          <ion-icon ios="ios-arrow-round-back" md="md-arrow-round-back"></ion-icon>
+        </button>
+    <ion-title> Notícias</ion-title>
     <ion-buttons end>
       <button ion-button
               icon-only
