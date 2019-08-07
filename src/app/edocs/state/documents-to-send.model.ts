@@ -1,7 +1,7 @@
 export interface Destination {
-    id: string;
-    descricao: string;
-    tipo?: string;
+  id: string;
+  descricao: string;
+  tipo?: string;
 }
 
 export interface DocumentSend {
@@ -11,17 +11,6 @@ export interface DocumentSend {
   ClasseId: string;
   Natureza: number;
   ValorLegal: number;
-
-}
-
-export interface Forward {
-    titulo: string;
-    remetente: string;
-    papel: string;
-    destino: [string];
-    nomeDocumento: string;
-    tipoDocumento: string;
-    valorLegal: string;
 }
 
 export interface ForwardPostBody {
@@ -69,7 +58,7 @@ export enum TipoDestino {
   Cidadao = 7
 }
 
-export enum DocumentoNatureza{
+export enum DocumentoNatureza {
   Natodigital = 1,
   Digitalizado = 2
 }

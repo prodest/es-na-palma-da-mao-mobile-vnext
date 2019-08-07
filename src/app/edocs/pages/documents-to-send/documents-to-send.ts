@@ -1,11 +1,22 @@
 import { Component, ChangeDetectionStrategy, OnInit, ViewChild, OnDestroy } from '@angular/core';
 import { IonicPage, Slides, NavParams } from 'ionic-angular';
 import { Subscription } from 'rxjs/Subscription';
-import { IBaseStepOutput, IAddresseesStepOutput, IDocStepOutput, IMessageOutput, IDocumentsToSendWizardValue } from '../../interfaces';
+import {
+  IBaseStepOutput,
+  IAddresseesStepOutput,
+  IDocStepOutput,
+  IMessageOutput,
+  IDocumentsToSendWizardValue
+} from '../../interfaces';
 import { WizardStep } from '../../providers';
-import { DocumentsToSendBasicComponent, DocumentsToSendAddresseesComponent, DocumentsToSendDocComponent, DocumentsToSendMessageComponent } from '../../components';
+import {
+  DocumentsToSendBasicComponent,
+  DocumentsToSendAddresseesComponent,
+  DocumentsToSendDocComponent,
+  DocumentsToSendMessageComponent
+} from '../../components';
 import { dev } from '@espm/core/environment/environment.dev';
-import { ForwardPostBody, Destination, DocumentsToSendService } from '../../state';
+import { ForwardPostBody, Destination, DocumentsToSendService, DocumentsToSendQuery } from '../../state';
 
 @IonicPage({
   segment: 'documentos-para-enviar'
@@ -16,7 +27,6 @@ import { ForwardPostBody, Destination, DocumentsToSendService } from '../../stat
   changeDetection: ChangeDetectionStrategy.Default
 })
 export class DocumentsToSendPage implements OnInit, OnDestroy {
-
   @ViewChild(Slides) slides: Slides;
   // file path
   file: string;
@@ -36,7 +46,7 @@ export class DocumentsToSendPage implements OnInit, OnDestroy {
   // subscriptions
   private subscriptions: Subscription[] = [];
 
-  constructor(private navParams: NavParams, private service: DocumentsToSendService) { }
+  constructor(private navParams: NavParams, private service: DocumentsToSendService, private query: DocumentsToSendQuery) {}
 
   nextSlide() {
     this.activeStep.submit();
@@ -47,9 +57,11 @@ export class DocumentsToSendPage implements OnInit, OnDestroy {
     } else if (this.activeStep instanceof DocumentsToSendDocComponent) {
       this.activeStep = this.messageStep;
     }
+
     this.slides.lockSwipes(false);
     this.slides.slideNext();
     this.slides.lockSwipes(true);
+    this.query.getWizardState().subscribe(query => console.log('NextSlide Query', query));
   }
 
   prevSlide() {
@@ -66,23 +78,26 @@ export class DocumentsToSendPage implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
-    console.log(dev.api.edocs)
+    console.log(dev.api.edocs);
+    this.query.getWizardState().subscribe(query => console.log('Query Send', query));
     this.subscriptions = [
-      this.basicStep.onComplete.subscribe(
-        (value: IBaseStepOutput) => this.stepsValue.basicStep = value
-      ),
-      this.addresseesStep.onComplete.subscribe(
-        (value: { addressees: IAddresseesStepOutput }) => this.stepsValue.addresseesStep = value.addressees
-      ),
-      this.docStep.onComplete.subscribe(
-        (value: IDocStepOutput) => this.stepsValue.docStep = value
-      ),
-      this.messageStep.onComplete.subscribe(
-        (value: IMessageOutput) => {
-          this.stepsValue.messageStep = value
-          this.send();
-        }
-      )
+      this.basicStep.onComplete.subscribe((value: IBaseStepOutput) => {
+        this.stepsValue.basicStep = value;
+        this.service.storeUpdate(this.stepsValue.basicStep, 'basicStep');
+      }),
+      this.addresseesStep.onComplete.subscribe((value: { addressees: IAddresseesStepOutput }) => {
+        this.stepsValue.addresseesStep = value.addressees;
+        this.service.storeUpdate(this.stepsValue.addresseesStep, 'addresseesStep');
+      }),
+      this.docStep.onComplete.subscribe((value: IDocStepOutput) => {
+        this.stepsValue.docStep = value;
+        this.service.storeUpdate(this.stepsValue.docStep, 'docStep');
+      }),
+      this.messageStep.onComplete.subscribe((value: IMessageOutput) => {
+        this.stepsValue.messageStep = value;
+        this.service.storeUpdate(this.stepsValue.messageStep, 'messageStep');
+        this.send();
+      })
     ];
     this.activeStep = this.basicStep;
     this.file = this.navParams.get('filePath');
@@ -90,10 +105,10 @@ export class DocumentsToSendPage implements OnInit, OnDestroy {
     this.slides.lockSwipes(true);
   }
 
-  refresh(): void { }
+  refresh(): void {}
 
   ngOnDestroy(): void {
-    this.subscriptions.forEach(sub => sub ? sub.unsubscribe() : void 0);
+    this.subscriptions.forEach(sub => (sub ? sub.unsubscribe() : void 0));
   }
 
   private send(): void {
@@ -101,23 +116,24 @@ export class DocumentsToSendPage implements OnInit, OnDestroy {
 
     body = {
       titulo: this.stepsValue.basicStep.titleForward,
-      destinosIds: this.stepsValue.addresseesStep.map( 
-        (dest: Destination) => {
-          return dest.id;
+      destinosIds: this.stepsValue.addresseesStep.map((dest: Destination) => {
+        return dest.id;
       }),
       conteudo: this.stepsValue.messageStep.message,
       documentosIds: [process.env.DOC_ID],
       encaminhamentoAnteriorId: null,
       enviarEmailNotificacoes: this.stepsValue.basicStep.notification,
-      responsavelId: this.stepsValue.basicStep.role,
-    }
+      responsavelId: this.stepsValue.basicStep.role
+    };
 
-    console.log(`Body: `, {body: body});
-    
-    console.log('TODO: ENVIAR ARQUIVOS PARA API(S)')
-    console.log({ stepsValue: this.stepsValue})
+    this.query.getWizardState().subscribe(query => console.log('Query Send', query));
 
-    console.log(this.service);
+    console.log(`Body: `, { body: body });
+
+    // console.log('TODO: ENVIAR ARQUIVOS PARA API(S)')
+    // console.log({ stepsValue: this.stepsValue})
+
+    // console.log(this.service);
     // this.service.createForwards(body).subscribe(
     //   retorno => console.log(retorno)
     // );
