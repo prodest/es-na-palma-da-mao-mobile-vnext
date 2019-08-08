@@ -1,6 +1,8 @@
 import { Component, ChangeDetectionStrategy, OnInit, ViewChild, OnDestroy } from '@angular/core';
 import { IonicPage, Slides, NavParams } from 'ionic-angular';
 import { Subscription } from 'rxjs/Subscription';
+import { mergeMap } from 'rxjs/operators';
+import { LoadingService } from '@espm/core';
 import {
   IBaseStepOutput,
   IAddresseesStepOutput,
@@ -46,7 +48,7 @@ export class DocumentsToSendPage implements OnInit, OnDestroy {
   // subscriptions
   private subscriptions: Subscription[] = [];
 
-  constructor(private navParams: NavParams, private service: DocumentsToSendService, private query: DocumentsToSendQuery) {}
+  constructor(private navParams: NavParams, private service: DocumentsToSendService, private query: DocumentsToSendQuery, private loadingService: LoadingService) { }
 
   nextSlide() {
     this.activeStep.submit();
@@ -129,38 +131,44 @@ export class DocumentsToSendPage implements OnInit, OnDestroy {
     this.slides.lockSwipes(true);
   }
 
-  refresh(): void {}
+  refresh(): void { }
 
   ngOnDestroy(): void {
     this.subscriptions.forEach(sub => (sub ? sub.unsubscribe() : void 0));
   }
 
   private send(): void {
-    let body: ForwardPostBody;
-
-    body = {
-      titulo: this.stepsValue.basicStep.titleForward,
-      destinosIds: this.stepsValue.addresseesStep.map((dest: Destination) => {
-        return dest.id;
-      }),
-      conteudo: this.stepsValue.messageStep.message,
-      documentosIds: [process.env.DOC_ID],
-      encaminhamentoAnteriorId: null,
-      enviarEmailNotificacoes: this.stepsValue.basicStep.notification,
-      responsavelId: this.stepsValue.basicStep.role
-    };
-
-    ////
     this.query.getWizardState().subscribe(query => console.log('Query Send', query));
 
-    console.log(`Body: `, { body: body });
-
-    // console.log('TODO: ENVIAR ARQUIVOS PARA API(S)')
-    // console.log({ stepsValue: this.stepsValue})
-
-    // console.log(this.service);
-    // this.service.createForwards(body).subscribe(
-    //   retorno => console.log(retorno)
-    // );
+    console.log({ stepsValue: this.stepsValue })
+    const loading = this.loadingService.show('Encaminhando documento');
+    this.service.captureDocuments({
+      File: this.file,
+      Assinar: true,
+      ClasseId: null, // deixar null pra cidadão
+      Natureza: this.stepsValue.docStep.documentType,
+      ValorLegal: this.stepsValue.docStep.documentPaperType
+    }).pipe(
+      mergeMap(res => this.service.createForwards({
+        titulo: this.stepsValue.basicStep.titleForward,
+        destinosIds: this.stepsValue.addresseesStep.map(
+          (dest: Destination) => {
+            return dest.id;
+          }),
+        conteudo: this.stepsValue.messageStep.message,
+        documentosIds: [
+          res.id
+        ],
+        encaminhamentoAnteriorId: null,
+        enviarEmailNotificacoes: this.stepsValue.basicStep.notification,
+        responsavelId: this.stepsValue.basicStep.role,
+      }))
+    ).subscribe(
+      () => loading.dismiss(),
+      err => {
+        console.error(err)
+        loading.dismiss()
+      }
+    );
   }
 }

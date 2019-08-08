@@ -11,6 +11,29 @@ export interface DocumentSend {
   ClasseId: string;
   Natureza: number;
   ValorLegal: number;
+
+}
+
+export interface Forward {
+  titulo: string;
+  remetente: string;
+  papel: string;
+  destino: [string];
+  nomeDocumento: string;
+  tipoDocumento: string;
+  valorLegal: string;
+}
+
+export interface CapturePostBody {
+  File: string;
+  Assinar: boolean;
+  ClasseId: string;
+  Natureza: number;
+  ValorLegal: number;
+}
+
+export interface CaptureReceive {
+  id: string;
 }
 
 export interface ForwardPostBody {
