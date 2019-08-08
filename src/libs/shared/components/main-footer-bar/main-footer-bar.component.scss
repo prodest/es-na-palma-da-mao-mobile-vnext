@@ -1,0 +1,14 @@
+main-footer-bar {
+  .main-footer-bar {
+    display: flex;
+    height: 50px;
+    width: 100%;
+    position: relative;
+    padding: 0 10vmin;
+    
+    button {
+      background: transparent;
+      margin-bottom: 4vmin;
+    }
+  }
+}
