@@ -13,6 +13,20 @@ import { VehiclesService } from '../../providers';
 export class DetranServicePage {
   tickets: Ticket[];
   loaded: boolean = false;
+  menus = [
+    {
+      buttonTitle: "CNH",
+      targetPage: "DriverLicenseStatusPage"
+    },
+    {
+      buttonTitle: "Infrações",
+      targetPage: "DriverLicenseStatusPage"
+    },
+    {
+      buttonTitle: "Meus Veículos",
+      targetPage: "VehiclesPage"
+    }
+  ];
   
 
   constructor(public navCtrl: NavController,
@@ -23,9 +37,6 @@ export class DetranServicePage {
               protected authNeeded: AuthNeededService,
               public navParams: NavParams,
               private menuCtrl: MenuController) {
-
-                
-
   }
   /**
    * 
