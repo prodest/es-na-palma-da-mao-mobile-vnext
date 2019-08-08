@@ -3,13 +3,14 @@ import { IonicPageModule } from 'ionic-angular';
 import { MyServicesPage } from './my-services';
 import { MenuService } from '../../providers/menu.service';
 
-import { NavTitleComponentModule } from '@espm/shared/components';
+import { NavTitleComponentModule, MainFooterBarComponentModule } from '@espm/shared/components';
 
 @NgModule({
   declarations: [MyServicesPage],
   imports: [
     IonicPageModule.forChild(MyServicesPage),
-    NavTitleComponentModule
+    NavTitleComponentModule,
+    MainFooterBarComponentModule
   ],
   providers: [MenuService]
 })
