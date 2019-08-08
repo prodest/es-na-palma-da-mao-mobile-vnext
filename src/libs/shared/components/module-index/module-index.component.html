@@ -1,0 +1,18 @@
+<div class="module-index">
+  <nav-header [title]=title class="sign-primary"></nav-header>
+  <div id="content" padding>
+    <div id="banner">
+      <ion-icon name={{icon}}></ion-icon>
+    </div>
+    <span id="separator"></span>
+    <ion-list>
+      <button *ngFor="let item of menus" ion-button block large round icon-end (click)="openPage(item.targetPage)">
+        {{item.buttonTitle}}
+        <ion-icon name="ios-arrow-forward"></ion-icon>
+      </button>
+    </ion-list>
+  </div>
+  <span id="separator"></span>
+  <!-- footer -->
+  <main-footer-bar></main-footer-bar>
+</div>

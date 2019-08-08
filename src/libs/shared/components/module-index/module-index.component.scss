@@ -1,0 +1,61 @@
+module-index {
+  .module-index {
+    height: 100%;
+    background-color: #e9f7fe; // $primary-very-light
+    display: flex;
+    flex-direction: column;
+  }
+
+  #content {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+
+    #banner {
+      background-color: white;
+      height: 15vh;
+      border-radius: 15px;
+      box-shadow: 0px 0px 3px 0px #cccccc;
+
+      display: flex;
+      align-items: center;
+      justify-content: center;
+
+      ion-icon {
+        font-size: 10vh;
+      }
+    }
+
+    #separator {
+      height: 1px;
+      width: 95%;
+      background-color: #6584cc;
+      margin: 30px auto;
+      box-shadow: 0px 0px 10px 0px #6584cc; // $primary-dark
+    }
+  
+    ion-list {
+      flex: 1 !important;
+
+      button {
+        background-color: white !important;
+        font-family: 'Poppins';
+        color: #004297; // $primary-dark
+        font-weight: 600;
+        text-transform: none;
+        margin-top: 0;
+        margin-bottom: 10px;
+        
+        .button-inner {
+          justify-content: space-between;
+        }
+      }
+    }
+  }
+  
+
+  #footer {
+    height: 50px;
+    background-color: aqua;
+  }
+}
