@@ -127,7 +127,7 @@ export class DocumentsToSendPage implements OnInit, OnDestroy {
     // console.log('ACTIVE ', this.activeStep)
     // this.service.storeUpdate(this.activeStep, WizardSteps.ACTIVE);
     this.file = this.navParams.get('filePath');
-    this.file = 'file.pdf'; // UNCOMENT TO TEST AND DEBUG WITH IONIC SERVE (BROWSER PLATFORM)
+    // this.file = 'file.pdf'; // UNCOMENT TO TEST AND DEBUG WITH IONIC SERVE (BROWSER PLATFORM)
     this.slides.lockSwipes(true);
   }
 
