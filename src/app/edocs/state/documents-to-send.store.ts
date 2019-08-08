@@ -7,55 +7,22 @@ import {
   IDocStepOutput,
   IMessageOutput
 } from '../interfaces';
-
-// const basicStepDefault: IBaseStepOutput = {
-//   titleForward: null,
-//   sender: null,
-//   role: null,
-//   notification: true
-// };
-
-// const addresseesStepDefault: IAddresseesStepOutput = [
-//   {
-//     id: null,
-//     descricao: null,
-//     tipo: null
-//   }
-// ];
-
-// const docStepDefault: IDocStepOutput = {
-//   name: null,
-//   documentType: 0,
-//   documentPaperType: 0,
-//   documentAssignType: 0,
-//   file: null
-// };
-
-// const messageStepDefault: IMessageOutput = {
-//   message: null
-// };
-
-// const wizardValueDefault = {
-//   basicStep: basicStepDefault,
-//   addresseesStep: addresseesStepDefault,
-//   docStep: docStepDefault,
-//   messageStep: messageStepDefault
-// };
+import { WizardStep } from '../providers';
 
 export interface DocumentsToSendState {
   basicStepState: IBaseStepOutput | null,
   addresseesStepState: IAddresseesStepOutput | null,
   docStepState: IDocStepOutput | null,
   messageStepState: IMessageOutput | null,
-
-  // wizardValueState: IDocumentsToSendWizardValue
+  activeStepState: WizardStep<any> | null;
 }
 
 const initialState: DocumentsToSendState = {
   basicStepState: null,
   addresseesStepState: null,
   docStepState: null,
-  messageStepState: null
+  messageStepState: null,
+  activeStepState: null,
 };
 
 @StoreConfig({ name: 'edocs-documents-to-send' })
@@ -81,7 +48,7 @@ export class DocumentsToSendStore extends Store<DocumentsToSendState> {
     this.update({ messageStepState: message });
   }
 
-  // wizardUpdate(wizard: IDocumentsToSendWizardValue) {
-  //   this.update({ wizardValue: wizard });
-  // }
+  activeStepUpdate(active: WizardStep<any>) {
+    this.update({activeStepState: active});
+  }
 }

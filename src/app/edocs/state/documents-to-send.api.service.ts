@@ -30,6 +30,9 @@ export class DocumentsToSendApiService extends ApiBaseService<Document> {
     return this.http.get<Destination[]>(this.endpoint(`Destinos`), {}).pipe(share());
   }
 
+  /**
+   *
+   */
   createForwards(body: ForwardPostBody): Observable<ForwardsRecieve> {
     return this.http.post<ForwardsRecieve>(this.endpoint('Encaminhamentos'), body)
   }

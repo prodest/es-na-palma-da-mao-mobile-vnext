@@ -69,3 +69,11 @@ export enum DocumentoValorLegal {
   CopiaAutenticadaAdministrativamente = 3,
   CopiaSimples = 4
 }
+
+export enum WizardSteps {
+  BASIC = 'basicStep',
+  ADDRESSEES = 'addresseesStep',
+  DOC = 'docStep',
+  MESSAGE = 'messageStep',
+  ACTIVE = 'activeStep'
+}

@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { DocumentsToSendApiService } from './documents-to-send.api.service';
-import { Destination, ForwardPostBody, ForwardsRecieve } from './documents-to-send.model';
+import { Destination, ForwardPostBody, ForwardsRecieve, WizardSteps } from './documents-to-send.model';
 import { Observable } from 'rxjs/Observable';
 import { DocumentsToSendStore } from './documents-to-send.store';
 
@@ -19,17 +19,20 @@ export class DocumentsToSendService {
 
   storeUpdate(step: any, stepName: string) {
     switch (stepName) {
-      case 'basicStep':
+      case WizardSteps.BASIC:
         this.store.basicStepUpdate(step);
         break;
-      case 'addresseesStep':
+      case WizardSteps.ADDRESSEES:
         this.store.addresseesStepUpdate(step);
         break;
-      case 'docStep':
+      case WizardSteps.DOC:
         this.store.docStepUpdate(step);
         break;
-      case 'messageStep':
+      case WizardSteps.MESSAGE:
         this.store.messageStepUpdate(step);
+        break;
+      case WizardSteps.ACTIVE:
+        this.store.activeStepUpdate(step);
         break;
       default:
         break;

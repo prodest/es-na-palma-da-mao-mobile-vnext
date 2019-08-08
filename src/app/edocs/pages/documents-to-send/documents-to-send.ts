@@ -16,7 +16,7 @@ import {
   DocumentsToSendMessageComponent
 } from '../../components';
 import { dev } from '@espm/core/environment/environment.dev';
-import { ForwardPostBody, Destination, DocumentsToSendService, DocumentsToSendQuery } from '../../state';
+import { ForwardPostBody, Destination, DocumentsToSendService, DocumentsToSendQuery, WizardSteps } from '../../state';
 
 @IonicPage({
   segment: 'documentos-para-enviar'
@@ -58,9 +58,12 @@ export class DocumentsToSendPage implements OnInit, OnDestroy {
       this.activeStep = this.messageStep;
     }
 
+    // this.service.storeUpdate(this.activeStep, WizardSteps.ACTIVE);
     this.slides.lockSwipes(false);
     this.slides.slideNext();
     this.slides.lockSwipes(true);
+
+    ////
     this.query.getWizardState().subscribe(query => console.log('NextSlide Query', query));
   }
 
@@ -72,34 +75,55 @@ export class DocumentsToSendPage implements OnInit, OnDestroy {
     } else if (this.activeStep instanceof DocumentsToSendMessageComponent) {
       this.activeStep = this.docStep;
     }
+
+    // this.service.storeUpdate(this.activeStep, WizardSteps.ACTIVE);
     this.slides.lockSwipes(false);
     this.slides.slidePrev();
     this.slides.lockSwipes(true);
   }
 
   ngOnInit(): void {
+    ////
     console.log(dev.api.edocs);
-    this.query.getWizardState().subscribe(query => console.log('Query Send', query));
+    // this.query.getWizardState().subscribe(query => {
+    //   if (query.addresseesStepState) {
+    //     this.stepsValue.addresseesStep = query.addresseesStepState;
+    //   }
+    //   if (query.basicStepState) {
+    //     this.stepsValue.basicStep = query.basicStepState;
+    //   }
+    //   if (query.docStepState) {
+    //     this.stepsValue.docStep = query.docStepState;
+    //   }
+    //   if (query.messageStepState) {
+    //     this.stepsValue.messageStep = query.messageStepState;
+    //   }
+    //   ////
+    //   console.log(this.stepsValue);
+    // });
+
     this.subscriptions = [
       this.basicStep.onComplete.subscribe((value: IBaseStepOutput) => {
         this.stepsValue.basicStep = value;
-        this.service.storeUpdate(this.stepsValue.basicStep, 'basicStep');
+        this.service.storeUpdate(this.stepsValue.basicStep, WizardSteps.BASIC);
       }),
       this.addresseesStep.onComplete.subscribe((value: { addressees: IAddresseesStepOutput }) => {
         this.stepsValue.addresseesStep = value.addressees;
-        this.service.storeUpdate(this.stepsValue.addresseesStep, 'addresseesStep');
+        this.service.storeUpdate(this.stepsValue.addresseesStep, WizardSteps.ADDRESSEES);
       }),
       this.docStep.onComplete.subscribe((value: IDocStepOutput) => {
         this.stepsValue.docStep = value;
-        this.service.storeUpdate(this.stepsValue.docStep, 'docStep');
+        this.service.storeUpdate(this.stepsValue.docStep, WizardSteps.DOC);
       }),
       this.messageStep.onComplete.subscribe((value: IMessageOutput) => {
         this.stepsValue.messageStep = value;
-        this.service.storeUpdate(this.stepsValue.messageStep, 'messageStep');
+        this.service.storeUpdate(this.stepsValue.messageStep, WizardSteps.MESSAGE);
         this.send();
       })
     ];
     this.activeStep = this.basicStep;
+    // console.log('ACTIVE ', this.activeStep)
+    // this.service.storeUpdate(this.activeStep, WizardSteps.ACTIVE);
     this.file = this.navParams.get('filePath');
     this.file = 'file.pdf'; // UNCOMENT TO TEST AND DEBUG WITH IONIC SERVE (BROWSER PLATFORM)
     this.slides.lockSwipes(true);
@@ -126,6 +150,7 @@ export class DocumentsToSendPage implements OnInit, OnDestroy {
       responsavelId: this.stepsValue.basicStep.role
     };
 
+    ////
     this.query.getWizardState().subscribe(query => console.log('Query Send', query));
 
     console.log(`Body: `, { body: body });

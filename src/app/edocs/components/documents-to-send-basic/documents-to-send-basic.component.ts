@@ -14,7 +14,7 @@ import { DocumentsToSendBasicFormComponent } from '../documents-to-send-basic-fo
 })
 export class DocumentsToSendBasicComponent extends WizardStep<IBaseStepOutput> implements OnInit {
 
-  documents = [];
+  // documents = [];
   sender$: Observable<AcessoCidadaoClaims>;
   roles$: Observable<CidadaoRole[]>;
   notification$: boolean = true;
