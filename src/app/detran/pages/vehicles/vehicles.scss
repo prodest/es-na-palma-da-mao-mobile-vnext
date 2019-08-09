@@ -6,7 +6,7 @@ page-vehicles {
       }
     }
   }
-
+  
   espm-vehicle {
     &.disabled {
       [ion-item] {
@@ -17,55 +17,59 @@ page-vehicles {
       }
     }
   }
-  ion-title {
-    width: 50%;
-  }  
+
   .scroll-content {
-    background-color: rgb(233, 247, 254) ;
+    background-color: rgb(233, 247, 254);
+    height: 100%;
+    display: flex;
+    flex-direction: column;
   }
+
   .item-md {
     border-radius: 10px;
     margin-top: 3%;
     width: 90%;
-    margin-left: 15px;
+    margin-left: auto;
+    margin-right: auto;
   }
-  .toolbar-title{
-    background-color: rgb(233, 247, 254);
-    margin-top: 5%;
-    font-size: x-large;
-    font-weight: bold;
-    font-size: x-large;
-  }
+
   button{
     background-color: rgb(233, 247, 254);
-    font-size: x-large;
     color: rgb(0,174,239);
-    margin-left: 15px;
-    margin-top: 10px;
+    // margin-left: 15px;
+    // margin-top: 10px;
   }
-  .back {
-     float: left;
-      width: 30%; 
-    }
-.remove {
-   float: right;
+  
+  .remove {
+    position: absolute;
+    right: 10px;
+    top: 10px;
     width: 60%;
-   }
+  }
 
-.button-md {
-  background-color: rgb(233, 247, 254);
-  color: black;
-  box-shadow: none;
-}
-.foot-css{
-  position: fixed;
-  bottom: 0;
+  ion-list {
+    flex: 1;
   }
-  .toolbar-title  {
-    color: #004297;
+
+  ion-fab {
+    margin-bottom: 75px;
+
+    .fab {
+      background-color: #004297; // $primary-dark
+    }
+
+    .activated {
+      background-color: #003069 !important; // $primary-very-dark
+    }
   }
+  
+  .button-md {
+    background-color: rgb(233, 247, 254);
+    color: black;
+    box-shadow: none;
+  }
+  
   .vehicle__model{
     color: #2BACE2;
-}
-
+  }
 }
