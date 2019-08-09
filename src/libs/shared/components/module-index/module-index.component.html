@@ -4,7 +4,7 @@
     <div id="banner">
       <ion-icon name={{icon}}></ion-icon>
     </div>
-    <span id="separator"></span>
+    <span class="separator"></span>
     <ion-list>
       <button *ngFor="let item of menus" ion-button block large round icon-end (click)="openPage(item.targetPage)">
         {{item.buttonTitle}}
@@ -12,7 +12,7 @@
       </button>
     </ion-list>
   </div>
-  <span id="separator"></span>
+  <span class="separator"></span>
   <!-- footer -->
   <main-footer-bar></main-footer-bar>
 </div>
