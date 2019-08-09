@@ -18,7 +18,7 @@ import {
   DocumentsToSendMessageComponent
 } from '../../components';
 import { dev } from '@espm/core/environment/environment.dev';
-import { ForwardPostBody, Destination, DocumentsToSendService, DocumentsToSendQuery, WizardSteps } from '../../state';
+import { Destination, DocumentsToSendService, DocumentsToSendQuery, WizardSteps } from '../../state';
 
 @IonicPage({
   segment: 'documentos-para-enviar'
