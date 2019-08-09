@@ -3,13 +3,14 @@
 var parser = require('xml2json');
 var format = require('xml-formatter');
 var fs = require('fs');
+var path = require('path');
 
 // check if exists android platform path
 var hasAndroid = fs.existsSync('./platforms') &&
   fs.existsSync('./platforms/android');
 
 if (hasAndroid) {
-  var manifestPath = './platforms/android/app/src/main/AndroidManifest.xml';
+  var manifestPath = path.normalize(path.join('./platforms', 'android/app', 'src/main/AndroidManifest.xml'));
   var manifest = fs.readFileSync(manifestPath);
   var jsonManifest = parser.toJson(manifest, { object: true });
 
