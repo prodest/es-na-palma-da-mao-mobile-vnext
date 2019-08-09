@@ -62,7 +62,9 @@ export class DocumentsToSendBasicFormComponent extends FormBase implements OnIni
   protected prepareFormModel(formModel: any): any {
     // trocando nome de exibição do remetente para seu id
     // na hora de enviar os dados
-    formModel.sender = this.sender.subNovo;
-    return formModel;
+    return {
+      ...formModel,
+      sender: this.sender.subNovo
+    };
   }
 }
