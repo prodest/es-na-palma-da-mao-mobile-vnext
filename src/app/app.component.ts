@@ -4,7 +4,7 @@ import { AuthQuery, AuthService, Environment, EnvVariables, PushService } from '
 import { SplashScreen } from '@ionic-native/splash-screen';
 import { StatusBar } from '@ionic-native/status-bar';
 import { FilePath } from '@ionic-native/file-path';
-import { Nav, Platform } from 'ionic-angular';
+import { Nav, Platform, AlertController } from 'ionic-angular';
 import { finalize } from 'rxjs/operators';
 import { Subscription } from 'rxjs/Subscription';
 
@@ -37,6 +37,7 @@ export class ESPMComponent implements OnDestroy {
     private push: PushService,
     private auth: AuthService,
     private filePath: FilePath,
+    private alertCtrl: AlertController,
     ngZone: NgZone,
     @Inject(EnvVariables) environment: Environment
   ) {
@@ -102,12 +103,14 @@ export class ESPMComponent implements OnDestroy {
 
   private resumeApplication = async () => {
     const clip = await this.getIntentClip();
+    console.log({ clip })
     if (this.authQuery.isLoggedIn) {
       this.auth
         .refreshAccessTokenIfNeeded()
         .pipe(finalize(this.push.init))
         .subscribe(
-          () => {
+          token => {
+            console.log({ token })
             if (clip) {
               this.nav.setRoot('DocumentsToSendPage', { filePath: clip });
               return;
@@ -123,6 +126,29 @@ export class ESPMComponent implements OnDestroy {
           }
         );
     } else {
+      if (clip) {
+        const alert = this.alertCtrl.create({
+          title: 'Login necessário',
+          message: 'Você precisa realizar o login para encaminhar um documento!',
+          buttons: [
+            {
+              text: 'Cancelar',
+              role: 'cancel'
+            },
+            {
+              text: 'Login',
+              handler: () => {
+                const alertDismiss = alert.dismiss();
+                alertDismiss.then(() => {
+                  this.nav.setRoot('LoginPage', { redirectTo: 'DocumentsToSendPage', filePath: clip })
+                });
+                return false;
+              }
+            }
+          ]
+        });
+        alert.present();
+      }
       this.push.init();
     }
   };
