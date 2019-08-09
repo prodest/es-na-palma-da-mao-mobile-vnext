@@ -1,5 +1,5 @@
 import { Component, ChangeDetectionStrategy, OnInit, ViewChild, OnDestroy } from '@angular/core';
-import { IonicPage, Slides, NavParams } from 'ionic-angular';
+import { IonicPage, Slides, NavParams, Loading, AlertController, NavController } from 'ionic-angular';
 import { Subscription } from 'rxjs/Subscription';
 import { mergeMap } from 'rxjs/operators';
 import { LoadingService } from '@espm/core';
@@ -34,6 +34,8 @@ export class DocumentsToSendPage implements OnInit, OnDestroy {
   file: string;
   // active step
   activeStep: WizardStep<any>;
+  // if sending/forwarding document
+  isSending: boolean = false
 
   // private atributes
   // all wizard steps
@@ -48,7 +50,12 @@ export class DocumentsToSendPage implements OnInit, OnDestroy {
   // subscriptions
   private subscriptions: Subscription[] = [];
 
-  constructor(private navParams: NavParams, private service: DocumentsToSendService, private query: DocumentsToSendQuery, private loadingService: LoadingService) { }
+  constructor(private navParams: NavParams,
+    private service: DocumentsToSendService,
+    private query: DocumentsToSendQuery,
+    private loadingService: LoadingService,
+    private alertCtrl: AlertController,
+    private navCtrl: NavController) { }
 
   nextSlide() {
     this.activeStep.submit();
@@ -138,14 +145,15 @@ export class DocumentsToSendPage implements OnInit, OnDestroy {
   }
 
   private send(): void {
+    if (this.isSending) {
+      return;
+    }
     this.query.getWizardState().subscribe(query => console.log('Query Send', query));
-
-    console.log({ stepsValue: this.stepsValue })
     const loading = this.loadingService.show('Encaminhando documento');
     this.service.captureDocuments({
       File: this.file,
-      Assinar: true,
-      ClasseId: null, // deixar null pra cidadão
+      Assinar: false,
+      // ClasseId: null, // deixar null pra cidadão
       Natureza: this.stepsValue.docStep.documentType,
       ValorLegal: this.stepsValue.docStep.documentPaperType
     }).pipe(
@@ -164,11 +172,39 @@ export class DocumentsToSendPage implements OnInit, OnDestroy {
         responsavelId: this.stepsValue.basicStep.role,
       }))
     ).subscribe(
-      () => loading.dismiss(),
-      err => {
-        console.error(err)
-        loading.dismiss()
-      }
+      () => this.onSendSuccess(loading),
+      err => this.onSendError(err, loading)
     );
+  }
+
+  private onSendSuccess(loading: Loading): void {
+    loading.dismiss();
+    const alert = this.alertCtrl.create({
+      title: 'Encaminhamento concluído',
+      message: `O encaminhamento do documento "${this.stepsValue.docStep.name}" foi concluído com sucesso.`,
+      enableBackdropDismiss: false,
+      buttons: [
+        {
+          text: 'OK',
+          handler: () => {
+            this.navCtrl.setRoot('DashboardPage')
+            return true;
+          }
+        }
+      ]
+    });
+    alert.present();
+  }
+
+  private onSendError(error: any, loading: Loading): void {
+    console.error(error);
+    loading.dismiss();
+    const alert = this.alertCtrl.create({
+      title: 'Encaminhamento interrompido',
+      message: `Ocorreu um erro ao tentar encaminhar o documento "${this.stepsValue.docStep.name}". Tente novamente mais tarde!`,
+      enableBackdropDismiss: false,
+      buttons: ['OK']
+    });
+    alert.present();
   }
 }

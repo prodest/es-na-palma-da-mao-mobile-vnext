@@ -27,7 +27,7 @@ export interface Forward {
 export interface CapturePostBody {
   File: string;
   Assinar: boolean;
-  ClasseId: string;
+  ClasseId?: string;
   Natureza: number;
   ValorLegal: number;
 }
