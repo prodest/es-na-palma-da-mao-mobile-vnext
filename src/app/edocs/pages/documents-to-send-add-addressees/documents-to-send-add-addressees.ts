@@ -1,5 +1,5 @@
 import { Component, ChangeDetectionStrategy, OnInit } from '@angular/core';
-import { NavController, NavParams, IonicPage } from 'ionic-angular';
+import { NavController, NavParams, IonicPage, Events } from 'ionic-angular';
 import { Destination, DocumentsToSendService } from '../../state';
 import deburr from 'lodash-es/deburr';
 
@@ -38,7 +38,7 @@ export class DocumentsToSendAddAddresseesPage implements OnInit {
   govAgencies: Destination[] = [];
   filteredGovAgencies: Destination[];
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, private service: DocumentsToSendService) {
+  constructor(public navCtrl: NavController, public navParams: NavParams, private service: DocumentsToSendService, private events: Events) {
     this.service.getDestinations().subscribe(destination => {
       this.govAgencies = this.filteredGovAgencies = destination;
     });
@@ -67,8 +67,10 @@ export class DocumentsToSendAddAddresseesPage implements OnInit {
    */
   addAddressees(agency: Destination) {
     if (this.addressees.findIndex(ad => ad.id === agency.id) === -1) {
-      agency.tipo = 'Órgão';
-      this.addressees.push(agency);
+      this.events.publish('documents-to-send-add-addressess:add', {
+        ...agency,
+        tipo: 'Órgão'
+      });
     }
     this.navCtrl.pop();
   }
@@ -81,9 +83,9 @@ export class DocumentsToSendAddAddresseesPage implements OnInit {
     }
   }
 
-  ngOnInit(): void {}
+  ngOnInit(): void { }
 
-  refresh(): void {}
+  refresh(): void { }
 
   isValidNumber(value: any) {
     return typeof value === 'number' && !isNaN(value);
