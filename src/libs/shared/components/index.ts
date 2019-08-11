@@ -13,3 +13,4 @@ export * from './nav-title';
 export * from './main-footer-bar';
 export * from './nav-header';
 export * from './module-index';
+export * from './module-page';
