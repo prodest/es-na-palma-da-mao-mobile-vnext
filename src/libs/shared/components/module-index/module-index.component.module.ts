@@ -2,14 +2,13 @@ import { NgModule } from "@angular/core";
 import { ModuleIndexComponent } from "./module-index.component";
 import { IonicModule } from "ionic-angular";
 
-import { NavHeaderComponentModule, MainFooterBarComponentModule } from '@espm/shared/components';
+import { ModulePageComponentModule } from '../module-page';
 
 @NgModule({
     declarations: [ModuleIndexComponent],
     imports: [
         IonicModule,
-        NavHeaderComponentModule,
-        MainFooterBarComponentModule
+        ModulePageComponentModule
     ],
     exports: [ModuleIndexComponent]
 })
