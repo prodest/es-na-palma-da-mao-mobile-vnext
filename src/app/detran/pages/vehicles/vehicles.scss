@@ -3,6 +3,9 @@ page-vehicles {
     .item-inner {
       .vehicle__button {
         font-size: 1.4rem;
+        background-color: #bf272d;
+        color: white;
+        font-family: 'Poppins';
       }
     }
   }
@@ -18,26 +21,12 @@ page-vehicles {
     }
   }
 
-  .scroll-content {
-    background-color: rgb(233, 247, 254);
-    height: 100%;
-    display: flex;
-    flex-direction: column;
-  }
-
-  .item-md {
+  #not-found {
     border-radius: 10px;
     margin-top: 3%;
-    width: 90%;
-    margin-left: auto;
-    margin-right: auto;
-  }
-
-  button{
-    background-color: rgb(233, 247, 254);
-    color: rgb(0,174,239);
-    // margin-left: 15px;
-    // margin-top: 10px;
+    color: #004297;
+    font-weight: 600;
+    font-family: 'Poppins';
   }
   
   .remove {

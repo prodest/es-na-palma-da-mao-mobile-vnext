@@ -1,5 +1,5 @@
-<ion-content *ngIf="(vehicles$ | async ) as vehicles">
-  <nav-header [title]="'Meus veículos'" class="sign-primary"></nav-header>
+<module-page [title]="'Meus veículos'"
+  *ngIf="(vehicles$ | async ) as vehicles">
   
   <div class="remove">
     <ion-buttons *ngIf="(vehicles$ | async )?.length" end>
@@ -17,34 +17,24 @@
       </button>
     </ion-buttons>
   </div>
-
+  
   <ion-list *ngIf="vehicles && vehicles.length" >
     <espm-vehicle [vehicle]="vehicle"
       *ngFor="let vehicle of vehicles"
       [class.disabled]="editing"
-      (click)="showDebitTipe(vehicle)">
-      <!-- <ion-list *ngIf="vehicles && vehicles.length">
-        <ion-item>
-          <button class="vehicle__button" *ngIf="!editing" ion-button clear item-end color-secondary-fg (click)="showTickets(vehicle)">MULTAS</button>
-        </ion-item>
-        <ion-item>
-          <button class="vehicle__button" *ngIf="!editing" ion-button clear item-end color-secondary-fg (click)="showDebitTipe(vehicle)">DÉBITOS</button>
-        </ion-item>
-      </ion-list>       -->
+      (click)="showDebitTipe(vehicle)"
+    >
       <button class="vehicle__button"
         *ngIf="editing"
-        ion-button
-        clear
-        item-end
-        color-secondary-fg
+        ion-button clear item-end color-secondary-fg
         (click)="confirmRemove(vehicle)"
       >REMOVER</button>
     </espm-vehicle>
   </ion-list>
-
-  <ion-item *ngIf="vehicles && !vehicles.length" text-center>
-    <h2>Nenhum veículo cadastrado</h2>
-    <p text-wrap>Adicione veículos para consulta suas multas</p>
+  
+  <ion-item id="not-found" *ngIf="vehicles && !vehicles.length" shadow text-center>
+    <h2>Nenhum veículo cadastrado!</h2>
+    <p text-wrap>Adicione veículos para consultar seus débitos.</p>
   </ion-item>
 
   <ion-fab right bottom margin-right>
@@ -55,6 +45,4 @@
       <ion-icon name="add"></ion-icon>
     </button>
   </ion-fab>
-
-  <main-footer-bar></main-footer-bar>
-</ion-content>
+</module-page>
