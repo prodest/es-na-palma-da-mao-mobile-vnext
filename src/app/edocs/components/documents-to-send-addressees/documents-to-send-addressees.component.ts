@@ -35,6 +35,7 @@ export class DocumentsToSendAddresseesComponent extends WizardStep<{ addressees:
       ...this.addressees.slice(0, index),
       ...this.addressees.slice(index + 1)
     ]
+    this.cdr.detectChanges();
   }
 
   async addAddresses() {
