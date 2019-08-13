@@ -105,7 +105,7 @@ export class DocumentsToSendBasicFormComponent extends FormBase implements OnIni
     return this.formBuilder.group({
       file: ['', [Validators.required]],
       name: ['', [Validators.required]],
-      documentType: [{value: 2, disabled: true}],
+      documentType: [null, [Validators.required]],
       documentPaperType: [null, []],
       documentAssignType: [null, []]
     });
