@@ -29,7 +29,7 @@
     *ngIf="form.get('titleForward')?.value && form.get('sender')?.value"
     [errors]="validationErrors['role']"
   ></espm-validation-message>
-  <ion-item *ngIf="form.get('titleForward')?.value && form.get('sender')?.value">
+  <ion-item *ngIf="form.get('titleForward')?.value && form.get('sender')?.value && form.get('role')?.value">
     <ion-label>Notificação por email</ion-label>
     <ion-toggle
       [(ngModel)]="notification"
