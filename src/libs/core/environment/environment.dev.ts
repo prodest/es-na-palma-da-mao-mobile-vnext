@@ -19,7 +19,7 @@ export const dev: Environment = {
     ceturbv2: process.env.API_CETURBV2_URL || 'https://api.es.gov.br/transcol',
     realtime: process.env.API_REALTIME_URL || 'https://api.es.gov.br/realtime',
     cbmes: process.env.API_CBMES_URL || 'https://api.es.gov.br/developers/cbmes',
-    push: process.env.API_PUSH_URL || 'https://api.es.gov.br/developers/push/api/v1/',
+    push: process.env.API_PUSH_URL || 'https://api.es.gov.br/developers/push/api/v1',
     espm: process.env.API_ESPM_URL || 'https://api.es.gov.br/developers/espm',
     transparency: process.env.API_TRANSPARENCY_URL || 'https://api.es.gov.br/developers/transparency',
     acessocidadaoApi: process.env.API_ACESSO_CIDADAO_URL || 'https://sistemas.es.gov.br/prodest/acessocidadao.webapi/api',
