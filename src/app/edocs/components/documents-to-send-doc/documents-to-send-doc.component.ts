@@ -1,5 +1,7 @@
 import { ChangeDetectionStrategy, Component, OnInit, Input, ViewChild } from '@angular/core';
 import { FormBase } from '@espm/core';
+import { AlertController } from 'ionic-angular';
+import { FileOpener } from '@ionic-native/file-opener';
 import { WizardStep } from '../../providers';
 import { IDocStepOutput } from '../../interfaces';
 
@@ -14,7 +16,7 @@ export class DocumentsToSendDocComponent extends WizardStep<IDocStepOutput> impl
   documents = [];
   @ViewChild('docForm') protected form: FormBase;
 
-  constructor() {
+  constructor(private fileOpener: FileOpener, private alertCtrl: AlertController) {
     super();
   }
 
@@ -23,7 +25,21 @@ export class DocumentsToSendDocComponent extends WizardStep<IDocStepOutput> impl
   refresh(): void { }
 
   async viewFile() {
-    window.open(this.file, '_system', 'location=yes');
+    try {
+      await this.fileOpener.open(this.file, 'application/pdf');
+    } catch (e) {
+      const alert = this.alertCtrl.create({
+        title: 'Falha ao abrir arquivo',
+        message: 'Ocorreu algum problema na tentativa de abrir o documento atual. Certifique-se de que o documento ainda existe em seu aparelho.',
+        buttons: [{
+          text: 'Ok',
+          role: 'cancel'
+        }]
+      });
+      alert.present();
+      console.log('error on try open PDF file');
+      console.error(e);
+    }
   }
 
 }
