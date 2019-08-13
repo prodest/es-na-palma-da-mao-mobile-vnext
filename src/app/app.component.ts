@@ -103,6 +103,7 @@ export class ESPMComponent implements OnDestroy {
 
   private resumeApplication = async () => {
     const clip = await this.getIntentClip();
+
     console.log({ clip })
     if (this.authQuery.isLoggedIn) {
       this.auth
@@ -110,8 +111,10 @@ export class ESPMComponent implements OnDestroy {
         .pipe(finalize(this.push.init))
         .subscribe(
           token => {
-            console.log({ token })
-            if (clip) {
+            console.log({ token });
+            const activeNavName = this.nav.getActive().name;
+            const isEdocs = activeNavName === 'DocumentsToSendPage' || activeNavName === 'DocumentsToSendAddAddresseesPage';
+            if (clip && !isEdocs) {
               this.nav.setRoot('DocumentsToSendPage', { filePath: clip });
               return;
             }
