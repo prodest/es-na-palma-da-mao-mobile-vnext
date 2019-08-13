@@ -1,19 +1,15 @@
 <ion-header>
     <ion-navbar hideBackButton>
-        <button ion-button
-                menuToggle>
-            <ion-icon name="menu"></ion-icon>
-        </button>
-        <ion-title>Diário Oficial ES</ion-title>
+        <button (click)="back()">
+            <ion-icon ios="ios-arrow-round-back" md="md-arrow-round-back"></ion-icon>
+          </button>
+        <ion-title>Edições Recentes</ion-title>
     </ion-navbar>
 </ion-header>
 
 <ion-content>
     <ng-container *ngSubscribe="latestEditions$ as latestEditions">
         <ion-list>
-            <ion-list-header>
-                Edições recentes
-            </ion-list-header>
             <ion-item *ngFor="let edition of latestEditions">
                 <h3>
                     <strong>{{edition.date}}</strong> - Diário Oficial do ES</h3>

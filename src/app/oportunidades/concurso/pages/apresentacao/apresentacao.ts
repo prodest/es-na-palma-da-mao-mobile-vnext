@@ -21,4 +21,5 @@ export class ApresentacaoPage {
   open(pagina) {
     this.navCtrl.push(pagina)
   }
+  back = () =>{this.navCtrl.pop()};
 }

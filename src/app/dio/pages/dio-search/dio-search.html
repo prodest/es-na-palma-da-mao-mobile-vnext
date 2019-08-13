@@ -1,10 +1,9 @@
 <ion-header>
   <ion-navbar hideBackButton>
-    <button ion-button
-            menuToggle>
-      <ion-icon name="menu"></ion-icon>
+    <button (click)="back()">
+      <ion-icon ios="ios-arrow-round-back" md="md-arrow-round-back"></ion-icon>
     </button>
-    <ion-title>Diário Oficial ES</ion-title>
+    <ion-title>Diário ES</ion-title>
     <ion-buttons end>
       <button *ngIf="totalHits > 0"
               ion-button
@@ -56,6 +55,13 @@
             margin-right
             color-secondary
             (click)="search({pageNumber:0})">Pesquisar</button>
+    <button ion-button
+            float-left
+            margin-left
+            color-secondary
+            (click)="editions()">
+            Edições Recentes
+          </button>
     <button *ngIf="filter.dateMax || filter.dateMin || filter.query"
             ion-button
             float-right

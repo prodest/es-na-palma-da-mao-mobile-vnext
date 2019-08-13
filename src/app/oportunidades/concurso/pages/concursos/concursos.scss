@@ -32,7 +32,7 @@ espm-dt-concursos-page {
     font-weight:bold;
     font-size:30px; 
     font-style: italic;
-    background-color: #d3ddf0;
+    background-color: rgb(233, 247, 254);
  }
  .radius_concursos{
   border-radius: 10px;
@@ -68,7 +68,7 @@ espm-dt-concursos-page {
   height: 2px;
 }
 .list-md {
-  background-color: #d3ddf0 ;
+  background-color: rgb(233, 247, 254) ;
 } 
 .center_css{
   margin-top: 1px;
@@ -81,5 +81,8 @@ espm-dt-concursos-page {
 }
 .searchbar-md .searchbar-input {
   border-radius: 25px;
+}
+.label-md {
+  color: #004297;
 }
 }

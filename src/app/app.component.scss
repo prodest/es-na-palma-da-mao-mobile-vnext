@@ -188,7 +188,10 @@ ion-icon {
     width: 1em;
     height: 1em;
   }
-
+  &[class*="modulo-educacao"] {
+    background: transparent url(../assets/icon/icone-educacao.png)no-repeat left bottom;
+    background-size: contain;
+  }
   &[class*="modulo-noticias"] {
     background: transparent url(../assets/icon/icone-noticias.png)no-repeat left bottom;
     background-size: contain;

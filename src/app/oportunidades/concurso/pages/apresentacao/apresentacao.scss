@@ -1,34 +1,35 @@
 apresentacao {
   .botao_page {
     position: fixed;
-    float: bottom;
     bottom: 25px;
     left: 15px;
     right: 15px;
     z-index: 100;
-    background-color: #208baa;
+    background-color: #004297;
     color: white;
-    border-radius: 5px;
+    border-radius: 10px;
     text-align: center;
     font-weight: bold;
     width: 90%;
     height: 70px;
-  }
-  .apres_conc {
-    color: white;
-    font-size: 30px;
-    background: url(https://i1.wp.com/marketingcomcafe.com.br/wp-content/uploads/2018/01/imagem-gratis-destaquese.png?ssl=1)
-      no-repeat center center fixed;
-    -webkit-background-size: cover;
-    -moz-background-size: cover;
-    background-size: cover;
-    width: 100%;
-    height: 100%;
-  }
+    font-size: x-large;
+   }
+  // .apres_conc {
+  //   color: white;
+  //   font-size: 30px;
+  //   background: url(https://i1.wp.com/marketingcomcafe.com.br/wp-content/uploads/2018/01/imagem-gratis-destaquese.png?ssl=1)
+  //     no-repeat center center fixed;
+  //   -webkit-background-size: cover;
+  //   -moz-background-size: cover;
+  //   background-size: cover;
+  //   width: 100%;
+  //   height: 100%;
+  // }
   .list_css {
     background: linear-gradient(45deg, red 50%, #208baa 50%);
     height: 2px;
-    width: 70px;
+    width: 42%;
+
   }
   .slide-zoom {
     text-align: initial;
@@ -47,8 +48,30 @@ apresentacao {
     margin-bottom: 2px;
     margin-top: 2px;
     font-weight: bold;
+    font-size: xx-large;
+    color: #004297;
   }
   .button-inner {
     font-size: 30px;
   }
+  ion-icon {
+    font-size: 1150%;
+    margin-left: 25%;
+}
+.swiper-slide {
+  background-color: #e9f7fe;
+}
+.ion-md-arrow-round-back:before {
+  font-size: xx-large;
+  color: #2BACE2;
+}
+button {
+  font-size: 1px;
+  background-color: #e9f7fe;
+  margin-top: 10px;
+}
+ion-icon[class*="modulo-educacao"] {
+  margin-top: 30%;
+  margin-left: 15%;
+}
 }

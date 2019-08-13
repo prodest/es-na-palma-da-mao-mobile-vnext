@@ -1,2 +1,22 @@
 latest-editions {
+    button{
+    float: left;
+    color: #2BACE2;
+    font-size: x-large;
+    background-color: rgb(233, 247, 254);
+    }
+    .active, [active], .toolbar-title, ion-navbar.toolbar, .toolbar-background {
+        background-color: rgb(233, 247, 254);
+        text-align: center;
+        color: #004297;
+        font-weight: bold;
+    }
+    .item-md {
+        margin-top: 5px;
+        color: cornflowerblue;
+        border-radius: 25px;
+    }  
+    .scroll-content {
+        background-color: rgb(233, 247, 254);
+    } 
 }

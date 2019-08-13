@@ -32,7 +32,7 @@ espm-lista-oportunidades-page {
     font-weight: bold;
     font-size: 30px;
     font-style: italic;
-    background-color: #d3ddf0;
+    background-color: #e9f7fe;
   }
   .radius_concursos {
     border-radius: 10px;
@@ -67,7 +67,7 @@ espm-lista-oportunidades-page {
     height: 2px;
   }
   .list-md {
-    background-color: #d3ddf0;
+    background-color: #e9f7fe;
   }
   .center_css {
     margin-top: 1px;
@@ -75,4 +75,7 @@ espm-lista-oportunidades-page {
   .favorito_icon {
     color: $color-secondary;
   }
+.label-md {
+  color: #004297;
+}
 }

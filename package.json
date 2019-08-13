@@ -167,7 +167,7 @@
     "husky": "^0.14.3",
     "lint-staged": "^6.0.0",
     "lite-server": "^2.4.0",
-    "lodash": "^4.17.11",
+    "lodash": "^4.17.15",
     "nodemon": "^1.19.1",
     "prettier": "^1.9.1",
     "purifycss": "^1.2.6",
@@ -242,7 +242,9 @@
       "cordova-plugin-file-opener2": {},
       "cordova-plugin-file": {},
       "cordova-plugin-ionic-webview": {},
-      "cordova-plugin-geolocation": {}
+      "cordova-plugin-geolocation": {
+        "GEOLOCATION_USAGE_DESCRIPTION": "O app precisa de acesso a sua localização para poder prover uma melhor experiências na consulta de transporte público."
+      }
     },
     "platforms": [
       "android"

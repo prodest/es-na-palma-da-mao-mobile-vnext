@@ -75,4 +75,28 @@ page-dio-search {
       margin-left: 5px;
     }
   }
+  button {
+    font-family: "Roboto";
+    float: left;
+    color: #2BACE2;
+    font-size: x-large;
+    background-color: rgb(233, 247, 254);
+    margin-left: 12px;
+}
+.active, [active], .toolbar-title, ion-navbar.toolbar, .toolbar-background {
+  background-color: rgb(233, 247, 254);
+  text-align: center;
+  color: #004297;
+  font-weight: bold;
+}
+.item-md[no-lines] {
+  border-radius: 25px;
+}
+[color-secondary], .color-secondary {
+  border-radius: 25px;
+}
+[color-secondary], .color-secondary {
+  background-color: #004297;
+  color: #fff;
+}
 }

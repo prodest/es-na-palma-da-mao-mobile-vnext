@@ -49,13 +49,6 @@ export const MENUS: ItemMenu[] = [
       component: 'BusLinesPage',
       isChecked: false
     },
-    {
-      id: 9,
-      title: 'Transcol Online',
-      icon: 'custom-modulo-onibus',
-      component: 'TranscolOnlinePage',
-      isChecked: false
-    },
   
     {
       id: 10,
@@ -67,31 +60,18 @@ export const MENUS: ItemMenu[] = [
   
     {
       id: 11,
-      title: 'Consultas',
+      title: 'Diário Oficial ES',
       icon: 'custom-modulo-consultas',
       component: 'DioSearchPage',
       isChecked: false
     },
-    {
-      id: 12,
-      title: 'Edições Recentes',
-      icon: 'custom-modulo-noticias',
-      component: 'LatestEditionsPage',
-      isChecked: false
-    },
-  
-    {
-      id: 13,
-      title: 'Táxi Gov',
-      icon: 'custom-modulo-taxi',
-      component: '',
-      url: 'mb://action=login',
-      name: 'app.mb',
-      deepLink: true,
-      package: 'mb.taxi.meiabandeirada',
-      uriScheme: 'mb://',
-      isChecked: false
-    },
+    // {
+    //   id: 12,
+    //   title: 'Edições Recentes',
+    //   icon: 'custom-modulo-noticias',
+    //   component: 'LatestEditionsPage',
+    //   isChecked: false
+    // },
   
     {
       id: 14,
