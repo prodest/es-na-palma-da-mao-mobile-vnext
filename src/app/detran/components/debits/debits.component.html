@@ -1,6 +1,6 @@
 <ion-list *ngIf="debits && debits.length" class="debits">
   
-    <!-- {{ countDebits() }} débitos | selecionados -->
+  <!-- {{ countDebits() }} débitos | selecionados -->
     
   <div *ngFor="let debit of debits">
     <ion-item>
@@ -16,14 +16,16 @@
       </ion-label>
     </ion-item>
   </div>
-  <button
-      ion-button
-      item-right
-      (click)="generateBillet()"
-      ng-show="debits.length > 0">
-      Pagamento
-    </button>
 </ion-list>
+<span separator shadow></span>
+<large-button
+  [color]="'primary-dark'"
+  [leftIcon]="'ios-add-circle-outline'"
+  [rightIcon]="'ios-arrow-forward-outline'"
+  [text]="'Pagamento'"
+  (click)="generateBillet()"
+  ng-show="debits.length > 0"
+></large-button>
 <ion-list *ngIf="debits && !debits.length" class="debits">
   <ion-list-header>
     Nenhum débito encontrado
