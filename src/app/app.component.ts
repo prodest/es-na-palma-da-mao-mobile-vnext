@@ -112,7 +112,8 @@ export class ESPMComponent implements OnDestroy {
         .subscribe(
           token => {
             console.log({ token });
-            const activeNavName = this.nav.getActive().name;
+            const navActive = this.nav.getActive();
+            const activeNavName = navActive ? navActive.name : this.rootPage;
             const isEdocs = activeNavName === 'DocumentsToSendPage' || activeNavName === 'DocumentsToSendAddAddresseesPage';
             if (clip && !isEdocs) {
               this.nav.setRoot('DocumentsToSendPage', { filePath: clip });
