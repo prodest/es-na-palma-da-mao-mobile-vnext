@@ -1,12 +1,3 @@
-
-
-<ion-content>
-    <div class="back"><button (click)="goBack()"> 
-        <ion-icon ios="ios-arrow-round-back" md="md-arrow-round-back"></ion-icon>
-    </button>
-  </div>
-  <div class="debit">
-      <ion-title >Débitos</ion-title>
-  </div>
-  <espm-debits [vehicle]="vehicle" [debits]="debits" [tipe]="tipe"></espm-debits>
-</ion-content>
+<module-page [title]="'Débitos'" no-footer no-scroll>
+  <espm-debits [vehicle]="vehicle" [debits]="debits" [tipe]="tipe"></espm-debits>    
+</module-page>

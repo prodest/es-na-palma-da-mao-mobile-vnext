@@ -97,7 +97,7 @@ export class MyServicesPage implements OnDestroy {
     let _menus: ItemMenu[] = menus;
 
     /* Se o array fornecido estiver vazio, todos os módulos serão exibidos, a menos que seja o resultado de uma busca */
-    if (menus.length === 0 && !this.searching) _menus = this.menuService.getMenus();
+    if (menus.length === 0 && !this.searching) _menus = this.menus;
 
     this.slides = [];
     _menus.map((elemento: ItemMenu, index: number) => {

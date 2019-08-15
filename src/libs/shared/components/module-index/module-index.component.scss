@@ -1,22 +1,21 @@
-page-vehicle-debits-tipe {
-  espm-vehicle {
-    margin-bottom: 15px;
-    
-    .vehicle {
-      .item-inner > ion-icon,
-      .button-effect {
-        display: none;
-      }
-    }
-    
-    .activated {
-      background-color: white !important;
+module-index {
+
+  #banner {
+    background-color: white;
+    height: 15vh;
+    border-radius: 15px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    ion-icon {
+      font-size: 10vh;
     }
   }
-  
+
   ion-list {
     flex: 1 !important;
-    margin: 0 !important;
 
     [ion-button] {
       background-color: white !important;
@@ -31,5 +30,13 @@ page-vehicle-debits-tipe {
         justify-content: space-between;
       }
     }
+  }
+
+  .separator {
+    height: 2px;
+    width: 85vw;
+    background-color: #004297; // 6584cc
+    margin: 30px auto;
+    border-radius: 5px;
   }
 }
