@@ -18,7 +18,7 @@ import {
   DocumentsToSendMessageComponent
 } from '../../components';
 import { dev } from '@espm/core/environment/environment.dev';
-import { Destination, DocumentsToSendService, DocumentsToSendQuery, WizardSteps } from '../../state';
+import { DestinationReceive, DocumentsToSendService, DocumentsToSendQuery, WizardSteps } from '../../state';
 
 @IonicPage({
   segment: 'documentos-para-enviar'
@@ -135,7 +135,7 @@ export class DocumentsToSendPage implements OnInit, OnDestroy {
     // this.service.storeUpdate(this.activeStep, WizardSteps.ACTIVE);
     this.file = this.navParams.get('filePath');
     // this.file = 'file.pdf'; // UNCOMENT TO TEST AND DEBUG WITH IONIC SERVE (BROWSER PLATFORM)
-    this.slides.lockSwipes(true);
+    // this.slides.lockSwipes(true);
   }
 
   refresh(): void { }
@@ -160,7 +160,7 @@ export class DocumentsToSendPage implements OnInit, OnDestroy {
       mergeMap(res => this.service.createForwards({
         titulo: this.stepsValue.basicStep.titleForward,
         destinosIds: this.stepsValue.addresseesStep.map(
-          (dest: Destination) => {
+          (dest: DestinationReceive) => {
             return dest.id;
           }),
         conteudo: this.stepsValue.messageStep.message,

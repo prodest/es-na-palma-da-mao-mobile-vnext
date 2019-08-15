@@ -1,9 +1,15 @@
-export interface Destination {
+export interface DestinationReceive {
   id: string;
   descricao: string;
   tipo?: string;
 }
 
+export interface Destination {
+  id: string;
+  nome: string;
+  descricao: string;
+  tipo?: string;
+}
 export interface DocumentSend {
   File: Buffer;
   Assinar: boolean;

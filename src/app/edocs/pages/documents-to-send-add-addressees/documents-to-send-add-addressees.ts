@@ -1,7 +1,8 @@
 import { Component, ChangeDetectionStrategy, OnInit } from '@angular/core';
 import { NavController, NavParams, IonicPage, Events } from 'ionic-angular';
-import { Destination, DocumentsToSendService } from '../../state';
+import { DocumentsToSendService, Destination } from '../../state';
 import deburr from 'lodash-es/deburr';
+import { map } from 'rxjs/operators';
 
 @IonicPage({
   segment: 'documentos-para-enviar-adicionar-destinatario'
@@ -39,7 +40,19 @@ export class DocumentsToSendAddAddresseesPage implements OnInit {
   filteredGovAgencies: Destination[];
 
   constructor(public navCtrl: NavController, public navParams: NavParams, private service: DocumentsToSendService, private events: Events) {
-    this.service.getDestinations().subscribe(destination => {
+    this.service.getDestinations()
+    .pipe(
+      map(destinations => destinations.map(dest => {
+        const descriptionSplited = dest.descricao.split('-');
+        const destination: Destination = {
+          ...dest,
+          nome: descriptionSplited[0].trim(),
+          descricao: descriptionSplited[1].trim()
+        };
+        return destination
+      }))
+    )
+    .subscribe(destination => {
       this.govAgencies = this.filteredGovAgencies = destination;
     });
     this.addressees = this.navParams.data;
@@ -51,7 +64,7 @@ export class DocumentsToSendAddAddresseesPage implements OnInit {
   search(e) {
     const search = this.normalize(e.target.value);
     this.filteredGovAgencies = this.govAgencies.filter(agency => {
-      return this.normalize(agency.descricao).includes(search);
+      return this.normalize(agency.descricao).includes(search) || this.normalize(agency.nome).includes(search);;
     });
   }
 

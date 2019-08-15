@@ -9,7 +9,7 @@ import { fromPromise } from 'rxjs/observable/fromPromise';
 
 import { ApiBaseService } from './api-base.service';
 import { Document } from './documents.model';
-import { Destination, CaptureReceive, CapturePostBody, ForwardsRecieve, ForwardPostBody } from './documents-to-send.model';
+import { DestinationReceive, CaptureReceive, CapturePostBody, ForwardsRecieve, ForwardPostBody } from './documents-to-send.model';
 
 /**
  *
@@ -31,8 +31,8 @@ export class DocumentsToSendApiService extends ApiBaseService<Document> {
   /**
    *
    */
-  getDestinations(): Observable<Destination[]> {
-    return this.http.get<Destination[]>(this.endpoint(`Destinos`), {}).pipe(share());
+  getDestinations(): Observable<DestinationReceive[]> {
+    return this.http.get<DestinationReceive[]>(this.endpoint(`Destinos`), {}).pipe(share());
   }
 
   captureDocuments(body: CapturePostBody): Observable<CaptureReceive> {

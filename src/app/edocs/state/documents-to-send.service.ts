@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { DocumentsToSendApiService } from './documents-to-send.api.service';
-import { Destination, ForwardPostBody, ForwardsRecieve, CapturePostBody, CaptureReceive, WizardSteps } from './documents-to-send.model';
+import { DestinationReceive, ForwardPostBody, ForwardsRecieve, CapturePostBody, CaptureReceive, WizardSteps } from './documents-to-send.model';
 import { Observable } from 'rxjs/Observable';
 import { DocumentsToSendStore } from './documents-to-send.store';
 
@@ -9,7 +9,7 @@ export class DocumentsToSendService {
 
   constructor(private api: DocumentsToSendApiService, private store: DocumentsToSendStore) { }
 
-  getDestinations(): Observable<Destination[]> {
+  getDestinations(): Observable<DestinationReceive[]> {
     return this.api.getDestinations();
   }
 

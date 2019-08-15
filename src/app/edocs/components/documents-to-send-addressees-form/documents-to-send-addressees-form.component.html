@@ -4,8 +4,8 @@
       <ion-row>
         <ion-col class="colAddr" *ngFor="let addressee of (form.get('addressees')?.value||[]); let i = index">
           <ion-card class="cardAddr">
-            <div class="contentCardAddr" item-start>
-              <p class="titleAddr">{{ limite(addressee.descricao) }}</p>
+            <div class="contentCardAddr" (click)="showName(addressee)" item-start>
+              <p class="titleAddr">{{ limite(addressee.nome) }}</p>
               <p class="subtitleAddr">{{ addressee.tipo }}</p>
             </div>
             <button ion-button (click)="onRemoveAddressee.emit(i)" class="closeAddr" color="danger" no-padding clear>

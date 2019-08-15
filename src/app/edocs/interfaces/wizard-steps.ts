@@ -1,4 +1,4 @@
-import { Destination } from "../state";
+import { DestinationReceive } from "../state";
 
 /**
  * @description wizard step output interface
@@ -20,9 +20,9 @@ export interface IBaseStepOutput {
  * @date 2019-07-24
  * @export
  * @interface IAddresseesStepOutput
- * @extends {Array<Destination>}
+ * @extends {Array<DestinationReceive>}
  */
-export interface IAddresseesStepOutput extends Array<Destination> {}
+export interface IAddresseesStepOutput extends Array<DestinationReceive> {}
 
 /**
  * @description wizard doc step output interface

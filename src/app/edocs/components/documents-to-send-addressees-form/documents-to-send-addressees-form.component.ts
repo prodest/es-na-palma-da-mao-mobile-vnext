@@ -31,6 +31,10 @@ export class DocumentsToSendAddresseesFormComponent extends FormBase implements 
     this.showErrors();
   }
 
+  showName(addresee: Destination): void {
+    console.log(`show ${addresee.descricao}`);
+  }
+
   submit() {
     this.onSubmitClick(this.form.value);
     this.cdr.detectChanges();

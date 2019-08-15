@@ -44,7 +44,7 @@
         <ion-scroll class="scrollable" scrollY="true" detail-none>
           <ion-list>
             <button ion-item *ngFor="let agency of filteredGovAgencies" (click)="addAddressees(agency)">
-              {{ limite(agency.descricao) }}
+              {{ limite(agency.nome) }}
             </button>
           </ion-list>
           <ion-item *ngIf="filteredGovAgencies && !filteredGovAgencies.length" text-center no-lines>
