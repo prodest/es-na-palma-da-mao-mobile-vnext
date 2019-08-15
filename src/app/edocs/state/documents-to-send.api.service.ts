@@ -1,7 +1,6 @@
 import { FileTransfer } from '@ionic-native/file-transfer';
 import { HttpClient } from '@angular/common/http';
 import { Inject, Injectable } from '@angular/core';
-// import { ID } from '@datorama/akita';
 import { Environment, EnvVariables, AuthService } from '@espm/core';
 import { Observable } from 'rxjs/Observable';
 import { share, map, mergeMap } from 'rxjs/operators';

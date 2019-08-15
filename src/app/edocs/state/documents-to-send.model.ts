@@ -104,5 +104,4 @@ export enum WizardSteps {
   ADDRESSEES = 'addresseesStep',
   DOC = 'docStep',
   MESSAGE = 'messageStep',
-  ACTIVE = 'activeStep'
 }

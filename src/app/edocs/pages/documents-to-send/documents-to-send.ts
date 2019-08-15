@@ -17,7 +17,6 @@ import {
   DocumentsToSendDocComponent,
   DocumentsToSendMessageComponent
 } from '../../components';
-import { dev } from '@espm/core/environment/environment.dev';
 import { DestinationReceive, DocumentsToSendService, DocumentsToSendQuery, WizardSteps } from '../../state';
 
 @IonicPage({
@@ -67,13 +66,10 @@ export class DocumentsToSendPage implements OnInit, OnDestroy {
       this.activeStep = this.messageStep;
     }
 
-    // this.service.storeUpdate(this.activeStep, WizardSteps.ACTIVE);
     this.slides.lockSwipes(false);
     this.slides.slideNext();
     this.slides.lockSwipes(true);
 
-    ////
-    this.query.getWizardState().subscribe(query => console.log('NextSlide Query', query));
   }
 
   prevSlide() {
@@ -85,31 +81,12 @@ export class DocumentsToSendPage implements OnInit, OnDestroy {
       this.activeStep = this.docStep;
     }
 
-    // this.service.storeUpdate(this.activeStep, WizardSteps.ACTIVE);
     this.slides.lockSwipes(false);
     this.slides.slidePrev();
     this.slides.lockSwipes(true);
   }
 
   ngOnInit(): void {
-    ////
-    console.log(dev.api.edocs);
-    // this.query.getWizardState().subscribe(query => {
-    //   if (query.addresseesStepState) {
-    //     this.stepsValue.addresseesStep = query.addresseesStepState;
-    //   }
-    //   if (query.basicStepState) {
-    //     this.stepsValue.basicStep = query.basicStepState;
-    //   }
-    //   if (query.docStepState) {
-    //     this.stepsValue.docStep = query.docStepState;
-    //   }
-    //   if (query.messageStepState) {
-    //     this.stepsValue.messageStep = query.messageStepState;
-    //   }
-    //   ////
-    //   console.log(this.stepsValue);
-    // });
 
     this.subscriptions = [
       this.basicStep.onComplete.subscribe((value: IBaseStepOutput) => {
@@ -131,11 +108,9 @@ export class DocumentsToSendPage implements OnInit, OnDestroy {
       })
     ];
     this.activeStep = this.basicStep;
-    // console.log('ACTIVE ', this.activeStep)
-    // this.service.storeUpdate(this.activeStep, WizardSteps.ACTIVE);
     this.file = this.navParams.get('filePath');
     // this.file = 'file.pdf'; // UNCOMENT TO TEST AND DEBUG WITH IONIC SERVE (BROWSER PLATFORM)
-    // this.slides.lockSwipes(true);
+    this.slides.lockSwipes(true);
   }
 
   refresh(): void { }

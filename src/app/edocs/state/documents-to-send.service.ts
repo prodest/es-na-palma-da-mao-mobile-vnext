@@ -35,9 +35,6 @@ export class DocumentsToSendService {
       case WizardSteps.MESSAGE:
         this.store.messageStepUpdate(step);
         break;
-      case WizardSteps.ACTIVE:
-        this.store.activeStepUpdate(step);
-        break;
       default:
         break;
     }

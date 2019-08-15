@@ -2,6 +2,7 @@ import { Component, OnInit, OnChanges, SimpleChanges, Input, ChangeDetectionStra
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { FormBase } from '@espm/core';
 import { Destination } from '../../state';
+import { AlertController } from 'ionic-angular';
 
 @Component({
   selector: 'edocs-documents-to-send-addressees-form',
@@ -14,7 +15,7 @@ export class DocumentsToSendAddresseesFormComponent extends FormBase implements 
   @Input() addressees: Destination[] = [];
   @Output() onRemoveAddressee: EventEmitter<number> = new EventEmitter()
 
-  constructor(formBuilder: FormBuilder, private cdr: ChangeDetectorRef) {
+  constructor(formBuilder: FormBuilder, private cdr: ChangeDetectorRef, private alert:AlertController) {
     super(formBuilder);
   }
 
@@ -32,7 +33,12 @@ export class DocumentsToSendAddresseesFormComponent extends FormBase implements 
   }
 
   showName(addresee: Destination): void {
-    console.log(`show ${addresee.descricao}`);
+    const alert = this.alert.create({
+      title: addresee.nome,
+      message: addresee.descricao,
+      buttons: ['OK'],
+    });
+    alert.present();
   }
 
   submit() {
