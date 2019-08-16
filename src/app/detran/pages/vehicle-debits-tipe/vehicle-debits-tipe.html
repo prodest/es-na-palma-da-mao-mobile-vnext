@@ -1,20 +1,12 @@
-<ion-content>
-    <div class="back"><button (click)="goBack()">
-            <ion-icon ios="ios-arrow-round-back" md="md-arrow-round-back"></ion-icon>
-        </button>
-    </div>
-    <div class="debit">
-        <ion-title>Débitos</ion-title>
-    </div>
-    <div class="componente">
-        <espm-vehicle [vehicle]="vehicle"></espm-vehicle>
-    </div>
-    <ion-list>
-        <button ion-item *ngFor="let item of botoes" (click)="pushNext(item.tipo)" [disabled]="!item.disable" >
-            {{ item.nome }}
-        </button>
-    </ion-list>
-    <button menuToggle class="foot-css">
-        <ion-icon name="menu"></ion-icon>
+<module-page [title]="'Débitos'">
+  <espm-vehicle [vehicle]="vehicle"></espm-vehicle>
+  <ion-list>
+    <button *ngFor="let item of botoes"
+      (click)="pushNext(item.tipo)"
+      [disabled]="!item.disable"
+      ion-button block large round icon-end>
+      {{ item.nome }}
+      <ion-icon name="ios-arrow-forward"></ion-icon>
     </button>
-</ion-content>
+  </ion-list>
+</module-page>

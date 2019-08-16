@@ -1,73 +1,48 @@
-
-
-<ion-content *ngIf="(vehicles$ | async ) as vehicles">
-    
-    <div>
-      <div class="back"><button (click)="goBack()"> 
-          <ion-icon ios="ios-arrow-round-back" md="md-arrow-round-back"></ion-icon>
+<module-page [title]="'Meus veículos'"
+  *ngIf="(vehicles$ | async ) as vehicles">
+  
+  <div class="remove">
+    <ion-buttons *ngIf="(vehicles$ | async )?.length" end>
+      <button *ngIf="!editing"
+        ion-button
+        icon-only
+        (click)="toggleEditMode($event)">
+        <ion-icon name="md-create"></ion-icon>
       </button>
-    </div>
-    <div class="remove"><ion-buttons *ngIf="(vehicles$ | async )?.length"
-      end>
-<button *ngIf="!editing"
-   ion-button
-   icon-only
-   (click)="toggleEditMode($event)">
-<ion-icon name="md-create"></ion-icon>
-</button>
-<button *ngIf="editing"
-   ion-button
-   icon-only
-   (click)="toggleEditMode($event)">
-<ion-icon name="close"></ion-icon>
-</button>
-</ion-buttons></div>
-        
-         </div>
-    <div>
-        <ion-title>Meus veículos</ion-title>
-    </div>
+      <button *ngIf="editing"
+        ion-button
+        icon-only
+        (click)="toggleEditMode($event)">
+        <ion-icon name="close"></ion-icon>
+      </button>
+    </ion-buttons>
+  </div>
+  
   <ion-list *ngIf="vehicles && vehicles.length" >
     <espm-vehicle [vehicle]="vehicle"
-                  *ngFor="let vehicle of vehicles"
-                  [class.disabled]="editing"
-                  (click)="showDebitTipe(vehicle)">
-      <!-- <ion-list *ngIf="vehicles && vehicles.length">
-        <ion-item>
-          <button class="vehicle__button" *ngIf="!editing" ion-button clear item-end color-secondary-fg (click)="showTickets(vehicle)">MULTAS</button>
-        </ion-item>
-        <ion-item>
-          <button class="vehicle__button" *ngIf="!editing" ion-button clear item-end color-secondary-fg (click)="showDebitTipe(vehicle)">DÉBITOS</button>
-        </ion-item>
-      </ion-list>       -->
+      *ngFor="let vehicle of vehicles"
+      [class.disabled]="editing"
+      (click)="showDebitTipe(vehicle)"
+    >
       <button class="vehicle__button"
-              *ngIf="editing"
-              ion-button
-              clear
-              item-end
-              color-secondary-fg
-              (click)="confirmRemove(vehicle)">REMOVER</button>
+        *ngIf="editing"
+        ion-button clear item-end color-secondary-fg
+        (click)="confirmRemove(vehicle)"
+      >REMOVER</button>
     </espm-vehicle>
   </ion-list>
-
-  <ion-item *ngIf="vehicles && !vehicles.length"
-            text-center>
-    <h2>Nenhum veículo cadastrado</h2>
-    <p text-wrap>Adicione veículos para consulta suas multas</p>
+  
+  <ion-item id="not-found" *ngIf="vehicles && !vehicles.length" shadow text-center>
+    <h2>Nenhum veículo cadastrado!</h2>
+    <p text-wrap>Adicione veículos para consultar seus débitos.</p>
   </ion-item>
 
-  <ion-fab right
-           bottom
-           margin-right
-           margin-bottom>
-    <button class="pop-in"
-            ion-fab
-            color-primary
-            (click)="addVehicle()">
+  <ion-fab right bottom margin-right>
+    <button
+      class="pop-in"
+      ion-fab
+      (click)="addVehicle()">
       <ion-icon name="add"></ion-icon>
     </button>
   </ion-fab>
-  <button menuToggle class="foot-css">
-      <ion-icon name="menu"></ion-icon>
-    </button>
-</ion-content>
+</module-page>

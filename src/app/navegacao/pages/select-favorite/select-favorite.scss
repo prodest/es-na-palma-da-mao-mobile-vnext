@@ -7,6 +7,8 @@ page-select-favorite {
 
   .scroll-content {
     background-color: white;
+    display: flex;
+    flex-direction: column;
   }
 
   /* Header */
@@ -16,6 +18,7 @@ page-select-favorite {
     font-size: 15px;
     background-color: transparent;
     padding: 0;
+    align-self: flex-start;
   }
 
   /* Marcar todos como favoritos */
@@ -82,7 +85,9 @@ page-select-favorite {
 
   /* Lista de módulos */
   #modules-list {
+    flex: 1;
     padding: 0px 15px;
+    overflow: scroll;
 
     .fav-item {
       display: flex;

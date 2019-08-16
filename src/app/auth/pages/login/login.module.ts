@@ -3,7 +3,7 @@ import { ComponentsModule } from '@espm/shared/components/components.module';
 import { NoMenuDirectiveModule } from '@espm/shared/directives';
 import { IonicPageModule } from 'ionic-angular';
 
-import { LargeButtonComponentModule, NavTitleComponentModule } from '@espm/shared/components';
+import { LargeButtonComponentModule, NavTitleComponentModule, NavHeaderComponentModule } from '@espm/shared/components';
 
 import { LoginPage } from './login';
 
@@ -13,6 +13,7 @@ import { LoginPage } from './login';
     ComponentsModule,
     LargeButtonComponentModule,
     NavTitleComponentModule,
+    NavHeaderComponentModule,
     NoMenuDirectiveModule,
     IonicPageModule.forChild(LoginPage)
   ]

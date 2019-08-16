@@ -1,0 +1,44 @@
+module-page {
+  
+  height: 100%;
+  background-color: #e9f7fe; // $primary-very-light
+  display: flex;
+  flex-direction: column;
+
+  nav-header {
+    background-color: #003069;
+  }
+  
+  #content {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+    overflow: scroll;
+  }
+
+  [shadow] {
+    box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.14),
+    0 3px 1px -2px rgba(0, 0, 0, 0.2),
+    0 1px 5px 0 rgba(0, 0, 0, 0.12);
+  }
+
+  [separator] {
+    height: 2px;
+    width: 100%;
+    background-color: #004297; // 6584cc
+    margin: 0 auto 15px auto;
+    border-radius: 5px;
+  }
+
+}
+
+[no-header] nav-header,
+[no-footer] main-footer-bar {
+  display: none !important;
+}
+
+[no-scroll] {
+  #content {
+    overflow: hidden;
+  }
+}

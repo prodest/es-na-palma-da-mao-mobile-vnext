@@ -1,5 +1,19 @@
 page-add-vehicle {
+  font-family: 'Poppins';
+
   ion-content {
     background-image: none !important;
+  }
+
+  button {
+    font-family: 'Poppins';
+  }
+
+  #salvar {
+    background-color: #004297;
+  }
+
+  #cancelar {
+    background-color: #bf272d;
   }
 }
