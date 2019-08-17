@@ -1,11 +1,25 @@
 nav-header {
   background-color: transparent;
 
-  #nav-header-return {
-    margin-top: 15px;
-    margin-left: 15px;
-    font-size: 15px;
-    background-color: transparent;
-    padding: 0;
+  #button-bar {
+    padding: 15px;
+    padding-bottom: 0;
+    display: flex;
+    
+    button {
+      font-size: 15px;
+      background-color: transparent;
+      padding: 0;
+    }
+
+    #navheader-buttons, [topbar] {
+      flex: 1;
+      display: flex;
+      justify-content: flex-end;
+
+      ion-icon {
+        color: white;;
+      }
+    }
   }
 }
