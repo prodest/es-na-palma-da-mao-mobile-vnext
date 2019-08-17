@@ -1,34 +1,23 @@
 page-news-list {
+
+  #content, .scroll-content {
+    padding: 0;
+    background-color: inherit;
+  }
+  
   ion-item ion-label.label {
     margin-bottom: 5px;
   }
-
+  
   h2 {
     white-space: normal;
     margin-bottom: 5px;
   }
 
-  p {
-    margin: 10px 0 !important;
-    color: #999 !important;
+  #options {
+    /* position: absolute;
+    right: 10px;
+    top: 10px;
+    width: 60%; */
   }
-  .active, [active], .toolbar-title, ion-navbar.toolbar, .toolbar-background {
-    background-color: #e9f7fe;
-    color: #004297;
-    font-weight: bold;
-    text-align: center;
-  }
-  body, input, textarea, keygen, select, button {
-    font-family: "Roboto";
-    float: left;
-    background-color: #e9f7fe;
-    color: #2BACE2;
-    font-size: x-large;
-}
-.bar-button-md[icon-only] ion-icon {
-color: #004297;
-}
-.item-md {
-  background-color: whitesmoke;
-}
 }
