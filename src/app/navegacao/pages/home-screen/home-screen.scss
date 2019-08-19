@@ -12,6 +12,11 @@ page-home-screen {
   ion-slide {
     display: block;
   }
+  @media screen and (max-width: 334px){
+    large-button button p {
+      font-size: 1.35rem;
+  }
+    }
 
   .slide-zoom {
     height: 100%;

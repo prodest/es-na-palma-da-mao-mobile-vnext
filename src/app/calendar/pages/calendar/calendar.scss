@@ -82,12 +82,25 @@ button{
 
   float: left;
   background-color: #fff;
-  font-size: x-large;
   color: #2BACE2;
 }
 h1{
   text-align: center;
   color: #004297;
 
+}
+
+ /* RODAPÉ */
+ .footer {
+  display: flex;
+  height: 50px;
+  width: 100%;
+  position: relative;
+  padding: 0 10vmin;
+
+  button {
+    background: transparent;
+    margin-bottom: 4vmin;
+  }
 }
 }

@@ -67,7 +67,12 @@ page-my-services {
       bottom: 0;
       left: 0;
     }
-
+    @media screen and (max-width: 300px){
+nav-title .content p {
+    font-size: 23px;
+    height: 30px;
+}
+    }
     /* Botão para a tela de seleção de favoritos */
     #button-wrapper {
       position: absolute;
