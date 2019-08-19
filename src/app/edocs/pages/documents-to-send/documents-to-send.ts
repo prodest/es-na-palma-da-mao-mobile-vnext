@@ -17,7 +17,7 @@ import {
   DocumentsToSendDocComponent,
   DocumentsToSendMessageComponent
 } from '../../components';
-import { DestinationReceive, DocumentsToSendService, DocumentsToSendQuery, WizardSteps } from '../../state';
+import { DestinationReceive, DocumentsToSendService, /*DocumentsToSendQuery,*/ WizardSteps } from '../../state';
 
 @IonicPage({
   segment: 'documentos-para-enviar'
@@ -51,7 +51,7 @@ export class DocumentsToSendPage implements OnInit, OnDestroy {
 
   constructor(private navParams: NavParams,
     private service: DocumentsToSendService,
-    private query: DocumentsToSendQuery,
+    /*private query: DocumentsToSendQuery,*/
     private loadingService: LoadingService,
     private alertCtrl: AlertController,
     private navCtrl: NavController) { }
@@ -109,7 +109,7 @@ export class DocumentsToSendPage implements OnInit, OnDestroy {
     ];
     this.activeStep = this.basicStep;
     this.file = this.navParams.get('filePath');
-    // this.file = 'file.pdf'; // UNCOMENT TO TEST AND DEBUG WITH IONIC SERVE (BROWSER PLATFORM)
+    // this.file = ':/storage/sdcard0/DCIM/Camera/file.jpg'; // UNCOMENT TO TEST AND DEBUG WITH IONIC SERVE (BROWSER PLATFORM)
     this.slides.lockSwipes(true);
   }
 
@@ -123,9 +123,8 @@ export class DocumentsToSendPage implements OnInit, OnDestroy {
     if (this.isSending) {
       return;
     }
-    this.query.getWizardState().subscribe(query => console.log('Query Send', query));
     const loading = this.loadingService.show('Encaminhando documento');
-    this.service.captureDocuments({
+    this.service.captureDocuments(this.stepsValue.docStep.name, {
       File: this.file,
       Assinar: false,
       // ClasseId: null, // deixar null pra cidadão

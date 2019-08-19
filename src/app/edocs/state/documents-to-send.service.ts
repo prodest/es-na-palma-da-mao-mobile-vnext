@@ -13,8 +13,8 @@ export class DocumentsToSendService {
     return this.api.getDestinations();
   }
 
-  captureDocuments(body: CapturePostBody): Observable<CaptureReceive> {
-    return this.api.captureDocuments(body);
+  captureDocuments(fileName: string, body: CapturePostBody): Observable<CaptureReceive> {
+    return this.api.captureDocuments(fileName, body);
   }
 
   createForwards(body: ForwardPostBody): Observable<ForwardsRecieve> {

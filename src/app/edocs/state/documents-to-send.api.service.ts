@@ -34,13 +34,14 @@ export class DocumentsToSendApiService extends ApiBaseService<Document> {
     return this.http.get<DestinationReceive[]>(this.endpoint(`Destinos`), {}).pipe(share());
   }
 
-  captureDocuments(body: CapturePostBody): Observable<CaptureReceive> {
+  captureDocuments(fileName: string, body: CapturePostBody): Observable<CaptureReceive> {
     const fileTransfer = this.transfer.create();
     const params: { [key: string]: string } = {}
     Object.keys(body).forEach(key => params[key] = String(body[key]))
     return this.auth.getAccessToken().pipe(
       mergeMap(token => fromPromise(fileTransfer.upload(body.File, this.endpoint('Documentos'), {
         fileKey: 'File',
+        fileName: fileName,
         params,
         headers: {
           'Authorization': `Bearer ${token}`

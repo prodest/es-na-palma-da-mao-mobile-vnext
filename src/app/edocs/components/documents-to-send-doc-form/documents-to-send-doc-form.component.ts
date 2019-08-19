@@ -74,7 +74,7 @@ export class DocumentsToSendBasicFormComponent extends FormBase implements OnIni
           documentPaperType.setValidators([Validators.required]);
         }
         this.selectChange();
-      });
+      });    
   }
 
   ngOnDestroy(): void {
@@ -97,7 +97,6 @@ export class DocumentsToSendBasicFormComponent extends FormBase implements OnIni
   }
 
   selectChange(): void {
-    console.log('Form: ', this.form)
     this.cdr.detectChanges()
   }
 
