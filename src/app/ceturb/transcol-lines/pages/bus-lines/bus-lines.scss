@@ -1,4 +1,20 @@
 page-bus-lines {
+  #content {
+    padding: 0;
+    .scroll-content {
+      padding: 0;
+      background-color: #e9f7fe;
+    }
+  }
+
+  ion-searchbar {
+    background-color: #003069 !important;
+  }
+
+  ion-list {
+    overflow: scroll;
+  }
+
   .busline_number {
     font-weight: 700;
     align-self: flex-start;

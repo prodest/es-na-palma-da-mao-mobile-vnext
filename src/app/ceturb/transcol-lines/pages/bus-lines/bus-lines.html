@@ -1,11 +1,5 @@
-<ion-header color-primary-bg>
-  <ion-navbar hideBackButton>
-    <button ion-button
-            menuToggle>
-      <ion-icon name="menu"></ion-icon>
-    </button>
-    <ion-title>Linhas Transcol</ion-title>
-  </ion-navbar>
+<module-page title="Linhas Transcol" no-scroll>
+  <ion-content>
   <ion-searchbar placeholder="Pesquisar..."
                  [showCancelButton]="true"
                  cancelButtonText="Cancelar"
@@ -14,9 +8,6 @@
                  (ionClear)="clear($event)"
                  (ionCancel)="clear($event)">
   </ion-searchbar>
-</ion-header>
-
-<ion-content>
   <ion-list-header *ngIf="filteredLines">
     <ng-container *ngIf="filteredLines.length"> Exibindo {{filteredLines.length}} linhas</ng-container>
     <ng-container *ngIf="!filteredLines.length"> Nenhuma linha de ônibus encontrada</ng-container>
@@ -45,3 +36,4 @@
     </button>
   </ion-list>
 </ion-content>
+</module-page>
