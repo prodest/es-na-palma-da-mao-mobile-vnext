@@ -1,25 +1,23 @@
-<ion-header color-primary-bg>
+<!-- <ion-header color-primary-bg>
   <ion-navbar>
-    <button ion-button
-            menuToggle>
-      <ion-icon name="menu"></ion-icon>
-    </button>
     <ion-title *ngIf="line">{{line.number}} {{line.name | capitalize }}</ion-title>
-    <ion-buttons end>
-      <button *ngIf="line"
-              ion-button
-              icon-only
-              (click)="toggleFavorite(line)">
-        <ion-icon name="md-star"
-                  *ngIf="line.isFavorite"></ion-icon>
-        <ion-icon name="md-star-outline"
-                  *ngIf="!line.isFavorite"></ion-icon>
-      </button>
-    </ion-buttons>
   </ion-navbar>
+  
+</ion-header> -->
+<module-page [title]="line !== undefined ? line.number+' '+line.name : ''">
+  <ion-buttons topbar>
+    <button *ngIf="line"
+            icon-only
+            (click)="toggleFavorite(line)">
+      <ion-icon name="md-star"
+                *ngIf="line.isFavorite"></ion-icon>
+      <ion-icon name="md-star-outline"
+                *ngIf="!line.isFavorite"></ion-icon>
+    </button>
+  </ion-buttons>
   <ion-toolbar no-border-top>
     <ion-segment [(ngModel)]="tab"
-                 (ionChange)="tab=$event.value">
+                  (ionChange)="tab=$event.value">
       <ion-segment-button value="info">
         Horários
       </ion-segment-button>
@@ -28,8 +26,6 @@
       </ion-segment-button>
     </ion-segment>
   </ion-toolbar>
-</ion-header>
-<ion-content>
   <ng-container *ngIf="line">
     <ng-container *ngIf="tab==='info'">
       <ng-container *ngFor="let departure of line.schedule?.departures">
@@ -82,4 +78,4 @@
       </ng-container>
     </ng-container>
   </ng-container>
-</ion-content>
+</module-page>

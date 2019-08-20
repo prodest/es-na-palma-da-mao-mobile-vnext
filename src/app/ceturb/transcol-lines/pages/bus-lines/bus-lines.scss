@@ -11,8 +11,17 @@ page-bus-lines {
     background-color: #003069 !important;
   }
 
+  ion-list-header {
+    background-color: #fdeff5 !important;
+  }
+
+  ion-list-header ion-label {
+    color: #004297 !important;
+    font-weight: 600;
+  }
+
   ion-list {
-    overflow: scroll;
+    margin: 0 !important;
   }
 
   .busline_number {
@@ -25,6 +34,6 @@ page-bus-lines {
     margin-left: 10px;
   }
   .busline_icon {
-    color: $color-secondary;
+    color: #ff0083 /* $color-secondary */;
   }
 }
