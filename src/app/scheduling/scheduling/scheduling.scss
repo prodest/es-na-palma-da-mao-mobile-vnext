@@ -1,0 +1,30 @@
+page-scheduling {
+  ion-content {
+    background: #208baa url('../assets/imgs/sep/triangles.png') !important;
+  }
+
+  ion-input.ng-touched.ng-invalid {
+    background-color: rgba(255, 0, 0, 0.048);
+  }
+}
+
+.initial-message {
+  color: #fff;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+
+  h2 {
+    font-size: 2rem;
+  }
+}
+
+.limit-bottom {
+  padding-bottom: 45px;
+}
+
+.panel-body, .pre-content {
+  word-break: break-word;
+}

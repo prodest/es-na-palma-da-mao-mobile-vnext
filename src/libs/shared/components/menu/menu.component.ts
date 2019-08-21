@@ -63,6 +63,23 @@ const menus = [
     ]
   },
   {
+    name: 'PRODEST',
+    items: [
+      {
+        title: 'Agendar Atendimento',
+        icon: 'calendar',
+        component: 'SchedulingPage',
+        order: 1
+      },
+      {
+        title: 'Consultar Agendamento',
+        icon: 'search',
+        component: 'ConsultSchedulingPage',
+        order: 1
+      }
+    ]
+  },
+  {
     name: 'E-Docs',
     items: [
       {

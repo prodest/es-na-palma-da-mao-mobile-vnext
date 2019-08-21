@@ -82,3 +82,6 @@ UserInterfaceState.xcuserstate
 # e2e
 /e2e/*.js
 /e2e/*.map
+
+# gradle
+gradle.properties

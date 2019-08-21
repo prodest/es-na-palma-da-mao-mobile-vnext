@@ -27,7 +27,10 @@ export const dev: Environment = {
     feedback: process.env.API_FEEDBACK_URL || 'https://developers.es.gov.br/demandas',
     edocs: process.env.API_EDOCS_URL || 'http://api.e-docs.des.es.gov.br',
     empregabilidade: process.env.API_EMPREGABILIDADE || 'https://api.es.gov.br/dev/selecaodt/concursos',
-    selecaoalunos: process.env.API_SELECAOALUNOS || 'https://api.es.gov.br/selecao-aluno/processos-seletivos'
+    selecaoalunos: process.env.API_SELECAOALUNOS || 'https://api.es.gov.br/selecao-aluno/processos-seletivos',
+    scheduling: process.env.API_SCHEDULING_URL || 'https://agendamento.dchm.es.gov.br/api',
+    guide: process.env.API_GUIDE_URL || 'https://guiadeservicos.dchm.es.gov.br/Servicos',
+    mailer: process.env.API_MAILER_URL || 'https://agendamento.dchm.es.gov.br/email'
   },
   push: {
     senderId: process.env.PUSH_SENDER_ID,
