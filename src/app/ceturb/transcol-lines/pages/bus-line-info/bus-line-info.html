@@ -1,9 +1,3 @@
-<!-- <ion-header color-primary-bg>
-  <ion-navbar>
-    <ion-title *ngIf="line">{{line.number}} {{line.name | capitalize }}</ion-title>
-  </ion-navbar>
-  
-</ion-header> -->
 <module-page [title]="line !== undefined ? line.number+' '+line.name : ''">
   <ion-buttons topbar>
     <button *ngIf="line"
