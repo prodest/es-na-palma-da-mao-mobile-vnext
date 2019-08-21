@@ -33,6 +33,10 @@ ion-menu {
   .menu-inner {
     background: $color-menu-bg !important;
   }
+  .toolbar-background, .toolbar-title {
+    background-color: #004297;
+  }
+  
   ion-content {
     background-color: transparent !important;
     background-image: none;

@@ -1,32 +1,47 @@
 page-news-list-filter {
-  .label-button {
-    float: right;
-    text-transform: uppercase;
-    color: $color-primary;
-  }
-  [color-secondary], .color-secondary {
-    background-color: #004297;
-    color: #fff;
-    border-radius: 25px;
-    width: 50%;
-    margin-left: 27%;
-}
-.active, [active], .toolbar-title, ion-navbar.toolbar, .toolbar-background {
-  background-color: #e9f7fe;
-  color: #004297;
-  text-align: center;
-  font-weight: bold;
-}
-.bar-button-md[icon-only] ion-icon {
-  color: #2BACE2;
-  font-size: x-large;
-}
-.button-md {
-  background-color: #004297;
-  border-radius: 25px;
 
-}
-.label-button {
-  color: #ffff;
-}
+  #content {
+    padding-top: 0;
+    //background-color: white;
+  }
+
+  ion-list {
+    overflow: scroll;
+    margin-top: 16px;
+    margin-bottom: 0 !important;
+
+    ion-list-header {
+      color: #004297 !important;
+      font-weight: 600 !important;
+      background-color: #fdeff5 !important;      
+    }
+    
+    #mark-all-wrapper { 
+      padding: 0;
+      
+      ion-label {
+        display: flex;
+        flex-direction: column;
+        margin: 0;
+        
+        #mark-all {
+          align-self: center;
+          text-transform: none;
+          background-color: #004297;
+          font-size: 1.4rem;
+          padding: 0 25px;
+          height: 3.6rem;
+        }
+      }
+    }
+
+    ion-item {
+      font-weight: 500 !important;
+    }
+  }
+
+  large-button {
+    width: 75%;
+    align-self: center;
+  }
 }

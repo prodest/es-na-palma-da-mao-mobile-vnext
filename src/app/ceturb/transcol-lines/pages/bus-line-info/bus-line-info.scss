@@ -1,4 +1,39 @@
 page-bus-line-info {
+  nav-header p {
+    font-size: 125% !important;
+    
+  }
+  
+  #content {
+    padding: 0;
+
+    .toolbar-background {
+      background-color: #003069 !important;
+    }
+    .toolbar-md {
+      padding: 0;
+    }
+    .segment-activated {
+      background-color: #820043;
+    }
+    .segment-button {
+      border-color: #820043;
+    }
+  }
+
+  ion-list-header {
+    background-color: #fdeff5 !important;
+  }
+
+  ion-list-header ion-label {
+    color: #004297 !important;
+    font-weight: 600;
+  }
+
+  ion-list {
+    margin: 0 !important;
+  }
+
   .day-group {
     margin-bottom: 0;
     padding-bottom: 30px;
@@ -25,7 +60,7 @@ page-bus-line-info {
     margin-right: 8px;
   }
 
-  toolbar-ios .segment-button:not(.segment-activated) {
+  .segment-ios .segment-button:not(.segment-activated) {
     background-color: white;
   }
 }

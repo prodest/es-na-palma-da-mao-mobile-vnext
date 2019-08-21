@@ -1,22 +1,16 @@
 <module-page [title]="'Meus veículos'"
   *ngIf="(vehicles$ | async ) as vehicles">
   
-  <div class="remove">
-    <ion-buttons *ngIf="(vehicles$ | async )?.length" end>
-      <button *ngIf="!editing"
-        ion-button
-        icon-only
-        (click)="toggleEditMode($event)">
-        <ion-icon name="md-create"></ion-icon>
-      </button>
-      <button *ngIf="editing"
-        ion-button
-        icon-only
-        (click)="toggleEditMode($event)">
-        <ion-icon name="close"></ion-icon>
-      </button>
-    </ion-buttons>
-  </div>
+  <ion-buttons *ngIf="(vehicles$ | async )?.length" topbar>
+    <button *ngIf="!editing" icon-only
+      (click)="toggleEditMode($event)">
+      <ion-icon name="md-create"></ion-icon>
+    </button>
+    <button *ngIf="editing" icon-only
+      (click)="toggleEditMode($event)">
+      <ion-icon name="close"></ion-icon>
+    </button>
+  </ion-buttons>
   
   <ion-list *ngIf="vehicles && vehicles.length" >
     <espm-vehicle [vehicle]="vehicle"

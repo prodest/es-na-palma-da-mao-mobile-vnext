@@ -1,31 +1,18 @@
-<ion-header>
-    <ion-navbar hideBackButton>
-        <button (click)="back()">
-            <ion-icon ios="ios-arrow-round-back" md="md-arrow-round-back"></ion-icon>
-          </button>
-        <ion-title>Edições Recentes</ion-title>
-    </ion-navbar>
-</ion-header>
-
-<ion-content>
-    <ng-container *ngSubscribe="latestEditions$ as latestEditions">
-        <ion-list>
-            <ion-item *ngFor="let edition of latestEditions">
-                <h3>
-                    <strong>{{edition.date}}</strong> - Diário Oficial do ES</h3>
-
-                <button ion-button
-                        item-end
-                        accent
-                        clear
-                        icon-start
-                        (click)="openEdition(edition.url)">
-                    <ion-icon name="download"></ion-icon>
-                    BAIXAR
-                </button>
-            </ion-item>
-        </ion-list>
-        <ion-spinner page-loading
-                     *ngIf="!latestEditions"></ion-spinner>
-    </ng-container>
-</ion-content>
+<module-page title="Edições Recentes">
+  <ng-container *ngSubscribe="latestEditions$ as latestEditions">
+    <ion-list>
+      <ion-item shadow *ngFor="let edition of latestEditions">
+        <h3><strong>{{edition.date}}</strong> - Diário Oficial do ES</h3>
+        <button ion-button
+          item-end
+          clear
+          icon-start
+          (click)="openEdition(edition.url)">
+          <ion-icon name="download"></ion-icon>
+          BAIXAR
+        </button>
+      </ion-item>
+    </ion-list>
+    <ion-spinner page-loading *ngIf="!latestEditions"></ion-spinner>
+  </ng-container>
+</module-page>
