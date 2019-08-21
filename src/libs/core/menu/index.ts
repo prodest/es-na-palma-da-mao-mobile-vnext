@@ -2,7 +2,6 @@ import { InjectionToken } from "@angular/core";
 import { ItemMenu } from "../../../app/navegacao/models";
 
 export const MENUS: ItemMenu[] = [
-    
     {
       id: 2,
       title: 'Notícias ',

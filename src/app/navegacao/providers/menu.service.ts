@@ -1,11 +1,11 @@
 import { Injectable, OnDestroy, Inject } from '@angular/core';
-import { Loading, LoadingController} from 'ionic-angular';
+import { Loading, LoadingController } from 'ionic-angular';
 import { MenuApiService } from './menu-api-service';
 import { MenusStore } from './menus-store';
 import { MenusQuery } from './menus-query';
 import { Observable } from 'rxjs/Observable';
 import { Subject } from 'rxjs/Subject';
-import { takeUntil, filter, map, finalize, tap } from 'rxjs/operators';
+import { takeUntil, filter, map, finalize, flatMap, tap } from 'rxjs/operators';
 import { AuthQuery } from '@espm/core';
 import { ItemMenu, FavoriteMenusData } from '../models';
 import { of } from 'rxjs/observable/of';
@@ -19,7 +19,7 @@ export class MenuService implements OnDestroy {
   private destroyed$ = new Subject();
 
   get menus$() {
-    return this.menuQuery.selectAll();
+    return this.menuQuery.menus$;
   }
 
   constructor(
@@ -33,9 +33,19 @@ export class MenuService implements OnDestroy {
     // salva favoritos no server todas as vezes que os favoritos forem atualizados após o carregamento
     // inicial da loja
     this.menuQuery.favorites$
-      .pipe(filter(() => !this.menusStore.isPristine), 
-       tap(this.saveFavorites), 
-       takeUntil(this.destroyed$))
+      .pipe(
+        filter(() => !this.menusStore.isPristine),
+        filter(() => this.authQuery.isLoggedIn),
+        flatMap(this.saveFavorites),
+        takeUntil(this.destroyed$)
+      )
+      .subscribe();
+
+    this.authQuery.authChanged$
+      .pipe(
+        tap(this.loadMenuData),
+        takeUntil(this.destroyed$)
+      )
       .subscribe();
   }
 
@@ -47,49 +57,53 @@ export class MenuService implements OnDestroy {
     this.destroyed$.complete();
   }
 
+  loadMenu = (): void => {
+    if (this.menusStore.isPristine) {
+      this.loadMenuData();
+    }
+  }
+
   /**
    *
    */
-  loadMenu = (): void => {
-    this.showLoading();
+  private loadMenuData = (): void => {
+      const menus = [...this.menus];
 
-    let menus = [...this.menus];
-   
-    let menus$ = this.authQuery.isLoggedIn
-      ?forkJoin(of(menus), this.api.getFavoriteMenusData()).pipe(map(this.markFavorites))
-      : of(menus);
-    
-    menus$.pipe(finalize(this.dismissLoading)).subscribe(this.storeMenus);
+      if (!this.authQuery.isLoggedIn) {
+        this.storeMenus(menus);
+        return;
+      }
+
+      this.showLoading();
+
+      forkJoin(of(menus), this.api.getFavoriteMenusData())
+        .pipe(
+          map(this.markFavorites),
+          finalize(this.dismissLoading)
+        )
+        .subscribe(this.storeMenus);
   };
 
   /**
-   * 
-   *
    *
    */
   private markFavorites = ([menus, favorites]: [ItemMenu[], FavoriteMenusData]): ItemMenu[] => {
     return menus.map(item => {
-      if(item.isChecked !== false){
-        item.isChecked = favorites.favoriteMenus.some(idMenu => idMenu === item.id);
-      return item;
-      } 
-      return item;
-        
+      return {
+        ...item,
+        isChecked: favorites.favoriteMenus.some(idMenu => idMenu === item.id)
+      };
     });
   };
 
   /**
-   * 
-   *
    *
    */
   private saveFavorites = (favoriteMenus: ItemMenu[]): Observable<FavoriteMenusData> => {
-    if (this.authQuery.isLoggedIn) {
-      return this.api.saveFavoriteMenus({
-        favoriteMenus: favoriteMenus.map(line => line.id),
-        date: new Date().toISOString()
-      });
-    }
+    return this.api.saveFavoriteMenus({
+      favoriteMenus: favoriteMenus.map(line => line.id),
+      date: new Date().toISOString()
+    });
   };
 
   /**
@@ -103,9 +117,8 @@ export class MenuService implements OnDestroy {
   /**
    *
    */
-  storeMenus = (m: ItemMenu[]) =>{
+  storeMenus = (m: ItemMenu[]) => {
     this.menusStore.set(m);
-    console.log("MENUS_STORE>>> ",this.menusStore)
   }
 
   /**
@@ -113,9 +126,15 @@ export class MenuService implements OnDestroy {
    */
   updateMenu = (id: number, isChecked: boolean) => {
     this.menusStore.update(id, { isChecked: isChecked })
-    console.log("UPDATE>>> ",this.menusStore)
   };
 
+  /**
+   * 
+   * @param isChecked 
+   */
+  updateAll(isChecked: boolean) {
+    this.menusStore.updateAll({ isChecked: isChecked });
+  }
 
   /**
    *
@@ -136,7 +155,6 @@ export class MenuService implements OnDestroy {
   };
 
   /**
-   *
    *
    */
   private dismissLoading = () => {

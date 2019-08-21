@@ -5,8 +5,9 @@ import { AuthNeededService } from '@espm/core/auth/auth-needed.service';
 import { ItemMenu } from '../../models';
 import { MenuService } from '../../providers/menu.service';
 import { Subject } from 'rxjs/Subject';
-import { takeUntil, tap } from 'rxjs/operators';
+// import { takeUntil, tap, share } from 'rxjs/operators';
 import { MenusQuery } from '../../providers';
+import { takeUntil, tap } from 'rxjs/operators';
 
 @IonicPage()
 @Component({
@@ -14,12 +15,10 @@ import { MenusQuery } from '../../providers';
   templateUrl: 'select-favorite.html'
 })
 export class SelectFavoritePage implements OnDestroy {
-  isLoggedIn: boolean;
-  public markAll: boolean;
-
   private destroyed$ = new Subject();
 
-  public menus: Array<ItemMenu> = [];
+  allChecked: boolean = false;
+  menus: ItemMenu[];
 
   headerContent: Array<string> = ['Selecione os', 'seus serviços', 'favoritos'];
 
@@ -31,26 +30,23 @@ export class SelectFavoritePage implements OnDestroy {
     private menuService: MenuService,
     private menusQuery: MenusQuery
   ) {
-    
-  }
-  
-  /**
-   *  atualiza "menus" com os dados menuQuery
-   */
-  ionViewWillLoad() {
-    this.menuService.menus$
-    .pipe(
-      takeUntil(this.destroyed$),
-      tap(menus => (this.menus = menus || []))
-    )
-    .subscribe();
+    this.menusQuery.menus$
+      .pipe(takeUntil(this.destroyed$))
+      .subscribe((menus) => this.menus = menus);
 
     this.menusQuery.favorites$
-    .pipe(
-      takeUntil(this.destroyed$),
-      tap(favorites => this.markAll = favorites.length === this.menus.length)
-    )
-    .subscribe();
+      .pipe(
+        takeUntil(this.destroyed$),
+        tap((favorites) => this.allChecked = favorites.length === this.menus.length)
+      )
+      .subscribe()
+  }
+
+  /**
+   * Marca um menu como favorito
+   */
+  markItem(item: ItemMenu) {
+    this.menuService.updateMenu(item.id, !item.isChecked);
   }
 
   /**
@@ -62,42 +58,11 @@ export class SelectFavoritePage implements OnDestroy {
   }
 
   /**
-   * seleciona os serviços favoritos
-   */
-  markItem(item: ItemMenu, value: boolean) {
-    this.menuService.updateMenu(item.id, value);
-    console.log(this.menus);
-  }
-  
-  /**
    * marcar e desmarcar todos os checkbox
    */
-  markUncheckList() {
-    if (this.markAll === true) {
-      this.menus = this.checkAllItemMenu(true);
-    } else {
-      this.menus = this.checkAllItemMenu(false);
-    }
-
-    this.saveFavorites();
-  }
-
-  /**
-   *
-   * @param value
-   */
-  private checkAllItemMenu(value: boolean) {
-    console.log('ALL>>', value);
-    return this.menus.map((item: ItemMenu) => Object.assign({}, item, { isChecked: value }));
-  }
-
-  /**
-   *
-   */
-  saveFavorites() {
-    this.menuService.storeMenus(this.menus);
-    console.log('AKI>>>>>>>>>>======  ', this.menus);
-    // this.back();
+  toggleAll() {
+    this.allChecked = !this.allChecked;
+    this.menuService.updateAll(this.allChecked);
   }
 
   /**
