@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+<a name="5.7.0"></a>
+# [5.7.0](https://github.com/prodest/es-na-palma-da-mao-mobile-vnext/compare/v5.6.5...v5.7.0) (2019-08-21)
+
+
+### Features
+
+* **agendamento:** funcionalidade de agendamento ([4000d00](https://github.com/prodest/es-na-palma-da-mao-mobile-vnext/commit/4000d00))
+
+
+
 <a name="5.6.5"></a>
 ## [5.6.5](https://github.com/prodest/es-na-palma-da-mao-mobile-vnext/compare/v5.6.4...v5.6.5) (2019-06-07)
 
