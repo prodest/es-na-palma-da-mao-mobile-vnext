@@ -4,12 +4,14 @@ import isEqual from 'lodash-es/isEqual';
 
 import { ItemMenu } from '../models';
 import { MenusStore, MenusState } from './menus-store';
-import { distinctUntilChanged, map } from 'rxjs/operators';
+import { distinctUntilChanged, map, share } from 'rxjs/operators';
 import { Observable } from 'rxjs/Observable';
 
 @Injectable()
 export class MenusQuery extends QueryEntity<MenusState, ItemMenu> {
-  favorites$: Observable<ItemMenu[]> = this.selectAll().pipe(map(lines => lines.filter(l => l.isChecked)), distinctUntilChanged(isEqual));
+  favorites$: Observable<ItemMenu[]> = this.selectAll().pipe(map(lines => lines.filter(l => l.isChecked)));
+  menus$: Observable<ItemMenu[]> = this.selectAll().pipe(distinctUntilChanged(isEqual));
+
   /**
    *
    */

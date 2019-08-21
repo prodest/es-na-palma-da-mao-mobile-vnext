@@ -13,10 +13,9 @@
     <ion-item>
       <ion-label>Todos</ion-label>
       <ion-checkbox
-        checked="false"
         id="check-all"
-        [(ngModel)]="markAll"
-        (click)="markUncheckList()"
+        [ngModel]="allChecked"
+        (click)="toggleAll()"
       ></ion-checkbox>
     </ion-item>
   </div>
@@ -28,13 +27,10 @@
         <ion-label>{{itemMenu.title}}</ion-label>
         <ion-checkbox
           id="bt-{{itemMenu.id}}"
-          class=""
-          checked="false"
           [(ngModel)]="itemMenu.isChecked"
-          (ionChange)="markItem(itemMenu, $event.value)"
+          (click)="markItem(itemMenu)"
         ></ion-checkbox>
       </ion-item>
     </ion-list>
   </div>
 </ion-content>
-<!-- (ionChange)= "markItem(itemMenu, $event.value)" -->
