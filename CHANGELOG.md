@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+<a name="5.6.5"></a>
+## [5.6.5](https://github.com/prodest/es-na-palma-da-mao-mobile-vnext/compare/v5.6.4...v5.6.5) (2019-06-07)
+
+
+### Bug Fixes
+
+* **e-docs:** documentos não sendo exibidos ([269ef4a](https://github.com/prodest/es-na-palma-da-mao-mobile-vnext/commit/269ef4a))
+
+
+
 <a name="5.6.4"></a>
 ## [5.6.4](https://github.com/prodest/es-na-palma-da-mao-mobile-vnext/compare/v5.6.3...v5.6.4) (2019-06-03)
 
