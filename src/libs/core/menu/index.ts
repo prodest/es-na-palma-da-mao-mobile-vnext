@@ -64,19 +64,26 @@ export const MENUS: ItemMenu[] = [
       component: 'DioSearchPage',
       isChecked: false
     },
-    // {
-    //   id: 12,
-    //   title: 'Edições Recentes',
-    //   icon: 'custom-modulo-noticias',
-    //   component: 'LatestEditionsPage',
-    //   isChecked: false
-    // },
   
     {
       id: 14,
       title: 'Buscar concursos',
       icon: 'custom-modulo-oportunidades',
       component: 'ApresentacaoPage',
+      isChecked: false
+    },
+    {
+      id: 22,
+      title: 'Agendar Atendimento',
+      icon: 'custom-modulo-agendamento',
+      component: 'SchedulingPage',
+      isChecked: false
+    },
+    { 
+      id: 23,
+      title: 'Consultar Agendamento',
+      icon: 'custom-modulo-agendamento',
+      component: 'ConsultSchedulingPage',
       isChecked: false
     }
   
