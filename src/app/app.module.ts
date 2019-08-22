@@ -39,6 +39,7 @@ import { AlunosProviders } from './oportunidades/alunos/providers';
 import { NewsProviders } from './news/providers';
 import { TransparencyProviders } from './secont/transparency/providers';
 import { SepProviders } from './sep/providers';
+import { SchedulingService } from './scheduling/providers/scheduling.service';
 
 import { TranscolOnlineStores } from './ceturb/transcol-online/state';
 import { MenusProviders } from './navegacao/providers';
@@ -120,7 +121,8 @@ registerLocaleData(ptBr);
     {
       provide: ErrorHandler,
       useClass: IonicErrorHandler
-    }
+    },
+    SchedulingService
   ]
 })
 export class AppModule {}
