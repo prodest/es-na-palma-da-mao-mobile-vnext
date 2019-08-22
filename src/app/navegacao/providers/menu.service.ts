@@ -125,7 +125,7 @@ export class MenuService implements OnDestroy {
    * 
    */
   updateMenu = (id: number, isChecked: boolean) => {
-    this.menusStore.update(id, { isChecked: isChecked })
+    this.menusStore.update(id, { isChecked: isChecked });
   };
 
   /**
@@ -135,11 +135,6 @@ export class MenuService implements OnDestroy {
   updateAll(isChecked: boolean) {
     this.menusStore.updateAll({ isChecked: isChecked });
   }
-
-  /**
-   *
-   */
-  getMenus = () => this.menuQuery.getAll();
 
   /**
    *
