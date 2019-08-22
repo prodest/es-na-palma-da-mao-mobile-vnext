@@ -67,6 +67,11 @@ page-home-screen {
     width: 75%;
     margin: auto;
   }
+  @media (max-width: 361px) {
+   .img-home-screen img {
+      width: 50%;
+  }
+  }
 
   /* Em telas maiores */
   // iPad

@@ -67,12 +67,19 @@ page-my-services {
       bottom: 0;
       left: 0;
     }
-    @media screen and (max-width: 300px){
-nav-title .content p {
-    font-size: 23px;
-    height: 30px;
+    @media screen and (max-width: 302px){
+      #custom-header {
+        min-height: 190px;
 }
     }
+
+    @media screen and (max-width: 302px){
+      nav-title .content p {
+          font-size: 23px;
+      }
+          }
+    
+
     /* Botão para a tela de seleção de favoritos */
     #button-wrapper {
       position: absolute;
@@ -110,7 +117,6 @@ nav-title .content p {
       flex-direction: column;
       padding: 20px;
       padding-top: 30px;
-      margin-bottom: 20px;
       height: 100%;
       max-width: 100vmin;
 
@@ -175,29 +181,38 @@ nav-title .content p {
 
   /* Em telas menores */
   // Galaxy S5
-  @media screen and (max-width: 399px) {
-    #custom-header {
-      min-height: 230px;
-    }
-  }
-
+// @media screen and (max-width: 399px) {
+//     #custom-header {
+//       min-height: 230px;
+//     }
+//   }
+// @media screen and (max-height: 640px){
+// page-my-services #custom-header {
+//     min-height: 180px;
+// }
+// }
+// @media screen and (max-width: 361px){
+// page-my-services #custom-header {
+//     min-height: 200px;
+// }
+// }
   // iPhone 5/SE
-  @media screen and (max-width: 349px) {
-    #custom-header {
-      min-height: 200px;
+// @media screen and (max-width: 349px) {
+//     #custom-header {
+//       min-height: 200px;
 
-      #searchbar-wrapper {
-        ion-searchbar {
-          .searchbar-input-container {
-            .searchbar-input {
-              height: 50px;
-              border-radius: 25px;
-            }
-          }
-        }
-      }
-    }
-  }
+//       #searchbar-wrapper {
+//         ion-searchbar {
+//           .searchbar-input-container {
+//             .searchbar-input {
+//               height: 50px;
+//               border-radius: 25px;
+//             }
+//           }
+//         }
+//       }
+//     }
+//   }
 }
 #not-founded {
   height: 100%;

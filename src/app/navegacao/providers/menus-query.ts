@@ -4,7 +4,7 @@ import isEqual from 'lodash-es/isEqual';
 
 import { ItemMenu } from '../models';
 import { MenusStore, MenusState } from './menus-store';
-import { distinctUntilChanged, map, share } from 'rxjs/operators';
+import { distinctUntilChanged, map} from 'rxjs/operators';
 import { Observable } from 'rxjs/Observable';
 
 @Injectable()
