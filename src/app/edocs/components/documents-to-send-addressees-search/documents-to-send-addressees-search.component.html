@@ -1,0 +1,45 @@
+<ion-header>
+  <ion-navbar>
+    <ion-title>Buscar Destinatário</ion-title>
+    <ion-buttons end>
+      <button ion-button (click)="closeModal()">Close</button>
+    </ion-buttons>
+  </ion-navbar>
+</ion-header>
+<ion-content>
+  <ion-refresher (ionRefresh)="refresh()" #refresher>
+    <ion-refresher-content> </ion-refresher-content>
+  </ion-refresher>
+
+  <ng-container> 
+    <ion-item>
+      <p class="title-search">Filtrar </p>
+      <ion-searchbar
+        placeholder="Digite para filtrar pelo Órgão"
+        [showCancelButton]="true"
+        cancelButtonText="Cancelar"
+        [animated]="false"
+        (ionInput)="search($event)"
+        (ionClear)="clear($event)"
+        (ionCancel)="clear($event)"
+      >
+      </ion-searchbar>
+    </ion-item>
+    <ion-item>
+      <ion-scroll class="scrollable" scrollY="true" detail-none>
+        <ion-list>
+          <button ion-item *ngFor="let agency of filteredGovAgencies" (click)="closeModal(agency)">
+            {{ limite(agency.nome) }}
+          </button>
+        </ion-list>
+        <ion-item *ngIf="filteredGovAgencies && !filteredGovAgencies.length" text-center no-lines>
+          <h2>Nenhum Órgão encontrado</h2>
+          <p>Tente mudar o filtro da consulta</p>
+        </ion-item>
+        <ion-spinner *ngIf="!filteredGovAgencies" page-loading></ion-spinner>
+      </ion-scroll>
+    </ion-item>
+  </ng-container>
+
+</ion-content>
+

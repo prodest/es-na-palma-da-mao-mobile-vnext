@@ -105,7 +105,7 @@
     "angular2-text-mask": "^8.0.2",
     "chart.js": "^2.7.2",
     "com-darryncampbell-cordova-plugin-intent": "git+https://github.com/darryncampbell/darryncampbell-cordova-plugin-intent.git",
-    "cordova-android": "^7.1.4",
+    "cordova-android": "7.1.4",
     "cordova-clipboard": "^1.2.1",
     "cordova-ios": "^4.5.5",
     "cordova-plugin-android-permissions": "^1.0.0",
@@ -247,7 +247,9 @@
       "cordova-plugin-file-opener2": {},
       "cordova-plugin-file": {},
       "cordova-plugin-ionic-webview": {},
-      "cordova-plugin-geolocation": {},
+      "cordova-plugin-geolocation": {
+        "GEOLOCATION_USAGE_DESCRIPTION": "O app precisa de acesso a sua localização para poder prover uma melhor experiências na consulta de transporte público."
+      },
       "com-darryncampbell-cordova-plugin-intent": {},
       "cordova-plugin-filepath": {},
       "cordova-plugin-file-transfer": {}

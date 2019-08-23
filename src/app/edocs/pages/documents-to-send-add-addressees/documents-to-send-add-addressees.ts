@@ -1,8 +1,6 @@
-import { Component, ChangeDetectionStrategy, OnInit } from '@angular/core';
-import { NavController, NavParams, IonicPage, Events } from 'ionic-angular';
-import { DocumentsToSendService, Destination } from '../../state';
-import deburr from 'lodash-es/deburr';
-import { map } from 'rxjs/operators';
+import { Component, ChangeDetectionStrategy, OnInit, ChangeDetectorRef } from '@angular/core';
+import { NavController, NavParams, IonicPage, Events, ModalController, Modal } from 'ionic-angular';
+import { Destination, TipoDestino } from '../../state';
 
 @IonicPage({
   segment: 'documentos-para-enviar-adicionar-destinatario'
@@ -13,22 +11,21 @@ import { map } from 'rxjs/operators';
   changeDetection: ChangeDetectionStrategy.Default
 })
 export class DocumentsToSendAddAddresseesPage implements OnInit {
-
   addresseesTypeFilter = [
     {
-      id: 0,
+      id: TipoDestino.Orgao,
       type: 'Somente órgão',
       notice:
         'Ao enviar para uma organização, apenas o responsável pela organização (e pessoas explicitamente autorizadas por ele no Acesso Cidadão) terão acesso ao trâmite.'
     },
     {
-      id: 1,
+      id: TipoDestino.Setor,
       type: 'Setor',
       notice:
         'Ao enviar para um setor, apenas o responsável pelo setor (e pessoas explicitamente autorizadas por ele no Acesso Cidadão) terão acesso ao trâmite.'
     },
     {
-      id: 2,
+      id: TipoDestino.GrupoDeTrabalho,
       type: 'Grupos de Trabalho',
       notice: 'Ao enviar para um grupo, TODOS os membros do grupo terão acesso ao trâmite.'
     }
@@ -36,48 +33,17 @@ export class DocumentsToSendAddAddresseesPage implements OnInit {
   selAddresseesTypeFilter: { id: number; type: string; notice: string } = this.addresseesTypeFilter[0];
 
   addressees: Destination[] = [];
-  govAgencies: Destination[] = [];
-  filteredGovAgencies: Destination[];
+  govAgencies: Destination;
+  govDestination: Destination;
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, private service: DocumentsToSendService, private events: Events) {
-    this.service.getDestinations()
-    .pipe(
-      map(destinations => destinations.map(dest => {
-        const descriptionSplited = dest.descricao.split('-');
-        const destination: Destination = {
-          ...dest,
-          nome: descriptionSplited[0].trim(),
-          descricao: descriptionSplited[1].trim()
-        };
-        return destination
-      }))
-    )
-    .subscribe(destination => {
-      this.govAgencies = this.filteredGovAgencies = destination;
-    });
-    this.addressees = this.navParams.data;
-  }
+  constructor(
+    public navCtrl: NavController,
+    public navParams: NavParams,
+    private events: Events,
+    private modal: ModalController,
+    private cdr: ChangeDetectorRef
+  ) {}
 
-  /**
-   *
-   */
-  search(e) {
-    const search = this.normalize(e.target.value);
-    this.filteredGovAgencies = this.govAgencies.filter(agency => {
-      return this.normalize(agency.descricao).includes(search) || this.normalize(agency.nome).includes(search);;
-    });
-  }
-
-  /**
-   *
-   */
-  clear() {
-    this.filteredGovAgencies = [...this.govAgencies];
-  }
-
-  /**
-   *
-   */
   addAddressees(agency: Destination) {
     if (this.addressees.findIndex(ad => ad.id === agency.id) === -1) {
       this.events.publish('documents-to-send-add-addressess:add', {
@@ -88,21 +54,63 @@ export class DocumentsToSendAddAddresseesPage implements OnInit {
     this.navCtrl.pop();
   }
 
-  limite(valor: string) {
-    if (valor.length > 35) {
-      return valor.substring(0, 35) + '…';
-    } else {
-      return valor;
-    }
+  ngOnInit(): void {
+    this.addressees = this.navParams.data;
   }
 
-  ngOnInit(): void { }
-
-  refresh(): void { }
+  refresh(): void {}
 
   isValidNumber(value: any) {
     return typeof value === 'number' && !isNaN(value);
   }
 
-  private normalize = (term: string) => (term ? deburr(term.toLowerCase()) : '');
+  changes() {
+    this.cdr.detectChanges();
+  }
+
+  openSearchAgency(){
+
+    const data = {
+      addAddressees: this.addAddressees,
+      id: 0,
+    }   
+
+    const searchModal: Modal = this.modal.create('DocumentsToSendAddresseesSearchComponent', data);
+    
+    searchModal.present();
+
+    searchModal.onDidDismiss( data => {
+      this.govAgencies = data;
+    })
+
+  }
+
+  openSearch(tipo: number) {
+
+    console.log('ID ', this.govAgencies, ' Tipo ', tipo);
+    
+    const data = {
+      addAddressees: this.addAddressees,
+      tipo: tipo,
+      agency: null,
+    }
+
+    if(tipo !== TipoDestino.Orgao){
+      data.agency = this.govAgencies.id;      
+    } 
+
+    console.log('Data ', data);
+
+    const searchModal: Modal = this.modal.create('DocumentsToSendAddresseesSearchComponent', data);
+    
+    searchModal.present();
+
+    searchModal.onDidDismiss( data => {
+      if(tipo === TipoDestino.Orgao) {
+        this.govAgencies = data;
+      } else {
+        this.govDestination = data;
+      }
+    })
+  }
 }

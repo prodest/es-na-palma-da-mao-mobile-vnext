@@ -30,8 +30,14 @@ export class DocumentsToSendApiService extends ApiBaseService<Document> {
   /**
    *
    */
-  getDestinations(): Observable<DestinationReceive[]> {
-    return this.http.get<DestinationReceive[]>(this.endpoint(`Destinos`), {}).pipe(share());
+  getDestinations(tipo: number, orgaoId?: string): Observable<DestinationReceive[]> {
+    let params: string = `?Tipo=${tipo}`;
+
+    if (tipo > 0) {
+      params = params + `&OrgaoId=${orgaoId}`
+    } 
+    
+    return this.http.get<DestinationReceive[]>(this.endpoint(`Destinos${params}`), {}).pipe(share());
   }
 
   captureDocuments(fileName: string, body: CapturePostBody): Observable<CaptureReceive> {
