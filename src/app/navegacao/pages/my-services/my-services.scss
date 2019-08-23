@@ -78,7 +78,8 @@ page-my-services {
           font-size: 23px;
       }
           }
-    
+         
+   
 
     /* Botão para a tela de seleção de favoritos */
     #button-wrapper {
@@ -143,7 +144,12 @@ page-my-services {
           .button-inner {
             display: flex;
             flex-direction: column;
-
+            @media screen and (max-width: 361px){
+              .icon {
+              height: 6vmin !important;
+              width: 12vmin !important;
+                }
+                    }
             .icon {
               height: 12vmin;
               width: 12vmin;
