@@ -1,41 +1,30 @@
 page-calendar-filter {
-  .label-button {
-    float: right;
-    text-transform: uppercase;
-    color: $color-primary;
+
+  #content {
+    overflow: hidden;
+    background-color: white;
   }
-  .active, [active], .toolbar-title, ion-navbar.toolbar, .toolbar-background {
-    background-color: rgb(233, 247, 254);
-    font-size: x-large;
-    color: #004297;
-    text-align: center;
-    width: 95%;
-  }
-  .item-md .item-button {
-    background-color: #ffff;
-  }
-  [color-secondary], .color-secondary {
+
+  #set-all {
+    align-self: center;
+    text-transform: none;
     background-color: #004297;
-    color: #fff;
-    border-radius: 25px;
-    width: 50%;
-    margin: auto;
-}
-.content-md, .list-header, .page-calendar-filter .active{
-  background-color:  rgb(233, 247, 254);
-}
-.bar-button-md[icon-only] ion-icon{
-  color: #2BACE2;
-}
+    font-size: 1.4rem;
+    padding: 0 25px;
+    height: 3.6rem;
 
-.bar-buttons-md[left] {
-  margin-left: 10px;
-}
+    span {
+      color: white;
+    }
+  }
 
-}
-page-calendar button {
-  margin-left: 10px;
-}
-page-calendar h1 {
-  width: 90%;
+  ion-list {
+    overflow: scroll;
+    flex: 1;
+  }
+
+  large-button {
+    align-self: center;
+    width: 75%;
+  }  
 }

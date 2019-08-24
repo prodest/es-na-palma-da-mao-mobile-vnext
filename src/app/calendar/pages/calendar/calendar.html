@@ -1,64 +1,52 @@
+<module-page title="Agenda ES">
 
-<ion-content>
-  <!-- TÍTULO DA PÁGINA -->
-  <module-page
-    [title]="'Agenda ES'"
-    class="sign-primary "
-  >
-  <ion-navbar hideBackButton>
-        
-        
-    <ion-title>
-      {{viewTitle}}
-      <ng-container *ngIf="!calendar.eventSources">Agenda ES</ng-container>
-    </ion-title>
-    <ion-buttons end>
-      <button ion-button
-              icon-only
-              (click)="openFilter()">
-        <ion-icon name="options"></ion-icon>
-      </button>
-    </ion-buttons>
-  </ion-navbar>
-<calendar #CalendarComponent
-        calendarMode="month"
-        step="30"
-        [eventSource]="calendar.eventSources"
-        [currentDate]="calendar.currentDate"
-        [autoSelect]="false"
-        [dateFormatter]="calendar.dateFormatter"
-        [monthviewDisplayEventTemplate]="templateDay"
-        [monthviewEventDetailTemplate]="templateEvent"
-        (onTitleChanged)="onViewTitleChanged($event)">
-</calendar>
+  <ion-buttons topbar>
+    <button icon-only (click)="openFilter()">
+      <ion-icon name="options"></ion-icon>
+    </button>
+  </ion-buttons>
+  <ion-title>
+    {{viewTitle}}
+    <ng-container *ngIf="!calendar.eventSources">Agenda ES</ng-container>
+  </ion-title>
+  <calendar #CalendarComponent
+          calendarMode="month"
+          step="30"
+          [eventSource]="calendar.eventSources"
+          [currentDate]="calendar.currentDate"
+          [autoSelect]="false"
+          [dateFormatter]="calendar.dateFormatter"
+          [monthviewDisplayEventTemplate]="templateDay"
+          [monthviewEventDetailTemplate]="templateEvent"
+          (onTitleChanged)="onViewTitleChanged($event)">
+  </calendar>
 
-<ng-template #templateDay
-           let-view="view"
-           let-row="row"
-           let-col="col">
-<day [label]="view.dates[row*7+col].label"
-     [events]="view.dates[row*7+col].events"></day>
-</ng-template>
+  <ng-template #templateDay
+    let-view="view"
+    let-row="row"
+    let-col="col">
+    <day [label]="view.dates[row*7+col].label"
+      [events]="view.dates[row*7+col].events"></day>
+  </ng-template>
 
-<ng-template #templateEvent
-           let-showEventDetail="showEventDetail"
-           let-selectedDate="selectedDate">
-<ion-list class="event-detail-container"
-          has-bouncing="false"
-          *ngIf="showEventDetail"
-          overflow-scroll="false">
-  <ion-item class="event-detail-item"
-            *ngFor="let event of selectedDate?.events"
-            (click)="onEventSelected(event)"
-            [style.border-left-color]="event.color">
-    <event [event]="event"
-           [currentDate]="selectedDate.date"></event>
-  </ion-item>
-  <ion-item *ngIf="selectedDate?.events.length==0"
-            class="no-events-label">
-    <div class="no-events-label">Nenhum Evento</div>
-  </ion-item>
-</ion-list>
-</ng-template></module-page>
- 
-</ion-content>
+  <ng-template #templateEvent
+    let-showEventDetail="showEventDetail"
+    let-selectedDate="selectedDate">
+    <ion-list class="event-detail-container"
+              has-bouncing="false"
+              *ngIf="showEventDetail"
+              overflow-scroll="false">
+      <ion-item class="event-detail-item"
+                *ngFor="let event of selectedDate?.events"
+                (click)="onEventSelected(event)"
+                [style.border-left-color]="event.color">
+        <event [event]="event"
+              [currentDate]="selectedDate.date"></event>
+      </ion-item>
+      <ion-item *ngIf="selectedDate?.events.length==0"
+                class="no-events-label">
+        <div class="no-events-label">Nenhum Evento</div>
+      </ion-item>
+    </ion-list>
+  </ng-template>
+</module-page>
