@@ -1,48 +1,38 @@
-<ion-header>
-  <ion-navbar hideBackButton>
-    <button ion-button
-            menuToggle>
-      <ion-icon name="menu"></ion-icon>
+<module-page title="Consulta Processo" no-padding>
+  <ion-buttons topbar>
+    <button icon-only
+            (click)="scanBarcode()">
+      <ion-icon name="md-barcode"></ion-icon>
     </button>
-    <ion-title>Consulta Processo</ion-title>
-    <ion-buttons end>
-      <button ion-button
-              icon-only
-              (click)="scanBarcode()">
-        <ion-icon name="md-barcode"></ion-icon>
-      </button>
-    </ion-buttons>
-  </ion-navbar>
+  </ion-buttons>
   <ion-toolbar>
     <ion-row class="search-bar">
       <ion-col>
         <ion-searchbar type="text"
-                       placeholder="N° do protocolo"
-                       [(ngModel)]="protocolId"
-                       (change)=search(protocolId)>
+                        placeholder="N° do protocolo"
+                        [(ngModel)]="protocolId"
+                        (change)=search(protocolId)>
         </ion-searchbar>
       </ion-col>
       <ion-col>
         <button ion-button
-                color-secondary
                 (click)="search(protocolId)">
           Buscar
         </button>
       </ion-col>
     </ion-row>
-  </ion-toolbar> 
-</ion-header>
-
-<ion-content no-bounce> 
-  <div *ngIf="!sepService.hasFavorites()"
-       text-center
-       class="initial-message">
-    <img src="assets/imgs/sep/logo-branco.png">
-    <p margin>Digite o protocolo do processo que deseja consultar ou clique no ícone para abrir o leitor de código de barras</p>
-  </div>
-
-  <favorite-protocols *ngIf="sepService.hasFavorites()"
-                      (open)="search($event.number)"
-                      [protocols]="sepService.favorites"></favorite-protocols>
-
-</ion-content> 
+  </ion-toolbar>
+  <ion-content no-bounce> 
+    <div *ngIf="!sepService.hasFavorites()"
+         text-center
+         class="initial-message">
+      <img src="assets/imgs/sep/logo-branco.png">
+      <p margin>Digite o protocolo do processo que deseja consultar ou clique no ícone para abrir o leitor de código de barras</p>
+    </div>
+  
+    <favorite-protocols *ngIf="sepService.hasFavorites()"
+                        (open)="search($event.number)"
+                        [protocols]="sepService.favorites"></favorite-protocols>
+  
+  </ion-content>
+</module-page>
