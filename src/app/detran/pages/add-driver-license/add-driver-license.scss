@@ -2,4 +2,24 @@ page-add-driver-license {
   ion-content {
     background-image: none !important;
   }
+
+  .toolbar-background, .toolbar-content, .toolbar-title {
+    background-color: #003069 !important;
+  }
+
+  ion-content {
+    background-image: none !important;
+  }
+
+  button {
+    font-family: 'Poppins';
+  }
+
+  #salvar {
+    background-color: #004297;
+  }
+
+  #cancelar {
+    background-color: #bf272d;
+  }
 }
