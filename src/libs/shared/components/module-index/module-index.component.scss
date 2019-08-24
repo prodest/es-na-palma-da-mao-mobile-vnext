@@ -3,6 +3,7 @@ module-index {
   #banner {
     background-color: white;
     height: 15vh;
+    min-height: 15vh;
     border-radius: 15px;
 
     display: flex;
@@ -16,6 +17,8 @@ module-index {
 
   ion-list {
     flex: 1 !important;
+    overflow: scroll;
+    margin-bottom: 0 !important;
 
     [ion-button] {
       background-color: white !important;
@@ -33,10 +36,11 @@ module-index {
   }
 
   .separator {
-    height: 2px;
+    height: 2px !important;
+    min-height: 2px;
     width: 85vw;
     background-color: #004297; // 6584cc
-    margin: 30px auto;
+    margin: 20px auto;
     border-radius: 5px;
   }
 }
