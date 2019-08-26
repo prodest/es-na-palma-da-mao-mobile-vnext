@@ -2,6 +2,18 @@ page-sep-search {
   ion-content {
     background: #208baa url('../assets/imgs/sep/triangles.png') !important;
   }
+
+  .toolbar-background, .searchbar {
+    background-color: #003069;
+  }
+
+  ion-toolbar {
+    button {
+      background-color: white !important;
+      color: #004297 !important;
+    }
+  }
+
   .search-bar .col {
     &:first-child {
       flex-grow: 8;

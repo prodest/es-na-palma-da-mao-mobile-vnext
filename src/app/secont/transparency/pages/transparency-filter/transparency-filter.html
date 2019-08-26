@@ -1,18 +1,6 @@
-<ion-header>
-  <ion-navbar>
-    <ion-buttons left>
-      <button ion-button
-              icon-only
-              (click)="navCtrl.pop()">
-        <ion-icon name="arrow-back"></ion-icon>
-      </button>
-    </ion-buttons>
-    <ion-title>{{title}}</ion-title>
-  </ion-navbar>
-</ion-header>
-<ion-content>
+<module-page [title]=title no-footer>
   <ng-container *ngIf="filter">
-    <ion-list *ngIf="year">
+    <ion-list *ngIf="year" shadow>
       <ion-list-header>
         Selecione o período
       </ion-list-header>
@@ -25,7 +13,7 @@
         </ion-select>
       </ion-item>
     </ion-list>
-    <ion-list *ngIf="!year">
+    <ion-list *ngIf="!year" shadow>
       <ion-list-header>
         Selecione o período
       </ion-list-header>
@@ -49,11 +37,12 @@
       </ion-item>
     </ion-list>
   </ng-container>
-</ion-content>
-<ion-footer>
-  <button ion-button
-          full
-          color-secondary
-          class="search-button"
-          (click)="dismiss()">Pesquisar</button>
-</ion-footer>
+  <span separator shadow></span>
+  <large-button
+    text="Pesquisar"
+    leftIcon="ios-search"
+    rightIcon="ios-arrow-forward-outline"
+    color="primary-dark"
+    (click)="dismiss()"
+  ></large-button>
+</module-page>
