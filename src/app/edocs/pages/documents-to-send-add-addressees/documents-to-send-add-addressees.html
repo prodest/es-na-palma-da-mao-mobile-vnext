@@ -29,9 +29,10 @@
         </ion-card-content>
       </ion-card>
       <ion-list>
-        <button ion-item (click)="openSearch(0)">{{ govAgencies? govAgencies.nome : "Buscar Órgão" }}</button>
-        <button *ngIf="selAddresseesTypeFilter.id !== 0 && govAgencies" ion-item (click)="openSearch(selAddresseesTypeFilter.id)">{{ govDestination? govDestination.nome : "Buscar " }}</button>
+        <button ion-item (click)="openSearch(0)">{{ govAgency? govAgency.nome : "Buscar Órgão" }}</button>
+        <button *ngIf="selAddresseesTypeFilter.id !== 0 && govAgency" ion-item (click)="openSearch(selAddresseesTypeFilter.id)">{{ govDestination? govDestination.nome : "Buscar " }}</button>
       </ion-list>
+      <button ion-button (click)="addAddressees()">Ok</button>
     </ng-container>
   </ion-list>
 </ion-content>

@@ -33,8 +33,9 @@ export class DocumentsToSendAddAddresseesPage implements OnInit {
   selAddresseesTypeFilter: { id: number; type: string; notice: string } = this.addresseesTypeFilter[0];
 
   addressees: Destination[] = [];
-  govAgencies: Destination;
+  govAgency: Destination;
   govDestination: Destination;
+
 
   constructor(
     public navCtrl: NavController,
@@ -44,11 +45,19 @@ export class DocumentsToSendAddAddresseesPage implements OnInit {
     private cdr: ChangeDetectorRef
   ) {}
 
-  addAddressees(agency: Destination) {
-    if (this.addressees.findIndex(ad => ad.id === agency.id) === -1) {
+  addAddressees() {   
+
+    let destination: Destination;
+
+    if(this.selAddresseesTypeFilter.id === 0){
+      destination = this.govAgency;
+    }else {
+      destination = this.govDestination;
+    }
+    
+    if (this.addressees.findIndex(ad => ad.id === destination.id) === -1) {
       this.events.publish('documents-to-send-add-addressess:add', {
-        ...agency,
-        tipo: 'Órgão'
+        ...destination
       });
     }
     this.navCtrl.pop();
@@ -68,26 +77,7 @@ export class DocumentsToSendAddAddresseesPage implements OnInit {
     this.cdr.detectChanges();
   }
 
-  openSearchAgency(){
-
-    const data = {
-      addAddressees: this.addAddressees,
-      id: 0,
-    }   
-
-    const searchModal: Modal = this.modal.create('DocumentsToSendAddresseesSearchComponent', data);
-    
-    searchModal.present();
-
-    searchModal.onDidDismiss( data => {
-      this.govAgencies = data;
-    })
-
-  }
-
   openSearch(tipo: number) {
-
-    console.log('ID ', this.govAgencies, ' Tipo ', tipo);
     
     const data = {
       addAddressees: this.addAddressees,
@@ -96,10 +86,8 @@ export class DocumentsToSendAddAddresseesPage implements OnInit {
     }
 
     if(tipo !== TipoDestino.Orgao){
-      data.agency = this.govAgencies.id;      
+      data.agency = this.govAgency.id;      
     } 
-
-    console.log('Data ', data);
 
     const searchModal: Modal = this.modal.create('DocumentsToSendAddresseesSearchComponent', data);
     
@@ -107,7 +95,7 @@ export class DocumentsToSendAddAddresseesPage implements OnInit {
 
     searchModal.onDidDismiss( data => {
       if(tipo === TipoDestino.Orgao) {
-        this.govAgencies = data;
+        this.govAgency = data;
       } else {
         this.govDestination = data;
       }
