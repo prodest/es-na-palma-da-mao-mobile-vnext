@@ -72,12 +72,11 @@ page-my-services {
         min-height: 190px;
 }
     }
-
-    @media screen and (max-width: 302px){
-      nav-title .content p {
-          font-size: 23px;
-      }
-          }
+          @media screen and (max-width: 350px){
+            nav-title .content p {
+                font-size: 23px;
+            }
+                }
          
    
 
@@ -117,9 +116,10 @@ page-my-services {
       display: flex;
       flex-direction: column;
       padding: 20px;
-      padding-top: 30px;
+      padding-top: 10px;
       height: 100%;
       max-width: 100vmin;
+      
 
       .slide-line {
         display: flex;
@@ -185,40 +185,7 @@ page-my-services {
     }
   }
 
-  /* Em telas menores */
-  // Galaxy S5
-// @media screen and (max-width: 399px) {
-//     #custom-header {
-//       min-height: 230px;
-//     }
-//   }
-// @media screen and (max-height: 640px){
-// page-my-services #custom-header {
-//     min-height: 180px;
-// }
-// }
-// @media screen and (max-width: 361px){
-// page-my-services #custom-header {
-//     min-height: 200px;
-// }
-// }
-  // iPhone 5/SE
-// @media screen and (max-width: 349px) {
-//     #custom-header {
-//       min-height: 200px;
-
-//       #searchbar-wrapper {
-//         ion-searchbar {
-//           .searchbar-input-container {
-//             .searchbar-input {
-//               height: 50px;
-//               border-radius: 25px;
-//             }
-//           }
-//         }
-//       }
-//     }
-//   }
+ 
 }
 #not-founded {
   height: 100%;

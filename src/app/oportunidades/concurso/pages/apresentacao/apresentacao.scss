@@ -1,16 +1,11 @@
 apresentacao {
-  @media screen and (max-width: 300px){
-    .apresentacao ion-icon {
-      font-size: 1150%;
-      margin-left: 10%;
+  @media screen and (max-width: 330px){
+    ion-icon[class*="custom-"] {
+      width: 0.9em;
+      height: 0.6em;
+      margin-left: 30%;
   }
         }
-  @media screen and (max-width: 400px){
-          .apresentacao ion-icon {
-            font-size: 1150%;
-            margin-left: 20%;
-        }
-      }
   .botao_page {
     position: fixed;
     bottom: 25px;
