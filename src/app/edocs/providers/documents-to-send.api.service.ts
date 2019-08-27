@@ -6,9 +6,9 @@ import { Observable } from 'rxjs/Observable';
 import { share, map, mergeMap } from 'rxjs/operators';
 import { fromPromise } from 'rxjs/observable/fromPromise';
 
-import { ApiBaseService } from './api-base.service';
-import { Document } from './documents.model';
-import { DestinationReceive, CaptureReceive, CapturePostBody, ForwardsRecieve, ForwardPostBody } from './documents-to-send.model';
+import { ApiBaseService } from '../state/api-base.service';
+import { Document } from '../state/documents.model';
+import { DestinationReceive, CaptureReceive, CapturePostBody, ForwardsRecieve, ForwardPostBody } from '../state/documents-to-send.model';
 
 /**
  *
