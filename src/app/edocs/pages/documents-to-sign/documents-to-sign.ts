@@ -1,5 +1,5 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
-import { IonicPage, NavController } from 'ionic-angular';
+import { IonicPage } from 'ionic-angular';
 
 @IonicPage({
   segment: 'documentos'
@@ -10,15 +10,26 @@ import { IonicPage, NavController } from 'ionic-angular';
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class DocumentsToSignPage {
+  menus = [
+    {
+      buttonTitle: 'Aguardando minha assinatura',
+      targetPage: 'WaitingForMySignaturePage'
+    },
+    {
+      buttonTitle: 'Assinei - aguardando os demais',
+      targetPage: 'SignedByMePage'
+    },
+    {
+      buttonTitle: 'Recusei - aguardando os demais',
+      targetPage: 'RefusedByMePage'
+    },
+    {
+      buttonTitle: 'Captura iniciada por mim',
+      targetPage: 'CapturedByMePage'
+    }
+  ]
   /**
    *
    */
-  constructor(private navCtrl: NavController) {}
-
-  /**
-   *
-   */
-  openPage(page: string) {
-    this.navCtrl.push(page);
-  }
+  constructor() {}
 }

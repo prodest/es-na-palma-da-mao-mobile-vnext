@@ -1,39 +1,59 @@
 page-calendar {
+
+  #content {
+    padding: 0;
+  }
+
+  ion-title {
+    flex: none;
+    height: 5rem;
+    background-color: #003069;
+  }
+
+  .toolbar-title {
+    background-color: transparent;
+  }
+
   .list-md .item-block .item-inner {
     border-bottom: 0;
   }
-
+  
   .item-md {
     padding-left: 10px;
   }
-
+  
   .monthview-datetable {
+    background-color: #fff;
     &.table-bordered {
       border: 0;
-      
     }
-
+    
     .monthview-selected {
       box-shadow: 0px 4px 8px 3px rgba(0, 0, 0, 0.2);
     }
-
+    
     .monthview-current {
       background-color: rgba(58, 135, 173, 0.6196078431372549) !important;
     }
-
+    
     .text-muted day .date-label {
       color: #999;
     }
-
+    
     thead {
       background-color: $color-primary;
-      color: white;
-
+      color: #004297;
+      
       th {
+        background-color: #ffdce7 !important;
         border: 0 !important;
       }
     }
 
+    tr {
+      background-color: #fff;
+    }
+    
     td {
       background-color: transparent !important;
       color: white !important;
@@ -41,66 +61,29 @@ page-calendar {
       height: 37px;
     }
   }
-
+  
   .event-detail-container {
     margin-top: 2px;
-
+    
     .event-detail-item {
       margin-bottom: 3px;
       border-left: 10px solid;
     }
-
+    
     .no-events-label {
       text-align: center;
       color: #999;
       font-weight: bold;
     }
   }
-  .foot-css{
-    position: fixed;
-    bottom: 0;
-    color: #004297;
-    background-color: #fff;
-    font-size: x-large;
-    margin-left: 15px;
-    margin-bottom: 10px;
-    }
-    ion-navbar.toolbar, .toolbar-background, .toolbar-title {
-      background-color: #ffff ;
-      color: #2e74eb;
-      font-weight: bold;
-  }  
-  .bar-button-md[icon-only] ion-icon {
-    color: #004297;
-  }
+
   .table[_ngcontent-c1] > thead[_ngcontent-c1]:first-child > tr[_ngcontent-c1]:first-child > th[_ngcontent-c1], .table[_ngcontent-c1] > thead[_ngcontent-c1]:first-child > tr[_ngcontent-c1]:first-child > td[_ngcontent-c1] {
-   background-color: #DDD;
-   color: #004297;
-
-}
-button{
-
-  float: left;
-  background-color: #fff;
-  color: #2BACE2;
-}
-h1{
-  text-align: center;
-  color: #004297;
-
-}
-
- /* RODAPÉ */
- .footer {
-  display: flex;
-  height: 50px;
-  width: 100%;
-  position: relative;
-  padding: 0 10vmin;
-
-  button {
-    background: transparent;
-    margin-bottom: 4vmin;
+    background-color: #DDD;
+    color: #004297;
   }
-}
+
+  h1 {
+    text-align: center;
+    color: #004297;
+  }
 }

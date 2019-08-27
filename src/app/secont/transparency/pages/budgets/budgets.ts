@@ -34,7 +34,7 @@ export class BudgetsPage extends MoneyFlowPage<YearFilter> implements OnInit {
    */
   openFilter() {
     let filterModal = this.modalCtrl.create('TransparencyFilterPage', {
-      title: 'Orçamento',
+      title: 'Filtrar',
       year: true,
       filter: this.filter
     });

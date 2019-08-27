@@ -32,7 +32,7 @@ export class PublicWorksPage extends TransparencyPage<YearFilter, PublicWorks> i
 
   openFilter() {
     let filterModal = this.modalCtrl.create('TransparencyFilterPage', {
-      title: 'Obras Públicas',
+      title: 'Filtrar',
       year: true,
       filter: this.filter
     });

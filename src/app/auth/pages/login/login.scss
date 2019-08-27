@@ -25,6 +25,20 @@ page-login {
   .scroll-content{
     overflow-x: none !important;
     overflow-y:  !important;
+
+  .scroll-content {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+
+    background-color: white !important;
+    overflow: hidden;
+
+    padding-bottom: 15%;
+  }
+
+  ion-grid, ion-col {
+    padding: 0 !important;
   }
   .wrapper {
     display: flex;

@@ -9,6 +9,7 @@ import {
   ReportTitleComponentModule
 } from '../../components';
 import { ExpensesByAreaPage } from './expenses-by-area';
+import { ModulePageComponentModule } from '@espm/shared/components';
 
 @NgModule({
   declarations: [ExpensesByAreaPage],
@@ -18,7 +19,8 @@ import { ExpensesByAreaPage } from './expenses-by-area';
     ReportListSummaryComponentModule,
     LastUpdateComponentModule,
     ReportTitleComponentModule,
-    PieChartComponentModule
+    PieChartComponentModule,
+    ModulePageComponentModule
   ]
 })
 export class ExpensesByAreaPageModule {}

@@ -9,6 +9,7 @@ import {
   ReportTitleComponentModule
 } from '../../components';
 import { PublicWorksByCityPage } from './public-works-by-city';
+import { ModulePageComponentModule } from '@espm/shared/components';
 
 @NgModule({
   declarations: [PublicWorksByCityPage],
@@ -20,7 +21,8 @@ import { PublicWorksByCityPage } from './public-works-by-city';
     PieChartComponentModule,
     ReportTitleComponentModule,
     PieChartComponentModule,
-    ReportTitleComponentModule
+    ReportTitleComponentModule,
+    ModulePageComponentModule
   ]
 })
 export class PublicWorksByCityPageModule {}

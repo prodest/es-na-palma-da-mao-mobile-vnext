@@ -9,6 +9,7 @@ import {
   ReportTitleComponentModule
 } from '../../components';
 import { PublicWorksPage } from './public-works';
+import { ModulePageComponentModule } from '@espm/shared/components';
 
 @NgModule({
   declarations: [PublicWorksPage],
@@ -18,7 +19,8 @@ import { PublicWorksPage } from './public-works';
     ReportListSummaryComponentModule,
     ReportTitleComponentModule,
     PieChartComponentModule,
-    LastUpdateComponentModule
+    LastUpdateComponentModule,
+    ModulePageComponentModule
   ]
 })
 export class PublicWorksPageModule {}
