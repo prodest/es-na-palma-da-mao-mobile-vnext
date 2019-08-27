@@ -1,5 +1,5 @@
 import { Component, ChangeDetectionStrategy, OnInit } from '@angular/core';
-import { NavController, NavParams, IonicPage, Events } from 'ionic-angular';
+import { NavController, NavParams, IonicPage, /*Events, */ViewController } from 'ionic-angular';
 import { DocumentsToSendService, Destination } from '../../state';
 import deburr from 'lodash-es/deburr';
 import { map } from 'rxjs/operators';
@@ -8,11 +8,11 @@ import { map } from 'rxjs/operators';
   segment: 'documentos-para-enviar-adicionar-destinatario'
 })
 @Component({
-  selector: 'documents-to-send-add-addressees',
-  templateUrl: './documents-to-send-add-addressees.html',
+  selector: 'edocs-documents-to-send-add-addressees',
+  templateUrl: './documents-to-send-add-addressees.component.html',
   changeDetection: ChangeDetectionStrategy.Default
 })
-export class DocumentsToSendAddAddresseesPage implements OnInit {
+export class DocumentsToSendAddAddresseesComponent implements OnInit {
 
   addresseesTypeFilter = [
     {
@@ -39,7 +39,7 @@ export class DocumentsToSendAddAddresseesPage implements OnInit {
   govAgencies: Destination[] = [];
   filteredGovAgencies: Destination[];
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, private service: DocumentsToSendService, private events: Events) {
+  constructor(public navCtrl: NavController, public navParams: NavParams, private service: DocumentsToSendService, private view: ViewController/*private events: Events*/) {
     this.service.getDestinations()
     .pipe(
       map(destinations => destinations.map(dest => {
@@ -79,13 +79,15 @@ export class DocumentsToSendAddAddresseesPage implements OnInit {
    *
    */
   addAddressees(agency: Destination) {
-    if (this.addressees.findIndex(ad => ad.id === agency.id) === -1) {
-      this.events.publish('documents-to-send-add-addressess:add', {
-        ...agency,
-        tipo: 'Órgão'
-      });
-    }
-    this.navCtrl.pop();
+    // if (this.addressees.findIndex(ad => ad.id === agency.id) === -1) {
+    //   this.events.publish('documents-to-send-add-addressess:add', {
+    //     ...agency,
+    //     tipo: 'Órgão'
+    //   });
+    // }
+    // this.navCtrl.pop();
+
+    this.view.dismiss(agency);
   }
 
   limite(valor: string) {
