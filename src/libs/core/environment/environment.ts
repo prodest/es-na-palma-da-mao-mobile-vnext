@@ -25,6 +25,9 @@ export interface Environment {
     edocs: string;
     selecaoalunos: string;
     empregabilidade: string;
+    scheduling: string;
+    mailer: string;
+    guide: string;
   };
   push: {
     senderId: string;
