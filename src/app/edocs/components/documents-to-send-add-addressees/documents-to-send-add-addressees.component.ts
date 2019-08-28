@@ -1,5 +1,5 @@
 import { Component, ChangeDetectionStrategy, OnInit } from '@angular/core';
-import { NavController, NavParams, IonicPage, /*Events, */ViewController } from 'ionic-angular';
+import { NavController, NavParams, IonicPage, ViewController } from 'ionic-angular';
 import { DocumentsToSendService, Destination } from '../../state';
 import deburr from 'lodash-es/deburr';
 import { map } from 'rxjs/operators';
@@ -39,7 +39,7 @@ export class DocumentsToSendAddAddresseesComponent implements OnInit {
   govAgencies: Destination[] = [];
   filteredGovAgencies: Destination[];
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, private service: DocumentsToSendService, private view: ViewController/*private events: Events*/) {
+  constructor(public navCtrl: NavController, public navParams: NavParams, private service: DocumentsToSendService, private view: ViewController) {
     this.service.getDestinations()
     .pipe(
       map(destinations => destinations.map(dest => {
@@ -78,15 +78,7 @@ export class DocumentsToSendAddAddresseesComponent implements OnInit {
   /**
    *
    */
-  addAddressees(agency: Destination) {
-    // if (this.addressees.findIndex(ad => ad.id === agency.id) === -1) {
-    //   this.events.publish('documents-to-send-add-addressess:add', {
-    //     ...agency,
-    //     tipo: 'Órgão'
-    //   });
-    // }
-    // this.navCtrl.pop();
-
+  closeModal(agency?: Destination) {
     this.view.dismiss(agency);
   }
 
@@ -99,8 +91,6 @@ export class DocumentsToSendAddAddresseesComponent implements OnInit {
   }
 
   ngOnInit(): void { }
-
-  refresh(): void { }
 
   isValidNumber(value: any) {
     return typeof value === 'number' && !isNaN(value);

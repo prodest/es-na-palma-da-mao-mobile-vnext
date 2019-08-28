@@ -1,6 +1,11 @@
 <ion-header>
-  <edocs-documents-to-send-header></edocs-documents-to-send-header>
-</ion-header>
+    <ion-navbar>
+      <ion-title>Buscar Destinatário</ion-title>
+      <ion-buttons end>
+        <button ion-button (click)="closeModal()">Close</button>
+      </ion-buttons>
+    </ion-navbar>
+  </ion-header>
 
 <ion-content>
   <ion-list no-lines>
@@ -39,7 +44,7 @@
       <ion-item>
         <ion-scroll class="scrollable" scrollY="true" detail-none>
           <ion-list>
-            <button ion-item *ngFor="let agency of filteredGovAgencies" (click)="addAddressees(agency)">
+            <button ion-item *ngFor="let agency of filteredGovAgencies" (click)="closeModal(agency)">
               {{ limite(agency.nome) }}
             </button>
           </ion-list>
@@ -50,14 +55,6 @@
           <ion-spinner *ngIf="!filteredGovAgencies" page-loading></ion-spinner>
         </ion-scroll>
       </ion-item>
-      <!--ion-item *ngIf="selAddresseesTypeFilter && govAgency && selAddresseesTypeFilter === 1">
-        <p>Filtrar Setor</p>
-        <ion-searchbar [(ngModel)]="govSector" (ionInput)="searchInput($event)"></ion-searchbar>
-      </ion-item>
-      <ion-item *ngIf="selAddresseesTypeFilter && govAgency && selAddresseesTypeFilter === 2">
-        <p>Filtrar Grupos de Trabalho</p>
-        <ion-searchbar [(ngModel)]="govGroup" (ionInput)="searchInput($event)"></ion-searchbar>
-      </ion-item-->
     </ng-container>
   </ion-list>
 </ion-content>
