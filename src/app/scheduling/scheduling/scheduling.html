@@ -1,13 +1,5 @@
-<ion-header>
-  <ion-navbar hideBackButton>
-    <button ion-button menuToggle>
-      <ion-icon name="menu"></ion-icon>
-    </button>
-    <ion-title>Agendar Atendimento</ion-title>
-  </ion-navbar>
-</ion-header>
 
-<ion-content>
+<module-page [title]="'Agendar'">
   <form [formGroup]="form">
     <div>
       <!-- categorias -->
@@ -172,7 +164,6 @@
       <ion-spinner></ion-spinner>
     </ion-item>
   </ng-template>
-</ion-content>
 
 <ion-footer *ngIf="page === 2">
   <ion-toolbar>
@@ -216,3 +207,4 @@
     </ion-row>
   </ion-toolbar>
 </ion-footer>
+</module-page>

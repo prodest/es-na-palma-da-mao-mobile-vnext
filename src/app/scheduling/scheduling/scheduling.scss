@@ -6,10 +6,20 @@ page-scheduling {
   ion-input.ng-touched.ng-invalid {
     background-color: rgba(255, 0, 0, 0.048);
   }
-}
+  .item-md {
+    border-radius: 25px;
+    color:#003069;
+  }
 
+
+[color-secondary], .color-secondary {
+  background-color: #003069;
+  color: #f4f4f4;
+  border-radius: 25px;
+}
+}
 .initial-message {
-  color: #fff;
+  color: #003069;
   display: flex;
   flex-direction: column;
   align-items: center;

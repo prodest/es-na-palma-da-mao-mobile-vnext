@@ -13,4 +13,12 @@ export class ModulePageComponent {
   openPage(page: string) {
     this.navCtrl.push(page);
   }
+  limite = (title) => {
+    if (this.title.length > 17){
+      return this.title.substring(0, 17)+"…";
+      }else{
+      return this.title;
+      }
+  }
+  
 }

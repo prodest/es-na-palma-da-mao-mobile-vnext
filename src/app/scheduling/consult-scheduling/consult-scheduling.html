@@ -1,14 +1,6 @@
-<ion-header>
-    <ion-navbar hideBackButton>
-      <button ion-button menuToggle>
-        <ion-icon name="menu"></ion-icon>
-      </button>
-      <ion-title>Consultar Agendamento</ion-title>
-    </ion-navbar>
-  </ion-header>
 
+  <module-page [title]="'Consultar Agendamento'">
 
-<ion-content padding>
   <form [formGroup]="form">
     <ion-list>
       <ion-item>
@@ -64,4 +56,4 @@
         <button ion-button color-secondary full (click)="cancel(results[0].id)">Cancelar Agendamento</button>
     </ng-container>
   </ng-container>
-</ion-content>
+</module-page>

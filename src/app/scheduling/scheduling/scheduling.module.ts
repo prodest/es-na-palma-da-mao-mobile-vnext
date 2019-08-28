@@ -5,6 +5,9 @@ import { SchedulingPage } from './scheduling';
 import { Keyboard } from '@ionic-native/keyboard';
 
 
+import { ModulePageComponentModule } from '@espm/shared/components';  
+
+
 @NgModule({
   declarations: [
     SchedulingPage
@@ -12,6 +15,7 @@ import { Keyboard } from '@ionic-native/keyboard';
   imports: [
     TextMaskModule,
     IonicPageModule.forChild(SchedulingPage),
+    ModulePageComponentModule
   ],
   providers: [Keyboard]
 })

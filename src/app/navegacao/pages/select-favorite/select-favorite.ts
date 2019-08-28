@@ -1,11 +1,10 @@
-import { Component, OnDestroy } from '@angular/core';
+import { Component, OnDestroy, OnInit} from '@angular/core';
 import { IonicPage, App, NavController } from 'ionic-angular';
 import { AuthQuery } from '@espm/core';
 import { AuthNeededService } from '@espm/core/auth/auth-needed.service';
 import { ItemMenu } from '../../models';
 import { MenuService } from '../../providers/menu.service';
 import { Subject } from 'rxjs/Subject';
-// import { takeUntil, tap, share } from 'rxjs/operators';
 import { MenusQuery } from '../../providers';
 import { takeUntil, tap } from 'rxjs/operators';
 
@@ -14,7 +13,7 @@ import { takeUntil, tap } from 'rxjs/operators';
   selector: 'page-select-favorite',
   templateUrl: 'select-favorite.html'
 })
-export class SelectFavoritePage implements OnDestroy {
+export class SelectFavoritePage implements OnDestroy, OnInit {
   private destroyed$ = new Subject();
 
   allChecked: boolean = false;
@@ -30,16 +29,22 @@ export class SelectFavoritePage implements OnDestroy {
     private menuService: MenuService,
     private menusQuery: MenusQuery
   ) {
+   
+  }
+  /**
+   * 
+   */
+  ngOnInit() {
     this.menusQuery.menus$
-      .pipe(takeUntil(this.destroyed$))
-      .subscribe((menus) => this.menus = menus);
+    .pipe(takeUntil(this.destroyed$))
+    .subscribe((menus) => this.menus = menus);
 
-    this.menusQuery.favorites$
-      .pipe(
-        takeUntil(this.destroyed$),
-        tap((favorites) => this.allChecked = favorites.length === this.menus.length)
-      )
-      .subscribe()
+  this.menusQuery.favorites$
+    .pipe(
+      takeUntil(this.destroyed$),
+      tap((favorites) => this.allChecked = favorites.length === this.menus.length)
+    )
+    .subscribe()
   }
 
   /**
