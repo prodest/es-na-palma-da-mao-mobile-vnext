@@ -106,7 +106,7 @@
     "angular2-text-mask": "^8.0.2",
     "chart.js": "^2.7.2",
     "com-darryncampbell-cordova-plugin-intent": "git+https://github.com/darryncampbell/darryncampbell-cordova-plugin-intent.git",
-    "cordova-android": "^7.1.4",
+    "cordova-android": "7.1.4",
     "cordova-clipboard": "^1.2.1",
     "cordova-ios": "^4.5.5",
     "cordova-plugin-android-permissions": "^1.0.0",
