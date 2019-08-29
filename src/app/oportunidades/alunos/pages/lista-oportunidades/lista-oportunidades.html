@@ -12,23 +12,26 @@
     <ion-list-header *ngIf="filteredConcursos && filteredConcursos.length">
       {{ filteredConcursos.length }} ENCONTRADOS
     </ion-list-header>
-    <ion-list [virtualScroll]="filteredConcursos" [virtualTrackBy]="trackById">
-      <button class="radius_concursos" *virtualItem="let concurso" (click)="showDetails(concurso.id)">
-        <div>
-          <div>
-            <h3 text-wrap class="concursos_name">{{ concurso.tipo }} - {{ concurso.anoBase }}</h3>
-          </div>
+    <ion-list
+        [virtualScroll]="filteredConcursos"
+        [virtualTrackBy]="trackById"
+      >
+      <button
+          ion-item
+          *virtualItem="let concurso"
+          (click)="showDetails(concurso.id)">
+        <div class="button-content">
+          <h3 text-wrap class="concursos_name">
+            {{ concurso.tipo }} - {{ concurso.anoBase }}
+          </h3>
           <p text-wrap class="concursos_descricao">{{ concurso.nome }}</p>
-          <div class="status_float">
-            <p class="center_css"></p>
-            <div>
-              <concurso-status [status]="concurso.status"></concurso-status>
-            </div>
-            <p>
-              <ion-icon *ngIf="concurso.favorito" class="star_css" item-end name="md-star"></ion-icon>
-              <ion-icon *ngIf="!concurso.favorito" class="star_css" item-end name="md-star-outline"></ion-icon>
-            </p>
-          </div>
+        </div>
+        <div class="button-status">
+          <concurso-status [status]="concurso.status"></concurso-status>
+          <p>
+            <ion-icon *ngIf="concurso.favorito" class="star_css" item-end name="md-star"></ion-icon>
+            <ion-icon *ngIf="!concurso.favorito" class="star_css" item-end name="md-star-outline"></ion-icon>
+          </p>
         </div>
       </button>
     </ion-list>
@@ -38,4 +41,5 @@
     </ion-item>
     <ion-spinner *ngIf="!filteredConcursos" page-loading></ion-spinner>
   </ion-content>
+
 </module-page>

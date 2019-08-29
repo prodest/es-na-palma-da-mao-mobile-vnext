@@ -1,12 +1,9 @@
 espm-lista-oportunidades-page {
   .scroll-content {
     padding: 0 !important;
-    background-color: transparent;
-
-    #not-founded {
-      height: 100%;
-    }
+    background-color: #e9f7fe;
   }
+
   ion-searchbar {
     background-color: transparent !important;
   }
@@ -14,12 +11,56 @@ espm-lista-oportunidades-page {
   .searchbar-input {
     box-shadow: none !important;
   }
+
   ion-list-header {
     background-color: #fdeff5 !important;
     font-weight: 600 !important;
     color: #004297 !important;
   }
-  concurso-status {
+
+  ion-list {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+
+    button {
+      width: 95%;
+      display: flex !important;
+    }
+
+    .label {
+      width: 100%;
+      display: flex !important;
+      flex-direction: row !important;
+
+      .button-content, .button-status {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+      }
+      
+      .button-content {
+        width: 60%;
+
+        h3 {
+          font-weight: 600;
+        }
+        p, h3 {
+          text-align: center;
+        }
+      }
+      .button-status {
+        width: 40%;
+
+        ion-icon {
+          color: #ff0083;
+        }
+      }
+    }
+  }
+  /* concurso-status {
     margin: 0px !important;
   }
   .concursos_name {
@@ -91,5 +132,5 @@ espm-lista-oportunidades-page {
   }
   .label-md {
     color: #004297;
-  }
+  } */
 }
