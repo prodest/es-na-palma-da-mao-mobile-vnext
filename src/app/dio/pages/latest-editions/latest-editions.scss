@@ -3,6 +3,11 @@ latest-editions {
   ion-item {
     margin-bottom: 5px !important;
     border-radius: 25px;
+    box-shadow: none !important;
+    
+    .item-inner {
+      border: none !important;
+    }
 
     h3 {
       margin: 0 !important;

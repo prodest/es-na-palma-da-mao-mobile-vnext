@@ -1,4 +1,9 @@
 espm-dt-concurso-page {
+  ion-item-divider {
+    background-color: #fdeff5 !important;
+    color: #004297 !important;
+  }
+  
   ion-item-divider ion-icon[item-start] {
     font-size: 2.5rem;
   }
@@ -6,6 +11,11 @@ espm-dt-concurso-page {
   .item ion-icon[item-start] + .item-inner {
     margin-left: 0;
   }
+
+  ion-item [accent] {
+    color: #ff0083 !important;
+  }
+
   #not-founded {
     color: rgb(240, 162, 162);
   }

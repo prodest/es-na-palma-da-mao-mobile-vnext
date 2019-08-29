@@ -6,7 +6,7 @@ module-page {
   flex-direction: column;
 
   nav-header {
-    background-color: #003069;
+    border-bottom: 1px solid #abe1fa;
   }
   
   #content {
@@ -23,9 +23,9 @@ module-page {
   }
 
   [separator] {
-    height: 2px;
+    height: 1px;
     width: 100%;
-    background-color: #004297; // 6584cc
+    background-color: #abe1fa; // 6584cc
     margin: 0 auto 15px auto;
     border-radius: 5px;
   }

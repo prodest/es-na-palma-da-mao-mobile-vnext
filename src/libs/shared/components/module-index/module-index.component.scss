@@ -5,6 +5,7 @@ module-index {
     height: 15vh;
     min-height: 15vh;
     border-radius: 15px;
+    margin-bottom: 16px;
 
     display: flex;
     align-items: center;
@@ -27,20 +28,12 @@ module-index {
       font-weight: 600;
       text-transform: none;
       margin-top: 0;
-      margin-bottom: 10px;
+      margin-bottom: 5px;
+      box-shadow: none;
       
       .button-inner {
         justify-content: space-between;
       }
     }
-  }
-
-  .separator {
-    height: 2px !important;
-    min-height: 2px;
-    width: 85vw;
-    background-color: #004297; // 6584cc
-    margin: 20px auto;
-    border-radius: 5px;
   }
 }

@@ -1,7 +1,7 @@
 page-news-list-filter {
 
   #content {
-    padding-top: 0;
+    padding-bottom: 16px !important;
     //background-color: white;
   }
 
@@ -9,6 +9,8 @@ page-news-list-filter {
     overflow: scroll;
     margin-top: 16px;
     margin-bottom: 0 !important;
+    flex: 1;
+    background-color: #fff;
 
     ion-list-header {
       color: #004297 !important;

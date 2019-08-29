@@ -12,12 +12,12 @@
       <ion-label>
         {{ debit.descricaoServico }}<br/>
         {{ debit.dataVencimento | shortDateFormat }} |
-        <span text-wrap color-secondary-fg>{{ debit.valorAtualizadoFranquia | currency: 'BRL':true:'1.2' }}</span>
+        <span text-wrap id="debit-value">{{ debit.valorAtualizadoFranquia | currency: 'BRL':true:'1.2' }}</span>
       </ion-label>
     </ion-item>
   </div>
 </ion-list>
-<span separator shadow></span>
+<span separator></span>
 <large-button
   [color]="'primary-dark'"
   [leftIcon]="'ios-add-circle-outline'"
