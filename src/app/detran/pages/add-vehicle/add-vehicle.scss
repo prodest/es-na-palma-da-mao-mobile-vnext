@@ -2,11 +2,16 @@ page-add-vehicle {
   font-family: 'Poppins';
 
   .toolbar-background, .toolbar-content, .toolbar-title {
-    background-color: #003069 !important;
+    background-color: #004297 !important;
   }
 
   ion-content {
     background-image: none !important;
+  }
+
+  ion-list-header {
+    background-color: #fdeff5 !important;
+    color: #820043 !important;
   }
 
   button {

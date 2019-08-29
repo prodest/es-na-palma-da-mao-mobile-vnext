@@ -1,4 +1,4 @@
-<module-page [title]="'Meus veículos'"
+<module-page title="Meus veículos"
   *ngIf="(vehicles$ | async ) as vehicles">
   
   <ion-buttons *ngIf="(vehicles$ | async )?.length" topbar>
@@ -26,7 +26,7 @@
     </espm-vehicle>
   </ion-list>
   
-  <ion-item id="not-found" *ngIf="vehicles && !vehicles.length" shadow text-center>
+  <ion-item id="not-found" *ngIf="vehicles && !vehicles.length" text-center>
     <h2>Nenhum veículo cadastrado!</h2>
     <p text-wrap>Adicione veículos para consultar seus débitos.</p>
   </ion-item>

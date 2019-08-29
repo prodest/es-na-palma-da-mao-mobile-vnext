@@ -1,17 +1,15 @@
 page-calendar {
 
-  #content {
-    padding: 0;
-  }
-
   ion-title {
     flex: none;
     height: 5rem;
-    background-color: #003069;
+    background-color: #fff;
   }
-
+  
   .toolbar-title {
     background-color: transparent;
+    color: #004297 !important;// background-color: #003069;
+    font-weight: 600;
   }
 
   .list-md .item-block .item-inner {

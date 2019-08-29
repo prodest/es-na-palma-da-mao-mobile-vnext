@@ -1,6 +1,6 @@
-<module-page [title]=title no-footer>
+<module-page [title]=title no-footer no-padding>
   <ng-container *ngIf="filter">
-    <ion-list *ngIf="year" shadow>
+    <ion-list *ngIf="year">
       <ion-list-header>
         Selecione o período
       </ion-list-header>
@@ -13,7 +13,7 @@
         </ion-select>
       </ion-item>
     </ion-list>
-    <ion-list *ngIf="!year" shadow>
+    <ion-list *ngIf="!year">
       <ion-list-header>
         Selecione o período
       </ion-list-header>
@@ -37,7 +37,7 @@
       </ion-item>
     </ion-list>
   </ng-container>
-  <span separator shadow></span>
+  <span separator></span>
   <large-button
     text="Pesquisar"
     leftIcon="ios-search"

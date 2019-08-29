@@ -1,23 +1,27 @@
 page-bus-line-info {
   nav-header p {
     font-size: 125% !important;
-    
   }
   
   #content {
     padding: 0;
 
     .toolbar-background {
-      background-color: #003069 !important;
+      background-color: transparent !important;
     }
     .toolbar-md {
       padding: 0;
+      min-height: 42px;
     }
     .segment-activated {
-      background-color: #820043;
+      background-color: #820043 !important;
+      color: white !important;
     }
     .segment-button {
       border-color: #820043;
+      background-color: #fff;
+      color: #004297;
+      font-weight: 600;
     }
   }
 

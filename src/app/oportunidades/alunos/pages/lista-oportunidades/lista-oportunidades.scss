@@ -1,9 +1,23 @@
 espm-lista-oportunidades-page {
   .scroll-content {
+    padding: 0 !important;
+    background-color: transparent;
+
     #not-founded {
       height: 100%;
     }
-    background-color: #f5f5f5;
+  }
+  ion-searchbar {
+    background-color: transparent !important;
+  }
+
+  .searchbar-input {
+    box-shadow: none !important;
+  }
+  ion-list-header {
+    background-color: #fdeff5 !important;
+    font-weight: 600 !important;
+    color: #004297 !important;
   }
   concurso-status {
     margin: 0px !important;
@@ -75,7 +89,7 @@ espm-lista-oportunidades-page {
   .favorito_icon {
     color: $color-secondary;
   }
-.label-md {
-  color: #004297;
-}
+  .label-md {
+    color: #004297;
+  }
 }

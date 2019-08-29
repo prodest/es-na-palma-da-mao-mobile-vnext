@@ -1,38 +1,5 @@
-<ion-content>
-  <ion-slides pager>
-    <ion-slide >
-      <ion-header>
-        <div>
-          <div>
-        <button (click)="back()">
-            <ion-icon ios="ios-arrow-round-back" md="md-arrow-round-back"></ion-icon>
-          </button>
-        </div>
-          <p class="styles_css">Concursos</p>
-        </div>
-        <div class="list_css"></div>
-        <p class="style">Encontre novos rumos para sua carreira</p>
-      </ion-header>
-      <div class="css-icone">
-        <ion-icon name="custom-modulo-oportunidades"></ion-icon>
-      </div>
-      
-      <button class="botao_page"  (click)="open(botoes[0].pagina)">
-        {{ botoes[0].nome }}
-      </button>
-    </ion-slide>
-    <ion-slide >
-      <ion-header>
-        <div>
-          <p class="styles_css">Cursos</p>
-        </div>
-        <div class="list_css"></div>
-        <p class="style">Encontre novos cursos</p>
-        <ion-icon name="custom-modulo-educacao"></ion-icon>
-      </ion-header>
-        <button class="botao_page"  (click)="open(botoes[1].pagina)">
-          {{ botoes[1].nome }}
-        </button>
-    </ion-slide>
-  </ion-slides>
-</ion-content>
+<module-index
+  title="Oportunidades"
+  icon="custom-modulo-oportunidades"
+  [menus]="menus">
+</module-index>
