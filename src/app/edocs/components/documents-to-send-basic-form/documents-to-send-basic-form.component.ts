@@ -31,7 +31,9 @@ export class DocumentsToSendBasicFormComponent extends FormBase implements OnIni
     super(formBuilder); 
   }
 
-  ngOnInit(): void { }
+  ngOnInit(): void {
+
+  }
 
   ngOnChanges(changes: SimpleChanges): void {
     if ('sender' in changes) {
@@ -62,9 +64,18 @@ export class DocumentsToSendBasicFormComponent extends FormBase implements OnIni
   protected prepareFormModel(formModel: any): any {
     // trocando nome de exibição do remetente para seu id
     // na hora de enviar os dados
+    const sender = this.sender.subNovo;
+
+    if (formModel.role === 'CIDADAO'){
+      return {
+        ...formModel,
+        role: undefined,
+        sender
+      };
+    }
     return {
       ...formModel,
-      sender: this.sender.subNovo
+      sender
     };
   }
 }
