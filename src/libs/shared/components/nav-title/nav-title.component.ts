@@ -6,16 +6,17 @@ import { Component, Input } from '@angular/core';
 })
 export class NavTitleComponent {
   /**
-   * Input do componente
-   */
+  * Input do componente
+  */
   @Input() title: string;
-
+  
   constructor() {}
-   limite = (title) => {
-    if (this.title.length > 17){
-      return this.title.substring(0, 17)+"…";
-      }else{
-      return this.title;
-      }
+  
+  limite = (title) => {
+    if (title && title.length > 17) {
+      return title.substring(0, 17)+"…";
+    }else{
+      return title;
+    }
   }
 }
