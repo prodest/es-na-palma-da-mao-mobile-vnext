@@ -17,6 +17,10 @@ page-scheduling {
   color: #f4f4f4;
   border-radius: 25px;
 }
+.active, [active], .toolbar-title, ion-navbar.toolbar, .toolbar-background {
+  background-color: #e9f7fe;
+  color: #fff;
+}
 }
 .initial-message {
   color: #003069;

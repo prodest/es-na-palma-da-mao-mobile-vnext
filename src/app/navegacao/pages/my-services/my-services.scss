@@ -1,6 +1,5 @@
 page-my-services {
   /* HEADER */
-
   #custom-header {
     background-image: url('../assets/imgs/bg-menu-principal-topo.jpg');
     background-size: cover;
@@ -144,10 +143,10 @@ page-my-services {
           .button-inner {
             display: flex;
             flex-direction: column;
-            @media screen and (max-width: 361px){
+            @media screen and (max-width: 359px){
               .icon {
               height: 6vmin !important;
-              width: 12vmin !important;
+              width: 6vmin !important;
                 }
                     }
             .icon {

@@ -2,9 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { IonicPage, NavController, NavParams, AlertController } from 'ionic-angular';
 import { FormBase } from '@espm/core';
 import { FormGroup, Validators, FormBuilder } from '@angular/forms';
-import { SchedulingService } from '../providers/scheduling.service';
+import { SchedulingService } from '../../providers/scheduling.service';
 import { Observable } from 'rxjs/Observable';
-import { ListItem } from '../models/list-item.model';
+import { ListItem } from '../../models/list-item.model';
 
 @IonicPage()
 @Component({

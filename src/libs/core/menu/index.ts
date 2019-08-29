@@ -16,13 +16,13 @@ export const MENUS: ItemMenu[] = [
       component: 'CalendarPage',
       isChecked: false
     },
-    {
-      id: 4,
-      title: 'Consulta Processo',
-      icon: 'custom-modulo-processos',
-      component: 'SepSearchPage',
-      isChecked: false
-    },
+    // {
+    //   id: 4,
+    //   title: 'Consulta Processo',
+    //   icon: 'custom-modulo-processos',
+    //   component: 'SepSearchPage',
+    //   isChecked: false
+    // },
     {
       id: 5,
       title: 'Detran',
@@ -34,16 +34,16 @@ export const MENUS: ItemMenu[] = [
   
     {
       id: 7,
-      title: 'Documentos para assinar',
-      icon: 'custom-modulo-documentos',
-      component: 'DocumentsToSignPage',
+      title: 'Processos',
+      icon: 'custom-modulo-processos',
+      component: 'PresentationEdocsPage',// DocumentsToSignPage
       secure: true,
       isChecked: false
     },
   
     {
       id: 8,
-      title: 'Consulta Ônibus',
+      title: 'Ônibus',
       icon: 'custom-modulo-onibus',
       component: 'BusLinesPage',
       isChecked: false
@@ -51,7 +51,7 @@ export const MENUS: ItemMenu[] = [
   
     {
       id: 10,
-      title: 'Portal da Transparência',
+      title: ' Transparência',
       icon: 'custom-modulo-consultas',
       component: 'TransparencyDashboardPage',
       isChecked: false
@@ -67,25 +67,18 @@ export const MENUS: ItemMenu[] = [
   
     {
       id: 14,
-      title: 'Buscar concursos',
+      title: 'Oportunidades',
       icon: 'custom-modulo-oportunidades',
       component: 'ApresentacaoPage',
       isChecked: false
     },
     {
       id: 22,
-      title: 'Agendar Atendimento',
+      title: 'Agendamento',
       icon: 'custom-modulo-agendamento',
-      component: 'SchedulingPage',
+      component: 'PresentationPage',
       isChecked: false
-    },
-    { 
-      id: 23,
-      title: 'Consultar Agendamento',
-      icon: 'custom-modulo-agendamento',
-      component: 'ConsultSchedulingPage',
-      isChecked: false
-    }
+     }
   
   ];
   

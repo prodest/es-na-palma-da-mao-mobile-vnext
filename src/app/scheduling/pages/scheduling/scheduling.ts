@@ -3,9 +3,9 @@ import { IonicPage, NavController, NavParams, Slides, AlertController } from 'io
 import { Observable } from 'rxjs/Observable';
 import { FormBase } from '@espm/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { SchedulingService } from '../providers/scheduling.service';
-import { ListItem } from '../models/list-item.model';
-import { TipoAgenda } from '../models/schedule-type.model';
+import { SchedulingService } from '../../providers/scheduling.service';
+import { ListItem } from '../../models/list-item.model';
+import { TipoAgenda } from '../../models/schedule-type.model';
 import { tap } from 'rxjs/operators/tap';
 import * as mascaras from '@espm/core/forms/masks/index';
 import { Keyboard } from '@ionic-native/keyboard';
