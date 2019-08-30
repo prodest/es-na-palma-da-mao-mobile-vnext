@@ -1,0 +1,61 @@
+
+edocs-documents-to-send-add-addressees {
+  nav-title p {
+    font-size: 35px !important;
+  }
+  div.pageTitle{
+    text-align: center; 
+    font-weight: bold;
+  }
+
+  ion-scroll { 
+    white-space: nowrap; 
+  }
+
+  .scrollable{
+    height: 300px;
+    border: 1px solid black;
+    padding: 1em;
+  }
+
+  ion-card.alert-card {
+    background-color: rgba(2553, 253, 163, .65);
+    box-shadow: none;
+    margin: 0;
+    width: 100%;
+  }
+
+  .title-search {
+    padding-left: 1em;
+  }
+
+  ion-list-header {
+    background-color: #fdeff5 !important;
+    color: #004297 !important;
+    font-weight: 600 !important;
+  }
+
+  ion-list {
+    flex: 1 !important;
+    margin: 0 !important;
+    display: flex;
+    flex-direction: column;
+
+    ion-searchbar {
+      box-shadow: none !important;
+      background-color: transparent !important;
+
+      .searchbar-input {
+        box-shadow: none !important;
+      }
+    }
+
+    #lista-orgaos {
+      flex: 1;
+
+      ion-label {
+        margin-top: 0;
+      }
+    }
+  }
+}

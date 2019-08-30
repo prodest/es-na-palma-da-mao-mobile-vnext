@@ -1,8 +1,8 @@
-import { Component, Inject } from '@angular/core';
+import { Component, Inject, OnInit } from '@angular/core';
 import { AcessoCidadaoClaims as User, AuthQuery, AuthService } from '@espm/core';
 import { Environment, EnvVariables } from '@espm/core/environment';
 import { InAppBrowser, InAppBrowserEvent, InAppBrowserObject } from '@ionic-native/in-app-browser';
-import { AlertController, IonicPage, LoadingController, NavController, Platform, ToastController } from 'ionic-angular';
+import { AlertController, IonicPage, LoadingController, NavController, Platform, ToastController, NavParams } from 'ionic-angular';
 import { Observable } from 'rxjs/Observable';
 import { finalize } from 'rxjs/operators';
 
@@ -11,7 +11,7 @@ import { finalize } from 'rxjs/operators';
   selector: 'page-login',
   templateUrl: 'login.html'
 })
-export class LoginPage {
+export class LoginPage implements OnInit {
   /**
    *
    */
@@ -20,6 +20,11 @@ export class LoginPage {
   readonly errorMsgs = {
     accountNotLinked: 'User not found.' // Verification message with AcessoCidadao
   };
+
+  private redirect: {
+    to?: string,
+    params?: { [key: string]: any }
+  } = {};
 
   /**
    * Creates an instance of LoginPage.
@@ -33,8 +38,19 @@ export class LoginPage {
     private alertCtrl: AlertController,
     private navCtrl: NavController,
     private loadingCtrl: LoadingController,
+    private navParams: NavParams,
     @Inject(EnvVariables) private environment: Environment
-  ) {}
+  ) { }
+
+  ngOnInit() {
+    this.redirect = {
+      to: this.navParams.get('redirectTo'),
+      params: {
+        filePath: this.navParams.get('filePath')
+      }
+    };
+  }
+
   /**
    * ref: https://github.com/ionic-team/ionic/issues/11459#issuecomment-365224107
    *
@@ -90,7 +106,7 @@ export class LoginPage {
     loading.present().then(() => {
       loginMethod()
         .pipe(finalize(() => loading.dismiss()))
-        .subscribe(this.goToDashboard, this.onLoginError);
+        .subscribe(this.redirectHandler, this.onLoginError);
     });
   };
 
@@ -133,6 +149,10 @@ export class LoginPage {
    *
    */
   private isAccountNotLinkedError = (data): boolean => data.error === this.errorMsgs.accountNotLinked;
+
+  private redirectHandler = () => this.redirect && this.redirect.to ?
+    this.navCtrl.setRoot(this.redirect.to, this.redirect.params) :
+    this.goToDashboard()
 
   /**
    * Redireciona usuário para o MyServicesPage

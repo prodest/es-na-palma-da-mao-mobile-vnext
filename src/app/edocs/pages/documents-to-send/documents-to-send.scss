@@ -1,0 +1,52 @@
+documents-to-send {
+  .scroll-content {
+    padding: 0 !important;
+    background-color: transparent !important;
+  }
+
+  ion-list-header {
+    background-color: #fdeff5 !important;
+    color: #004297 !important;
+    font-weight: 600 !important;
+  }
+
+  #basic, #doc, #message {
+    &>ion-item {
+      padding: 0 !important;
+    }
+  }
+
+  #addresses {
+    h2, ion-icon {
+      color: #ff0083;
+    }
+  }
+
+  #send-button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0;
+
+    &>.item-inner {
+      padding: 0;
+    }
+
+    ion-label {
+      display: flex;
+      margin: 0;
+      justify-content: center;
+    }
+
+    #large-button {
+      width: 75%;
+    }
+  }
+
+
+  .foot-toolbar {
+    .toolbar-background {
+      background-color: white;
+    }
+  }
+}

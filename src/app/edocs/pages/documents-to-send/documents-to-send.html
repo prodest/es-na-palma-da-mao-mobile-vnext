@@ -1,0 +1,44 @@
+<module-page title="Enviar documentos" no-padding no-footer no-back>
+  <ion-content>
+    <ion-list no-lines>
+      <ion-list-header>
+        Encaminhar Documentos
+      </ion-list-header>
+      <ion-slides pager="false">
+        <ion-slide>
+          <edocs-documents-to-send-basic #basic id="basic"></edocs-documents-to-send-basic>
+        </ion-slide>
+        <ion-slide>
+          <edocs-documents-to-send-addressees #addressees id="addresses"></edocs-documents-to-send-addressees>
+        </ion-slide>
+        <ion-slide>
+          <edocs-documents-to-send-doc [file]="file" #doc id="doc"></edocs-documents-to-send-doc>
+        </ion-slide>
+        <ion-slide>
+          <edocs-documents-to-send-message #message id="message"></edocs-documents-to-send-message>
+          <ion-item id="send-button">
+            <large-button
+              id="large-button"
+              text="Enviar"
+              leftIcon="ios-add-circle-outline"
+              rightIcon="ios-arrow-forward-outline"
+              color="primary-dark"
+              (click)="message.submit()"
+              [disabled]="!message.isValid || isSending"
+            ></large-button>
+          </ion-item>
+        </ion-slide>
+      </ion-slides>
+    </ion-list>
+  </ion-content>
+  <ion-footer>
+    <ion-toolbar text-center="" class="foot-toolbar">
+      <button ion-button color="dark" (click)="prevSlide()" [disabled]="slides.isBeginning()" outline>
+        Anterior
+      </button>
+      <button ion-button color="dark" (click)="nextSlide()" [disabled]="slides.isEnd() || !activeStep?.isValid" outline>
+        Proximo
+      </button>
+    </ion-toolbar>
+  </ion-footer>
+</module-page>

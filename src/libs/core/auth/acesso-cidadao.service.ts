@@ -2,12 +2,12 @@ import { Inject, Injectable } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
 import { of } from 'rxjs/observable/of';
 import { _throw } from 'rxjs/observable/throw';
-import { flatMap, map, tap, finalize, catchError } from 'rxjs/operators';
+import { flatMap, map, tap, finalize, catchError, mergeMap } from 'rxjs/operators';
 import { resetStores } from '@datorama/akita';
 import { Environment, EnvVariables } from './../environment';
 import { AcessoCidadaoApiService } from './acesso-cidadao-api.service';
 import { JwtHelper } from './jwt-helper';
-import { AcessoCidadaoClaims, AcessoCidadaoIdentity, AcessoCidadaoResponse, Identity, Token } from './models';
+import { AcessoCidadaoClaims, AcessoCidadaoIdentity, AcessoCidadaoResponse, Identity, Token, CidadaoRole } from './models';
 import { AuthQuery, AuthStore } from './state';
 import { empty } from 'rxjs/observable/empty';
 
@@ -111,6 +111,15 @@ export class AcessoCidadaoService {
    */
   createUser = (user: any): Observable<any> => this.api.createUser(user);
 
+  /**
+   * @description Obtém todas os papéis do usuário no acesso cidadão
+   * @memberof AcessoCidadaoService
+   */
+  getUserRoles = (): Observable<CidadaoRole[]> => this.getUserClaims().pipe(
+    mergeMap(claims => this.api.getRoles(claims)),
+    tap(this.storeRoles)
+  )
+
   /************************************* Private API *************************************/
 
   /**
@@ -165,4 +174,11 @@ export class AcessoCidadaoService {
    *
    */
   private storeClaims = (claims: AcessoCidadaoClaims) => this.authStore.update({ claims });
+
+  /**
+   * @description Store user rules info
+   * @private
+   * @memberof AcessoCidadaoService
+   */
+  private storeRoles = (roles: CidadaoRole[]) => this.authStore.update({ roles })
 }

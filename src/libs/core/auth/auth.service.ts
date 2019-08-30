@@ -15,7 +15,8 @@ import {
   GoogleAuthResponse,
   Identity,
   SocialNetworkIdentity,
-  Token
+  Token,
+  CidadaoRole
 } from './models';
 import { AuthStore } from './state';
 
@@ -127,6 +128,12 @@ export class AuthService {
    *
    */
   refreshUser = (): Observable<User> => this.acessoCidadao.getUserClaims();
+
+  /**
+   * @description Obtém todas os papéis do usuário no acesso cidadão
+   * @memberof AuthService
+   */
+  getUserRoles = (): Observable<CidadaoRole[]> => this.acessoCidadao.getUserRoles();
 
   /************************************* Private API *************************************/
 

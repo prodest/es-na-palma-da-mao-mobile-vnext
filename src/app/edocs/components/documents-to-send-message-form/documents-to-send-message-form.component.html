@@ -1,0 +1,7 @@
+<form novalidate [formGroup]="form">
+  <ion-item>
+    <ion-label floating>Mensagem</ion-label>
+    <ion-textarea rows="5" formControlName="message" name="message"></ion-textarea>
+  </ion-item>
+  <espm-validation-message [errors]="validationErrors['message']"></espm-validation-message>
+</form>

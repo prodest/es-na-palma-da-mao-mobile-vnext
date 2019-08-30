@@ -16,21 +16,24 @@ large-button {
 
     button {
         font-family: 'Poppins';
-        font-weight: 600 !important; // semi-bold
         width: 100%;
-        text-transform: none !important;
-
         border-width: 0.75px;
         border-style: solid;
-
-        color: white;
-
         margin-left: 0 !important;
         margin-right: 0 !important;
     }
-
+    
     button p {
         margin: auto;
+        margin-bottom: 0 !important;
+        color: white !important;
+        font-weight: 600 !important; // semi-bold
+        text-transform: none !important;
+        font-size: 2rem !important;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
     }
 
     .secondary-dark > button {
