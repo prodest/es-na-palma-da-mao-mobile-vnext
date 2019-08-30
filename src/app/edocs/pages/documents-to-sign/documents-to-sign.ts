@@ -12,10 +12,6 @@ import { IonicPage } from 'ionic-angular';
 export class DocumentsToSignPage {
   menus = [
     {
-      buttonTitle: 'Encaminhar documentos',
-      targetPage: 'DocumentsToSendPage'
-    },
-    {
       buttonTitle: 'Aguardando minha assinatura',
       targetPage: 'WaitingForMySignaturePage'
     },
