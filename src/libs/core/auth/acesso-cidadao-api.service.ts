@@ -1,11 +1,12 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Inject, Injectable } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
+import { map } from 'rxjs/operators';
 
 import { ANONYMOUS_HEADER } from '.';
 import { EnvVariables } from './../environment';
 import { Environment } from './../environment/environment';
-import { AcessoCidadaoClaims, AcessoCidadaoResponse, Identity } from './models';
+import { AcessoCidadaoClaims, AcessoCidadaoResponse, Identity, CidadaoRole } from './models';
 
 const transformRequest = obj => {
   let str: string[] = [];
@@ -58,4 +59,14 @@ export class AcessoCidadaoApiService {
    */
   createUser = (user: any): Observable<any> =>
     this.http.post<any>(`${this.environment.identityServer.url}/createAccount`, user)
+
+  /**
+   * @description Obtém todos os papéis do usuário no acesso cidadão.
+   * @memberof AcessoCidadaoApiService
+   */
+  getRoles = (cidadao: AcessoCidadaoClaims) =>
+    this.http.get<CidadaoRole[]>(`${this.environment.api.acessocidadaoApi}/agentepublico/${cidadao.subNovo}/papeis`)
+      .pipe(
+        map(roles => roles.filter(role => typeof role.LotacaoGuid === 'string' && role.LotacaoGuid.length > 0))
+      )
 }

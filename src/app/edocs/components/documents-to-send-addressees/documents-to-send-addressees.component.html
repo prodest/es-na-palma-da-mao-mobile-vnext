@@ -1,0 +1,11 @@
+<ion-item>
+  Destinatários
+  <ion-scroll class="scrollable" scrollY="true" detail-none>
+    <edocs-documents-to-send-addressees-form [addressees]="addressees" (onSubmit)="completeStep($event)"
+      (onRemoveAddressee)="removeAddressee($event)" #addresseesForm>
+    </edocs-documents-to-send-addressees-form>
+  </ion-scroll>
+  <button ion-button (click)="addAddresses()" class="addButton" detail-none [color]="colorAddIcon" default outline>
+    Adicionar
+  </button>
+</ion-item>

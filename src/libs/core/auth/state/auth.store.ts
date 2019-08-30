@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Store, StoreConfig } from '@datorama/akita';
 
-import { AcessoCidadaoClaims, Token } from '../models';
+import { AcessoCidadaoClaims, Token, CidadaoRole } from '../models';
 
 export const defaultAvatarSrc = 'assets/imgs/user.png';
 
@@ -11,6 +11,7 @@ export type AuthState = {
   refreshToken?: any;
   clientId?: string;
   avatarUrl?: string;
+  roles?: CidadaoRole[];
 };
 
 export function createDefaultAuthState(): AuthState {
