@@ -1,4 +1,4 @@
-<module-page [title]="concurso?.nome" no-padding>
+<module-page [title]="concurso?.nome" no-padding no-footer >
   <ion-buttons topbar>
     <button icon-only (click)="favoritar(concurso)">
       <ion-icon name="md-star" *ngIf="concurso?.favorito"></ion-icon>

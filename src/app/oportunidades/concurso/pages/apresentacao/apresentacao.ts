@@ -17,5 +17,6 @@ export class ApresentacaoPage {
       targetPage: "ConcursosPage"
     }
   ]
+  
   constructor() {}
 }

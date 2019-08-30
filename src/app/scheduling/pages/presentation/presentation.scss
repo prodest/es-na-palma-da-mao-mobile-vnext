@@ -1,4 +1,9 @@
 page-presentation {
+    @media screen and (max-width: 359px){
+        module-index ion-list [ion-button] .button-inner {
+            font-size: small;
+        }
+}
     module-page nav-header {
         background-color: #e9f7fe;
     }

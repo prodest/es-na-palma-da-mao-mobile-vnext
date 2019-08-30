@@ -1,6 +1,8 @@
 page-select-favorite {
   /* Geral */
-
+  .button-md {
+    background-color: #004297;
+  }
   ion-content, .scroll-content {
     height: 100%;
   }
@@ -96,7 +98,7 @@ page-select-favorite {
       border-radius: 50px;
       box-shadow: 0px 1px 3px #cccccc;
       margin: 10px 0px;
-      min-height: 70px;
+      min-height: 50px;
       padding: 0px 40px !important;
 
       .checkbox {

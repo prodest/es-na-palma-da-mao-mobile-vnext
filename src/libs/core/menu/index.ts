@@ -51,7 +51,7 @@ export const MENUS: ItemMenu[] = [
   
     {
       id: 10,
-      title: ' Transparência',
+      title: ' Transparência ES',
       icon: 'custom-modulo-consultas',
       component: 'TransparencyDashboardPage',
       isChecked: false
