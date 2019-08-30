@@ -20,6 +20,21 @@ nav-header {
       ion-icon {
         color: #004297;
       }
+
+      button {
+        color: #004297;
+        font-weight: 600;
+      }
     }
+  }
+}
+
+[no-back] {
+  #button-bar {
+    height: 44px;
+    min-height: 44px;
+  }
+  #nav-header-return {
+    display: none;
   }
 }

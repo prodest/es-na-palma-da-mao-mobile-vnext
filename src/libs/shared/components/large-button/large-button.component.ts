@@ -16,6 +16,7 @@ export class LargeButtonComponent {
   @Input() rightIcon: string;
   @Input() text: string;
   @Input() color: string;
+  @Input() disabled: boolean;
   
   constructor() {}
 }

@@ -1,5 +1,8 @@
 
-edocs-documents-to-send-add-addressees {  
+edocs-documents-to-send-add-addressees {
+  nav-title p {
+    font-size: 35px !important;
+  }
   div.pageTitle{
     text-align: center; 
     font-weight: bold;
@@ -24,5 +27,35 @@ edocs-documents-to-send-add-addressees {
 
   .title-search {
     padding-left: 1em;
+  }
+
+  ion-list-header {
+    background-color: #fdeff5 !important;
+    color: #004297 !important;
+    font-weight: 600 !important;
+  }
+
+  ion-list {
+    flex: 1 !important;
+    margin: 0 !important;
+    display: flex;
+    flex-direction: column;
+
+    ion-searchbar {
+      box-shadow: none !important;
+      background-color: transparent !important;
+
+      .searchbar-input {
+        box-shadow: none !important;
+      }
+    }
+
+    #lista-orgaos {
+      flex: 1;
+
+      ion-label {
+        margin-top: 0;
+      }
+    }
   }
 }
