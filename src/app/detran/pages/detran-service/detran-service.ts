@@ -18,10 +18,10 @@ export class DetranServicePage {
       buttonTitle: "CNH",
       targetPage: "DriverLicenseStatusPage"
     },
-    {
+    /* {
       buttonTitle: "Infrações",
       targetPage: "DriverLicenseStatusPage"
-    },
+    }, */
     {
       buttonTitle: "Meus Veículos",
       targetPage: "VehiclesPage"
