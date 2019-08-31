@@ -32,6 +32,10 @@ documents-to-send {
       padding: 0;
     }
 
+    &.item-md p {
+      font-size: 2rem;
+    }
+
     ion-label {
       display: flex;
       margin: 0;
