@@ -32,7 +32,7 @@
     <preference name="SplashScreen" value="screen" />
     <preference name="AutoHideSplashScreen" value="false" />
     <preference name="ShowSplashScreenSpinner" value="false" />
-    <preference name="AndroidLaunchMode" value="singleTop" />
+    <preference name="AndroidLaunchMode" value="singleTask" />
     <preference name="Orientation" value="portrait" />
     <platform name="android">
         <resource-file src="google-services.json" target="app/google-services.json" />
