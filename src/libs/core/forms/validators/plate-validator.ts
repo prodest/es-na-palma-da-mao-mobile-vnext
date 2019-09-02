@@ -6,7 +6,7 @@ export function plate(control: AbstractControl) {
     return null;
   }
 
-  let PLATE_REGEX = /^[a-zA-Z]{3}\d{4}$/;
+  let PLATE_REGEX = /^[a-zA-Z]{3}\d([a-zA-Z]|\d)\d{2}$/;
 
   return PLATE_REGEX.test(control.value) ? null : { plate: true };
 }

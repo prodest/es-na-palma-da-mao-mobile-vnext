@@ -27,7 +27,7 @@ export const PHONE_MASK = ['(', /\d/, /\d/, ')', ' ', /\d/, /\d/, /\d/, /\d/, '-
 
 export const CELL_PHONE_MASK = ['(', /\d/, /\d/, ')', ' ', /\d/, ' ', /\d/, /\d/, /\d/, /\d/, '-', /\d/, /\d/, /\d/, /\d/];
 
-export const PLATE_MASK = [/[A-Za-z]/, /[A-Za-z]/, /[A-Za-z]/, /\d/, /\d/, /\d/, /\d/];
+export const PLATE_MASK = [/[A-Za-z]/, /[A-Za-z]/, /[A-Za-z]/, /\d/, /([A-Za-z]|\d)/, /\d/, /\d/];
 
 export const YEAR_MASK = [/[1|2]/, /[0|9]/, /[0-9]/, /[0-9]/];
 
