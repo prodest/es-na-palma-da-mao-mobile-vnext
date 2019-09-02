@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+<a name="5.8.3"></a>
+## [5.8.3](https://github.com/prodest/es-na-palma-da-mao-mobile-vnext/compare/v5.8.2...v5.8.3) (2019-09-02)
+
+
+### Bug Fixes
+
+* **vehicle:** fix invalid plate massage ([50df98e](https://github.com/prodest/es-na-palma-da-mao-mobile-vnext/commit/50df98e))
+
+
+
 <a name="5.8.2"></a>
 ## [5.8.2](https://github.com/prodest/es-na-palma-da-mao-mobile-vnext/compare/v5.8.1...v5.8.2) (2019-09-02)
 
