@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+<a name="5.8.2"></a>
+## [5.8.2](https://github.com/prodest/es-na-palma-da-mao-mobile-vnext/compare/v5.8.1...v5.8.2) (2019-09-02)
+
+
+### Bug Fixes
+
+* **ionic:** production build ([03d99e0](https://github.com/prodest/es-na-palma-da-mao-mobile-vnext/commit/03d99e0))
+
+
+
 <a name="5.8.1"></a>
 ## [5.8.1](https://github.com/prodest/es-na-palma-da-mao-mobile-vnext/compare/v5.8.0...v5.8.1) (2019-09-02)
 
