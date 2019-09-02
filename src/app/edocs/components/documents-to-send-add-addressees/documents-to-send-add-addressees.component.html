@@ -1,0 +1,60 @@
+<ion-header>
+    <ion-navbar>
+      <ion-title>Buscar Destinatário</ion-title>
+      <ion-buttons end>
+        <button ion-button (click)="closeModal()">Fechar</button>
+      </ion-buttons>
+    </ion-navbar>
+  </ion-header>
+
+<ion-content>
+  <ion-list no-lines>
+    <ion-list-header>
+      Encaminhar Documentos
+    </ion-list-header>
+    <ng-container>
+      <ion-item>
+        <div class="pageTitle">Adicionar Destinatário</div>
+      </ion-item>
+      <ion-item>
+        <ion-label>Filtrar por:</ion-label>
+        <ion-select cancelText="Cancelar" [(ngModel)]="selAddresseesTypeFilter" disabled required>
+          <ion-option *ngFor="let addTypeFilter of addresseesTypeFilter" [value]="addTypeFilter">
+            {{ addTypeFilter.type }}
+          </ion-option>
+        </ion-select>
+      </ion-item>
+      <ion-card class="alert-card">
+        <ion-card-content>
+          <p>{{ selAddresseesTypeFilter.notice }}</p>
+        </ion-card-content>
+      </ion-card>
+      <ion-item>
+        <p class="title-search">Filtrar Órgão</p>
+        <ion-searchbar
+          placeholder="Digite para filtrar pelo Órgão"
+          [showCancelButton]="true"
+          cancelButtonText="Cancelar"
+          [animated]="false"
+          (ionInput)="search($event)"
+          (ionClear)="clear($event)"
+          (ionCancel)="clear($event)">
+        </ion-searchbar>
+      </ion-item>
+      <ion-item>
+        <ion-scroll class="scrollable" scrollY="true" detail-none>
+          <ion-list>
+            <button ion-item *ngFor="let agency of filteredGovAgencies" (click)="closeModal(agency)">
+              {{ limite(agency.nome) }}
+            </button>
+          </ion-list>
+          <ion-item *ngIf="filteredGovAgencies && !filteredGovAgencies.length" text-center no-lines>
+            <h2>Nenhum Órgão encontrado</h2>
+            <p>Tente mudar o filtro da consulta</p>
+          </ion-item>
+          <ion-spinner *ngIf="!filteredGovAgencies" page-loading></ion-spinner>
+        </ion-scroll>
+      </ion-item>
+    </ng-container>
+  </ion-list>
+</ion-content>

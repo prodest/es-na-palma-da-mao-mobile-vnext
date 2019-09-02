@@ -22,6 +22,7 @@ import { Push } from '@ionic-native/push';
 import { SocialSharing } from '@ionic-native/social-sharing';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import { StatusBar } from '@ionic-native/status-bar';
+import { FilePath } from '@ionic-native/file-path';
 import { IonicStorageModule } from '@ionic/storage';
 import { IonicApp, IonicErrorHandler, IonicModule } from 'ionic-angular';
 import * as moment from 'moment';
@@ -83,6 +84,7 @@ registerLocaleData(ptBr);
     Push,
     PushService,
     StatusBar,
+    FilePath,
     Clipboard,
     FileOpener,
     File,
@@ -123,4 +125,4 @@ registerLocaleData(ptBr);
     SchedulingService
   ]
 })
-export class AppModule {}
+export class AppModule { }

@@ -65,12 +65,21 @@ export interface AcessoCidadaoClaims {
   sid: string;
 
   /**
+   * DEPRECATED
+   *
    * Subject Id Claim
    *
    * O Id do usuário
    *
+   *
    */
   sub: number;
+
+  /**
+   * Identificação nova do usuário
+   *
+   */
+  subNovo: string;
 
   /**
    * Número de registro da CNH
