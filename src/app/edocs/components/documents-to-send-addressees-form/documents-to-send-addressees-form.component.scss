@@ -1,0 +1,60 @@
+
+edocs-documents-to-send-addressees-form {
+  .colAddr {
+    min-width: 9em;
+    max-width: 10em;
+    padding: 0.1em;
+  }
+  .contentCardAddr{
+    padding-bottom: 0em;
+    padding-left: 0.8em;
+    margin: 0em;
+    min-width:40%;
+    max-width:100%;
+    font-style: normal;
+    float: left;
+    overflow: auto;
+    cursor: pointer;
+    width: 70%;
+
+    p.titleAddr{
+      font-size: 1.2em;
+      font-weight: bold;
+      color: rgb(29, 28, 28);
+    }
+    p.subtitleAddr {
+      font-size: 0.8em;
+      color: rgb(29, 28, 28);
+    }
+  }
+
+  ion-card.cardAddr {
+    border-radius: 1em;
+    background-color: rgb(199, 197, 197);
+  }
+
+  .closeAddr{
+    width: 10%;
+    float: right;
+    position: relative;
+    top: 0.3em;
+    right: 0.4em;
+    zoom:1.5;
+    padding: auto 0;
+  }
+
+  @media screen and (max-width: 359px) {
+    .colAddr {
+      max-width: 100%;
+    }
+  }
+
+  .text-danger {
+    color: $color-error;
+    .error-icon {
+      margin-right: 5px;
+      background: transparent;
+      color: $color-error;
+    }
+  }
+}

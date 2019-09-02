@@ -1,0 +1,17 @@
+ion-card {
+  &.alert-card {
+    background-color: rgba(2553, 253, 163, .65);
+    box-shadow: none;
+    margin: 0;
+    width: 100%;
+  }
+}
+
+p.alert-text {
+  font-size: 1.2rem;
+  white-space: initial;
+}
+
+.hidden {
+  display: none;
+}

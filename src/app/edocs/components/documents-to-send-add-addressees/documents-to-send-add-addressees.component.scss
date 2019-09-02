@@ -1,0 +1,28 @@
+
+edocs-documents-to-send-add-addressees {  
+  div.pageTitle{
+    text-align: center; 
+    font-weight: bold;
+  }
+
+  ion-scroll { 
+    white-space: nowrap; 
+  }
+
+  .scrollable{
+    height: 300px;
+    border: 1px solid black;
+    padding: 1em;
+  }
+
+  ion-card.alert-card {
+    background-color: rgba(2553, 253, 163, .65);
+    box-shadow: none;
+    margin: 0;
+    width: 100%;
+  }
+
+  .title-search {
+    padding-left: 1em;
+  }
+}

@@ -1,0 +1,42 @@
+<ion-header>
+  <edocs-documents-to-send-header></edocs-documents-to-send-header>
+</ion-header>
+
+<ion-content>
+  <ion-list no-lines>
+    <ion-list-header>
+      Encaminhar Documentos
+    </ion-list-header>
+    <ion-slides pager="false">
+      <ion-slide>
+        <edocs-documents-to-send-basic #basic></edocs-documents-to-send-basic>
+      </ion-slide>
+      <ion-slide>
+        <edocs-documents-to-send-addressees #addressees></edocs-documents-to-send-addressees>
+      </ion-slide>
+      <ion-slide>
+        <edocs-documents-to-send-doc [file]="file" #doc></edocs-documents-to-send-doc>
+      </ion-slide>
+      <ion-slide>
+        <edocs-documents-to-send-message #message></edocs-documents-to-send-message>
+        <ion-item>
+          <div class="sendButton">
+            <button [disabled]="!message.isValid || isSending" (click)="message.submit()" ion-button default>
+              Enviar
+            </button>
+          </div>
+        </ion-item>
+      </ion-slide>
+    </ion-slides>
+  </ion-list>
+</ion-content>
+<ion-footer>
+  <ion-toolbar text-center="" class="foot-toolbar">
+    <button ion-button color="dark" (click)="prevSlide()" [disabled]="slides.isBeginning()" outline>
+      Anterior
+    </button>
+    <button ion-button color="dark" (click)="nextSlide()" [disabled]="slides.isEnd() || !activeStep?.isValid" outline>
+      Proximo
+    </button>
+  </ion-toolbar>
+</ion-footer>

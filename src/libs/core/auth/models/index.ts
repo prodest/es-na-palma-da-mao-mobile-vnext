@@ -10,3 +10,4 @@ export * from './claims/acessoCidadaoClaims';
 export * from './claims/accessTokenClaims';
 
 export * from './token';
+export * from './cidadao-role'

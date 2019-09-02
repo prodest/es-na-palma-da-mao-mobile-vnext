@@ -1,0 +1,7 @@
+<ion-item>
+  <ion-item class="text-center">
+    <button (click)="viewFile()" ion-button outline>Visualizar</button>
+  </ion-item>
+  <edocs-documents-to-send-doc-form [file]="file" (onSubmit)="completeStep($event)" #docForm>
+  </edocs-documents-to-send-doc-form>
+</ion-item>
