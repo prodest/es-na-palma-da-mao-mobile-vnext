@@ -3,9 +3,6 @@
 </ion-header>
 
 <ion-content>
-  <!--ion-refresher (ionRefresh)="refresh()" #refresher>
-    <ion-refresher-content> </ion-refresher-content>
-  </ion-refresher-->
   <ion-list no-lines>
     <ion-list-header>
       Encaminhar Documentos
@@ -35,11 +32,11 @@
 </ion-content>
 <ion-footer>
   <ion-toolbar text-center="" class="foot-toolbar">
-    <button ion-button color="dark" (click)="prevSlide()" [disabled]="slides.isBeginning()" clear>
-      <ion-icon item-start name="md-arrow-round-back"></ion-icon>
+    <button ion-button color="dark" (click)="prevSlide()" [disabled]="slides.isBeginning()" outline>
+      Anterior
     </button>
-    <button ion-button color="dark" (click)="nextSlide()" [disabled]="slides.isEnd() || !activeStep?.isValid" clear>
-      <ion-icon item-start name="md-arrow-round-forward"></ion-icon>
+    <button ion-button color="dark" (click)="nextSlide()" [disabled]="slides.isEnd() || !activeStep?.isValid" outline>
+      Proximo
     </button>
   </ion-toolbar>
 </ion-footer>

@@ -2,6 +2,96 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+<a name="5.8.3"></a>
+## [5.8.3](https://github.com/prodest/es-na-palma-da-mao-mobile-vnext/compare/v5.8.2...v5.8.3) (2019-09-02)
+
+
+### Bug Fixes
+
+* **vehicle:** fix invalid plate massage ([50df98e](https://github.com/prodest/es-na-palma-da-mao-mobile-vnext/commit/50df98e))
+
+
+
+<a name="5.8.2"></a>
+## [5.8.2](https://github.com/prodest/es-na-palma-da-mao-mobile-vnext/compare/v5.8.1...v5.8.2) (2019-09-02)
+
+
+### Bug Fixes
+
+* **ionic:** production build ([03d99e0](https://github.com/prodest/es-na-palma-da-mao-mobile-vnext/commit/03d99e0))
+
+
+
+<a name="5.8.1"></a>
+## [5.8.1](https://github.com/prodest/es-na-palma-da-mao-mobile-vnext/compare/v5.8.0...v5.8.1) (2019-09-02)
+
+
+
+<a name="5.8.0"></a>
+# [5.8.0](https://github.com/prodest/es-na-palma-da-mao-mobile-vnext/compare/v5.7.0...v5.8.0) (2019-09-02)
+
+
+### Bug Fixes
+
+* **add-vehicle:** Acerto para aceitar a placa no padrão mercosul ([521b204](https://github.com/prodest/es-na-palma-da-mao-mobile-vnext/commit/521b204))
+* **app:** check undefined on get active nav ([e30d964](https://github.com/prodest/es-na-palma-da-mao-mobile-vnext/commit/e30d964))
+* **app:** redirect only if necessary to avoid losing state ([e2e754a](https://github.com/prodest/es-na-palma-da-mao-mobile-vnext/commit/e2e754a))
+* **app:** resume application with clip item edocs ([39f5133](https://github.com/prodest/es-na-palma-da-mao-mobile-vnext/commit/39f5133))
+* **component:** Mudar o do nome do Close para Fechar no Modal ([84ae287](https://github.com/prodest/es-na-palma-da-mao-mobile-vnext/commit/84ae287))
+* **documents-to-send:** capture document upload ([6923c85](https://github.com/prodest/es-na-palma-da-mao-mobile-vnext/commit/6923c85))
+* **documents-to-send:** comment debug line ([63d7a5f](https://github.com/prodest/es-na-palma-da-mao-mobile-vnext/commit/63d7a5f))
+* **documents-to-send:** form wizard behavior ([9c0f194](https://github.com/prodest/es-na-palma-da-mao-mobile-vnext/commit/9c0f194))
+* **documents-to-send:** unused import ([34936fd](https://github.com/prodest/es-na-palma-da-mao-mobile-vnext/commit/34936fd))
+* **documents-to-send-basic-form:** show toggle after select role ([27ca401](https://github.com/prodest/es-na-palma-da-mao-mobile-vnext/commit/27ca401))
+* **documents-to-send-doc:** open pdf file with its default application ([bdd16c2](https://github.com/prodest/es-na-palma-da-mao-mobile-vnext/commit/bdd16c2))
+* **environment:** rm unnecessary slash ([cd2b9de](https://github.com/prodest/es-na-palma-da-mao-mobile-vnext/commit/cd2b9de))
+* Conserto do bug no formulario do component documents-to-send-doc-form ([fce4887](https://github.com/prodest/es-na-palma-da-mao-mobile-vnext/commit/fce4887))
+* remove ionic-plugin-keyboard ([d5981ff](https://github.com/prodest/es-na-palma-da-mao-mobile-vnext/commit/d5981ff))
+* **scripts:** fix intent filters script ([cb60e36](https://github.com/prodest/es-na-palma-da-mao-mobile-vnext/commit/cb60e36))
+
+
+### Features
+
+* **acesso-cidadao:** add cidadao role of acesso cidadao api ([f6fad2d](https://github.com/prodest/es-na-palma-da-mao-mobile-vnext/commit/f6fad2d))
+* **akita:** Salvamento de estado no akita do encaminhamento de documentos ([22dab50](https://github.com/prodest/es-na-palma-da-mao-mobile-vnext/commit/22dab50))
+* **app:** get intent file clipped and show edocs page ([d8737b4](https://github.com/prodest/es-na-palma-da-mao-mobile-vnext/commit/d8737b4))
+* **app:** resolve native path on get intent clip pdf ([acf48d5](https://github.com/prodest/es-na-palma-da-mao-mobile-vnext/commit/acf48d5))
+* **app:** when forward pdf add login redirect if needed ([456ad40](https://github.com/prodest/es-na-palma-da-mao-mobile-vnext/commit/456ad40))
+* **component:** Forward header and footer component ([79c12c4](https://github.com/prodest/es-na-palma-da-mao-mobile-vnext/commit/79c12c4))
+* **component:** Pagina para adicionar destinatarios do encaminhamento ([c96904a](https://github.com/prodest/es-na-palma-da-mao-mobile-vnext/commit/c96904a))
+* **components:** Add addressees pages ([ec6e1fb](https://github.com/prodest/es-na-palma-da-mao-mobile-vnext/commit/ec6e1fb))
+* **documents-to-send:** add capture document before send ([8e101ee](https://github.com/prodest/es-na-palma-da-mao-mobile-vnext/commit/8e101ee))
+* **documents-to-send-addressees-form:** add form component to addressees ([0178451](https://github.com/prodest/es-na-palma-da-mao-mobile-vnext/commit/0178451))
+* **documents-to-send-basic:** show roles and sender from acesso cidadao api ([94e6026](https://github.com/prodest/es-na-palma-da-mao-mobile-vnext/commit/94e6026))
+* **documents-to-send-doc:** view document button ([989ea92](https://github.com/prodest/es-na-palma-da-mao-mobile-vnext/commit/989ea92))
+* **documents-to-send-doc-form:** add form component to doc ([4bedcca](https://github.com/prodest/es-na-palma-da-mao-mobile-vnext/commit/4bedcca))
+* **documents-to-send-message-form:** add form component to message ([21be87d](https://github.com/prodest/es-na-palma-da-mao-mobile-vnext/commit/21be87d))
+* **edocs:** add wizard step abstract class ([2b12922](https://github.com/prodest/es-na-palma-da-mao-mobile-vnext/commit/2b12922))
+* **forward-basic:** Add forward-basic page ([66af18e](https://github.com/prodest/es-na-palma-da-mao-mobile-vnext/commit/66af18e))
+* **page:** Add New Page foward-message ([774acfd](https://github.com/prodest/es-na-palma-da-mao-mobile-vnext/commit/774acfd))
+* **page:** Create documents-to-send ([e6c07bd](https://github.com/prodest/es-na-palma-da-mao-mobile-vnext/commit/e6c07bd))
+* **service:** Serviço de encaminhamento funcionando ([ecf4148](https://github.com/prodest/es-na-palma-da-mao-mobile-vnext/commit/ecf4148))
+* Adicionada funcionalidades aos botoes de excluir e adicionar destinatarios ([a8da666](https://github.com/prodest/es-na-palma-da-mao-mobile-vnext/commit/a8da666))
+* Adicionado opçao de notificaçao por email ([4a6b2ee](https://github.com/prodest/es-na-palma-da-mao-mobile-vnext/commit/4a6b2ee))
+* Buscar orgaos e adicionar destinatario ([78349ea](https://github.com/prodest/es-na-palma-da-mao-mobile-vnext/commit/78349ea))
+
+
+### Reverts
+
+* remove intent filter from scripts ([f9b6a3d](https://github.com/prodest/es-na-palma-da-mao-mobile-vnext/commit/f9b6a3d))
+
+
+
+<a name="5.7.0"></a>
+# [5.7.0](https://github.com/prodest/es-na-palma-da-mao-mobile-vnext/compare/v5.6.5...v5.7.0) (2019-08-21)
+
+
+### Features
+
+* **agendamento:** funcionalidade de agendamento ([4000d00](https://github.com/prodest/es-na-palma-da-mao-mobile-vnext/commit/4000d00))
+
+
+
 <a name="5.6.5"></a>
 ## [5.6.5](https://github.com/prodest/es-na-palma-da-mao-mobile-vnext/compare/v5.6.4...v5.6.5) (2019-06-07)
 

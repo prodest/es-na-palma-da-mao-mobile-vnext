@@ -23,6 +23,7 @@
       (ionChange)="roleSelectChange()"
     >
       <ion-option *ngFor="let role of roles" [value]="role.Guid">{{ role.Nome }}</ion-option>
+      <ion-option value="CIDADAO">Cidadão</ion-option>
     </ion-select>
   </ion-item>
   <espm-validation-message

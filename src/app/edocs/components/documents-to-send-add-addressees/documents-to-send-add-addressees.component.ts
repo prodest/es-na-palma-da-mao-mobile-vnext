@@ -1,16 +1,17 @@
 import { Component, ChangeDetectionStrategy, OnInit, ChangeDetectorRef } from '@angular/core';
-import { NavController, NavParams, IonicPage, Events, ModalController, Modal } from 'ionic-angular';
+import { NavController, NavParams, IonicPage, Events, ModalController, Modal, ViewController } from 'ionic-angular';
 import { Destination, TipoDestino } from '../../state';
 
 @IonicPage({
   segment: 'documentos-para-enviar-adicionar-destinatario'
 })
 @Component({
-  selector: 'documents-to-send-add-addressees',
-  templateUrl: './documents-to-send-add-addressees.html',
+  selector: 'edocs-documents-to-send-add-addressees',
+  templateUrl: './documents-to-send-add-addressees.component.html',
   changeDetection: ChangeDetectionStrategy.Default
 })
-export class DocumentsToSendAddAddresseesPage implements OnInit {
+export class DocumentsToSendAddAddresseesComponent implements OnInit {
+
   addresseesTypeFilter = [
     {
       id: TipoDestino.Orgao,
@@ -40,9 +41,9 @@ export class DocumentsToSendAddAddresseesPage implements OnInit {
   constructor(
     public navCtrl: NavController,
     public navParams: NavParams,
-    private events: Events,
     private modal: ModalController,
-    private cdr: ChangeDetectorRef
+    private cdr: ChangeDetectorRef,
+    private view: ViewController
   ) {}
 
   addAddressees() {   
@@ -54,20 +55,18 @@ export class DocumentsToSendAddAddresseesPage implements OnInit {
     }else {
       destination = this.govDestination;
     }
-    
-    if (this.addressees.findIndex(ad => ad.id === destination.id) === -1) {
-      this.events.publish('documents-to-send-add-addressess:add', {
-        ...destination
-      });
-    }
-    this.navCtrl.pop();
+    this.view.dismiss(destination);
   }
+  /**
+   *
+   */
+  // closeModal(agency?: Destination) {
+  //   this.view.dismiss(agency);
+  // }
 
   ngOnInit(): void {
     this.addressees = this.navParams.data;
   }
-
-  refresh(): void {}
 
   isValidNumber(value: any) {
     return typeof value === 'number' && !isNaN(value);

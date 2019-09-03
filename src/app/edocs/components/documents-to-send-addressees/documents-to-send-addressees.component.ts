@@ -1,5 +1,5 @@
 import { Component, ChangeDetectionStrategy, OnInit, ViewChild, ChangeDetectorRef } from '@angular/core';
-import { NavController, Events } from 'ionic-angular';
+import { ModalController, Modal } from 'ionic-angular';
 import { FormBase } from '@espm/core';
 import { Destination } from '../../state';
 import { WizardStep } from '../../providers';
@@ -17,18 +17,11 @@ export class DocumentsToSendAddresseesComponent extends WizardStep<{ addressees:
 
   @ViewChild('addresseesForm') protected form: FormBase;
 
-  constructor(private navCtrl: NavController, private cdr: ChangeDetectorRef, private events: Events) {
+  constructor( private cdr: ChangeDetectorRef, private modal: ModalController) {
     super();
   }
 
-  ngOnInit(): void {
-    this.events.subscribe('documents-to-send-add-addressess:add', addressees => {
-      this.addressees = [...this.addressees, addressees]
-      this.cdr.detectChanges();
-    })
-  }
-
-  refresh(): void { }
+  ngOnInit(): void { }
 
   removeAddressee(index: number): void {
     this.addressees = [
@@ -39,7 +32,16 @@ export class DocumentsToSendAddresseesComponent extends WizardStep<{ addressees:
   }
 
   async addAddresses() {
-    const addAddresseesPage: string = 'DocumentsToSendAddAddresseesPage';
-    await this.navCtrl.push(addAddresseesPage, this.addressees)
+    const addAddresseesModal: Modal = this.modal.create('DocumentsToSendAddAddresseesComponent', this.addAddresses);
+
+    addAddresseesModal.present();
+
+    addAddresseesModal.onDidDismiss( addressees => {
+      if (addressees && this.addressees.findIndex(ad => ad.id === addressees.id) === -1) {
+        this.addressees = [...this.addressees, addressees];
+      }
+      this.cdr.detectChanges();
+    })
+    
   }
 }

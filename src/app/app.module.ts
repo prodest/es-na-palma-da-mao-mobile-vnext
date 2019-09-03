@@ -23,7 +23,6 @@ import { SocialSharing } from '@ionic-native/social-sharing';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import { StatusBar } from '@ionic-native/status-bar';
 import { FilePath } from '@ionic-native/file-path';
-import { FileTransfer } from '@ionic-native/file-transfer';
 import { IonicStorageModule } from '@ionic/storage';
 import { IonicApp, IonicErrorHandler, IonicModule } from 'ionic-angular';
 import * as moment from 'moment';
@@ -41,6 +40,7 @@ import { AlunosProviders } from './oportunidades/alunos/providers';
 import { NewsProviders } from './news/providers';
 import { TransparencyProviders } from './secont/transparency/providers';
 import { SepProviders } from './sep/providers';
+import { SchedulingService } from './scheduling/providers/scheduling.service';
 
 import { TranscolOnlineStores } from './ceturb/transcol-online/state';
 
@@ -85,7 +85,6 @@ registerLocaleData(ptBr);
     PushService,
     StatusBar,
     FilePath,
-    FileTransfer,
     Clipboard,
     FileOpener,
     File,
@@ -122,7 +121,8 @@ registerLocaleData(ptBr);
     {
       provide: ErrorHandler,
       useClass: IonicErrorHandler
-    }
+    },
+    SchedulingService
   ]
 })
 export class AppModule { }

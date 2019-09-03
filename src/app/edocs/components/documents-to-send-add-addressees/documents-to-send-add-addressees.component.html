@@ -1,12 +1,13 @@
 <ion-header>
-  <edocs-documents-to-send-header></edocs-documents-to-send-header>
-</ion-header>
+    <ion-navbar>
+      <ion-title>Buscar Destinatário</ion-title>
+      <ion-buttons end>
+        <button ion-button (click)="closeModal()">Fechar</button>
+      </ion-buttons>
+    </ion-navbar>
+  </ion-header>
 
 <ion-content>
-  <ion-refresher (ionRefresh)="refresh()" #refresher>
-    <ion-refresher-content> </ion-refresher-content>
-  </ion-refresher>
-
   <ion-list no-lines>
     <ion-list-header>
       Encaminhar Documentos

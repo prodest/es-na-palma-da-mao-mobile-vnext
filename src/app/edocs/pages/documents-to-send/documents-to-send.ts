@@ -17,7 +17,7 @@ import {
   DocumentsToSendDocComponent,
   DocumentsToSendMessageComponent
 } from '../../components';
-import { DestinationReceive, DocumentsToSendService, /*DocumentsToSendQuery,*/ WizardSteps } from '../../state';
+import { DestinationReceive, DocumentsToSendService, WizardSteps } from '../../state';
 
 @IonicPage({
   segment: 'documentos-para-enviar'
@@ -51,7 +51,6 @@ export class DocumentsToSendPage implements OnInit, OnDestroy {
 
   constructor(private navParams: NavParams,
     private service: DocumentsToSendService,
-    /*private query: DocumentsToSendQuery,*/
     private loadingService: LoadingService,
     private alertCtrl: AlertController,
     private navCtrl: NavController) { }
@@ -109,11 +108,9 @@ export class DocumentsToSendPage implements OnInit, OnDestroy {
     ];
     this.activeStep = this.basicStep;
     this.file = this.navParams.get('filePath');
-    // this.file = ':/storage/sdcard0/DCIM/Camera/file.jpg'; // UNCOMENT TO TEST AND DEBUG WITH IONIC SERVE (BROWSER PLATFORM)
+    // this.file = file.pdf'; // UNCOMENT TO TEST AND DEBUG WITH IONIC SERVE (BROWSER PLATFORM)
     this.slides.lockSwipes(true);
   }
-
-  refresh(): void { }
 
   ngOnDestroy(): void {
     this.subscriptions.forEach(sub => (sub ? sub.unsubscribe() : void 0));

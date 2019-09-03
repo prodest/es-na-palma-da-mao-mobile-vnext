@@ -1,0 +1,67 @@
+<ion-header>
+    <ion-navbar hideBackButton>
+      <button ion-button menuToggle>
+        <ion-icon name="menu"></ion-icon>
+      </button>
+      <ion-title>Consultar Agendamento</ion-title>
+    </ion-navbar>
+  </ion-header>
+
+
+<ion-content padding>
+  <form [formGroup]="form">
+    <ion-list>
+      <ion-item>
+        <ion-label>Tipo de documento</ion-label>
+        <ion-select formControlName="tipoDocumento">
+          <ion-option *ngFor="let tipo of (documentTypes$ | async)" [value]="tipo.id">{{ tipo.nome }}</ion-option>
+        </ion-select>
+      </ion-item>
+      <ion-item>
+        <ion-label>Número do documento</ion-label>
+        <ion-input formControlName="documento"></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label>Código de agendamento</ion-label>
+        <ion-input formControlName="codigo"></ion-input>
+      </ion-item>
+    </ion-list>
+    <button ion-button full color-secondary (click)="find()" [disabled]="form.invalid">
+      Consultar
+    </button>
+  </form>
+
+  <ng-container *ngIf="result$ | async as results">
+    <ng-container *ngIf="results.length > 0">
+        <hr>
+        <ion-list>
+          <ion-list-header>
+            Data e hora
+          </ion-list-header>
+          <ion-item>
+            {{ results[0].data | date: 'dd/MM/yyyy' }} {{results[0].hora}}
+          </ion-item>
+          <ion-list-header>
+            Documento
+          </ion-list-header>
+          <ion-item>
+            {{ results[0].tipoDocumento.nome }}: {{ results[0].documento }}
+          </ion-item>
+          <ion-list-header>
+            Serviço
+          </ion-list-header>
+          <ion-item>
+            {{ results[0].servico.nome }}
+          </ion-item>
+          <ion-list-header>
+            Local
+          </ion-list-header>
+          <ion-item>
+            {{ results[0].unidade.nome }}
+            <h3> {{ results[0].unidade.endereco }} </h3>
+          </ion-item>
+        </ion-list>
+        <button ion-button color-secondary full (click)="cancel(results[0].id)">Cancelar Agendamento</button>
+    </ng-container>
+  </ng-container>
+</ion-content>
