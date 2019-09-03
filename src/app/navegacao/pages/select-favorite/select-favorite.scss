@@ -26,7 +26,8 @@ page-select-favorite {
   /* Marcar todos como favoritos */
   #mark-all {
     padding: 0px 30px;
-    margin: 20px 0px;
+    margin: 0px;
+    border-bottom: 2px solid #e9f7fe;
 
     ion-item {
       display: flex;
@@ -90,14 +91,20 @@ page-select-favorite {
     flex: 1;
     padding: 0px 15px;
     overflow: scroll;
+    border-bottom: 2px solid #e9f7fe;
+    padding-top: 5px;
+    padding-bottom: 5px;
+
+    ion-list {
+      margin: 0;
+    }
 
     .fav-item {
       display: flex;
       flex-direction: row-reverse;
       background-color: #e9f7fe; // $primary-very-light,
       border-radius: 50px;
-      box-shadow: 0px 1px 3px #cccccc;
-      margin: 10px 0px;
+      margin: 5px 0px;
       min-height: 50px;
       padding: 0px 40px !important;
 
@@ -145,5 +152,11 @@ page-select-favorite {
         }
       }
     }
+  }
+
+  large-button {
+    width: 60%;
+    margin: 4px;
+    align-self: center;
   }
 }
