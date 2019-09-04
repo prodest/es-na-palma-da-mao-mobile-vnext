@@ -41,6 +41,9 @@
         <hook src="scripts/copy-plugins-from-node_modules.js" type="before_platform_add" />
         <hook src="scripts/manually-set-plugin-params.sh" type="before_platform_add" />
         <hook src="scripts/copy_resource_files.js" type="after_prepare" />
+        <edit-config file="AndroidManifest.xml" mode="merge" target="/manifest/application/activity[@android:name='MainActivity']">
+            <activity android:windowSoftInputMode="adjustPan" />
+        </edit-config>
         <config-file parent="/resources" target="./res/values/strings.xml">
             <string name="fb_app_id">926428880739042</string>
             <string name="fb_app_name">Acesso Cidadão</string>

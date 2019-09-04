@@ -3,40 +3,41 @@ page-my-services {
   #custom-header {
     background-image: url('../assets/imgs/bg-menu-principal-topo.jpg');
     background-size: cover;
-    min-height: 250px;
+    height: 30vh;
+    min-height: 30vh;
     position: relative;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
-
+    
     /* Searchbar */
     #searchbar-wrapper {
       width: 100%;
       max-width: 450px;
-
+      
       ion-searchbar {
         font-family: 'Poppins';
         background: transparent !important;
         padding: 15px;
         border: 0;
-
+        
         .searchbar-input-container {
           display: flex;
           align-items: center;
-
+          
           .searchbar-search-icon {
             top: unset;
             left: 20px;
           }
-
+          
           .searchbar-input {
             height: 60px;
             border-radius: 30px;
             padding: 6px 55px;
           }
         }
-
+        
         .searchbar-ios-cancel {
           position: absolute;
           right: 40px;
@@ -48,18 +49,18 @@ page-my-services {
           height: unset;
         }
       }
-
+      
       .searchbar-ios {
         .searchbar-input {
           padding-right: 130px !important;
         }
-
+        
         .searchbar-clear-icon {
           right: 100px;
         }
       }
     }
-
+    
     /* Título da página */
     nav-title {
       position: absolute;
@@ -69,22 +70,20 @@ page-my-services {
     @media screen and (max-width: 302px){
       #custom-header {
         min-height: 190px;
-}
+      }
     }
-          @media screen and (max-width: 350px){
-            nav-title .content p {
-                font-size: 23px;
-            }
-                }
-         
-   
-
+    @media screen and (max-width: 350px){
+      nav-title .content p {
+        font-size: 23px;
+      }
+    }    
+    
     /* Botão para a tela de seleção de favoritos */
     #button-wrapper {
       position: absolute;
       right: 15px;
       bottom: 5px;
-
+      
       #select-favorite {
         font-size: 2rem;
         display: inline;
@@ -94,9 +93,9 @@ page-my-services {
       }
     }
   }
-
+  
   /* CORPO */
-
+  
   .scroll-content {
     background-color: #e9f7fe; // $primary-very-light
     display: flex;
@@ -104,29 +103,37 @@ page-my-services {
     flex-direction: column;
     justify-content: space-between;
     overflow: hidden;
+    padding-bottom: 0 !important;
   }
 
+  ion-slides, .swiper-container, .swiper-wrapper, .slide-zoom {
+    display: flex;
+    flex: 1 0;
+  }
+  
   ion-slides {
     position: relative;
     height: unset;
     flex: 1 0;
-
+    
     .slide-zoom {
       display: flex;
       flex-direction: column;
       padding: 20px;
       padding-top: 10px;
       height: 100%;
+      min-height: 100%;
       max-width: 100vmin;
       
-
+      
       .slide-line {
         display: flex;
         flex: 1 0;
         justify-content: space-between;
         max-height: 30%;
+        min-height: 95px;
         margin-bottom: 3vmin;
-
+        
         button {
           font-family: 'Poppins';
           font-size: 4.5vmin;
@@ -134,21 +141,21 @@ page-my-services {
           color: #004297; // $primary-dark
           text-transform: none;
           background-color: white;
-          height: 100%;
+          min-height: 100%;
           width: 49.7%;
           margin: 0;
           box-shadow: 0px 0px 5px #cccccc;
           white-space: normal;
-
+          
           .button-inner {
             display: flex;
             flex-direction: column;
             @media screen and (max-width: 359px){
               .icon {
-              height: 6vmin !important;
-              width: 6vmin !important;
-                }
-                    }
+                height: 6vmin !important;
+                width: 6vmin !important;
+              }
+            }
             .icon {
               height: 12vmin;
               width: 12vmin;
@@ -162,14 +169,14 @@ page-my-services {
         border-top-left-radius: 6vmin;
         border-bottom-left-radius: 6vmin;
       }
-
+      
       .slide-line > :last-child {
         border-top-right-radius: 6vmin;
         border-bottom-right-radius: 6vmin;
       }
     }
   }
-
+  
   /* RODAPÉ */
   .footer {
     display: flex;
@@ -177,14 +184,14 @@ page-my-services {
     width: 100%;
     position: relative;
     padding: 0 10vmin;
-
+    
     button {
       background: transparent;
       margin-bottom: 4vmin;
     }
   }
-
- 
+  
+  
 }
 #not-founded {
   height: 100%;
