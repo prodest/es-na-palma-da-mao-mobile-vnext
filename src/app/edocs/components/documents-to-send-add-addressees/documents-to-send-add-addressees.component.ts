@@ -1,5 +1,5 @@
-import { Component, ChangeDetectionStrategy, OnInit, ChangeDetectorRef } from '@angular/core';
-import { NavController, NavParams, IonicPage, Events, ModalController, Modal, ViewController } from 'ionic-angular';
+import { Component, ChangeDetectionStrategy, ChangeDetectorRef } from '@angular/core';
+import { NavController, NavParams, IonicPage, ModalController, Modal, ViewController } from 'ionic-angular';
 import { Destination, TipoDestino } from '../../state';
 
 @IonicPage({
@@ -10,7 +10,7 @@ import { Destination, TipoDestino } from '../../state';
   templateUrl: './documents-to-send-add-addressees.component.html',
   changeDetection: ChangeDetectionStrategy.Default
 })
-export class DocumentsToSendAddAddresseesComponent implements OnInit {
+export class DocumentsToSendAddAddresseesComponent {
 
   addresseesTypeFilter = [
     {
@@ -33,7 +33,6 @@ export class DocumentsToSendAddAddresseesComponent implements OnInit {
   ];
   selAddresseesTypeFilter: { id: number; type: string; notice: string } = this.addresseesTypeFilter[0];
 
-  addressees: Destination[] = [];
   govAgency: Destination;
   govDestination: Destination;
 
@@ -45,9 +44,8 @@ export class DocumentsToSendAddAddresseesComponent implements OnInit {
     private cdr: ChangeDetectorRef,
     private view: ViewController
   ) {}
-
-  addAddressees() {   
-
+  
+  closeModal() {
     let destination: Destination;
 
     if(this.selAddresseesTypeFilter.id === 0){
@@ -57,29 +55,18 @@ export class DocumentsToSendAddAddresseesComponent implements OnInit {
     }
     this.view.dismiss(destination);
   }
-  /**
-   *
-   */
-  // closeModal(agency?: Destination) {
-  //   this.view.dismiss(agency);
-  // }
-
-  ngOnInit(): void {
-    this.addressees = this.navParams.data;
-  }
 
   isValidNumber(value: any) {
     return typeof value === 'number' && !isNaN(value);
   }
 
-  changes() {
+  changes(e) {
     this.cdr.detectChanges();
   }
 
   openSearch(tipo: number) {
     
     const data = {
-      addAddressees: this.addAddressees,
       tipo: tipo,
       agency: null,
     }
