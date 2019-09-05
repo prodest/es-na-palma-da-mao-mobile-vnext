@@ -18,7 +18,7 @@
       </ion-item>
       <ion-item>
         <ion-label>Filtrar por:</ion-label>
-        <ion-select cancelText="Cancelar" [(ngModel)]="selAddresseesTypeFilter" (ionChange)="changes($event)" required>
+        <ion-select cancelText="Cancelar" [(ngModel)]="selAddresseesTypeFilter" (ionChange)="changes()" required>
           <ion-option *ngFor="let addTypeFilter of addresseesTypeFilter" [value]="addTypeFilter">
             {{ addTypeFilter.type }}
           </ion-option>
@@ -31,20 +31,28 @@
       </ion-card>
       <ion-list>
         <ion-item>
-          <p>{{ govAgency? "Órgão: "+govAgency.nome : "Buscar Órgão" }}</p>
+          <p>Órgão</p>
           <ion-buttons end>
-            <button ion-button (click)="openSearch(0)" outline>Buscar Órgão</button>
+            <button ion-button (click)="openSearch(0)" full>{{ govAgency? govAgency.nome : "Buscar Órgão" }}</button>
           </ion-buttons>
         </ion-item>
         <ion-item *ngIf="selAddresseesTypeFilter.id !== 0 && govAgency">
-          <p >{{ govDestination? govDestination.nome : Buscar }}</p>
+          <p>{{ tipoPesquisa }}</p>
           <ion-buttons end>
-            <button ion-button (click)="openSearch(selAddresseesTypeFilter.id)" outline>"Buscar "</button>
+            <button ion-button (click)="openSearch(selAddresseesTypeFilter.id)" full>{{ govDestination? govDestination.nome : "Buscar "+tipoPesquisa }}</button>
           </ion-buttons>
         </ion-item>
-        
+        <ion-card class="alert-card" *ngIf="selAddresseesTypeFilter.id !== 0 && !govAgency">
+          <ion-card-content>
+            <p>{{ noticeAgency }}</p>
+          </ion-card-content>
+        </ion-card>
       </ion-list>
-      <button ion-button (click)="closeModal()">Ok</button>
+      <ion-footer>
+        <ion-toolbar text-center="" class="foot-toolbar">
+          <button ion-button (click)="closeModal()" full>Ok</button>
+        </ion-toolbar>
+      </ion-footer>
     </ng-container>
   </ion-list>
 </ion-content>

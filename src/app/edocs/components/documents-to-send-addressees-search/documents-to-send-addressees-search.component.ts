@@ -15,6 +15,7 @@ import deburr from 'lodash-es/deburr';
 export class DocumentsToSendAddresseesSearchComponent {
   govDestinations: Destination[] = [];
   filteredGovDestinations: Destination[];
+  nomeTipoDestino: string;
 
   constructor(
     private navParams: NavParams,
@@ -24,6 +25,7 @@ export class DocumentsToSendAddresseesSearchComponent {
   ) {}
 
   ionViewWillLoad(): void {
+    this.nomeTipoDestino = this.navParams.data.nomeTipo;
     this.service
       .getDestinations(parseInt(this.navParams.data.tipo, 10), this.navParams.data.agency)
       .pipe(

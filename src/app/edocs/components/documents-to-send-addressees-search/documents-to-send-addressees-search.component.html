@@ -11,7 +11,7 @@
     <ion-item>
       <p class="title-search">Filtrar </p>
       <ion-searchbar
-        placeholder="Digite para filtrar pelo Órgão"
+        placeholder="Digite para filtrar pelo {{ nomeTipoDestino }}"
         [showCancelButton]="true"
         cancelButtonText="Cancelar"
         [animated]="false"
@@ -29,7 +29,7 @@
           </button>
         </ion-list>
         <ion-item *ngIf="filteredGovDestinations && !filteredGovDestinations.length" text-center no-lines>
-          <h2>Nenhum Órgão encontrado</h2>
+          <h2>Nenhum {{ nomeTipoDestino }} encontrado</h2>
           <p>Tente mudar o filtro da consulta</p>
         </ion-item>
         <ion-spinner page-loading *ngIf="!filteredGovDestinations"></ion-spinner>

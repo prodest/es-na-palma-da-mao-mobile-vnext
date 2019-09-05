@@ -15,7 +15,7 @@ export class DocumentsToSendAddAddresseesComponent {
   addresseesTypeFilter = [
     {
       id: TipoDestino.Orgao,
-      type: 'Somente órgão',
+      type: 'Órgão',
       notice:
         'Ao enviar para uma organização, apenas o responsável pela organização (e pessoas explicitamente autorizadas por ele no Acesso Cidadão) terão acesso ao trâmite.'
     },
@@ -27,14 +27,16 @@ export class DocumentsToSendAddAddresseesComponent {
     },
     {
       id: TipoDestino.GrupoDeTrabalho,
-      type: 'Grupos de Trabalho',
+      type: 'Grupo de Trabalho',
       notice: 'Ao enviar para um grupo, TODOS os membros do grupo terão acesso ao trâmite.'
     }
   ];
+  noticeAgency: string = "Primeiro escolha um Órgão."
   selAddresseesTypeFilter: { id: number; type: string; notice: string } = this.addresseesTypeFilter[0];
 
   govAgency: Destination;
   govDestination: Destination;
+  tipoPesquisa: string = this.selAddresseesTypeFilter.type;
 
 
   constructor(
@@ -52,6 +54,7 @@ export class DocumentsToSendAddAddresseesComponent {
       destination = this.govAgency;
     }else {
       destination = this.govDestination;
+      destination.orgaoNome = this.govAgency.nome;
     }
     this.view.dismiss(destination);
   }
@@ -60,7 +63,8 @@ export class DocumentsToSendAddAddresseesComponent {
     return typeof value === 'number' && !isNaN(value);
   }
 
-  changes(e) {
+  changes() {
+    this.tipoPesquisa = this.selAddresseesTypeFilter.type;
     this.cdr.detectChanges();
   }
 
@@ -68,6 +72,7 @@ export class DocumentsToSendAddAddresseesComponent {
     
     const data = {
       tipo: tipo,
+      nomeTipo: this.addresseesTypeFilter[tipo].type,
       agency: null,
     }
 

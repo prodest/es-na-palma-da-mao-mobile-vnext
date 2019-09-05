@@ -33,6 +33,7 @@ export class DocumentsToSendAddresseesFormComponent extends FormBase implements 
   showName(addresee: Destination): void {
     const alert = this.alert.create({
       title: addresee.nome,
+      subTitle: addresee.orgaoNome,
       message: addresee.descricao,
       buttons: ['OK'],
     });

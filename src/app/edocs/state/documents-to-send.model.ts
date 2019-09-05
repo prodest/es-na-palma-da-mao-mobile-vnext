@@ -9,6 +9,7 @@ export interface Destination {
   nome: string;
   descricao: string;
   tipo?: string;
+  orgaoNome?: string;
 }
 export interface DocumentSend {
   File: Buffer;
