@@ -88,14 +88,14 @@ const menus = [
         component: 'DocumentsToSignPage',
         order: 2,
         secure: true
-      }/*,
+      },
       {
-        title: 'Documentos para enviar',
+        title: 'Encaminhar documentos',
         icon: 'create',
         component: 'DocumentsToSendPage',
         order: 2,
         secure: true
-      }*/
+      }
     ]
   },
   {
@@ -207,7 +207,7 @@ export class MenuComponent implements OnInit, OnDestroy {
     private appCtrl: App,
     private cd: ChangeDetectorRef,
     private platform: Platform
-  ) {}
+  ) { }
 
   /**
    *
