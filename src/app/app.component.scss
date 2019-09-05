@@ -35,6 +35,7 @@ ion-menu {
   }
   .toolbar-background, .toolbar-title {
     background-color: #004297;
+    color: white;
   }
   
   ion-content {
@@ -369,3 +370,52 @@ ion-spinner[section-loading] {
   background-color: #e9f7fe; 
 }
 
+ion-list-header {
+  background-color: #fdeff5 !important;
+  font-weight: 600 !important;
+  color: #004297 !important;
+}
+
+ion-alert {
+  font-family: 'Poppins';
+  
+  .alert-wrapper {
+    border-radius: 30px !important;
+    
+    .alert-head {
+      text-align: center;
+
+      h2 {
+        font-weight: 600 !important;
+      }
+    }
+
+    .alert-message {
+      font-weight: 600 !important;
+    }
+
+    .alert-button-group {
+      justify-content: space-evenly;
+      padding: 0;
+      border-top: 1px solid #ccc;
+      
+      button {
+        margin: 0;
+        flex: 1;
+        padding: 15px;
+        .button-inner {
+          justify-content: center;
+          font-family: 'Poppins';
+          color: #004297;
+          font-weight: 700;
+          border: none;
+
+        }
+      }
+
+      :first-child {
+        border-right: 1px solid #ccc;
+      }
+    }
+  }
+}
