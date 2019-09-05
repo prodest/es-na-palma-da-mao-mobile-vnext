@@ -91,6 +91,7 @@
     "@ionic-native/file-chooser": "^4.20.0",
     "@ionic-native/file-opener": "^4.18.0",
     "@ionic-native/file-path": "^4.20.0",
+    "@ionic-native/file-picker": "^4.20.0",
     "@ionic-native/geolocation": "^4.18.0",
     "@ionic-native/google-plus": "^4.9.2",
     "@ionic-native/in-app-browser": "^4.4.2",
@@ -122,6 +123,7 @@
     "cordova-plugin-file-opener2": "^2.1.0",
     "cordova-plugin-filechooser": "^1.2.0",
     "cordova-plugin-filepath": "^1.5.6",
+    "cordova-plugin-filepicker": "^1.1.6",
     "cordova-plugin-geolocation": "4.0.1",
     "cordova-plugin-googleplus": "^5.3.2",
     "cordova-plugin-inappbrowser": "^1.7.2",
@@ -253,7 +255,8 @@
       "com-darryncampbell-cordova-plugin-intent": {},
       "cordova-plugin-filepath": {},
       "cordova-plugin-ionic-keyboard": {},
-      "cordova-plugin-filechooser": {}
+      "cordova-plugin-filechooser": {},
+      "cordova-plugin-filepicker": {}
     },
     "platforms": [
       "android"

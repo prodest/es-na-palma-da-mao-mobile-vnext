@@ -160,4 +160,5 @@
     <plugin name="com-darryncampbell-cordova-plugin-intent" spec="git+https://github.com/darryncampbell/darryncampbell-cordova-plugin-intent.git" />
     <engine name="android" spec="7.1.4" />
     <plugin name="cordova-plugin-filechooser" spec="^1.2.0" />
+    <plugin name="cordova-plugin-filepicker" spec="^1.1.6" />
 </widget>
