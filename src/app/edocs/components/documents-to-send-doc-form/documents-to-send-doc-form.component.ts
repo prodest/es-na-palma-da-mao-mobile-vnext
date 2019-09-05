@@ -2,7 +2,8 @@ import { Component, OnInit, OnChanges, SimpleChanges, Input, ChangeDetectionStra
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { FileChooser } from '@ionic-native/file-chooser';
 import { FilePath } from '@ionic-native/file-path';
-import { AlertController } from 'ionic-angular';
+import { IOSFilePicker } from '@ionic-native/file-picker';
+import { AlertController, Platform } from 'ionic-angular';
 import { Subscription } from 'rxjs/Subscription';
 import { FormBase } from '@espm/core';
 import { DocumentoNatureza } from '../../state';
@@ -62,8 +63,10 @@ export class DocumentsToSendBasicFormComponent extends FormBase implements OnIni
   constructor(formBuilder: FormBuilder,
     private cdr: ChangeDetectorRef,
     private fileChooser: FileChooser,
+    private filePicker: IOSFilePicker,
     private filePath: FilePath,
-    private alertCtrl: AlertController) {
+    private alertCtrl: AlertController,
+    private platform: Platform) {
     super(formBuilder);
   }
 
@@ -109,7 +112,7 @@ export class DocumentsToSendBasicFormComponent extends FormBase implements OnIni
 
   async chooser(): Promise<void> {
     try {
-      const uri = await this.fileChooser.open();
+      const uri = this.platform.is('ios') ? await this.filePicker.pickFile() : await this.fileChooser.open();
       const path = await this.filePath.resolveNativePath(uri)
       this.form.get('file').setValue(path);
       this.onFileSelect.next(path);
