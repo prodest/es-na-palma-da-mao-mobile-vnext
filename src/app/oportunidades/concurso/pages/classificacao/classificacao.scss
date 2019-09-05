@@ -1,4 +1,14 @@
 espm-dt-classificacao-page {
+  .searchbar-md {
+    background-color: #e9f7fe;
+}
+.active, [active], .toolbar-title, ion-navbar.toolbar, .toolbar-background {
+  background-color: #e9f7fe;
+  color: #004297;
+}
+.back-button-icon-md{
+  color: #00aeef;
+}
   .scroll-content {
     #not-founded {
       height: 100%;

@@ -23,8 +23,9 @@ espm-dt-areas-page {
   .back-button-icon-md {
     color: #00aeef;
   }
+  .active, [active], .toolbar-title, ion-navbar.toolbar, .toolbar-background {
+    background-color: #e9f7fe;
+    color: #004297;
+  }
 }
-.active, [active], .toolbar-title, ion-navbar.toolbar, .toolbar-background {
-  background-color: #e9f7fe;
-  color: #004297;
-}
+
