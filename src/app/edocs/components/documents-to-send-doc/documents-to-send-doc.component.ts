@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, OnInit, Input, ViewChild, Output } from '@angular/core';
+import { ChangeDetectionStrategy, Component, OnInit, Input, ViewChild } from '@angular/core';
 import { FormBase } from '@espm/core';
 import { AlertController } from 'ionic-angular';
 import { FileOpener } from '@ionic-native/file-opener';
