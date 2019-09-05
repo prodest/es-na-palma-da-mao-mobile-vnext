@@ -109,7 +109,7 @@ export class DocumentsToSendPage implements OnInit, OnDestroy {
     this.activeStep = this.basicStep;
     this.file = this.navParams.get('filePath');
     // this.file = 'file.pdf'; // UNCOMENT TO TEST AND DEBUG WITH IONIC SERVE (BROWSER PLATFORM)
-    // this.slides.lockSwipes(true);
+    this.slides.lockSwipes(true);
   }
 
   ngOnDestroy(): void {
@@ -122,7 +122,7 @@ export class DocumentsToSendPage implements OnInit, OnDestroy {
     }
     const loading = this.loadingService.show('Encaminhando documento');
     this.service.captureDocuments(this.stepsValue.docStep.name, {
-      File: this.file,
+      File: this.stepsValue.docStep.file,
       Assinar: false,
       // ClasseId: null, // deixar null pra cidadão
       Natureza: this.stepsValue.docStep.documentType,

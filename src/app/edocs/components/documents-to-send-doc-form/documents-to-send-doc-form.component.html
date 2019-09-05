@@ -1,63 +1,82 @@
 <form novalidate [formGroup]="form">
-  <ion-item>
-    <ion-label floating>Nome do documento</ion-label>
-    <ion-input type="text" formControlName="name" name="name" required></ion-input>
-  </ion-item>
-  <espm-validation-message [errors]="validationErrors['name']"></espm-validation-message>
-  <ion-item *ngIf="form?.get('name').value">
-    <ion-label floating>Tipo de documento</ion-label>
-    <ion-select cancelText="Cancelar" formControlName="documentType" name="documentType" (ionChange)="selectChange()"
-      [selectOptions]="documentTypeOptions" required>
-      <!-- <ion-option [value]="1">Documento Eletrônico</ion-option> -->
-      <ion-option [value]="2">Documento Escaneado</ion-option>
-    </ion-select>
-  </ion-item>
-  <espm-validation-message *ngIf="form?.get('name').value" [errors]="validationErrors['documentType']"></espm-validation-message>
-  <ion-item *ngIf="form?.get('name').value && isValidNumber(form?.get('documentType').value) && form?.get('documentType').value === 2">
-    <ion-label floating>Como é o documento em papel?</ion-label>
-    <ion-select cancelText="Cancelar" formControlName="documentPaperType" name="documentPaperType"
-      (ionChange)="selectChange()" [selectOptions]="documentPaperTypeOptions" required>
-      <ion-option [value]="1">Documento Original</ion-option>
-      <ion-option [value]="2">Cópia Autenticada em Cartório</ion-option>
-      <ion-option [value]="3">Cópia Autenticada Administrativamente</ion-option>
-      <ion-option [value]="4">Cópia Simples</ion-option>
-    </ion-select>
-  </ion-item>
-  <espm-validation-message *ngIf="form?.get('name').value && isValidNumber(form?.get('documentType').value) && form?.get('documentType').value === 2"
-    [errors]="validationErrors['documentPaperType']"></espm-validation-message>
-  <ion-item *ngIf="form?.get('name').value && isValidNumber(form?.get('documentType').value) && form?.get('documentType').value === 1">
-    <ion-label floating>Qual tipo de assinatura?</ion-label>
-    <ion-select cancelText="Cancelar" formControlName="documentAssignType" name="documentAssignType"
-      (ionChange)="selectChange()" [selectOptions]="documentAssignTypeOptions" required>
-      <ion-option [value]="0">E-Docs</ion-option>
-      <ion-option [value]="1">Sem assinatura</ion-option>
-    </ion-select>
-  </ion-item>
-  <espm-validation-message *ngIf="form?.get('name').value && isValidNumber(form?.get('documentType').value) && form?.get('documentType').value === 1"
-    [errors]="validationErrors['documentAssignType']"></espm-validation-message>
-  <ion-item *ngIf="form?.get('name').value && isValidNumber(form?.get('documentType').value)">
-    <ion-card class="success-card">
-      <ion-card-content>
-        <p class="success-text">
-          <ion-icon name="information-circle"></ion-icon>&nbsp;
-          <strong *ngIf="form?.get('documentPaperType').value === 0 && form?.get('documentType').value === 1; else notOriginal">
-            Valor Legal: Cópia Autenticada Administrativamente
-          </strong>
-          <ng-template #notOriginal>
-            <strong>Valor Legal: Cópia Simples</strong>
-          </ng-template>
-        </p>
-      </ion-card-content>
-    </ion-card>
-    <ion-card class="alert-card" *ngIf="form?.get('documentType').value === 1">
-      <ion-card-content>
-        <p class="alert-text">
-          <strong>IMPORTANTE:</strong> Por ser uma cópia de um documento em papel,
-          <strong>você deve manter a guarda do documento original em papel</strong> para eventual apresentação caso
-          solicitado,
-          na forma do art. 11, § 3º do Decreto nº 4410-R, de 18/04/2019.
-        </p>
-      </ion-card-content>
-    </ion-card>
-  </ion-item>
+  <div *ngIf="!!form?.get('file')?.value then hasFile; else notHasFile"></div>
+  <ng-template #hasFile>
+    <ion-item>
+      <ion-label floating>Nome do documento</ion-label>
+      <ion-input type="text" formControlName="name" name="name" required></ion-input>
+    </ion-item>
+    <espm-validation-message [errors]="validationErrors['name']"></espm-validation-message>
+    <ion-item *ngIf="form?.get('name').value">
+      <ion-label floating>Tipo de documento</ion-label>
+      <ion-select cancelText="Cancelar" formControlName="documentType" name="documentType" (ionChange)="selectChange()"
+        [selectOptions]="documentTypeOptions" required>
+        <!-- <ion-option [value]="1">Documento Eletrônico</ion-option> -->
+        <ion-option [value]="2">Documento Escaneado</ion-option>
+      </ion-select>
+    </ion-item>
+    <espm-validation-message *ngIf="form?.get('name').value" [errors]="validationErrors['documentType']">
+    </espm-validation-message>
+    <ion-item
+      *ngIf="form?.get('name').value && isValidNumber(form?.get('documentType').value) && form?.get('documentType').value === 2">
+      <ion-label floating>Como é o documento em papel?</ion-label>
+      <ion-select cancelText="Cancelar" formControlName="documentPaperType" name="documentPaperType"
+        (ionChange)="selectChange()" [selectOptions]="documentPaperTypeOptions" required>
+        <ion-option [value]="1">Documento Original</ion-option>
+        <ion-option [value]="2">Cópia Autenticada em Cartório</ion-option>
+        <ion-option [value]="3">Cópia Autenticada Administrativamente</ion-option>
+        <ion-option [value]="4">Cópia Simples</ion-option>
+      </ion-select>
+    </ion-item>
+    <espm-validation-message
+      *ngIf="form?.get('name').value && isValidNumber(form?.get('documentType').value) && form?.get('documentType').value === 2"
+      [errors]="validationErrors['documentPaperType']"></espm-validation-message>
+    <ion-item
+      *ngIf="form?.get('name').value && isValidNumber(form?.get('documentType').value) && form?.get('documentType').value === 1">
+      <ion-label floating>Qual tipo de assinatura?</ion-label>
+      <ion-select cancelText="Cancelar" formControlName="documentAssignType" name="documentAssignType"
+        (ionChange)="selectChange()" [selectOptions]="documentAssignTypeOptions" required>
+        <ion-option [value]="0">E-Docs</ion-option>
+        <ion-option [value]="1">Sem assinatura</ion-option>
+      </ion-select>
+    </ion-item>
+    <espm-validation-message
+      *ngIf="form?.get('name').value && isValidNumber(form?.get('documentType').value) && form?.get('documentType').value === 1"
+      [errors]="validationErrors['documentAssignType']"></espm-validation-message>
+    <ion-item *ngIf="form?.get('name').value && isValidNumber(form?.get('documentType').value)">
+      <ion-card class="success-card">
+        <ion-card-content>
+          <p class="success-text">
+            <ion-icon name="information-circle"></ion-icon>&nbsp;
+            <strong
+              *ngIf="form?.get('documentPaperType').value === 0 && form?.get('documentType').value === 1; else notOriginal">
+              Valor Legal: Cópia Autenticada Administrativamente
+            </strong>
+            <ng-template #notOriginal>
+              <strong>Valor Legal: Cópia Simples</strong>
+            </ng-template>
+          </p>
+        </ion-card-content>
+      </ion-card>
+      <ion-card class="alert-card" *ngIf="form?.get('documentType').value === 1">
+        <ion-card-content>
+          <p class="alert-text">
+            <strong>IMPORTANTE:</strong> Por ser uma cópia de um documento em papel,
+            <strong>você deve manter a guarda do documento original em papel</strong> para eventual apresentação caso
+            solicitado,
+            na forma do art. 11, § 3º do Decreto nº 4410-R, de 18/04/2019.
+          </p>
+        </ion-card-content>
+      </ion-card>
+    </ion-item>
+  </ng-template>
+  <ng-template #notHasFile>
+    <ion-item>
+      <ion-buttons end>
+        <button ion-button (click)="chooser()" full>
+          Selecionar arquivo
+        </button>
+      </ion-buttons>
+      <espm-validation-message [errors]="validationErrors['file']"></espm-validation-message>
+    </ion-item>
+  </ng-template>
 </form>
