@@ -32,7 +32,7 @@
           <h2>Nenhum Órgão encontrado</h2>
           <p>Tente mudar o filtro da consulta</p>
         </ion-item>
-        <!-- <ion-spinner page-loading *ngIf="isLoading"></ion-spinner> -->
+        <ion-spinner page-loading *ngIf="!filteredGovDestinations"></ion-spinner>
       </ion-scroll>
     </ion-item>
   </ng-container>

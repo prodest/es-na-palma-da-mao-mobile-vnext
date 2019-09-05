@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component } from '@angular/core';
+import { ChangeDetectionStrategy, Component, ChangeDetectorRef } from '@angular/core';
 import { Destination, DocumentsToSendService, TipoDestino } from '../../state';
 import { map } from 'rxjs/operators';
 import { NavParams, IonicPage, ViewController } from 'ionic-angular';
@@ -20,6 +20,7 @@ export class DocumentsToSendAddresseesSearchComponent {
     private navParams: NavParams,
     private service: DocumentsToSendService,
     private view: ViewController,
+    private cdr: ChangeDetectorRef,
   ) {}
 
   ionViewWillLoad(): void {
@@ -53,6 +54,7 @@ export class DocumentsToSendAddresseesSearchComponent {
       )
       .subscribe(destination => {
         this.govDestinations = this.filteredGovDestinations = destination;
+        this.cdr.detectChanges();
       });
   }
 

@@ -109,7 +109,7 @@ export class DocumentsToSendPage implements OnInit, OnDestroy {
     this.activeStep = this.basicStep;
     this.file = this.navParams.get('filePath');
     // this.file = 'file.pdf'; // UNCOMENT TO TEST AND DEBUG WITH IONIC SERVE (BROWSER PLATFORM)
-    this.slides.lockSwipes(true);
+    // this.slides.lockSwipes(true);
   }
 
   ngOnDestroy(): void {
