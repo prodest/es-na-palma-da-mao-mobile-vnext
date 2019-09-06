@@ -1,19 +1,6 @@
 espm-menu {
   .menu {
     background-color: #e9f7fe;
-    ion-list-header {
-      font-weight: 500;
-      text-transform: uppercase;
-      border-top: 1px solid #11637a;
-      margin-bottom: 0;
-      color: #064d61;
-     // background: #2286a2 !important;
-     background-color: red;
-    }
-
-    ion-list-header.item-ios {
-      border-top: none;
-    }
 
     button {
       background: transparent !important;

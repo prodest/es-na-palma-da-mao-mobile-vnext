@@ -22,6 +22,10 @@ page-about {
     max-width: 150px;
   }
 
+  ion-list {
+    margin: 0 !important;
+  }
+
   ion-list.list > div.full-divider > ion-item {
     border-bottom: 1px solid #dedede;
 

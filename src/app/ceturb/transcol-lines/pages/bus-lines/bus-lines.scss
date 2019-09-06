@@ -12,11 +12,7 @@ page-bus-lines {
     box-shadow: none !important;
   }
 
-  ion-list-header {
-    background-color: #fdeff5 !important;
-  }
-
-  ion-list-header ion-label {
+  ion-label {
     color: #004297 !important;
     font-weight: 600;
   }
@@ -27,7 +23,7 @@ page-bus-lines {
 
   .busline_number {
     font-weight: 700;
-    align-self: flex-start;
+    align-self: center;
     padding-top: 8px;
   }
   .busline_name {

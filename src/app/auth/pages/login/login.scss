@@ -4,37 +4,22 @@ page-login {
 
   ion-content, .scroll-content {
     height: 100%;
+    min-height: 100%;
   }
   
-  //Está sobrepondo os componentes
-
-  // .scroll-content {
-  //   display: flex;
-  //   // flex-direction: column;
-  //   justify-content: space-between;
-
-  //   background-color: white;
-  //   overflow: hidden;
-
-  //   padding-bottom: 15%;
-  // }
-
-  // ion-grid, ion-col {
-  //   padding: 0 !important;
-  // }
-  .scroll-content{
-    overflow-x: none !important;
-    overflow-y:  !important;
-
   .scroll-content {
     display: flex;
     flex-direction: column;
     justify-content: space-between;
 
-    background-color: white !important;
+    background-color: white;
     overflow: hidden;
 
-    padding-bottom: 15%;
+    padding-bottom: 15% !important;
+  }
+
+  ion-grid, ion-col {
+    padding: 0 !important;
   }
 
   ion-grid, ion-col {
@@ -171,6 +156,4 @@ page-login {
       }
     }
   }
-
-  
-  }}
+}

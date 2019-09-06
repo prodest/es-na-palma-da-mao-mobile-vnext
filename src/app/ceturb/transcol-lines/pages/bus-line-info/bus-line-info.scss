@@ -25,17 +25,33 @@ page-bus-line-info {
     }
   }
 
-  ion-list-header {
-    background-color: #fdeff5 !important;
-  }
-
-  ion-list-header ion-label {
+  ion-label {
     color: #004297 !important;
     font-weight: 600;
   }
 
   ion-list {
     margin: 0 !important;
+  }
+
+  #path {
+
+    .input-wrapper {
+      display: flex;
+      
+      .label {
+        display: flex;
+        margin: 0;
+        height: 100%;
+        align-items: center;
+
+        h3 {
+          height: min-content;
+          margin: 0;
+        }
+      }
+    }
+
   }
 
   .day-group {
