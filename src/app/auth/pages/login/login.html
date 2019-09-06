@@ -1,7 +1,7 @@
 <ion-content>
   <div id="header">
     <nav-header
-      [title]="'Minha Conta'"
+      title="Minha Conta"
     ></nav-header>
   </div>
   <div class="wrapper">
@@ -32,20 +32,20 @@
     <div class="login-button">
       <!-- Botão ENTRAR -->
       <large-button
-        [color]="'secondary-dark'"
-        [leftIcon]="'md-finger-print'"
-        [rightIcon]="'ios-arrow-forward-outline'"
-        [text]="'Entrar'"
+        color="secondary-dark"
+        leftIcon="md-finger-print"
+        rightIcon="ios-arrow-forward-outline"
+        text="Entrar"
         (click)="login(username, password)"
       ></large-button>
     </div>
     <div class="login-button">
         <!-- Botão CRIAR CONTA -->
         <large-button
-          [color]="'primary-dark'"
-          [leftIcon]="'ios-add-circle-outline'"
-          [rightIcon]="'ios-arrow-forward-outline'"
-          [text]="'Criar conta'"
+          color="primary-dark"
+          leftIcon="ios-add-circle-outline"
+          rightIcon="ios-arrow-forward-outline"
+          text="Criar conta"
           (click)="createAccount()"
         ></large-button>
       </div>
