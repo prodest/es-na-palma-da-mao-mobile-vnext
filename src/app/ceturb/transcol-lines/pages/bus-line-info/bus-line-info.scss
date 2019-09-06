@@ -13,6 +13,9 @@ page-bus-line-info {
       padding: 0;
       min-height: 42px;
     }
+    .segment {
+      background-color: #e9f7fe;
+    }
     .segment-activated {
       background-color: #820043 !important;
       color: white !important;
@@ -22,6 +25,9 @@ page-bus-line-info {
       background-color: #fff;
       color: #004297;
       font-weight: 600;
+    }
+    .segment-ios .segment-button:not(.segment-activated) {
+      background-color: white;
     }
   }
 
@@ -80,7 +86,4 @@ page-bus-line-info {
     margin-right: 8px;
   }
 
-  .segment-ios .segment-button:not(.segment-activated) {
-    background-color: white;
-  }
 }
