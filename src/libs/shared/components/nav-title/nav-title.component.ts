@@ -11,12 +11,4 @@ export class NavTitleComponent {
   @Input() title: string;
   
   constructor() {}
-  
-  limite = (title) => {
-    if (title && title.length > 17) {
-      return title.substring(0, 17)+"…";
-    }else{
-      return title;
-    }
-  }
 }

@@ -34,6 +34,26 @@ page-bus-line-info {
     margin: 0 !important;
   }
 
+  #path {
+
+    .input-wrapper {
+      display: flex;
+      
+      .label {
+        display: flex;
+        margin: 0;
+        height: 100%;
+        align-items: center;
+
+        h3 {
+          height: min-content;
+          margin: 0;
+        }
+      }
+    }
+
+  }
+
   .day-group {
     margin-bottom: 0;
     padding-bottom: 30px;
