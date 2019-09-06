@@ -16,13 +16,6 @@ export const MENUS: ItemMenu[] = [
       component: 'CalendarPage',
       isChecked: false
     },
-    // {
-    //   id: 4,
-    //   title: 'Consulta Processo',
-    //   icon: 'custom-modulo-processos',
-    //   component: 'SepSearchPage',
-    //   isChecked: false
-    // },
     {
       id: 5,
       title: 'Detran',
@@ -34,9 +27,9 @@ export const MENUS: ItemMenu[] = [
   
     {
       id: 7,
-      title: 'Processos',
+      title: 'E-Docs',
       icon: 'custom-modulo-processos',
-      component: 'PresentationEdocsPage',// DocumentsToSignPage
+      component: 'PresentationEdocsPage',
       secure: true,
       isChecked: false
     },

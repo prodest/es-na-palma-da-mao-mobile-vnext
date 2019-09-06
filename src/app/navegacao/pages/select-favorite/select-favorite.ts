@@ -74,6 +74,6 @@ export class SelectFavoritePage implements OnDestroy, OnInit {
    *
    */
   back() {
-    this.navCtrl.pop();
+    this.navCtrl.setRoot('MyServicesPage');
   }
 }
