@@ -1,4 +1,9 @@
 espm-detalhe-oportunidade-page {
+  @media screen and (max-width: 350px) {
+    nav-title .content p {
+      font-size: 18px;
+    }
+  }
   ion-item-divider {
     background-color: #fdeff5 !important;
     color: #004297 !important;
@@ -11,7 +16,7 @@ espm-detalhe-oportunidade-page {
   .item ion-icon[item-start] + .item-inner {
     margin-left: 0;
   }
-  
+
   ion-item [accent] {
     color: #ff0083 !important;
   }
@@ -26,23 +31,24 @@ espm-detalhe-oportunidade-page {
   .title {
     text-align: center;
   }
-  .toolbar-background, .toolbar-title{
-    background-color: #004297;  
+  .toolbar-background,
+  .toolbar-title {
+    background-color: #004297;
   }
-  .botao_classificados{
+  .botao_classificados {
     position: fixed;
     float: bottom;
     bottom: 25px;
-    right: 15px ;
-    left: 15px ;
+    right: 15px;
+    left: 15px;
     z-index: 100;
     background-color: #004297;
-    color:white;
+    color: white;
     border-radius: 5px;
     text-align: center;
     font-weight: bold;
     width: 90%;
-    height: 70px ;
+    height: 70px;
   }
   ion-label {
     font-size: 20px;

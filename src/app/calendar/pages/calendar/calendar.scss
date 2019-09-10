@@ -1,5 +1,9 @@
 page-calendar {
-
+  @media screen and (max-width: 350px) {
+    small {
+      font-size: 53%;
+  }
+  }
   ion-title {
     flex: none;
     height: 5rem;
