@@ -1,14 +1,7 @@
 <ion-list *ngIf="debits && debits.length" class="debits">
-  <ion-list-header>
-    {{ countDebits() }} débitos | selecionados<button
-      ion-button
-      item-right
-      (click)="generateBillet()"
-      ng-show="debits.length > 0"
-    >
-      Gerar Guia
-    </button>
-  </ion-list-header>
+  
+  <!-- {{ countDebits() }} débitos | selecionados -->
+    
   <div *ngFor="let debit of debits">
     <ion-item>
       <ion-checkbox
@@ -19,11 +12,20 @@
       <ion-label>
         {{ debit.descricaoServico }}<br/>
         {{ debit.dataVencimento | shortDateFormat }} |
-        <span text-wrap color-secondary-fg>{{ debit.valorAtualizadoFranquia | currency: 'BRL':true:'1.2' }}</span>
+        <span text-wrap id="debit-value">{{ debit.valorAtualizadoFranquia | currency: 'BRL':true:'1.2' }}</span>
       </ion-label>
     </ion-item>
   </div>
 </ion-list>
+<span separator></span>
+<large-button
+  [color]="'primary-dark'"
+  [leftIcon]="'ios-add-circle-outline'"
+  [rightIcon]="'ios-arrow-forward-outline'"
+  [text]="'Pagamento'"
+  (click)="generateBillet()"
+  ng-show="debits.length > 0"
+></large-button>
 <ion-list *ngIf="debits && !debits.length" class="debits">
   <ion-list-header>
     Nenhum débito encontrado

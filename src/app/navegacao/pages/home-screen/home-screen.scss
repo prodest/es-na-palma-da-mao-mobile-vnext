@@ -1,0 +1,109 @@
+page-home-screen {
+  // TODO: Aplicar as variáveis de cores
+
+  /* Geral */
+  height: 100%;
+
+  .scroll-content {
+    background-color: white;
+    padding-top: 40px;
+  }
+
+  ion-slide {
+    display: block;
+  }
+  @media screen and (max-width: 334px){
+    large-button button p {
+      font-size: 1.35rem;
+  }
+    }
+
+  .slide-zoom {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+  }
+
+  .img-home-screen {
+    img {
+      width: 70%;
+    }
+  }
+
+  /* Slide 1 - Boas vindas */
+
+  #slide-welcome {
+    padding-bottom: 10rem;
+  }
+
+  #description {
+    font-family: 'Poppins';
+    font-weight: 600; // semi-bold
+    font-size: 20px;
+    color: #ff0083; // $secondary-dark
+  }
+
+  #next-slide{
+    position: fixed;
+    right: 20px;
+    bottom: 20px;
+    font-size: 20px;
+    background-color: transparent;
+  }
+
+  /* Slide 2 - Acesso */
+  #slide-access {
+    padding-bottom: 7rem;
+  }
+
+  #home-buttons {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+
+  .home-button {
+    width: 75%;
+    margin: auto;
+  }
+  @media (max-width: 361px) {
+   .img-home-screen img {
+      width: 50%;
+  }
+  }
+
+  /* Em telas maiores */
+  // iPad
+  @media screen and (min-width: 650px) {
+    // menor largura da imagem
+    .img-home-screen {
+      img {
+        max-width: 320px;
+      }
+    }
+
+    .home-button {
+      width: 40%;
+    }
+  }
+
+  /* Em telas menores */
+  // Galaxy S5
+  @media screen and (max-width: 399px) {
+    // menor tamanho do botão "next slide"
+    #next-slide{
+      font-size: 15px;
+      right: 15px;
+      bottom: 15px;
+    }
+  }
+
+  // iPhone 5/SE
+  @media screen and (max-width: 349px) {
+    // menor tamanho do texto de descrição
+    #description {
+      font-size: 17px;
+    }
+  }
+}

@@ -1,0 +1,43 @@
+<ion-content>
+  <!-- Botão voltar -->
+  <button icon-only id="return" (click)="back()">
+    <ion-icon name="custom-nav-voltar"></ion-icon>
+  </button>
+  <!-- Header -->
+  <div>
+    <large-header [content]="headerContent"></large-header>
+  </div>
+
+  <!-- Check: Marcar todos -->
+  <div id="mark-all">
+    <ion-item>
+      <ion-label>Todos</ion-label>
+      <ion-checkbox
+        id="check-all"
+        [ngModel]="allChecked"
+        (click)="toggleAll()"
+      ></ion-checkbox>
+    </ion-item>
+  </div>
+
+  <!-- Lista de módulos -->
+  <div id="modules-list">
+    <ion-list>
+      <ion-item class="fav-item" *ngFor="let itemMenu of menus">
+        <ion-label>{{itemMenu.title}}</ion-label>
+        <ion-checkbox
+          id="bt-{{itemMenu.id}}"
+          [(ngModel)]="itemMenu.isChecked"
+          (click)="markItem(itemMenu)"
+        ></ion-checkbox>
+      </ion-item>
+    </ion-list>
+  </div>
+  <large-button
+    text="Salvar"
+    leftIcon="ios-add-circle-outline"
+    rightIcon="ios-arrow-forward-outline"
+    color="primary-dark"
+    (click)="back()"
+  ></large-button>
+</ion-content>

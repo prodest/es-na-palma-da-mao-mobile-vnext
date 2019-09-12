@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { IonicPage } from 'ionic-angular';
+import { IonicPage, NavController } from 'ionic-angular';
 import { Observable } from 'rxjs/Observable';
 
 import { Edition } from './../../model';
@@ -20,7 +20,9 @@ export class LatestEditionsPage {
    *
    *
    */
-  constructor(private dio: DioApiService) {}
+  constructor(
+              private dio: DioApiService,
+              public navCtrl: NavController) {}
 
   /**
    *
@@ -37,4 +39,8 @@ export class LatestEditionsPage {
   openEdition(url) {
     window.open(url, '_system');
   }
+  /**
+   * 
+   */
+  back = () =>{this.navCtrl.pop()};
 }

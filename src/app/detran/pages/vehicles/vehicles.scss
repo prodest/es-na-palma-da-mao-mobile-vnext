@@ -3,10 +3,16 @@ page-vehicles {
     .item-inner {
       .vehicle__button {
         font-size: 1.4rem;
+        background-color: #bf272d;
+        color: white;
+        font-family: 'Poppins';
+        position: absolute;
+        right: 30px;
+        bottom: 20px;
       }
     }
   }
-
+  
   espm-vehicle {
     &.disabled {
       [ion-item] {
@@ -16,5 +22,39 @@ page-vehicles {
         }
       }
     }
+  }
+
+  #not-found {
+    border-radius: 10px;
+    margin-top: 3%;
+    color: #004297;
+    font-weight: 600;
+    font-family: 'Poppins';
+  }
+
+  ion-list {
+    flex: 1;
+  }
+
+  ion-fab {
+    margin-bottom: 75px;
+
+    .fab {
+      background-color: #004297; // $primary-dark
+    }
+
+    .activated {
+      background-color: #003069 !important; // $primary-very-dark
+    }
+  }
+  
+  .button-md {
+    background-color: rgb(233, 247, 254);
+    color: black;
+    box-shadow: none;
+  }
+  
+  .vehicle__model{
+    color: #2BACE2;
   }
 }

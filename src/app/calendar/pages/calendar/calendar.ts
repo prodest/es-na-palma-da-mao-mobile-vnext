@@ -1,5 +1,5 @@
 import { Component, ViewChild } from '@angular/core';
-import { IonicPage, Loading, LoadingController, ModalController } from 'ionic-angular';
+import { IonicPage, Loading, LoadingController, ModalController, NavController } from 'ionic-angular';
 import { CalendarComponent } from 'ionic2-calendar/calendar';
 import { finalize, map } from 'rxjs/operators';
 
@@ -34,6 +34,7 @@ export class CalendarPage {
    *
    */
   constructor(
+    private navCtrl: NavController,
     private modalCtrl: ModalController,
     private calendarApiService: CalendarApiService,
     private loadingCtrl: LoadingController
@@ -92,6 +93,10 @@ export class CalendarPage {
   onViewTitleChanged(title: string): void {
     this.viewTitle = title;
   }
+  /**
+   * 
+   */
+  back=()=>{this.navCtrl.pop()};
 
   /**
    *

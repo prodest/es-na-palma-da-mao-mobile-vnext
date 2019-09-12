@@ -8,6 +8,7 @@ import {
   ReportTitleComponentModule
 } from '../../components';
 import { BudgetDeviationPage } from './budget-deviation';
+import { ModulePageComponentModule } from '@espm/shared/components';
 
 @NgModule({
   declarations: [BudgetDeviationPage],
@@ -16,7 +17,8 @@ import { BudgetDeviationPage } from './budget-deviation';
     BudgetDeviationItemComponentModule,
     BarChartComponentModule,
     ReportTitleComponentModule,
-    ReportListSummaryComponentModule
+    ReportListSummaryComponentModule,
+    ModulePageComponentModule
   ]
 })
 export class BudgetDeviationPageModule {}

@@ -1,7 +1,43 @@
 page-news-list-filter {
-  .label-button {
-    float: right;
-    text-transform: uppercase;
-    color: $color-primary;
+
+  #content {
+    padding-bottom: 16px !important;
+    //background-color: white;
+  }
+
+  ion-list {
+    overflow: scroll;
+    margin-top: 16px;
+    margin-bottom: 0 !important;
+    flex: 1;
+    background-color: #fff;
+    
+    #mark-all-wrapper { 
+      padding: 0;
+      
+      ion-label {
+        display: flex;
+        flex-direction: column;
+        margin: 0;
+        
+        #mark-all {
+          align-self: center;
+          text-transform: none;
+          background-color: #004297;
+          font-size: 1.4rem;
+          padding: 0 25px;
+          height: 3.6rem;
+        }
+      }
+    }
+
+    ion-item {
+      font-weight: 500 !important;
+    }
+  }
+
+  large-button {
+    width: 75%;
+    align-self: center;
   }
 }

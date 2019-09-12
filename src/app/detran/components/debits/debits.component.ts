@@ -17,7 +17,8 @@ export class DebitsComponent {
     private loadingCtrl: LoadingController,
     private clipboard: Clipboard,
     private toastCtrl: ToastController
-  ) {}
+  ) {
+  }
 
   @Input() vehicle: Vehicle;
   @Input() tipe: string;
@@ -80,6 +81,8 @@ export class DebitsComponent {
     alert.present();
   };
 
+  
+
   totalAmount = () => {
     let total = 0.0;
     for (let i = 0; i < this.debits.length; i++) {
@@ -89,6 +92,7 @@ export class DebitsComponent {
     }
     return total;
   };
+
 
   ensureDebits = () => {
     return this.debits.filter(debit => !this.checkInstallment(debit));

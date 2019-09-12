@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { AuthQuery, NotificationService } from '@espm/core';
-import { IonicPage, NavController, ModalController } from 'ionic-angular';
+import { IonicPage, NavController, ModalController, NavParams } from 'ionic-angular';
 import * as moment from 'moment';
 
 import { DriverStatus, DriverStatusName, Ticket, DriverLicense } from '../../model';
@@ -15,6 +15,7 @@ import { finalize } from 'rxjs/operators';
   templateUrl: 'driver-license-status.html'
 })
 export class DriverLicenseStatusPage {
+  infra: boolean;
   tickets: Ticket[];
   cnh: DriverLicense = null;
   status: {
@@ -35,8 +36,12 @@ export class DriverLicenseStatusPage {
     private detran: DriverService,
     private navCtrl: NavController,
     private modalCtrl: ModalController,
+    private navParams: NavParams,
     private notification: NotificationService
-  ) {}
+  ) {
+   this.infra = this.navParams.data;
+   console.log("tem que esta verdade: s"+this.infra)
+  }
 
   /**
    * ref: https://github.com/ionic-team/ionic/issues/11459#issuecomment-365224107

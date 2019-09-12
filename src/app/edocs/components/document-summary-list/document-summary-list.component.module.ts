@@ -5,10 +5,11 @@ import { IonicPageModule } from 'ionic-angular';
 
 import { DocumentSummaryComponentModule } from '../document-summary';
 import { DocumentSummaryListComponent } from './document-summary-list.component';
+import { ModulePageComponentModule } from '@espm/shared/components';
 
 @NgModule({
   declarations: [DocumentSummaryListComponent],
-  imports: [IonicPageModule, NgSubscribeDirectiveModule, CapitalizePipeModule, DocumentSummaryComponentModule],
+  imports: [ ModulePageComponentModule, IonicPageModule, NgSubscribeDirectiveModule, CapitalizePipeModule, DocumentSummaryComponentModule],
   exports: [DocumentSummaryListComponent]
 })
 export class DocumentSummaryListComponentModule {}

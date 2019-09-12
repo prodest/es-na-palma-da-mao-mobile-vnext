@@ -1,12 +1,12 @@
-<ion-header>
-  <ion-navbar>
-    <button ion-button menuToggle>
-      <ion-icon name="menu"></ion-icon>
+<module-page title="Débitos">
+  <espm-vehicle [vehicle]="vehicle"></espm-vehicle>
+  <ion-list>
+    <button *ngFor="let item of botoes"
+      (click)="pushNext(item.tipo)"
+      [disabled]="!item.disable"
+      ion-button block large round icon-end>
+      {{ item.nome }}
+      <ion-icon name="ios-arrow-forward"></ion-icon>
     </button>
-    <ion-title>Débitos do veículo</ion-title>
-  </ion-navbar>
-</ion-header>
-
-<ion-content>
-    <ion-list><button ion-item *ngFor="let item of botoes" (click)="pushNext(item.tipo)" >{{ item.nome }}</button></ion-list>  
-</ion-content>
+  </ion-list>
+</module-page>

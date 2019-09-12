@@ -1,19 +1,17 @@
 page-dio-search {
-  // .scroll-content,
-  // .fixed-content {
-  //   margin-top: 156px !important;
-  // }
-
-  // .scroll-content {
-  //   display: flex;
-  //   flex-direction: column;
-  //   ion-item {
-  //     flex: 1;
-  //   }
-  // }
-
+  
+  .scroll-content {
+    background-color: #e9f7fe;
+    display: flex;
+    flex-direction: column;
+  }
+  
+  ion-header {
+    // background-color: #003069 !important;
+  }
+  
   expandable-header {
-    background: #208baa url('../assets/imgs/sep/triangles.png') !important;
+    background: #abe1fa !important;
     ion-item {
       width: 92% !important;
       margin: 4% !important;
@@ -23,30 +21,44 @@ page-dio-search {
         ion-label {
           flex: initial !important;
         }
-
+        
         ion-datetime {
           padding-left: 8px !important;
         }
       }
     }
 
-    button {
-      &.disabled {
-        opacity: 0.8;
+    .header-buttons {
+      display: flex;
+      flex-direction: row;
+      justify-content: space-evenly;
+      padding: 0 10px;
+
+      button {
+        width: 45%;
+        text-transform: none;
+  
+        &.disabled {
+          opacity: 0.8;
+        }
+        &[clear] {
+          color: #004297 !important;
+        }
       }
-      &[clear] {
-        color: #fff !important;
+
+      .header-button {
+        background-color: #004297;
       }
     }
   }
-
+  
   .results {
-    min-height: calc(100vh - 160px) !important;
+    min-height: calc(100vh - 165px) !important;
   }
-
+  
   .hit-title {
     font-size: 12px;
-
+    
     ion-badge {
       font-size: 12px;
       float: right;
@@ -54,25 +66,34 @@ page-dio-search {
       background-color: transparent;
     }
   }
-
+  
   blockquote {
     margin: 10px 0 15px 0;
     padding: 5px 10px 10px 10px;
     border-left: 3px solid #ccc;
     font-size: 12px;
-
+    
     strong {
       color: $color-secondary;
     }
-
+    
     span {
       white-space: normal;
     }
   }
-
+  
   .hit-buttons button {
     ion-icon {
       margin-left: 5px;
     }
+  }
+  .active, [active], .toolbar-title, ion-navbar.toolbar, .toolbar-background {
+    background-color: rgb(233, 247, 254);
+    text-align: center;
+    color: #004297;
+    font-weight: bold;
+  }
+  .item-md[no-lines] {
+    border-radius: 25px;
   }
 }

@@ -164,7 +164,7 @@ export class BusLinesService implements OnDestroy {
     return lines.map(line => {
       return {
         ...line,
-        isFavorite: favorites.favoriteLines.some(l => l == line.number)
+        isFavorite: favorites.favoriteLines.some(l => l === line.number)
       };
     });
   };

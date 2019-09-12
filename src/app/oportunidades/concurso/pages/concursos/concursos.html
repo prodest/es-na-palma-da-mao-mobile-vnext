@@ -1,10 +1,4 @@
-<ion-header color-primary-bg>
-  <ion-navbar hideBackButton>
-    <button ion-button menuToggle>
-      <ion-icon name="menu"></ion-icon>
-    </button>
-    <ion-title>CONCURSOS </ion-title>
-  </ion-navbar>
+<module-page title="Concursos" no-padding>
   <ion-searchbar
     placeholder="Pesquisar..."
     [showCancelButton]="true"
@@ -14,43 +8,38 @@
     (ionClear)="clear($event)"
     (ionCancel)="clear($event)">
   </ion-searchbar>
-</ion-header>
-
-<ion-content>
-  <ion-list-header class="testo_negrito" *ngIf="filteredConcursos && filteredConcursos.length">
-    {{filteredConcursos.length}} ENCONTRADOS
-  </ion-list-header>
-  <ion-list no-margin 
-            [virtualScroll]="filteredConcursos" 
-            [virtualTrackBy]="trackById"
-             approxItemHeight="70px">
-    <button class="radius_concursos" 
-        *virtualItem="let concurso" 
-        (click)="showDetails(concurso.id)">
-        <div>
-          <div>
-      <h3 text-wrap class="concursos_name">
-        {{ limite ( concurso.orgao ) }}
-      </h3>
-    </div>
-      <p text-wrap class="concursos_descricao">{{ concurso.descricao }}</p>
-      <div class="status_float">
-          <p class="center_css" >
-            </p>
-            <concurso-status [status]="concurso.status"></concurso-status>
-            <p>
-            <ion-icon *ngIf="concurso.favorito" class="star_css" item-end name="md-star"></ion-icon>
-      <ion-icon *ngIf="!concurso.favorito" class="star_css" item-end name="md-star-outline"></ion-icon>
-      
-           </p>
-           
-          </div>
+  <ion-content>
+    <ion-list-header *ngIf="filteredConcursos && filteredConcursos.length">
+      {{filteredConcursos.length}} concursos encontrados
+    </ion-list-header>
+    <ion-list
+        [virtualScroll]="filteredConcursos" 
+        [virtualTrackBy]="trackById"
+      >
+      <button
+          ion-item
+          *virtualItem="let concurso" 
+          (click)="showDetails(concurso.id)">
+        <div class="button-content">
+          <h3 text-wrap class="concursos_name">
+            {{ limite ( concurso.orgao ) }}
+          </h3>
+          <p text-wrap class="concursos_descricao">{{ concurso.descricao }}</p>
         </div>
-    </button>
-  </ion-list>
-  <ion-item *ngIf="filteredConcursos && !filteredConcursos.length" text-center no-lines id="not-founded">
-    <h2>Nenhum concurso encontrado</h2>
-    <p>Tente mudar o filtro da consulta</p>
-  </ion-item>
-  <ion-spinner *ngIf="!filteredConcursos" page-loading></ion-spinner>
-</ion-content>
+        <div class="button-status">
+          <concurso-status [status]="concurso.status"></concurso-status>
+          <p>
+            <ion-icon *ngIf="concurso.favorito" class="star_css" item-end name="md-star"></ion-icon>
+            <ion-icon *ngIf="!concurso.favorito" class="star_css" item-end name="md-star-outline"></ion-icon>
+          </p>
+        </div>
+      </button>
+    </ion-list>
+    <ion-item *ngIf="filteredConcursos && !filteredConcursos.length" text-center no-lines id="not-found">
+      <h2>Nenhum concurso encontrado</h2>
+      <p>Tente mudar o filtro da consulta</p>
+    </ion-item>
+    <ion-spinner *ngIf="!filteredConcursos" page-loading></ion-spinner>
+  </ion-content>
+
+</module-page>

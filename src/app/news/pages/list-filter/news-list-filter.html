@@ -1,17 +1,4 @@
-<ion-header>
-  <ion-navbar>
-    <ion-buttons left>
-      <button ion-button
-              icon-only
-              (click)="navCtrl.pop()">
-        <ion-icon name="arrow-back"></ion-icon>
-      </button>
-    </ion-buttons>
-    <ion-title>Notícias</ion-title>
-  </ion-navbar>
-</ion-header>
-
-<ion-content>
+<module-page title="Filtrar Notícias" no-footer no-scroll no-padding>
   <ion-list>
     <ion-list-header>
       Palavra-chave
@@ -43,14 +30,16 @@
                     doneText="Selecionar">
       </ion-datetime>
     </ion-item>
-    <ion-list-header>
-      Órgãos
-      <span *ngIf="isAllChecked()"
+    <ion-list-header id="mark-all-wrapper">
+      <button ion-button round id="mark-all">
+        <span *ngIf="isAllChecked()"
             (click)="toggleAllChecked()"
-            class="label-button">Desmarcar todos</span>
-      <span *ngIf="!isAllChecked()"
+            class="label-button">Desmarcar todos os Órgãos</span>
+
+        <span *ngIf="!isAllChecked()"
             (click)="toggleAllChecked()"
-            class="label-button">Selecionar todos</span>
+            class="label-button">Selecionar todos os Órgãos</span>
+      </button>
     </ion-list-header>
     <ion-item *ngFor="let origin of availableOrigins">
       <ion-label>{{origin}}</ion-label>
@@ -58,11 +47,12 @@
                     (click)="toggleChecked(origin)"></ion-checkbox>
     </ion-item>
   </ion-list>
-</ion-content>
-<ion-footer>
-  <button ion-button
-          full
-          color-secondary
-          class="search-button"
-          (click)="dismiss()">Pesquisar</button>
-</ion-footer>
+  <span separator></span>
+  <large-button
+    text="Pesquisar"
+    leftIcon="ios-search"
+    rightIcon="ios-arrow-forward-outline"
+    color="primary-dark"
+    (click)="dismiss()"
+  ></large-button>
+</module-page>

@@ -1,4 +1,4 @@
-espm-dt-classificacao-page {
+espm-dt-areas-page {
   .scroll-content {
     #not-founded {
       height: 100%;
@@ -17,4 +17,15 @@ espm-dt-classificacao-page {
       margin-right: 16px !important;
     }
   }
+  .searchbar-md {
+    background-color: #e9f7fe;
+  }
+  .back-button-icon-md {
+    color: #00aeef;
+  }
+  .active, [active], .toolbar-title, ion-navbar.toolbar, .toolbar-background {
+    background-color: #e9f7fe;
+    color: #004297;
+  }
 }
+

@@ -1,0 +1,90 @@
+nav-title {
+    // TODO: Aplicar as variáveis de cores
+    // TODO: Implementar classes dos esquemas de cores
+    
+    .nav-title {
+        margin-top: 0;
+        background-color: transparent;
+        display: flex;
+        margin-bottom: 10px;
+    }
+
+    .sign {
+        align-self: center;
+        justify-self: flex-start;
+        height: 30px;
+        width: 7px;
+        min-width: 7px;
+        background-color: #ff0083; // $secondary-dark
+        border-radius: 2px;
+    }
+
+    .content {
+        display: flex;
+        padding-left: 25px;
+        height: 35px;
+        
+        p {
+            align-self: center;
+            font-family: 'Poppins';
+            font-weight: 700;
+            font-size: 35px;
+            text-align: left;
+            color: #004297; // $primary-dark
+            margin: 0;
+            display: -webkit-box;
+            align-items: center;
+            text-overflow: ellipsis;
+            -webkit-line-clamp: 2;
+            -webkit-box-orient: vertical;
+        }
+    }
+
+    // iPhone 5/SE
+    @media screen and (max-width: 361px) {
+        .sign {
+            height: 25px;
+        }
+        .content {
+            padding-left: 20px;
+            p {
+                font-size: 30px;
+            }
+        }
+                
+    }
+}
+
+.sign-primary {
+    .sign  {
+        background-color: #00aeef; // $primary-mid
+    }
+}
+
+.sign-secondary {
+    .sign  {
+        background-color: #ff0083; // $secondary-dark
+    }
+}
+
+.sign-white {
+    .sign  {
+        background-color: white; // $secondary-dark
+    }
+}
+
+.content-white {
+    .content {
+        p {
+            color: white;
+        }
+    }
+}
+
+.content-primary {
+    .content {
+        p {
+            color: #004297; // $primary-dark
+        }
+    }
+}

@@ -123,6 +123,10 @@ export class NewsListPage {
 
     return this.newsApiService.getNews(filter, pagination);
   }
+  /**
+   * 
+   */
+  back = () => {this.navCtrl.pop()};
 
   /**
    * Verifica se existem mais registros e configuração a paginação da classe
