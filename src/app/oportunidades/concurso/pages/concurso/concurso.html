@@ -1,19 +1,13 @@
-<ion-header>
-  <ion-navbar>
-    <ion-title>{{ concurso?.nome }}</ion-title>
-    <ion-buttons end>
-      <button ion-button icon-only (click)="favoritar(concurso)">
-        <ion-icon name="md-star" *ngIf="concurso?.favorito"></ion-icon>
-        <ion-icon name="md-star-outline" *ngIf="!concurso?.favorito"></ion-icon>
-      </button>
-    </ion-buttons>
-  </ion-navbar>
-</ion-header>
-
-<ion-content>
+<module-page [title]="concurso?.nome" no-padding no-footer >
+  <ion-buttons topbar>
+    <button icon-only (click)="favoritar(concurso)">
+      <ion-icon name="md-star" *ngIf="concurso?.favorito"></ion-icon>
+      <ion-icon name="md-star-outline" *ngIf="!concurso?.favorito"></ion-icon>
+    </button>
+  </ion-buttons>
   <ion-list *ngIf="concurso?.areas" no-margin>
     <ng-container *ngFor="let data of concurso.datas">
-      <ion-item-divider color="light" text-uppercase>
+      <ion-item-divider color="light">
         <ion-icon item-start name="calendar"></ion-icon>{{ data.nome }}
       </ion-item-divider>
       <ion-item *ngIf="data.inicio">
@@ -33,10 +27,11 @@
     </button>
     <ion-item-divider *ngIf="concurso.anexos" color="light">
       <ion-icon name="attach" item-start></ion-icon>
-      ANEXOS
+      Anexos
     </ion-item-divider>
     <button ion-item *ngFor="let anexo of concurso.anexos" (click)="openLink(anexo.link)">
       <p>{{ anexo.documento }}</p>
     </button>
   </ion-list>
-</ion-content>
+
+</module-page>

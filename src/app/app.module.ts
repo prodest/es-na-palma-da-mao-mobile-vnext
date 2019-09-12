@@ -45,6 +45,7 @@ import { SepProviders } from './sep/providers';
 import { SchedulingService } from './scheduling/providers/scheduling.service';
 
 import { TranscolOnlineStores } from './ceturb/transcol-online/state';
+import { MenusProviders } from './navegacao/providers';
 
 moment.locale('pt-br');
 
@@ -99,6 +100,7 @@ registerLocaleData(ptBr);
     ...CeturbProviders,
     ...DetranProviders,
     ...DioProviders,
+    ...MenusProviders,
     ...NewsProviders,
     ...SepProviders,
     ...TranscolOnlineProviders,

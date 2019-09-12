@@ -1,0 +1,13 @@
+<div class="nav-header">
+  <div id="button-bar">
+    <button icon-only id="nav-header-return" (click)="back()">
+      <ion-icon name="custom-nav-voltar"></ion-icon>
+    </button>
+    <div id="navheader-buttons">
+      <ng-content></ng-content>
+    </div>
+  </div>
+  <nav-title
+    [title]=title
+  ></nav-title>
+</div>

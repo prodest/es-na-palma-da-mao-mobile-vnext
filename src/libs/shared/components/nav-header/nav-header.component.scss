@@ -1,0 +1,40 @@
+nav-header {
+  background-color: transparent;
+
+  #button-bar {
+    padding: 15px;
+    padding-bottom: 0;
+    display: flex;
+    
+    button {
+      font-size: 15px;
+      background-color: transparent;
+      padding: 0;
+    }
+
+    #navheader-buttons, [topbar] {
+      flex: 1;
+      display: flex;
+      justify-content: flex-end;
+
+      ion-icon {
+        color: #004297;
+      }
+
+      button {
+        color: #004297;
+        font-weight: 600;
+      }
+    }
+  }
+}
+
+[no-back] {
+  #button-bar {
+    height: 44px;
+    min-height: 44px;
+  }
+  #nav-header-return {
+    display: none;
+  }
+}

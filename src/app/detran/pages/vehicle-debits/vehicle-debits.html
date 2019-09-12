@@ -1,12 +1,3 @@
-<ion-header>
-  <ion-navbar>
-    <button ion-button menuToggle>
-      <ion-icon name="menu"></ion-icon>
-    </button>
-    <ion-title>Débitos do veículo</ion-title>
-  </ion-navbar>
-</ion-header>
-
-<ion-content>
-  <espm-debits [vehicle]="vehicle" [debits]="debits" [tipe]="tipe"></espm-debits>
-</ion-content>
+<module-page title="Débitos" no-footer no-scroll no-padding>
+  <espm-debits [vehicle]="vehicle" [debits]="debits" [tipe]="tipe"></espm-debits>    
+</module-page>

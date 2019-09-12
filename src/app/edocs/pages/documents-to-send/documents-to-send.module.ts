@@ -10,10 +10,13 @@ import {
   DocumentsToSendMessageComponentModule,
   
 } from '../../components';
+import { ModulePageComponentModule, LargeButtonComponentModule } from '@espm/shared/components';
 
 @NgModule({
   declarations: [DocumentsToSendPage],
   imports: [
+    ModulePageComponentModule,
+    LargeButtonComponentModule,
     DocumentsToSendHeaderComponentModule,
     DocumentsToSendFooterComponentModule,
     DocumentsToSendAddresseesComponentModule,

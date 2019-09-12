@@ -36,7 +36,7 @@ export class ExpensesByAreaPage extends MoneyFlowListPage<DateRangeFilter> imple
 
   openFilter() {
     let filterModal = this.modalCtrl.create('TransparencyFilterPage', {
-      title: 'Despesas(Áreas)',
+      title: 'Filtrar',
       year: false,
       filter: this.filter
     });

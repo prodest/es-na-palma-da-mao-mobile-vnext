@@ -23,7 +23,7 @@ type WindowWithIntent = Window & {
 export class ESPMComponent implements OnDestroy {
   @ViewChild(Nav) nav: Nav;
 
-  rootPage: any = 'DashboardPage';
+  rootPage: any = 'HomeScreenPage';
   private onResumeSub: Subscription;
 
   /**

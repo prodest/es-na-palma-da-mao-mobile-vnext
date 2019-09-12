@@ -2,13 +2,15 @@
         class="vehicle"
         detail-none>
     <ion-icon item-start
-              name="md-car"></ion-icon>
+              name="custom-modulo-taxi"></ion-icon>
     <h3 class="vehicle__model"
         text-wrap>
-        {{vehicle.model}} - {{vehicle.color }}
+        {{vehicle.model}} <br>
+        COR: {{vehicle.color }}
     </h3>
     <small class="vehicle__plate">Placa: {{vehicle.plate}}</small>
     <small class="vehicle__renavam">RENAVAM: {{vehicle.renavam}}</small>
     <ng-content item-end>
     </ng-content>
+    <ion-icon item-end name="ios-arrow-forward"></ion-icon>
 </button>

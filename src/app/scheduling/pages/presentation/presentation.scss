@@ -1,0 +1,32 @@
+page-presentation {
+    @media screen and (max-width: 359px){
+        module-index ion-list [ion-button] .button-inner {
+            font-size: small;
+        }
+}
+    module-page nav-header {
+        background-color: #e9f7fe;
+    }
+    .content-white .content p {
+        color: #003069;
+    }
+    main-footer-bar .main-footer-bar {
+        background-color: #e9f7fe;
+    }
+    main-footer-bar .main-footer-bar button ion-icon {
+        background-color: #003069;
+    }
+   .separator {
+        width: 0px !important ; 
+    }
+    .button-md, module-page [shadow], main-footer-bar .main-footer-bar { 
+     webkit-box-shadow:none;    
+     box-shadow:none;
+    }
+    main-footer-bar .main-footer-bar {
+        border-top: 1px solid #abe1fa;
+    }
+    module-page [shadow] {
+        border-bottom: 1px solid #abe1fa;
+    }
+}

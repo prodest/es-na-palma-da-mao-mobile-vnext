@@ -5,6 +5,7 @@ import { NgModule, Optional, SkipSelf } from '@angular/core';
 import { Auth } from './auth';
 import { Common } from './common';
 import { EnvironmentProvider } from './environment';
+import { MenusStaticProvider } from './menu';
 import { androidPermissionsProvider } from './permissions';
 import { PushProvider } from './push'
 import { NotificationProviders } from '@espm/core/notification';
@@ -19,6 +20,7 @@ import { NotificationProviders } from '@espm/core/notification';
   imports: [CommonModule, HttpClientModule],
   providers: [
     EnvironmentProvider,
+    MenusStaticProvider,
     //    Config,
     ...Auth,
     ...Common,

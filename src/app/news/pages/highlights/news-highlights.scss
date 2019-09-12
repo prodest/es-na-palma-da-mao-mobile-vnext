@@ -1,2 +1,15 @@
 page-news-highlights {
+
+  .wrapper {
+    display: flex;
+    flex-direction: column;
+    
+    #see-all {
+      width: 50%;
+      align-self: center;
+      text-transform: none;
+      background-color: #004297;
+    }
+  }
+  
 }

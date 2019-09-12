@@ -1,0 +1,14 @@
+<module-page [title]=title no-scroll>
+  <div id="banner">
+    <ion-icon name={{icon}}></ion-icon>
+  </div>
+  <ion-list>
+    <button *ngFor="let item of menus"
+      ion-button block large round icon-end
+      (click)="openPage(item.targetPage)"
+    >
+      {{item.buttonTitle}}
+      <ion-icon name="ios-arrow-forward"></ion-icon>
+    </button>
+  </ion-list>
+</module-page>

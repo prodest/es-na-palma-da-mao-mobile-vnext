@@ -1,6 +1,6 @@
 import { Component, ViewChild } from '@angular/core';
 import { ExpandableHeaderComponent } from '@espm/shared';
-import { Content, IonicPage, Loading, LoadingController, ModalController, ToastController } from 'ionic-angular';
+import { Content, IonicPage, Loading, LoadingController, ModalController, ToastController, NavController } from 'ionic-angular';
 import { finalize } from 'rxjs/operators';
 
 import { DioApiService } from '../../providers';
@@ -38,6 +38,7 @@ export class DioSearchPage {
    *
    */
   constructor(
+    public navCtrl: NavController,
     private modalCtrl: ModalController,
     private toastr: ToastController,
     private dio: DioApiService,
@@ -83,7 +84,10 @@ export class DioSearchPage {
         .subscribe(this.onSearchSuccess);
     }
   };
-
+/**
+ * 
+ */
+editions = () =>{ this.navCtrl.push('LatestEditionsPage')}
   /**
    *
    *
@@ -141,4 +145,8 @@ export class DioSearchPage {
     this.hasMoreHits = nextResults.hits && nextResults.hits.length > 0;
     this.lastQuery = this.filter.query;
   };
+  /**
+   * 
+   */
+  back = () =>{ this.navCtrl.pop()}
 }

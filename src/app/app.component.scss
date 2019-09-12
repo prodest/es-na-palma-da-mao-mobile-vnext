@@ -17,6 +17,7 @@
 @import '../theme/mixins';
 @import '../theme/pop-up-modal';
 @import 'font-awesome';
+@import '../theme/fonts';
 
 i[class^='fa-'],
 ion-icon[class^='fa-'] {
@@ -24,14 +25,19 @@ ion-icon[class^='fa-'] {
 }
 
 ion-content {
-  background-color: #fefdff;
-  background-image: url("data:image/svg+xml,%3Csvg width='6' height='6' viewBox='0 0 6 6' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='%23c2cce1' fill-opacity='0.4' fill-rule='evenodd'%3E%3Cpath d='M5 0h1L0 6V5zM6 5v1H5z'/%3E%3C/g%3E%3C/svg%3E");
+  background-color: #e9f7fe;
+  // background-image: url("data:image/svg+xml,%3Csvg width='6' height='6' viewBox='0 0 6 6' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='%23c2cce1' fill-opacity='0.4' fill-rule='evenodd'%3E%3Cpath d='M5 0h1L0 6V5zM6 5v1H5z'/%3E%3C/g%3E%3C/svg%3E");
 }
 
 ion-menu {
   .menu-inner {
     background: $color-menu-bg !important;
   }
+  .toolbar-background, .toolbar-title {
+    background-color: #004297;
+    color: white;
+  }
+  
   ion-content {
     background-color: transparent !important;
     background-image: none;
@@ -96,6 +102,145 @@ ion-icon[name='exit'] {
     overflow: hidden;
     overflow-y: scroll;
   }
+}
+
+ion-icon {
+  /* Ícones do menu */
+  &[class*="custom-menu-"] {
+    mask-size: contain;
+    mask-position: 50% 50%;
+    mask-repeat: no-repeat;
+    background: #004297; // $primary-dark
+    width: 1em;
+    height: 1em;
+  }
+
+  &[class*="menu-bar"] {
+    mask-image: url(../assets/icon/icone-menu.svg);
+  }
+
+  &[class*="ajuda"] {
+    mask-image: url(../assets/icon/icone-menu-ajuda.svg);
+  }
+  &[class*="contato"] {
+    mask-image: url(../assets/icon/icone-menu-contato.svg);
+  }
+  &[class*="desenvolvedores"] {
+    mask-image: url(../assets/icon/icone-menu-desenvolvedores.svg);
+  }
+  &[class*="facebook"] {
+    mask-image: url(../assets/icon/icone-menu-facebook.svg);
+  }
+  &[class*="instagram"] {
+    mask-image: url(../assets/icon/icone-menu-instagram.svg);
+  }
+  &[class*="meu-perfil"] {
+    mask-image: url(../assets/icon/icone-menu-meu-perfil.svg);
+  }
+  &[class*="meus-servicos"] {
+    mask-image: url(../assets/icon/icone-menu-meus-serviços.svg);
+  }
+  &[class*="sair"] {
+    mask-image: url(../assets/icon/icone-menu-sair-da-conta.svg);
+  }
+  &[class*="youtube"] {
+    mask-image: url(../assets/icon/icone-menu-youtube.svg);
+  }
+
+  /* Ícones de navegação */
+  &[class*="custom-nav-"] {
+    mask-size: contain;
+    mask-position: 50% 50%;
+    mask-repeat: no-repeat;
+    background: #00aeef; // $primary-mid
+    width: 1em;
+    height: 1em;
+  }
+
+  &[class*="avancar"] {
+    mask-image: url(../assets/icon/icone-avançar.svg);
+  }
+
+  &[class*="voltar"] {
+    mask-image: url(../assets/icon/icone-voltar.svg);
+  }
+
+  /* Ícones redes sociais */
+
+  &[class*="custom-social-"] {
+    mask-size: contain;
+    mask-position: 50% 50%;
+    mask-repeat: no-repeat;
+    width: 1.5em;
+    height: 1.5em;
+  }
+
+  &[class*="facebook"] {
+    mask-image: url(../assets/icon/botao-facebook.svg);
+    background: #004297;
+  }
+
+  &[class*="google"] {
+    mask-image: url(../assets/icon/botao-google.svg);
+    background: #ed1c24;
+  }
+
+  /* Ícones dos módulos */
+  &[class*="custom-"] {
+    mask-size: contain;
+    mask-position: 50% 50%;
+    mask-repeat: no-repeat;
+    width: 1em;
+    height: 1em;
+  }
+  &[class*="modulo-educacao"] {
+    background: transparent url(../assets/icon/icone-educacao.png)no-repeat left bottom;
+    background-size: contain;
+  }
+  &[class*="modulo-noticias"] {
+    background: transparent url(../assets/icon/icone-noticias.png)no-repeat left bottom;
+    background-size: contain;
+  }
+  &[class*="modulo-agendamento"] {
+    background: transparent url(../assets/icon/icone-agendamento.png)no-repeat left bottom;
+    background-size: contain;
+  }
+  &[class*="modulo-consultas"] {
+    background: transparent url(../assets/icon/icone-consultas.png)no-repeat left bottom;
+    background-size: contain;
+  }
+  &[class*="modulo-onibus"] {
+    background: transparent url(../assets/icon/icone-onibus.png)no-repeat left bottom;
+    background-size: contain;
+  }
+  &[class*="modulo-oportunidades"] {
+    background: transparent url(../assets/icon/icone-oportunidades.png)no-repeat left bottom;
+    background-size: contain;
+  }
+  &[class*="modulo-taxi"] {
+    background: transparent url(../assets/icon/icone-detran.png)no-repeat left bottom;
+    background-size: contain;
+  }
+  &[class*="modulo-processos"] {
+    background: transparent url(../assets/icon/icone-processos.png)no-repeat left bottom;
+    background-size: contain;
+  }
+  &[class*="modulo-documentos"] {
+    background: transparent url(../assets/icon/icone-servidor-publico.png)no-repeat left bottom;
+    background-size: contain;
+  }
+
+  /* Ícone Selecionar favoritos */
+  &[class*="custom-selecionar-favoritos"] {
+    mask-size: contain;
+    mask-position: 50% 50%;
+    mask-repeat: no-repeat;
+    background: white;
+    width: 1em;
+    height: 1em;
+    mask-image: url(../assets/icon/icone-reordenar-claro.svg);
+  }
+
 }
 
 .text-right {
@@ -219,5 +364,58 @@ ion-spinner[section-loading] {
   // border-radius: 50%;
   circle {
     stroke: var(--primary) !important;
+  }
+}
+.split-pane-side .scroll-content {
+  background-color: #e9f7fe; 
+}
+
+ion-list-header {
+  background-color: #fdeff5 !important;
+  font-weight: 600 !important;
+  color: #004297 !important;
+}
+
+ion-alert {
+  font-family: 'Poppins';
+  
+  .alert-wrapper {
+    border-radius: 30px !important;
+    
+    .alert-head {
+      text-align: center;
+
+      h2 {
+        font-weight: 600 !important;
+      }
+    }
+
+    .alert-message {
+      font-weight: 600 !important;
+    }
+
+    .alert-button-group {
+      justify-content: space-evenly;
+      padding: 0;
+      border-top: 1px solid #ccc;
+      
+      button {
+        margin: 0;
+        flex: 1;
+        padding: 15px;
+        .button-inner {
+          justify-content: center;
+          font-family: 'Poppins';
+          color: #004297;
+          font-weight: 700;
+          border: none;
+
+        }
+      }
+
+      :first-child {
+        border-right: 1px solid #ccc;
+      }
+    }
   }
 }

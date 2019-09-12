@@ -1,4 +1,65 @@
 page-bus-line-info {
+  nav-header p {
+    font-size: 125% !important;
+  }
+  
+  #content {
+    padding: 0;
+
+    .toolbar-background {
+      background-color: transparent !important;
+    }
+    .toolbar-md {
+      padding: 0;
+      min-height: 42px;
+    }
+    .segment {
+      background-color: #e9f7fe;
+    }
+    .segment-activated {
+      background-color: #820043 !important;
+      color: white !important;
+    }
+    .segment-button {
+      border-color: #820043;
+      background-color: #fff;
+      color: #004297;
+      font-weight: 600;
+    }
+    .segment-ios .segment-button:not(.segment-activated) {
+      background-color: white;
+    }
+  }
+
+  ion-label {
+    color: #004297 !important;
+    font-weight: 600;
+  }
+
+  ion-list {
+    margin: 0 !important;
+  }
+
+  #path {
+
+    .input-wrapper {
+      display: flex;
+      
+      .label {
+        display: flex;
+        margin: 0;
+        height: 100%;
+        align-items: center;
+
+        h3 {
+          height: min-content;
+          margin: 0;
+        }
+      }
+    }
+
+  }
+
   .day-group {
     margin-bottom: 0;
     padding-bottom: 30px;
@@ -25,7 +86,4 @@ page-bus-line-info {
     margin-right: 8px;
   }
 
-  toolbar-ios .segment-button:not(.segment-activated) {
-    background-color: white;
-  }
 }

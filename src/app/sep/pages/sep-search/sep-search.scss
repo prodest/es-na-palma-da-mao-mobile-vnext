@@ -1,7 +1,23 @@
 page-sep-search {
   ion-content {
-    background: #208baa url('../assets/imgs/sep/triangles.png') !important;
+    background: transparent !important;
   }
+
+  .toolbar-background, .searchbar {
+    background-color: transparent;
+  }
+
+  .searchbar-input {
+    box-shadow: none !important;
+  }
+
+  ion-toolbar {
+    button {
+      background-color: white !important;
+      color: #004297 !important;
+    }
+  }
+
   .search-bar .col {
     &:first-child {
       flex-grow: 8;
@@ -15,12 +31,19 @@ page-sep-search {
   }
 
   .initial-message {
-    color: #fff;
+    color: #004297;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
     height: 100%;
+
+    #message-title {
+      font-size: 3rem;
+      text-transform: uppercase;
+      font-weight: 600;
+    }
+
     h2 {
       font-size: 2rem;
     }

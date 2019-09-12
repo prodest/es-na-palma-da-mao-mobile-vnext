@@ -1,0 +1,45 @@
+<ion-content>
+  <div id="custom-header">
+    <!-- SEARCHBAR -->
+    <div id="searchbar-wrapper">
+      <ion-searchbar
+        placeholder="Buscar"
+        [showCancelButton]="true"
+        cancelButtonText="Cancelar"
+        [animated]="false"
+        (ionInput)="search($event)"
+        (ionClear)="clear($event)"
+        (ionCancel)="clear($event)">
+      </ion-searchbar>
+    </div>
+  
+    <!-- TÍTULO DA PÁGINA -->
+    <nav-title
+      title="Meus serviços"
+      class="sign-primary content-white"
+    ></nav-title>
+  
+    <!-- BOTÃO PARA A TELA DE SELEÇÃO DE FAVORITOS -->
+    <div id="button-wrapper">
+      <button ion-button icon-only id="select-favorite" (click)="goToSelectFavorites()">
+          <ion-icon name="md-more"></ion-icon>
+      </button>
+    </div>
+  </div>
+  
+  <!-- SLIDES -->
+  <ion-slides [pager]="true">
+    <ion-slide *ngFor="let slide of slides">
+      <div class="slide-line" *ngFor="let line of slide">
+        <button ion-button clear icon-start *ngFor="let item of line" (click)="openPage(item.component)">
+          <ion-icon name="{{item.icon}}"></ion-icon>
+          {{item.title}}
+        </button>
+      </div>
+    </ion-slide>
+  </ion-slides>
+
+  <!-- BARRA INFERIOR -->
+  <main-footer-bar></main-footer-bar>
+  
+</ion-content>

@@ -1,16 +1,15 @@
-<ion-header>
-  <ion-navbar hideBackButton>
-    <button ion-button
-            menuToggle>
-      <ion-icon name="menu"></ion-icon>
-    </button>
-    <ion-title>Destaques</ion-title>
-  </ion-navbar>
-</ion-header>
-
-<ion-content>
-  <card-noticia *ngFor="let news of highlights"
-                [news]="news"
-                highlight="true"
-                (click)="goToNews(news.id)"></card-noticia>
-</ion-content>
+<module-page title="Notícias">
+  <div class="wrapper">
+    <button
+      id="see-all"
+      ion-button round
+      (click)="allNews()"
+    >Ver todas</button>
+    <card-noticia
+      *ngFor="let news of highlights"
+      [news]="news"
+      highlight="true"
+      (click)="goToNews(news.id)">
+    </card-noticia>
+  </div>
+</module-page>

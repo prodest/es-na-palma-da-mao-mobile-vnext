@@ -1,0 +1,59 @@
+<ion-content>
+  <ion-slides pager #slides>
+    <!-- Primeiro Slide -->
+    <ion-slide id="slide-welcome">
+      <!-- Header: Boas Vindas -->
+      <div>
+        <large-header [content]="headerContentWelcome"></large-header>
+      </div>
+      <!-- Imagem -->
+      <div class="img-home-screen">
+        <img src="./assets/imgs/ilustracao-tela-bem-vindo.png" id="img-welcome">
+      </div>
+      <!-- Legenda -->
+      <div id="description">
+        <p>Serviços públicos digitais <br> que melhoram <br> a vida do cidadão</p>
+      </div>
+      <!-- Botão: Próximo slide -->
+      <button icon-only id="next-slide" (click)="next()">
+        <ion-icon name="custom-nav-avancar"></ion-icon>
+      </button>
+    </ion-slide> <!-- Fim primeiro slide -->
+    
+    <!-- Segundo Slide -->
+    <ion-slide id="slide-access" class="wrapper">
+      <!--  Header: Acesso -->
+      <div>
+        <large-header [content]="headerContentAccess"></large-header>
+      </div>
+      <!-- Imagem -->
+      <div class="img-home-screen">
+        <img src="./assets/imgs/ilustracao-tela-login.png" id="img-login">
+      </div>
+      
+      <div id="home-buttons">
+        <div class="home-button">
+          <!-- Botão: Minha conta -->
+          <large-button
+            [color]="'secondary-dark'"
+            [leftIcon]="'ios-lock'"
+            [rightIcon]="'ios-arrow-forward-outline'"
+            [text]="'Minha Conta'"
+            (click)="openPageLogin()"
+          ></large-button>
+        </div>
+        <div class="home-button">
+          <!-- Botão: Visitante -->
+          <large-button
+            [color]="'primary-dark'"
+            [leftIcon]="'ios-eye'"
+            [rightIcon]="'ios-arrow-forward-outline'"
+            [text]="'Visitante'"
+            (click)="openPageMyServices()"
+          ></large-button>
+        </div>
+      </div>
+    </ion-slide> <!-- Fim segundo slide -->
+
+  </ion-slides>
+</ion-content>
