@@ -1,6 +1,10 @@
 edocs-document-summary-list {
   display: block;
 
+  .scroll-content {
+    padding: 0 !important;
+  }
+
   ion-spinner {
     width: 100%;
     margin: 30px 0;

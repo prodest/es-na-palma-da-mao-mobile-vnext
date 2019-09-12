@@ -1,38 +1,37 @@
-<ion-header>
+<!-- <ion-header>
   <ion-navbar hideBackButton>
-    <button ion-button
-            menuToggle>
-      <ion-icon name="menu"></ion-icon>
-    </button>
-    <ion-title>Notícias</ion-title>
-    <ion-buttons end>
-      <button ion-button
-              icon-only
-              (click)="openFilter()">
-        <ion-icon name="options"></ion-icon>
-      </button>
-    </ion-buttons>
+      <button (click)="back()">
+          <ion-icon ios="ios-arrow-round-back" md="md-arrow-round-back"></ion-icon>
+        </button>
+    <ion-title> Notícias</ion-title>
   </ion-navbar>
 </ion-header>
-
-<ion-content>
-  <ion-list>
-    <news-list-item [news]="newsItem"
-                    *ngFor="let newsItem of news; trackBy:trackById"
-                    (click)="goToNews(newsItem.id)">
-    </news-list-item>
-    <ion-spinner page-loading
-                 *ngIf="!news"></ion-spinner>
-  </ion-list>
-  <ion-list *ngIf="news && !news.length">
-    <ion-list-header>
-      Nenhuma notícia encontrada
-      <remark>Tente mudar o filtro da consulta</remark>
-    </ion-list-header>
-  </ion-list>
-
-  <ion-infinite-scroll *ngIf="hasMoreNews"
-                       (ionInfinite)="doPaginate($event)">
-    <ion-infinite-scroll-content loadingText="Carregando notícias..."></ion-infinite-scroll-content>
-  </ion-infinite-scroll>
-</ion-content>
+ -->
+<module-page title="Notícias">
+  <ion-buttons topbar>
+    <button icon-only (click)="openFilter()">
+      <ion-icon name="options"></ion-icon>
+    </button>
+  </ion-buttons>
+  <ion-content>
+    <ion-list>
+      <news-list-item [news]="newsItem"
+                      *ngFor="let newsItem of news; trackBy:trackById"
+                      (click)="goToNews(newsItem.id)">
+      </news-list-item>
+      <ion-spinner page-loading
+                   *ngIf="!news"></ion-spinner>
+    </ion-list>
+    <ion-list *ngIf="news && !news.length">
+      <ion-list-header>
+        Nenhuma notícia encontrada
+        <remark>Tente mudar o filtro da consulta</remark>
+      </ion-list-header>
+    </ion-list>
+    
+    <ion-infinite-scroll *ngIf="hasMoreNews"
+                         (ionInfinite)="doPaginate($event)">
+      <ion-infinite-scroll-content loadingText="Carregando notícias..."></ion-infinite-scroll-content>
+    </ion-infinite-scroll>
+  </ion-content>
+</module-page>

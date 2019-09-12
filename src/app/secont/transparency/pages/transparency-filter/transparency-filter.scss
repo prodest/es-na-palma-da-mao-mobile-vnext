@@ -1,5 +1,15 @@
 page-transparency-filter {
-  .text-button {
-    color: white;
+  #content {
+    background-color: white;
+
+    padding-bottom: 16px !important;
+  }
+  ion-list {
+    flex: 1;
+    margin-bottom: 0 !important;
+  }
+  large-button {
+    width: 75%;
+    align-self: center;
   }
 }

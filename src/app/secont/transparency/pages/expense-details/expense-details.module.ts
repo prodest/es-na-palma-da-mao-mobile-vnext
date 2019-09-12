@@ -9,6 +9,7 @@ import {
   ReportTitleComponentModule
 } from '../../components';
 import { ExpenseDetailsPage } from './expense-details';
+import { ModulePageComponentModule } from '@espm/shared/components';
 
 @NgModule({
   declarations: [ExpenseDetailsPage],
@@ -18,7 +19,8 @@ import { ExpenseDetailsPage } from './expense-details';
     ReportListSummaryComponentModule,
     LastUpdateComponentModule,
     PieChartComponentModule,
-    ReportTitleComponentModule
+    ReportTitleComponentModule,
+    ModulePageComponentModule
   ]
 })
 export class ExpenseDetailsPageModule {}

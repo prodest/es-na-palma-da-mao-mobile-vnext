@@ -56,7 +56,7 @@ export class LoginPage implements OnInit {
    *
    */
   ionViewCanEnter(): boolean | Promise<any> {
-    const isAllowed = !this.authQuery.isLoggedIn;
+    const isAllowed = ! this.authQuery.isLoggedIn;
 
     if (!isAllowed) {
       setTimeout(this.goToDashboard, 0);
@@ -69,7 +69,7 @@ export class LoginPage implements OnInit {
    */
   login = (username?: string, password?: string) => {
     if (!username || !password) {
-      this.toastCtrl.create({ message: 'Login e senha são obrigatórios' }).present();
+      this.toastCtrl.create({ message: 'Login e senha são obrigatórios', duration: 3000 }).present();
       return;
     }
 
@@ -92,6 +92,9 @@ export class LoginPage implements OnInit {
    */
   openUrlForgotPassword = () => this.openInAppBrowser(`${this.environment.api.acessocidadao}/Conta/SolicitarReinicioSenha`);
 
+  back(){
+    this.navCtrl.pop()
+  }
   /************************************* Private API *************************************/
 
   /**
@@ -152,10 +155,10 @@ export class LoginPage implements OnInit {
     this.goToDashboard()
 
   /**
-   * Redireciona usuário para o dashboard
+   * Redireciona usuário para o MyServicesPage
    */
-  private goToDashboard = () => this.navCtrl.setRoot('DashboardPage');
-
+ private goToDashboard = () => this.navCtrl.push('MyServicesPage');
+  
   /**
    *
    *
@@ -183,4 +186,8 @@ export class LoginPage implements OnInit {
   public createAccount(): void {
     this.openInAppBrowser(`${this.environment.api.acessocidadao}/Conta/VerificarCPF`);
   }
+  /**
+   * 
+   */
+  
 }

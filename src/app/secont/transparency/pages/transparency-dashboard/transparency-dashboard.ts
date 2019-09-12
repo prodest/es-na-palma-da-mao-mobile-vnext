@@ -10,42 +10,42 @@ import { IonicPage } from 'ionic-angular';
   templateUrl: 'transparency-dashboard.html'
 })
 export class TransparencyDashboardPage {
-  pages = [
+  menus = [
     {
       type: 'revenues',
-      name: 'Receitas',
+      buttonTitle: 'Receitas',
       icon: 'fa-line-chart',
-      url: 'TransparenciaRevenuesPage'
+      targetPage: 'TransparenciaRevenuesPage'
     },
     {
       type: '',
-      name: 'Orçamentos',
+      buttonTitle: 'Orçamentos',
       icon: 'fa-bar-chart',
-      url: 'TransparenciaOrcamentosPage'
+      targetPage: 'TransparenciaOrcamentosPage'
     },
     {
       type: '',
-      name: 'Orçado x Executado',
+      buttonTitle: 'Orçado x Executado',
       icon: 'fa-bar-chart',
-      url: 'TransparenciaOrcadoxExecutadoPage'
+      targetPage: 'TransparenciaOrcadoxExecutadoPage'
     },
     {
       type: 'expenses',
-      name: 'Despesas por Área',
+      buttonTitle: 'Despesas por Área',
       icon: 'fa-line-chart',
-      url: 'TransparenciaExpensesByAreaPage'
+      targetPage: 'TransparenciaExpensesByAreaPage'
     },
     {
       type: 'expenses',
-      name: 'Despesas por Órgão',
+      buttonTitle: 'Despesas por Órgão',
       icon: 'fa-line-chart',
-      url: 'TransparenciaExpensesByOriginPage'
+      targetPage: 'TransparenciaExpensesByOriginPage'
     },
     {
       type: '',
-      name: 'Obras Públicas',
+      buttonTitle: 'Obras Públicas',
       icon: 'fa-building-o',
-      url: 'TransparenciaPublicWorksPage'
+      targetPage: 'TransparenciaPublicWorksPage'
     }
   ];
 }

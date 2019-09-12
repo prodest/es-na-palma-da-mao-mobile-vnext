@@ -32,17 +32,17 @@
   <ion-grid>
     <ion-row>
       <ion-col>
-        <button ion-button
+        <button id="cancelar"
+                ion-button
                 no-margin
                 full
-                color-primary-inverse
                 (click)="dismiss()">Cancelar</button>
       </ion-col>
       <ion-col>
-        <button ion-button
+        <button id="salvar"
+                ion-button
                 no-margin
                 full
-                color-primary
                 (click)="onSubmitClick(form.value)">Salvar</button>
       </ion-col>
     </ion-row>

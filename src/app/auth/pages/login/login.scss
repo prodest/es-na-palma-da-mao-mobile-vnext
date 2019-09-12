@@ -1,25 +1,158 @@
 page-login {
-  ion-content {
-    background-image: url('../assets/imgs/background.png');
-    background-size: 100% 100%;
+
+  /* Geral */
+
+  ion-content, .scroll-content {
+    height: 100%;
+    min-height: 100%;
+  }
+  
+  .scroll-content {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+
+    background-color: white;
+    overflow: hidden;
+
+    padding-bottom: 15% !important;
+  }
+
+  ion-grid, ion-col {
+    padding: 0 !important;
+  }
+
+  ion-grid, ion-col {
+    padding: 0 !important;
+  }
+  .wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+  }
+
+  // /* Inputs */
+
+  #inputs {
+    width: 85%;
+    
+    ion-item, ion-input {
+      width: 100%;
+    }
+
+    #ion-item-email {
+      margin-bottom: 20px;
+    }
 
     .item {
-      background-color: transparent !important;
+      padding: 0;
+    
+      .input-wrapper {
+        font-family: 'Poppins';
 
-      ion-label,
-      .text-input {
-        color: #fff !important;
+        .label {
+          color: #6584cc; // $primary-mid-dark
+          font-weight: 600;
+          font-size: 1.75rem;
+        }
+
+        input {
+          color: #999999; // $gray-mid
+          font-size: 2.2rem;
+          font-weight: 400;
+        }
       }
+    }
+  }
 
-      &.item-block {
-        margin-bottom: 10px;
+  #forgot-password {
+    height: 2.5rem;
+    width: 85%;
+    align-items: flex-end;
+    margin-top: 1.5rem;
+    padding-right: 1rem;
+    color: #00aeef; // $primary-mid
+    font-weight: 400;
+    font-family: 'Poppins';
+
+    p {
+      font-size: 1.5rem;
+    }
+
+    .icon {
+      font-size: 2rem;
+    }
+  }
+
+  // /* Botões */
+
+  .login-button {
+    width: 75%;
+  }
+
+  // /* Final da página */
+
+  #access-with {
+    font-family: 'Poppins';
+    font-weight: 400;
+    font-size: 1.5rem;
+    color: #999999; // $gray-mid
+
+    p {
+      margin: 0;
+    }
+  }
+
+  #social-login {
+    flex-direction: row;
+    justify-content: center;
+
+    .social-login {
+      width: 42%;
+      height: fit-content;
+      // border: 1px solid red;
+      padding: 0;
+
+      font-family: 'Poppins';
+      font-weight: 500;
+      font-size: 1.9rem;
+
+      text-transform: none;
+
+      ion-icon {
+        margin-right: 5px;
       }
     }
 
-    .social-login {
-      margin-top: 20px;
-      ion-icon {
-        background-color: transparent !important;
+    #button-login-facebook {
+      color: #004297; // $primary-dark
+    }
+
+    #button-login-google {
+      color: #ed1c24;
+    }
+  }
+
+  // /* Em telas maiores */
+  // // iPad
+  @media screen and (min-width: 650px) {
+
+    .login-button {
+      width: 40%;
+    }
+  }
+
+  /* Em telas menores */
+  // iPhone 5/SE
+  @media screen and (max-width: 349px) {
+    .scroll-content {
+      padding-bottom: 5%;
+    }
+
+    #social-login {
+      .social-login {
+        font-size: 1.5rem;
       }
     }
   }

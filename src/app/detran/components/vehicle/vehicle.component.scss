@@ -1,17 +1,36 @@
 espm-vehicle {
+  .vehicle {
+    border-radius: 10px;
+    margin-bottom: 10px;
+  }
+
   [ion-item] {
+    /* box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.14),
+    0 3px 1px -2px rgba(0, 0, 0, 0.2),
+    0 1px 5px 0 rgba(0, 0, 0, 0.12); */
+
+    color: #999999;
+    
     .item-inner {
       margin-left: 10px !important;
-
+      font-family: 'Poppins';
+      border-bottom: none !important;
+      
       .vehicle__model {
         margin-bottom: 0px;
-        font-weight: 500;
+        color: #004297; // $primary-dark
+        font-weight: 600;
       }
       .vehicle__plate,
       .vehicle__renavam {
+        font-weight: 600;
         display: block;
-        margin: 5px 0;
+        margin: 0;
         text-transform: uppercase;
+      }
+
+      .label {
+        margin: 8px 8px 8px 0;
       }
     }
   }

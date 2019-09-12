@@ -5,6 +5,8 @@ import deburr from 'lodash-es/deburr';
 import { Concurso } from '../../model';
 import { SelecaoQuery, SelecaoService } from '../../providers';
 import { map } from 'rxjs/operators';
+import * as _ from 'lodash';
+
 @IonicPage({
   segment: 'concursos'
 })
@@ -31,7 +33,10 @@ export class ConcursosPage {
   ionViewWillLoad() {
     this.query
       .selectAll()
-      .pipe(map(concursos => concursos.sort(this.sortConcursos)))
+      .pipe(map(concursos => {
+        _.sortBy(concursos, this.sortConcursos);
+        return concursos;
+      }))
       .subscribe(concursos => {
         this.allConcursos = this.filteredConcursos = concursos;
       });
@@ -42,16 +47,8 @@ export class ConcursosPage {
   /**
    *
    */
-  private sortConcursos = (a: Concurso, b: Concurso) => {
-    if (a.favorito && b.favorito) {
-      return 1;
-    } else if (a.favorito) {
-      return -1;
-    } else if (b.favorito) {
-      return 1;
-    } else {
-      return 1;
-    }
+  private sortConcursos = (a: Concurso) => {
+    return a && a.favorito;
   };
 
   /**
@@ -69,7 +66,6 @@ export class ConcursosPage {
   backPageOne(){
     this.navCtrl.push('Apresentacao')
   }
-
   /**
    *
    */

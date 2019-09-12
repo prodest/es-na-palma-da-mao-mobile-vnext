@@ -1,0 +1,61 @@
+large-button {
+    // TODO: Aplicar as variáveis de cores
+
+    .large-button {
+        width: 100%;
+    }
+
+    .large-button-grid, .large-button-grid > ion-row {
+        height: 100%;
+    }
+
+    ion-col {
+        display: flex;
+        justify-content: center;
+    }
+
+    button {
+        font-family: 'Poppins';
+        width: 100%;
+        border-width: 0.75px;
+        border-style: solid;
+        margin-left: 0 !important;
+        margin-right: 0 !important;
+    }
+    
+    button p {
+        margin: 0 !important;
+        color: white !important;
+        font-weight: 600 !important; // semi-bold
+        text-transform: none !important;
+        font-size: 2rem;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .secondary-dark > button {
+        background-color: #ff0083; // $secondary-dark
+        border-color: #f8c1d9; // $secondary-light
+    }
+    .secondary-dark > button:active, .secondary-dark .activated { 
+        background-color: #820043; // $secondary-very-dark
+    }
+    
+    .primary-dark > button {
+        background-color: #004297; // $primary-dark
+        border-color: #abe1fa; // $primary-light
+    }
+    .primary-dark > button:active, .primary-dark .activated {
+        background-color: #003069; // $primary-very-dark
+    }
+
+    /* Em telas menores */
+    // iPhone 5/SE
+    @media screen and (max-width: 349px) {
+        button p {
+            font-size: 1.55rem !important;
+        }
+    }
+}

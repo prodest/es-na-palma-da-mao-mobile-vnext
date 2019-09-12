@@ -1,0 +1,198 @@
+page-my-services {
+  /* HEADER */
+  #custom-header {
+    background-image: url('../assets/imgs/bg-menu-principal-topo.jpg');
+    background-size: cover;
+    height: 30vh;
+    min-height: 30vh;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    
+    /* Searchbar */
+    #searchbar-wrapper {
+      width: 100%;
+      max-width: 450px;
+      
+      ion-searchbar {
+        font-family: 'Poppins';
+        background: transparent !important;
+        padding: 15px;
+        border: 0;
+        
+        .searchbar-input-container {
+          display: flex;
+          align-items: center;
+          
+          .searchbar-search-icon {
+            top: unset;
+            left: 20px;
+          }
+          
+          .searchbar-input {
+            height: 60px;
+            border-radius: 30px;
+            padding: 6px 55px;
+          }
+        }
+        
+        .searchbar-ios-cancel {
+          position: absolute;
+          right: 40px;
+          margin: 0;
+          padding: 0;
+          font-family: 'Poppins';
+          font-size: 1.5rem;
+          font-weight: 500;
+          height: unset;
+        }
+      }
+      
+      .searchbar-ios {
+        .searchbar-input {
+          padding-right: 130px !important;
+        }
+        
+        .searchbar-clear-icon {
+          right: 100px;
+        }
+      }
+    }
+    
+    /* Título da página */
+    nav-title {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+    }
+    @media screen and (max-width: 302px){
+      #custom-header {
+        min-height: 190px;
+      }
+    }
+    @media screen and (max-width: 350px){
+      nav-title .content p {
+        font-size: 23px;
+      }
+    }    
+    
+    /* Botão para a tela de seleção de favoritos */
+    #button-wrapper {
+      position: absolute;
+      right: 15px;
+      bottom: 5px;
+      
+      #select-favorite {
+        font-size: 2rem;
+        display: inline;
+        background-color: transparent;
+        padding: 0;
+        box-shadow: none;
+      }
+    }
+  }
+  
+  /* CORPO */
+  
+  .scroll-content {
+    background-color: #e9f7fe; // $primary-very-light
+    display: flex;
+    flex-basis: 'height';
+    flex-direction: column;
+    justify-content: space-between;
+    overflow: hidden;
+    padding-bottom: 0 !important;
+  }
+
+  ion-slides, .swiper-container, .swiper-wrapper, .slide-zoom {
+    display: flex;
+    flex: 1 0;
+  }
+  
+  ion-slides {
+    position: relative;
+    height: unset;
+    flex: 1 0;
+    
+    .slide-zoom {
+      display: flex;
+      flex-direction: column;
+      padding: 20px;
+      padding-top: 10px;
+      height: 100%;
+      min-height: 100%;
+      max-width: 100vmin;
+      
+      
+      .slide-line {
+        display: flex;
+        flex: 1 0;
+        justify-content: space-between;
+        max-height: 30%;
+        min-height: 95px;
+        margin-bottom: 3vmin;
+        
+        button {
+          font-family: 'Poppins';
+          font-size: 4.5vmin;
+          font-weight: 700;
+          color: #004297; // $primary-dark
+          text-transform: none;
+          background-color: white;
+          min-height: 100%;
+          width: 49.7%;
+          margin: 0;
+          box-shadow: 0px 0px 5px #cccccc;
+          white-space: normal;
+          
+          .button-inner {
+            display: flex;
+            flex-direction: column;
+            @media screen and (max-width: 359px){
+              .icon {
+                height: 6vmin !important;
+                width: 6vmin !important;
+              }
+            }
+            .icon {
+              height: 12vmin;
+              width: 12vmin;
+              padding: 0;
+              margin-bottom: 2vmin;
+            }
+          }
+        }
+      }
+      .slide-line > :first-child {
+        border-top-left-radius: 6vmin;
+        border-bottom-left-radius: 6vmin;
+      }
+      
+      .slide-line > :last-child {
+        border-top-right-radius: 6vmin;
+        border-bottom-right-radius: 6vmin;
+      }
+    }
+  }
+  
+  /* RODAPÉ */
+  .footer {
+    display: flex;
+    height: 50px;
+    width: 100%;
+    position: relative;
+    padding: 0 10vmin;
+    
+    button {
+      background: transparent;
+      margin-bottom: 4vmin;
+    }
+  }
+  
+  
+}
+#not-founded {
+  height: 100%;
+}

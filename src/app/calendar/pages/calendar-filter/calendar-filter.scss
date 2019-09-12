@@ -1,7 +1,30 @@
 page-calendar-filter {
-  .label-button {
-    float: right;
-    text-transform: uppercase;
-    color: $color-primary;
+
+  #content {
+    overflow: hidden;
+    background-color: white;
   }
+
+  #set-all {
+    align-self: center;
+    text-transform: none;
+    background-color: #004297;
+    font-size: 1.4rem;
+    padding: 0 25px;
+    height: 3.6rem;
+
+    span {
+      color: white;
+    }
+  }
+
+  ion-list {
+    overflow: scroll;
+    flex: 1;
+  }
+
+  large-button {
+    align-self: center;
+    width: 75%;
+  }  
 }

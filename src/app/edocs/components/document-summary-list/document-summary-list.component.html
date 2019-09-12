@@ -1,47 +1,40 @@
-<ion-header>
-    <ion-navbar>
-        <ion-title>E-docs - Assinatura de documentos</ion-title>
-    </ion-navbar>
-</ion-header>
-<ion-content>
-    <ion-refresher (ionRefresh)="refresh()"
-                   #refresher>
-        <ion-refresher-content>
-        </ion-refresher-content>
+<module-page title="E - Docs" no-padding>
+  <ion-content>
+    <ion-refresher (ionRefresh)="refresh()" #refresher>
+      <ion-refresher-content>
+      </ion-refresher-content>
     </ion-refresher>
-
+  
     <ion-list>
-        <ion-list-header>
-            {{title}}
-        </ion-list-header>
-        <ng-container *ngSubscribe="isLoading$ as isLoading">
-            <ng-container *ngSubscribe="documents$ as documents">
-                <ion-spinner page-loading
-                             *ngIf="isLoading && !documents.length && !isRefreshing; else docs"></ion-spinner>
-                <ng-template #docs>
-
-                    <edocs-document-summary *ngFor="let doc of documents; trackBy:trackById"
-                                            [document]="doc"
-                                            (sign)="sign($event)"
-                                            (block)="block($event)"
-                                            (unblock)="unblock($event)"
-                                            (open)="open($event)"
-                                            (showDetails)="showDetails($event)"
-                                            (refuse)="refuse($event)">
-                    </edocs-document-summary>
-
-                    <ion-item *ngIf="!documents.length"
-                              text-center
-                              padding>
-                        <h2>Nenhum documento encontrado</h2>
-                    </ion-item>
-                </ng-template>
-            </ng-container>
+      <ion-list-header>
+        {{title}}
+      </ion-list-header>
+      <ng-container *ngSubscribe="isLoading$ as isLoading">
+        <ng-container *ngSubscribe="documents$ as documents">
+          <ion-spinner page-loading
+          *ngIf="isLoading && !documents.length && !isRefreshing; else docs"></ion-spinner>
+          <ng-template #docs>
+            <edocs-document-summary
+              *ngFor="let doc of documents; trackBy:trackById"
+              [document]="doc"
+              (sign)="sign($event)"
+              (block)="block($event)"
+              (unblock)="unblock($event)"
+              (open)="open($event)"
+              (showDetails)="showDetails($event)"
+              (refuse)="refuse($event)">
+            </edocs-document-summary>
+          
+            <ion-item *ngIf="!documents.length" text-center padding>
+              <h2>Nenhum documento encontrado</h2>
+            </ion-item>
+          </ng-template>
         </ng-container>
+      </ng-container>
     </ion-list>
 
-    <ion-infinite-scroll *ngIf="hasMore$ | async"
-                         (ionInfinite)="loadNextPage()">
-        <ion-infinite-scroll-content loadingText="Carregando documentos..."></ion-infinite-scroll-content>
+    <ion-infinite-scroll *ngIf="hasMore$ | async" (ionInfinite)="loadNextPage()">
+      <ion-infinite-scroll-content loadingText="Carregando documentos..."></ion-infinite-scroll-content>
     </ion-infinite-scroll>
-</ion-content>
+  </ion-content>
+</module-page>

@@ -1,11 +1,12 @@
 import { NgModule } from '@angular/core';
-import { MatchHeightDirectiveModule } from '@espm/shared';
 import { IonicPageModule } from 'ionic-angular';
+import { MatchHeightDirectiveModule } from '@espm/shared';
+import { ModulePageComponentModule } from '@espm/shared/components';
 
 import { AboutPage } from './about';
 
 @NgModule({
   declarations: [AboutPage],
-  imports: [IonicPageModule.forChild(AboutPage), MatchHeightDirectiveModule]
+  imports: [IonicPageModule.forChild(AboutPage), MatchHeightDirectiveModule, ModulePageComponentModule]
 })
 export class AboutPageModule {}

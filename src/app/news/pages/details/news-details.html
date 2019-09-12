@@ -1,19 +1,9 @@
-<ion-header>
-  <ion-navbar>
-    <ion-title>
-      <span *ngIf="news">{{news.origin}} </span>
-      <span *ngIf="!news">Notícias</span>
-    </ion-title>
-    <ion-buttons end>
-      <button ion-button
-              icon-only
-              (click)="share(this.news)">
-        <ion-icon name="share"></ion-icon>
-      </button>
-    </ion-buttons>
-  </ion-navbar>
-</ion-header>
-
-<ion-content>
+<module-page [title]="news !== undefined ? news.origin : 'Notícias'">
+  <ion-buttons topbar>
+    <button icon-only
+            (click)="share(this.news)">
+      <ion-icon name="share"></ion-icon>
+    </button>
+  </ion-buttons>
   <card-noticia [news]="news"></card-noticia>
-</ion-content>
+</module-page>

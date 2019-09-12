@@ -49,5 +49,11 @@ export class VehicleDebitsPage {
   ionViewDidLoad(){
    this.debits = this.debits.map(d => d)
   }
+  /**
+   * 
+   */
+  goBack(){
+    this.navCtrl.pop();
+  }
 
 }
