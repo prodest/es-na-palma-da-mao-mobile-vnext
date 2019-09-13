@@ -21,7 +21,16 @@ export class RevenueDetailsPage extends MoneyFlowPage<DateRangeFilter> implement
     super(loadingCtrl);
     this.title = this.params.get('title');
   }
-
+/**
+ * 
+ */
+limite = (valor) => {
+  if (valor.length > 12){
+    return valor.substring(0, 18)+"…";
+    }else{
+    return valor;
+    }
+}
   /**
    *
    */
