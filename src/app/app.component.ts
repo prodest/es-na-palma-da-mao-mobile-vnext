@@ -9,7 +9,7 @@ import { finalize } from 'rxjs/operators';
 import { Subscription } from 'rxjs/Subscription';
 
 
-type WindowWithIntent = Window & {
+type WindowWithIntent = Window & typeof globalThis & {
   plugins: {
     intentShim: {
       getIntent: Function
@@ -116,7 +116,9 @@ export class ESPMComponent implements OnDestroy {
             const activeNavName = navActive ? navActive.name : this.rootPage;
             const isEdocs = activeNavName === 'DocumentsToSendPage' || activeNavName === 'DocumentsToSendAddAddresseesPage';
             if (clip && !isEdocs) {
-              this.nav.setRoot('DocumentsToSendPage', { filePath: clip });
+              this.nav.setRoot(this.rootPage).then(
+                () => this.nav.push('DocumentsToSendPage', { filePath: clip })
+              )
               return;
             }
           },
