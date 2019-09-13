@@ -1,41 +1,30 @@
-<ion-header>
-  <ion-navbar>
-    <ion-title>Buscar Destinatário</ion-title>
-    <ion-buttons end>
-      <button ion-button (click)="closeModal()">Fechar</button>
-    </ion-buttons>
-  </ion-navbar>
-</ion-header>
-<ion-content>
-  <ng-container> 
-    <ion-item>
-      <p class="title-search">Filtrar </p>
-      <ion-searchbar
-        placeholder="Digite para filtrar pelo {{ nomeTipoDestino }}"
-        [showCancelButton]="true"
-        cancelButtonText="Cancelar"
-        [animated]="false"
-        (ionInput)="search($event)"
-        (ionClear)="clear($event)"
-        (ionCancel)="clear($event)"
-      >
-      </ion-searchbar>
-    </ion-item>
-    <ion-item>
-      <ion-scroll class="scrollable" scrollY="true" detail-none>
-        <ion-list>
-          <button ion-item *ngFor="let destination of filteredGovDestinations" (click)="closeModal(destination)">
-            {{ destination.nome }}
-          </button>
-        </ion-list>
-        <ion-item *ngIf="filteredGovDestinations && !filteredGovDestinations.length" text-center no-lines>
-          <h2>Nenhum {{ nomeTipoDestino }} encontrado</h2>
-          <p>Tente mudar o filtro da consulta</p>
-        </ion-item>
-        <ion-spinner page-loading *ngIf="!filteredGovDestinations"></ion-spinner>
-      </ion-scroll>
-    </ion-item>
-  </ng-container>
-
-</ion-content>
-
+<module-page title="E-DOCS" no-padding no-footer>
+  <ion-list no-lines>
+    <ion-list-header>
+      Adicionar destinatários
+    </ion-list-header>
+    <ng-container>
+      <ion-item>
+        <p class="title-search">Filtrar </p>
+        <ion-searchbar placeholder="Digite para filtrar pelo {{ nomeTipoDestino }}" [showCancelButton]="true"
+          cancelButtonText="Cancelar" [animated]="false" (ionInput)="search($event)" (ionClear)="clear($event)"
+          (ionCancel)="clear($event)">
+        </ion-searchbar>
+      </ion-item>
+      <ion-item>
+        <ion-scroll class="scrollable" scrollY="true" detail-none>
+          <ion-list>
+            <button ion-item *ngFor="let destination of filteredGovDestinations" (click)="closeModal(destination)">
+              {{ destination.nome }}
+            </button>
+          </ion-list>
+          <ion-item *ngIf="filteredGovDestinations && !filteredGovDestinations.length" text-center no-lines>
+            <h2>Nenhum {{ nomeTipoDestino }} encontrado</h2>
+            <p>Tente mudar o filtro da consulta</p>
+          </ion-item>
+          <ion-spinner page-loading *ngIf="!filteredGovDestinations"></ion-spinner>
+        </ion-scroll>
+      </ion-item>
+    </ng-container>
+  </ion-list>
+</module-page>

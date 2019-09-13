@@ -1,11 +1,16 @@
 import { NgModule } from '@angular/core';
-import { DocumentsToSendAddresseesSearchComponent } from './documents-to-send-addressees-search.component';
 import { IonicPageModule } from 'ionic-angular';
+import { ModulePageComponentModule } from '@espm/shared/components';
+import { DocumentsToSendAddresseesSearchComponent } from './documents-to-send-addressees-search.component';
 
 @NgModule({
   declarations: [DocumentsToSendAddresseesSearchComponent],
-  imports: [IonicPageModule, IonicPageModule.forChild(DocumentsToSendAddresseesSearchComponent)],
+  imports: [
+    ModulePageComponentModule,
+    IonicPageModule,
+    IonicPageModule.forChild(DocumentsToSendAddresseesSearchComponent)
+  ],
   exports: [DocumentsToSendAddresseesSearchComponent],
   providers: []
 })
-export class DocumentsToSendAddreessesSearchComponentModule {}
+export class DocumentsToSendAddreessesSearchComponentModule { }

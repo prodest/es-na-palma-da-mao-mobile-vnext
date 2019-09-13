@@ -15,4 +15,20 @@ edocs-documents-to-send-addressees-search {
   .title-search {
     padding-left: 1em;
   }
+
+  .searchbar-input {
+    box-shadow: none !important;
+  }
+
+  .search-bar .col {
+    &:first-child {
+      flex-grow: 8;
+    }
+    .searchbar-md .searchbar-input {
+      padding: 6px 40px;
+    }
+    .searchbar.searchbar-ios .searchbar-input {
+      background-color: white;
+    }
+  }
 }
