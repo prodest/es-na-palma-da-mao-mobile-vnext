@@ -1,8 +1,8 @@
 import { Component, ChangeDetectionStrategy, OnInit, ViewChild, OnDestroy } from '@angular/core';
-import { IonicPage, Slides, NavParams, Loading, AlertController, NavController } from 'ionic-angular';
+import { IonicPage, Slides, NavParams, Loading, AlertController, NavController, App, MenuController } from 'ionic-angular';
 import { Subscription } from 'rxjs/Subscription';
 import { mergeMap } from 'rxjs/operators';
-import { LoadingService } from '@espm/core';
+import { LoadingService, AuthQuery } from '@espm/core';
 import {
   IBaseStepOutput,
   IAddresseesStepOutput,
@@ -53,7 +53,57 @@ export class DocumentsToSendPage implements OnInit, OnDestroy {
     private service: DocumentsToSendService,
     private loadingService: LoadingService,
     private alertCtrl: AlertController,
-    private navCtrl: NavController) { }
+    private navCtrl: NavController,
+    private authQuery: AuthQuery,
+    private menuCtrl: MenuController,
+    protected appCtrl: App) { }
+
+  ionViewCanEnter(): boolean | Promise<any> {
+    // permite acesso à tela se autenticados
+    const isAllowed = this.authQuery.isLoggedIn;
+    if (!isAllowed) {
+      this.showAuthNeededModal();
+    }
+    return isAllowed;
+  }
+
+  showAuthNeededModal = () => {
+    let alert = this.alertCtrl.create({
+      title: 'Login necessário',
+      message: 'Você deve estar autenticado no <strong>ES na palma da mão</strong> para acessar essa funcionalidade.',
+      buttons: [
+        {
+          text: 'Entendi',
+          handler: () => {
+            this.appCtrl
+              .getRootNav()
+              .setRoot('PresentationEdocsPage')
+              .then(() => {
+                alert.dismiss();
+                this.menuCtrl.close();
+              });
+            return false;
+          },
+          role: 'cancel'
+        },
+        {
+          text: 'Autenticar',
+          handler: () => {
+            this.appCtrl
+              .getRootNav()
+              .setRoot('PresentationEdocsPage')
+              .then(() => this.appCtrl.getRootNav().push('LoginPage', { redirectTo: 'DocumentsToSendPage' }))
+              .then(() => {
+                alert.dismiss();
+                this.menuCtrl.close();
+              });
+            return false;
+          }
+        }
+      ]
+    });
+    return alert.present();
+  };
 
   nextSlide() {
     this.activeStep.submit();
