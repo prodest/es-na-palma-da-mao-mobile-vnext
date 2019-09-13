@@ -158,7 +158,7 @@ export class DocumentsToSendPage implements OnInit, OnDestroy {
         {
           text: 'OK',
           handler: () => {
-            this.navCtrl.setRoot('DashboardPage')
+            this.navCtrl.setRoot('MyServicesPage');
             return true;
           }
         }
