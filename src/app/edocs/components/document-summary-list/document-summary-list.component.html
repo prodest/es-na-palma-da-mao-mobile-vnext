@@ -1,10 +1,10 @@
-<module-page title="E - Docs" no-padding>
+<module-page title="E-Docs" no-padding>
   <ion-content>
     <ion-refresher (ionRefresh)="refresh()" #refresher>
       <ion-refresher-content>
       </ion-refresher-content>
     </ion-refresher>
-  
+
     <ion-list>
       <ion-list-header>
         {{title}}
@@ -24,7 +24,7 @@
               (showDetails)="showDetails($event)"
               (refuse)="refuse($event)">
             </edocs-document-summary>
-          
+
             <ion-item *ngIf="!documents.length" text-center padding>
               <h2>Nenhum documento encontrado</h2>
             </ion-item>
