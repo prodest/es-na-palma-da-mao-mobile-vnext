@@ -24,6 +24,7 @@ export class ESPMComponent implements OnDestroy {
   @ViewChild(Nav) nav: Nav;
 
   rootPage: any = 'HomeScreenPage';
+  private myServicesPage: string = 'MyServicesPage';
   private onResumeSub: Subscription;
 
   /**
@@ -116,7 +117,8 @@ export class ESPMComponent implements OnDestroy {
             const activeNavName = navActive ? navActive.name : this.rootPage;
             const isEdocs = activeNavName === 'DocumentsToSendPage' || activeNavName === 'DocumentsToSendAddAddresseesPage';
             if (clip && !isEdocs) {
-              this.nav.setRoot('DocumentsToSendPage', { filePath: clip });
+              this.nav.setRoot(this.myServicesPage)
+                .then(() => this.nav.push('DocumentsToSendPage', { filePath: clip }));
               return;
             }
           },
@@ -125,7 +127,7 @@ export class ESPMComponent implements OnDestroy {
               this.auth.logout().then(() => this.nav.setRoot(this.rootPage));
             } else {
               this.push.init();
-              this.nav.setRoot(this.rootPage);
+              this.nav.setRoot(this.myServicesPage);
             }
           }
         );
@@ -143,9 +145,11 @@ export class ESPMComponent implements OnDestroy {
               text: 'Login',
               handler: () => {
                 const alertDismiss = alert.dismiss();
-                alertDismiss.then(() => {
-                  this.nav.setRoot('LoginPage', { redirectTo: 'DocumentsToSendPage', filePath: clip })
-                });
+                alertDismiss
+                  .then(() => this.nav.setRoot(this.myServicesPage))
+                  .then(() => {
+                    this.nav.push('LoginPage', { redirectTo: 'DocumentsToSendPage', filePath: clip });
+                  });
                 return false;
               }
             }
