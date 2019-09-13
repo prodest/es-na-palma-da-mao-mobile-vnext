@@ -91,7 +91,7 @@ export class MenuService implements OnDestroy {
     return menus.map(item => {
       return {
         ...item,
-        isChecked: favorites.favoriteMenus.some(idMenu => idMenu === item.id)
+        isChecked: favorites.favoriteMenus !== undefined ? favorites.favoriteMenus.some(idMenu => idMenu === item.id) : false
       };
     });
   };
