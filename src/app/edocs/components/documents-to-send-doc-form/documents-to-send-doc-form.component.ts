@@ -1,4 +1,15 @@
-import { Component, OnInit, OnChanges, SimpleChanges, Input, ChangeDetectionStrategy, ChangeDetectorRef, OnDestroy, Output, EventEmitter } from '@angular/core';
+import {
+  Component,
+  OnInit,
+  OnChanges,
+  SimpleChanges,
+  Input,
+  ChangeDetectionStrategy,
+  ChangeDetectorRef,
+  OnDestroy,
+  Output,
+  EventEmitter
+} from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { FileChooser } from '@ionic-native/file-chooser';
 import { FilePath } from '@ionic-native/file-path';
@@ -15,7 +26,6 @@ import { File, IFile } from '@ionic-native/file';
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class DocumentsToSendBasicFormComponent extends FormBase implements OnInit, OnChanges, OnDestroy {
-
   validationMessages = {
     file: {
       required: 'Obrigatório'
@@ -40,19 +50,19 @@ export class DocumentsToSendBasicFormComponent extends FormBase implements OnIni
   roleOptions = {
     title: 'Cargo / Função',
     subTitle: 'Selecione o cargo ou a função que deseja capturar e encaminhar o documento atual'
-  }
+  };
   documentTypeOptions = {
     title: 'Tipo de documento',
     subTitle: 'Selecione o tipo do documento atual'
-  }
+  };
   documentPaperTypeOptions = {
     title: 'Documento em papel',
     subTitle: 'Selecione como o documento em papel foi tirado foto ou escaneado'
-  }
+  };
   documentAssignTypeOptions = {
     title: 'Tipo de assinatura',
     subTitle: 'Selecione o tipo de assinatura para o documento atual'
-  }
+  };
   name: string = '';
   role: string = '';
   documentType: number = NaN;
@@ -61,7 +71,8 @@ export class DocumentsToSendBasicFormComponent extends FormBase implements OnIni
 
   private subscription: Subscription;
 
-  constructor(formBuilder: FormBuilder,
+  constructor(
+    formBuilder: FormBuilder,
     private cdr: ChangeDetectorRef,
     private fileChooser: FileChooser,
     private filePicker: IOSFilePicker,
@@ -69,26 +80,28 @@ export class DocumentsToSendBasicFormComponent extends FormBase implements OnIni
     private alertCtrl: AlertController,
     private platform: Platform,
     private f: File,
-    private loadingService: LoadingService) {
+    private loadingService: LoadingService
+  ) {
     super(formBuilder);
   }
 
   ngOnInit(): void {
-    this.subscription = this.form.get('documentType').valueChanges
-      .subscribe((value: number) => {
-        const documentPaperType = this.form.get('documentPaperType');
-        const documentAssignType = this.form.get('documentAssignType');
-        documentPaperType.clearValidators();
-        documentAssignType.clearValidators();
-        documentPaperType.reset(null);
-        documentAssignType.reset(null);
-        if (value === DocumentoNatureza.Natodigital) { // Documento Eletrônico
-          documentAssignType.setValidators([Validators.required]);
-        } else if (value === DocumentoNatureza.Digitalizado) { // Documento Escaneado
-          documentPaperType.setValidators([Validators.required]);
-        }
-        this.selectChange();
-      });
+    this.subscription = this.form.get('documentType').valueChanges.subscribe((value: number) => {
+      const documentPaperType = this.form.get('documentPaperType');
+      const documentAssignType = this.form.get('documentAssignType');
+      documentPaperType.clearValidators();
+      documentAssignType.clearValidators();
+      documentPaperType.reset(null);
+      documentAssignType.reset(null);
+      if (value === DocumentoNatureza.Natodigital) {
+        // Documento Eletrônico
+        documentAssignType.setValidators([Validators.required]);
+      } else if (value === DocumentoNatureza.Digitalizado) {
+        // Documento Escaneado
+        documentPaperType.setValidators([Validators.required]);
+      }
+      this.selectChange();
+    });
   }
 
   ngOnDestroy(): void {
@@ -106,30 +119,30 @@ export class DocumentsToSendBasicFormComponent extends FormBase implements OnIni
   }
 
   isValidNumber(value: any) {
-    return typeof value === 'number' && !isNaN(value)
+    return typeof value === 'number' && !isNaN(value);
   }
 
   selectChange(): void {
-    this.cdr.detectChanges()
+    this.cdr.detectChanges();
   }
 
   async chooser(): Promise<void> {
     try {
       const loading = this.loadingService.show('Aguarde');
       const uri = this.platform.is('ios') ? await this.filePicker.pickFile() : await this.fileChooser.open();
-      const path = await this.filePath.resolveNativePath(uri)
-      const response: any = await this.f.resolveLocalFilesystemUrl(path)
+      const path = await this.filePath.resolveNativePath(uri);
+      const response: any = await this.f.resolveLocalFilesystemUrl(path);
       response.file((file: IFile) => {
         //verifcar mimetype
-        if (file.type == "application/pdf" || file.type == "image/png" || file.type == "image/jpeg"){
-          const docFile: DocumentFile = { 
+        if (file.type === 'application/pdf' || file.type === 'image/png' || file.type === 'image/jpeg') {
+          const docFile: DocumentFile = {
             url: path,
             name: file.name,
             type: file.type
           };
           this.form.get('file').setValue(docFile);
           this.onFileSelect.next(docFile);
-        }else{
+        } else {
           const alert = this.alertCtrl.create({
             title: 'Formato não suportado!',
             message: 'Selecione somente documentos PDF imagens em formato PNG ou JPEG.',
@@ -138,7 +151,7 @@ export class DocumentsToSendBasicFormComponent extends FormBase implements OnIni
           alert.present();
         }
         loading.dismiss();
-      })
+      });
 
       this.cdr.detectChanges();
     } catch (e) {
@@ -158,7 +171,7 @@ export class DocumentsToSendBasicFormComponent extends FormBase implements OnIni
       name: ['', [Validators.required]],
       documentType: [null, [Validators.required]],
       documentPaperType: [null, []],
-      documentAssignType: [null, []],
+      documentAssignType: [null, []]
     });
   }
 
