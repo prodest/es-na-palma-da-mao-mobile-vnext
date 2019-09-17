@@ -7,6 +7,8 @@ import { FilePath } from '@ionic-native/file-path';
 import { Nav, Platform, AlertController } from 'ionic-angular';
 import { finalize } from 'rxjs/operators';
 import { Subscription } from 'rxjs/Subscription';
+import { File, IFile } from '@ionic-native/file';
+import { DocumentFile } from './edocs/state';
 
 
 type WindowWithIntent = Window & {
@@ -39,6 +41,7 @@ export class ESPMComponent implements OnDestroy {
     private auth: AuthService,
     private filePath: FilePath,
     private alertCtrl: AlertController,
+    private file: File,
     ngZone: NgZone,
     @Inject(EnvVariables) environment: Environment
   ) {
@@ -105,20 +108,27 @@ export class ESPMComponent implements OnDestroy {
   private resumeApplication = async () => {
     const clip = await this.getIntentClip();
 
-    console.log({ clip })
     if (this.authQuery.isLoggedIn) {
       this.auth
         .refreshAccessTokenIfNeeded()
         .pipe(finalize(this.push.init))
         .subscribe(
-          token => {
-            console.log({ token });
+          async token => {
             const navActive = this.nav.getActive();
             const activeNavName = navActive ? navActive.name : this.rootPage;
-            const isEdocs = activeNavName === 'DocumentsToSendPage' || activeNavName === 'DocumentsToSendAddAddresseesPage';
+            const isEdocs = activeNavName === 'DocumentsToSendPage';
             if (clip && !isEdocs) {
-              this.nav.setRoot(this.myServicesPage)
-                .then(() => this.nav.push('DocumentsToSendPage', { filePath: clip }));
+              const path = await this.filePath.resolveNativePath(clip)
+              const response: any = await this.file.resolveLocalFilesystemUrl(path) // FileEntry
+              response.file((file: IFile) => {
+                const docFile: DocumentFile = { 
+                  url: path,
+                  name: file.name,
+                  type: file.type
+                }
+                this.nav.setRoot(this.myServicesPage)
+                .then(() => this.nav.push('DocumentsToSendPage', { docFile }));
+              });
               return;
             }
           },

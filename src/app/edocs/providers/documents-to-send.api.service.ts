@@ -40,10 +40,10 @@ export class DocumentsToSendApiService extends ApiBaseService<Document> {
   }
 
   captureDocuments(fileName: string, body: CapturePostBody): Observable<CaptureReceive> {
-    const fileNameSplited = body.File.split('/')
-    const directoryUrl = fileNameSplited.slice(0, fileNameSplited.length-1).join('/')
+    const fileUrlSplited = body.File.url.split('/')
+    const directoryUrl = fileUrlSplited.slice(0, fileUrlSplited.length-1).join('/')
     
-    return fromPromise(this.file.readAsArrayBuffer(directoryUrl, fileNameSplited[fileNameSplited.length-1]))
+    return fromPromise(this.file.readAsArrayBuffer(directoryUrl, body.File.name))
       .pipe(
         mergeMap(fileBuffer => {
           const formData = new FormData()

@@ -5,8 +5,9 @@ import { FilePath } from '@ionic-native/file-path';
 import { IOSFilePicker } from '@ionic-native/file-picker';
 import { AlertController, Platform } from 'ionic-angular';
 import { Subscription } from 'rxjs/Subscription';
-import { FormBase } from '@espm/core';
-import { DocumentoNatureza } from '../../state';
+import { FormBase, LoadingService } from '@espm/core';
+import { DocumentoNatureza, DocumentFile } from '../../state';
+import { File, IFile } from '@ionic-native/file';
 
 @Component({
   selector: 'edocs-documents-to-send-doc-form',
@@ -33,8 +34,8 @@ export class DocumentsToSendBasicFormComponent extends FormBase implements OnIni
     }
   };
 
-  @Input() file: string;
-  @Output() onFileSelect: EventEmitter<string> = new EventEmitter();
+  @Input() file: DocumentFile;
+  @Output() onFileSelect: EventEmitter<DocumentFile> = new EventEmitter();
 
   roleOptions = {
     title: 'Cargo / Função',
@@ -66,7 +67,9 @@ export class DocumentsToSendBasicFormComponent extends FormBase implements OnIni
     private filePicker: IOSFilePicker,
     private filePath: FilePath,
     private alertCtrl: AlertController,
-    private platform: Platform) {
+    private platform: Platform,
+    private f: File,
+    private loadingService: LoadingService) {
     super(formBuilder);
   }
 
@@ -96,7 +99,7 @@ export class DocumentsToSendBasicFormComponent extends FormBase implements OnIni
 
   ngOnChanges(changes: SimpleChanges): void {
     if ('file' in changes) {
-      const file: string = changes['file'].currentValue;
+      const file: DocumentFile = changes['file'].currentValue;
       this.form.reset({ file });
       this.cdr.detectChanges();
     }
@@ -112,10 +115,31 @@ export class DocumentsToSendBasicFormComponent extends FormBase implements OnIni
 
   async chooser(): Promise<void> {
     try {
+      const loading = this.loadingService.show('Aguarde');
       const uri = this.platform.is('ios') ? await this.filePicker.pickFile() : await this.fileChooser.open();
       const path = await this.filePath.resolveNativePath(uri)
-      this.form.get('file').setValue(path);
-      this.onFileSelect.next(path);
+      const response: any = await this.f.resolveLocalFilesystemUrl(path)
+      response.file((file: IFile) => {
+        //verifcar mimetype
+        if (file.type == "application/pdf" || file.type == "image/png" || file.type == "image/jpeg"){
+          const docFile: DocumentFile = { 
+            url: path,
+            name: file.name,
+            type: file.type
+          };
+          this.form.get('file').setValue(docFile);
+          this.onFileSelect.next(docFile);
+        }else{
+          const alert = this.alertCtrl.create({
+            title: 'Formato não suportado!',
+            message: 'Selecione somente documentos PDF imagens em formato PNG ou JPEG.',
+            buttons: ['Ok']
+          });
+          alert.present();
+        }
+        loading.dismiss();
+      })
+
       this.cdr.detectChanges();
     } catch (e) {
       console.error('Error catch file chooser', e);
@@ -130,11 +154,11 @@ export class DocumentsToSendBasicFormComponent extends FormBase implements OnIni
 
   protected createFormModel(): FormGroup {
     return this.formBuilder.group({
-      file: ['', [Validators.required]],
+      file: [null, [Validators.required]],
       name: ['', [Validators.required]],
       documentType: [null, [Validators.required]],
       documentPaperType: [null, []],
-      documentAssignType: [null, []]
+      documentAssignType: [null, []],
     });
   }
 

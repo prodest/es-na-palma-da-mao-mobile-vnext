@@ -17,7 +17,7 @@ import {
   DocumentsToSendDocComponent,
   DocumentsToSendMessageComponent
 } from '../../components';
-import { DestinationReceive, DocumentsToSendService, WizardSteps } from '../../state';
+import { DestinationReceive, DocumentsToSendService, WizardSteps, DocumentFile } from '../../state';
 
 @IonicPage({
   segment: 'documentos-para-enviar'
@@ -29,8 +29,8 @@ import { DestinationReceive, DocumentsToSendService, WizardSteps } from '../../s
 })
 export class DocumentsToSendPage implements OnInit, OnDestroy {
   @ViewChild(Slides) slides: Slides;
-  // file path
-  file: string;
+  // file object
+  file: DocumentFile
   // active step
   activeStep: WizardStep<any>;
   // if sending/forwarding document
@@ -90,9 +90,7 @@ export class DocumentsToSendPage implements OnInit, OnDestroy {
           text: 'Autenticar',
           handler: () => {
             this.appCtrl
-              .getRootNav()
-              .setRoot('PresentationEdocsPage')
-              .then(() => this.appCtrl.getRootNav().push('LoginPage', { redirectTo: 'DocumentsToSendPage' }))
+              .getRootNav().push('LoginPage', { redirectTo: 'DocumentsToSendPage' })
               .then(() => {
                 alert.dismiss();
                 this.menuCtrl.close();
@@ -157,8 +155,8 @@ export class DocumentsToSendPage implements OnInit, OnDestroy {
       })
     ];
     this.activeStep = this.basicStep;
-    this.file = this.navParams.get('filePath');
-    // this.file = 'file.pdf'; // UNCOMENT TO TEST AND DEBUG WITH IONIC SERVE (BROWSER PLATFORM)
+    this.file = this.navParams.get('docFile');
+    // this.file = {url: 'file.pdf', name: 'file.pdf', type: 'application/pdf'} // UNCOMENT TO TEST AND DEBUG WITH IONIC SERVE (BROWSER PLATFORM)
     this.slides.lockSwipes(true);
   }
 

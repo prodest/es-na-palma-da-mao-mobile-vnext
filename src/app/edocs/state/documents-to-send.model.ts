@@ -32,7 +32,7 @@ export interface Forward {
 }
 
 export interface CapturePostBody {
-  File: string;
+  File: DocumentFile;
   Assinar: boolean;
   ClasseId?: string;
   Natureza: number;
@@ -75,6 +75,12 @@ export interface ForwardsRecieve {
     }
   ];
   urlDocumentoEdocs: string;
+}
+
+export interface DocumentFile {
+  url: string;
+  name: string;
+  type: string;
 }
 
 export enum TipoDestino {
