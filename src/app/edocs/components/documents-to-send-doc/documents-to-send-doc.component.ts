@@ -24,6 +24,14 @@ export class DocumentsToSendDocComponent extends WizardStep<IDocStepOutput> impl
 
   refresh(): void { }
 
+  fileSelect(file: string): void {
+    this.file = file;
+  }
+
+  dismissFile(): void {
+    this.file = undefined;
+  }
+
   async viewFile() {
     try {
       await this.fileOpener.open(this.file, 'application/pdf');

@@ -1,5 +1,9 @@
-import { Component, OnInit, OnChanges, SimpleChanges, Input, ChangeDetectionStrategy, ChangeDetectorRef, OnDestroy } from '@angular/core';
+import { Component, OnInit, OnChanges, SimpleChanges, Input, ChangeDetectionStrategy, ChangeDetectorRef, OnDestroy, Output, EventEmitter } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { FileChooser } from '@ionic-native/file-chooser';
+import { FilePath } from '@ionic-native/file-path';
+import { IOSFilePicker } from '@ionic-native/file-picker';
+import { AlertController, Platform } from 'ionic-angular';
 import { Subscription } from 'rxjs/Subscription';
 import { FormBase } from '@espm/core';
 import { DocumentoNatureza } from '../../state';
@@ -30,6 +34,7 @@ export class DocumentsToSendBasicFormComponent extends FormBase implements OnIni
   };
 
   @Input() file: string;
+  @Output() onFileSelect: EventEmitter<string> = new EventEmitter();
 
   roleOptions = {
     title: 'Cargo / Função',
@@ -55,7 +60,13 @@ export class DocumentsToSendBasicFormComponent extends FormBase implements OnIni
 
   private subscription: Subscription;
 
-  constructor(formBuilder: FormBuilder, private cdr: ChangeDetectorRef) {
+  constructor(formBuilder: FormBuilder,
+    private cdr: ChangeDetectorRef,
+    private fileChooser: FileChooser,
+    private filePicker: IOSFilePicker,
+    private filePath: FilePath,
+    private alertCtrl: AlertController,
+    private platform: Platform) {
     super(formBuilder);
   }
 
@@ -74,7 +85,7 @@ export class DocumentsToSendBasicFormComponent extends FormBase implements OnIni
           documentPaperType.setValidators([Validators.required]);
         }
         this.selectChange();
-      });    
+      });
   }
 
   ngOnDestroy(): void {
@@ -86,9 +97,8 @@ export class DocumentsToSendBasicFormComponent extends FormBase implements OnIni
   ngOnChanges(changes: SimpleChanges): void {
     if ('file' in changes) {
       const file: string = changes['file'].currentValue;
-      if (file) {
-        this.form.reset({ file });
-      }
+      this.form.reset({ file });
+      this.cdr.detectChanges();
     }
   }
 
@@ -98,6 +108,24 @@ export class DocumentsToSendBasicFormComponent extends FormBase implements OnIni
 
   selectChange(): void {
     this.cdr.detectChanges()
+  }
+
+  async chooser(): Promise<void> {
+    try {
+      const uri = this.platform.is('ios') ? await this.filePicker.pickFile() : await this.fileChooser.open();
+      const path = await this.filePath.resolveNativePath(uri)
+      this.form.get('file').setValue(path);
+      this.onFileSelect.next(path);
+      this.cdr.detectChanges();
+    } catch (e) {
+      console.error('Error catch file chooser', e);
+      const alert = this.alertCtrl.create({
+        title: 'Erro inesperado',
+        message: 'Não foi possível selecionar um arquivo. Tente novamente mais tarde.',
+        buttons: ['Ok']
+      });
+      alert.present();
+    }
   }
 
   protected createFormModel(): FormGroup {

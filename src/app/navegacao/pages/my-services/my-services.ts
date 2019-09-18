@@ -16,9 +16,9 @@ import { Subject } from 'rxjs/Subject';
 })
 export class MyServicesPage implements OnDestroy {
 
+  slides: Array<Array<ItemMenu[]>> = [];
   private destroyed$ = new Subject();
   private favorites: ItemMenu[] = [];
-  private slides: Array<Array<ItemMenu[]>> = [];
   private menuToShow$: Subject<ItemMenu[]>;
   private searching: boolean = false;
 
@@ -51,7 +51,7 @@ export class MyServicesPage implements OnDestroy {
   }
 
   /**
-   * 
+   *
    */
   ngOnDestroy() {
     this.destroyed$.next();
@@ -70,14 +70,14 @@ export class MyServicesPage implements OnDestroy {
   };
 
   /**
-   * 
+   *
    */
   goToSelectFavorites() {
     this.navCtrl.push('SelectFavoritePage')
   }
 
   /**
-   * 
+   *
    */
   updateSlides = (menus: ItemMenu[]) => {
     let _menus: ItemMenu[] = menus;

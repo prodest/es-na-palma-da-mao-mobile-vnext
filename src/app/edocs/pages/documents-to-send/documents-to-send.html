@@ -1,4 +1,4 @@
-<module-page title="Enviar documentos" no-padding no-footer no-back>
+<module-page title="E-DOCS" no-padding no-footer>
   <ion-content>
     <ion-list no-lines>
       <ion-list-header>
@@ -23,8 +23,8 @@
               leftIcon="ios-add-circle-outline"
               rightIcon="ios-arrow-forward-outline"
               color="primary-dark"
-              (click)="message.submit()"
-              [disabled]="!message.isValid || isSending"
+              (click)="message?.submit()"
+              [disabled]="!message?.isValid || isSending"
             ></large-button>
           </ion-item>
         </ion-slide>
@@ -33,10 +33,10 @@
   </ion-content>
   <ion-footer>
     <ion-toolbar text-center="" class="foot-toolbar">
-      <button ion-button color="dark" (click)="prevSlide()" [disabled]="slides.isBeginning()" outline>
+      <button ion-button color="dark" (click)="prevSlide()" [disabled]="slides?.isBeginning()" outline>
         Anterior
       </button>
-      <button ion-button color="dark" (click)="nextSlide()" [disabled]="slides.isEnd() || !activeStep?.isValid" outline>
+      <button ion-button color="dark" (click)="nextSlide()" [disabled]="slides?.isEnd() || !activeStep?.isValid" outline>
         Proximo
       </button>
     </ion-toolbar>

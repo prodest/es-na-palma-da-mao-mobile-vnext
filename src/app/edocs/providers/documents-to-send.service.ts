@@ -9,8 +9,8 @@ export class DocumentsToSendService {
 
   constructor(private api: DocumentsToSendApiService, private store: DocumentsToSendStore) { }
 
-  getDestinations(): Observable<DestinationReceive[]> {
-    return this.api.getDestinations();
+  getDestinations(tipo: number, orgaoId?: string): Observable<DestinationReceive[]> {
+    return this.api.getDestinations(tipo, orgaoId);
   }
 
   captureDocuments(fileName: string, body: CapturePostBody): Observable<CaptureReceive> {

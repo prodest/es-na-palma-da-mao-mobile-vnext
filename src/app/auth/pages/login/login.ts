@@ -150,15 +150,20 @@ export class LoginPage implements OnInit {
    */
   private isAccountNotLinkedError = (data): boolean => data.error === this.errorMsgs.accountNotLinked;
 
-  private redirectHandler = () => this.redirect && this.redirect.to ?
-    this.navCtrl.setRoot(this.redirect.to, this.redirect.params) :
-    this.goToDashboard()
+  private redirectHandler = () => {
+    if (this.redirect && this.redirect.to) {
+      return this.navCtrl.setRoot('MyServicesPage').then(
+        () => this.navCtrl.push(this.redirect.to, this.redirect.params)
+      );
+    }
+    return this.goToDashboard();
+  }
 
   /**
    * Redireciona usuário para o MyServicesPage
    */
  private goToDashboard = () => this.navCtrl.push('MyServicesPage');
-  
+
   /**
    *
    *
@@ -187,7 +192,7 @@ export class LoginPage implements OnInit {
     this.openInAppBrowser(`${this.environment.api.acessocidadao}/Conta/VerificarCPF`);
   }
   /**
-   * 
+   *
    */
-  
+
 }

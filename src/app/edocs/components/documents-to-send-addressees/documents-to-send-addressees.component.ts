@@ -1,4 +1,4 @@
-import { Component, ChangeDetectionStrategy, OnInit, ViewChild, ChangeDetectorRef } from '@angular/core';
+import { Component, ChangeDetectionStrategy, ViewChild, ChangeDetectorRef } from '@angular/core';
 import { ModalController, Modal } from 'ionic-angular';
 import { FormBase } from '@espm/core';
 import { Destination } from '../../state';
@@ -10,7 +10,7 @@ import { IAddresseesStepOutput } from '../../interfaces';
   templateUrl: './documents-to-send-addressees.component.html',
   changeDetection: ChangeDetectionStrategy.Default
 })
-export class DocumentsToSendAddresseesComponent extends WizardStep<{ addressees: IAddresseesStepOutput }> implements OnInit {
+export class DocumentsToSendAddresseesComponent extends WizardStep<{ addressees: IAddresseesStepOutput }> {
   addIcon: string = 'md-add-circle';
   colorAddIcon: string = 'dark';
   addressees: Destination[] = [];
@@ -21,8 +21,6 @@ export class DocumentsToSendAddresseesComponent extends WizardStep<{ addressees:
     super();
   }
 
-  ngOnInit(): void { }
-
   removeAddressee(index: number): void {
     this.addressees = [
       ...this.addressees.slice(0, index),
@@ -32,7 +30,7 @@ export class DocumentsToSendAddresseesComponent extends WizardStep<{ addressees:
   }
 
   async addAddresses() {
-    const addAddresseesModal: Modal = this.modal.create('DocumentsToSendAddAddresseesComponent', this.addAddresses);
+    const addAddresseesModal: Modal = this.modal.create('DocumentsToSendAddAddresseesComponent');
 
     addAddresseesModal.present();
 
