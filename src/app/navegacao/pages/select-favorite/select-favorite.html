@@ -15,7 +15,7 @@
       <ion-checkbox
         id="check-all"
         [ngModel]="allChecked"
-        (click)="toggleAll()"
+        (ionChange)="toggleAll()"
       ></ion-checkbox>
     </ion-item>
   </div>
@@ -28,7 +28,7 @@
         <ion-checkbox
           id="bt-{{itemMenu.id}}"
           [(ngModel)]="itemMenu.isChecked"
-          (click)="markItem(itemMenu)"
+          (ionChange)="markItem(itemMenu)"
         ></ion-checkbox>
       </ion-item>
     </ion-list>
