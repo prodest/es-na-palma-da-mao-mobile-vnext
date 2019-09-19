@@ -2,6 +2,7 @@ espm-dt-concurso-page {
   ion-list {
     flex: 1;
     overflow: scroll;
+    border-bottom: 1px solid #abe1fa;
   }
 
   ion-item-divider {
@@ -36,6 +37,6 @@ espm-dt-concurso-page {
   large-button {
     width: 75%;
     align-self: center;
-    margin: 16px 0;
+    margin: 8px 0;
   }
 }
