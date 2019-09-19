@@ -1,4 +1,8 @@
 page-driver-license {
+  @media screen and (max-width: 350px){
+nav-title .content p {
+    font-size: 25px;
+}}
   [color-primary-light], .color-primary-light {
     background-color: #004297;
     border-radius: 25px;

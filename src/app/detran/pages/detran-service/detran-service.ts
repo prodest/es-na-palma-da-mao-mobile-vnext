@@ -77,7 +77,7 @@ export class DetranServicePage {
           handler: () => {
             this.appCtrl
               .getRootNav()
-              .setRoot('LoginPage')
+              .push('LoginPage',{ redirectTo: 'DetranServicePage' })
               .then(() => {
                 alert.dismiss();
                 this.menuCtrl.close();

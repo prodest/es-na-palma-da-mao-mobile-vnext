@@ -1,5 +1,14 @@
 latest-editions {
-  
+  @media screen and (max-width: 350px){
+nav-title .content p {
+    font-size: 20px;
+}
+}
+@media screen and (max-width: 350px){
+.item-md h3{
+  font-size: 0.9rem;
+}
+}
   ion-item {
     margin-bottom: 5px !important;
     border-radius: 25px;

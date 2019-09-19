@@ -55,7 +55,7 @@ export class CapturedByMePage {
           handler: () => {
             this.appCtrl
               .getRootNav()
-              this.navCtrl.push('LoginPage')
+              this.navCtrl.push('LoginPage',{ redirectTo:'PresentationEdocsPage' })
               .then(() => {
                 alert.dismiss();
                 this.menuCtrl.close();

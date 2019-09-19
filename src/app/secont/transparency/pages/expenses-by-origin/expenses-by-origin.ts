@@ -35,7 +35,7 @@ export class ExpensesByOriginPage extends MoneyFlowListPage<DateRangeFilter> imp
 
   openFilter() {
     let filterModal = this.modalCtrl.create('TransparencyFilterPage', {
-      title: 'Despesas(Órgãos)',
+      title: 'Despesas',
       year: false,
       filter: this.filter
     });
