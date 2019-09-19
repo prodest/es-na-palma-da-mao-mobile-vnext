@@ -1,4 +1,9 @@
 espm-dt-concurso-page {
+  ion-list {
+    flex: 1;
+    overflow: scroll;
+  }
+
   ion-item-divider {
     background-color: #fdeff5 !important;
     color: #004297 !important;
@@ -15,39 +20,22 @@ espm-dt-concurso-page {
   ion-item [accent] {
     color: #ff0083 !important;
   }
-
-  #not-founded {
-    color: rgb(240, 162, 162);
-  }
-  ._css{
-    background: linear-gradient(45deg, red 50%, #208baa 50%);
-    height: 2px;
-  }
-  .title{
-     text-align: center;
-  }
-  .toolbar-background, .toolbar-title{
-    background-color: #004297;  
-  }
-  .botao_classificados{
-    position: fixed;
-    float: bottom;
-    bottom: 25px;
-    right: 15px ;
-    left: 15px ;
-    z-index: 100;
-    background-color: #004297;
-    color:white;
-    border-radius: 5px;
-    text-align: center;
-    font-weight: bold;
-    width: 90%;
-    height: 70px ;
-  }
+  
   ion-label {
     font-size: 20px;
   }
+  
   .item-md{
     position: initial;
+  }
+  
+  #not-found {
+    color: rgb(240, 162, 162);
+  }
+
+  large-button {
+    width: 75%;
+    align-self: center;
+    margin: 16px 0;
   }
 }
