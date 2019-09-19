@@ -17,7 +17,7 @@ import {
   DocumentsToSendDocComponent,
   DocumentsToSendMessageComponent
 } from '../../components';
-import { DestinationReceive, DocumentsToSendService, WizardSteps, DocumentFile } from '../../state';
+import { DestinationReceive, DocumentsToSendService, WizardSteps, DocumentFile, ConvertToPdfPostBody, HorizontalAlign, VerticalAlign } from '../../state';
 
 @IonicPage({
   segment: 'documentos-para-enviar'
@@ -164,11 +164,34 @@ export class DocumentsToSendPage implements OnInit, OnDestroy {
     this.subscriptions.forEach(sub => (sub ? sub.unsubscribe() : void 0));
   }
 
-  private send(): void {
+  private async send(): Promise<void> {
     if (this.isSending) {
       return;
     }
     const loading = this.loadingService.show('Encaminhando documento');
+
+    if (this.stepsValue.docStep.file.type !== 'application/pdf') {
+      const body: ConvertToPdfPostBody = {
+        size: 'A4', 
+        landscape: false,
+        horizontalAlign: HorizontalAlign.CENTER,
+        verticalAlign: VerticalAlign.MIDDLE,
+        image: this.stepsValue.docStep.file
+      }
+      
+      const value: IDocStepOutput = {
+        name: this.stepsValue.docStep.name,
+        documentType: this.stepsValue.docStep.documentType,
+        documentPaperType: this.stepsValue.docStep.documentPaperType,
+        documentAssignType: this.stepsValue.docStep.documentAssignType,
+        file: { ...this.stepsValue.docStep.file }
+      };
+
+      value.file.buffer = await this.service.convertTopdf(body).toPromise();
+
+      this.stepsValue.docStep = value;
+      this.service.storeUpdate(this.stepsValue.docStep, WizardSteps.DOC);
+    }
     this.service.captureDocuments(this.stepsValue.docStep.name, {
       File: this.stepsValue.docStep.file,
       Assinar: false,

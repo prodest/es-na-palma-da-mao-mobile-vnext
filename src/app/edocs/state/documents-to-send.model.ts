@@ -1,3 +1,4 @@
+// INTERFACES
 export interface DestinationReceive {
   id: string;
   descricao: string;
@@ -78,11 +79,21 @@ export interface ForwardsRecieve {
 }
 
 export interface DocumentFile {
-  url: string;
+  buffer?: ArrayBuffer;
+  url?: string;
   name: string;
   type: string;
 }
 
+export interface ConvertToPdfPostBody {
+  size: string; 
+  landscape: boolean;
+  horizontalAlign: HorizontalAlign;
+  verticalAlign: VerticalAlign;
+  image: DocumentFile;
+}
+
+// ENUMS
 export enum TipoDestino {
   Orgao = 0,
   Setor = 1,
@@ -111,4 +122,16 @@ export enum WizardSteps {
   ADDRESSEES = 'addresseesStep',
   DOC = 'docStep',
   MESSAGE = 'messageStep',
+}
+
+export enum HorizontalAlign {
+  LEFT='left',
+  CENTER='center',
+  RIGHT='right'
+}
+
+export enum VerticalAlign {
+  TOP='top',
+  MIDDLE='middle',
+  BOTTOM='bottom'
 }

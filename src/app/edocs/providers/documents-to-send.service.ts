@@ -1,13 +1,20 @@
 import { Injectable } from '@angular/core';
 import { DocumentsToSendApiService } from './documents-to-send.api.service';
-import { DestinationReceive, ForwardPostBody, ForwardsRecieve, CapturePostBody, CaptureReceive, WizardSteps } from '../state/documents-to-send.model';
+import {
+  DestinationReceive,
+  ForwardPostBody,
+  ForwardsRecieve,
+  CapturePostBody,
+  CaptureReceive,
+  WizardSteps,
+  ConvertToPdfPostBody
+} from '../state/documents-to-send.model';
 import { Observable } from 'rxjs/Observable';
 import { DocumentsToSendStore } from '../state/documents-to-send.store';
 
 @Injectable()
 export class DocumentsToSendService {
-
-  constructor(private api: DocumentsToSendApiService, private store: DocumentsToSendStore) { }
+  constructor(private api: DocumentsToSendApiService, private store: DocumentsToSendStore) {}
 
   getDestinations(tipo: number, orgaoId?: string): Observable<DestinationReceive[]> {
     return this.api.getDestinations(tipo, orgaoId);
@@ -19,6 +26,10 @@ export class DocumentsToSendService {
 
   createForwards(body: ForwardPostBody): Observable<ForwardsRecieve> {
     return this.api.createForwards(body);
+  }
+
+  convertTopdf(body: ConvertToPdfPostBody): Observable<ArrayBuffer> {
+    return this.api.convertToPdf(body);
   }
 
   storeUpdate(step: any, stepName: string) {
