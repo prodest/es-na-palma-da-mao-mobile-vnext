@@ -50,8 +50,8 @@ export class SelectFavoritePage implements OnDestroy, OnInit {
   /**
    * Marca um menu como favorito
    */
-  markItem(item: ItemMenu) {
-    this.menuService.updateMenu(item.id, item.isChecked);
+  markItem(itemId: number, itemCheck: boolean) {
+    this.menuService.updateMenu(itemId, !itemCheck);
   }
 
   /**
@@ -66,7 +66,7 @@ export class SelectFavoritePage implements OnDestroy, OnInit {
    * marcar e desmarcar todos os checkbox
    */
   toggleAll() {
-    this.menuService.updateAll(!this.allChecked);
+    this.menuService.updateAll(this.allChecked);
   }
 
   /**
