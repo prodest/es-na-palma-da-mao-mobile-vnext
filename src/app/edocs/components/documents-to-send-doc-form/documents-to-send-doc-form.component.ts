@@ -129,11 +129,14 @@ export class DocumentsToSendBasicFormComponent extends FormBase implements OnIni
   async chooser(): Promise<void> {
     try {
       const loading = this.loadingService.show('Aguarde');
-      const uri = this.platform.is('ios') ? await this.filePicker.pickFile() : await this.fileChooser.open();
+      const uri = this.platform.is('ios') ? await this.filePicker.pickFile().catch(() => null) : await this.fileChooser.open().catch(() => null);
+      if (!uri) {
+        loading.dismiss();
+        return;
+      }
       const path = await this.filePath.resolveNativePath(uri);
       const response: any = await this.f.resolveLocalFilesystemUrl(path);
       response.file((file: IFile) => {
-        //verifcar mimetype
         if (file.type === 'application/pdf' || file.type === 'image/png' || file.type === 'image/jpeg') {
           const docFile: DocumentFile = {
             url: path,
