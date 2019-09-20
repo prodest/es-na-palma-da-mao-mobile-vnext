@@ -11,14 +11,6 @@ import { File, IFile } from '@ionic-native/file';
 import { DocumentFile } from './edocs/state';
 
 
-type WindowWithIntent = Window & {
-  plugins: {
-    intentShim: {
-      getIntent: Function
-    }
-  }
-};
-
 @Component({
   templateUrl: 'app.component.html'
 })
@@ -86,8 +78,8 @@ export class ESPMComponent implements OnDestroy {
   };
 
   private getIntentClip = () => new Promise<string>(resolve => {
-    if (!(window as WindowWithIntent).plugins) { return resolve(null); }
-    (window as WindowWithIntent).plugins.intentShim.getIntent(
+    if (!(window as any).plugins) { return resolve(null); }
+    (window as any).plugins.intentShim.getIntent(
       async data => {
         if (!data || !data.clipItems) {
           resolve(null);
@@ -118,16 +110,15 @@ export class ESPMComponent implements OnDestroy {
             const activeNavName = navActive ? navActive.name : this.rootPage;
             const isEdocs = activeNavName === 'DocumentsToSendPage';
             if (clip && !isEdocs) {
-              const path = await this.filePath.resolveNativePath(clip)
-              const response: any = await this.file.resolveLocalFilesystemUrl(path) // FileEntry
+              const response: any = await this.file.resolveLocalFilesystemUrl(clip) // FileEntry
               response.file((file: IFile) => {
-                const docFile: DocumentFile = { 
-                  url: path,
+                const docFile: DocumentFile = {
+                  url: clip,
                   name: file.name,
                   type: file.type
                 }
                 this.nav.setRoot(this.myServicesPage)
-                .then(() => this.nav.push('DocumentsToSendPage', { docFile }));
+                  .then(() => this.nav.push('DocumentsToSendPage', { docFile }));
               });
               return;
             }
