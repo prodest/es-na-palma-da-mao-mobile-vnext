@@ -97,6 +97,18 @@ export class ESPMComponent implements OnDestroy {
     );
   });
 
+  private getDocFile(path: string): Promise<DocumentFile> {
+    return new Promise((resolve, reject) => {
+      return this.file.resolveLocalFilesystemUrl(path).then((response: any) => {
+        response.file((file: IFile) => resolve({
+          url: path,
+          name: file.name,
+          type: file.type
+        }));
+      }).catch(reject);
+    });
+  }
+
   private resumeApplication = async () => {
     const clip = await this.getIntentClip();
 
@@ -110,16 +122,9 @@ export class ESPMComponent implements OnDestroy {
             const activeNavName = navActive ? navActive.name : this.rootPage;
             const isEdocs = activeNavName === 'DocumentsToSendPage';
             if (clip && !isEdocs) {
-              const response: any = await this.file.resolveLocalFilesystemUrl(clip) // FileEntry
-              response.file((file: IFile) => {
-                const docFile: DocumentFile = {
-                  url: clip,
-                  name: file.name,
-                  type: file.type
-                }
-                this.nav.setRoot(this.myServicesPage)
-                  .then(() => this.nav.push('DocumentsToSendPage', { docFile }));
-              });
+              const docFile = await this.getDocFile(clip);
+              this.nav.setRoot(this.myServicesPage)
+                .then(() => this.nav.push('DocumentsToSendPage', { docFile }));
               return;
             }
           },
@@ -148,8 +153,9 @@ export class ESPMComponent implements OnDestroy {
                 const alertDismiss = alert.dismiss();
                 alertDismiss
                   .then(() => this.nav.setRoot(this.myServicesPage))
-                  .then(() => {
-                    this.nav.push('LoginPage', { redirectTo: 'DocumentsToSendPage', filePath: clip });
+                  .then(() => this.getDocFile(clip))
+                  .then(docFile => {
+                    this.nav.push('LoginPage', { redirectTo: 'DocumentsToSendPage', params: { docFile } });
                   });
                 return false;
               }
