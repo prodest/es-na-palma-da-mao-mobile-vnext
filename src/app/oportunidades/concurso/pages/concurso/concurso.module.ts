@@ -10,4 +10,4 @@ import { ModulePageComponentModule } from '@espm/shared/components';
   declarations: [ConcursoPage],
   imports: [ModulePageComponentModule, DateFormatPipeModule, IonicPageModule.forChild(ConcursoPage)]
 })
-export class ConcursosPageModule {}
+export class ConcursosPageModule { }

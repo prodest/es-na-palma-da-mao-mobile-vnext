@@ -28,10 +28,10 @@ export class ConcursoPage implements OnDestroy {
     private selecaoService: SelecaoService,
     private selecaoQuery: SelecaoQuery,
     private authNeeded: AuthNeededService
-  ) {}
-/**
- * 
- */
+  ) { }
+  /**
+   * 
+   */
 
 
   /**

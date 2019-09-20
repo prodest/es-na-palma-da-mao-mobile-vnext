@@ -25,7 +25,7 @@ export class ConcursosPage {
   /**
    *
    */
-  constructor(private navCtrl: NavController, private service: SelecaoService, private query: SelecaoQuery) {}
+  constructor(private navCtrl: NavController, private service: SelecaoService, private query: SelecaoQuery) { }
 
   /**
    *
@@ -63,7 +63,7 @@ export class ConcursosPage {
   /**
    *  volta para pagina de apresentação
    */
-  backPageOne(){
+  backPageOne() {
     this.navCtrl.push('Apresentacao')
   }
   /**
@@ -80,13 +80,13 @@ export class ConcursosPage {
     this.navCtrl.push('ConcursoPage', { id });
   }
 
-    // tamanho do nome "orgão" limitado 
+  // tamanho do nome "orgão" limitado 
   limite = (valor) => {
-    if (valor.length > 12){
-      return valor.substring(0, 12)+"…";
-      }else{
+    if (valor.length > 12) {
+      return valor.substring(0, 12) + "…";
+    } else {
       return valor;
-      }
+    }
   }
 
   /**

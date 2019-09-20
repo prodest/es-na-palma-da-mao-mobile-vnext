@@ -8,4 +8,4 @@ import { RefusedByMePage } from './refused-by-me';
   declarations: [RefusedByMePage],
   imports: [DocumentSummaryListComponentModule, IonicPageModule.forChild(RefusedByMePage)]
 })
-export class RefusedByMePageModule {}
+export class RefusedByMePageModule { }

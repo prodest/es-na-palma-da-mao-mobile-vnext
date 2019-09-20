@@ -8,4 +8,4 @@ import { SignedByMePage } from './signed-by-me';
   declarations: [SignedByMePage],
   imports: [DocumentSummaryListComponentModule, IonicPageModule.forChild(SignedByMePage)]
 })
-export class SignedByMePageModule {}
+export class SignedByMePageModule { }

@@ -1,20 +1,14 @@
-<module-page [title]=limite(title) no-padding>
+<module-page [title]="title | limit:12:18" no-padding>
   <div class="expenses">
-    <report-title *ngIf="data"
-                  [title]="reportTitle"
-                  [info]="data.info"></report-title>
-  
-    <pie-chart [data]="data.chart"
-               *ngIf="data?.chart"></pie-chart>
+    <report-title *ngIf="data" [title]="reportTitle" [info]="data.info"></report-title>
+
+    <pie-chart [data]="data.chart" *ngIf="data?.chart"></pie-chart>
     <report-list-summary #header>
       <h2 *ngIf="data">{{data.total | currency: 'BRL': 'symbol'}}</h2>
     </report-list-summary>
-    <ion-list *ngIf="data"
-              [class.desc]="'desc' === header.sort">
-      <default-item *ngFor="let item of data.listable"
-                    [item]="item"></default-item>
+    <ion-list *ngIf="data" [class.desc]="'desc' === header.sort">
+      <default-item *ngFor="let item of data.listable" [item]="item"></default-item>
     </ion-list>
-    <last-update *ngIf="data"
-                 [date]="data.lastUpdate"></last-update>
+    <last-update *ngIf="data" [date]="data.lastUpdate"></last-update>
   </div>
 </module-page>

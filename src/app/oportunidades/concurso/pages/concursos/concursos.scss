@@ -17,7 +17,6 @@ espm-dt-concursos-page {
     flex-direction: column;
     align-items: center;
 
-
     button {
       width: 95%;
       display: flex !important;
@@ -28,13 +27,14 @@ espm-dt-concursos-page {
       display: flex !important;
       flex-direction: row !important;
 
-      .button-content, .button-status {
+      .button-content,
+      .button-status {
         display: flex;
         flex-direction: column;
         justify-content: center;
         align-items: center;
       }
-      
+
       .button-content {
         width: 60%;
 
