@@ -9,11 +9,11 @@
     (ionCancel)="clear($event)">
   </ion-searchbar>
   <ion-content>
-    <ion-list-header *ngIf="filteredConcursos && filteredConcursos.length">
+    <ion-list-header *ngIf="concursosLength">
       {{filteredConcursos.length}} concursos encontrados
     </ion-list-header>
     <ion-list
-        [virtualScroll]="filteredConcursos" 
+        [virtualScroll]="concursos$ | async"
         [virtualTrackBy]="trackById"
       >
       <button
@@ -35,11 +35,10 @@
         </div>
       </button>
     </ion-list>
-    <ion-item *ngIf="filteredConcursos && !filteredConcursos.length" text-center no-lines id="not-found">
+    <ion-item *ngIf="concursosLength" text-center no-lines id="not-found">
       <h2>Nenhum concurso encontrado</h2>
       <p>Tente mudar o filtro da consulta</p>
     </ion-item>
-    <ion-spinner *ngIf="!filteredConcursos" page-loading></ion-spinner>
   </ion-content>
 
 </module-page>
