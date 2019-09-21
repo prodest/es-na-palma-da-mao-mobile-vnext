@@ -35,5 +35,5 @@
     (click)="showAreas(concurso)"
     *ngIf="concurso.liberarClassificacao"
   ></large-button>
-  <button *ngIf="!concurso.liberarClassificacao" ion-item no-lines>
+  <ion-spinner *ngIf="!concurso.nome" page-loading></ion-spinner>
 </module-page>
