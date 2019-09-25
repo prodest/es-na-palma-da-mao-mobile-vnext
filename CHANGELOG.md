@@ -2,6 +2,198 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+<a name="6.0.0"></a>
+# [6.0.0](https://github.com/prodest/es-na-palma-da-mao-mobile-vnext/compare/v5.8.3...v6.0.0) (2019-09-12)
+
+
+### Bug Fixes
+
+* **bus-lines-info:** corrigindo bg-color do ion-segment ([886a87e](https://github.com/prodest/es-na-palma-da-mao-mobile-vnext/commit/886a87e))
+* **bus-lines-info:** Corrigindo cores e fonte ([04dc675](https://github.com/prodest/es-na-palma-da-mao-mobile-vnext/commit/04dc675))
+* **calendar:** Corrigindo css do "agenda" ([a03e09b](https://github.com/prodest/es-na-palma-da-mao-mobile-vnext/commit/a03e09b))
+* **conflicts:** resolving conflicts ([ab48b28](https://github.com/prodest/es-na-palma-da-mao-mobile-vnext/commit/ab48b28))
+* **debits-tipe:** Corrigindo rolagem da tela ([d804e3e](https://github.com/prodest/es-na-palma-da-mao-mobile-vnext/commit/d804e3e))
+* **detran:** corrigindo Header do add-driver-license ([c032e61](https://github.com/prodest/es-na-palma-da-mao-mobile-vnext/commit/c032e61))
+* **detran:** corrigindo Header do add-vehicle ([c8c422a](https://github.com/prodest/es-na-palma-da-mao-mobile-vnext/commit/c8c422a))
+* **detran:** removendo botão "infrações" ([16aa5c8](https://github.com/prodest/es-na-palma-da-mao-mobile-vnext/commit/16aa5c8))
+* **dio-search:** Removendo css não usado ([723771f](https://github.com/prodest/es-na-palma-da-mao-mobile-vnext/commit/723771f))
+* **docs-to-sign:** removendo import não usado ([6da9c05](https://github.com/prodest/es-na-palma-da-mao-mobile-vnext/commit/6da9c05))
+* **edocs:** removendo botão que leva pra encaminhamentos ([974a5f2](https://github.com/prodest/es-na-palma-da-mao-mobile-vnext/commit/974a5f2))
+* **globals:** Corrigido header do menu e fonte padrão do app (Poppins) ([ad5d468](https://github.com/prodest/es-na-palma-da-mao-mobile-vnext/commit/ad5d468))
+* **headers:** Pequeno ajuste na responsividade ([3db7f06](https://github.com/prodest/es-na-palma-da-mao-mobile-vnext/commit/3db7f06))
+* **large-button:** Corrigindo alinhamento do botão e do conteúdo ([d3ce8e2](https://github.com/prodest/es-na-palma-da-mao-mobile-vnext/commit/d3ce8e2))
+* **large-button:** Corrigindo formatação do large-button ([4780c88](https://github.com/prodest/es-na-palma-da-mao-mobile-vnext/commit/4780c88))
+* **large-button:** Corrigindo large-button pra alinhar com flex ([de32faf](https://github.com/prodest/es-na-palma-da-mao-mobile-vnext/commit/de32faf))
+* **large-header:** Corrigindo margens do componente ([b2ea49c](https://github.com/prodest/es-na-palma-da-mao-mobile-vnext/commit/b2ea49c))
+* **login:** Aplicando flex na tela de login ([de6339b](https://github.com/prodest/es-na-palma-da-mao-mobile-vnext/commit/de6339b))
+* **login:** Corrigido o esmagamendo do login pelo teclado ([9150038](https://github.com/prodest/es-na-palma-da-mao-mobile-vnext/commit/9150038))
+* **login-page:** Add duration ao Toast de "login e senha requeridos" ([b07aa35](https://github.com/prodest/es-na-palma-da-mao-mobile-vnext/commit/b07aa35))
+* **login-page:** Corrigindo plano de fundo da página ([6f6fcea](https://github.com/prodest/es-na-palma-da-mao-mobile-vnext/commit/6f6fcea))
+* **menu:** corrige multiplas chamadas ao salvar favoritos ([22546e5](https://github.com/prodest/es-na-palma-da-mao-mobile-vnext/commit/22546e5))
+* **menu-service:** Corrigindo erro no carregamento da store ([d8dcb23](https://github.com/prodest/es-na-palma-da-mao-mobile-vnext/commit/d8dcb23))
+* **my-services:** Corrigindo esmagamento de elementos por teclado ([bf17258](https://github.com/prodest/es-na-palma-da-mao-mobile-vnext/commit/bf17258))
+* **my-services:** removendo msg de not found ([4458770](https://github.com/prodest/es-na-palma-da-mao-mobile-vnext/commit/4458770))
+* **my-services:** trocando vw por vmin ([15296b7](https://github.com/prodest/es-na-palma-da-mao-mobile-vnext/commit/15296b7))
+* **nav-title:** novas classes de personalização ([e0a5481](https://github.com/prodest/es-na-palma-da-mao-mobile-vnext/commit/e0a5481))
+* **nav-title:** Truncando textos grandes e melhorando alinhamento ([f58a6a9](https://github.com/prodest/es-na-palma-da-mao-mobile-vnext/commit/f58a6a9))
+* **new-components:** Pequenas melhorias nos componentes ([4c4bdf4](https://github.com/prodest/es-na-palma-da-mao-mobile-vnext/commit/4c4bdf4))
+* **novo-edocs:** Desfazendo mudanças de dev ([8395859](https://github.com/prodest/es-na-palma-da-mao-mobile-vnext/commit/8395859))
+* **oportunidades:** ordenação de favoritos ([15b6e45](https://github.com/prodest/es-na-palma-da-mao-mobile-vnext/commit/15b6e45))
+* **select-favorite:** Corrigida a rolagem da página ([c916330](https://github.com/prodest/es-na-palma-da-mao-mobile-vnext/commit/c916330))
+* **select-favorite:** Retirando flexbox do .scroll-content ([0b3cd33](https://github.com/prodest/es-na-palma-da-mao-mobile-vnext/commit/0b3cd33))
+* **vehicles:** Ajustando posicionamento do botão REMOVER e margem ([ecf956b](https://github.com/prodest/es-na-palma-da-mao-mobile-vnext/commit/ecf956b))
+* **vehicles:** Aplicando nova feat do navheader ([8122264](https://github.com/prodest/es-na-palma-da-mao-mobile-vnext/commit/8122264))
+
+
+### Features
+
+* **componentes:** primeira versão dos componentes ([96bafee](https://github.com/prodest/es-na-palma-da-mao-mobile-vnext/commit/96bafee))
+* **components:** segunda versão dos components ([8cece6f](https://github.com/prodest/es-na-palma-da-mao-mobile-vnext/commit/8cece6f))
+* **detran:** Aplicando nova tela padrão ao detran ([4e7f1a7](https://github.com/prodest/es-na-palma-da-mao-mobile-vnext/commit/4e7f1a7))
+* **detran-service:** adicionado o separador no rodapé ([45be181](https://github.com/prodest/es-na-palma-da-mao-mobile-vnext/commit/45be181))
+* **fonts:** Adicionando a fonte Poppins ([cc34620](https://github.com/prodest/es-na-palma-da-mao-mobile-vnext/commit/cc34620))
+* **home-screen:** Adicionando TODO e correção da navegação ([b92e9e9](https://github.com/prodest/es-na-palma-da-mao-mobile-vnext/commit/b92e9e9))
+* **icones:** Trocando icones do Menu ([1771f1e](https://github.com/prodest/es-na-palma-da-mao-mobile-vnext/commit/1771f1e))
+* **icons:** Adicionando ícones de navegação ([017288d](https://github.com/prodest/es-na-palma-da-mao-mobile-vnext/commit/017288d))
+* **icons:** Adicionando novos ícones ([6d64e82](https://github.com/prodest/es-na-palma-da-mao-mobile-vnext/commit/6d64e82))
+* **large-button:** Criando novo componente de botão grande ([9aacf73](https://github.com/prodest/es-na-palma-da-mao-mobile-vnext/commit/9aacf73))
+* **large-button:** Removendo restrição de largura em telas grandes ([c9b682f](https://github.com/prodest/es-na-palma-da-mao-mobile-vnext/commit/c9b682f))
+* **large-header:** Componente large-header terminado ([4d8ba73](https://github.com/prodest/es-na-palma-da-mao-mobile-vnext/commit/4d8ba73))
+* **login:** Trocando o header pelo header padrão ([ae429b9](https://github.com/prodest/es-na-palma-da-mao-mobile-vnext/commit/ae429b9))
+* **login-page:** Adicionando svg dos botões de rede social ([77cd2a0](https://github.com/prodest/es-na-palma-da-mao-mobile-vnext/commit/77cd2a0))
+* **login-page:** Botões de rede social ([27f9bfe](https://github.com/prodest/es-na-palma-da-mao-mobile-vnext/commit/27f9bfe))
+* **login-page:** Login com redes sociais, formatação dos elementos ([60d689c](https://github.com/prodest/es-na-palma-da-mao-mobile-vnext/commit/60d689c))
+* **login-page:** WIP Refatorando a tela ([df22bd3](https://github.com/prodest/es-na-palma-da-mao-mobile-vnext/commit/df22bd3))
+* **main-footer-bar:** Cor de fundo primary-very-dark ([2ce040e](https://github.com/prodest/es-na-palma-da-mao-mobile-vnext/commit/2ce040e))
+* **main-footer-bar:** Criando componente main-footer-bar ([5970e74](https://github.com/prodest/es-na-palma-da-mao-mobile-vnext/commit/5970e74))
+* **menu:** primeira versão funcional ([386d1de](https://github.com/prodest/es-na-palma-da-mao-mobile-vnext/commit/386d1de))
+* **meus-veiculos:** aplicando componentes de header e footer ([98a0e6b](https://github.com/prodest/es-na-palma-da-mao-mobile-vnext/commit/98a0e6b))
+* **mobile:** ajustes de responsividade ([3aa0fee](https://github.com/prodest/es-na-palma-da-mao-mobile-vnext/commit/3aa0fee))
+* **mobile:** autenticando acesso ([3a4cad1](https://github.com/prodest/es-na-palma-da-mao-mobile-vnext/commit/3a4cad1))
+* **mobile:** componetização default ([e3da90a](https://github.com/prodest/es-na-palma-da-mao-mobile-vnext/commit/e3da90a))
+* **mobile:** correção de serviços no feedback ([4f2bc84](https://github.com/prodest/es-na-palma-da-mao-mobile-vnext/commit/4f2bc84))
+* **mobile:** correção dos botoes ([45309cb](https://github.com/prodest/es-na-palma-da-mao-mobile-vnext/commit/45309cb))
+* **mobile:** integração de serviços e componentes ([3ba15dc](https://github.com/prodest/es-na-palma-da-mao-mobile-vnext/commit/3ba15dc))
+* **mobile:** integração serviços  agenda ([e5428c9](https://github.com/prodest/es-na-palma-da-mao-mobile-vnext/commit/e5428c9))
+* **mobile:** melhorias mobile ([fd78533](https://github.com/prodest/es-na-palma-da-mao-mobile-vnext/commit/fd78533))
+* **mobile:** modularização default ([6826dbc](https://github.com/prodest/es-na-palma-da-mao-mobile-vnext/commit/6826dbc))
+* **mobile:** pesquisar serviços ([4e7990d](https://github.com/prodest/es-na-palma-da-mao-mobile-vnext/commit/4e7990d))
+* **mobile:** primeiro login correção ([b4bac2a](https://github.com/prodest/es-na-palma-da-mao-mobile-vnext/commit/b4bac2a))
+* **mobile:** responsividade ([8096f65](https://github.com/prodest/es-na-palma-da-mao-mobile-vnext/commit/8096f65))
+* **mobile:** responsividade ([a85f941](https://github.com/prodest/es-na-palma-da-mao-mobile-vnext/commit/a85f941))
+* **mobile:** responsividade melhorada ([ec04074](https://github.com/prodest/es-na-palma-da-mao-mobile-vnext/commit/ec04074))
+* **mobile:** terceira versao melhorada ([b7e37e4](https://github.com/prodest/es-na-palma-da-mao-mobile-vnext/commit/b7e37e4))
+* **Mobile:**  versão de pull ([30c1840](https://github.com/prodest/es-na-palma-da-mao-mobile-vnext/commit/30c1840))
+* **Mobile:** aplicaçao do layout Detran ([69aea4d](https://github.com/prodest/es-na-palma-da-mao-mobile-vnext/commit/69aea4d))
+* **Mobile:** componente detran melhorado ([022fb5c](https://github.com/prodest/es-na-palma-da-mao-mobile-vnext/commit/022fb5c))
+* **Mobile:** finalização do novo component Detran ([752b5d2](https://github.com/prodest/es-na-palma-da-mao-mobile-vnext/commit/752b5d2))
+* **Mobile:** interface componentes calendar ([3ebff26](https://github.com/prodest/es-na-palma-da-mao-mobile-vnext/commit/3ebff26))
+* **Mobile:** junção entre serviços semelhantes ([8b05a68](https://github.com/prodest/es-na-palma-da-mao-mobile-vnext/commit/8b05a68))
+* **Mobile:** melhorias no css ([4035e2b](https://github.com/prodest/es-na-palma-da-mao-mobile-vnext/commit/4035e2b))
+* **Mobile:** melhorias no login e detran ([c3ba0aa](https://github.com/prodest/es-na-palma-da-mao-mobile-vnext/commit/c3ba0aa))
+* **Mobile:** modulo noticias agrupado ([cf8914c](https://github.com/prodest/es-na-palma-da-mao-mobile-vnext/commit/cf8914c))
+* **Mobile:** novo componente Detran ([7cf8976](https://github.com/prodest/es-na-palma-da-mao-mobile-vnext/commit/7cf8976))
+* **Mobile:** versão funcional com as apis ([ef91462](https://github.com/prodest/es-na-palma-da-mao-mobile-vnext/commit/ef91462))
+* **Mobile:** versao pronta do novo app ([9cf5c95](https://github.com/prodest/es-na-palma-da-mao-mobile-vnext/commit/9cf5c95))
+* **module-index:** Criando componente module-index ([f2c862e](https://github.com/prodest/es-na-palma-da-mao-mobile-vnext/commit/f2c862e))
+* **module-page:** Criando componente module-page. Template para o espm. ([a284fa7](https://github.com/prodest/es-na-palma-da-mao-mobile-vnext/commit/a284fa7))
+* **module-page:** Novas diretivas: no-scroll  e separator ([ad8f40e](https://github.com/prodest/es-na-palma-da-mao-mobile-vnext/commit/ad8f40e))
+* **my-services:** Aplicando componente de footer padrão ([d5eca71](https://github.com/prodest/es-na-palma-da-mao-mobile-vnext/commit/d5eca71))
+* **my-services:** Exibindo apenas favoritos ([b6fb9ac](https://github.com/prodest/es-na-palma-da-mao-mobile-vnext/commit/b6fb9ac))
+* **my-services:** Exibindo favoritos primeiro ([2b289fb](https://github.com/prodest/es-na-palma-da-mao-mobile-vnext/commit/2b289fb))
+* **my-services:** Finalizando o layout dos botões conforme guideline ([a63f280](https://github.com/prodest/es-na-palma-da-mao-mobile-vnext/commit/a63f280))
+* **my-services:** Minimizando o shrink pelo teclado. Formatando search. ([110479a](https://github.com/prodest/es-na-palma-da-mao-mobile-vnext/commit/110479a))
+* **my-services-page:** WIP da página de serviços ([16ab1d9](https://github.com/prodest/es-na-palma-da-mao-mobile-vnext/commit/16ab1d9))
+* **my-services-page:** WIP da página de serviços ([1efc761](https://github.com/prodest/es-na-palma-da-mao-mobile-vnext/commit/1efc761))
+* **my-services-page:** WIP da página de serviços ([8b3782b](https://github.com/prodest/es-na-palma-da-mao-mobile-vnext/commit/8b3782b))
+* **nav-header:** Criando componente nav-header ([3558772](https://github.com/prodest/es-na-palma-da-mao-mobile-vnext/commit/3558772))
+* **nav-title:** Adicionada a classe .sign-white ([3d95ef4](https://github.com/prodest/es-na-palma-da-mao-mobile-vnext/commit/3d95ef4))
+* **nav-title:** Novo componente 'nav-title' ([88feffa](https://github.com/prodest/es-na-palma-da-mao-mobile-vnext/commit/88feffa))
+* **navheader-buttonbar:** Automatizando os botões da barra superior ([87bbb3b](https://github.com/prodest/es-na-palma-da-mao-mobile-vnext/commit/87bbb3b))
+* **vehicle-debits:** WIP da página de pagamento de débitos ([ed9674f](https://github.com/prodest/es-na-palma-da-mao-mobile-vnext/commit/ed9674f))
+
+
+
+<a name="5.8.3"></a>
+## [5.8.3](https://github.com/prodest/es-na-palma-da-mao-mobile-vnext/compare/v5.8.2...v5.8.3) (2019-09-02)
+
+
+### Bug Fixes
+
+* **vehicle:** fix invalid plate massage ([50df98e](https://github.com/prodest/es-na-palma-da-mao-mobile-vnext/commit/50df98e))
+
+
+
+<a name="5.8.2"></a>
+## [5.8.2](https://github.com/prodest/es-na-palma-da-mao-mobile-vnext/compare/v5.8.1...v5.8.2) (2019-09-02)
+
+
+### Bug Fixes
+
+* **ionic:** production build ([03d99e0](https://github.com/prodest/es-na-palma-da-mao-mobile-vnext/commit/03d99e0))
+
+
+
+<a name="5.8.1"></a>
+## [5.8.1](https://github.com/prodest/es-na-palma-da-mao-mobile-vnext/compare/v5.8.0...v5.8.1) (2019-09-02)
+
+
+
+<a name="5.8.0"></a>
+# [5.8.0](https://github.com/prodest/es-na-palma-da-mao-mobile-vnext/compare/v5.7.0...v5.8.0) (2019-09-02)
+
+
+### Bug Fixes
+
+* **add-vehicle:** Acerto para aceitar a placa no padrão mercosul ([521b204](https://github.com/prodest/es-na-palma-da-mao-mobile-vnext/commit/521b204))
+* **app:** check undefined on get active nav ([e30d964](https://github.com/prodest/es-na-palma-da-mao-mobile-vnext/commit/e30d964))
+* **app:** redirect only if necessary to avoid losing state ([e2e754a](https://github.com/prodest/es-na-palma-da-mao-mobile-vnext/commit/e2e754a))
+* **app:** resume application with clip item edocs ([39f5133](https://github.com/prodest/es-na-palma-da-mao-mobile-vnext/commit/39f5133))
+* **component:** Mudar o do nome do Close para Fechar no Modal ([84ae287](https://github.com/prodest/es-na-palma-da-mao-mobile-vnext/commit/84ae287))
+* **documents-to-send:** capture document upload ([6923c85](https://github.com/prodest/es-na-palma-da-mao-mobile-vnext/commit/6923c85))
+* **documents-to-send:** comment debug line ([63d7a5f](https://github.com/prodest/es-na-palma-da-mao-mobile-vnext/commit/63d7a5f))
+* **documents-to-send:** form wizard behavior ([9c0f194](https://github.com/prodest/es-na-palma-da-mao-mobile-vnext/commit/9c0f194))
+* **documents-to-send:** unused import ([34936fd](https://github.com/prodest/es-na-palma-da-mao-mobile-vnext/commit/34936fd))
+* **documents-to-send-basic-form:** show toggle after select role ([27ca401](https://github.com/prodest/es-na-palma-da-mao-mobile-vnext/commit/27ca401))
+* **documents-to-send-doc:** open pdf file with its default application ([bdd16c2](https://github.com/prodest/es-na-palma-da-mao-mobile-vnext/commit/bdd16c2))
+* **environment:** rm unnecessary slash ([cd2b9de](https://github.com/prodest/es-na-palma-da-mao-mobile-vnext/commit/cd2b9de))
+* Conserto do bug no formulario do component documents-to-send-doc-form ([fce4887](https://github.com/prodest/es-na-palma-da-mao-mobile-vnext/commit/fce4887))
+* remove ionic-plugin-keyboard ([d5981ff](https://github.com/prodest/es-na-palma-da-mao-mobile-vnext/commit/d5981ff))
+* **scripts:** fix intent filters script ([cb60e36](https://github.com/prodest/es-na-palma-da-mao-mobile-vnext/commit/cb60e36))
+
+
+### Features
+
+* **acesso-cidadao:** add cidadao role of acesso cidadao api ([f6fad2d](https://github.com/prodest/es-na-palma-da-mao-mobile-vnext/commit/f6fad2d))
+* **akita:** Salvamento de estado no akita do encaminhamento de documentos ([22dab50](https://github.com/prodest/es-na-palma-da-mao-mobile-vnext/commit/22dab50))
+* **app:** get intent file clipped and show edocs page ([d8737b4](https://github.com/prodest/es-na-palma-da-mao-mobile-vnext/commit/d8737b4))
+* **app:** resolve native path on get intent clip pdf ([acf48d5](https://github.com/prodest/es-na-palma-da-mao-mobile-vnext/commit/acf48d5))
+* **app:** when forward pdf add login redirect if needed ([456ad40](https://github.com/prodest/es-na-palma-da-mao-mobile-vnext/commit/456ad40))
+* **component:** Forward header and footer component ([79c12c4](https://github.com/prodest/es-na-palma-da-mao-mobile-vnext/commit/79c12c4))
+* **component:** Pagina para adicionar destinatarios do encaminhamento ([c96904a](https://github.com/prodest/es-na-palma-da-mao-mobile-vnext/commit/c96904a))
+* **components:** Add addressees pages ([ec6e1fb](https://github.com/prodest/es-na-palma-da-mao-mobile-vnext/commit/ec6e1fb))
+* **documents-to-send:** add capture document before send ([8e101ee](https://github.com/prodest/es-na-palma-da-mao-mobile-vnext/commit/8e101ee))
+* **documents-to-send-addressees-form:** add form component to addressees ([0178451](https://github.com/prodest/es-na-palma-da-mao-mobile-vnext/commit/0178451))
+* **documents-to-send-basic:** show roles and sender from acesso cidadao api ([94e6026](https://github.com/prodest/es-na-palma-da-mao-mobile-vnext/commit/94e6026))
+* **documents-to-send-doc:** view document button ([989ea92](https://github.com/prodest/es-na-palma-da-mao-mobile-vnext/commit/989ea92))
+* **documents-to-send-doc-form:** add form component to doc ([4bedcca](https://github.com/prodest/es-na-palma-da-mao-mobile-vnext/commit/4bedcca))
+* **documents-to-send-message-form:** add form component to message ([21be87d](https://github.com/prodest/es-na-palma-da-mao-mobile-vnext/commit/21be87d))
+* **edocs:** add wizard step abstract class ([2b12922](https://github.com/prodest/es-na-palma-da-mao-mobile-vnext/commit/2b12922))
+* **forward-basic:** Add forward-basic page ([66af18e](https://github.com/prodest/es-na-palma-da-mao-mobile-vnext/commit/66af18e))
+* **page:** Add New Page foward-message ([774acfd](https://github.com/prodest/es-na-palma-da-mao-mobile-vnext/commit/774acfd))
+* **page:** Create documents-to-send ([e6c07bd](https://github.com/prodest/es-na-palma-da-mao-mobile-vnext/commit/e6c07bd))
+* **service:** Serviço de encaminhamento funcionando ([ecf4148](https://github.com/prodest/es-na-palma-da-mao-mobile-vnext/commit/ecf4148))
+* Adicionada funcionalidades aos botoes de excluir e adicionar destinatarios ([a8da666](https://github.com/prodest/es-na-palma-da-mao-mobile-vnext/commit/a8da666))
+* Adicionado opçao de notificaçao por email ([4a6b2ee](https://github.com/prodest/es-na-palma-da-mao-mobile-vnext/commit/4a6b2ee))
+* Buscar orgaos e adicionar destinatario ([78349ea](https://github.com/prodest/es-na-palma-da-mao-mobile-vnext/commit/78349ea))
+
+
+### Reverts
+
+* remove intent filter from scripts ([f9b6a3d](https://github.com/prodest/es-na-palma-da-mao-mobile-vnext/commit/f9b6a3d))
+
+
+
 <a name="5.7.0"></a>
 # [5.7.0](https://github.com/prodest/es-na-palma-da-mao-mobile-vnext/compare/v5.6.5...v5.7.0) (2019-08-21)
 

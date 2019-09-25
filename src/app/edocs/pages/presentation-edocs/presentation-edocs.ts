@@ -15,6 +15,10 @@ export class PresentationEdocsPage {
       targetPage: "SepSearchPage"
     },
     {
+      buttonTitle: "Encaminhar documentos",
+      targetPage: "DocumentsToSendPage"
+    },
+    {
       buttonTitle: 'Aguardando minha assinatura',
       targetPage: 'WaitingForMySignaturePage'
     },
@@ -30,8 +34,8 @@ export class PresentationEdocsPage {
       buttonTitle: 'Captura iniciada por mim',
       targetPage: 'CapturedByMePage'
     }
-    
+
   ];
 
- 
+
 }

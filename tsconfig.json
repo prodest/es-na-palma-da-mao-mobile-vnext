@@ -1,5 +1,5 @@
 {
-  "compilerOptions": {    
+  "compilerOptions": {
     "target": "es6",
     "module": "es6",
     "allowSyntheticDefaultImports": true,
@@ -8,30 +8,18 @@
     "experimentalDecorators": true,
     "noUnusedLocals": true,
     "noUnusedParameters": false,
-    "lib": [
-      "dom",
-      "es2016"
-    ],
+    "lib": ["dom", "es2016"],
     "moduleResolution": "node",
     "sourceMap": true,
-    "typeRoots": [
-      "./node_modules/@types"
-    ],
+    "typeRoots": ["./node_modules/@types"],
+    "types": ["node", "leaflet", "leaflet.markercluster"],
     "baseUrl": ".",
     "paths": {
-      "@espm/*": [
-        "src/libs/*"
-      ]
+      "@espm/*": ["src/libs/*"]
     }
   },
-  "include": [
-    "src/**/*.ts"
-  ],
-  "exclude": [
-    "node_modules",
-    "src/**/*.spec.ts",
-    "src/**/__tests__/*.ts"
-  ],
+  "include": ["src/**/*.ts"],
+  "exclude": ["node_modules", "src/**/*.spec.ts", "src/**/__tests__/*.ts"],
   "compileOnSave": false,
   "atom": {
     "rewriteTsconfig": false

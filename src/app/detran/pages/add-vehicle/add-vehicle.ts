@@ -13,7 +13,8 @@ import { Vehicle } from './../../model';
 export class AddVehiclePage extends FormBase {
   validationMessages = {
     plate: {
-      required: 'Obrigatório'
+      required: 'Obrigatório',
+      plate: 'Placa inválida'
     },
     renavam: {
       required: 'Obrigatório',

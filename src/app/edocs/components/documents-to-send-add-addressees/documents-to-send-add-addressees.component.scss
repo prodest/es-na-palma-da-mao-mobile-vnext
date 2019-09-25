@@ -29,27 +29,9 @@ edocs-documents-to-send-add-addressees {
     padding-left: 1em;
   }
 
-  ion-list {
-    flex: 1 !important;
-    margin: 0 !important;
-    display: flex;
-    flex-direction: column;
-
-    ion-searchbar {
-      box-shadow: none !important;
-      background-color: transparent !important;
-
-      .searchbar-input {
-        box-shadow: none !important;
-      }
-    }
-
-    #lista-orgaos {
-      flex: 1;
-
-      ion-label {
-        margin-top: 0;
-      }
+  .foot-toolbar {
+    .toolbar-background {
+      background-color: white;
     }
   }
 }

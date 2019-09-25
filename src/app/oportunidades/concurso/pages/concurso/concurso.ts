@@ -63,14 +63,13 @@ export class ConcursoPage implements OnDestroy {
   }
 
   /**
+   * 
    *
-   showClassificados(concurso: Concurso) {
-     this.navCtrl.push('ClassificacaoPage', { concurso });
-    }
-*/
+   */
   showAreas(concurso: Concurso) {
     this.navCtrl.push('AreasPage', { idConcurso: concurso.id, nomeConcurso: concurso.nome, areas: concurso.areas });
   }
+
   /**
    *
    *
@@ -82,7 +81,4 @@ export class ConcursoPage implements OnDestroy {
       this.selecaoService.toggleFavorite(concurso);
     }
   }
-  /**
-   *
-   */
 }

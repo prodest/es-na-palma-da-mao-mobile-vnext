@@ -4,10 +4,15 @@ import { IonicPageModule } from 'ionic-angular';
 
 import { ConcursoPage } from './concurso';
 
-import { ModulePageComponentModule } from '@espm/shared/components';
+import { ModulePageComponentModule, LargeButtonComponentModule } from '@espm/shared/components';
 
 @NgModule({
   declarations: [ConcursoPage],
-  imports: [ModulePageComponentModule, DateFormatPipeModule, IonicPageModule.forChild(ConcursoPage)]
+  imports: [
+    ModulePageComponentModule,
+    LargeButtonComponentModule,
+    DateFormatPipeModule,
+    IonicPageModule.forChild(ConcursoPage)
+  ]
 })
 export class ConcursosPageModule { }

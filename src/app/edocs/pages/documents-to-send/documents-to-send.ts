@@ -1,8 +1,8 @@
 import { Component, ChangeDetectionStrategy, OnInit, ViewChild, OnDestroy } from '@angular/core';
-import { IonicPage, Slides, NavParams, Loading, AlertController, NavController } from 'ionic-angular';
+import { IonicPage, Slides, NavParams, Loading, AlertController, NavController, App, MenuController } from 'ionic-angular';
 import { Subscription } from 'rxjs/Subscription';
 import { mergeMap } from 'rxjs/operators';
-import { LoadingService } from '@espm/core';
+import { LoadingService, AuthQuery } from '@espm/core';
 import {
   IBaseStepOutput,
   IAddresseesStepOutput,
@@ -17,7 +17,7 @@ import {
   DocumentsToSendDocComponent,
   DocumentsToSendMessageComponent
 } from '../../components';
-import { DestinationReceive, DocumentsToSendService, WizardSteps } from '../../state';
+import { DestinationReceive, DocumentsToSendService, WizardSteps, DocumentFile, ConvertToPdfPostBody, HorizontalAlign, VerticalAlign } from '../../state';
 
 @IonicPage({
   segment: 'documentos-para-enviar'
@@ -29,12 +29,14 @@ import { DestinationReceive, DocumentsToSendService, WizardSteps } from '../../s
 })
 export class DocumentsToSendPage implements OnInit, OnDestroy {
   @ViewChild(Slides) slides: Slides;
-  // file path
-  file: string;
+  // file object
+  file: DocumentFile
   // active step
   activeStep: WizardStep<any>;
   // if sending/forwarding document
   isSending: boolean = false
+  // if current user is agente publico
+  agentePublico: boolean;
 
   // private atributes
   // all wizard steps
@@ -53,7 +55,55 @@ export class DocumentsToSendPage implements OnInit, OnDestroy {
     private service: DocumentsToSendService,
     private loadingService: LoadingService,
     private alertCtrl: AlertController,
-    private navCtrl: NavController) { }
+    private navCtrl: NavController,
+    private authQuery: AuthQuery,
+    private menuCtrl: MenuController,
+    protected appCtrl: App) { }
+
+  ionViewCanEnter(): boolean | Promise<any> {
+    // permite acesso à tela se autenticados
+    const isAllowed = this.authQuery.isLoggedIn;
+    if (!isAllowed) {
+      this.showAuthNeededModal();
+    }
+    return isAllowed;
+  }
+
+  showAuthNeededModal = () => {
+    let alert = this.alertCtrl.create({
+      title: 'Login necessário',
+      message: 'Você deve estar autenticado no <strong>ES na palma da mão</strong> para acessar essa funcionalidade.',
+      buttons: [
+        {
+          text: 'Entendi',
+          handler: () => {
+            this.appCtrl
+              .getRootNav()
+              .setRoot('PresentationEdocsPage')
+              .then(() => {
+                alert.dismiss();
+                this.menuCtrl.close();
+              });
+            return false;
+          },
+          role: 'cancel'
+        },
+        {
+          text: 'Autenticar',
+          handler: () => {
+            this.appCtrl
+              .getRootNav().push('LoginPage', { redirectTo: 'DocumentsToSendPage' })
+              .then(() => {
+                alert.dismiss();
+                this.menuCtrl.close();
+              });
+            return false;
+          }
+        }
+      ]
+    });
+    return alert.present();
+  };
 
   nextSlide() {
     this.activeStep.submit();
@@ -89,6 +139,7 @@ export class DocumentsToSendPage implements OnInit, OnDestroy {
 
     this.subscriptions = [
       this.basicStep.onComplete.subscribe((value: IBaseStepOutput) => {
+        this.agentePublico = !!value.role;
         this.stepsValue.basicStep = value;
         this.service.storeUpdate(this.stepsValue.basicStep, WizardSteps.BASIC);
       }),
@@ -107,8 +158,8 @@ export class DocumentsToSendPage implements OnInit, OnDestroy {
       })
     ];
     this.activeStep = this.basicStep;
-    this.file = this.navParams.get('filePath');
-    // this.file = 'file.pdf'; // UNCOMENT TO TEST AND DEBUG WITH IONIC SERVE (BROWSER PLATFORM)
+    this.file = this.navParams.get('docFile');
+    // this.file = {url: 'file.pdf', name: 'file.pdf', type: 'application/pdf'} // UNCOMENT TO TEST AND DEBUG WITH IONIC SERVE (BROWSER PLATFORM)
     this.slides.lockSwipes(true);
   }
 
@@ -116,13 +167,36 @@ export class DocumentsToSendPage implements OnInit, OnDestroy {
     this.subscriptions.forEach(sub => (sub ? sub.unsubscribe() : void 0));
   }
 
-  private send(): void {
+  private async send(): Promise<void> {
     if (this.isSending) {
       return;
     }
     const loading = this.loadingService.show('Encaminhando documento');
+
+    if (this.stepsValue.docStep.file.type !== 'application/pdf') {
+      const body: ConvertToPdfPostBody = {
+        size: 'A4',
+        landscape: false,
+        horizontalAlign: HorizontalAlign.CENTER,
+        verticalAlign: VerticalAlign.MIDDLE,
+        image: this.stepsValue.docStep.file
+      }
+
+      const value: IDocStepOutput = {
+        name: this.stepsValue.docStep.name,
+        documentType: this.stepsValue.docStep.documentType,
+        documentPaperType: this.stepsValue.docStep.documentPaperType,
+        documentAssignType: this.stepsValue.docStep.documentAssignType,
+        file: { ...this.stepsValue.docStep.file }
+      };
+
+      value.file.buffer = await this.service.convertTopdf(body).toPromise();
+
+      this.stepsValue.docStep = value;
+      this.service.storeUpdate(this.stepsValue.docStep, WizardSteps.DOC);
+    }
     this.service.captureDocuments(this.stepsValue.docStep.name, {
-      File: this.file,
+      File: this.stepsValue.docStep.file,
       Assinar: false,
       // ClasseId: null, // deixar null pra cidadão
       Natureza: this.stepsValue.docStep.documentType,
@@ -158,7 +232,7 @@ export class DocumentsToSendPage implements OnInit, OnDestroy {
         {
           text: 'OK',
           handler: () => {
-            this.navCtrl.setRoot('DashboardPage')
+            this.navCtrl.setRoot('MyServicesPage');
             return true;
           }
         }
