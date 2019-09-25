@@ -85,14 +85,6 @@ export interface DocumentFile {
   type: string;
 }
 
-export interface ConvertToPdfPostBody {
-  size: string; 
-  landscape: boolean;
-  horizontalAlign: HorizontalAlign;
-  verticalAlign: VerticalAlign;
-  image: DocumentFile;
-}
-
 // ENUMS
 export enum TipoDestino {
   Orgao = 0,
@@ -122,16 +114,4 @@ export enum WizardSteps {
   ADDRESSEES = 'addresseesStep',
   DOC = 'docStep',
   MESSAGE = 'messageStep',
-}
-
-export enum HorizontalAlign {
-  LEFT='left',
-  CENTER='center',
-  RIGHT='right'
-}
-
-export enum VerticalAlign {
-  TOP='top',
-  MIDDLE='middle',
-  BOTTOM='bottom'
 }

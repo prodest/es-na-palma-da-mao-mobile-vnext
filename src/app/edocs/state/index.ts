@@ -8,6 +8,7 @@ import { DocumentsToSendStore } from './documents-to-send.store';
 
 export * from './documents.model';
 export * from './documents-to-send.model';
+export * from './documents-to-convert.model';
 
 export { DocumentsService, DocumentsApiService, DocumentsStore, DocumentsQuery, DocumentsToSendApiService, DocumentsToSendService, DocumentsToSendQuery, DocumentsToSendStore, DocumentsToConvertApiService, DocumentsToConvertService };
 
