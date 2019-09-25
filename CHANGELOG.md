@@ -2,6 +2,55 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+<a name="6.1.0"></a>
+# [6.1.0](https://github.com/prodest/es-na-palma-da-mao-mobile-vnext/compare/v6.0.0...v6.1.0) (2019-09-25)
+
+
+### Bug Fixes
+
+* **app:** redirect params when is not logged in ([9d55523](https://github.com/prodest/es-na-palma-da-mao-mobile-vnext/commit/9d55523))
+* **app:** shared file error ([827134d](https://github.com/prodest/es-na-palma-da-mao-mobile-vnext/commit/827134d))
+* **app:** window type with intent ([d2268fc](https://github.com/prodest/es-na-palma-da-mao-mobile-vnext/commit/d2268fc))
+* **app-icon:** Fixing android app icon source ([d727dcc](https://github.com/prodest/es-na-palma-da-mao-mobile-vnext/commit/d727dcc))
+* **app-icon:** Fixing android app icon source ([1ad9a25](https://github.com/prodest/es-na-palma-da-mao-mobile-vnext/commit/1ad9a25))
+* **classificacao:** rm scss style causing bug in edocs search bar ([384f9b8](https://github.com/prodest/es-na-palma-da-mao-mobile-vnext/commit/384f9b8))
+* **detalhe-curso:** Adiciona ion-spinner enquanto o conteúdo carrega ([fb58931](https://github.com/prodest/es-na-palma-da-mao-mobile-vnext/commit/fb58931))
+* **detalhe-dt:** Adiciona ion-spinner enquanto o conteúdo carrega ([ca0dab0](https://github.com/prodest/es-na-palma-da-mao-mobile-vnext/commit/ca0dab0))
+* **documents-to-send:** back button not working ([4b29728](https://github.com/prodest/es-na-palma-da-mao-mobile-vnext/commit/4b29728))
+* **documents-to-send:** redirect when forward completed ([685ad53](https://github.com/prodest/es-na-palma-da-mao-mobile-vnext/commit/685ad53))
+* **documents-to-send:** rename title too big ([a7969f1](https://github.com/prodest/es-na-palma-da-mao-mobile-vnext/commit/a7969f1))
+* **documents-to-send:** user can't enter page without being logged in ([0eee12d](https://github.com/prodest/es-na-palma-da-mao-mobile-vnext/commit/0eee12d))
+* **documents-to-send-doc-form:** dismiss loading if not file selected ([ea8fcc2](https://github.com/prodest/es-na-palma-da-mao-mobile-vnext/commit/ea8fcc2))
+* **documents-to-send-doc-form:** rm "documento original" option ([f07a1dc](https://github.com/prodest/es-na-palma-da-mao-mobile-vnext/commit/f07a1dc))
+* **oportunidades_dt:** Corrige ordenação dos concursos, favoritos antes ([9000567](https://github.com/prodest/es-na-palma-da-mao-mobile-vnext/commit/9000567))
+* **oportunidades-cursos:** Arredonda as bordas do searchbar ([80f68c8](https://github.com/prodest/es-na-palma-da-mao-mobile-vnext/commit/80f68c8))
+* **oportunidades-dt:** Adiciona borda entre a lista e o botão ([5c4a172](https://github.com/prodest/es-na-palma-da-mao-mobile-vnext/commit/5c4a172))
+* **oportunidades-dt:** Arredonda as bordas do searchbar ([c636c77](https://github.com/prodest/es-na-palma-da-mao-mobile-vnext/commit/c636c77))
+* **oportunidades-dt:** Corrige a exibição do botão "Classificados" ([c29c23c](https://github.com/prodest/es-na-palma-da-mao-mobile-vnext/commit/c29c23c))
+* **select-favorite:** Corrige marcação de favoritos na versão web ([25a4efc](https://github.com/prodest/es-na-palma-da-mao-mobile-vnext/commit/25a4efc))
+* **select-favorite:** Corrige o bug na tela de seleção de favoritos ([9c50cfe](https://github.com/prodest/es-na-palma-da-mao-mobile-vnext/commit/9c50cfe))
+* **select-favorite:** Corrige o bug na tela de seleção de favoritos ([69a5918](https://github.com/prodest/es-na-palma-da-mao-mobile-vnext/commit/69a5918))
+
+
+### Features
+
+* **documents-to-send:** add chooser button ([7f536d5](https://github.com/prodest/es-na-palma-da-mao-mobile-vnext/commit/7f536d5))
+* **documents-to-send:** add file picker suport ios ([1b6ca23](https://github.com/prodest/es-na-palma-da-mao-mobile-vnext/commit/1b6ca23))
+* **documents-to-send:** Convert images to pdf ([dbe3ecd](https://github.com/prodest/es-na-palma-da-mao-mobile-vnext/commit/dbe3ecd))
+* **documents-to-send:** show only "Órgão" for "Cidadão" role ([53bebe4](https://github.com/prodest/es-na-palma-da-mao-mobile-vnext/commit/53bebe4))
+* **documents-to-send-addressees-search:** apply layout style in this component ([88cb011](https://github.com/prodest/es-na-palma-da-mao-mobile-vnext/commit/88cb011))
+* **menu:** add documents to send page in menu ([8a1e43f](https://github.com/prodest/es-na-palma-da-mao-mobile-vnext/commit/8a1e43f))
+* **mobile:** atualizando branch ([be313f9](https://github.com/prodest/es-na-palma-da-mao-mobile-vnext/commit/be313f9))
+* **mobile:** boas praticas identação ([d5517b8](https://github.com/prodest/es-na-palma-da-mao-mobile-vnext/commit/d5517b8))
+* **mobile:** melhorando responsividade css ([b75e4af](https://github.com/prodest/es-na-palma-da-mao-mobile-vnext/commit/b75e4af))
+* **mobile:** melhorias app ([44c13b8](https://github.com/prodest/es-na-palma-da-mao-mobile-vnext/commit/44c13b8))
+* **mobile:** responsividade  titles transparencia ([8797864](https://github.com/prodest/es-na-palma-da-mao-mobile-vnext/commit/8797864))
+* **mobile:** responsividade no css ([06358cb](https://github.com/prodest/es-na-palma-da-mao-mobile-vnext/commit/06358cb))
+* **mobile:** ultima atualização do repositorio ([b532aa5](https://github.com/prodest/es-na-palma-da-mao-mobile-vnext/commit/b532aa5))
+* **presentation-edocs:** add documents to send menu ([fd8ff5c](https://github.com/prodest/es-na-palma-da-mao-mobile-vnext/commit/fd8ff5c))
+
+
+
 <a name="6.0.0"></a>
 # [6.0.0](https://github.com/prodest/es-na-palma-da-mao-mobile-vnext/compare/v5.8.3...v6.0.0) (2019-09-12)
 
