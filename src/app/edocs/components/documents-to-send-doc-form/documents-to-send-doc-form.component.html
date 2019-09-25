@@ -72,8 +72,13 @@
   <ng-template #notHasFile>
     <ion-item>
       <ion-buttons end>
-        <button ion-button (click)="chooser()" full>
+        <button ion-button (click)="chooser()" full round>
           Selecionar arquivo
+        </button>
+      </ion-buttons>
+      <ion-buttons end>
+        <button ion-button (click)="takePhoto()" full round>
+          Tirar foto
         </button>
       </ion-buttons>
       <espm-validation-message [errors]="validationErrors['file']"></espm-validation-message>

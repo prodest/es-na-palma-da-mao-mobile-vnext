@@ -153,5 +153,8 @@
     <plugin name="com-darryncampbell-cordova-plugin-intent" spec="git+https://github.com/darryncampbell/darryncampbell-cordova-plugin-intent.git" />
     <plugin name="cordova-plugin-filechooser" spec="^1.2.0" />
     <plugin name="cordova-plugin-filepicker" spec="^1.1.6" />
+    <plugin name="cordova-plugin-camera" spec="4.1.0">
+        <variable name="ANDROID_SUPPORT_V4_VERSION" value="27.+" />
+    </plugin>
     <engine name="android" spec="7.1.4" />
 </widget>
