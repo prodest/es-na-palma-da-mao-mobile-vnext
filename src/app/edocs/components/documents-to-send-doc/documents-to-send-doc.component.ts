@@ -4,6 +4,7 @@ import { AlertController } from 'ionic-angular';
 import { FileOpener } from '@ionic-native/file-opener';
 import { WizardStep } from '../../providers';
 import { IDocStepOutput } from '../../interfaces';
+import { DocumentFile } from '../../state';
 
 @Component({
   selector: 'edocs-documents-to-send-doc',
@@ -12,8 +13,7 @@ import { IDocStepOutput } from '../../interfaces';
 })
 export class DocumentsToSendDocComponent extends WizardStep<IDocStepOutput> implements OnInit {
 
-  @Input() file: string;
-  documents = [];
+  @Input() file: DocumentFile;
   @ViewChild('docForm') protected form: FormBase;
 
   constructor(private fileOpener: FileOpener, private alertCtrl: AlertController) {
@@ -24,9 +24,17 @@ export class DocumentsToSendDocComponent extends WizardStep<IDocStepOutput> impl
 
   refresh(): void { }
 
+  fileSelect(file: DocumentFile): void {
+    this.file = file;
+  }
+
+  dismissFile(): void {
+    this.file = undefined;
+  }
+
   async viewFile() {
     try {
-      await this.fileOpener.open(this.file, 'application/pdf');
+      await this.fileOpener.open(this.file.url, this.file.type);
     } catch (e) {
       const alert = this.alertCtrl.create({
         title: 'Falha ao abrir arquivo',

@@ -1,4 +1,4 @@
-import { Component, ChangeDetectionStrategy, OnInit, ViewChild, ChangeDetectorRef } from '@angular/core';
+import { Component, ChangeDetectionStrategy, ViewChild, ChangeDetectorRef, Input } from '@angular/core';
 import { ModalController, Modal } from 'ionic-angular';
 import { FormBase } from '@espm/core';
 import { Destination } from '../../state';
@@ -10,18 +10,18 @@ import { IAddresseesStepOutput } from '../../interfaces';
   templateUrl: './documents-to-send-addressees.component.html',
   changeDetection: ChangeDetectionStrategy.Default
 })
-export class DocumentsToSendAddresseesComponent extends WizardStep<{ addressees: IAddresseesStepOutput }> implements OnInit {
+export class DocumentsToSendAddresseesComponent extends WizardStep<{ addressees: IAddresseesStepOutput }> {
   addIcon: string = 'md-add-circle';
   colorAddIcon: string = 'dark';
   addressees: Destination[] = [];
 
   @ViewChild('addresseesForm') protected form: FormBase;
 
-  constructor( private cdr: ChangeDetectorRef, private modal: ModalController) {
+  @Input() private agentePublico: boolean;
+
+  constructor(private cdr: ChangeDetectorRef, private modal: ModalController) {
     super();
   }
-
-  ngOnInit(): void { }
 
   removeAddressee(index: number): void {
     this.addressees = [
@@ -32,16 +32,16 @@ export class DocumentsToSendAddresseesComponent extends WizardStep<{ addressees:
   }
 
   async addAddresses() {
-    const addAddresseesModal: Modal = this.modal.create('DocumentsToSendAddAddresseesComponent', this.addAddresses);
+    const addAddresseesModal: Modal = this.modal.create('DocumentsToSendAddAddresseesComponent', { agentePublico: this.agentePublico });
 
     addAddresseesModal.present();
 
-    addAddresseesModal.onDidDismiss( addressees => {
+    addAddresseesModal.onDidDismiss(addressees => {
       if (addressees && this.addressees.findIndex(ad => ad.id === addressees.id) === -1) {
         this.addressees = [...this.addressees, addressees];
       }
       this.cdr.detectChanges();
     })
-    
+
   }
 }

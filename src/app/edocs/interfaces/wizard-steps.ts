@@ -1,4 +1,4 @@
-import { DestinationReceive } from "../state";
+import { DestinationReceive, DocumentFile } from "../state";
 
 /**
  * @description wizard step output interface
@@ -36,7 +36,7 @@ export interface IDocStepOutput {
   documentType: number;
   documentPaperType: number;
   documentAssignType: number;
-  file: string;
+  file: DocumentFile;
 }
 
 /**

@@ -1,7 +1,9 @@
 <ion-item>
-  <ion-item class="text-center">
+  <ion-item *ngIf="file" class="text-center">
     <button (click)="viewFile()" ion-button outline>Visualizar</button>
+    <button color="danger" (click)="dismissFile()" ion-button outline>Remover</button>
   </ion-item>
-  <edocs-documents-to-send-doc-form [file]="file" (onSubmit)="completeStep($event)" #docForm>
+  <edocs-documents-to-send-doc-form [file]="file" (onFileSelect)="fileSelect($event)" (onSubmit)="completeStep($event)"
+    #docForm>
   </edocs-documents-to-send-doc-form>
 </ion-item>

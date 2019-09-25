@@ -209,7 +209,7 @@ export class MenuComponent implements OnInit, OnDestroy {
     private appCtrl: App,
     private cd: ChangeDetectorRef,
     private platform: Platform
-  ) {}
+  ) { }
 
   /**
    *

@@ -1,8 +1,6 @@
-import { Component, ChangeDetectionStrategy, OnInit } from '@angular/core';
-import { NavController, NavParams, IonicPage, ViewController } from 'ionic-angular';
-import { DocumentsToSendService, Destination } from '../../state';
-import deburr from 'lodash-es/deburr';
-import { map } from 'rxjs/operators';
+import { Component, ChangeDetectionStrategy, ChangeDetectorRef, OnInit } from '@angular/core';
+import { NavController, NavParams, IonicPage, ModalController, Modal, ViewController } from 'ionic-angular';
+import { Destination, TipoDestino } from '../../state';
 
 @IonicPage({
   segment: 'documentos-para-enviar-adicionar-destinatario'
@@ -16,85 +14,92 @@ export class DocumentsToSendAddAddresseesComponent implements OnInit {
 
   addresseesTypeFilter = [
     {
-      id: 0,
-      type: 'Somente órgão',
+      id: TipoDestino.Orgao,
+      type: 'Órgão',
       notice:
-        'Ao enviar para uma organização, apenas o responsável pela organização (e pessoas explicitamente autorizadas por ele no Acesso Cidadão) terão acesso ao trâmite.'
+        'Ao enviar para uma organização, apenas o responsável pela organização (e pessoas explicitamente autorizadas por ele no Acesso Cidadão) terão acesso ao trâmite.',
+      restrict: false
     },
     {
-      id: 1,
+      id: TipoDestino.Setor,
       type: 'Setor',
       notice:
-        'Ao enviar para um setor, apenas o responsável pelo setor (e pessoas explicitamente autorizadas por ele no Acesso Cidadão) terão acesso ao trâmite.'
+        'Ao enviar para um setor, apenas o responsável pelo setor (e pessoas explicitamente autorizadas por ele no Acesso Cidadão) terão acesso ao trâmite.',
+      restrict: true
     },
     {
-      id: 2,
-      type: 'Grupos de Trabalho',
-      notice: 'Ao enviar para um grupo, TODOS os membros do grupo terão acesso ao trâmite.'
+      id: TipoDestino.GrupoDeTrabalho,
+      type: 'Grupo de Trabalho',
+      notice: 'Ao enviar para um grupo, TODOS os membros do grupo terão acesso ao trâmite.',
+      restrict: true
     }
   ];
+  noticeAgency: string = "Primeiro escolha um Órgão."
   selAddresseesTypeFilter: { id: number; type: string; notice: string } = this.addresseesTypeFilter[0];
 
-  addressees: Destination[] = [];
-  govAgencies: Destination[] = [];
-  filteredGovAgencies: Destination[];
+  govAgency: Destination;
+  govDestination: Destination;
+  tipoPesquisa: string = this.selAddresseesTypeFilter.type;
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, private service: DocumentsToSendService, private view: ViewController) {
-    this.service.getDestinations()
-    .pipe(
-      map(destinations => destinations.map(dest => {
-        const descriptionSplited = dest.descricao.split('-');
-        const destination: Destination = {
-          ...dest,
-          nome: descriptionSplited[0].trim(),
-          descricao: descriptionSplited[1].trim()
-        };
-        return destination
-      }))
-    )
-    .subscribe(destination => {
-      this.govAgencies = this.filteredGovAgencies = destination;
-    });
-    this.addressees = this.navParams.data;
+  agentePublico: boolean;
+
+
+  constructor(
+    public navCtrl: NavController,
+    public navParams: NavParams,
+    private modal: ModalController,
+    private cdr: ChangeDetectorRef,
+    private view: ViewController
+  ) { }
+
+  ngOnInit(): void {
+    this.agentePublico = this.navParams.data.agentePublico;
   }
 
-  /**
-   *
-   */
-  search(e) {
-    const search = this.normalize(e.target.value);
-    this.filteredGovAgencies = this.govAgencies.filter(agency => {
-      return this.normalize(agency.descricao).includes(search) || this.normalize(agency.nome).includes(search);;
-    });
-  }
+  closeModal() {
+    let destination: Destination;
 
-  /**
-   *
-   */
-  clear() {
-    this.filteredGovAgencies = [...this.govAgencies];
-  }
-
-  /**
-   *
-   */
-  closeModal(agency?: Destination) {
-    this.view.dismiss(agency);
-  }
-
-  limite(valor: string) {
-    if (valor.length > 35) {
-      return valor.substring(0, 35) + '…';
+    if (this.selAddresseesTypeFilter.id === 0) {
+      destination = this.govAgency;
     } else {
-      return valor;
+      destination = this.govDestination;
+      destination.orgaoNome = this.govAgency.nome;
     }
+    this.view.dismiss(destination);
   }
-
-  ngOnInit(): void { }
 
   isValidNumber(value: any) {
     return typeof value === 'number' && !isNaN(value);
   }
 
-  private normalize = (term: string) => (term ? deburr(term.toLowerCase()) : '');
+  changes() {
+    this.tipoPesquisa = this.selAddresseesTypeFilter.type;
+    this.cdr.detectChanges();
+  }
+
+  openSearch(tipo: number) {
+
+    const data = {
+      tipo: tipo,
+      nomeTipo: this.addresseesTypeFilter[tipo].type,
+      agency: null,
+      agentePublico: this.agentePublico
+    }
+
+    if (tipo !== TipoDestino.Orgao) {
+      data.agency = this.govAgency.id;
+    }
+
+    const searchModal: Modal = this.modal.create('DocumentsToSendAddresseesSearchComponent', data);
+
+    searchModal.present();
+
+    searchModal.onDidDismiss(data => {
+      if (tipo === TipoDestino.Orgao) {
+        this.govAgency = data;
+      } else {
+        this.govDestination = data;
+      }
+    })
+  }
 }

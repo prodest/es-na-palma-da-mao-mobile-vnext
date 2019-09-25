@@ -1,4 +1,4 @@
-<module-page title="Buscar Destinatário" no-padding no-footer>
+<module-page title="E-DOCS" no-padding no-footer>
   <ion-list no-lines>
     <ion-list-header>
       Encaminhar Documentos
@@ -7,10 +7,11 @@
       <ion-item>
         <div class="pageTitle">Adicionar Destinatário</div>
       </ion-item>
-      <ion-item>
-        <ion-label>Filtrar por:</ion-label>
-        <ion-select cancelText="Cancelar" [(ngModel)]="selAddresseesTypeFilter" disabled required>
-          <ion-option *ngFor="let addTypeFilter of addresseesTypeFilter" [value]="addTypeFilter">
+      <ion-item *ngIf="(addresseesTypeFilter | restrict : agentePublico).length > 1">
+        <ion-label>Enviar para:</ion-label>
+        <ion-select cancelText="Cancelar" [(ngModel)]="selAddresseesTypeFilter" (ionChange)="changes()" required>
+          <ion-option *ngFor="let addTypeFilter of addresseesTypeFilter | restrict : agentePublico"
+            [value]="addTypeFilter">
             {{ addTypeFilter.type }}
           </ion-option>
         </ion-select>
@@ -20,32 +21,31 @@
           <p>{{ selAddresseesTypeFilter.notice }}</p>
         </ion-card-content>
       </ion-card>
-      <ion-item>
-        <p class="title-search">Filtrar Órgão</p>
-        <ion-searchbar
-          placeholder="Digite para filtrar pelo Órgão"
-          [showCancelButton]="true"
-          cancelButtonText="Cancelar"
-          [animated]="false"
-          (ionInput)="search($event)"
-          (ionClear)="clear($event)"
-          (ionCancel)="clear($event)">
-        </ion-searchbar>
-      </ion-item>
-      <ion-item id="lista-orgaos">
-        <ion-scroll class="scrollable" scrollY="true" detail-none>
-          <ion-list>
-            <button ion-item *ngFor="let agency of filteredGovAgencies" (click)="closeModal(agency)">
-              {{ limite(agency.nome) }}
-            </button>
-          </ion-list>
-          <ion-item *ngIf="filteredGovAgencies && !filteredGovAgencies.length" text-center no-lines>
-            <h2>Nenhum Órgão encontrado</h2>
-            <p>Tente mudar o filtro da consulta</p>
-          </ion-item>
-          <ion-spinner *ngIf="!filteredGovAgencies" page-loading></ion-spinner>
-        </ion-scroll>
-      </ion-item>
+      <ion-list>
+        <ion-item>
+          <p>Órgão</p>
+          <ion-buttons end>
+            <button ion-button (click)="openSearch(0)" full>{{ govAgency? govAgency.nome : "Buscar Órgão" }}</button>
+          </ion-buttons>
+        </ion-item>
+        <ion-item *ngIf="selAddresseesTypeFilter.id !== 0 && govAgency">
+          <p>{{ tipoPesquisa }}</p>
+          <ion-buttons end>
+            <button ion-button (click)="openSearch(selAddresseesTypeFilter.id)"
+              full>{{ govDestination? govDestination.nome : "Buscar "+tipoPesquisa }}</button>
+          </ion-buttons>
+        </ion-item>
+        <ion-card class="alert-card" *ngIf="selAddresseesTypeFilter.id !== 0 && !govAgency">
+          <ion-card-content>
+            <p>{{ noticeAgency }}</p>
+          </ion-card-content>
+        </ion-card>
+      </ion-list>
+      <ion-footer>
+        <ion-toolbar text-center="" class="foot-toolbar">
+          <button ion-button (click)="closeModal()" full>Ok</button>
+        </ion-toolbar>
+      </ion-footer>
     </ng-container>
   </ion-list>
 </module-page>

@@ -1,4 +1,4 @@
-import { Component, OnInit, OnChanges, SimpleChanges, Input, ChangeDetectionStrategy, ChangeDetectorRef, Output, EventEmitter } from '@angular/core';
+import { Component, OnChanges, SimpleChanges, Input, ChangeDetectionStrategy, ChangeDetectorRef, Output, EventEmitter } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { FormBase } from '@espm/core';
 import { Destination } from '../../state';
@@ -9,7 +9,7 @@ import { AlertController } from 'ionic-angular';
   templateUrl: './documents-to-send-addressees-form.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class DocumentsToSendAddresseesFormComponent extends FormBase implements OnInit, OnChanges {
+export class DocumentsToSendAddresseesFormComponent extends FormBase implements OnChanges {
   validationMessages = {};
 
   @Input() addressees: Destination[] = [];
@@ -18,8 +18,6 @@ export class DocumentsToSendAddresseesFormComponent extends FormBase implements 
   constructor(formBuilder: FormBuilder, private cdr: ChangeDetectorRef, private alert:AlertController) {
     super(formBuilder);
   }
-
-  ngOnInit(): void { }
 
   ngOnChanges(changes: SimpleChanges): void {
     if ('addressees' in changes) {
@@ -35,6 +33,7 @@ export class DocumentsToSendAddresseesFormComponent extends FormBase implements 
   showName(addresee: Destination): void {
     const alert = this.alert.create({
       title: addresee.nome,
+      subTitle: addresee.orgaoNome,
       message: addresee.descricao,
       buttons: ['OK'],
     });
