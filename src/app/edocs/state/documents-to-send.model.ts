@@ -54,7 +54,7 @@ export interface ForwardPostBody {
   responsavelId?: string;
 }
 
-export interface ForwardsRecieve {
+export interface ForwardsReceive {
   urlHistorico: string;
   identificadorExterno: string;
   assunto: string;
