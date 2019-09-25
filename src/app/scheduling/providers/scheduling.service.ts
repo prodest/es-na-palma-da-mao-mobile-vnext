@@ -10,6 +10,10 @@ export class SchedulingService {
   constructor(public http: HttpClient, @Inject(EnvVariables) private env: Environment) {}
 
   getCategories(): Observable<ListItem[]> {
+    // const headers = new HttpHeaders({
+    //   // 'Content-Type': 'application/x-www-form-urlencoded',
+    //   'anonymous': 'true'
+    // });
     return this.http.get<ListItem[]>(`${this.env.api.scheduling}/categorias`);
   }
 

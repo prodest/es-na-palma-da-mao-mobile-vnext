@@ -24,19 +24,12 @@ export class ConcursosPage {
   trackById = trackById;
   
   /**
-<<<<<<< HEAD
-   *
-   */
-  constructor(private navCtrl: NavController, private service: SelecaoService, private query: SelecaoQuery) { }
-
-=======
   *
   */
   constructor(private navCtrl: NavController, private service: SelecaoService, private query: SelecaoQuery) {
     this.concursos$ = new Subject();
   }
   
->>>>>>> 757056b03b08421f08618410abd991ad6683acff
   /**
   *
   */
@@ -85,13 +78,8 @@ export class ConcursosPage {
     );
   };
   /**
-<<<<<<< HEAD
-   *  volta para pagina de apresentação
-   */
-=======
   *  volta para pagina de apresentação
   */
->>>>>>> 757056b03b08421f08618410abd991ad6683acff
   backPageOne() {
     this.navCtrl.push('Apresentacao')
   }
@@ -108,19 +96,11 @@ export class ConcursosPage {
   showDetails(id) {
     this.navCtrl.push('ConcursoPage', { id });
   }
-<<<<<<< HEAD
-
-  // tamanho do nome "orgão" limitado 
-  limite = (valor) => {
-    if (valor.length > 12) {
-      return valor.substring(0, 12) + "…";
-=======
   
   // tamanho do nome "orgão" limitado 
   limite = (valor) => {
     if (valor.length > 12) {
       return valor.substring(0, 12)+"…";
->>>>>>> 757056b03b08421f08618410abd991ad6683acff
     } else {
       return valor;
     }
