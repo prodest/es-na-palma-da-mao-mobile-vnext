@@ -1,4 +1,9 @@
 page-transparency-dashboard {
+  @media screen and (max-width: 350px) {
+    module-index ion-list [ion-button] .button-inner {
+      font-size: 16px;
+    }
+  }
   
   .pages {
     display: flex;

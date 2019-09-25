@@ -21,7 +21,7 @@ export class ExpenseDetailsPage extends MoneyFlowPage<DateRangeFilter> implement
     super(loadingCtrl);
     this.title = this.params.get('title');
   }
-
+  
   /**
    *
    */

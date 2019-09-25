@@ -15,4 +15,4 @@ import { ModulePageComponentModule, LargeButtonComponentModule } from '@espm/sha
     IonicPageModule.forChild(ConcursoPage)
   ]
 })
-export class ConcursosPageModule {}
+export class ConcursosPageModule { }

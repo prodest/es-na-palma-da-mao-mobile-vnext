@@ -15,4 +15,4 @@ import { ConcursosPage } from './concursos';
     IonicPageModule.forChild(ConcursosPage)
   ]
 })
-export class ConcursosPageModule {}
+export class ConcursosPageModule { }

@@ -1,92 +1,68 @@
 <ion-header>
   <nav-header title="Diário ES" class="sign-primary">
     <ion-buttons topbar>
-      <button *ngIf="totalHits > 0"
-              icon-only
-              (click)="scrollToTop()">
+      <button *ngIf="totalHits > 0" icon-only (click)="scrollToTop()">
         <ion-icon name="options"></ion-icon>
       </button>
     </ion-buttons>
   </nav-header>
-  <expandable-header [scrollArea]="dioContent"
-                     maxHeight="265">
+  <expandable-header [scrollArea]="dioContent" maxHeight="265">
     <ion-item no-lines>
       <ion-label>
         <ion-icon name="search"></ion-icon>
       </ion-label>
-      <ion-input type="text"
-                 [(ngModel)]="filter.query"
-                 clearInput
-                 no-validation
-                 placeholder="Palavra-chave"></ion-input>
+      <ion-input type="text" [(ngModel)]="filter.query" clearInput no-validation placeholder="Palavra-chave">
+      </ion-input>
     </ion-item>
     <ion-item no-lines>
       <ion-label>
         <ion-icon name="md-calendar"></ion-icon>
       </ion-label>
-      <ion-datetime [(ngModel)]="filter.dateMin"
-                    placeholder="Data inicial"
-                    displayFormat="DD/MM/YYYY"
-                    pickerFormat="DD MM YYYY"
-                    cancelText="Cancelar"
-                    doneText="Selecionar">
+      <ion-datetime [(ngModel)]="filter.dateMin" placeholder="Data inicial" displayFormat="DD/MM/YYYY"
+        pickerFormat="DD MM YYYY" cancelText="Cancelar" doneText="Selecionar">
       </ion-datetime>
     </ion-item>
     <ion-item no-lines>
       <ion-label>
         <ion-icon name="md-calendar"></ion-icon>
       </ion-label>
-      <ion-datetime [(ngModel)]="filter.dateMax"
-                    placeholder="Data final"
-                    displayFormat="DD/MM/YYYY"
-                    pickerFormat="DD MM YYYY"
-                    cancelText="Cancelar"
-                    doneText="Selecionar">
+      <ion-datetime [(ngModel)]="filter.dateMax" placeholder="Data final" displayFormat="DD/MM/YYYY"
+        pickerFormat="DD MM YYYY" cancelText="Cancelar" doneText="Selecionar">
       </ion-datetime>
     </ion-item>
 
     <div class="header-buttons">
-      <button class="header-button"
-              ion-button round
-              (click)="editions()">Ver Recentes</button>
+      <button class="header-button" ion-button round (click)="editions()">Ver Recentes</button>
       <!-- <button *ngIf="filter.dateMax || filter.dateMin || filter.query"
               ion-button clear round
               (click)="clear()">Limpar</button> -->
-      <button class="header-button"
-              ion-button round
-              (click)="search({pageNumber:0})">Pesquisar</button>
+      <button class="header-button" ion-button round (click)="search({pageNumber:0})">Pesquisar</button>
     </div>
   </expandable-header>
 </ion-header>
 
-<ion-content #dioContent
-             fullscreen>
-  <ion-list *ngIf="searched && totalHits"
-            class="results">
+<ion-content #dioContent fullscreen>
+  <ion-list *ngIf="searched && totalHits" class="results">
     <ion-list-header>
       {{ totalHits }} resultados encontrados para
       <strong>"{{ lastQuery }}"</strong>
     </ion-list-header>
-    <search-hit-item [hit]="hit"
-                    *ngFor="let hit of hits">
+    <search-hit-item [hit]="hit" *ngFor="let hit of hits">
     </search-hit-item>
   </ion-list>
 
-  <ion-item *ngIf="!searched"
-            text-center>
+  <ion-item *ngIf="!searched" text-center>
     <h2>Selecione um filtro</h2>
     <p>Todos os campos são obrigatórios</p>
   </ion-item>
 
-  <ion-item *ngIf="searched && !totalHits"
-            text-center>
+  <ion-item *ngIf="searched && !totalHits" text-center>
     <h2>Nenhum resultado encontrado para</h2>
     <highlight>"{{filter.query}}"</highlight>
     <p>Tente mudar o filtro da consulta</p>
   </ion-item>
 
-  <ion-infinite-scroll *ngIf="hasMoreHits"
-                      (ionInfinite)="search({pageNumber:filter.pageNumber+1}, $event)">
+  <ion-infinite-scroll *ngIf="hasMoreHits" (ionInfinite)="search({pageNumber:filter.pageNumber+1}, $event)">
     <ion-infinite-scroll-content></ion-infinite-scroll-content>
   </ion-infinite-scroll>
 </ion-content>

@@ -11,7 +11,7 @@ import { AuthNeededService, AuthQuery } from '@espm/core';
   changeDetection: ChangeDetectionStrategy.Default
 })
 export class SignedByMePage {
-  constructor(public navCtrl: NavController, 
+  constructor(public navCtrl: NavController,
     public navParams: NavParams,
     private authQuery: AuthQuery,
     private alertCtrl: AlertController,
@@ -41,7 +41,7 @@ export class SignedByMePage {
           handler: () => {
             this.appCtrl
               .getRootNav()
-              this.navCtrl.push('PresentationEdocsPage')
+            this.navCtrl.push('PresentationEdocsPage')
               .then(() => {
                 alert.dismiss();
                 this.menuCtrl.close();
@@ -55,7 +55,7 @@ export class SignedByMePage {
           handler: () => {
             this.appCtrl
               .getRootNav()
-              this.navCtrl.push('LoginPage')
+            this.navCtrl.push('LoginPage', { redirectTo: 'PresentationEdocsPage' })
               .then(() => {
                 alert.dismiss();
                 this.menuCtrl.close();

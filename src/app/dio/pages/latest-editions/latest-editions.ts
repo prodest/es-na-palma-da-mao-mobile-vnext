@@ -21,8 +21,8 @@ export class LatestEditionsPage {
    *
    */
   constructor(
-              private dio: DioApiService,
-              public navCtrl: NavController) {}
+    private dio: DioApiService,
+    public navCtrl: NavController) { }
 
   /**
    *
@@ -42,5 +42,5 @@ export class LatestEditionsPage {
   /**
    * 
    */
-  back = () =>{this.navCtrl.pop()};
+  back = () => { this.navCtrl.pop() };
 }
