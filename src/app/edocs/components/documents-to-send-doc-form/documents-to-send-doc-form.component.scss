@@ -1,0 +1,17 @@
+edocs-documents-to-send-doc-form {
+  button {
+    width: 45%;
+    text-transform: none;
+
+    &.disabled {
+      opacity: 0.8;
+    }
+    &[clear] {
+      color: #004297 !important;
+    }
+  }
+
+  .header-button {
+    background-color: #004297;
+  }
+}
