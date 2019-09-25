@@ -17,7 +17,7 @@ import {
   DocumentsToSendDocComponent,
   DocumentsToSendMessageComponent
 } from '../../components';
-import { DestinationReceive, DocumentsToSendService, WizardSteps } from '../../state';
+import { DestinationReceive, DocumentsToSendService, WizardSteps, DocumentFile, ConvertToPdfPostBody, HorizontalAlign, VerticalAlign } from '../../state';
 
 @IonicPage({
   segment: 'documentos-para-enviar'
@@ -29,12 +29,14 @@ import { DestinationReceive, DocumentsToSendService, WizardSteps } from '../../s
 })
 export class DocumentsToSendPage implements OnInit, OnDestroy {
   @ViewChild(Slides) slides: Slides;
-  // file path
-  file: string;
+  // file object
+  file: DocumentFile
   // active step
   activeStep: WizardStep<any>;
   // if sending/forwarding document
   isSending: boolean = false
+  // if current user is agente publico
+  agentePublico: boolean;
 
   // private atributes
   // all wizard steps
@@ -90,9 +92,7 @@ export class DocumentsToSendPage implements OnInit, OnDestroy {
           text: 'Autenticar',
           handler: () => {
             this.appCtrl
-              .getRootNav()
-              .setRoot('PresentationEdocsPage')
-              .then(() => this.appCtrl.getRootNav().push('LoginPage', { redirectTo: 'DocumentsToSendPage' }))
+              .getRootNav().push('LoginPage', { redirectTo: 'DocumentsToSendPage' })
               .then(() => {
                 alert.dismiss();
                 this.menuCtrl.close();
@@ -139,6 +139,7 @@ export class DocumentsToSendPage implements OnInit, OnDestroy {
 
     this.subscriptions = [
       this.basicStep.onComplete.subscribe((value: IBaseStepOutput) => {
+        this.agentePublico = !!value.role;
         this.stepsValue.basicStep = value;
         this.service.storeUpdate(this.stepsValue.basicStep, WizardSteps.BASIC);
       }),
@@ -157,8 +158,8 @@ export class DocumentsToSendPage implements OnInit, OnDestroy {
       })
     ];
     this.activeStep = this.basicStep;
-    this.file = this.navParams.get('filePath');
-    // this.file = 'file.pdf'; // UNCOMENT TO TEST AND DEBUG WITH IONIC SERVE (BROWSER PLATFORM)
+    this.file = this.navParams.get('docFile');
+    // this.file = {url: 'file.pdf', name: 'file.pdf', type: 'application/pdf'} // UNCOMENT TO TEST AND DEBUG WITH IONIC SERVE (BROWSER PLATFORM)
     this.slides.lockSwipes(true);
   }
 
@@ -166,11 +167,34 @@ export class DocumentsToSendPage implements OnInit, OnDestroy {
     this.subscriptions.forEach(sub => (sub ? sub.unsubscribe() : void 0));
   }
 
-  private send(): void {
+  private async send(): Promise<void> {
     if (this.isSending) {
       return;
     }
     const loading = this.loadingService.show('Encaminhando documento');
+
+    if (this.stepsValue.docStep.file.type !== 'application/pdf') {
+      const body: ConvertToPdfPostBody = {
+        size: 'A4',
+        landscape: false,
+        horizontalAlign: HorizontalAlign.CENTER,
+        verticalAlign: VerticalAlign.MIDDLE,
+        image: this.stepsValue.docStep.file
+      }
+
+      const value: IDocStepOutput = {
+        name: this.stepsValue.docStep.name,
+        documentType: this.stepsValue.docStep.documentType,
+        documentPaperType: this.stepsValue.docStep.documentPaperType,
+        documentAssignType: this.stepsValue.docStep.documentAssignType,
+        file: { ...this.stepsValue.docStep.file }
+      };
+
+      value.file.buffer = await this.service.convertTopdf(body).toPromise();
+
+      this.stepsValue.docStep = value;
+      this.service.storeUpdate(this.stepsValue.docStep, WizardSteps.DOC);
+    }
     this.service.captureDocuments(this.stepsValue.docStep.name, {
       File: this.stepsValue.docStep.file,
       Assinar: false,

@@ -256,7 +256,9 @@
       "com-darryncampbell-cordova-plugin-intent": {},
       "cordova-plugin-filepath": {},
       "cordova-plugin-ionic-keyboard": {},
-      "cordova-sqlite-storage": {}
+      "cordova-sqlite-storage": {},
+      "cordova-plugin-filechooser": {},
+      "cordova-plugin-filepicker": {}
     },
     "platforms": [
       "android"

@@ -7,10 +7,11 @@
       <ion-item>
         <div class="pageTitle">Adicionar Destinatário</div>
       </ion-item>
-      <ion-item>
-        <ion-label>Filtrar por:</ion-label>
+      <ion-item *ngIf="(addresseesTypeFilter | restrict : agentePublico).length > 1">
+        <ion-label>Enviar para:</ion-label>
         <ion-select cancelText="Cancelar" [(ngModel)]="selAddresseesTypeFilter" (ionChange)="changes()" required>
-          <ion-option *ngFor="let addTypeFilter of addresseesTypeFilter" [value]="addTypeFilter">
+          <ion-option *ngFor="let addTypeFilter of addresseesTypeFilter | restrict : agentePublico"
+            [value]="addTypeFilter">
             {{ addTypeFilter.type }}
           </ion-option>
         </ion-select>
@@ -30,7 +31,8 @@
         <ion-item *ngIf="selAddresseesTypeFilter.id !== 0 && govAgency">
           <p>{{ tipoPesquisa }}</p>
           <ion-buttons end>
-            <button ion-button (click)="openSearch(selAddresseesTypeFilter.id)" full>{{ govDestination? govDestination.nome : "Buscar "+tipoPesquisa }}</button>
+            <button ion-button (click)="openSearch(selAddresseesTypeFilter.id)"
+              full>{{ govDestination? govDestination.nome : "Buscar "+tipoPesquisa }}</button>
           </ion-buttons>
         </ion-item>
         <ion-card class="alert-card" *ngIf="selAddresseesTypeFilter.id !== 0 && !govAgency">

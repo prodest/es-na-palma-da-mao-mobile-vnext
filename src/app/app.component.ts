@@ -7,15 +7,9 @@ import { FilePath } from '@ionic-native/file-path';
 import { Nav, Platform, AlertController } from 'ionic-angular';
 import { finalize } from 'rxjs/operators';
 import { Subscription } from 'rxjs/Subscription';
+import { File, IFile } from '@ionic-native/file';
+import { DocumentFile } from './edocs/state';
 
-
-type WindowWithIntent = Window & {
-  plugins: {
-    intentShim: {
-      getIntent: Function
-    }
-  }
-};
 
 @Component({
   templateUrl: 'app.component.html'
@@ -39,6 +33,7 @@ export class ESPMComponent implements OnDestroy {
     private auth: AuthService,
     private filePath: FilePath,
     private alertCtrl: AlertController,
+    private file: File,
     ngZone: NgZone,
     @Inject(EnvVariables) environment: Environment
   ) {
@@ -83,8 +78,8 @@ export class ESPMComponent implements OnDestroy {
   };
 
   private getIntentClip = () => new Promise<string>(resolve => {
-    if (!(window as WindowWithIntent).plugins) { return resolve(null); }
-    (window as WindowWithIntent).plugins.intentShim.getIntent(
+    if (!(window as any).plugins) { return resolve(null); }
+    (window as any).plugins.intentShim.getIntent(
       async data => {
         if (!data || !data.clipItems) {
           resolve(null);
@@ -102,23 +97,34 @@ export class ESPMComponent implements OnDestroy {
     );
   });
 
+  private getDocFile(path: string): Promise<DocumentFile> {
+    return new Promise((resolve, reject) => {
+      return this.file.resolveLocalFilesystemUrl(path).then((response: any) => {
+        response.file((file: IFile) => resolve({
+          url: path,
+          name: file.name,
+          type: file.type
+        }));
+      }).catch(reject);
+    });
+  }
+
   private resumeApplication = async () => {
     const clip = await this.getIntentClip();
 
-    console.log({ clip })
     if (this.authQuery.isLoggedIn) {
       this.auth
         .refreshAccessTokenIfNeeded()
         .pipe(finalize(this.push.init))
         .subscribe(
-          token => {
-            console.log({ token });
+          async token => {
             const navActive = this.nav.getActive();
             const activeNavName = navActive ? navActive.name : this.rootPage;
-            const isEdocs = activeNavName === 'DocumentsToSendPage' || activeNavName === 'DocumentsToSendAddAddresseesPage';
+            const isEdocs = activeNavName === 'DocumentsToSendPage';
             if (clip && !isEdocs) {
+              const docFile = await this.getDocFile(clip);
               this.nav.setRoot(this.myServicesPage)
-                .then(() => this.nav.push('DocumentsToSendPage', { filePath: clip }));
+                .then(() => this.nav.push('DocumentsToSendPage', { docFile }));
               return;
             }
           },
@@ -147,8 +153,9 @@ export class ESPMComponent implements OnDestroy {
                 const alertDismiss = alert.dismiss();
                 alertDismiss
                   .then(() => this.nav.setRoot(this.myServicesPage))
-                  .then(() => {
-                    this.nav.push('LoginPage', { redirectTo: 'DocumentsToSendPage', filePath: clip });
+                  .then(() => this.getDocFile(clip))
+                  .then(docFile => {
+                    this.nav.push('LoginPage', { redirectTo: 'DocumentsToSendPage', params: { docFile } });
                   });
                 return false;
               }
