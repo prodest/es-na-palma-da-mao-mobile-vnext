@@ -1,4 +1,4 @@
-import { Component, ChangeDetectionStrategy, ViewChild, ChangeDetectorRef } from '@angular/core';
+import { Component, ChangeDetectionStrategy, ViewChild, ChangeDetectorRef, Input } from '@angular/core';
 import { ModalController, Modal } from 'ionic-angular';
 import { FormBase } from '@espm/core';
 import { Destination } from '../../state';
@@ -17,7 +17,9 @@ export class DocumentsToSendAddresseesComponent extends WizardStep<{ addressees:
 
   @ViewChild('addresseesForm') protected form: FormBase;
 
-  constructor( private cdr: ChangeDetectorRef, private modal: ModalController) {
+  @Input() private agentePublico: boolean;
+
+  constructor(private cdr: ChangeDetectorRef, private modal: ModalController) {
     super();
   }
 
@@ -30,16 +32,16 @@ export class DocumentsToSendAddresseesComponent extends WizardStep<{ addressees:
   }
 
   async addAddresses() {
-    const addAddresseesModal: Modal = this.modal.create('DocumentsToSendAddAddresseesComponent');
+    const addAddresseesModal: Modal = this.modal.create('DocumentsToSendAddAddresseesComponent', { agentePublico: this.agentePublico });
 
     addAddresseesModal.present();
 
-    addAddresseesModal.onDidDismiss( addressees => {
+    addAddresseesModal.onDidDismiss(addressees => {
       if (addressees && this.addressees.findIndex(ad => ad.id === addressees.id) === -1) {
         this.addressees = [...this.addressees, addressees];
       }
       this.cdr.detectChanges();
     })
-    
+
   }
 }

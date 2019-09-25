@@ -16,15 +16,17 @@ export class DocumentsToSendAddresseesSearchComponent {
   govDestinations: Destination[] = [];
   filteredGovDestinations: Destination[];
   nomeTipoDestino: string;
+  agentePublico: boolean;
 
   constructor(
     private navParams: NavParams,
     private service: DocumentsToSendService,
     private view: ViewController,
     private cdr: ChangeDetectorRef,
-  ) {}
+  ) { }
 
   ionViewWillLoad(): void {
+    this.agentePublico = this.navParams.data.agentePublico;
     this.nomeTipoDestino = this.navParams.data.nomeTipo;
     this.service
       .getDestinations(parseInt(this.navParams.data.tipo, 10), this.navParams.data.agency)

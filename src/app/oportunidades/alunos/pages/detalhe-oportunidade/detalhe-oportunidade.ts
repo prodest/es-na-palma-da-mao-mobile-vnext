@@ -32,7 +32,6 @@ export class DetalheOportunidadePage implements OnDestroy {
   /**
    *
    */
-
   ionViewDidLoad() {
     let id = this.navParams.data.id;
     this.AlunoService.loadConcurso(id);
@@ -62,13 +61,12 @@ export class DetalheOportunidadePage implements OnDestroy {
 
   /**
    *
-   showClassificados(concurso: Concurso) {
-     this.navCtrl.push('ClassificacaoPage', { concurso });
-    }
-*/
+   * 
+   */
   showCursos(concurso: Concurso) {
     this.navCtrl.push('CursosPage', { id: concurso.id });
   }
+
   /**
    *
    *
@@ -80,8 +78,4 @@ export class DetalheOportunidadePage implements OnDestroy {
       this.AlunoService.toggleFavorite(concurso);
     }
   }
-  
-  /**
-   *
-   */
 }

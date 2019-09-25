@@ -35,6 +35,8 @@ export class DocumentsToSendPage implements OnInit, OnDestroy {
   activeStep: WizardStep<any>;
   // if sending/forwarding document
   isSending: boolean = false
+  // if current user is agente publico
+  agentePublico: boolean;
 
   // private atributes
   // all wizard steps
@@ -137,6 +139,7 @@ export class DocumentsToSendPage implements OnInit, OnDestroy {
 
     this.subscriptions = [
       this.basicStep.onComplete.subscribe((value: IBaseStepOutput) => {
+        this.agentePublico = !!value.role;
         this.stepsValue.basicStep = value;
         this.service.storeUpdate(this.stepsValue.basicStep, WizardSteps.BASIC);
       }),
@@ -172,13 +175,13 @@ export class DocumentsToSendPage implements OnInit, OnDestroy {
 
     if (this.stepsValue.docStep.file.type !== 'application/pdf') {
       const body: ConvertToPdfPostBody = {
-        size: 'A4', 
+        size: 'A4',
         landscape: false,
         horizontalAlign: HorizontalAlign.CENTER,
         verticalAlign: VerticalAlign.MIDDLE,
         image: this.stepsValue.docStep.file
       }
-      
+
       const value: IDocStepOutput = {
         name: this.stepsValue.docStep.name,
         documentType: this.stepsValue.docStep.documentType,

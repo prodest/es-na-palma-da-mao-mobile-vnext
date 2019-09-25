@@ -1,8 +1,4 @@
-<ion-header color-primary-bg>
-  <ion-navbar>
-    <ion-title>{{ nomeConcurso }} - Classificação </ion-title>
-  </ion-navbar>
-
+<module-page title="{{nomeConcurso}} - Classificação" no-padding>
   <ion-searchbar
     placeholder="Pesquisar..."
     [showCancelButton]="true"
@@ -13,28 +9,27 @@
     (ionCancel)="clear($event)"
   >
   </ion-searchbar>
-</ion-header>
-
-<ion-content>
-  <ion-list-header *ngIf="filtered && filtered.length"> {{ filtered.length }} encontrados </ion-list-header>
-  <ion-list *ngIf="areas" [virtualScroll]="filtered" approxItemHeight="70px">
-    <button ion-item *virtualItem="let areas" (click)="goToNext(areas)">
-      <h2>{{ areas.nome }}</h2>
-    </button>
-    <ion-item *ngIf="filtered && !filtered.length" text-center no-lines id="not-founded">
-      <h2>Nenhum encontrado</h2>
-      <p>Tente mudar o filtro da consulta</p>
-    </ion-item>
-  </ion-list>
-  <ion-list *ngIf="cargos.length > 0" no-margin [virtualScroll]="filtered" approxItemHeight="70px">
-    <button ion-item *virtualItem="let cargos" (click)="telaClassificacao(cargos.id)">
-      <h3 text-wrap>{{ cargos.nome }}</h3>
-      <p text-wrap>{{ cargos.descricao }}</p>
-    </button>
-    <ion-item *ngIf="filtered && !filtered.length" text-center no-lines id="not-founded">
-      <h2>Nenhum encontrado</h2>
-      <p>Tente mudar o filtro da consulta</p>
-    </ion-item>
-  </ion-list>
-  <ion-spinner *ngIf="!filtered" page-loading></ion-spinner>
-</ion-content>
+  <ion-content>
+    <ion-list-header *ngIf="filtered && filtered.length"> {{ filtered.length }} encontrados </ion-list-header>
+    <ion-list *ngIf="areas" [virtualScroll]="filtered" approxItemHeight="70px">
+      <button ion-item *virtualItem="let areas" (click)="goToNext(areas)">
+        <h2>{{ areas.nome }}</h2>
+      </button>
+      <ion-item *ngIf="filtered && !filtered.length" text-center no-lines id="not-founded">
+        <h2>Nenhum encontrado</h2>
+        <p>Tente mudar o filtro da consulta</p>
+      </ion-item>
+    </ion-list>
+    <ion-list *ngIf="cargos.length > 0" no-margin [virtualScroll]="filtered" approxItemHeight="70px">
+      <button ion-item *virtualItem="let cargos" (click)="telaClassificacao(cargos.id)">
+        <h3 text-wrap>{{ cargos.nome }}</h3>
+        <p text-wrap>{{ cargos.descricao }}</p>
+      </button>
+      <ion-item *ngIf="filtered && !filtered.length" text-center no-lines id="not-found">
+        <h2>Nenhum encontrado</h2>
+        <p>Tente mudar o filtro da consulta</p>
+      </ion-item>
+    </ion-list>
+    <ion-spinner *ngIf="!filtered" page-loading></ion-spinner>
+  </ion-content>
+</module-page>

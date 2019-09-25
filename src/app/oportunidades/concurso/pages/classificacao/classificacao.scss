@@ -1,16 +1,21 @@
 espm-dt-classificacao-page {
   .searchbar-md {
     background-color: #e9f7fe;
-}
-.active, [active], .toolbar-title, ion-navbar.toolbar, .toolbar-background {
-  background-color: #e9f7fe;
-  color: #004297;
-}
-.back-button-icon-md{
-  color: #00aeef;
-}
+  }
+  .active,
+  [active],
+  .toolbar-title,
+  ion-navbar.toolbar,
+  .toolbar-background {
+    background-color: #e9f7fe;
+    color: #004297;
+  }
+  .back-button-icon-md {
+    color: #00aeef;
+  }
   .scroll-content {
-    #not-founded {
+    padding: 0 !important;
+    #not-found {
       height: 100%;
     }
     .colocacao {
@@ -28,7 +33,14 @@ espm-dt-classificacao-page {
     }
   }
 
-}
-.searchbar-md .searchbar-input {
-border-radius: 25px;
+  .searchbar-md .searchbar-input {
+    box-shadow: none !important;
+    border-radius: 25px;
+  }
+
+  @media screen and (max-width: 375px) {
+    nav-header p {
+      font-size: 25px;
     }
+  }
+}

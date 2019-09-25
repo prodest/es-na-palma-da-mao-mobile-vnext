@@ -46,7 +46,7 @@ export class LoginPage implements OnInit {
     this.redirect = {
       to: this.navParams.get('redirectTo'),
       params: {
-        filePath: this.navParams.get('filePath')
+        ...this.navParams.get('params')
       }
     };
   }
@@ -56,7 +56,7 @@ export class LoginPage implements OnInit {
    *
    */
   ionViewCanEnter(): boolean | Promise<any> {
-    const isAllowed = ! this.authQuery.isLoggedIn;
+    const isAllowed = !this.authQuery.isLoggedIn;
 
     if (!isAllowed) {
       setTimeout(this.goToDashboard, 0);
@@ -92,7 +92,7 @@ export class LoginPage implements OnInit {
    */
   openUrlForgotPassword = () => this.openInAppBrowser(`${this.environment.api.acessocidadao}/Conta/SolicitarReinicioSenha`);
 
-  back(){
+  back() {
     this.navCtrl.pop()
   }
   /************************************* Private API *************************************/
@@ -162,7 +162,7 @@ export class LoginPage implements OnInit {
   /**
    * Redireciona usuário para o MyServicesPage
    */
- private goToDashboard = () => this.navCtrl.push('MyServicesPage');
+  private goToDashboard = () => this.navCtrl.push('MyServicesPage');
 
   /**
    *

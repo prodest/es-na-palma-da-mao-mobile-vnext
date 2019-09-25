@@ -1,4 +1,4 @@
-<module-page [title]="concurso?.nome" no-padding no-footer >
+<module-page [title]="concurso?.nome" no-padding no-footer no-scroll>
   <ion-buttons topbar>
     <button icon-only (click)="favoritar(concurso)">
       <ion-icon name="md-star" *ngIf="concurso?.favorito"></ion-icon>
@@ -19,12 +19,6 @@
         <h4 item-end accent>{{ data.fim | shortDateFormat }}</h4>
       </ion-item>
     </ng-container>
-    <button class="botao_classificados" *ngIf="concurso.liberarClassificacao"  no-lines (click)="showAreas(concurso)">
-      <ion-label>LISTA DE CLASSIFICADOS</ion-label>
-    </button>
-    <button *ngIf="!concurso.liberarClassificacao" ion-item no-lines>
-      <ion-label id="not-founded"></ion-label>
-    </button>
     <ion-item-divider *ngIf="concurso.anexos" color="light">
       <ion-icon name="attach" item-start></ion-icon>
       Anexos
@@ -33,5 +27,13 @@
       <p>{{ anexo.documento }}</p>
     </button>
   </ion-list>
-
+  <large-button
+    text="Classificados"
+    leftIcon="ios-search"
+    rightIcon="ios-arrow-forward-outline"
+    color="primary-dark"
+    (click)="showAreas(concurso)"
+    *ngIf="concurso.liberarClassificacao"
+  ></large-button>
+  <ion-spinner *ngIf="!concurso.nome" page-loading></ion-spinner>
 </module-page>
