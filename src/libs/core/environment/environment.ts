@@ -28,6 +28,7 @@ export interface Environment {
     scheduling: string;
     mailer: string;
     guide: string;
+    convertToPdf: string;
   };
   push: {
     senderId: string;

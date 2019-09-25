@@ -30,7 +30,8 @@ export const dev: Environment = {
     selecaoalunos: process.env.API_SELECAOALUNOS || 'https://api.es.gov.br/selecao-aluno/processos-seletivos',
     scheduling: process.env.API_SCHEDULING_URL || 'https://agendamento.dchm.es.gov.br/api',
     guide: process.env.API_GUIDE_URL || 'https://guiadeservicos.dchm.es.gov.br/Servicos',
-    mailer: process.env.API_MAILER_URL || 'https://agendamento.dchm.es.gov.br/email'
+    mailer: process.env.API_MAILER_URL || 'https://agendamento.dchm.es.gov.br/email',
+    convertToPdf: process.env.API_CONVERT_TO_PDF || 'https://api.es.gov.br/pdf/'
   },
   push: {
     senderId: process.env.PUSH_SENDER_ID,
