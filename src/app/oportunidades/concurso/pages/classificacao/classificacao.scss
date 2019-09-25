@@ -2,11 +2,15 @@ espm-dt-classificacao-page {
   .searchbar-md {
     background-color: #e9f7fe;
   }
-  .active, [active], .toolbar-title, ion-navbar.toolbar, .toolbar-background {
+  .active,
+  [active],
+  .toolbar-title,
+  ion-navbar.toolbar,
+  .toolbar-background {
     background-color: #e9f7fe;
     color: #004297;
   }
-  .back-button-icon-md{
+  .back-button-icon-md {
     color: #00aeef;
   }
   .scroll-content {
@@ -28,12 +32,12 @@ espm-dt-classificacao-page {
       margin-right: 16px !important;
     }
   }
-  
+
   .searchbar-md .searchbar-input {
     box-shadow: none !important;
     border-radius: 25px;
   }
-  
+
   @media screen and (max-width: 375px) {
     nav-header p {
       font-size: 25px;

@@ -1,6 +1,6 @@
 {
   "name": "espm",
-  "version": "6.0.0",
+  "version": "6.1.0",
   "displayName": "ES na Palma da Mao",
   "description": "O ES NA PALMA DA MÃO é um programa do Governo do Estado do Espírito Santo que reúne iniciativas e serviços do Governo em plataforma móvel (aplicativo) e web, com unidade de experiência do cidadão. Por meio do ES NA PALMA DA MÃO, diversos serviços governamentais podem ser acessados através da web e dispositivos móveis (sistemas operacionais iOS e Android) utilizando uma interface comum.",
   "private": true,
@@ -89,8 +89,10 @@
     "@ionic-native/device": "^4.10.1",
     "@ionic-native/facebook": "^4.4.2",
     "@ionic-native/file": "^4.18.0",
+    "@ionic-native/file-chooser": "^4.20.0",
     "@ionic-native/file-opener": "^4.18.0",
     "@ionic-native/file-path": "^4.20.0",
+    "@ionic-native/file-picker": "^4.20.0",
     "@ionic-native/geolocation": "^4.18.0",
     "@ionic-native/google-plus": "^4.9.2",
     "@ionic-native/in-app-browser": "^4.4.2",
@@ -120,7 +122,9 @@
     "cordova-plugin-facebook4": "^1.10.1",
     "cordova-plugin-file": "^6.0.1",
     "cordova-plugin-file-opener2": "^2.1.0",
+    "cordova-plugin-filechooser": "^1.2.0",
     "cordova-plugin-filepath": "^1.5.6",
+    "cordova-plugin-filepicker": "^1.1.6",
     "cordova-plugin-geolocation": "4.0.1",
     "cordova-plugin-googleplus": "^5.3.2",
     "cordova-plugin-inappbrowser": "^1.7.2",
@@ -252,7 +256,9 @@
       "com-darryncampbell-cordova-plugin-intent": {},
       "cordova-plugin-filepath": {},
       "cordova-plugin-ionic-keyboard": {},
-      "cordova-sqlite-storage": {}
+      "cordova-sqlite-storage": {},
+      "cordova-plugin-filechooser": {},
+      "cordova-plugin-filepicker": {}
     },
     "platforms": [
       "android"

@@ -43,7 +43,7 @@ export class DioSearchPage {
     private toastr: ToastController,
     private dio: DioApiService,
     private loadingCtrl: LoadingController
-  ) {}
+  ) { }
 
   /**
    *
@@ -84,10 +84,10 @@ export class DioSearchPage {
         .subscribe(this.onSearchSuccess);
     }
   };
-/**
- * 
- */
-editions = () =>{ this.navCtrl.push('LatestEditionsPage')}
+  /**
+   * 
+   */
+  editions = () => { this.navCtrl.push('LatestEditionsPage') }
   /**
    *
    *
@@ -148,5 +148,5 @@ editions = () =>{ this.navCtrl.push('LatestEditionsPage')}
   /**
    * 
    */
-  back = () =>{ this.navCtrl.pop()}
+  back = () => { this.navCtrl.pop() }
 }

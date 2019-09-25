@@ -12,7 +12,7 @@ import { AuthNeededService, AuthQuery } from '@espm/core';
 })
 export class WaitingForMySignaturePage {
 
-  constructor(public navCtrl: NavController, 
+  constructor(public navCtrl: NavController,
     public navParams: NavParams,
     private authQuery: AuthQuery,
     private alertCtrl: AlertController,
@@ -42,7 +42,7 @@ export class WaitingForMySignaturePage {
           handler: () => {
             this.appCtrl
               .getRootNav()
-              this.navCtrl.push('PresentationEdocsPage')
+            this.navCtrl.push('PresentationEdocsPage')
               .then(() => {
                 alert.dismiss();
                 this.menuCtrl.close();
@@ -56,7 +56,7 @@ export class WaitingForMySignaturePage {
           handler: () => {
             this.appCtrl
               .getRootNav()
-              this.navCtrl.push('LoginPage')
+            this.navCtrl.push('LoginPage', { redirectTo: 'PresentationEdocsPage' })
               .then(() => {
                 alert.dismiss();
                 this.menuCtrl.close();

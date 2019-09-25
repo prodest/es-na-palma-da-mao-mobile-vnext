@@ -1,12 +1,6 @@
 <module-page title="Concursos" no-padding>
-  <ion-searchbar
-    placeholder="Pesquisar..."
-    [showCancelButton]="true"
-    cancelButtonText="Cancelar"
-    [animated]="false"
-    (ionInput)="search($event)"
-    (ionClear)="clear($event)"
-    (ionCancel)="clear($event)">
+  <ion-searchbar placeholder="Pesquisar..." [showCancelButton]="true" cancelButtonText="Cancelar" [animated]="false"
+    (ionInput)="search($event)" (ionClear)="clear($event)" (ionCancel)="clear($event)">
   </ion-searchbar>
   <ion-content>
     <ion-list-header *ngIf="concursosLength">

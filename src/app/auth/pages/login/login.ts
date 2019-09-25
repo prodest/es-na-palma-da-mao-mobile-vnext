@@ -46,7 +46,7 @@ export class LoginPage implements OnInit {
     this.redirect = {
       to: this.navParams.get('redirectTo'),
       params: {
-        filePath: this.navParams.get('filePath')
+        ...this.navParams.get('params')
       }
     };
   }
@@ -56,7 +56,7 @@ export class LoginPage implements OnInit {
    *
    */
   ionViewCanEnter(): boolean | Promise<any> {
-    const isAllowed = ! this.authQuery.isLoggedIn;
+    const isAllowed = !this.authQuery.isLoggedIn;
 
     if (!isAllowed) {
       setTimeout(this.goToDashboard, 0);
@@ -92,7 +92,7 @@ export class LoginPage implements OnInit {
    */
   openUrlForgotPassword = () => this.openInAppBrowser(`${this.environment.api.acessocidadao}/Conta/SolicitarReinicioSenha`);
 
-  back(){
+  back() {
     this.navCtrl.pop()
   }
   /************************************* Private API *************************************/
@@ -150,15 +150,20 @@ export class LoginPage implements OnInit {
    */
   private isAccountNotLinkedError = (data): boolean => data.error === this.errorMsgs.accountNotLinked;
 
-  private redirectHandler = () => this.redirect && this.redirect.to ?
-    this.navCtrl.setRoot(this.redirect.to, this.redirect.params) :
-    this.goToDashboard()
+  private redirectHandler = () => {
+    if (this.redirect && this.redirect.to) {
+      return this.navCtrl.setRoot('MyServicesPage').then(
+        () => this.navCtrl.push(this.redirect.to, this.redirect.params)
+      );
+    }
+    return this.goToDashboard();
+  }
 
   /**
    * Redireciona usuário para o MyServicesPage
    */
- private goToDashboard = () => this.navCtrl.push('MyServicesPage');
-  
+  private goToDashboard = () => this.navCtrl.push('MyServicesPage');
+
   /**
    *
    *
@@ -187,7 +192,7 @@ export class LoginPage implements OnInit {
     this.openInAppBrowser(`${this.environment.api.acessocidadao}/Conta/VerificarCPF`);
   }
   /**
-   * 
+   *
    */
-  
+
 }

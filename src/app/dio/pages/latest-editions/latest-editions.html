@@ -3,11 +3,7 @@
     <ion-list>
       <ion-item shadow *ngFor="let edition of latestEditions">
         <h3><strong>{{edition.date}}</strong> - Diário Oficial do ES</h3>
-        <button ion-button
-          item-end
-          clear
-          icon-start
-          (click)="openEdition(edition.url)">
+        <button ion-button item-end clear icon-start (click)="openEdition(edition.url)">
           <ion-icon name="download"></ion-icon>
           BAIXAR
         </button>

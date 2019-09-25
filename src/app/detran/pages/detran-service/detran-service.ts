@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams, App, AlertController, MenuController } from 'ionic-angular';
-import { AuthNeededService, AuthQuery} from '@espm/core';
+import { AuthNeededService, AuthQuery } from '@espm/core';
 import { Vehicle, Ticket } from '../../model';
 import { VehiclesService } from '../../providers';
 
@@ -27,16 +27,16 @@ export class DetranServicePage {
       targetPage: "VehiclesPage"
     }
   ];
-  
+
 
   constructor(public navCtrl: NavController,
-              private detran: VehiclesService,
-              private authQuery: AuthQuery,
-              private alertCtrl: AlertController,
-              protected appCtrl: App,
-              protected authNeeded: AuthNeededService,
-              public navParams: NavParams,
-              private menuCtrl: MenuController) {
+    private detran: VehiclesService,
+    private authQuery: AuthQuery,
+    private alertCtrl: AlertController,
+    protected appCtrl: App,
+    protected authNeeded: AuthNeededService,
+    public navParams: NavParams,
+    private menuCtrl: MenuController) {
   }
   /**
    * 
@@ -77,7 +77,7 @@ export class DetranServicePage {
           handler: () => {
             this.appCtrl
               .getRootNav()
-              .setRoot('LoginPage')
+              .push('LoginPage', { redirectTo: 'DetranServicePage' })
               .then(() => {
                 alert.dismiss();
                 this.menuCtrl.close();
@@ -89,36 +89,36 @@ export class DetranServicePage {
     });
     return alert.present();
   };
-/**
- * 
- */
-
-loadData(){
-  this.appCtrl.getRootNav().push('DriverLicenseStatusPage');
-}
   /**
    * 
    */
 
-  back(){
-    this.navCtrl.pop();
-  }
-  /**
-   * 
-   */
-  myVehicle(){
-  this.appCtrl.getRootNav().push('VehiclesPage');
-  }
-  /**
-   * 
-   */
-  cnhVehicle(){
+  loadData() {
     this.appCtrl.getRootNav().push('DriverLicenseStatusPage');
   }
   /**
    * 
    */
-  
+
+  back() {
+    this.navCtrl.pop();
+  }
+  /**
+   * 
+   */
+  myVehicle() {
+    this.appCtrl.getRootNav().push('VehiclesPage');
+  }
+  /**
+   * 
+   */
+  cnhVehicle() {
+    this.appCtrl.getRootNav().push('DriverLicenseStatusPage');
+  }
+  /**
+   * 
+   */
+
   infractionsVehicle = (vehicle: Vehicle) => {
     this.detran
       .getTickets(vehicle)
@@ -130,11 +130,11 @@ loadData(){
   /**
    * 
    */
-  goFavorites(){
+  goFavorites() {
     this.navCtrl.push('SelectFavoritePage');
   }
   /**
    * 
    */
-  
+
 }

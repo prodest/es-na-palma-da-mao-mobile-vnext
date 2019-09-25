@@ -10,6 +10,7 @@ import {
 } from '../../components';
 import { RevenueDetailsPage } from './revenue-details';
 import { ModulePageComponentModule } from '@espm/shared/components';
+import { LimitPipeModule } from '@espm/shared/pipes';
 
 @NgModule({
   declarations: [RevenueDetailsPage],
@@ -20,7 +21,8 @@ import { ModulePageComponentModule } from '@espm/shared/components';
     ReportTitleComponentModule,
     PieChartComponentModule,
     LastUpdateComponentModule,
-    ModulePageComponentModule
+    ModulePageComponentModule,
+    LimitPipeModule
   ]
 })
-export class RevenueDetailsPageModule {}
+export class RevenueDetailsPageModule { }

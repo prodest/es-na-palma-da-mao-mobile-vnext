@@ -1,5 +1,5 @@
 <?xml version='1.0' encoding='utf-8'?>
-<widget android-versionCode="400079" id="br.gov.es.prodest.espm" version="6.0.0" xmlns="http://www.w3.org/ns/widgets" xmlns:android="http://schemas.android.com/apk/res/android" xmlns:cdv="http://cordova.apache.org/ns/1.0">
+<widget android-versionCode="400080" id="br.gov.es.prodest.espm" version="6.1.0" xmlns="http://www.w3.org/ns/widgets" xmlns:android="http://schemas.android.com/apk/res/android" xmlns:cdv="http://cordova.apache.org/ns/1.0">
     <name>ES na Palma da Mao</name>
     <description>O ES NA PALMA DA MÃO é um programa do Governo do Estado do Espírito Santo que reúne iniciativas e serviços do Governo em plataforma móvel (aplicativo) e web, com unidade de experiência do cidadão. Por meio do ES NA PALMA DA MÃO, diversos serviços governamentais podem ser acessados através da web e dispositivos móveis (sistemas operacionais iOS e Android) utilizando uma interface comum.</description>
     <author email="atendimento@prodest.es.gov.br" href="https://prodest.es.gov.br/">PRODEST</author>
@@ -53,9 +53,17 @@
                 <action android:name="android.intent.action.SEND" />
                 <category android:name="android.intent.category.DEFAULT" />
                 <data android:mimeType="application/pdf" />
+                <data android:mimeType="image/jpeg" />
+                <data android:mimeType="image/png" />
             </intent-filter>
         </config-file>
         <allow-intent href="market:*" />
+        <icon density="ldpi" src="resources/android/icon/drawable-ldpi-icon.png" />
+        <icon density="mdpi" src="resources/android/icon/drawable-mdpi-icon.png" />
+        <icon density="hdpi" src="resources/android/icon/drawable-hdpi-icon.png" />
+        <icon density="xhdpi" src="resources/android/icon/drawable-xhdpi-icon.png" />
+        <icon density="xxhdpi" src="resources/android/icon/drawable-xxhdpi-icon.png" />
+        <icon density="xxxhdpi" src="resources/android/icon/drawable-xxxhdpi-icon.png" />
         <splash density="port-ldpi" src="resources/android/splash/drawable-port-ldpi-screen.png" />
         <splash density="port-mdpi" src="resources/android/splash/drawable-port-mdpi-screen.png" />
         <splash density="port-hdpi" src="resources/android/splash/drawable-port-hdpi-screen.png" />
@@ -149,5 +157,7 @@
     </plugin>
     <plugin name="cordova-plugin-ionic-webview" spec="4.0.0" />
     <plugin name="com-darryncampbell-cordova-plugin-intent" spec="git+https://github.com/darryncampbell/darryncampbell-cordova-plugin-intent.git" />
+    <plugin name="cordova-plugin-filechooser" spec="^1.2.0" />
+    <plugin name="cordova-plugin-filepicker" spec="^1.1.6" />
     <engine name="android" spec="7.1.4" />
 </widget>

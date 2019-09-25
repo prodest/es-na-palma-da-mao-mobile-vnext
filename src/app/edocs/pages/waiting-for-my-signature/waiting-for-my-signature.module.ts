@@ -8,4 +8,4 @@ import { WaitingForMySignaturePage } from './waiting-for-my-signature';
   declarations: [WaitingForMySignaturePage],
   imports: [DocumentSummaryListComponentModule, IonicPageModule.forChild(WaitingForMySignaturePage)]
 })
-export class WaitingForMySignaturePageModule {}
+export class WaitingForMySignaturePageModule { }

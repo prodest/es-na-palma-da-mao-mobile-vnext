@@ -1,8 +1,13 @@
 page-bus-line-info {
+  @media screen and (max-width: 350px) {
+    nav-title .content {
+      font-size: 11px;
+    }
+  }
   nav-header p {
     font-size: 125% !important;
   }
-  
+
   #content {
     padding: 0;
 
@@ -41,10 +46,9 @@ page-bus-line-info {
   }
 
   #path {
-
     .input-wrapper {
       display: flex;
-      
+
       .label {
         display: flex;
         margin: 0;
@@ -57,7 +61,6 @@ page-bus-line-info {
         }
       }
     }
-
   }
 
   .day-group {

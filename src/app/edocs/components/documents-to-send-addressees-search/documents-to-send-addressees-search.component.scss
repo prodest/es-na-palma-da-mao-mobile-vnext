@@ -1,0 +1,34 @@
+edocs-documents-to-send-addressees-search {
+  .scrollable {
+    height: 300px;
+    border: 1px solid black;
+    padding: 1em;
+  }
+
+  ion-card.alert-card {
+    background-color: rgba(2553, 253, 163, 0.65);
+    box-shadow: none;
+    margin: 0;
+    width: 100%;
+  }
+
+  .title-search {
+    padding-left: 1em;
+  }
+
+  .searchbar-input {
+    box-shadow: none !important;
+  }
+
+  .search-bar .col {
+    &:first-child {
+      flex-grow: 8;
+    }
+    .searchbar-md .searchbar-input {
+      padding: 6px 40px;
+    }
+    .searchbar.searchbar-ios .searchbar-input {
+      background-color: white;
+    }
+  }
+}

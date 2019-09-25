@@ -2,7 +2,8 @@ import { Component, ChangeDetectionStrategy, OnInit, ViewChild } from '@angular/
 import { Loading } from 'ionic-angular';
 import { Observable } from 'rxjs/Observable';
 import { finalize } from 'rxjs/operators';
-import { AuthService, CidadaoRole, AcessoCidadaoClaims, LoadingService } from '@espm/core';
+import { of } from 'rxjs/observable/of'
+import { AuthService, CidadaoRole, AcessoCidadaoClaims, LoadingService, AuthQuery } from '@espm/core';
 import { WizardStep } from '../../providers';
 import { IBaseStepOutput } from '../../interfaces';
 import { DocumentsToSendBasicFormComponent } from '../documents-to-send-basic-form';
@@ -22,11 +23,17 @@ export class DocumentsToSendBasicComponent extends WizardStep<IBaseStepOutput> i
   private loading: Loading;
   private loadCount = 0;
 
-  constructor(private auth: AuthService, private loadingService: LoadingService) {
+  constructor(private auth: AuthService, private loadingService: LoadingService, private authQuery: AuthQuery) {
     super();
   }
 
   ngOnInit(): void {
+    if (!this.authQuery.isLoggedIn) {
+      // remove errors message on get user without logged in
+      this.sender$ = of({} as any);
+      this.roles$ = of ({} as any);
+      return;
+    }
     let loadEndIn = 2;
     this.loading = this.loadingService.show('Aguarde');
     // buscando dados na api (sender e roles)
