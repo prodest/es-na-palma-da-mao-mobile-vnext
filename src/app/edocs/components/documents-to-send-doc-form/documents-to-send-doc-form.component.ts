@@ -201,12 +201,10 @@ export class DocumentsToSendBasicFormComponent extends FormBase implements OnIni
         mediaType: this.camera.MediaType.PICTURE,
         correctOrientation: true,
         saveToPhotoAlbum: true,
-        allowEdit: true,
+        allowEdit: false,
       }
     
-      
       const imageUri = await this.camera.getPicture(options);
-      console.log(imageUri);
 
       const response: any = await this.f.resolveLocalFilesystemUrl(imageUri);
       response.file((file: IFile) => {
@@ -217,7 +215,6 @@ export class DocumentsToSendBasicFormComponent extends FormBase implements OnIni
         };
         this.form.get('file').setValue(docFile);
         this.onFileSelect.next(docFile);
-        console.log(docFile);
         loading.dismiss();
       })
     
