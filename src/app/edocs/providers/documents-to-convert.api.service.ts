@@ -2,14 +2,14 @@ import { Environment, EnvVariables } from '@espm/core';
 import { HttpClient } from '@angular/common/http';
 import { Injectable, Inject } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
-import { ConvertToPdfPostBody, Document } from '../state';
+import { ConvertToPdfPostBody } from '../state';
 import { mergeMap } from 'rxjs/operators';
 import { fromPromise } from 'rxjs/observable/fromPromise';
 import { File } from '@ionic-native/file';
 import { ApiBaseService } from '../state/api-base.service';
 
 @Injectable()
-export class DocumentsToConvertApiService extends ApiBaseService<Document> {
+export class DocumentsToConvertApiService extends ApiBaseService<any> {
   /**
    *
    *

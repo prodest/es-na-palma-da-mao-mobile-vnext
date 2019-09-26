@@ -1,8 +1,6 @@
 
 edocs-documents-to-send-add-addressees {
-  nav-title p {
-    font-size: 35px !important;
-  }
+
   div.pageTitle{
     text-align: center; 
     font-weight: bold;
@@ -29,25 +27,31 @@ edocs-documents-to-send-add-addressees {
     padding-left: 1em;
   }
 
-  button {
-    width: 100%;
-    text-transform: none;
-
-    &.disabled {
-      opacity: 0.8;
+  .header-buttons {
+    button {
+      width: 100%;
+      text-transform: none;
+  
+      &.disabled {
+        opacity: 0.8;
+      }
+      &[clear] {
+        color: #004297 !important;
+      }
     }
-    &[clear] {
-      color: #004297 !important;
+  
+    .header-button {
+      background-color: #004297;
     }
-  }
-
-  .header-button {
-    background-color: #004297;
   }
 
   .foot-toolbar {
     .toolbar-background {
       background-color: white;
     }
+    .bar-button-round {
+      border-radius: 64px;
+      padding: 0 2.6rem;
+  }
   }
 }
