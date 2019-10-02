@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+<a name="6.1.4"></a>
+## [6.1.4](https://github.com/prodest/es-na-palma-da-mao-mobile-vnext/compare/v6.1.3...v6.1.4) (2019-10-02)
+
+
+### Bug Fixes
+
+* **cordova:** android resources path ([fcaba27](https://github.com/prodest/es-na-palma-da-mao-mobile-vnext/commit/fcaba27))
+
+
+
 <a name="6.1.3"></a>
 ## [6.1.3](https://github.com/prodest/es-na-palma-da-mao-mobile-vnext/compare/v6.1.2...v6.1.3) (2019-10-02)
 
