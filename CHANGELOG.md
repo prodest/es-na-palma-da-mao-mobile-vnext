@@ -2,6 +2,18 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+<a name="6.1.5"></a>
+## [6.1.5](https://github.com/prodest/es-na-palma-da-mao-mobile-vnext/compare/v6.1.4...v6.1.5) (2019-10-02)
+
+
+### Bug Fixes
+
+* **cordova:** AGP png too big bug ([770bc45](https://github.com/prodest/es-na-palma-da-mao-mobile-vnext/commit/770bc45))
+* **cordova:** build. update splash density ([b59748d](https://github.com/prodest/es-na-palma-da-mao-mobile-vnext/commit/b59748d))
+* **script:** update chmod ([277a730](https://github.com/prodest/es-na-palma-da-mao-mobile-vnext/commit/277a730))
+
+
+
 <a name="6.1.4"></a>
 ## [6.1.4](https://github.com/prodest/es-na-palma-da-mao-mobile-vnext/compare/v6.1.3...v6.1.4) (2019-10-02)
 
