@@ -36,6 +36,7 @@ jobs:
       - run: cordova telemetry off
       - run: cordova platform add android@8.1.0
       - run: cordova prepare android -f
+      - run: cat platforms/android/phonegap-plugin-barcodescanner/espm-barcodescanner.gradle
       - run: cordova build android --release --buildconfig=build.json
       # - run: 
       #     name: Upload APK to Gitlab?
