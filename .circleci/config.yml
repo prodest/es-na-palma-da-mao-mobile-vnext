@@ -8,8 +8,8 @@ jobs:
       - checkout
       - restore_cache:
           keys:
-          - v6-dependencies-node_modules-{{ checksum "package-lock.json" }}
-          - v6-dependencies-node_modules
+          - v7-dependencies-node_modules-{{ checksum "package-lock.json" }}
+          - v7-dependencies-node_modules
       - run: npm install
       - run:
           name: Get secrets
@@ -21,7 +21,7 @@ jobs:
       - save_cache:
           paths:
             - node_modules
-          key: v6-dependencies-node_modules-{{ checksum "package-lock.json" }}
+          key: v7-dependencies-node_modules-{{ checksum "package-lock.json" }}
       - persist_to_workspace:
           root: ~/espm
           paths:
