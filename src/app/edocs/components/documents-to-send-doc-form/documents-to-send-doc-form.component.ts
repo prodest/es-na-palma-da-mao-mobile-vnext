@@ -104,6 +104,12 @@ export class DocumentsToSendBasicFormComponent extends FormBase implements OnIni
       }
       this.selectChange();
     });
+
+    if (this.file){
+      
+      this.form.get('name').setValue(this.file.name);
+      this.cdr.detectChanges()
+    }
   }
 
   ngOnDestroy(): void {
@@ -115,7 +121,8 @@ export class DocumentsToSendBasicFormComponent extends FormBase implements OnIni
   ngOnChanges(changes: SimpleChanges): void {
     if ('file' in changes) {
       const file: DocumentFile = changes['file'].currentValue;
-      this.form.reset({ file });
+      const name = file && file.name? file.name: '';
+      this.form.reset({ file, name });
       this.cdr.detectChanges();
     }
   }
@@ -146,6 +153,7 @@ export class DocumentsToSendBasicFormComponent extends FormBase implements OnIni
             type: file.type
           };
           this.form.get('file').setValue(docFile);
+          this.form.get('name').setValue(docFile.name);
           this.onFileSelect.next(docFile);
         } else {
           const alert = this.alertCtrl.create({
@@ -205,8 +213,8 @@ export class DocumentsToSendBasicFormComponent extends FormBase implements OnIni
       }
     
       const imageUri = await this.camera.getPicture(options);
-
       const response: any = await this.f.resolveLocalFilesystemUrl(imageUri);
+
       response.file((file: IFile) => {
         const docFile: DocumentFile = {
           url: imageUri,
@@ -214,6 +222,7 @@ export class DocumentsToSendBasicFormComponent extends FormBase implements OnIni
           type: file.type
         };
         this.form.get('file').setValue(docFile);
+        this.form.get('name').setValue(docFile.name);
         this.onFileSelect.next(docFile);
         loading.dismiss();
       })
