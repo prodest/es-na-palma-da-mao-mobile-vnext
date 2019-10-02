@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+<a name="6.1.6"></a>
+## [6.1.6](https://github.com/prodest/es-na-palma-da-mao-mobile-vnext/compare/v6.1.5...v6.1.6) (2019-10-02)
+
+
+### Bug Fixes
+
+* **cordova:** scripts lfcr ([1d49db7](https://github.com/prodest/es-na-palma-da-mao-mobile-vnext/commit/1d49db7))
+
+
+
 <a name="6.1.5"></a>
 ## [6.1.5](https://github.com/prodest/es-na-palma-da-mao-mobile-vnext/compare/v6.1.4...v6.1.5) (2019-10-02)
 
