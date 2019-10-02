@@ -39,6 +39,7 @@
         <resource-file src="google-services.json" target="app/google-services.json" />
         <hook src="scripts/barcodescanner-add-compile-config.sh" type="after_platform_add" />
         <hook src="scripts/resolve-project-properties-dependencies.sh" type="before_build" />
+        <hook src="scripts/copy-custom-build-gradle.sh" type="before_build" />
         <hook src="scripts/resolve-project-properties-dependencies.sh" type="before_run" />
         <hook src="scripts/copy_resource_files.js" type="after_prepare" />
         
