@@ -2,6 +2,17 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+<a name="6.2.0"></a>
+# [6.2.0](https://github.com/prodest/es-na-palma-da-mao-mobile-vnext/compare/v6.1.6...v6.2.0) (2019-10-02)
+
+
+### Features
+
+* **documents-to-send:** Nome original do arquivo como nome padrao do arquivo a ser encaminhado ([d081fe7](https://github.com/prodest/es-na-palma-da-mao-mobile-vnext/commit/d081fe7))
+* **documents-to-send:** Tirar foto e encaminha-la pelo app ([a632664](https://github.com/prodest/es-na-palma-da-mao-mobile-vnext/commit/a632664))
+
+
+
 <a name="6.1.6"></a>
 ## [6.1.6](https://github.com/prodest/es-na-palma-da-mao-mobile-vnext/compare/v6.1.5...v6.1.6) (2019-10-02)
 
