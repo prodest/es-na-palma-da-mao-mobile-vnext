@@ -24,7 +24,8 @@ import { SplashScreen } from '@ionic-native/splash-screen';
 import { StatusBar } from '@ionic-native/status-bar';
 import { FilePath } from '@ionic-native/file-path';
 import { FileChooser } from '@ionic-native/file-chooser';
-import { IOSFilePicker } from '@ionic-native/file-picker'
+import { IOSFilePicker } from '@ionic-native/file-picker';
+import { Camera } from '@ionic-native/camera';
 import { IonicStorageModule } from '@ionic/storage';
 import { IonicApp, IonicErrorHandler, IonicModule } from 'ionic-angular';
 import * as moment from 'moment';
@@ -95,6 +96,7 @@ registerLocaleData(ptBr);
     File,
     SplashScreen,
     SocialSharing,
+    Camera,
     ...AboutProviders,
     ...CalendarProviders,
     ...CeturbProviders,
