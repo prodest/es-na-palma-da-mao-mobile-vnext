@@ -33,6 +33,7 @@ jobs:
     steps:
       - attach_workspace:
           at: ./
+      - run: cordova telemetry off
       - run: cordova platform add android@8.1.0
       - run: cordova prepare android -f
       - run: cordova build android --release --buildconfig=build.json
