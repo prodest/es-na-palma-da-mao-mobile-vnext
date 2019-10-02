@@ -2,7 +2,7 @@ version: 2
 jobs:
   build-ionic:
     docker:
-      - image: prodest/circleci-containers:node-ionic-aws-v1.1.0
+      - image: prodest/circleci-containers:node-ionic-aws-v1.2.0
     working_directory: ~/espm
     steps:
       - checkout
@@ -28,12 +28,12 @@ jobs:
             - ./
   publish-prod:
     docker:
-      - image: prodest/circleci-containers:mobile-android-v2.0.0
+      - image: prodest/circleci-containers:mobile-android-28
     working_directory: ~/espm
     steps:
       - attach_workspace:
           at: ./
-      - run: cordova platform add android@7.1.1
+      - run: cordova platform add android@8.1.0
       - run: cordova prepare android -f
       - run: cordova build android --release --buildconfig=build.json
       # - run: 
