@@ -28,11 +28,10 @@
   </ion-content>
   <ion-footer>
     <ion-toolbar text-center="" class="foot-toolbar">
-      <button ion-button color="dark" (click)="prevSlide()" [disabled]="slides?.isBeginning()" outline>
+      <button ion-button color="dark" (click)="prevSlide()" [disabled]="slides?.isBeginning()" outline round>
         Anterior
       </button>
-      <button ion-button color="dark" (click)="nextSlide()" [disabled]="slides?.isEnd() || !activeStep?.isValid"
-        outline>
+      <button ion-button color="dark" (click)="nextSlide()" [disabled]="slides?.isEnd() || !activeStep?.isValid" outline round>
         Proximo
       </button>
     </ion-toolbar>

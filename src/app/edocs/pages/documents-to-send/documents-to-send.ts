@@ -10,7 +10,7 @@ import {
   IMessageOutput,
   IDocumentsToSendWizardValue
 } from '../../interfaces';
-import { WizardStep } from '../../providers';
+import { WizardStep, DocumentsToConvertService } from '../../providers';
 import {
   DocumentsToSendBasicComponent,
   DocumentsToSendAddresseesComponent,
@@ -53,6 +53,7 @@ export class DocumentsToSendPage implements OnInit, OnDestroy {
 
   constructor(private navParams: NavParams,
     private service: DocumentsToSendService,
+    private convertService: DocumentsToConvertService,
     private loadingService: LoadingService,
     private alertCtrl: AlertController,
     private navCtrl: NavController,
@@ -190,7 +191,7 @@ export class DocumentsToSendPage implements OnInit, OnDestroy {
         file: { ...this.stepsValue.docStep.file }
       };
 
-      value.file.buffer = await this.service.convertTopdf(body).toPromise();
+      value.file.buffer = await this.convertService.convertTopdf(body).toPromise();
 
       this.stepsValue.docStep = value;
       this.service.storeUpdate(this.stepsValue.docStep, WizardSteps.DOC);

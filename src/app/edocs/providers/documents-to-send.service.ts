@@ -3,11 +3,10 @@ import { DocumentsToSendApiService } from './documents-to-send.api.service';
 import {
   DestinationReceive,
   ForwardPostBody,
-  ForwardsRecieve,
+  ForwardsReceive,
   CapturePostBody,
   CaptureReceive,
-  WizardSteps,
-  ConvertToPdfPostBody
+  WizardSteps
 } from '../state/documents-to-send.model';
 import { Observable } from 'rxjs/Observable';
 import { DocumentsToSendStore } from '../state/documents-to-send.store';
@@ -24,12 +23,8 @@ export class DocumentsToSendService {
     return this.api.captureDocuments(fileName, body);
   }
 
-  createForwards(body: ForwardPostBody): Observable<ForwardsRecieve> {
+  createForwards(body: ForwardPostBody): Observable<ForwardsReceive> {
     return this.api.createForwards(body);
-  }
-
-  convertTopdf(body: ConvertToPdfPostBody): Observable<ArrayBuffer> {
-    return this.api.convertToPdf(body);
   }
 
   storeUpdate(step: any, stepName: string) {

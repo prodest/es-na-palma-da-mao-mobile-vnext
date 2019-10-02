@@ -21,18 +21,21 @@
           <p>{{ selAddresseesTypeFilter.notice }}</p>
         </ion-card-content>
       </ion-card>
-      <ion-list>
+      <ion-list class="header-buttons">
         <ion-item>
           <p>Órgão</p>
           <ion-buttons end>
-            <button ion-button (click)="openSearch(0)" full>{{ govAgency? govAgency.nome : "Buscar Órgão" }}</button>
+            <button ion-button class="header-button" (click)="openSearch(0)" full round>
+              {{ govAgency? govAgency.nome : "Buscar Órgão" }}
+            </button>
           </ion-buttons>
         </ion-item>
         <ion-item *ngIf="selAddresseesTypeFilter.id !== 0 && govAgency">
           <p>{{ tipoPesquisa }}</p>
           <ion-buttons end>
-            <button ion-button (click)="openSearch(selAddresseesTypeFilter.id)"
-              full>{{ govDestination? govDestination.nome : "Buscar "+tipoPesquisa }}</button>
+            <button ion-button class="header-button" (click)="openSearch(selAddresseesTypeFilter.id)" full round>
+              {{ govDestination? govDestination.nome : "Buscar "+tipoPesquisa }}
+            </button>
           </ion-buttons>
         </ion-item>
         <ion-card class="alert-card" *ngIf="selAddresseesTypeFilter.id !== 0 && !govAgency">
@@ -42,8 +45,10 @@
         </ion-card>
       </ion-list>
       <ion-footer>
-        <ion-toolbar text-center="" class="foot-toolbar">
-          <button ion-button (click)="closeModal()" full>Ok</button>
+        <ion-toolbar text-center class="foot-toolbar">
+          <ion-buttons class="header-buttons">
+            <button ion-button class="header-button" (click)="closeModal()" full round>Ok</button>
+          </ion-buttons>
         </ion-toolbar>
       </ion-footer>
     </ng-container>
