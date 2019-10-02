@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+<a name="6.1.2"></a>
+## [6.1.2](https://github.com/prodest/es-na-palma-da-mao-mobile-vnext/compare/v6.1.1...v6.1.2) (2019-10-02)
+
+
+### Features
+
+* **app:** update to cordova 9 ([322208a](https://github.com/prodest/es-na-palma-da-mao-mobile-vnext/commit/322208a))
+
+
+
 <a name="6.1.1"></a>
 ## [6.1.1](https://github.com/prodest/es-na-palma-da-mao-mobile-vnext/compare/v6.1.0...v6.1.1) (2019-09-26)
 
