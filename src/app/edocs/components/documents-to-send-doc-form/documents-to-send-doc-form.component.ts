@@ -175,8 +175,9 @@ export class DocumentsToSendBasicFormComponent extends FormBase implements OnIni
         buttons: ['Ok']
       });
       alert.present();
+    } finally {
+      loading.dismiss();
     }
-    loading.dismiss();
   }
 
   protected createFormModel(): FormGroup {
@@ -236,7 +237,8 @@ export class DocumentsToSendBasicFormComponent extends FormBase implements OnIni
         buttons: ['Ok']
       });
       alert.present();
+    } finally {
+      loading.dismiss();
     }
-    loading.dismiss();
   }
 }
