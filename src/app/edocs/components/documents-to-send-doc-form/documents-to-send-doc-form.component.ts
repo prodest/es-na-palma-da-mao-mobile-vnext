@@ -136,8 +136,9 @@ export class DocumentsToSendBasicFormComponent extends FormBase implements OnIni
   }
 
   async chooser(): Promise<void> {
+    const loading = this.loadingService.show('Aguarde');
+    
     try {
-      const loading = this.loadingService.show('Aguarde');
       const uri = this.platform.is('ios') ? await this.filePicker.pickFile().catch(() => null) : await this.fileChooser.open().catch(() => null);
       if (!uri) {
         loading.dismiss();
@@ -163,7 +164,6 @@ export class DocumentsToSendBasicFormComponent extends FormBase implements OnIni
           });
           alert.present();
         }
-        loading.dismiss();
       });
 
       this.cdr.detectChanges();
@@ -175,6 +175,8 @@ export class DocumentsToSendBasicFormComponent extends FormBase implements OnIni
         buttons: ['Ok']
       });
       alert.present();
+    } finally {
+      loading.dismiss();
     }
   }
 
@@ -199,9 +201,9 @@ export class DocumentsToSendBasicFormComponent extends FormBase implements OnIni
   }
 
   async takePhoto() {
+    const loading = this.loadingService.show('Aguarde');
 
     try {
-      const loading = this.loadingService.show('Aguarde');
       const options: CameraOptions = {
         quality: 100,
         destinationType: this.camera.DestinationType.FILE_URI,
@@ -224,7 +226,6 @@ export class DocumentsToSendBasicFormComponent extends FormBase implements OnIni
         this.form.get('file').setValue(docFile);
         this.form.get('name').setValue(docFile.name);
         this.onFileSelect.next(docFile);
-        loading.dismiss();
       })
     
       this.cdr.detectChanges();
@@ -236,6 +237,8 @@ export class DocumentsToSendBasicFormComponent extends FormBase implements OnIni
         buttons: ['Ok']
       });
       alert.present();
+    } finally {
+      loading.dismiss();
     }
   }
 }
