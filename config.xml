@@ -1,5 +1,5 @@
 <?xml version='1.0' encoding='utf-8'?>
-<widget android-versionCode="400080" id="br.gov.es.prodest.espm" version="6.1.0" xmlns="http://www.w3.org/ns/widgets" xmlns:android="http://schemas.android.com/apk/res/android" xmlns:cdv="http://cordova.apache.org/ns/1.0">
+<widget android-versionCode="400088" id="br.gov.es.prodest.espm" version="6.2.1" xmlns="http://www.w3.org/ns/widgets" xmlns:android="http://schemas.android.com/apk/res/android" xmlns:cdv="http://cordova.apache.org/ns/1.0">
     <name>ES na Palma da Mao</name>
     <description>O ES NA PALMA DA MÃO é um programa do Governo do Estado do Espírito Santo que reúne iniciativas e serviços do Governo em plataforma móvel (aplicativo) e web, com unidade de experiência do cidadão. Por meio do ES NA PALMA DA MÃO, diversos serviços governamentais podem ser acessados através da web e dispositivos móveis (sistemas operacionais iOS e Android) utilizando uma interface comum.</description>
     <author email="atendimento@prodest.es.gov.br" href="https://prodest.es.gov.br/">PRODEST</author>
@@ -34,20 +34,18 @@
     <preference name="ShowSplashScreenSpinner" value="false" />
     <preference name="AndroidLaunchMode" value="singleTask" />
     <preference name="Orientation" value="portrait" />
+    <preference name="SplashScreenDelay" value="3000" />
     <platform name="android">
         <resource-file src="google-services.json" target="app/google-services.json" />
+        <hook src="scripts/barcodescanner-add-compile-config.sh" type="after_platform_add" />
         <hook src="scripts/resolve-project-properties-dependencies.sh" type="before_build" />
+        <hook src="scripts/copy-custom-build-gradle.sh" type="before_build" />
         <hook src="scripts/resolve-project-properties-dependencies.sh" type="before_run" />
-        <hook src="scripts/copy-plugins-from-node_modules.js" type="before_platform_add" />
-        <hook src="scripts/manually-set-plugin-params.sh" type="before_platform_add" />
         <hook src="scripts/copy_resource_files.js" type="after_prepare" />
+        
         <edit-config file="AndroidManifest.xml" mode="merge" target="/manifest/application/activity[@android:name='MainActivity']">
             <activity android:windowSoftInputMode="adjustPan" />
         </edit-config>
-        <config-file parent="/resources" target="./res/values/strings.xml">
-            <string name="fb_app_id">926428880739042</string>
-            <string name="fb_app_name">Acesso Cidadão</string>
-        </config-file>
         <config-file mode="merge" parent="/manifest/application/activity" target="AndroidManifest.xml">
             <intent-filter>
                 <action android:name="android.intent.action.SEND" />
@@ -64,12 +62,12 @@
         <icon density="xhdpi" src="resources/android/icon/drawable-xhdpi-icon.png" />
         <icon density="xxhdpi" src="resources/android/icon/drawable-xxhdpi-icon.png" />
         <icon density="xxxhdpi" src="resources/android/icon/drawable-xxxhdpi-icon.png" />
-        <splash density="port-ldpi" src="resources/android/splash/drawable-port-ldpi-screen.png" />
-        <splash density="port-mdpi" src="resources/android/splash/drawable-port-mdpi-screen.png" />
-        <splash density="port-hdpi" src="resources/android/splash/drawable-port-hdpi-screen.png" />
-        <splash density="port-xhdpi" src="resources/android/splash/drawable-port-xhdpi-screen.png" />
-        <splash density="port-xxhdpi" src="resources/android/splash/drawable-port-xxhdpi-screen.png" />
-        <splash density="port-xxxhdpi" src="resources/android/splash/drawable-port-xxxhdpi-screen.png" />
+        <splash density="ldpi" src="resources/android/splash/drawable-port-ldpi-screen.png" />
+        <splash density="mdpi" src="resources/android/splash/drawable-port-mdpi-screen.png" />
+        <splash density="hdpi" src="resources/android/splash/drawable-port-hdpi-screen.png" />
+        <splash density="xhdpi" src="resources/android/splash/drawable-port-xhdpi-screen.png" />
+        <splash density="xxhdpi" src="resources/android/splash/drawable-port-xxhdpi-screen.png" />
+        <splash density="xxxhdpi" src="resources/android/splash/drawable-port-xxxhdpi-screen.png" />
     </platform>
     <platform name="ios">
         <allow-intent href="itms:*" />
@@ -125,39 +123,4 @@
         <splash height="480" src="resources/ios/splash/Default~iphone.png" width="320" />
         <splash height="2732" src="resources/ios/splash/Default@2x~universal~anyany.png" width="2732" />
     </platform>
-    <plugin name="cordova-plugin-whitelist" spec="1.3.1" />
-    <plugin name="cordova-plugin-device" spec="1.1.4" />
-    <plugin name="cordova-plugin-inappbrowser" spec="^1.7.2" />
-    <plugin name="cordova-plugin-facebook4" spec="^1.7.4">
-        <variable name="APP_ID" value="926428880739042" />
-        <variable name="APP_NAME" value="Acesso Cidadão" />
-    </plugin>
-    <plugin name="cordova-sqlite-storage" spec="^2.2.1" />
-    <plugin name="cordova-plugin-splashscreen" spec="^5.0.2" />
-    <plugin name="cordova-plugin-x-socialsharing" spec="^5.4.1" />
-    <plugin name="phonegap-plugin-barcodescanner" spec="^7.0.2" />
-    <plugin name="cordova-plugin-android-permissions" spec="^1.0.0" />
-    <plugin name="phonegap-plugin-push" spec="^2.2.3">
-        <variable name="ANDROID_SUPPORT_V13_VERSION" value="27.+" />
-        <variable name="FCM_VERSION" value="11.8.0" />
-    </plugin>
-    <plugin name="cordova-plugin-appavailability" spec="^0.4.2" />
-    <plugin name="cordova-plugin-local-notification" spec="^0.9.0-beta.2" />
-    <preference name="SplashScreenDelay" value="3000" />
-    <plugin name="cordova-plugin-googleplus" spec="^5.3.0">
-        <variable name="WEB_APPLICATION_CLIENT_ID" value="716051840979-96738cri764kv9vhih0d41ug07sroibv.apps.googleusercontent.com" />
-        <variable name="REVERSED_CLIENT_ID" value="com.googleusercontent.apps.716051840979-96738cri764kv9vhih0d41ug07sroibv" />
-    </plugin>
-    <plugin name="cordova-plugin-statusbar" spec="^2.4.2" />
-    <plugin name="cordova-clipboard" spec="^1.2.1" />
-    <plugin name="cordova-plugin-file-opener2" spec="^2.1.0" />
-    <plugin name="cordova-plugin-file" spec="^6.0.1" />
-    <plugin name="cordova-plugin-geolocation" spec="4.0.1">
-        <variable name="GEOLOCATION_USAGE_DESCRIPTION" value="O app precisa de acesso a sua localização para poder prover uma melhor experiências na consulta de transporte público." />
-    </plugin>
-    <plugin name="cordova-plugin-ionic-webview" spec="4.0.0" />
-    <plugin name="com-darryncampbell-cordova-plugin-intent" spec="git+https://github.com/darryncampbell/darryncampbell-cordova-plugin-intent.git" />
-    <plugin name="cordova-plugin-filechooser" spec="^1.2.0" />
-    <plugin name="cordova-plugin-filepicker" spec="^1.1.6" />
-    <engine name="android" spec="7.1.4" />
 </widget>

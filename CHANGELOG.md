@@ -2,6 +2,84 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+<a name="6.2.1"></a>
+## [6.2.1](https://github.com/prodest/es-na-palma-da-mao-mobile-vnext/compare/v6.2.0...v6.2.1) (2019-10-08)
+
+
+### Bug Fixes
+
+* **documents-to-send-doc-form:** Acerto da mensagem de aguarde que nao se desfaz ([ea75d7b](https://github.com/prodest/es-na-palma-da-mao-mobile-vnext/commit/ea75d7b))
+
+
+
+<a name="6.2.0"></a>
+# [6.2.0](https://github.com/prodest/es-na-palma-da-mao-mobile-vnext/compare/v6.1.6...v6.2.0) (2019-10-02)
+
+
+### Features
+
+* **documents-to-send:** Nome original do arquivo como nome padrao do arquivo a ser encaminhado ([d081fe7](https://github.com/prodest/es-na-palma-da-mao-mobile-vnext/commit/d081fe7))
+* **documents-to-send:** Tirar foto e encaminha-la pelo app ([a632664](https://github.com/prodest/es-na-palma-da-mao-mobile-vnext/commit/a632664))
+
+
+
+<a name="6.1.6"></a>
+## [6.1.6](https://github.com/prodest/es-na-palma-da-mao-mobile-vnext/compare/v6.1.5...v6.1.6) (2019-10-02)
+
+
+### Bug Fixes
+
+* **cordova:** scripts lfcr ([1d49db7](https://github.com/prodest/es-na-palma-da-mao-mobile-vnext/commit/1d49db7))
+
+
+
+<a name="6.1.5"></a>
+## [6.1.5](https://github.com/prodest/es-na-palma-da-mao-mobile-vnext/compare/v6.1.4...v6.1.5) (2019-10-02)
+
+
+### Bug Fixes
+
+* **cordova:** AGP png too big bug ([770bc45](https://github.com/prodest/es-na-palma-da-mao-mobile-vnext/commit/770bc45))
+* **cordova:** build. update splash density ([b59748d](https://github.com/prodest/es-na-palma-da-mao-mobile-vnext/commit/b59748d))
+* **script:** update chmod ([277a730](https://github.com/prodest/es-na-palma-da-mao-mobile-vnext/commit/277a730))
+
+
+
+<a name="6.1.4"></a>
+## [6.1.4](https://github.com/prodest/es-na-palma-da-mao-mobile-vnext/compare/v6.1.3...v6.1.4) (2019-10-02)
+
+
+### Bug Fixes
+
+* **cordova:** android resources path ([fcaba27](https://github.com/prodest/es-na-palma-da-mao-mobile-vnext/commit/fcaba27))
+
+
+
+<a name="6.1.3"></a>
+## [6.1.3](https://github.com/prodest/es-na-palma-da-mao-mobile-vnext/compare/v6.1.2...v6.1.3) (2019-10-02)
+
+
+
+<a name="6.1.2"></a>
+## [6.1.2](https://github.com/prodest/es-na-palma-da-mao-mobile-vnext/compare/v6.1.1...v6.1.2) (2019-10-02)
+
+
+### Features
+
+* **app:** update to cordova 9 ([322208a](https://github.com/prodest/es-na-palma-da-mao-mobile-vnext/commit/322208a))
+
+
+
+<a name="6.1.1"></a>
+## [6.1.1](https://github.com/prodest/es-na-palma-da-mao-mobile-vnext/compare/v6.1.0...v6.1.1) (2019-09-26)
+
+
+### Features
+
+* **mobile:** import no module expense-detail ([418771c](https://github.com/prodest/es-na-palma-da-mao-mobile-vnext/commit/418771c))
+
+
+
 <a name="6.1.0"></a>
 # [6.1.0](https://github.com/prodest/es-na-palma-da-mao-mobile-vnext/compare/v6.0.0...v6.1.0) (2019-09-25)
 

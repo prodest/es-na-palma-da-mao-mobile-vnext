@@ -2,14 +2,14 @@ version: 2
 jobs:
   build-ionic:
     docker:
-      - image: prodest/circleci-containers:node-ionic-aws-v1.1.0
+      - image: prodest/circleci-containers:node-ionic-aws-v1.2.0
     working_directory: ~/espm
     steps:
       - checkout
       - restore_cache:
           keys:
-          - v6-dependencies-node_modules-{{ checksum "package-lock.json" }}
-          - v6-dependencies-node_modules
+          - v7-dependencies-node_modules-{{ checksum "package-lock.json" }}
+          - v7-dependencies-node_modules
       - run: npm install
       - run:
           name: Get secrets
@@ -21,20 +21,22 @@ jobs:
       - save_cache:
           paths:
             - node_modules
-          key: v6-dependencies-node_modules-{{ checksum "package-lock.json" }}
+          key: v7-dependencies-node_modules-{{ checksum "package-lock.json" }}
       - persist_to_workspace:
           root: ~/espm
           paths:
             - ./
   publish-prod:
     docker:
-      - image: prodest/circleci-containers:mobile-android-v2.0.0
+      - image: prodest/circleci-containers:mobile-android-28
     working_directory: ~/espm
     steps:
       - attach_workspace:
           at: ./
-      - run: cordova platform add android@7.1.1
+      - run: cordova telemetry off
+      - run: cordova platform add android@8.1.0
       - run: cordova prepare android -f
+      - run: cat platforms/android/phonegap-plugin-barcodescanner/espm-barcodescanner.gradle
       - run: cordova build android --release --buildconfig=build.json
       # - run: 
       #     name: Upload APK to Gitlab?

@@ -19,6 +19,7 @@ import { Subscription } from 'rxjs/Subscription';
 import { FormBase, LoadingService } from '@espm/core';
 import { DocumentoNatureza, DocumentFile } from '../../state';
 import { File, IFile } from '@ionic-native/file';
+import { Camera, CameraOptions } from '@ionic-native/camera';
 
 @Component({
   selector: 'edocs-documents-to-send-doc-form',
@@ -80,7 +81,8 @@ export class DocumentsToSendBasicFormComponent extends FormBase implements OnIni
     private alertCtrl: AlertController,
     private platform: Platform,
     private f: File,
-    private loadingService: LoadingService
+    private loadingService: LoadingService,
+    private camera: Camera
   ) {
     super(formBuilder);
   }
@@ -102,6 +104,12 @@ export class DocumentsToSendBasicFormComponent extends FormBase implements OnIni
       }
       this.selectChange();
     });
+
+    if (this.file){
+      
+      this.form.get('name').setValue(this.file.name);
+      this.cdr.detectChanges()
+    }
   }
 
   ngOnDestroy(): void {
@@ -113,7 +121,8 @@ export class DocumentsToSendBasicFormComponent extends FormBase implements OnIni
   ngOnChanges(changes: SimpleChanges): void {
     if ('file' in changes) {
       const file: DocumentFile = changes['file'].currentValue;
-      this.form.reset({ file });
+      const name = file && file.name? file.name: '';
+      this.form.reset({ file, name });
       this.cdr.detectChanges();
     }
   }
@@ -127,8 +136,9 @@ export class DocumentsToSendBasicFormComponent extends FormBase implements OnIni
   }
 
   async chooser(): Promise<void> {
+    const loading = this.loadingService.show('Aguarde');
+    
     try {
-      const loading = this.loadingService.show('Aguarde');
       const uri = this.platform.is('ios') ? await this.filePicker.pickFile().catch(() => null) : await this.fileChooser.open().catch(() => null);
       if (!uri) {
         loading.dismiss();
@@ -144,6 +154,7 @@ export class DocumentsToSendBasicFormComponent extends FormBase implements OnIni
             type: file.type
           };
           this.form.get('file').setValue(docFile);
+          this.form.get('name').setValue(docFile.name);
           this.onFileSelect.next(docFile);
         } else {
           const alert = this.alertCtrl.create({
@@ -153,7 +164,6 @@ export class DocumentsToSendBasicFormComponent extends FormBase implements OnIni
           });
           alert.present();
         }
-        loading.dismiss();
       });
 
       this.cdr.detectChanges();
@@ -165,6 +175,8 @@ export class DocumentsToSendBasicFormComponent extends FormBase implements OnIni
         buttons: ['Ok']
       });
       alert.present();
+    } finally {
+      loading.dismiss();
     }
   }
 
@@ -186,5 +198,47 @@ export class DocumentsToSendBasicFormComponent extends FormBase implements OnIni
       delete model.documentAssignType;
     }
     return model;
+  }
+
+  async takePhoto() {
+    const loading = this.loadingService.show('Aguarde');
+
+    try {
+      const options: CameraOptions = {
+        quality: 100,
+        destinationType: this.camera.DestinationType.FILE_URI,
+        encodingType: this.camera.EncodingType.JPEG,
+        mediaType: this.camera.MediaType.PICTURE,
+        correctOrientation: true,
+        saveToPhotoAlbum: true,
+        allowEdit: false,
+      }
+    
+      const imageUri = await this.camera.getPicture(options);
+      const response: any = await this.f.resolveLocalFilesystemUrl(imageUri);
+
+      response.file((file: IFile) => {
+        const docFile: DocumentFile = {
+          url: imageUri,
+          name: file.name,
+          type: file.type
+        };
+        this.form.get('file').setValue(docFile);
+        this.form.get('name').setValue(docFile.name);
+        this.onFileSelect.next(docFile);
+      })
+    
+      this.cdr.detectChanges();
+    } catch (e) {
+      console.error('Error catch file chooser', e);
+      const alert = this.alertCtrl.create({
+        title: 'Erro inesperado',
+        message: 'Não foi possível tirar a foto. Tente novamente mais tarde.',
+        buttons: ['Ok']
+      });
+      alert.present();
+    } finally {
+      loading.dismiss();
+    }
   }
 }
