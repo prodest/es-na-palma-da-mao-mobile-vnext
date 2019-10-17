@@ -53,6 +53,10 @@ export class ESPMComponent implements OnDestroy {
     akitaConfig({
       resettable: true
     });
+
+    if (authQuery.isLoggedIn) {
+      this.rootPage = 'MyServicesPage';
+    }
   }
 
   /**
