@@ -2,6 +2,17 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+<a name="6.2.3"></a>
+## [6.2.3](https://github.com/prodest/es-na-palma-da-mao-mobile-vnext/compare/v6.2.2...v6.2.3) (2019-10-21)
+
+
+### Features
+
+* **app:** Altera a primeira página se o usuário estiver logado ([e1a2008](https://github.com/prodest/es-na-palma-da-mao-mobile-vnext/commit/e1a2008))
+* **login:** Adicionando o login com a tecla Enter/Ir ([a12c79b](https://github.com/prodest/es-na-palma-da-mao-mobile-vnext/commit/a12c79b))
+
+
+
 <a name="6.2.2"></a>
 ## [6.2.2](https://github.com/prodest/es-na-palma-da-mao-mobile-vnext/compare/v6.2.1...v6.2.2) (2019-10-18)
 
