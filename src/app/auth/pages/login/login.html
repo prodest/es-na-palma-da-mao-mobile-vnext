@@ -21,6 +21,7 @@
           type="password"
           [(ngModel)]="password"
           name="password"
+          (keyup.enter)="login(username, password)"
         ></ion-input>
       </ion-item>
     </div>
