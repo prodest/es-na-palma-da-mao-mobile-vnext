@@ -229,6 +229,10 @@ ion-icon {
     background: transparent url(../assets/icon/icone-servidor-publico.png)no-repeat left bottom;
     background-size: contain;
   }
+  &[class*="modulo-denuncias"] {
+    background: transparent url(../assets/icon/icone-denuncias.png)no-repeat left bottom;
+    background-size: contain;
+  }
 
   /* Ícone Selecionar favoritos */
   &[class*="custom-selecionar-favoritos"] {

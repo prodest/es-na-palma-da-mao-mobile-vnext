@@ -65,14 +65,22 @@ export const MENUS: ItemMenu[] = [
       component: 'ApresentacaoPage',
       isChecked: false
     },
+
     {
       id: 22,
       title: 'Agendamento',
       icon: 'custom-modulo-agendamento',
       component: 'PresentationPage',
       isChecked: false
+     },
+     
+     {
+       id: 23,
+       title: "Sedu",
+       icon: 'custom-modulo-denuncias',
+       component: 'SeduDenunciasPage',
+       isChecked: false
      }
-  
   ];
   
   export function menusFactory() {
