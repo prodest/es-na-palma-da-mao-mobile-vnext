@@ -1,20 +1,35 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, AlertController } from 'ionic-angular';
 
 @IonicPage({
   segment: 'contracheque'
 })
 @Component({
   selector: 'paystub',
-  templateUrl: 'paystub.html',
+  templateUrl: 'paystub.html'
 })
 export class PaystubPage {
+  constructor(public navCtrl: NavController, public navParams: NavParams, private alert: AlertController) {}
 
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
+  profiles = [
+    {
+      perfilacesso: 'Servidor'
+    },
+    {
+      perfilacesso: 'Pensionista'
+    },
+    {
+      perfilacesso: 'Pensão Especial'
+    }
+  ];
+
+  showDetails(profile: any): void {
+    const alert = this.alert.create({
+      title: profile.perfilacesso,
+      subTitle: profile.perfilacesso,
+      message: profile.perfilacesso,
+      buttons: ['OK']
+    });
+    alert.present();
   }
-
-  ionViewDidLoad() {
-    console.log('ionViewDidLoad PaystubPage');
-  }
-
 }
