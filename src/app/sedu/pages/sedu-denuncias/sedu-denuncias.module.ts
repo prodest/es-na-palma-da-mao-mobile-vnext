@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { IonicPageModule } from 'ionic-angular';
 import { SeduDenunciasPage } from './sedu-denuncias';
-import { ModulePageComponentModule } from '@espm/shared';
+import { ModulePageComponentModule, LargeButtonComponentModule } from '@espm/shared';
 
 @NgModule({
   declarations: [
@@ -9,7 +9,8 @@ import { ModulePageComponentModule } from '@espm/shared';
   ],
   imports: [
     IonicPageModule.forChild(SeduDenunciasPage),
-    ModulePageComponentModule
+    ModulePageComponentModule,
+    LargeButtonComponentModule
   ],
 })
 export class SeduDenunciasPageModule {}

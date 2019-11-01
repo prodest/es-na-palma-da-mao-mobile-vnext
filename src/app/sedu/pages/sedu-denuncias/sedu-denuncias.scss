@@ -1,3 +1,59 @@
 page-sedu-denuncias {
+  #content {
+    background-color: white !important;
+  }
+  
+  .slide-zoom {
+    height: 100%;
+    flex: 1;
+    overflow: scroll;
+  
+  }
+  
+  .slide-zoom > div {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+  }
+  
+  #slide-reclamacao {
+    .slide-zoom {
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+  }
+
+  large-button {
+    width: 75%;
+    align-self: center;
+  }
+
+  #item-descricao {
+    flex: 1;
+    padding-bottom: 15px;
+
+    textarea {
+      height: 100%;
+    }
+  }
+
+  #nav-slides {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    width: 100%;
+
+    .nav-slide button {
+      font-size: 20px;
+      background-color: transparent;
+      margin: 15px;
+    }
+    
+    #next-slide {
+      align-self: flex-end;
+    }
+  }
 
 }

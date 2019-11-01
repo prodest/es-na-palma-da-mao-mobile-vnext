@@ -1,19 +1,82 @@
 <module-page title="SEDU" no-padding no-footer>
-  <h2>Preencha as informações abaixo</h2>
-  <ion-item>
-    <ion-label floating>Seu nome</ion-label>
-    <ion-input type="text"></ion-input>
-  </ion-item>
-  <ion-item>
-    <ion-label floating>Seu e-mail</ion-label>
-    <ion-input type="text"></ion-input>
-  </ion-item>
-  <ion-item>
-    <ion-label floating>Nº Instalação EDP</ion-label>
-    <ion-input type="text"></ion-input>
-  </ion-item>
-  <ion-item>
-    <ion-label floating>RA</ion-label>
-    <ion-input type="text"></ion-input>
-  </ion-item>
+  <ion-slides #slides>
+    <ion-slide id="slide-identificacao">
+      <ion-list-header>Suas informações</ion-list-header>
+      <ion-item>
+        <ion-label floating>Seu nome</ion-label>
+        <ion-input type="text" [(ngModel)]="denuncia.autor"></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label floating>Seu e-mail</ion-label>
+        <ion-input type="text" [(ngModel)]="denuncia.email"></ion-input>
+      </ion-item>
+    </ion-slide>
+    <ion-slide id="slide-aluno">
+      <ion-list-header>Agora nos ajude a identificar a rota</ion-list-header>
+      <ion-item>
+        <ion-label floating>Nº Instalação EDP do Aluno</ion-label>
+        <ion-input type="text" [(ngModel)]="denuncia.codigoEdp"></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label floating>RA</ion-label>
+        <ion-input type="text" [(ngModel)]="denuncia.RA"></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label floating>Município</ion-label>
+        <ion-select
+          [(ngModel)]="municipio"
+          cancelText="Cancelar">
+          <ion-option *ngFor="let municipio of municipios">{{municipio}}</ion-option>
+        </ion-select>
+      </ion-item>
+      <ion-item>
+        <ion-label floating>Escola</ion-label>
+        <ion-select
+          [(ngModel)]="escola"
+          cancelText="Cancelar">
+          <ion-option *ngFor="let escola of escolas">{{escola}}</ion-option>
+        </ion-select>
+      </ion-item>
+    </ion-slide>
+    <ion-slide id="slide-reclamacao">
+      <div>
+        <ion-list-header>Agora detalhe sua reclamação</ion-list-header>
+        <ion-item>
+          <ion-label floating>Tipo de reclamação</ion-label>
+          <ion-select
+            [(ngModel)]="denuncia.tipo"
+            cancelText="Cancelar">
+            <ion-option *ngFor="let tipo of tiposDenuncia" [value]="tipo.id">{{tipo.value}}</ion-option>
+          </ion-select>
+        </ion-item>
+        <ion-item *ngIf="denuncia.tipo == 4">
+          <ion-label floating>Que tipo?</ion-label>
+          <ion-input type="text" [(ngModel)]="denuncia.outroTipo"></ion-input>
+        </ion-item>
+        <ion-item id="item-descricao">
+          <ion-label floating>Descreva sua reclamação</ion-label>
+          <ion-textarea [(ngModel)]="denuncia.descricao"></ion-textarea>
+        </ion-item>
+      </div>
+      <large-button
+        text="Enviar"
+        leftIcon="ios-add-circle-outline"
+        rightIcon="ios-arrow-forward-outline"
+        color="primary-dark"
+        (click)="send()"
+      ></large-button>
+    </ion-slide>
+  </ion-slides>
+  <div id="nav-slides">
+    <span class="nav-slide">
+      <button *ngIf="!slides.isBeginning()" icon-only id="prev-slide" (click)="prev()">
+        <ion-icon name="custom-nav-voltar"></ion-icon>
+      </button>
+    </span>
+    <span class="nav-slide">
+      <button *ngIf="!slides.isEnd()" icon-only id="next-slide" (click)="next()">
+        <ion-icon name="custom-nav-avancar"></ion-icon>
+      </button>
+    </span>
+    </div>
 </module-page>
