@@ -10,4 +10,5 @@ export interface ItemMenu {
   deepLink?: boolean;
   package?: string;
   uriScheme?: string;
+  isCivilServant?: boolean;
 }
