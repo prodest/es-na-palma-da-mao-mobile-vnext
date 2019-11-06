@@ -1,0 +1,1 @@
+sed -i 's/\(com.android.tools.build:gradle:\)[0-9\.\+]*/\13+/' ./platforms/android/cordova-support-google-services/espm-build.gradle
