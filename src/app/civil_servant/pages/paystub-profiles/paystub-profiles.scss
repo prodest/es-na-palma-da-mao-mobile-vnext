@@ -1,0 +1,21 @@
+paystub-profiles {
+  ion-list.list {
+    flex: 1 !important;
+    margin: 0 !important;
+
+    [ion-button] {
+      background-color: white !important;
+      font-family: 'Poppins';
+      color: #004297; // $primary-dark
+      font-weight: 600;
+      text-transform: none;
+      margin-top: 0;
+      margin-bottom: 5px;
+      box-shadow: none;
+
+      .button-inner {
+        justify-content: space-between;
+      }
+    }
+  }
+}
