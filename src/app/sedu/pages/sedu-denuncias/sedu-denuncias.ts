@@ -1,6 +1,7 @@
 import { Component, ViewChild } from '@angular/core';
-import { IonicPage, NavController, NavParams, Slides } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, Slides, AlertController, App, MenuController } from 'ionic-angular';
 import { Denuncia } from '../../model/denuncia';
+import { AuthQuery } from '@espm/core';
 
 /**
  * Generated class for the SeduDenunciasPage page.
@@ -29,7 +30,6 @@ export class SeduDenunciasPage {
   };
   municipio: String;
   escola: String;
-  
   municipios = [
     "Vitória", "Cariacica", "Serra", "Vila Velha", "Viana", "Guarapari"
   ];
@@ -46,12 +46,68 @@ export class SeduDenunciasPage {
     {id: 4, value: "Outro"}
   ];
 
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
-  }
-
-  ionViewDidLoad() {
+  constructor(
+    public navCtrl: NavController,
+    public navParams: NavParams,
+    public alertCtrl: AlertController,
+    protected appCtrl: App,
+    private menuCtrl: MenuController,
+    public auth: AuthQuery
+  ) {
     
   }
+
+  ionViewCanEnter(): boolean | Promise<any> {
+    let isAllowed = this.auth.isLoggedIn;
+    if (!isAllowed) {
+      this.showAuthNeededModal()
+    }
+    return isAllowed;
+  }
+
+  ionViewDidEnter() {
+    console.log(this.auth.state.claims);
+    
+    this.denuncia.autor = this.auth.state.claims.nome;
+    this.denuncia.email = this.auth.state.claims.email;
+  }
+
+  showAuthNeededModal = () => {
+    let alert = this.alertCtrl.create({
+      title: 'Login necessário',
+      message: 'Você deve estar autenticado no <strong>ES na palma da mão</strong> para acessar essa funcionalidade.',
+      buttons: [
+        {
+          text: 'Entendi',
+          handler: () => {
+            this.appCtrl
+              .getRootNav()
+              .setRoot('MyServicesPage')
+              .then(() => {
+                alert.dismiss();
+                this.menuCtrl.close();
+              });
+            return false;
+          },
+          role: 'cancel'
+        },
+        {
+          text: 'Autenticar',
+          handler: () => {
+            this.appCtrl
+              .getRootNav()
+              .push('LoginPage', { redirectTo: 'SeduDenunciasPage' })
+              .then(() => {
+                alert.dismiss();
+                this.menuCtrl.close();
+              });
+            return false;
+          }
+        }
+      ]
+    });
+    return alert.present();
+  };
 
   send() {
     console.log("enviando");

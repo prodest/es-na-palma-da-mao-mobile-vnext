@@ -1,14 +1,14 @@
 <module-page title="SEDU" no-padding no-footer>
   <ion-slides #slides>
     <ion-slide id="slide-identificacao">
-      <ion-list-header>Suas informações</ion-list-header>
+      <ion-list-header>Primeiro, cheque suas informações</ion-list-header>
       <ion-item>
         <ion-label floating>Seu nome</ion-label>
-        <ion-input type="text" [(ngModel)]="denuncia.autor"></ion-input>
+        <ion-input type="text" [(ngModel)]="denuncia.autor" [disabled]="true"></ion-input>
       </ion-item>
       <ion-item>
         <ion-label floating>Seu e-mail</ion-label>
-        <ion-input type="text" [(ngModel)]="denuncia.email"></ion-input>
+        <ion-input type="text" [(ngModel)]="denuncia.email" [disabled]="true"></ion-input>
       </ion-item>
     </ion-slide>
     <ion-slide id="slide-aluno">
@@ -16,10 +16,6 @@
       <ion-item>
         <ion-label floating>Nº Instalação EDP do Aluno</ion-label>
         <ion-input type="text" [(ngModel)]="denuncia.codigoEdp"></ion-input>
-      </ion-item>
-      <ion-item>
-        <ion-label floating>RA</ion-label>
-        <ion-input type="text" [(ngModel)]="denuncia.RA"></ion-input>
       </ion-item>
       <ion-item>
         <ion-label floating>Município</ion-label>

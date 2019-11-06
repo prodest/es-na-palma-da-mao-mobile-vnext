@@ -1,4 +1,4 @@
-import { SeduDenunciasApiProvider } from './sedu-denuncias-api';
+import { SeduDenunciasApiProvider } from './sedu-denuncias-api.service';
 
 export { SeduDenunciasApiProvider }
 
