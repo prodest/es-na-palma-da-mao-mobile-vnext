@@ -18,11 +18,10 @@ import { AuthQuery } from '@espm/core';
 export class SeduDenunciasPage {
   @ViewChild('slides') slides: Slides;
 
-  denuncia: Denuncia = {
+  denuncia: Partial<Denuncia> = {
     autor: "",
     email: "",
     codigoEdp: "",
-    RA: "",
     tipo: 0,
     outroTipo: "",
     descricao: "",
@@ -66,8 +65,6 @@ export class SeduDenunciasPage {
   }
 
   ionViewDidEnter() {
-    console.log(this.auth.state.claims);
-    
     this.denuncia.autor = this.auth.state.claims.nome;
     this.denuncia.email = this.auth.state.claims.email;
   }

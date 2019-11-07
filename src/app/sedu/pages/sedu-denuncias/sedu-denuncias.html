@@ -1,7 +1,8 @@
 <module-page title="SEDU" no-padding no-footer>
   <ion-slides #slides>
     <ion-slide id="slide-identificacao">
-      <ion-list-header>Primeiro, cheque suas informações</ion-list-header>
+      <ion-list-header>Verifique suas informações. <br>
+        Se este não é você, faça logout, por favor.</ion-list-header>
       <ion-item>
         <ion-label floating>Seu nome</ion-label>
         <ion-input type="text" [(ngModel)]="denuncia.autor" [disabled]="true"></ion-input>
@@ -21,16 +22,18 @@
         <ion-label floating>Município</ion-label>
         <ion-select
           [(ngModel)]="municipio"
-          cancelText="Cancelar">
-          <ion-option *ngFor="let municipio of municipios">{{municipio}}</ion-option>
+          cancelText="Cancelar"
+          [required]="true">
+          <ion-option *ngFor="let municipio of municipios" value="municipio">{{municipio}}</ion-option>
         </ion-select>
       </ion-item>
       <ion-item>
         <ion-label floating>Escola</ion-label>
         <ion-select
           [(ngModel)]="escola"
-          cancelText="Cancelar">
-          <ion-option *ngFor="let escola of escolas">{{escola}}</ion-option>
+          cancelText="Cancelar"
+          [required]="true">
+          <ion-option *ngFor="let escola of escolas" value="escola">{{escola}}</ion-option>
         </ion-select>
       </ion-item>
     </ion-slide>
