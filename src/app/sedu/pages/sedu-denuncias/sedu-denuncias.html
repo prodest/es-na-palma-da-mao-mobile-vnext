@@ -13,27 +13,33 @@
       </ion-item>
     </ion-slide>
     <ion-slide id="slide-aluno">
-      <ion-list-header>Agora nos ajude a identificar a rota</ion-list-header>
+      <ion-list-header>
+        Agora, nos ajude a identificar a rota que está <br>
+        com problemas
+      </ion-list-header>
+      <ion-item>
+        <ion-label floating>Nome do Aluno</ion-label>
+        <ion-input type="text"></ion-input>
+      </ion-item>
       <ion-item>
         <ion-label floating>Nº Instalação EDP do Aluno</ion-label>
-        <ion-input type="text" [(ngModel)]="denuncia.codigoEdp"></ion-input>
+        <ion-input type="number" [(ngModel)]="denuncia.codigoEdp"></ion-input>
       </ion-item>
       <ion-item>
         <ion-label floating>Município</ion-label>
         <ion-select
           [(ngModel)]="municipio"
-          cancelText="Cancelar"
-          [required]="true">
-          <ion-option *ngFor="let municipio of municipios" value="municipio">{{municipio}}</ion-option>
+          cancelText="Cancelar">
+          <ion-option *ngFor="let municipio of municipios" [value]="municipio">{{municipio}}</ion-option>
         </ion-select>
       </ion-item>
       <ion-item>
         <ion-label floating>Escola</ion-label>
         <ion-select
-          [(ngModel)]="escola"
+          [(ngModel)]="denuncia.inepEscola"
           cancelText="Cancelar"
-          [required]="true">
-          <ion-option *ngFor="let escola of escolas" value="escola">{{escola}}</ion-option>
+          [disabled]="municipio == undefined">
+          <ion-option *ngFor="let escola of escolas" [value]="escola.inep">{{escola.nome}}</ion-option>
         </ion-select>
       </ion-item>
     </ion-slide>
@@ -73,7 +79,7 @@
       </button>
     </span>
     <span class="nav-slide">
-      <button *ngIf="!slides.isEnd()" icon-only id="next-slide" (click)="next()">
+      <button *ngIf="!slides.isEnd() && canGoNext()" icon-only id="next-slide" (click)="next()">
         <ion-icon name="custom-nav-avancar"></ion-icon>
       </button>
     </span>

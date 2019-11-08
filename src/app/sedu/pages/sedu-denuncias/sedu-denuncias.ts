@@ -33,9 +33,9 @@ export class SeduDenunciasPage {
     "Vitória", "Cariacica", "Serra", "Vila Velha", "Viana", "Guarapari"
   ];
   escolas = [
-    "Escola 1",
-    "Escola 2",
-    "Escola 3",
+    {"nome": "Escola do Magno", "inep": 123456},
+    {"nome": "Escola do Matheus", "inep": 123457},
+    {"nome": "Escola do Lucas", "inep": 123458}
   ];
   tiposDenuncia = [
     {id: 0, value: "Ônibus não passou"},
@@ -65,8 +65,12 @@ export class SeduDenunciasPage {
   }
 
   ionViewDidEnter() {
-    this.denuncia.autor = this.auth.state.claims.nome;
-    this.denuncia.email = this.auth.state.claims.email;
+    this.slides.lockSwipes(true);
+
+    if (this.auth.isLoggedIn) {
+      this.denuncia.autor = this.auth.state.claims.nome;
+      this.denuncia.email = this.auth.state.claims.email;
+    }
   }
 
   showAuthNeededModal = () => {
@@ -106,16 +110,55 @@ export class SeduDenunciasPage {
     return alert.present();
   };
 
+  /** 
+   * Envia a reclamação/denuncia.
+   */
   send() {
     console.log("enviando");
   }
 
+  /**
+   * Retorna para o Slide anterior.
+   */
   prev() {
+    this.slides.lockSwipes(false);
     this.slides.slidePrev();
+    this.slides.lockSwipes(true);
   }
 
+  /**
+   * Avança para o próximo Slide.
+   */
   next() {
+    this.slides.lockSwipes(false);
     this.slides.slideNext();
+    this.slides.lockSwipes(true);
+  }
+
+  /**
+   * Diz se o usuário pode avançar a tela ou não, para cada Slide.
+   */
+  canGoNext(): boolean {
+    
+    if (this.slides.getActiveIndex() === 0) return true;
+
+    if (this.slides.getActiveIndex() === 1) {
+      if (
+        this.denuncia.codigoEdp &&
+        this.denuncia.inepEscola) {
+          return true;
+      }
+    }
+
+    if (this.slides.getActiveIndex() === 2) {
+      if (
+        this.denuncia.tipo &&
+        this.denuncia.descricao) {
+          return true;
+      }
+    }
+
+    return false;
   }
 
 }
