@@ -21,11 +21,26 @@ const markFavorites = ([concursos, favorites]: [Concurso[], ConcursoFavorito]): 
 };
 
 @Injectable()
+/**
+constructor
+(
+  public navCtrl: NavController,
+  public navParams: NavParams,
+  public auth: AuthQuery
+) 
+{
+  let isLogged =this.auth.isLoggedIn
+  let cpf = this.auth.state.claims.cpf
+}
+
+*/
+
 export class SelecaoService {
   /**
    *
    */
   constructor(
+    private auth: AuthQuery,
     private loadingCtrl: LoadingController,
     private authQuery: AuthQuery,
     private api: SelecaoApiService,
@@ -51,13 +66,31 @@ export class SelecaoService {
    *
    */
   loadAll = () => {
-    this.showLoading();
+    this.showLoading(); 
 
-    const concursos$ = this.authQuery.isLoggedIn
+    const concursos$ = this.authQuery.isLoggedIn 
       ? forkJoin(this.getAllConcursos(), this.api.getFavorites()).pipe(map(markFavorites))
       : this.getAllConcursos();
 
     concursos$.pipe(finalize(() => this.dismissLoading())).subscribe(concursos => this.store.set(concursos));
+
+   // this.loadAllpercent();
+  };
+  /**
+   * 
+   */
+
+   loadAllpercent ()  {
+    if (this.auth.isLoggedIn)
+    { let cpf = this.auth.state.claims.cpf }
+
+    this.showLoading(); 
+
+    const concursos$ = this.authQuery.isLoggedIn 
+  //    ? forkJoin(this.getAllConcursos(), this.api.getPorcentagem()).pipe(map())
+   //   : this.getAllConcursos();
+
+  // return concursos$.pipe(finalize(() => this.dismissLoading())).subscribe(concursos => this.store.set(concursos));
   };
 
   /**

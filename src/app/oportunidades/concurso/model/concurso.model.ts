@@ -14,4 +14,5 @@ export class Concurso {
   nome?: string;
   areas?: Areas[];
   favorito?: boolean;
+  porcentagem?: number;
 }

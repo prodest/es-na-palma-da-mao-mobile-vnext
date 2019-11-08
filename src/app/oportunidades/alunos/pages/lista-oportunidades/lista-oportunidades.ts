@@ -13,6 +13,20 @@ import { map } from 'rxjs/operators';
   templateUrl: 'lista-oportunidades.html'
 })
 export class ListaOportunidadesPage {
+
+  lista = [
+    {
+      nome:"ivonildo",
+      idade:12
+    },
+    {
+      nome:"paulo",
+      idade:1
+    },{
+      nome:"ivon",
+      idade:2
+    },
+  ]
   /**
    *
    */

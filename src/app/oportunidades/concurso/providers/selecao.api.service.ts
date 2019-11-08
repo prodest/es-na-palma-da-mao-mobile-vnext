@@ -15,7 +15,9 @@ export class SelecaoApiService {
   /**
    *
    */
-  constructor(private http: HttpClient, @Inject(EnvVariables) private env: Environment) {}
+  constructor(private http: HttpClient, @Inject(EnvVariables) private env: Environment) {
+
+  }
 
   /**
    *
@@ -45,6 +47,24 @@ export class SelecaoApiService {
   getFavorites = (): Observable<ConcursoFavorito> => {
     return this.http.get<ConcursoFavorito>(`${this.env.api.espm}/publicTender/data/favorite`).pipe(share());
   };
+  /**
+   * 
+   */
+
+  getPorcentagem = (cpf: string, orgaos: [string]): Observable<Concurso[]> => {
+    let string = `${this.env.api.empregabilidade}/cpf/orgao?cpf=${cpf}`;
+         // todo: concatenar os órgãos na string
+         for(let i = 0; i < orgaos.length; i ++){
+           
+         }
+    
+    return this.http.get<Concurso[]>(string).pipe(share());
+    // /cpf/orgao?cpf=<cpf_que _voce_vai_mandar>&orgao=<primeiro_orgao>&orgao=<segundo_orgao>
+  }; 
+
+  /**
+   * 
+   */
   syncFavorites = (favoritos): Observable<ConcursoFavorito> => {
     return this.http.post<ConcursoFavorito>(`${this.env.api.espm}/publicTender/data/favorite`, favoritos).pipe(share());
   };

@@ -1,10 +1,13 @@
+
+
 import { Component } from '@angular/core';
-import { trackById } from '@espm/core';
+import { trackById, AuthQuery } from '@espm/core';
 import { IonicPage, NavController } from 'ionic-angular';
 import deburr from 'lodash-es/deburr';
 import { Concurso } from '../../model';
 import { SelecaoQuery, SelecaoService } from '../../providers';
 import { Subject } from 'rxjs/Subject';
+
 
 @IonicPage({
   segment: 'concursos'
@@ -14,6 +17,19 @@ import { Subject } from 'rxjs/Subject';
   templateUrl: 'concursos.html'
 })
 export class ConcursosPage {
+
+  data=[
+    { CPF: '02437333128',
+      orgao:'SEDU',
+      percentual: 65 },
+
+    { CPF: '01435333128',
+      orgao:'SESA',
+      percentual: 95 },
+
+    { CPF: '01435355555',
+      orgao:'SECTI',
+      percentual: 10 }]
   /**
   *
   */
@@ -22,17 +38,33 @@ export class ConcursosPage {
   allConcursos: Concurso[];
   filteredConcursos: Concurso[];
   trackById = trackById;
+  valor = [];
   
   /**
   *
   */
-  constructor(private navCtrl: NavController, private service: SelecaoService, private query: SelecaoQuery) {
+  constructor(private auth: AuthQuery, private navCtrl: NavController, private service: SelecaoService, private query: SelecaoQuery) {
     this.concursos$ = new Subject();
+
+   if (this.auth.isLoggedIn)
+    { let cpf = this.auth.state.claims.cpf 
+      for(let i = 0; i < this.data.length; i++){
+        if(cpf === this.data[i].CPF){ 
+          this.valor[i] = this.data[i].orgao
+         
+        }
+      }
+    }
+    console.log(this.valor)
   }
   
   /**
   *
   */
+  verificationOrgan(){
+  
+}
+  
   ionViewWillLoad() {
     this.query
     .selectAll()
