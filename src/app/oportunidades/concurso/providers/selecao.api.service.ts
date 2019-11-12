@@ -51,7 +51,7 @@ export class SelecaoApiService {
    * 
    */
 
-  getPorcentagem = (cpf: string, orgaos: [string]): Observable<Concurso[]> => {
+   /* getPorcentagem = (cpf: string, orgaos: [string]): Observable<Concurso[]> => {
     let string = `${this.env.api.empregabilidade}/cpf/orgao?cpf=${cpf}`;
          // todo: concatenar os órgãos na string
          for(let i = 0; i < orgaos.length; i ++){

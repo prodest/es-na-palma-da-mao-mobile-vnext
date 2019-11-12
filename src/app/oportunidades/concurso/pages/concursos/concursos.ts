@@ -1,3 +1,4 @@
+// import { Auth } from './../../../../../libs/core/auth/index';
 
 
 import { Component } from '@angular/core';
@@ -18,18 +19,50 @@ import { Subject } from 'rxjs/Subject';
 })
 export class ConcursosPage {
 
-  data=[
-    { CPF: '02437333128',
-      orgao:'SEDU',
-      percentual: 65 },
+  dadosTeste=[
+    {
+      "orgao": "SEDU",
+      "porcentagem": 67.8473
+    },
+    {
+      "orgao": "SESA",
+      "porcentagem": 49.6142
+    },
+    {
+      "orgao": "IASES",
+      "porcentagem": 64.7321
+    },
+    {
+      "orgao": "SEJUS",
+      "porcentagem": 68.2648
+    },
+    {
+      "orgao": "OUTROS",
+      "porcentagem": 82.5552
+    },
+    {
+      "orgao": "SEDU",
+      "porcentagem": 54.0532
+    },
+    {
+      "orgao": "SEDU",
+      "porcentagem": 81.5622
+    },
+    {
+      "orgao": "IASES",
+      "porcentagem": 40.4908
+    },
+    {
+      "orgao": "OUTROS",
+      "porcentagem": 53.3688
+    },
+    {
+      "orgao": "OUTROS",
+      "porcentagem": 25.435
+    }
+  ]
 
-    { CPF: '01435333128',
-      orgao:'SESA',
-      percentual: 95 },
 
-    { CPF: '01435355555',
-      orgao:'SECTI',
-      percentual: 10 }]
   /**
   *
   */
@@ -46,36 +79,75 @@ export class ConcursosPage {
   constructor(private auth: AuthQuery, private navCtrl: NavController, private service: SelecaoService, private query: SelecaoQuery) {
     this.concursos$ = new Subject();
 
-   if (this.auth.isLoggedIn)
-    { let cpf = this.auth.state.claims.cpf 
-      for(let i = 0; i < this.data.length; i++){
-        if(cpf === this.data[i].CPF){ 
-          this.valor[i] = this.data[i].orgao
-         
+  /*  if (this.auth.isLoggedIn) // verificando se está logado
+    { let cpf = this.auth.state.claims.cpf  // funcao que pega o cpf pronto 
+
+      for(let i = 0; i < this.data.length; i++)
+      {
+        if(cpf === this.data[i].CPF)
+        { 
+          this.valor[i] = this.data[i].orgao   
         }
       }
     }
-    console.log(this.valor)
+    console.log(this.valor) */
   }
+
+
   
   /**
   *
   */
-  verificationOrgan(){
+  verificationOrgan() {
   
-}
+  }
+
+  matcheorgaos(concursos) {
+    if (this.auth.isLoggedIn) {  // se o usuario esta logado
+      // let cpf = this.auth.state.claims.cpf;
+      let newConcursos = [];
+
+      concursos.map(
+        (concurso: Concurso) => {
+          let porcentagem;
+
+          this.dadosTeste.map(
+            (dado) => {
+              if (dado.orgao === concurso.orgao.trim()) {
+                porcentagem = dado.porcentagem;
+              }
+            }
+          );
+
+          newConcursos.push({
+            ...concurso,
+            porcentagem: porcentagem
+          });
+        }
+      );
+
+      return newConcursos;
+    }
+
+    return concursos;
+  }
+  
   
   ionViewWillLoad() {
     this.query
     .selectAll()
     .subscribe((concursos: Concurso[]) => {
+      console.log(concursos);
+      
       this.allConcursos = concursos;
-      this.updateConcursos(concursos);
+      this.updateConcursos(this.matcheorgaos(concursos));
+    
     });
     
     // carrega dados
     this.service.loadAll();
   }
+
   /**
   *
   */

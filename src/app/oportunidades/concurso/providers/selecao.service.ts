@@ -40,7 +40,7 @@ export class SelecaoService {
    *
    */
   constructor(
-    private auth: AuthQuery,
+    // private auth: AuthQuery,
     private loadingCtrl: LoadingController,
     private authQuery: AuthQuery,
     private api: SelecaoApiService,
@@ -78,7 +78,7 @@ export class SelecaoService {
   };
   /**
    * 
-   */
+ 
 
    loadAllpercent ()  {
     if (this.auth.isLoggedIn)
