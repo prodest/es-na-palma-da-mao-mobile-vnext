@@ -102,18 +102,17 @@ export class ConcursosPage {
   
   }
 
-  matcheorgaos(concursos) {
+  matcheorgaos(concursos) {  // funcao que verifica se os orgaos recebidos estao iguais
     if (this.auth.isLoggedIn) {  // se o usuario esta logado
       // let cpf = this.auth.state.claims.cpf;
-      let newConcursos = [];
-
-      concursos.map(
-        (concurso: Concurso) => {
+      let newConcursos = []; // necessario criar pois nao estava reconhecendo o objeto criado.
+      concursos.map(  // loop de fora 
+        (concurso: Concurso) => { 
           let porcentagem;
-
           this.dadosTeste.map(
             (dado) => {
-              if (dado.orgao === concurso.orgao.trim()) {
+              if (dado.orgao === concurso.orgao.trim() && concurso.status === 'aberto' || concurso.status === 'andamento'  ) 
+              {
                 porcentagem = dado.porcentagem;
               }
             }
