@@ -394,6 +394,10 @@ ion-alert {
       }
     }
 
+    .alert-radio-group .alert-radio-label {
+      white-space: unset;
+    }
+
     .alert-message {
       font-weight: 600 !important;
     }

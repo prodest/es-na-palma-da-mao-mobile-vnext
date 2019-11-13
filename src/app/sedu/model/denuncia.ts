@@ -1,10 +1,10 @@
 export interface Denuncia {
   autor: string;
   email: string;
+  aluno: string;
   codigoEdp: string;
-  RA: string;
   tipo: number;
-  outroTipo: string;
+  outroTipo?: string;
   descricao: string;
   inepEscola: string;
 }

@@ -2,6 +2,9 @@ import { Component, ViewChild } from '@angular/core';
 import { IonicPage, NavController, NavParams, Slides, AlertController, App, MenuController } from 'ionic-angular';
 import { Denuncia } from '../../model/denuncia';
 import { AuthQuery } from '@espm/core';
+import { Subject } from 'rxjs/Subject';
+import { SeduDenunciasApiService } from '../../providers';
+import { Escola } from '../../model/escola';
 
 /**
  * Generated class for the SeduDenunciasPage page.
@@ -21,42 +24,38 @@ export class SeduDenunciasPage {
   denuncia: Partial<Denuncia> = {
     autor: "",
     email: "",
+    aluno: "",
     codigoEdp: "",
     tipo: 0,
-    outroTipo: "",
     descricao: "",
     inepEscola: ""
   };
-  municipio: String;
-  escola: String;
-  municipios = [
-    "Vitória", "Cariacica", "Serra", "Vila Velha", "Viana", "Guarapari"
-  ];
-  escolas = [
-    {"nome": "Escola do Magno", "inep": 123456},
-    {"nome": "Escola do Matheus", "inep": 123457},
-    {"nome": "Escola do Lucas", "inep": 123458}
-  ];
-  tiposDenuncia = [
-    {id: 0, value: "Ônibus não passou"},
-    {id: 1, value: "Ônibus atrasou"},
-    {id: 2, value: "Ônibus lotado"},
-    {id: 3, value: "Ônibus danificado"},
-    {id: 4, value: "Outro"}
-  ];
 
+  municipios$: Subject<Array<any>>;               // lista de municípios, obtida pela api, para exibir no select
+  tiposDenuncia$: Subject<Array<any>>;            // lista de tipos de denúncias, obtida pela api
+  escolas: Array<Escola>;                         // lista de todas as escolas, obtida pela api
+  escolasDoMunicipio$: Subject<Array<Escola>>;    // lista de escolas, filtrada por município, exibida no select de escolas, atualizada pelo subscribe no IonViewDidEnter
+  municipio$: Subject<string>;                    // município escolhido, atualizado pelo método setCity()
+  municipio: string;                              // município escolhido, amarrado no [(ngModel)] do select de município
+  escola: string;                                 // escola escolhida pelo usuário, amarrada no [(ngModel)] do select de escola
+  
   constructor(
     public navCtrl: NavController,
     public navParams: NavParams,
     public alertCtrl: AlertController,
     protected appCtrl: App,
     private menuCtrl: MenuController,
-    public auth: AuthQuery
+    public auth: AuthQuery,
+    public api: SeduDenunciasApiService
   ) {
-    
+    this.municipios$ = new Subject();
+    this.municipio$ = new Subject();
+    this.escolasDoMunicipio$ = new Subject();
+    this.tiposDenuncia$ = new Subject();
   }
 
   ionViewCanEnter(): boolean | Promise<any> {
+    // Check de autenticação
     let isAllowed = this.auth.isLoggedIn;
     if (!isAllowed) {
       this.showAuthNeededModal()
@@ -65,12 +64,52 @@ export class SeduDenunciasPage {
   }
 
   ionViewDidEnter() {
-    this.slides.lockSwipes(true);
+    this.slides.lockSwipes(true); // trava o swipe para o usuário seguir o passo a passo
 
+    // Checa a autenticação e obtém os dados do usuário
     if (this.auth.isLoggedIn) {
       this.denuncia.autor = this.auth.state.claims.nome;
       this.denuncia.email = this.auth.state.claims.email;
     }
+
+    // Atualiza a lista de escolas SEMPRE que o usuário troca o município no select
+    this.municipio$.subscribe((municipio: string) => {
+      this.escolasDoMunicipio$.next(
+        this.escolas.filter((escola: Escola) => escola.municipio === municipio)
+      );
+    });
+
+    this.loadData();
+  }
+
+  /**
+   * Carrega os dados da API para o app
+   */
+  loadData() {
+    // carrega municípios
+    this.api.getMunicipios()
+    .subscribe((municipios) => {
+      this.municipios$.next(municipios);
+    });
+
+    // carrega escolas
+    this.api.getSchools()
+    .subscribe((escolas) => {
+      this.escolas = escolas;
+    });
+
+    // carrega tipos de denuncias
+    this.api.getDemandTypes()
+    .subscribe((tipos) => {
+      this.tiposDenuncia$.next(tipos);
+    });
+  }
+
+  /**
+   * Disparado pelo ionChange do ion-select de municípios para atualizar a lista de escolas.
+   */
+  setCity() {
+    this.municipio$.next(this.municipio);
   }
 
   showAuthNeededModal = () => {
@@ -114,7 +153,34 @@ export class SeduDenunciasPage {
    * Envia a reclamação/denuncia.
    */
   send() {
-    console.log("enviando");
+    this.api.sendDemand(this.denuncia as Denuncia)
+    .subscribe(
+      res => {
+        this.showSuccessAlert(res["protocolo"]);
+      }
+    );
+  }
+
+  showSuccessAlert(protocolo) {
+    let alert = this.alertCtrl.create({
+      title: "Reclamação recebida",
+      message: `Nº de Protocolo: ${protocolo}`,
+      buttons: [
+        {
+          text: "OK",
+          handler: () => {
+            if (this.navCtrl.length() > 1) {
+              this.navCtrl.pop();
+            }
+            else {
+              this.navCtrl.setRoot('MyServicesPage');
+            }
+          }
+        }
+      ]
+    });
+
+    alert.present();
   }
 
   /**
@@ -144,6 +210,7 @@ export class SeduDenunciasPage {
 
     if (this.slides.getActiveIndex() === 1) {
       if (
+        this.denuncia.aluno &&
         this.denuncia.codigoEdp &&
         this.denuncia.inepEscola) {
           return true;

@@ -1,5 +1,6 @@
 export interface Escola {
+  id: number;
   nome: string;
-  codigoInep: number;
+  inep: number;
   municipio: string;
 }

@@ -19,7 +19,7 @@
       </ion-list-header>
       <ion-item>
         <ion-label floating>Nome do Aluno</ion-label>
-        <ion-input type="text"></ion-input>
+        <ion-input type="text" [(ngModel)]="denuncia.aluno"></ion-input>
       </ion-item>
       <ion-item>
         <ion-label floating>Nº Instalação EDP do Aluno</ion-label>
@@ -29,8 +29,9 @@
         <ion-label floating>Município</ion-label>
         <ion-select
           [(ngModel)]="municipio"
-          cancelText="Cancelar">
-          <ion-option *ngFor="let municipio of municipios" [value]="municipio">{{municipio}}</ion-option>
+          cancelText="Cancelar"
+          (ionChange)="setCity()">
+          <ion-option *ngFor="let municipio of municipios$ | async" [value]="municipio.nome">{{municipio.nome}}</ion-option>
         </ion-select>
       </ion-item>
       <ion-item>
@@ -39,7 +40,7 @@
           [(ngModel)]="denuncia.inepEscola"
           cancelText="Cancelar"
           [disabled]="municipio == undefined">
-          <ion-option *ngFor="let escola of escolas" [value]="escola.inep">{{escola.nome}}</ion-option>
+          <ion-option *ngFor="let escola of escolasDoMunicipio$ | async" [value]="escola.inep">{{escola.nome}}</ion-option>
         </ion-select>
       </ion-item>
     </ion-slide>
@@ -51,7 +52,7 @@
           <ion-select
             [(ngModel)]="denuncia.tipo"
             cancelText="Cancelar">
-            <ion-option *ngFor="let tipo of tiposDenuncia" [value]="tipo.id">{{tipo.value}}</ion-option>
+            <ion-option *ngFor="let tipo of tiposDenuncia$ | async" [value]="tipo.id">{{tipo.nome}}</ion-option>
           </ion-select>
         </ion-item>
         <ion-item *ngIf="denuncia.tipo == 4">
@@ -59,7 +60,7 @@
           <ion-input type="text" [(ngModel)]="denuncia.outroTipo"></ion-input>
         </ion-item>
         <ion-item id="item-descricao">
-          <ion-label floating>Descreva sua reclamação</ion-label>
+          <ion-label floating>Descreva sua reclamação. Tente dar o máximo de detalhes possível.</ion-label>
           <ion-textarea [(ngModel)]="denuncia.descricao"></ion-textarea>
         </ion-item>
       </div>

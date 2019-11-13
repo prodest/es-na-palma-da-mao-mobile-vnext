@@ -3,6 +3,7 @@ import { Injectable, Inject } from '@angular/core';
 import { EnvVariables, Environment } from '@espm/core';
 import { Observable } from 'rxjs/Observable';
 import { Denuncia } from '../model/denuncia';
+import { Escola } from '../model/escola';
 
 /*
   Generated class for the SeduDenunciasApiProvider provider.
@@ -11,16 +12,24 @@ import { Denuncia } from '../model/denuncia';
   and Angular DI.
 */
 @Injectable()
-export class SeduDenunciasApiProvider {
+export class SeduDenunciasApiService {
 
   constructor(public http: HttpClient, @Inject(EnvVariables) private env: Environment) {}
 
-  getSchools(): Observable<any> {
-    return this.http.get(`${this.env.api.seduDenuncias}/escolas`);
+  getMunicipios(): Observable<any> {
+    return this.http.get(`${this.env.api.seduDenuncias}/municipios/`);
+  }
+
+  getSchools(): Observable<Escola[]> {
+    return this.http.get<Escola[]>(`${this.env.api.seduDenuncias}/escolas/`);
+  }
+
+  getDemandTypes(): Observable<any> {
+    return this.http.get(`${this.env.api.seduDenuncias}/denuncias/tipos/`);
   }
 
   sendDemand(demand: Denuncia) {
-    return this.http.post(this.env.api.seduDenuncias, demand);
+    return this.http.post(`${this.env.api.seduDenuncias}/denuncia/`, demand);
   }
 
 }

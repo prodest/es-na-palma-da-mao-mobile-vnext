@@ -1,5 +1,5 @@
-import { SeduDenunciasApiProvider } from './sedu-denuncias-api.service';
+import { SeduDenunciasApiService } from './sedu-denuncias-api.service';
 
-export { SeduDenunciasApiProvider }
+export { SeduDenunciasApiService }
 
-export const SeduDenunciasProviders = [ SeduDenunciasApiProvider ];
+export const SeduDenunciasProviders = [ SeduDenunciasApiService ];
