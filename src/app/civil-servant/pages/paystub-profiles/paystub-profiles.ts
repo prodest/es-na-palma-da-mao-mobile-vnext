@@ -8,7 +8,7 @@ import { IonicPage, NavController, NavParams, /*AlertController*/ } from 'ionic-
   selector: 'paystub-profiles',
   templateUrl: 'paystub-profiles.html'
 })
-export class PaystubPage {
+export class PaystubProfilesPage {
   constructor(public navCtrl: NavController, public navParams: NavParams, /*private alert: AlertController*/) {}
 
   profiles = [

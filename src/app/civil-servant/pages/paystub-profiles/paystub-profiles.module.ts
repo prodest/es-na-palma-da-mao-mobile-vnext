@@ -1,15 +1,15 @@
 import { NgModule } from '@angular/core';
 import { IonicPageModule } from 'ionic-angular';
-import { PaystubPage } from './paystub-profiles';
+import { PaystubProfilesPage } from './paystub-profiles';
 import { ModulePageComponentModule } from '@espm/shared';
 
 @NgModule({
   declarations: [
-    PaystubPage,
+    PaystubProfilesPage,
   ],
   imports: [
     ModulePageComponentModule,
-    IonicPageModule.forChild(PaystubPage),
+    IonicPageModule.forChild(PaystubProfilesPage),
   ],
 })
 export class PaystubPageModule {}
