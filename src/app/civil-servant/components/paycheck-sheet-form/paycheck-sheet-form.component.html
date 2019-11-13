@@ -1,0 +1,29 @@
+<form novalidate [formGroup]="form" (ngSubmit)="onSubmitClick(form.value)">
+  <ion-item class="form-item">
+    <ion-label>Ano</ion-label>
+    <ion-select cancelText="Cancelar" formControlName="year" name="year" [selectOptions]="yearsOptions"
+      (ionChange)="selectChange()">
+      <ion-option *ngFor="let year of years" [value]="year">{{ year }}</ion-option>
+    </ion-select>
+  </ion-item>
+  <espm-validation-message [errors]="validationErrors['year']"></espm-validation-message>
+  <ion-item class="form-item">
+    <ion-label>Mês</ion-label>
+    <ion-select cancelText="Cancelar" formControlName="month" name="month" [selectOptions]="monthsOptions"
+      (ionChange)="selectChange()">
+      <ion-option *ngFor="let month of months" [value]="month">{{ month }}</ion-option>
+    </ion-select>
+  </ion-item>
+  <espm-validation-message [errors]="validationErrors['month']"></espm-validation-message>
+  <ion-item class="form-item">
+    <ion-label>Folha</ion-label>
+    <ion-select cancelText="Cancelar" formControlName="sheet" name="sheet" [selectOptions]="sheetsOptions"
+      (ionChange)="selectChange()">
+      <ion-option *ngFor="let sheet of sheets" [value]="sheet">{{ sheet }}</ion-option>
+    </ion-select>
+  </ion-item>
+  <espm-validation-message [errors]="validationErrors['sheet']"></espm-validation-message>
+  <button type="submit" ion-button class="download">
+    Baixar
+  </button>
+</form>
