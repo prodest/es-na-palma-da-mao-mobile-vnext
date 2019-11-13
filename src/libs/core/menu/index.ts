@@ -77,8 +77,8 @@ export const MENUS: ItemMenu[] = [
      {
        id: 23,
        title: "Sedu",
-       icon: 'custom-modulo-denuncias',
-       component: 'SeduDenunciasPage',
+       icon: 'custom-modulo-educacao',
+       component: 'SeduIndexPage',
        isChecked: false
      }
   ];
