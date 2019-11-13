@@ -1,0 +1,58 @@
+page-paystub-links {
+  .scroll-content {
+    padding: 0 !important;
+    background-color: #e9f7fe;
+  }
+
+  ion-searchbar {
+    background-color: transparent !important;
+  }
+
+  .searchbar-md .searchbar-input {
+    box-shadow: none !important;
+    border-radius: 25px;
+  }
+
+  ion-list {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    button {
+      width: 95%;
+      display: flex !important;
+    }
+
+    .label {
+      width: 100%;
+      display: flex !important;
+      flex-direction: row !important;
+
+      .button-content,
+      .button-status {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+      }
+
+      .button-content {
+        width: 60%;
+
+        h3 {
+          font-weight: 600;
+        }
+        p {
+          text-align: center;
+        }
+      }
+      .button-status {
+        width: 40%;
+
+        ion-icon {
+          color: #ff0083;
+        }
+      }
+    }
+  }
+}

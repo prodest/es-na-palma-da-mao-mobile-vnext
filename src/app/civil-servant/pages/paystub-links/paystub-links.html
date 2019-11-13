@@ -1,0 +1,37 @@
+<module-page title="CONTRACHEQUE" no-padding>
+  <ion-searchbar placeholder="Pesquisar..." [showCancelButton]="true" cancelButtonText="Cancelar" [animated]="false"
+    (ionInput)="search($event)" (ionClear)="clear($event)" (ionCancel)="clear($event)">
+  </ion-searchbar>
+  <ion-content>
+    <ion-list-header *ngIf="filteredLinks.length">
+     {{ filteredLinks.length }} vinculos encontrados
+    </ion-list-header>
+    <ion-list
+        [virtualScroll]="filteredLinks"
+        [virtualTrackBy]="trackById"
+      >
+      <button
+          ion-item
+          *virtualItem="let link" 
+          (click)="showLink(link.vinculo)">
+        <div class="button-status">
+          <links-status [status]="link.numero_vinculo"></links-status>
+        </div>
+        <div class="button-content">
+          <h3 text-wrap class="concursos_name">
+            {{ limite ( link.orgao ) }}
+          </h3>
+          <p text-wrap class="concursos_descricao">{{ link.data_inicio }}</p>
+        </div>
+        <div class="button-status">
+          <links-status [status]="link.situacao"></links-status>
+        </div>
+      </button>
+    </ion-list>
+    <ion-item *ngIf="!filteredLinks.length" text-center no-lines id="not-found">
+      <h2>Nenhum concurso encontrado</h2>
+      <p>Tente mudar o filtro da consulta</p>
+    </ion-item>
+  </ion-content>
+
+</module-page>
