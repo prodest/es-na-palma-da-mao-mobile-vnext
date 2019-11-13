@@ -75,7 +75,7 @@ export const MENUS: ItemMenu[] = [
   {
     id: 23,
     title: 'Servidor',
-    icon: 'custom-modulo-processos',
+    icon: 'custom-modulo-servidor',
     component: 'PresentationCivilServantPage',
     isChecked: false,
     isCivilServant: true
