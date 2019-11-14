@@ -21,13 +21,12 @@
           </h3>
             
           <p text-wrap class="concursos_descricao"> {{ concurso.descricao }}</p>
-          <h5> {{concurso.porcentagem}}  </h5>
+          <h5 *ngIf="concurso.status != 'encerrado'"> {{concurso.porcentagem + " % para seu perfil"}} </h5>
         </div> 
         
          
         <div class="button-status">
           <concurso-status [status]="concurso.status"></concurso-status>
-         
           <p>
             <ion-icon *ngIf="concurso.favorito" class="star_css" item-end name="md-star"></ion-icon>
             <ion-icon *ngIf="!concurso.favorito" class="star_css" item-end name="md-star-outline"></ion-icon>
