@@ -111,9 +111,10 @@ export class ConcursosPage {
           let porcentagem;
           this.dadosTeste.map(
             (dado) => {
-              if (dado.orgao === concurso.orgao.trim() && concurso.status === 'aberto' || concurso.status === 'andamento'  ) 
+              if (dado.orgao === concurso.orgao.trim() && concurso.status === 'aberto' || concurso.status === 'andamento') 
               {
-                porcentagem = dado.porcentagem;
+                porcentagem = dado.porcentagem.toFixed(1);
+                
               }
             }
           );
