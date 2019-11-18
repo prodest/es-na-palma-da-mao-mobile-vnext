@@ -8,6 +8,7 @@ import deburr from 'lodash-es/deburr';
 import { Concurso } from '../../model';
 import { SelecaoQuery, SelecaoService } from '../../providers';
 import { Subject } from 'rxjs/Subject';
+import { SelecaoApiService } from '../../providers/selecao.api.service';
 
 
 @IonicPage({
@@ -19,48 +20,7 @@ import { Subject } from 'rxjs/Subject';
 })
 export class ConcursosPage {
 
-  dadosTeste=[
-    {
-      "orgao": "SEDU",
-      "porcentagem": 67.8473
-    },
-    {
-      "orgao": "SESA",
-      "porcentagem": 49.6142
-    },
-    {
-      "orgao": "IASES",
-      "porcentagem": 64.7321
-    },
-    {
-      "orgao": "SEJUS",
-      "porcentagem": 68.2648
-    },
-    {
-      "orgao": "OUTROS",
-      "porcentagem": 82.5552
-    },
-    {
-      "orgao": "SEDU",
-      "porcentagem": 54.0532
-    },
-    {
-      "orgao": "SEDU",
-      "porcentagem": 81.5622
-    },
-    {
-      "orgao": "IASES",
-      "porcentagem": 40.4908
-    },
-    {
-      "orgao": "OUTROS",
-      "porcentagem": 53.3688
-    },
-    {
-      "orgao": "OUTROS",
-      "porcentagem": 25.435
-    }
-  ]
+  dadosTeste = []
 
 
   /**
@@ -76,7 +36,7 @@ export class ConcursosPage {
   /**
   *
   */
-  constructor(private auth: AuthQuery, private navCtrl: NavController, private service: SelecaoService, private query: SelecaoQuery) {
+  constructor(private auth: AuthQuery, private navCtrl: NavController, private service: SelecaoService, private query: SelecaoQuery, private selecaoApiService: SelecaoApiService) {
     this.concursos$ = new Subject();
 
   /*  if (this.auth.isLoggedIn) // verificando se está logado
@@ -109,15 +69,12 @@ export class ConcursosPage {
       concursos.map(  // loop de fora 
         (concurso: Concurso) => { 
           let porcentagem;
-          this.dadosTeste.map(
-            (dado) => {
-              if (dado.orgao === concurso.orgao.trim() && concurso.status === 'aberto' || concurso.status === 'andamento') 
-              {
-                porcentagem = dado.porcentagem.toFixed(1);
-                
-              }
+
+          this.selecaoApiService.getPorcentagem(CPF, ORGAOS).subscribe(
+            dados => {
+              this.dadosTeste = dados
             }
-          );
+          )
 
           newConcursos.push({
             ...concurso,

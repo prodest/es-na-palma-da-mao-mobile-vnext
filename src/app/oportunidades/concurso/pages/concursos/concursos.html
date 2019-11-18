@@ -21,7 +21,7 @@
           </h3>
             
           <p text-wrap class="concursos_descricao"> {{ concurso.descricao }}</p>
-          <h5 *ngIf="concurso.status != 'encerrado'"> {{concurso.porcentagem + " % para seu perfil"}} </h5>
+          <h5 *ngIf="concurso.status != 'encerrado'  &&  concurso.porcentagem != null "> {{concurso.porcentagem + " % sugerido"}} </h5>
         </div> 
         
          

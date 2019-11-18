@@ -1,6 +1,6 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Inject, Injectable } from '@angular/core';
-import { Environment, EnvVariables } from '@espm/core';
+import { Environment, EnvVariables, ANONYMOUS_HEADER } from '@espm/core';
 import { Observable } from 'rxjs/Observable';
 
 import { Classificacao, Concurso } from '../model';
@@ -47,18 +47,22 @@ export class SelecaoApiService {
   getFavorites = (): Observable<ConcursoFavorito> => {
     return this.http.get<ConcursoFavorito>(`${this.env.api.espm}/publicTender/data/favorite`).pipe(share());
   };
+  
   /**
    * 
    */
-
-   /* getPorcentagem = (cpf: string, orgaos: [string]): Observable<Concurso[]> => {
+  getPorcentagem = (cpf: string, orgaos: [string]): Observable<Concurso[]> => {
+    const headers: HttpHeaders = new HttpHeaders({
+      Authorization: `Basic usuario:senha`,
+      [ANONYMOUS_HEADER]: 'true'
+    })
     let string = `${this.env.api.empregabilidade}/cpf/orgao?cpf=${cpf}`;
          // todo: concatenar os órgãos na string
          for(let i = 0; i < orgaos.length; i ++){
            
          }
     
-    return this.http.get<Concurso[]>(string).pipe(share());
+    return this.http.get<Concurso[]>(string, { headers }).pipe(share());
     // /cpf/orgao?cpf=<cpf_que _voce_vai_mandar>&orgao=<primeiro_orgao>&orgao=<segundo_orgao>
   }; 
 
