@@ -11,7 +11,7 @@ export class PresentationCivilServantPage {
   menus = [
     {
       buttonTitle: 'Contracheque',
-      targetPage: 'PaystubPage'
+      targetPage: 'PaystubProfilesPage'
     },
   ];
 }
