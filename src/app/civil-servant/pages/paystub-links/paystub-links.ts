@@ -59,7 +59,13 @@ export class PaystubLinksPage {
   }
 
   ngOnInit(): void {
-    this.allLinks$.sort()
+    this.allLinks$.sort((a, b) => {
+      // critério 1: situação ativo
+      const crit1 = a.situacao === 'ativo' ? -1 : 1;
+      // critério 2: data de início maior na frente
+      const crit2 = a.data_inicio > b.data_inicio ? 1 : -1;
+      return a.situacao === b.situacao ? crit2 : crit1;
+    });
     this.filteredLinks = this.allLinks$;
     this.cdr.detectChanges();
     // console.log('Links: ', this.filteredLinks)
@@ -70,8 +76,8 @@ export class PaystubLinksPage {
     // console.log('Links: ', this.filteredLinks)
   }
 
-  linksSort (links: any[]) {
-    
+  linksSort(links: any[]) {
+
   }
 
   showLink(id) {
@@ -80,13 +86,13 @@ export class PaystubLinksPage {
 
   search = e => {
     const search = this.normalize(e.target.value);
-    
+
     // se o texto da pesquisa estiver vazio, exibe tudo
     // if (search.length === 0) this.updateConcursos(this.allLinks$);
-    
+
     // // artibui o resultado da busca ao Subject de concursos
     // this.updateConcursos(
-    //   // efetivamente faz a busca      
+    //   // efetivamente faz a busca
     //   this.filteredLinks = this.allLinks.filter(concurso => {
     //     return this.normalize(concurso.orgao).includes(search) || this.normalize(concurso.descricao).includes(search);
     //   })
@@ -101,10 +107,10 @@ export class PaystubLinksPage {
     this.filteredLinks = [...this.allLinks$];
   };
 
-  // tamanho do nome "orgão" limitado 
+  // tamanho do nome "orgão" limitado
   limite = (valor) => {
     if (valor.length > 12) {
-      return valor.substring(0, 12)+"…";
+      return valor.substring(0, 12) + "…";
     } else {
       return valor;
     }
