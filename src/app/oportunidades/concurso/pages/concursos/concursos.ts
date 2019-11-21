@@ -61,21 +61,21 @@ export class ConcursosPage {
   verificationOrgan() {
   
   }
-
+  
   matcheorgaos(concursos) {  // funcao que verifica se os orgaos recebidos estao iguais
     if (this.auth.isLoggedIn) {  // se o usuario esta logado
       let cpf = '03147642755'; // this.auth.state.claims.cpf;
       let newConcursos = []; // necessario criar pois nao estava reconhecendo o objeto criado.
-      let orgaos:Array<string> = [];
+      let orgaos:Array<string> = ['sedu','sejus','iases','sesa'];
       // de cada concurso, separa os orgaos
 
-      concursos.map(
+       /* concursos.map(
         (concurso: Concurso) => {
           if (!orgaos.includes(concurso.orgao.trim())) {
             orgaos.push(concurso.orgao.trim());
           }
         }
-      )
+      ) */ 
             
       this.selecaoApiService.getPorcentagem(cpf, orgaos).subscribe(
         dados => { 
@@ -92,7 +92,7 @@ export class ConcursosPage {
             (dados) => { 
               if (dados.orgao.trim() === concurso.orgao.trim()) 
               {
-                porcentagem = dados.porcentagem;
+                porcentagem = dados.porcentagem.tofixed(1);
               }
             }
           );

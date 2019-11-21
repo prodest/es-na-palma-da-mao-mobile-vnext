@@ -61,7 +61,7 @@ export class SelecaoApiService {
     let url = `${this.env.api.sugestaodt}/sugestao/cpf/orgao?cpf=${cpf}&`;
 
     for(let i = 0; i < orgaos.length; i ++){
-      url = url+`orgao=${orgaos[i]}&`;
+      url = url+`orgao=${orgaos[i].toLowerCase()}&`;
     }
     url = url.slice(0, -1);
 
