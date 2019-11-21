@@ -64,16 +64,26 @@ export class ConcursosPage {
 
   matcheorgaos(concursos) {  // funcao que verifica se os orgaos recebidos estao iguais
     if (this.auth.isLoggedIn) {  // se o usuario esta logado
-      let cpf = this.auth.state.claims.cpf;
+      let cpf = '03147642755'; // this.auth.state.claims.cpf;
       let newConcursos = []; // necessario criar pois nao estava reconhecendo o objeto criado.
-      
-      this.selecaoApiService.getPorcentagem(cpf, concursos.orgao).subscribe(
-        dados => {
+      let orgaos:Array<string> = [];
+      // de cada concurso, separa os orgaos
+
+      concursos.map(
+        (concurso: Concurso) => {
+          if (!orgaos.includes(concurso.orgao.trim())) {
+            orgaos.push(concurso.orgao.trim());
+          }
+        }
+      )
+            
+      this.selecaoApiService.getPorcentagem(cpf, orgaos).subscribe(
+        dados => { 
           this.dadosTeste = dados
         }
       )
       
-  
+      
       concursos.map(  // loop de fora 
         (concurso: Concurso) => { 
           let porcentagem;
@@ -106,7 +116,7 @@ export class ConcursosPage {
     this.query
     .selectAll()
     .subscribe((concursos: Concurso[]) => {
-      console.log(concursos);
+      // console.log(concursos);
       
       this.allConcursos = concursos;
       this.updateConcursos(this.matcheorgaos(concursos));

@@ -51,7 +51,9 @@ export class SelecaoApiService {
   /**
    * 
    */
-  getPorcentagem = (cpf: string, orgaos: [string]): Observable<Concurso[]> => {   /* autenticacao api */ 
+  getPorcentagem = (cpf: string, orgaos:Array<string>): Observable<Concurso[]> => {   /* autenticacao api */ 
+    console.log(cpf, orgaos);
+    
     const headers: HttpHeaders = new HttpHeaders({
       Authorization: `Basic user:pass`, 
       [ANONYMOUS_HEADER]: 'true'
@@ -59,7 +61,7 @@ export class SelecaoApiService {
     let url = `${this.env.api.sugestaodt}/sugestao/cpf/orgao?cpf=${cpf}&`;
 
     for(let i = 0; i < orgaos.length; i ++){
-      url = url+`${orgaos[i]}&`;
+      url = url+`orgao=${orgaos[i]}&`;
     }
     url = url.slice(0, -1);
 
