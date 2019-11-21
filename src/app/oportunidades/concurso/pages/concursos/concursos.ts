@@ -66,16 +66,28 @@ export class ConcursosPage {
     if (this.auth.isLoggedIn) {  // se o usuario esta logado
       let cpf = this.auth.state.claims.cpf;
       let newConcursos = []; // necessario criar pois nao estava reconhecendo o objeto criado.
+      
+      this.selecaoApiService.getPorcentagem(cpf, concursos.orgao).subscribe(
+        dados => {
+          this.dadosTeste = dados
+        }
+      )
+      
+  
       concursos.map(  // loop de fora 
         (concurso: Concurso) => { 
           let porcentagem;
 
-          this.selecaoApiService.getPorcentagem(cpf, concursos.orgao).subscribe(
-            dados => {
-              this.dadosTeste = dados
+          this.dadosTeste.map(
+            (dados) => { 
+              if (dados.orgao.trim() === concurso.orgao.trim()) 
+              {
+                porcentagem = dados.porcentagem;
+              }
             }
-          )
-
+          );
+        
+          
           newConcursos.push({
             ...concurso,
             porcentagem: porcentagem

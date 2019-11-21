@@ -51,18 +51,19 @@ export class SelecaoApiService {
   /**
    * 
    */
-  getPorcentagem = (cpf: string, orgaos: [string]): Observable<Concurso[]> => {
+  getPorcentagem = (cpf: string, orgaos: [string]): Observable<Concurso[]> => {   /* autenticacao api */ 
     const headers: HttpHeaders = new HttpHeaders({
-      Authorization: `Basic usuario:senha`,
+      Authorization: `Basic user:pass`, 
       [ANONYMOUS_HEADER]: 'true'
     })
-    let string = `${this.env.api.empregabilidade}/cpf/orgao?cpf=${cpf}`;
-         // todo: concatenar os órgãos na string
-         for(let i = 0; i < orgaos.length; i ++){
-           
-         }
-    
-    return this.http.get<Concurso[]>(string, { headers }).pipe(share());
+    let url = `${this.env.api.sugestaodt}/sugestao/cpf/orgao?cpf=${cpf}&`;
+
+    for(let i = 0; i < orgaos.length; i ++){
+      url = url+`${orgaos[i]}&`;
+    }
+    url = url.slice(0, -1);
+
+    return this.http.get<Concurso[]>(url, { headers }).pipe(share());
     // /cpf/orgao?cpf=<cpf_que _voce_vai_mandar>&orgao=<primeiro_orgao>&orgao=<segundo_orgao>
   }; 
 
