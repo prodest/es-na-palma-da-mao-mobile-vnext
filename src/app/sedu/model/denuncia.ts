@@ -5,6 +5,7 @@ export interface Denuncia {
   codigoEDP: string;
   tipoReclamacao: number;
   dataReclamacao: Date;
+  dataReclamacaoString: string;
   outroTipo?: string;
   descricao: string;
   inepEscola: string;

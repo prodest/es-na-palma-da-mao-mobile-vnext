@@ -102,18 +102,14 @@ export class SeduDenunciasPage {
    * 
    */
   setDay({day, month, year}) {
-    console.log(day, month, year);
     this.denuncia.dataReclamacao.setFullYear(year, month-1, day);
-    console.log(this.denuncia.dataReclamacao);
   }
 
   /**
    * 
    */
   setHour({hour, minute}) {
-    console.log(hour, minute);    
     this.denuncia.dataReclamacao.setHours(hour, minute);
-    console.log(this.denuncia.dataReclamacao);
   }
 
   /**
@@ -127,7 +123,10 @@ export class SeduDenunciasPage {
    * Envia a reclamação/denuncia.
    */
   send() {
-    this.api.sendDemand(this.denuncia as Denuncia)
+    this.api.sendDemand({
+      ...this.denuncia,
+      dataReclamacaoString: this.denuncia.dataReclamacao.toISOString()
+    } as Denuncia)
     .subscribe(
       res => {
         this.showSuccessAlert(res["protocolo"]);
@@ -141,7 +140,7 @@ export class SeduDenunciasPage {
       message: `Nº de Protocolo: ${protocolo}`,
       buttons: [
         {
-          text: "OK",
+          text: "Ok, voltar ao início",
           handler: () => {
             if (this.navCtrl.length() > 1) {
               this.navCtrl.pop();
