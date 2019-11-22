@@ -1,6 +1,7 @@
 <module-page title="SEDU" no-padding no-footer>
   <ion-slides #slides>
-    <ion-slide id="slide-identificacao">
+
+    <ion-slide id="slide-identificacao"> <!-- SLIDE 1 - IDENTIFICAÇÃO DO AUTOR DA RECLAMAÇÃO -->
       <ion-list-header>Verifique suas informações. <br>
         Se este não é você, faça logout, por favor.</ion-list-header>
       <ion-item>
@@ -11,19 +12,46 @@
         <ion-label floating>Seu e-mail</ion-label>
         <ion-input type="text" [(ngModel)]="denuncia.email" [disabled]="true"></ion-input>
       </ion-item>
-    </ion-slide>
-    <ion-slide id="slide-aluno">
+      <ion-list radio-group [(ngModel)]="denuncia.papel">
+        <ion-list-header>Eu sou:</ion-list-header>
+        <ion-item>
+          <ion-label>Aluno do Estado</ion-label>
+          <ion-radio value=0></ion-radio>
+        </ion-item>
+        <ion-item>
+          <ion-label>Responsável de aluno do Estado</ion-label>
+          <ion-radio value=1></ion-radio>
+        </ion-item>
+        <ion-item>
+          <ion-label>Outro</ion-label>
+          <ion-radio value=2></ion-radio>
+        </ion-item>
+      </ion-list>
+    </ion-slide> <!-- SLIDE 1 -->
+
+    <ion-slide id="slide-aluno"> <!-- SLIDE 2 - IDENTIFICAÇÃO DA ROTA ONDE HOUVE PROBLEMA -->
       <ion-list-header>
-        Agora, nos ajude a identificar a rota que está <br>
-        com problemas
+        Para facilitar a identificação da rota <br>
+        informe os dados de um aluno que a utiliza
       </ion-list-header>
       <ion-item>
-        <ion-label floating>Nome do Aluno</ion-label>
+        <ion-label floating>Nome completo</ion-label>
         <ion-input type="text" [(ngModel)]="denuncia.aluno"></ion-input>
       </ion-item>
       <ion-item>
-        <ion-label floating>Nº Instalação EDP do Aluno</ion-label>
+        <ion-label floating>Nº Instalação EDP</ion-label>
         <ion-input type="number" [(ngModel)]="denuncia.codigoEDP"></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label floating>Registro Acadêmico (opcional)</ion-label>
+        <ion-input type="number" [(ngModel)]="denuncia.registroAcademico"></ion-input>
+      </ion-item>
+      <ion-list-header>
+        Outras informações da rota
+      </ion-list-header>
+      <ion-item>
+        <ion-label floating>Placa do veículo (opcional)</ion-label>
+        <ion-input type="text" [(ngModel)]="denuncia.placaVeiculo"></ion-input>
       </ion-item>
       <ion-item>
         <ion-label floating>Município</ion-label>
@@ -43,8 +71,17 @@
           <ion-option *ngFor="let escola of escolasDoMunicipio$ | async" [value]="escola.inep">{{escola.nome}}</ion-option>
         </ion-select>
       </ion-item>
-    </ion-slide>
-    <ion-slide id="slide-reclamacao">
+      <!-- TODO: Vincular rotas à API e filtrar por escola -->
+      <ion-item>
+        <ion-label floating>Nome da Rota</ion-label>
+        <ion-select
+          cancelText="Cancelar">
+          <ion-option value="rota1">Rota 1</ion-option>
+        </ion-select>
+      </ion-item>
+    </ion-slide> <!-- SLIDE 2 -->
+
+    <ion-slide id="slide-reclamacao"> <!-- SLIDE 3 - DETALHAMENTO DA RECLAMAÇÃO -->
       <div id="inputs-reclamacao">
         <ion-list-header>Agora detalhe sua reclamação</ion-list-header>
         <ion-item>
@@ -91,7 +128,8 @@
         color="primary-dark"
         (click)="send()"
       ></large-button>
-    </ion-slide>
+    </ion-slide> <!-- SLIDE 3 -->
+
   </ion-slides>
   <div id="nav-slides">
     <span class="nav-slide">

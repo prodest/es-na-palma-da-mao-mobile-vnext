@@ -10,11 +10,11 @@ import { AuthQuery } from '@espm/core';
 export class SeduIndexPage {
   menus = [
     {
-      buttonTitle: "Nova denúncia",
+      buttonTitle: "Nova reclamação",
       targetPage: "SeduDenunciasPage"
     },
     {
-      buttonTitle: "Minhas denúncias",
+      buttonTitle: "Minhas reclamações",
       targetPage: "MinhasDenunciasPage"
     }
   ];

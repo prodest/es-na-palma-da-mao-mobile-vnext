@@ -23,6 +23,7 @@ export class SeduDenunciasPage {
 
   denuncia: Partial<Denuncia> = {
     autor: "",
+    papelDoAutor: "",
     email: "",
     aluno: "",
     codigoEDP: "",
