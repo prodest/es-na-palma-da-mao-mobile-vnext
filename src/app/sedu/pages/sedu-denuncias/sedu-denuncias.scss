@@ -23,6 +23,20 @@ page-sedu-denuncias {
       flex-direction: column;
       justify-content: space-between;
     }
+
+    #inputs-reclamacao {
+      flex-direction: column;
+
+      #data-hora {
+        display: flex;
+        flex-direction: row;
+      }
+
+      // #dateIonItem, #hourIonItem {
+      //   width: 45%;
+      // }
+    }
+
   }
 
   large-button {
@@ -34,6 +48,10 @@ page-sedu-denuncias {
     flex: 1;
     padding-bottom: 15px;
 
+    ion-label {
+      white-space: unset;
+    }
+
     textarea {
       height: 100%;
     }
@@ -44,6 +62,7 @@ page-sedu-denuncias {
     flex-direction: row;
     justify-content: space-between;
     width: 100%;
+    background-color: transparent;
 
     .nav-slide button {
       font-size: 20px;

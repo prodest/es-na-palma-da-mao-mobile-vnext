@@ -23,7 +23,7 @@
       </ion-item>
       <ion-item>
         <ion-label floating>Nº Instalação EDP do Aluno</ion-label>
-        <ion-input type="number" [(ngModel)]="denuncia.codigoEdp"></ion-input>
+        <ion-input type="number" [(ngModel)]="denuncia.codigoEDP"></ion-input>
       </ion-item>
       <ion-item>
         <ion-label floating>Município</ion-label>
@@ -45,20 +45,40 @@
       </ion-item>
     </ion-slide>
     <ion-slide id="slide-reclamacao">
-      <div>
+      <div id="inputs-reclamacao">
         <ion-list-header>Agora detalhe sua reclamação</ion-list-header>
         <ion-item>
           <ion-label floating>Tipo de reclamação</ion-label>
           <ion-select
-            [(ngModel)]="denuncia.tipo"
+            [(ngModel)]="denuncia.tipoReclamacao"
             cancelText="Cancelar">
             <ion-option *ngFor="let tipo of tiposDenuncia$ | async" [value]="tipo.id">{{tipo.nome}}</ion-option>
           </ion-select>
         </ion-item>
-        <ion-item *ngIf="denuncia.tipo == 4">
+        <ion-item *ngIf="denuncia.tipoReclamacao == 4">
           <ion-label floating>Que tipo?</ion-label>
           <ion-input type="text" [(ngModel)]="denuncia.outroTipo"></ion-input>
         </ion-item>
+        <div id="data-hora">
+          <ion-item id="dateIonItem">
+            <ion-label floating>Data do ocorrido</ion-label>
+            <ion-datetime
+              cancelText="Cancelar"
+              doneText="OK"
+              displayFormat="D MMM YYYY" 
+              pickerFormat="D MMM YYYY" 
+              (ionChange)="setDay($event)"></ion-datetime>
+          </ion-item>
+          <ion-item id="hourIonItem">
+            <ion-label floating>Horário do ocorrido</ion-label>
+            <ion-datetime
+              cancelText="Cancelar"
+              doneText="OK"
+              displayFormat="HH:mm"
+              pickerFormat="HH mm"
+              (ionChange)="setHour($event)"></ion-datetime>
+          </ion-item>
+        </div>
         <ion-item id="item-descricao">
           <ion-label floating>Descreva sua reclamação. Tente dar o máximo de detalhes possível.</ion-label>
           <ion-textarea [(ngModel)]="denuncia.descricao"></ion-textarea>

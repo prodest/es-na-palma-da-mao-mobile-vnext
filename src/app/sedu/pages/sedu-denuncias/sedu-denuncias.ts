@@ -1,5 +1,5 @@
 import { Component, ViewChild } from '@angular/core';
-import { IonicPage, NavController, NavParams, Slides, AlertController, App, MenuController } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, Slides, AlertController, App } from 'ionic-angular';
 import { Denuncia } from '../../model/denuncia';
 import { AuthQuery } from '@espm/core';
 import { Subject } from 'rxjs/Subject';
@@ -25,8 +25,9 @@ export class SeduDenunciasPage {
     autor: "",
     email: "",
     aluno: "",
-    codigoEdp: "",
-    tipo: 0,
+    codigoEDP: "",
+    tipoReclamacao: 0,
+    dataReclamacao: null,
     descricao: "",
     inepEscola: ""
   };
@@ -44,7 +45,6 @@ export class SeduDenunciasPage {
     public navParams: NavParams,
     public alertCtrl: AlertController,
     protected appCtrl: App,
-    private menuCtrl: MenuController,
     public auth: AuthQuery,
     public api: SeduDenunciasApiService
   ) {
@@ -52,15 +52,8 @@ export class SeduDenunciasPage {
     this.municipio$ = new Subject();
     this.escolasDoMunicipio$ = new Subject();
     this.tiposDenuncia$ = new Subject();
-  }
 
-  ionViewCanEnter(): boolean | Promise<any> {
-    // Check de autenticação
-    let isAllowed = this.auth.isLoggedIn;
-    if (!isAllowed) {
-      this.showAuthNeededModal()
-    }
-    return isAllowed;
+    this.denuncia.dataReclamacao = new Date();
   }
 
   ionViewDidEnter() {
@@ -106,48 +99,29 @@ export class SeduDenunciasPage {
   }
 
   /**
+   * 
+   */
+  setDay({day, month, year}) {
+    console.log(day, month, year);
+    this.denuncia.dataReclamacao.setFullYear(year, month-1, day);
+    console.log(this.denuncia.dataReclamacao);
+  }
+
+  /**
+   * 
+   */
+  setHour({hour, minute}) {
+    console.log(hour, minute);    
+    this.denuncia.dataReclamacao.setHours(hour, minute);
+    console.log(this.denuncia.dataReclamacao);
+  }
+
+  /**
    * Disparado pelo ionChange do ion-select de municípios para atualizar a lista de escolas.
    */
   setCity() {
     this.municipio$.next(this.municipio);
   }
-
-  showAuthNeededModal = () => {
-    let alert = this.alertCtrl.create({
-      title: 'Login necessário',
-      message: 'Você deve estar autenticado no <strong>ES na palma da mão</strong> para acessar essa funcionalidade.',
-      buttons: [
-        {
-          text: 'Entendi',
-          handler: () => {
-            this.appCtrl
-              .getRootNav()
-              .setRoot('MyServicesPage')
-              .then(() => {
-                alert.dismiss();
-                this.menuCtrl.close();
-              });
-            return false;
-          },
-          role: 'cancel'
-        },
-        {
-          text: 'Autenticar',
-          handler: () => {
-            this.appCtrl
-              .getRootNav()
-              .push('LoginPage', { redirectTo: 'SeduDenunciasPage' })
-              .then(() => {
-                alert.dismiss();
-                this.menuCtrl.close();
-              });
-            return false;
-          }
-        }
-      ]
-    });
-    return alert.present();
-  };
 
   /** 
    * Envia a reclamação/denuncia.
@@ -211,7 +185,7 @@ export class SeduDenunciasPage {
     if (this.slides.getActiveIndex() === 1) {
       if (
         this.denuncia.aluno &&
-        this.denuncia.codigoEdp &&
+        this.denuncia.codigoEDP &&
         this.denuncia.inepEscola) {
           return true;
       }
@@ -219,7 +193,7 @@ export class SeduDenunciasPage {
 
     if (this.slides.getActiveIndex() === 2) {
       if (
-        this.denuncia.tipo &&
+        this.denuncia.tipoReclamacao &&
         this.denuncia.descricao) {
           return true;
       }
