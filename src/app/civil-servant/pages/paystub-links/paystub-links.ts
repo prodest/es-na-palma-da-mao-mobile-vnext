@@ -1,4 +1,4 @@
-import { Component, ChangeDetectorRef } from '@angular/core';
+import { Component, ChangeDetectorRef, OnInit } from '@angular/core';
 import { trackById } from '@espm/core';
 import deburr from 'lodash-es/deburr';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
@@ -10,7 +10,7 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
   selector: 'page-paystub-links',
   templateUrl: 'paystub-links.html',
 })
-export class PaystubLinksPage {
+export class PaystubLinksPage implements OnInit {
 
   allLinks$ = [
     {
