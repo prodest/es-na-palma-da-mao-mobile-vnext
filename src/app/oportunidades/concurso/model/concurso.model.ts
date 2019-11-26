@@ -14,5 +14,8 @@ export class Concurso {
   nome?: string;
   areas?: Areas[];
   favorito?: boolean;
-  porcentagem?: number;
+  porcentagem_sedu?: number;
+  porcentagem_sesa?: number;
+  porcentagem_sejus?: number;
+  porcentagem_iases?: number;
 }

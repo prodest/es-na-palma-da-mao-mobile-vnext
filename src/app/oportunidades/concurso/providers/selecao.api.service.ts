@@ -50,6 +50,8 @@ export class SelecaoApiService {
   
   /**
    * 
+   * 
+   * 
    */
   getPorcentagem = (cpf: string, orgaos:Array<string>): Observable<Concurso[]> => {   /* autenticacao api */ 
     console.log(cpf, orgaos);

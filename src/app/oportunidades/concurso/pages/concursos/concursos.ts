@@ -20,6 +20,15 @@ import { SelecaoApiService } from '../../providers/selecao.api.service';
 })
 export class ConcursosPage {
 
+  porcentagens: Array<Object> = [
+    {
+      "cpf": "12345678902",
+      "sedu": 65.240,
+      "sesa": 65.7073,
+      "sejus": 67.70,
+      "iases": 90.58
+    }
+  ];
   dadosTeste = []
 
 
@@ -66,7 +75,7 @@ export class ConcursosPage {
     if (this.auth.isLoggedIn) {  // se o usuario esta logado
       let cpf = '03147642755'; // this.auth.state.claims.cpf;
       let newConcursos = []; // necessario criar pois nao estava reconhecendo o objeto criado.
-      let orgaos:Array<string> = ['sedu','sejus','iases','sesa'];
+      let orgaos:Array<string> = ['sedu','sesa','sejus','iases'];
       // de cada concurso, separa os orgaos
 
        /* concursos.map(
@@ -90,14 +99,38 @@ export class ConcursosPage {
 
           this.dadosTeste.map(
             (dados) => { 
-              if (dados.orgao.trim() === concurso.orgao.trim()) 
+              /* if ( orgaos[0] === concurso.orgao.trim() ) 
               {
-                porcentagem = dados.porcentagem.tofixed(1);
+                porcentagem_sedu = dados.porcentagem.tofixed(1);
               }
+              else if (( orgaos[1] === concurso.orgao.trim() ) )
+              {
+                porcentagem_sesa = dados.porcentagem.tofixed(1);
+              }
+              else if (( orgaos[2] === concurso.orgao.trim() ) )
+              {
+                porcentagem_sejus = dados.porcentagem.tofixed(1);
+              }
+              else if (( orgaos[3] === concurso.orgao.trim() ) )
+              {
+                porcentagem_iases = dados.porcentagem.tofixed(1);
+              } */
+              
             }
           );
         
-          
+          /*
+
+          dados_2 = [{
+              "cpf": "12345678902",
+              "sedu": 65.240,
+              "sesa": 65.7073,
+              "sejus": 67.70,
+              "iases": 90.58
+            }
+          ]
+
+          */
           newConcursos.push({
             ...concurso,
             porcentagem: porcentagem
@@ -110,6 +143,15 @@ export class ConcursosPage {
 
     return concursos;
   }
+
+  hasPercent(orgao: string) {
+
+    if ( Object.keys(this.porcentagens[0]).includes(orgao) ) {
+      return true;
+    }
+
+    return false;
+  }
   
   
   ionViewWillLoad() {
@@ -119,8 +161,7 @@ export class ConcursosPage {
       // console.log(concursos);
       
       this.allConcursos = concursos;
-      this.updateConcursos(this.matcheorgaos(concursos));
-    
+      this.updateConcursos(concursos);
     });
     
     // carrega dados

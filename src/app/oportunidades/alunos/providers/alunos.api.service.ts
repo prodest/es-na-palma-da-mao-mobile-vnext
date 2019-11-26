@@ -1,6 +1,6 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Inject, Injectable } from '@angular/core';
-import { Environment, EnvVariables } from '@espm/core';
+import { Environment, EnvVariables, ANONYMOUS_HEADER } from '@espm/core';
 import { Observable } from 'rxjs/Observable';
 import { Concurso } from '../model';
 import { share } from 'rxjs/operators';
@@ -31,4 +31,15 @@ export class AlunosApiService {
       .post<ConcursoFavorito>(`${this.env.api.espm}/studentOpportunities/data/favorite`, favoritos)
       .pipe(share());
   };
+  /* Concetando api dos alunos - distnacia */ 
+  getDistancias= (cpf: string, municipio_curso: string): Observable<Concurso[]> => {
+    const headers: HttpHeaders = new HttpHeaders({
+      Authorization: `Basic user:pass`, 
+      [ANONYMOUS_HEADER]: 'true'
+    })
+    let url = `${this.env.api.sugestaodt}/sugestao/cpf/orgao?cpf=${cpf}&`+municipio_curso;
+    return this.http.get<Concurso[]>(url, { headers }).pipe(share());
+
+  }
+
 }

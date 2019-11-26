@@ -13,18 +13,19 @@ import { map } from 'rxjs/operators';
   templateUrl: 'lista-oportunidades.html'
 })
 export class ListaOportunidadesPage {
+  [x: string]: any;
 
-  lista = [
+  distancias = [
     {
-      nome:"ivonildo",
-      idade:12
+      municipio:"Cariacica",
+      Distancua: 12
     },
     {
-      nome:"paulo",
-      idade:1
+      municipio:"Serra",
+      Distancua: 800
     },{
-      nome:"ivon",
-      idade:2
+      nome:"Viana",
+      idade: 9999999999
     },
   ]
   /**
@@ -33,6 +34,9 @@ export class ListaOportunidadesPage {
   allConcursos: Concurso[];
   filteredConcursos: Concurso[];
   trackById = trackById;
+  auth: any;
+  selecaoApiService: any;
+  dadosTeste: any;
 
   /**
    *
@@ -105,6 +109,51 @@ export class ListaOportunidadesPage {
       return valor;
     }
   };
+
+  /* 
+  
+
+ /* matcheCursos(concursos) {  // funcao que verifica se os orgaos recebidos estao iguais
+  if (this.auth.isLoggedIn) {  // se o usuario esta logado
+    let cpf = '03147642755'; // this.auth.state.claims.cpf;
+    let newConcursos = []; // necessario criar pois nao estava reconhecendo o objeto criado.
+    let municipio = this.Curso.municipio;
+          
+    this.AlunosApiService.getDistancias(cpf, municipio).subscribe(
+      dados => { 
+        this.dadosTeste = dados
+      }
+    )
+    
+    
+    concursos.map(  // loop de fora 
+      (concurso: Concurso) => { 
+        let porcentagem;
+
+        this.dadosTeste.map(
+          (dados) => { 
+            if (dados.municipio.trim() === Curso.municipio.trim()) 
+            {
+              porcentagem = dados.porcentagem.tofixed(1);
+            }
+          }
+        );
+      
+        
+        newConcursos.push({
+          ...concurso,
+          porcentagem: porcentagem
+        });
+      }
+    );
+
+    return newConcursos;
+  }
+
+  return concursos;
+}
+
+
 
   /**
    *

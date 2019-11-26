@@ -25,6 +25,9 @@
             {{ concurso.tipo }} - {{ concurso.anoBase }}
           </h3>
           <p text-wrap class="concursos_descricao">{{ concurso.nome }}</p>
+          
+          <p *ngIf="concurso.status != 'encerrado' && concurso.distancia != null "> disponivel a x metros de vc </p>
+          
         </div>
         <div class="button-status">
           <concurso-status [status]="concurso.status"></concurso-status>
