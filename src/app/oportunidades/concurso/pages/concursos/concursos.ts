@@ -23,9 +23,9 @@ export class ConcursosPage {
   porcentagens: Array<Object> = [
     {
       "cpf": "12345678902",
-      "sedu": 65.240,
+      "sedu": undefined,
       "sesa": 65.7073,
-      "sejus": 67.70,
+      "sejus": 99.0,
       "iases": 90.58
     }
   ];
@@ -41,117 +41,37 @@ export class ConcursosPage {
   filteredConcursos: Concurso[];
   trackById = trackById;
   valor = [];
-  
   /**
   *
   */
   constructor(private auth: AuthQuery, private navCtrl: NavController, private service: SelecaoService, private query: SelecaoQuery, private selecaoApiService: SelecaoApiService) {
     this.concursos$ = new Subject();
 
-  /*  if (this.auth.isLoggedIn) // verificando se está logado
-    { let cpf = this.auth.state.claims.cpf  // funcao que pega o cpf pronto 
-
-      for(let i = 0; i < this.data.length; i++)
-      {
-        if(cpf === this.data[i].CPF)
-        { 
-          this.valor[i] = this.data[i].orgao   
-        }
-      }
+    if (this.auth.isLoggedIn) {
+     // let cpf = this.auth.state.claims.cpf  // funcao que pega o cpf pronto 
+     let cpf = '03147642755'; // this.auth.state.claims.cpf;
+     // this.selecaoApiService.getPorcentagem(cpf).subscribe(dados => {this.porcentagens = dados});
+      
     }
-    console.log(this.valor) */
+    
+    console.log(this.valor)
   }
-
-
-  
   /**
   *
   */
   verificationOrgan() {
-  
   }
-  
-  matcheorgaos(concursos) {  // funcao que verifica se os orgaos recebidos estao iguais
-    if (this.auth.isLoggedIn) {  // se o usuario esta logado
-      let cpf = '03147642755'; // this.auth.state.claims.cpf;
-      let newConcursos = []; // necessario criar pois nao estava reconhecendo o objeto criado.
-      let orgaos:Array<string> = ['sedu','sesa','sejus','iases'];
-      // de cada concurso, separa os orgaos
-
-       /* concursos.map(
-        (concurso: Concurso) => {
-          if (!orgaos.includes(concurso.orgao.trim())) {
-            orgaos.push(concurso.orgao.trim());
-          }
-        }
-      ) */ 
-            
-      this.selecaoApiService.getPorcentagem(cpf, orgaos).subscribe(
-        dados => { 
-          this.dadosTeste = dados
-        }
-      )
-      
-      
-      concursos.map(  // loop de fora 
-        (concurso: Concurso) => { 
-          let porcentagem;
-
-          this.dadosTeste.map(
-            (dados) => { 
-              /* if ( orgaos[0] === concurso.orgao.trim() ) 
-              {
-                porcentagem_sedu = dados.porcentagem.tofixed(1);
-              }
-              else if (( orgaos[1] === concurso.orgao.trim() ) )
-              {
-                porcentagem_sesa = dados.porcentagem.tofixed(1);
-              }
-              else if (( orgaos[2] === concurso.orgao.trim() ) )
-              {
-                porcentagem_sejus = dados.porcentagem.tofixed(1);
-              }
-              else if (( orgaos[3] === concurso.orgao.trim() ) )
-              {
-                porcentagem_iases = dados.porcentagem.tofixed(1);
-              } */
-              
-            }
-          );
-        
-          /*
-
-          dados_2 = [{
-              "cpf": "12345678902",
-              "sedu": 65.240,
-              "sesa": 65.7073,
-              "sejus": 67.70,
-              "iases": 90.58
-            }
-          ]
-
-          */
-          newConcursos.push({
-            ...concurso,
-            porcentagem: porcentagem
-          });
-        }
-      );
-
-      return newConcursos;
-    }
-
-    return concursos;
-  }
-
+  /*
+  *
+  */
   hasPercent(orgao: string) {
-
-    if ( Object.keys(this.porcentagens[0]).includes(orgao) ) {
+    if ( this.porcentagens[0][orgao.toLowerCase()] != undefined )
+    {
       return true;
     }
-
     return false;
-  }
+  }   
+    
   
   
   ionViewWillLoad() {
