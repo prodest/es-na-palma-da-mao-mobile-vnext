@@ -59,12 +59,12 @@ export class SelecaoApiService {
       Authorization: `Basic user:pass`, 
       [ANONYMOUS_HEADER]: 'true'
     })
-    let url = `${this.env.api.sugestaodt}/sugestao/cpf/orgao?cpf=${cpf}&`;
+    let url = `${this.env.api.sugestaodt}/sugestao/pessoa/cpf?cpf=${cpf}`;
 
     /* for(let i = 0; i < orgaos.length; i ++){
       url = url+`orgao=${orgaos[i].toLowerCase()}&`;
     } */
-    url = url.slice(0, -1);
+    // url = url.slice(0, -1);
 
     return this.http.get<Concurso[]>(url, { headers }).pipe(share());
     // /cpf/orgao?cpf=<cpf_que _voce_vai_mandar>&orgao=<primeiro_orgao>&orgao=<segundo_orgao>

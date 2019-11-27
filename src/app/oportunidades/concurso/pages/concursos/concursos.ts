@@ -29,7 +29,7 @@ export class ConcursosPage {
       "iases": 90.58
     }
   ];
-  dadosTeste = []
+  porcentagens2: Array<Object> = []
 
 
   /**
@@ -46,14 +46,12 @@ export class ConcursosPage {
   */
   constructor(private auth: AuthQuery, private navCtrl: NavController, private service: SelecaoService, private query: SelecaoQuery, private selecaoApiService: SelecaoApiService) {
     this.concursos$ = new Subject();
-
-    if (this.auth.isLoggedIn) {
-     // let cpf = this.auth.state.claims.cpf  // funcao que pega o cpf pronto 
-     let cpf = '03147642755'; // this.auth.state.claims.cpf;
-     // this.selecaoApiService.getPorcentagem(cpf).subscribe(dados => {this.porcentagens = dados});
-      
+    if (this.auth.isLoggedIn) 
+    {
+    // let cpf = this.auth.state.claims.cpf  // funcao que pega o cpf pronto 
+      let cpf = '03147642755'; // this.auth.state.claims.cpf;
+     // this.selecaoApiService.getPorcentagem(cpf).subscribe(dados => {this.porcentagens2 = dados});
     }
-    
     console.log(this.valor)
   }
   /**
