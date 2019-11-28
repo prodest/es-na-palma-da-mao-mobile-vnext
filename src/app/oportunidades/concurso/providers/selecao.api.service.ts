@@ -65,6 +65,7 @@ export class SelecaoApiService {
       url = url+`orgao=${orgaos[i].toLowerCase()}&`;
     } */
     // url = url.slice(0, -1);
+    console.log(url)
 
     return this.http.get<Concurso[]>(url, { headers }).pipe(share());
     // /cpf/orgao?cpf=<cpf_que _voce_vai_mandar>&orgao=<primeiro_orgao>&orgao=<segundo_orgao>

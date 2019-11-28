@@ -20,7 +20,7 @@ import { SelecaoApiService } from '../../providers/selecao.api.service';
 })
 export class ConcursosPage {
 
-  porcentagens: Array<Object> = [
+  /* porcentagens: Array<Object> = [
     {
       "cpf": "12345678902",
       "sedu": undefined,
@@ -28,8 +28,8 @@ export class ConcursosPage {
       "sejus": 99.0,
       "iases": 90.58
     }
-  ];
-  porcentagens2: Array<Object> = []
+  ];*/
+  porcentagens2: Array<Object> = [{}]
 
 
   /**
@@ -48,9 +48,9 @@ export class ConcursosPage {
     this.concursos$ = new Subject();
     if (this.auth.isLoggedIn) 
     {
-    // let cpf = this.auth.state.claims.cpf  // funcao que pega o cpf pronto 
-      let cpf = '03147642755'; // this.auth.state.claims.cpf;
-     // this.selecaoApiService.getPorcentagem(cpf).subscribe(dados => {this.porcentagens2 = dados});
+      // let cpf = this.auth.state.claims.cpf  // funcao que pega o cpf pronto 
+       let cpf =  '03147642755'; // '03147642755'; // this.auth.state.claims.cpf;
+      this.selecaoApiService.getPorcentagem(cpf).subscribe(dados => {this.porcentagens2 = dados});
     }
     console.log(this.valor)
   }
@@ -63,7 +63,7 @@ export class ConcursosPage {
   *
   */
   hasPercent(orgao: string) {
-    if ( this.porcentagens[0][orgao.toLowerCase()] != undefined )
+    if ( this.porcentagens2[0][orgao.toLowerCase()] != undefined )
     {
       return true;
     }
