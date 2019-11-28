@@ -27,19 +27,24 @@ export class SeduDenunciasPage {
     email: "",
     aluno: "",
     codigoEDP: "",
+    registroAcademico: "",
+    placaVeiculo: "",
     tipoReclamacao: 0,
     dataReclamacao: null,
     descricao: "",
-    inepEscola: ""
+    inepEscola: "",
+    codigoRota: null
   };
 
   municipios$: Subject<Array<any>>;               // lista de municípios, obtida pela api, para exibir no select
-  tiposDenuncia$: Subject<Array<any>>;            // lista de tipos de denúncias, obtida pela api
   escolas: Array<Escola>;                         // lista de todas as escolas, obtida pela api
-  escolasDoMunicipio$: Subject<Array<Escola>>;    // lista de escolas, filtrada por município, exibida no select de escolas, atualizada pelo subscribe no IonViewDidEnter
+  tiposDenuncia$: Subject<Array<any>>;            // lista de tipos de denúncias, obtida pela api, para exibir no select
+  rotas: Array<any>;                              // lista de rotas, obetida pela api
+  
   municipio$: Subject<string>;                    // município escolhido, atualizado pelo método setCity()
-  municipio: string;                              // município escolhido, amarrado no [(ngModel)] do select de município
-  escola: string;                                 // escola escolhida pelo usuário, amarrada no [(ngModel)] do select de escola
+  escolasDoMunicipio$: Subject<Array<Escola>>;    // lista de escolas, filtrada por município, exibida no select de escolas, atualizada pelo subscribe no IonViewDidEnter
+  escola$: Subject<string>                        // escola escolhida, atualizado pelo método setSchool()
+  rotasDaEscola$: Subject<Array<any>>;            // lista de rotas, filtrada por escola, exibida no select de rotas, atualizada pelo subscribe no IonViewDidEnter
   
   constructor(
     public navCtrl: NavController,
@@ -51,8 +56,10 @@ export class SeduDenunciasPage {
   ) {
     this.municipios$ = new Subject();
     this.municipio$ = new Subject();
+    this.escola$ = new Subject();
     this.escolasDoMunicipio$ = new Subject();
     this.tiposDenuncia$ = new Subject();
+    this.rotasDaEscola$ = new Subject();
 
     this.denuncia.dataReclamacao = new Date();
   }
@@ -70,6 +77,12 @@ export class SeduDenunciasPage {
     this.municipio$.subscribe((municipio: string) => {
       this.escolasDoMunicipio$.next(
         this.escolas.filter((escola: Escola) => escola.municipio === municipio)
+      );
+    });
+
+    this.escola$.subscribe((escola: string) => {
+      this.rotasDaEscola$.next(
+        this.rotas.filter((rota) => `${rota.inepEscola}` === escola)
       );
     });
 
@@ -97,6 +110,26 @@ export class SeduDenunciasPage {
     .subscribe((tipos) => {
       this.tiposDenuncia$.next(tipos);
     });
+
+    // carrega rotas
+    this.api.getAllRoutes()
+    .subscribe((rotas) => {
+      this.rotas = rotas;
+    });
+  }
+
+  /**
+   * Disparado pelo ionChange do ion-select de municípios para atualizar a lista de escolas.
+   */
+  setCity(e) {
+    this.municipio$.next(e);
+  }
+
+  /**
+   * 
+   */
+  setSchool(e) {
+    this.escola$.next(e);
   }
 
   /**
@@ -111,13 +144,6 @@ export class SeduDenunciasPage {
    */
   setHour({hour, minute}) {
     this.denuncia.dataReclamacao.setHours(hour, minute);
-  }
-
-  /**
-   * Disparado pelo ionChange do ion-select de municípios para atualizar a lista de escolas.
-   */
-  setCity() {
-    this.municipio$.next(this.municipio);
   }
 
   /** 
@@ -180,13 +206,17 @@ export class SeduDenunciasPage {
    */
   canGoNext(): boolean {
     
-    if (this.slides.getActiveIndex() === 0) return true;
+    if (this.slides.getActiveIndex() === 0) {
+      if (this.denuncia.papelDoAutor) {
+        return true;
+      }
+    }
 
     if (this.slides.getActiveIndex() === 1) {
       if (
         this.denuncia.aluno &&
         this.denuncia.codigoEDP &&
-        this.denuncia.inepEscola) {
+        this.denuncia.codigoRota) {
           return true;
       }
     }

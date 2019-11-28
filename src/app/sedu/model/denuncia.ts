@@ -6,12 +6,15 @@ export interface Denuncia {
 
   // dados de um aluno
   aluno: string;
-  registroAcademico: number;
+  registroAcademico: string;
   codigoEDP: string;
   inepEscola: string;
 
   // dados do veículo
   placaVeiculo: string;
+
+  // dados da rota
+  codigoRota: number;
 
   // detalhes da reclamação
   tipoReclamacao: number;

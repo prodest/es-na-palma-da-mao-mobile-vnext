@@ -7,7 +7,7 @@ page-sedu-denuncias {
     height: 100%;
     flex: 1;
     overflow: scroll;
-  
+    overflow-y: visible;    
   }
   
   .slide-zoom > div {
@@ -62,12 +62,12 @@ page-sedu-denuncias {
     flex-direction: row;
     justify-content: space-between;
     width: 100%;
-    background-color: transparent;
+    border-top: 1px solid #abe1fa;
 
     .nav-slide button {
       font-size: 20px;
       background-color: transparent;
-      margin: 15px;
+      margin: 10px 15px;
     }
     
     #next-slide {

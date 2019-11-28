@@ -36,4 +36,8 @@ export class SeduDenunciasApiService {
     return this.http.post(`${this.env.api.seduDenuncias}/denuncia/`, demand);
   }
 
+  getAllRoutes(): Observable<any> {
+    return this.http.get(`${this.env.api.seduDenuncias}/rotas/`);
+  }
+
 }
