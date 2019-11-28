@@ -1,1 +1,13 @@
-<module-page title="Minhas Denúncias" no-padding></module-page>
+<module-page title="Minhas Denúncias" no-padding>
+  <ion-card
+    *ngFor="let denuncia of (denuncias$ | async)"
+    (click)="console.log('open card')">
+    <ion-card-header>
+      {{date(denuncia.dataReclamacao)}} - {{denuncia.status}}
+    </ion-card-header>
+    <ion-card-content>
+      <p>{{denuncia.tipoReclamacao}}</p>
+      <span>{{denuncia.descricao}}</span>
+    </ion-card-content>
+  </ion-card>
+</module-page>
