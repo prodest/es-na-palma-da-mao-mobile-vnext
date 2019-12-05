@@ -1,7 +1,6 @@
-page-paystub-links {
-  .scroll-content {
+paystub-links {
+  .content {
     padding: 0 !important;
-    background-color: #e9f7fe;
   }
 
   ion-searchbar {
@@ -17,6 +16,10 @@ page-paystub-links {
     display: flex;
     flex-direction: column;
     align-items: center;
+
+    .header {
+      margin: 15px 0;
+    }
 
     button {
       width: 95%;

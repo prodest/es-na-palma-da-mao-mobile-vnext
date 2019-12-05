@@ -1,16 +1,13 @@
 import { Component, ChangeDetectorRef, OnInit } from '@angular/core';
 import { trackById } from '@espm/core';
 import deburr from 'lodash-es/deburr';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { NavController, NavParams } from 'ionic-angular';
 
-@IonicPage({
-  segment: 'contracheque/vinculos'
-})
 @Component({
-  selector: 'page-paystub-links',
-  templateUrl: 'paystub-links.html',
+  selector: 'paystub-links',
+  templateUrl: 'paystub-links.component.html',
 })
-export class PaystubLinksPage implements OnInit {
+export class PaystubLinksComponent implements OnInit {
 
   allLinks$ = [
     {
@@ -67,7 +64,7 @@ export class PaystubLinksPage implements OnInit {
       return a.situacao === b.situacao ? crit2 : crit1;
     });
     this.filteredLinks = this.allLinks$;
-    this.cdr.detectChanges();
+    this.cdr.detectChanges()
     // console.log('Links: ', this.filteredLinks)
   }
 
