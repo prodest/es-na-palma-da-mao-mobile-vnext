@@ -1,26 +1,26 @@
 paystub-profiles {
-  ion-list.list {
-    flex: 1 !important;
-    margin: 0 !important;
-
-    p {
-      // para dispositivos pequenos o texto
-      // ser quebrado e exibido de forma integral
-      word-break: normal;
-      white-space: normal;
+  p.info {
+    // para dispositivos pequenos o texto
+    // ser quebrado e exibido de forma integral
+    word-break: normal;
+    white-space: normal;
+    margin-bottom: 20px;
+  }
+  p.text-danger {
+    color: #dc3545;
+  }
+  ion-list {
+    .button-content {
+      h3 {
+        font-weight: 600;
+      }
     }
+    button.item {
+      border-width: 1px!important;
+      border-top: 1px solid #eee;
 
-    [ion-button] {
-      font-family: 'Poppins';
-      font-weight: 600;
-      text-transform: none;
-      margin-top: 0;
-      margin-bottom: 5px;
-      box-shadow: none;
-      text-align: right;
-
-      .button-inner {
-        justify-content: space-between;
+      &:last-child {
+        border-bottom: 1px solid #eee;
       }
     }
   }
