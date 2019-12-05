@@ -1,4 +1,4 @@
-download-paystub {
+paystub-download {
   ion-list {
     margin-bottom: 0;
     background-color: #fff;
@@ -34,6 +34,14 @@ download-paystub {
           span.end {
             margin-left: auto;
           }
+        }
+      }
+    }
+    table.table {
+      text-align: left;
+      tr {
+        td {
+          text-align: right;
         }
       }
     }
