@@ -1,54 +1,18 @@
-import { Component, ChangeDetectorRef, OnInit } from '@angular/core';
+import { Component, ChangeDetectorRef, OnInit, Input, OnChanges, SimpleChanges } from '@angular/core';
 import { trackById } from '@espm/core';
 import deburr from 'lodash-es/deburr';
 import { NavController, NavParams } from 'ionic-angular';
+import { IPaystubLink } from '../../interfaces';
 
 @Component({
   selector: 'paystub-links',
   templateUrl: 'paystub-links.component.html',
 })
-export class PaystubLinksComponent implements OnInit {
+export class PaystubLinksComponent implements OnInit, OnChanges {
 
-  allLinks$ = [
-    {
-      numero_vinculo: 4,
-      orgao: 'PRODEST',
-      situacao: 'ativo',
-      tipo_vinculo: 'REQUISITADO',
-      data_inicio: '14/03/2016',
-      data_vacancia: '-',
-      data_apos: '-'
-    },
-    {
-      numero_vinculo: 3,
-      orgao: 'SEGER',
-      situacao: 'inativo',
-      tipo_vinculo: 'REQUISITADO',
-      data_inicio: '01/09/2011',
-      data_vacancia: '-',
-      data_apos: '-'
-    },
-    {
-      numero_vinculo: 2,
-      orgao: 'SEDU',
-      situacao: 'ativo',
-      tipo_vinculo: 'REQUISITADO',
-      data_inicio: '26/05/2014',
-      data_vacancia: '-',
-      data_apos: '-'
-    },
-    {
-      numero_vinculo: 1,
-      orgao: 'SEGER',
-      situacao: 'desligado',
-      tipo_vinculo: 'REQUISITADO',
-      data_inicio: '26/05/2012',
-      data_vacancia: '-',
-      data_apos: '-'
-    }
-  ]
+  @Input() links: IPaystubLink[] = []
 
-  filteredLinks: any[];
+  filteredLinks: IPaystubLink[];
 
   trackById = trackById
 
@@ -56,16 +20,15 @@ export class PaystubLinksComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.allLinks$.sort((a, b) => {
-      // critério 1: situação ativo
-      const crit1 = a.situacao === 'ativo' ? -1 : 1;
-      // critério 2: data de início maior na frente
-      const crit2 = a.data_inicio > b.data_inicio ? 1 : -1;
-      return a.situacao === b.situacao ? crit2 : crit1;
-    });
-    this.filteredLinks = this.allLinks$;
+    this.filteredLinks = this.links || [];
     this.cdr.detectChanges()
-    // console.log('Links: ', this.filteredLinks)
+  }
+
+  ngOnChanges(changes: SimpleChanges): void {
+    if ('links' in changes) {
+      this.filteredLinks = this.links || [];
+      this.cdr.detectChanges()
+    }
   }
 
   ionViewDidLoad(): void {
@@ -95,13 +58,13 @@ export class PaystubLinksComponent implements OnInit {
     //   })
     // );
 
-    this.filteredLinks = this.allLinks$.filter(link => {
+    this.filteredLinks = this.links.filter(link => {
       return this.normalize(link.orgao).includes(search) || this.normalize(link.situacao).includes(search);
     });
   };
 
   clear = () => {
-    this.filteredLinks = [...this.allLinks$];
+    this.filteredLinks = [...this.links];
   };
 
   // tamanho do nome "orgão" limitado
