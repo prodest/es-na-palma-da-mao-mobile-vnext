@@ -4,10 +4,10 @@
       Baixar contracheque
     </ion-list-header>
     <ion-item *ngSwitchCase="'profile'">
-      <paystub-profiles></paystub-profiles>
+      <paystub-profiles [profiles]="profiles$ | async" (onSelectProfile)="getLinks($event)"></paystub-profiles>
     </ion-item>
     <ion-item class="no-padding" *ngSwitchCase="'links'">
-      <paystub-links></paystub-links>
+      <paystub-links [links]="links$ | async"></paystub-links>
     </ion-item>
     <ion-item *ngSwitchCase="'download'">
       <paystub-download></paystub-download>
