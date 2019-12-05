@@ -1,15 +1,12 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams, /*AlertController*/ } from 'ionic-angular';
+import { NavController, NavParams, /*AlertController*/ } from 'ionic-angular';
 
-@IonicPage({
-  segment: 'contracheque/perfis'
-})
 @Component({
   selector: 'paystub-profiles',
-  templateUrl: 'paystub-profiles.html'
+  templateUrl: 'paystub-profiles.component.html'
 })
-export class PaystubProfilesPage {
-  constructor(public navCtrl: NavController, public navParams: NavParams, /*private alert: AlertController*/) {}
+export class PaystubProfilesComponent {
+  constructor(public navCtrl: NavController, public navParams: NavParams, /*private alert: AlertController*/) { }
 
   profiles = [
     {

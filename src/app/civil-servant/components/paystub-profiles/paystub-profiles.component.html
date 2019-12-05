@@ -1,0 +1,9 @@
+<ion-list class="list" padding>
+  <p>Selecione o perfil que deseja consultar o contracheque</p>
+  <br>
+  <button *ngFor="let profile of profiles" (click)="pushNext(profile.perfilacesso)" [disabled]="profile.disable"
+    ion-button block large round icon-end>
+    {{ profile.perfilacesso }}
+    <ion-icon name="ios-arrow-forward"></ion-icon>
+  </button>
+</ion-list>
