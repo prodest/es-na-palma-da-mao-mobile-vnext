@@ -8,15 +8,15 @@ links-status {
     color: #fff ;
     border-radius: 0.3em;
 
-    &.ativo {
+    &.ATIVO {
       background-color: #208baa;
     }
-    
-    &.inativo {
+
+    &.INATIVO {
       background-color: rgb(214, 166, 10);
     }
-  
-    &.desligado {
+
+    &.DESLIGADO {
       background-color: rgb(240, 162, 162);
     }
   }
