@@ -28,8 +28,8 @@ export class SeduDenunciasApiService {
     return this.http.get(`${this.env.api.seduDenuncias}/denuncias/tipos/`);
   }
 
-  getUserDemands(user): Observable<any> {
-    return this.http.get(`${this.env.api.seduDenuncias}/denuncias/`);
+  getUserDemands(idUser: string): Observable<any> {
+    return this.http.get(`${this.env.api.seduDenuncias}/reclamante/${idUser}/denuncias`);
   }
 
   sendDemand(demand: Denuncia) {
