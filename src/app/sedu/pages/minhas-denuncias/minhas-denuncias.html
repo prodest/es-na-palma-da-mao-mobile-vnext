@@ -1,7 +1,7 @@
-<module-page title="Minhas Denúncias" no-padding>
+<module-page title="Minhas Reclamações" no-padding>
   <ion-card
     *ngFor="let denuncia of (denuncias$ | async)"
-    (click)="console.log('open card')">
+    (click)="showDemand(denuncia.id)">
     <ion-card-header>
       {{date(denuncia.dataReclamacao)}} - {{denuncia.status}}
     </ion-card-header>

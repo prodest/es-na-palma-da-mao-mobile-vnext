@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { IonicPage } from 'ionic-angular';
+import { IonicPage, NavController } from 'ionic-angular';
 import { SeduDenunciasApiService } from '../../providers';
 import { Subject } from 'rxjs/Subject';
 import { AuthQuery } from '@espm/core';
@@ -11,24 +11,35 @@ import { AuthQuery } from '@espm/core';
 })
 export class MinhasDenunciasPage {
 
-  denuncias$: Subject<any>;
+  denuncias: Array<any>;
+  denuncias$: Subject<Array<any>>;
 
   constructor(
     private api: SeduDenunciasApiService,
-    public auth: AuthQuery
+    public auth: AuthQuery,
+    private navCtrl: NavController
   ) {
     this.denuncias$ = new Subject();
   }
 
   ionViewWillLoad() {
-    this.api.getUserDemands(this.auth.state.claims.nome)
+    this.api.getUserDemands(this.auth.state.claims.subNovo)
     .subscribe((denuncias) => {
       console.log(denuncias);
       this.denuncias$.next(denuncias);
+      this.denuncias = denuncias;
     });
+
   }
 
   date(date: string) {
     return (new Date(date)).toLocaleString();
+  }
+
+  showDemand(id: number) {
+    let params = {
+      demand: this.denuncias.find((demand) => demand.id === id)
+    };
+    this.navCtrl.push("DetalhesDenunciaPage", params);
   }
 }
