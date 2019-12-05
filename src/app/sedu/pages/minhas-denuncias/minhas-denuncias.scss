@@ -1,6 +1,16 @@
 page-minhas-denuncias {
+  .content p {
+    font-size: 30px !important;
+  }
+  
   ion-card {
     box-shadow: none !important;
     border-radius: 15px !important;
+  }
+
+  @media screen and (max-width: 361px) {
+    .content p {
+      font-size: 25px !important;
+    }
   }
 }
