@@ -1,7 +1,16 @@
 page-detalhes-denuncia {
-  .content p {
-    font-size: 30px !important;
+
+  ion-label {
+    white-space: normal;
   }
+
+  ion-list {
+    margin: 0 !important;
+  }
+
+  #content {
+    background-color: #fff !important;
+  } 
   
   ion-card {
     box-shadow: none !important;

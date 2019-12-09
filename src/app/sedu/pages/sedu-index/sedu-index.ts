@@ -10,7 +10,7 @@ import { AuthQuery } from '@espm/core';
 export class SeduIndexPage {
   menus = [
     {
-      buttonTitle: "Nova reclamação",
+      buttonTitle: "Reclamar sobre transporte",
       targetPage: "SeduDenunciasPage"
     },
     {
@@ -58,7 +58,7 @@ export class SeduIndexPage {
           handler: () => {
             this.appCtrl
               .getRootNav()
-              .push('LoginPage', { redirectTo: 'SeduDenunciasPage' })
+              .push('LoginPage', { redirectTo: 'SeduIndexPage' })
               .then(() => {
                 alert.dismiss();
                 this.menuCtrl.close();
