@@ -2,6 +2,7 @@ export interface Denuncia {
   // dados do autor
   autor: string;
   papelDoAutor: string;
+  outroPapel?: string;
   email: string;
 
   // dados de um aluno
@@ -17,7 +18,7 @@ export interface Denuncia {
   codigoRota: number;
 
   // detalhes da reclamação
-  tipoReclamacao: number;
+  tipoReclamacao: string;
   dataReclamacao: Date;
   dataReclamacaoString: string;
   outroTipo?: string;

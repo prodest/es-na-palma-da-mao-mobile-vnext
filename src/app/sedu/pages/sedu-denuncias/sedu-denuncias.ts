@@ -24,12 +24,13 @@ export class SeduDenunciasPage {
   denuncia: Partial<Denuncia> = {
     autor: "",
     papelDoAutor: "",
+    outroPapel: "",
     email: "",
     aluno: "",
     codigoEDP: "",
     registroAcademico: "",
     placaVeiculo: "",
-    tipoReclamacao: 0,
+    tipoReclamacao: "",
     dataReclamacao: null,
     descricao: "",
     inepEscola: "",
@@ -208,6 +209,13 @@ export class SeduDenunciasPage {
     
     if (this.slides.getActiveIndex() === 0) {
       if (this.denuncia.papelDoAutor) {
+        // tslint:disable-next-line: triple-equals
+        if (this.denuncia.papelDoAutor == 2) {
+          if (this.denuncia.outroPapel) {
+            return true;
+          }
+          return false;
+        }
         return true;
       }
     }

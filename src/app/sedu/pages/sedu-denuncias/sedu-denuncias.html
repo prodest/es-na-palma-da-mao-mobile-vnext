@@ -26,6 +26,10 @@
           <ion-label>Outro</ion-label>
           <ion-radio value=2></ion-radio>
         </ion-item>
+        <ion-item *ngIf="denuncia.papelDoAutor == 2">
+          <ion-label>Descreva</ion-label>
+          <ion-input type="text" [(ngModel)]="denuncia.outroPapel"></ion-input>
+        </ion-item>
       </ion-list>
     </ion-slide> <!-- SLIDE 1 -->
 
