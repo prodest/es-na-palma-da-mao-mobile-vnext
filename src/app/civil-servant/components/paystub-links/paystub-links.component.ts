@@ -1,4 +1,4 @@
-import { Component, ChangeDetectorRef, OnInit, Input, OnChanges, SimpleChanges } from '@angular/core';
+import { Component, ChangeDetectorRef, OnInit, Input, OnChanges, SimpleChanges, Output, EventEmitter } from '@angular/core';
 import { trackById } from '@espm/core';
 import deburr from 'lodash-es/deburr';
 import { NavController, NavParams } from 'ionic-angular';
@@ -11,6 +11,7 @@ import { IPaystubLink } from '../../interfaces';
 export class PaystubLinksComponent implements OnInit, OnChanges {
 
   @Input() links: IPaystubLink[] = []
+  @Output() onSelectLink: EventEmitter<IPaystubLink> = new EventEmitter();
 
   filteredLinks: IPaystubLink[];
 
@@ -40,8 +41,8 @@ export class PaystubLinksComponent implements OnInit, OnChanges {
 
   }
 
-  showLink(id) {
-    this.navCtrl.push('ConcursoPage', { id });
+  selectLink(link: IPaystubLink) {
+    this.onSelectLink.emit(link);
   }
 
   search = e => {
