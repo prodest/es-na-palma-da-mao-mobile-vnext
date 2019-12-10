@@ -2,7 +2,7 @@ import { NgModule } from '@angular/core';
 import { IonicPageModule } from 'ionic-angular';
 import { PaystubDownloadComponent } from './paystub-download.component';
 import { ModulePageComponentModule } from '@espm/shared';
-import { PaycheckSheetComponentModule } from '../paycheck-sheet'
+import { PaycheckSheetFormModule } from '../paycheck-sheet-form'
 
 @NgModule({
   declarations: [
@@ -10,7 +10,7 @@ import { PaycheckSheetComponentModule } from '../paycheck-sheet'
   ],
   imports: [
     ModulePageComponentModule,
-    PaycheckSheetComponentModule,
+    PaycheckSheetFormModule,
     IonicPageModule,
   ],
   exports: [

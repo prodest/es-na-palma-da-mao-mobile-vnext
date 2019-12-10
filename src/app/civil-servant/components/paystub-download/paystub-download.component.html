@@ -11,11 +11,11 @@
           <tbody>
             <tr>
               <th>Número do vínculo:</th>
-              <td>4</td>
+              <td>{{ numVinc }}</td>
             </tr>
             <tr>
               <th>Número funcional:</th>
-              <td>3295257</td>
+              <td>{{ numFunc }}</td>
             </tr>
           </tbody>
         </table>
@@ -23,6 +23,8 @@
     </ion-row>
   </ion-item>
   <ion-item>
-    <civil-servant-paycheck-sheet></civil-servant-paycheck-sheet>
+    <civil-servant-paycheck-sheet-form [years]="years" [months]="months" (onSelectYear)="selectYear($event)"
+      (onSelectMonth)="selectMonth($event)">
+    </civil-servant-paycheck-sheet-form>
   </ion-item>
 </ion-list>

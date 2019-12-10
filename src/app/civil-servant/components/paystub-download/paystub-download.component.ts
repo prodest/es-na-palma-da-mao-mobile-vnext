@@ -1,5 +1,6 @@
-import { Component } from '@angular/core';
+import { Component, Input, Output, EventEmitter } from '@angular/core';
 import { NavController, NavParams } from 'ionic-angular';
+import { IPaystubYear, IPaystubMonth } from '../../interfaces';
 
 @Component({
   selector: 'paystub-download',
@@ -7,7 +8,22 @@ import { NavController, NavParams } from 'ionic-angular';
 })
 export class PaystubDownloadComponent {
 
+  @Input() years: IPaystubYear[] = [];
+  @Output() onSelectYear: EventEmitter<IPaystubYear> = new EventEmitter();
+  @Input() months: IPaystubMonth[] = [];
+  @Output() onSelectMonth: EventEmitter<IPaystubMonth> = new EventEmitter();
+  @Input() numVinc: number;
+  @Input() numFunc: number;
+
   constructor(public navCtrl: NavController, public navParams: NavParams) { }
+
+  selectYear(year: IPaystubYear): void {
+    this.onSelectYear.emit(year);
+  }
+
+  selectMonth(month: IPaystubMonth): void {
+    this.onSelectMonth.emit(month);
+  }
 
 }
 
