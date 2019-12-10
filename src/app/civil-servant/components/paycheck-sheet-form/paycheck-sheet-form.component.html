@@ -1,21 +1,24 @@
 <form novalidate [formGroup]="form" (ngSubmit)="onSubmitClick(form.value)">
-  <ion-item class="form-item">
+  <ion-item *ngIf="years?.length === 0">
+    <p class="empty-data-info">Nenhum dado encontrado.</p>
+  </ion-item>
+  <ion-item class="form-item" *ngIf="years?.length">
     <ion-label>Ano</ion-label>
     <ion-select cancelText="Cancelar" formControlName="year" name="year" [selectOptions]="yearsOptions"
-      (ionChange)="selectChange()">
+      (ionChange)="selectYear($event)">
       <ion-option *ngFor="let year of years" [value]="year">{{ year }}</ion-option>
     </ion-select>
   </ion-item>
   <espm-validation-message [errors]="validationErrors['year']"></espm-validation-message>
-  <ion-item class="form-item">
+  <ion-item class="form-item" *ngIf="months?.length">
     <ion-label>Mês</ion-label>
     <ion-select cancelText="Cancelar" formControlName="month" name="month" [selectOptions]="monthsOptions"
-      (ionChange)="selectChange()">
-      <ion-option *ngFor="let month of months" [value]="month">{{ month }}</ion-option>
+      (ionChange)="selectMonth($event)">
+      <ion-option *ngFor="let month of months" [value]="month">{{ monthsValues[month] }}</ion-option>
     </ion-select>
   </ion-item>
   <espm-validation-message [errors]="validationErrors['month']"></espm-validation-message>
-  <ion-item class="form-item">
+  <ion-item class="form-item" *ngIf="sheets?.length">
     <ion-label>Folha</ion-label>
     <ion-select cancelText="Cancelar" formControlName="sheet" name="sheet" [selectOptions]="sheetsOptions"
       (ionChange)="selectChange()">
@@ -23,7 +26,7 @@
     </ion-select>
   </ion-item>
   <espm-validation-message [errors]="validationErrors['sheet']"></espm-validation-message>
-  <button type="submit" ion-button class="download">
+  <button type="submit" ion-button class="download" [disabled]="form.invalid">
     Baixar
   </button>
 </form>
