@@ -7,10 +7,12 @@
       <paystub-profiles [profiles]="profiles$ | async" (onSelectProfile)="getLinks($event)"></paystub-profiles>
     </ion-item>
     <ion-item class="no-padding" *ngSwitchCase="'links'">
-      <paystub-links [links]="links$ | async"></paystub-links>
+      <paystub-links [links]="links$ | async" (onSelectLink)="getYears($event)"></paystub-links>
     </ion-item>
     <ion-item *ngSwitchCase="'download'">
-      <paystub-download></paystub-download>
+      <paystub-download [years]="years$ | async" [months]="months$ | async" [numVinc]="currentLink?.numeroVinculo"
+        [numFunc]="currentProfile?.numeroFuncionario" (onSelectYear)="getMonths($event)"
+        (onSelectMonth)="getLeafs($event)"></paystub-download>
     </ion-item>
   </ion-list>
 </module-page>
