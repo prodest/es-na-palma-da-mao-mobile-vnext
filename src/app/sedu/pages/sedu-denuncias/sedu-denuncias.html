@@ -94,6 +94,7 @@
           <ion-label floating>Tipo de reclamação</ion-label>
           <ion-select
             [(ngModel)]="denuncia.tipoReclamacao"
+            (ionChange)="updateSenderLock()"
             cancelText="Cancelar">
             <ion-option *ngFor="let tipo of tiposDenuncia$ | async" [value]="tipo.id">{{tipo.nome}}</ion-option>
           </ion-select>
@@ -124,7 +125,7 @@
         </div>
         <ion-item id="item-descricao">
           <ion-label floating>Descreva sua reclamação. Tente dar o máximo de detalhes possível.</ion-label>
-          <ion-textarea [(ngModel)]="denuncia.descricao"></ion-textarea>
+          <ion-textarea [(ngModel)]="denuncia.descricao" (ionChange)="updateSenderLock()"></ion-textarea>
         </ion-item>
       </div>
       <large-button
@@ -132,7 +133,8 @@
         leftIcon="ios-add-circle-outline"
         rightIcon="ios-arrow-forward-outline"
         color="primary-dark"
-        (click)="send()"
+        [action]="send"
+        [disabled]="!(canSend$ | async)"
       ></large-button>
     </ion-slide> <!-- SLIDE 3 -->
 

@@ -3,6 +3,7 @@ import { IonicPage, NavController, NavParams, Slides, AlertController, App } fro
 import { Denuncia } from '../../model/denuncia';
 import { AuthQuery } from '@espm/core';
 import { Subject } from 'rxjs/Subject';
+import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 import { SeduDenunciasApiService } from '../../providers';
 import { Escola } from '../../model/escola';
 
@@ -47,6 +48,8 @@ export class SeduDenunciasPage {
   escola$: Subject<string>                        // escola escolhida, atualizado pelo método setSchool()
   rotasDaEscola$: Subject<Array<any>>;            // lista de rotas, filtrada por escola, exibida no select de rotas, atualizada pelo subscribe no IonViewDidEnter
   
+  canSend$: BehaviorSubject<boolean>;
+
   constructor(
     public navCtrl: NavController,
     public navParams: NavParams,
@@ -61,6 +64,8 @@ export class SeduDenunciasPage {
     this.escolasDoMunicipio$ = new Subject();
     this.tiposDenuncia$ = new Subject();
     this.rotasDaEscola$ = new Subject();
+
+    this.canSend$ = new BehaviorSubject(false);
 
     this.denuncia.dataReclamacao = new Date();
   }
@@ -150,7 +155,7 @@ export class SeduDenunciasPage {
   /** 
    * Envia a reclamação/denuncia.
    */
-  send() {
+  send = () => {
     this.api.sendDemand({
       ...this.denuncia,
       dataReclamacaoString: this.denuncia.dataReclamacao.toISOString()
@@ -174,7 +179,7 @@ export class SeduDenunciasPage {
               this.navCtrl.pop();
             }
             else {
-              this.navCtrl.setRoot('MyServicesPage');
+              this.navCtrl.setRoot('SeduIndexPage');
             }
           }
         }
@@ -209,8 +214,7 @@ export class SeduDenunciasPage {
     
     if (this.slides.getActiveIndex() === 0) {
       if (this.denuncia.papelDoAutor) {
-        // tslint:disable-next-line: triple-equals
-        if (this.denuncia.papelDoAutor == 2) {
+        if (this.denuncia.papelDoAutor === "2") {
           if (this.denuncia.outroPapel) {
             return true;
           }
@@ -229,15 +233,12 @@ export class SeduDenunciasPage {
       }
     }
 
-    if (this.slides.getActiveIndex() === 2) {
-      if (
-        this.denuncia.tipoReclamacao &&
-        this.denuncia.descricao) {
-          return true;
-      }
-    }
-
     return false;
   }
 
+  updateSenderLock() {    
+    this.canSend$.next(
+      (this.denuncia.tipoReclamacao && this.denuncia.descricao) ? true : false
+    );
+  }
 }
