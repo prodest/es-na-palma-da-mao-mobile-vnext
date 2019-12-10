@@ -1,7 +1,7 @@
 import { EnvVariables, Environment } from '@espm/core';
 import { Injectable, Inject } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { IPaystubProfile, IPaystubLink } from '../interfaces';
+import { IPaystubProfile, IPaystubLink, IPaystubYear, IPaystubMonth } from '../interfaces';
 import { Observable } from 'rxjs/Observable';
 
 @Injectable()
@@ -13,7 +13,7 @@ export class PaystubApiService {
   }
 
   getProfiles(cpf: string): Observable<IPaystubProfile[]> {
-    return this.http.get<IPaystubProfile[]>(this.endpoint('perfis'), { params: { cpf } })
+    return this.http.get<IPaystubProfile[]>(this.endpoint('perfis'), { params: { cpf } });
   }
 
   getLink(cpf: string, codPerfil: number, numFunc: number): Observable<IPaystubLink[]> {
@@ -21,12 +21,52 @@ export class PaystubApiService {
       params: {
         cpf,
         codPerfil: codPerfil.toString(),
-        numFunc: numFunc.toString()
+        numFunc: numFunc.toString(),
       }
-    })
+    });
   }
 
-  getLeaf(link: string) { }
+  getYears(numFunc: number, numVinc: number, numPens?: number): Observable<IPaystubYear[]> {
+    const params: { [key: string]: string } = {
+      numFunc: numFunc.toString(),
+      numVinc: numVinc.toString(),
+    };
+    if (typeof numPens === 'number') {
+      params['numPens'] = numPens.toString();
+    }
+    return this.http.get<IPaystubYear[]>(this.endpoint('contracheque/anos'), {
+      params
+    });
+  }
+
+  getMonths(numFunc: number, numVinc: number, ano: number, numPens?: number): Observable<IPaystubMonth[]> {
+    const params: { [key: string]: string } = {
+      numFunc: numFunc.toString(),
+      numVinc: numVinc.toString(),
+      ano: ano.toString(),
+    };
+    if (typeof numPens === 'number') {
+      params['numPens'] = numPens.toString();
+    }
+    return this.http.get<IPaystubMonth[]>(this.endpoint('contracheque/meses'), {
+      params
+    });
+  }
+
+  getLeaf(numFunc: number, numVinc: number, ano: number, mes: number, numPens?: number): Observable<any> {
+    const params: { [key: string]: string } = {
+      numFunc: numFunc.toString(),
+      numVinc: numVinc.toString(),
+      ano: ano.toString(),
+      mes: mes.toString(),
+    };
+    if (typeof numPens === 'number') {
+      params['numPens'] = numPens.toString();
+    }
+    return this.http.get<any>(this.endpoint('contracheque/folhas'), {
+      params
+    });
+  }
 
   getPaystub(leaf: string) { }
 

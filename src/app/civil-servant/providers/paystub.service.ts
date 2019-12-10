@@ -3,18 +3,26 @@ import { PaystubApiService } from './paystub.api.service';
 
 @Injectable()
 export class PaystubService {
-  constructor(private api: PaystubApiService) {}
+  constructor(private api: PaystubApiService) { }
 
   getProfiles(cpf: string) {
     return this.api.getProfiles(cpf);
   }
 
-  getLink(perfil: string) {
-    return this.api.getLink(perfil);
+  getLink(cpf: string, codPerfil: number, numFunc: number) {
+    return this.api.getLink(cpf, codPerfil, numFunc);
   }
 
-  getLeaf(link: string) {
-    return this.api.getLeaf(link);
+  getYears(numFunc: number, numVinc: number, numPens?: number) {
+    return this.api.getYears(numFunc, numVinc, numPens);
+  }
+
+  getMonths(numFunc: number, numVinc: number, ano: number, numPens?: number) {
+    return this.api.getMonths(numFunc, numVinc, ano, numPens);
+  }
+
+  getLeaf(numFunc: number, numVinc: number, ano: number, mes: number, numPens?: number) {
+    return this.api.getLeaf(numFunc, numVinc, ano, mes, numPens);
   }
 
   getPaystub(leaf: string) {
