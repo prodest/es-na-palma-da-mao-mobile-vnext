@@ -32,14 +32,13 @@ export class AlunosApiService {
       .pipe(share());
   };
   /* Concetando api dos alunos - distnacia */ 
-  getDistancias= (cpf: string, municipio_curso: string): Observable<Concurso[]> => {
+   getDistancias= (cpf: string): Observable<Concurso[]> => {
     const headers: HttpHeaders = new HttpHeaders({
       Authorization: `Basic user:pass`, 
       [ANONYMOUS_HEADER]: 'true'
     })
-    let url = `${this.env.api.sugestaodt}/sugestao/cpf/orgao?cpf=${cpf}&`+municipio_curso;
+    let url = `${this.env.api.sugestaodt}/sugestao/cpf/orgao?cpf=${cpf}`;
     return this.http.get<Concurso[]>(url, { headers }).pipe(share());
-
-  }
+  } 
 
 }

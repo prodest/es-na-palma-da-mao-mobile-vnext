@@ -15,4 +15,5 @@ export class Concurso {
   areas?: Areas[];
   favorito?: boolean;
 
+
 }

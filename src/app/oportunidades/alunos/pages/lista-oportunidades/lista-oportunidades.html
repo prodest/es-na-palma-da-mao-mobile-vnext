@@ -24,9 +24,10 @@
           <h3 text-wrap class="concursos_name">
             {{ concurso.tipo }} - {{ concurso.anoBase }}
           </h3>
-          <p text-wrap class="concursos_descricao">{{ concurso.nome }}</p>
+          <p text-wrap class="concursos_descricao">{{ concurso.nome }}</p> 
           
-          <p *ngIf="concurso.status != 'encerrado' && concurso.distancia != null "> disponivel a x metros de vc </p>
+          <!-- <p *ngIf="concurso.status === 'aberto' && concurso.distancia === 1 ">  Curso próximo a você </p>  -->
+          <p *ngIf="checaCurso(concurso.id)"> Curso próximo a você </p> 
           
         </div>
         <div class="button-status">

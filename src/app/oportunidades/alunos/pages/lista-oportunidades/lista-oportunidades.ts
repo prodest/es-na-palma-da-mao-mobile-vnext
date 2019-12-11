@@ -1,5 +1,7 @@
+import { AlunosApiService } from './../../providers/alunos.api.service';
+// import { ID } from '@datorama/akita';
 import { Component } from '@angular/core';
-import { trackById } from '@espm/core';
+import { trackById, AuthQuery } from '@espm/core';
 import { IonicPage, NavController } from 'ionic-angular';
 import deburr from 'lodash-es/deburr';
 import { Concurso } from '../../model';
@@ -13,36 +15,33 @@ import { map } from 'rxjs/operators';
   templateUrl: 'lista-oportunidades.html'
 })
 export class ListaOportunidadesPage {
-  [x: string]: any;
 
-  distancias = [
+  /* exemplo de novo retorno */ 
+  distancia2: Array<object> = [];
+  distancia: Array<Object> = [
     {
-      municipio:"Cariacica",
-      Distancua: 12
-    },
-    {
-      municipio:"Serra",
-      Distancua: 800
-    },{
-      nome:"Viana",
-      idade: 9999999999
-    },
-  ]
+      "cpf": "12345678902",
+      "cursos": [168,169,44,150,90,60,56,180,51]
+    }
+  ];
+  
   /**
    *
    */
   allConcursos: Concurso[];
   filteredConcursos: Concurso[];
   trackById = trackById;
-  auth: any;
-  selecaoApiService: any;
-  dadosTeste: any;
 
   /**
    *
    */
-  constructor(private navCtrl: NavController, private service: AlunoService, private query: AlunosQuery) {}
-
+  constructor(
+    private navCtrl: NavController,
+    private auth: AuthQuery,
+    private service: AlunoService,
+    private query: AlunosQuery,
+    private apiService: AlunosApiService) {}
+  
   /**
    *
    */
@@ -53,8 +52,12 @@ export class ListaOportunidadesPage {
       .selectAll()
       .pipe(map(concursos => concursos.sort(this.sortConcursos)))
       .subscribe(concursos => {
+        console.log(concursos);
+        
         this.allConcursos = this.filteredConcursos = concursos;
       });
+
+    // this.recebeDados();
   }
   /**
    *
@@ -80,6 +83,7 @@ export class ListaOportunidadesPage {
       return this.normalize(concurso.nome).includes(search) || this.normalize(concurso.tipo).includes(search);
     });
   };
+  
   /**
    *  volta para pagina de apresentação
    */
@@ -110,48 +114,51 @@ export class ListaOportunidadesPage {
     }
   };
 
-  /* 
-  
-
- /* matcheCursos(concursos) {  // funcao que verifica se os orgaos recebidos estao iguais
-  if (this.auth.isLoggedIn) {  // se o usuario esta logado
-    let cpf = '03147642755'; // this.auth.state.claims.cpf;
-    let newConcursos = []; // necessario criar pois nao estava reconhecendo o objeto criado.
-    let municipio = this.Curso.municipio;
-          
-    this.AlunosApiService.getDistancias(cpf, municipio).subscribe(
-      dados => { 
-        this.dadosTeste = dados
-      }
-    )
-    
-    
-    concursos.map(  // loop de fora 
-      (concurso: Concurso) => { 
-        let porcentagem;
-
-        this.dadosTeste.map(
-          (dados) => { 
-            if (dados.municipio.trim() === Curso.municipio.trim()) 
-            {
-              porcentagem = dados.porcentagem.tofixed(1);
-            }
-          }
-        );
-      
-        
-        newConcursos.push({
-          ...concurso,
-          porcentagem: porcentagem
-        });
-      }
-    );
-
-    return newConcursos;
+  recebeDados()
+  {
+    if (this.auth.isLoggedIn) 
+    {
+      let cpf = '03147642755'; // this.auth.state.claims.cpf;
+      this.apiService.getDistancias(cpf).subscribe(dados => { this.distancia2 = dados; });
+    }
   }
 
-  return concursos;
-}
+  checaCurso(cursoId: number) {
+    let cursos: [] = this.distancia[0]["cursos"];
+    return cursos.some((curso) => curso == cursoId);
+  }
+  /* match_id_curso(concursos) {  // funcao que verifica se os orgaos recebidos estao iguais
+    
+    {  // se o usuario esta logado
+      let cpf = '03147642755'; // this.auth.state.claims.cpf;
+      let newConcursos = []; // necessario criar pois nao estava reconhecendo o objeto criado.
+          
+      this.AlunosApiService.getDistancias(cpf).subscribe(dados => {this.dadosTeste = this.distancia2;});
+    
+      concursos.map(  // loop de fora 
+        (concurso: Concurso) => { 
+          let distancia;
+
+          this.dadosTeste.map(
+            (dados) => { 
+              if (dados.distancia[1] === concurso.id) {
+                distancia = 1;
+              }
+            }
+          );
+      
+        
+          newConcursos.push({
+            ...concurso,
+            porcentagem: distancia
+          });
+        }
+      );
+      return newConcursos;
+    }
+
+    return concursos;
+  } */
 
 
 

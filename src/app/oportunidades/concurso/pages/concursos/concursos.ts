@@ -19,18 +19,19 @@ import { SelecaoApiService } from '../../providers/selecao.api.service';
   templateUrl: 'concursos.html'
 })
 export class ConcursosPage {
-
-  /* porcentagens: Array<Object> = [
+  /* exemplo de novo retorno */ 
+  porcentagens1: Array<Object> = [
     {
       "cpf": "12345678902",
-      "sedu": undefined,
+      "sedu": 99.5000,
       "sesa": 65.7073,
       "sejus": 99.0,
       "iases": 90.58
     }
-  ];*/
+  ];
+    
   porcentagens2: Array<Object> = [{}]
-
+  
 
   /**
   *
@@ -48,9 +49,9 @@ export class ConcursosPage {
     this.concursos$ = new Subject();
     if (this.auth.isLoggedIn) 
     {
-      // let cpf = this.auth.state.claims.cpf  // funcao que pega o cpf pronto 
-       let cpf =  '03147642755'; // '03147642755'; // this.auth.state.claims.cpf;
-      this.selecaoApiService.getPorcentagem(cpf).subscribe(dados => {this.porcentagens2 = dados});
+       let cpf = this.auth.state.claims.cpf  // funcao que pega o cpf pronto 
+      // let cpf =  '03147642755'; // '03147642755'; // this.auth.state.claims.cpf;
+       this.selecaoApiService.getPorcentagem(cpf).subscribe(dados => {this.porcentagens1 = dados});
     }
     console.log(this.valor)
   }
@@ -62,8 +63,10 @@ export class ConcursosPage {
   /*
   *
   */
+
   hasPercent(orgao: string) {
-    if ( this.porcentagens2[0][orgao.toLowerCase()] != undefined )
+    
+    if ( this.porcentagens1[0][orgao.toLowerCase()] != undefined )
     {
       return true;
     }
@@ -73,6 +76,7 @@ export class ConcursosPage {
   
   
   ionViewWillLoad() {
+    
     this.query
     .selectAll()
     .subscribe((concursos: Concurso[]) => {
