@@ -21,8 +21,8 @@
   <ion-item class="form-item" *ngIf="sheets?.length">
     <ion-label>Folha</ion-label>
     <ion-select cancelText="Cancelar" formControlName="sheet" name="sheet" [selectOptions]="sheetsOptions"
-      (ionChange)="selectChange()">
-      <ion-option *ngFor="let sheet of sheets" [value]="sheet">{{ sheet }}</ion-option>
+      (ionChange)="selectSheet($event)">
+      <ion-option *ngFor="let sheet of sheets" [value]="sheet">{{ sheet.numeroFolha }}</ion-option>
     </ion-select>
   </ion-item>
   <espm-validation-message [errors]="validationErrors['sheet']"></espm-validation-message>

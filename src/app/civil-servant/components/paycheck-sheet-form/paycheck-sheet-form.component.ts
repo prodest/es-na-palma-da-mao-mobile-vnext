@@ -1,7 +1,7 @@
 import { Component, OnInit, OnChanges, SimpleChanges, ChangeDetectionStrategy, ChangeDetectorRef, Input, Output, EventEmitter } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { FormBase } from '@espm/core';
-import { IPaystubYear, IPaystubMonth } from '../../interfaces';
+import { IPaystubYear, IPaystubMonth, IPaystubSheet } from '../../interfaces';
 
 @Component({
   selector: 'civil-servant-paycheck-sheet-form',
@@ -14,7 +14,8 @@ export class PaycheckSheetFormComponent extends FormBase implements OnInit, OnCh
   @Output() onSelectYear: EventEmitter<IPaystubYear> = new EventEmitter();
   @Input() months: IPaystubMonth[] = [];
   @Output() onSelectMonth: EventEmitter<IPaystubMonth> = new EventEmitter();
-  @Input() sheets: number[] = [];
+  @Input() sheets: IPaystubSheet[] = [];
+  @Output() onSelectSheet: EventEmitter<IPaystubSheet> = new EventEmitter();
 
   validationMessages = {
     year: {
@@ -35,7 +36,7 @@ export class PaycheckSheetFormComponent extends FormBase implements OnInit, OnCh
   };
 
   monthsOptions = {
-    title: 'Ano',
+    title: 'Mês',
     subTitle: 'Selecione o mês referente ao contracheque que deseja consultar'
   };
 
@@ -61,6 +62,10 @@ export class PaycheckSheetFormComponent extends FormBase implements OnInit, OnCh
       const months: Array<IPaystubMonth> = changes['months'].currentValue || [];
       this.months = months.sort().reverse()
     }
+    if ('sheets' in changes) {
+      const sheets: Array<IPaystubSheet> = changes['sheets'].currentValue || [];
+      this.sheets = sheets.sort().reverse()
+    }
   }
 
   selectYear(year: IPaystubYear): void {
@@ -70,6 +75,11 @@ export class PaycheckSheetFormComponent extends FormBase implements OnInit, OnCh
 
   selectMonth(month: IPaystubMonth): void {
     this.onSelectMonth.emit(month);
+    return this.selectChange();
+  }
+
+  selectSheet(sheet: IPaystubSheet): void {
+    this.onSelectSheet.emit(sheet);
     return this.selectChange();
   }
 

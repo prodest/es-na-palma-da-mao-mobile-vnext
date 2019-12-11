@@ -11,8 +11,8 @@
     </ion-item>
     <ion-item *ngSwitchCase="'download'">
       <paystub-download [years]="years$ | async" [months]="months$ | async" [numVinc]="currentLink?.numeroVinculo"
-        [numFunc]="currentProfile?.numeroFuncionario" (onSelectYear)="getMonths($event)"
-        (onSelectMonth)="getLeafs($event)"></paystub-download>
+        [numFunc]="currentProfile?.numeroFuncionario" [sheets]="leafs$ | async" (onSelectYear)="getMonths($event)"
+        (onSelectMonth)="getLeafs($event)" (onSelectSheet)="download($event)"></paystub-download>
     </ion-item>
   </ion-list>
 </module-page>

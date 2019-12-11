@@ -23,8 +23,8 @@
     </ion-row>
   </ion-item>
   <ion-item>
-    <civil-servant-paycheck-sheet-form [years]="years" [months]="months" (onSelectYear)="selectYear($event)"
-      (onSelectMonth)="selectMonth($event)">
+    <civil-servant-paycheck-sheet-form [years]="years" [months]="months" [sheets]="sheets" (onSelectYear)="selectYear($event)"
+      (onSelectMonth)="selectMonth($event)" (onSelectSheet)="selectSheet($event)">
     </civil-servant-paycheck-sheet-form>
   </ion-item>
 </ion-list>

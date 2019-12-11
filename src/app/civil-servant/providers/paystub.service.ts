@@ -17,15 +17,15 @@ export class PaystubService {
     return this.api.getYears(numFunc, numVinc, numPens);
   }
 
-  getMonths(numFunc: number, numVinc: number, ano: number, numPens?: number) {
+  getMonths(numFunc: number, numVinc: number, ano: number, numPens: number) {
     return this.api.getMonths(numFunc, numVinc, ano, numPens);
   }
 
-  getLeaf(numFunc: number, numVinc: number, ano: number, mes: number, numPens?: number) {
+  getLeaf(numFunc: number, numVinc: number, ano: number, mes: number, numPens: number) {
     return this.api.getLeaf(numFunc, numVinc, ano, mes, numPens);
   }
 
-  getPaystub(leaf: string) {
-    return this.api.getPaystub(leaf);
+  getPaystub(numFunc: number, numVinc: number, ano: number, mes: number, folha: number, empCodigo: number, ip: string, codPerfil: number, numPens: number) {
+    return this.api.getPaystub(numFunc, numVinc, ano, mes, folha, empCodigo, ip, codPerfil, numPens);
   }
 }
