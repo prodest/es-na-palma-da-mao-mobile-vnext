@@ -32,7 +32,7 @@ export const dev: Environment = {
     guide: process.env.API_GUIDE_URL || 'https://guiadeservicos.dchm.es.gov.br/Servicos',
     mailer: process.env.API_MAILER_URL || 'https://agendamento.dchm.es.gov.br/email',
     convertToPdf: process.env.API_CONVERT_TO_PDF || 'https://api.es.gov.br/pdf/',
-    paystub: process.env.API_PAYSTUB || 'https://api.es.gov.br/api-siarhes/api/espm',
+    paystub: process.env.API_PAYSTUB || 'https://apisiarhes.dchm.es.gov.br/api/espm',
   },
   push: {
     senderId: process.env.PUSH_SENDER_ID,
