@@ -45,7 +45,7 @@ export class PaystubPage implements OnInit {
 
   getProfiles(loading: Loading): void {
     if (!this.currentUser) { return; }
-    this.profiles$ = this.paystubService.getProfiles( this.cpf /*this.currentUser.cpf*/).pipe(
+    this.profiles$ = this.paystubService.getProfiles(this.cpf /*this.currentUser.cpf*/).pipe(
       finalize(() => loading.dismiss())
     );
   }
@@ -55,7 +55,7 @@ export class PaystubPage implements OnInit {
     const loading = this.loading.show('Aguarde');
     this.activeComponent = 'links';
     this.currentProfile = profile;
-    this.links$ = this.paystubService.getLink( this.cpf /*this.currentUser.cpf*/, profile.codigoPerfil, profile.numeroFuncionario).pipe(
+    this.links$ = this.paystubService.getLink(this.cpf /*this.currentUser.cpf*/, profile.codigoPerfil, profile.numeroFuncionario).pipe(
       finalize(() => loading.dismiss())
     );
   }
@@ -104,7 +104,7 @@ export class PaystubPage implements OnInit {
     this.leafs$ = this.paystubService.getLeaf(numeroFuncionario, numeroVinculo, year, month, numeroPensionista).pipe(
       finalize(() => loading.dismiss())
     );
-    
+
     //console.log(this.leafs$.subscribe( folhas => {return folhas;}));
   }
 
@@ -113,7 +113,7 @@ export class PaystubPage implements OnInit {
     this.currentLeaf = leaf;
 
     const loading = this.loading.show('Aguarde');
-    const { 
+    const {
       numeroFuncionario,
       codigoPerfil
     } = this.currentProfile;
@@ -132,7 +132,7 @@ export class PaystubPage implements OnInit {
     // );
     this.paystubService.getPaystub(numeroFuncionario, numeroVinculo, year, month, leaf.numeroFolha, empresaCodigo, ip, codigoPerfil, numeroPensionista).pipe(
       finalize(() => loading.dismiss())
-    ).subscribe( pdf => {
+    ).subscribe(pdf => {
       const blob = new Blob([pdf], { type: 'application/pdf' });
       const url = window.URL.createObjectURL(blob); // só pra testar na web
       open(url) // só pra testar na web acho que n vai funcionar, mas no app usando plugin File deve abrir o blob
