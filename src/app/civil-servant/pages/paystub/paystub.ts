@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { IonicPage, NavController, NavParams, Loading } from 'ionic-angular';
 import { PaystubService } from '../../providers/paystub.service';
 import { AuthService, AcessoCidadaoClaims, LoadingService } from '@espm/core';
-import { IPaystubProfile, IPaystubLink, IPaystubYear, IPaystubMonth, IPaystubSheet } from '../../interfaces';
+import { IPaystubProfile, IPaystubLink, IPaystubYear, IPaystubMonth, IPaystubPayroll } from '../../interfaces';
 import { Observable } from 'rxjs/Observable';
 import { mergeMap, finalize } from 'rxjs/operators';
 import { of } from 'rxjs/observable/of';
@@ -21,13 +21,13 @@ export class PaystubPage implements OnInit {
   links$: Observable<IPaystubLink[]> = of([]);
   years$: Observable<IPaystubYear[]> = of([]);
   months$: Observable<IPaystubMonth[]> = of([]);
-  leafs$: Observable<IPaystubSheet[]> = of([]);
+  payrolls$: Observable<IPaystubPayroll[]> = of([]);
   currentUser: AcessoCidadaoClaims | undefined;
   currentProfile: IPaystubProfile | undefined;
   currentLink: IPaystubLink | undefined;
   currentYear: IPaystubYear | undefined;
   currentMonth: IPaystubMonth | undefined;
-  currentLeaf: IPaystubSheet | undefined;
+  currentPayroll: IPaystubPayroll | undefined;
   cpf: string;
 
   constructor(public navCtrl: NavController, public navParams: NavParams,
@@ -90,7 +90,7 @@ export class PaystubPage implements OnInit {
     );
   }
 
-  getLeafs(month?: IPaystubMonth): void {
+  getPayrolls(month?: IPaystubMonth): void {
     if (!this.currentYear || !month) { return; }
     const loading = this.loading.show('Aguarde');
     const { numeroFuncionario } = this.currentProfile;
@@ -101,16 +101,16 @@ export class PaystubPage implements OnInit {
     const year = this.currentYear
     this.activeComponent = 'download';
     this.currentMonth = month;
-    this.leafs$ = this.paystubService.getLeaf(numeroFuncionario, numeroVinculo, year, month, numeroPensionista).pipe(
+    this.payrolls$ = this.paystubService.getPayroll(numeroFuncionario, numeroVinculo, year, month, numeroPensionista).pipe(
       finalize(() => loading.dismiss())
     );
 
-    //console.log(this.leafs$.subscribe( folhas => {return folhas;}));
+    //console.log(this.payrolls$.subscribe( folhas => {return folhas;}));
   }
 
-  download(leaf?: IPaystubSheet): void {
-    if (!leaf || !this.currentMonth) { return; }
-    this.currentLeaf = leaf;
+  download(payroll?: IPaystubPayroll): void {
+    if (!payroll || !this.currentMonth) { return; }
+    this.currentPayroll = payroll;
 
     const loading = this.loading.show('Aguarde');
     const {
@@ -124,19 +124,18 @@ export class PaystubPage implements OnInit {
     } = this.currentLink;
     const year = this.currentYear
     const month = this.currentMonth
-    const ip = "198.168.0.1";
     this.activeComponent = 'download';
     this.currentMonth = month;
-    // this.paystub$ = this.paystubService.getPaystub(numeroFuncionario, numeroVinculo, year, month, leaf.numeroFolha, empresaCodigo, ip, codigoPerfil, numeroPensionista).pipe(
-    //   finalize(() => loading.dismiss())
-    // );
-    this.paystubService.getPaystub(numeroFuncionario, numeroVinculo, year, month, leaf.numeroFolha, empresaCodigo, ip, codigoPerfil, numeroPensionista).pipe(
+  
+    this.paystubService.getPaystub(numeroFuncionario, numeroVinculo, year, month, payroll.numeroFolha, empresaCodigo, codigoPerfil, numeroPensionista).pipe(
       finalize(() => loading.dismiss())
     ).subscribe(pdf => {
       const blob = new Blob([pdf], { type: 'application/pdf' });
       const url = window.URL.createObjectURL(blob); // só pra testar na web
-      open(url) // só pra testar na web acho que n vai funcionar, mas no app usando plugin File deve abrir o blob
+      window.open(url) // só pra testar na web acho que n vai funcionar, mas no app usando plugin File deve abrir o blob
       console.log(pdf);
+
+      //window.open(`${this.env.api.detranInternetBanking}/veiculos/debitos/get-guia/${codigo}`, '_system', 'location=yes');
     });
   }
 

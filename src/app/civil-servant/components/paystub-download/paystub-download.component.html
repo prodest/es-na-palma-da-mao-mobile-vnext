@@ -24,7 +24,7 @@
   </ion-item>
   <ion-item>
     <civil-servant-paycheck-payroll-form [years]="years" [months]="months" [payrolls]="payrolls"
-      (onSelectYear)="selectYear($event)" (onSelectMonth)="selectMonth($event)" (onSelectPayroll)="selectPayroll($event)" (onSubmit)="selectPayroll($event)">
+      (onSelectYear)="selectYear($event)" (onSelectMonth)="selectMonth($event)" (onSubmit)="selectPayroll($event.payroll)">
     </civil-servant-paycheck-payroll-form>
   </ion-item>
 </ion-list>
