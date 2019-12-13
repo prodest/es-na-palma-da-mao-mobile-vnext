@@ -1,4 +1,4 @@
-export interface IPaystubSheet {
+export interface IPaystubPayroll {
     numeroFolha: number;
     empresaCodigo: number;
   }

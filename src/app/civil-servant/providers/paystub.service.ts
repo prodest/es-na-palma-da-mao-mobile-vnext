@@ -21,11 +21,11 @@ export class PaystubService {
     return this.api.getMonths(numFunc, numVinc, ano, numPens);
   }
 
-  getLeaf(numFunc: number, numVinc: number, ano: number, mes: number, numPens: number) {
-    return this.api.getLeaf(numFunc, numVinc, ano, mes, numPens);
+  getPayroll(numFunc: number, numVinc: number, ano: number, mes: number, numPens: number) {
+    return this.api.getPayroll(numFunc, numVinc, ano, mes, numPens);
   }
 
-  getPaystub(numFunc: number, numVinc: number, ano: number, mes: number, folha: number, empCodigo: number, ip: string, codPerfil: number, numPens: number) {
-    return this.api.getPaystub(numFunc, numVinc, ano, mes, folha, empCodigo, ip, codPerfil, numPens);
+  getPaystub(numFunc: number, numVinc: number, ano: number, mes: number, folha: number, empCodigo: number, codPerfil: number, numPens: number) {
+    return this.api.getPaystub(numFunc, numVinc, ano, mes, folha, empCodigo, codPerfil, numPens);
   }
 }

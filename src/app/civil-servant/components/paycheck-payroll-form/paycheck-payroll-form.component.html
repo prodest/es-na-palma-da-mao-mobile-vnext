@@ -18,14 +18,14 @@
     </ion-select>
   </ion-item>
   <espm-validation-message [errors]="validationErrors['month']"></espm-validation-message>
-  <ion-item class="form-item" *ngIf="sheets?.length">
+  <ion-item class="form-item" *ngIf="payrolls?.length">
     <ion-label>Folha</ion-label>
-    <ion-select cancelText="Cancelar" formControlName="sheet" name="sheet" [selectOptions]="sheetsOptions"
-      (ionChange)="selectSheet($event)">
-      <ion-option *ngFor="let sheet of sheets" [value]="sheet">{{ sheet.numeroFolha }}</ion-option>
+    <ion-select cancelText="Cancelar" formControlName="payroll" name="payroll" [selectOptions]="payrollsOptions"
+      (ionChange)="selectPayroll($event)">
+      <ion-option *ngFor="let payroll of payrolls" [value]="payroll">{{ payroll.numeroFolha }}</ion-option>
     </ion-select>
   </ion-item>
-  <espm-validation-message [errors]="validationErrors['sheet']"></espm-validation-message>
+  <espm-validation-message [errors]="validationErrors['payroll']"></espm-validation-message>
   <button type="submit" ion-button class="download" [disabled]="form.invalid">
     Baixar
   </button>

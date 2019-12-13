@@ -2,16 +2,16 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { IonicModule } from 'ionic-angular';
 import { ValidationMessageModule } from '@espm/shared';
-import { PaycheckSheetFormComponent } from './paycheck-sheet-form.component'
+import { PaycheckPayrollFormComponent } from './paycheck-payroll-form.component'
 
 @NgModule({
-  declarations: [PaycheckSheetFormComponent],
+  declarations: [PaycheckPayrollFormComponent],
   imports: [
     CommonModule,
     IonicModule,
     ValidationMessageModule
   ],
-  exports: [PaycheckSheetFormComponent],
+  exports: [PaycheckPayrollFormComponent],
   providers: [],
 })
-export class PaycheckSheetFormModule { }
+export class PaycheckPayrollFormModule { }

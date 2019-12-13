@@ -1,7 +1,7 @@
 import { EnvVariables, Environment } from '@espm/core';
 import { Injectable, Inject } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { IPaystubProfile, IPaystubLink, IPaystubYear, IPaystubMonth, IPaystubSheet } from '../interfaces';
+import { IPaystubProfile, IPaystubLink, IPaystubYear, IPaystubMonth, IPaystubPayroll } from '../interfaces';
 import { Observable } from 'rxjs/Observable';
 
 @Injectable()
@@ -49,7 +49,7 @@ export class PaystubApiService {
     });
   }
 
-  getLeaf(numFunc: number, numVinc: number, ano: number, mes: number, numPens: number): Observable<IPaystubSheet[]> {
+  getPayroll(numFunc: number, numVinc: number, ano: number, mes: number, numPens: number): Observable<IPaystubPayroll[]> {
     const params: { [key: string]: string } = {
       numFunc: numFunc.toString(),
       numVinc: numVinc.toString(),
@@ -58,13 +58,13 @@ export class PaystubApiService {
       numPens: numPens.toString(),
     };
     console.log(params);
-    const retorno = this.http.get<IPaystubSheet[]>(this.endpoint('contracheque/folhas'), {
+    const retorno = this.http.get<IPaystubPayroll[]>(this.endpoint('contracheque/folhas'), {
       params
     });
     return retorno;
   }
 
-  getPaystub(numFunc: number, numVinc: number, ano: number, mes: number, folha: number, empCodigo: number, ip: string, codPerfil: number, numPens: number) {
+  getPaystub(numFunc: number, numVinc: number, ano: number, mes: number, folha: number, empCodigo: number, codPerfil: number, numPens: number) {
     const params: { [key: string]: string } = {
       numFunc: numFunc.toString(),
       numVinc: numVinc.toString(),
@@ -72,7 +72,6 @@ export class PaystubApiService {
       mes: mes.toString(),
       folha: folha.toString(),
       empCodigo: empCodigo.toString(),
-      ip,
       codPerfil: codPerfil.toString(),
       numPens: numPens.toString(),
     }

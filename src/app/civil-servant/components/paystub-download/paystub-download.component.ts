@@ -1,6 +1,6 @@
 import { Component, Input, Output, EventEmitter } from '@angular/core';
 import { NavController, NavParams } from 'ionic-angular';
-import { IPaystubYear, IPaystubMonth, IPaystubSheet } from '../../interfaces';
+import { IPaystubYear, IPaystubMonth, IPaystubPayroll } from '../../interfaces';
 
 @Component({
   selector: 'paystub-download',
@@ -12,8 +12,8 @@ export class PaystubDownloadComponent {
   @Output() onSelectYear: EventEmitter<IPaystubYear> = new EventEmitter();
   @Input() months: IPaystubMonth[] = [];
   @Output() onSelectMonth: EventEmitter<IPaystubMonth> = new EventEmitter();
-  @Input() sheets: IPaystubSheet[] = [];
-  @Output() onSelectSheet: EventEmitter<IPaystubSheet> = new EventEmitter();
+  @Input() payrolls: IPaystubPayroll[] = [];
+  @Output() onSelectPayroll: EventEmitter<IPaystubPayroll> = new EventEmitter();
   @Input() numVinc: number;
   @Input() numFunc: number;
 
@@ -27,8 +27,8 @@ export class PaystubDownloadComponent {
     this.onSelectMonth.emit(month);
   }
 
-  selectSheet(sheet: IPaystubSheet): void {
-    this.onSelectSheet.emit(sheet);
+  selectPayroll(payroll: IPaystubPayroll): void {
+    this.onSelectPayroll.emit(payroll);
   }
 
 }

@@ -1,21 +1,21 @@
 import { Component, OnInit, OnChanges, SimpleChanges, ChangeDetectionStrategy, ChangeDetectorRef, Input, Output, EventEmitter } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { FormBase } from '@espm/core';
-import { IPaystubYear, IPaystubMonth, IPaystubSheet } from '../../interfaces';
+import { IPaystubYear, IPaystubMonth, IPaystubPayroll } from '../../interfaces';
 
 @Component({
-  selector: 'civil-servant-paycheck-sheet-form',
-  templateUrl: './paycheck-sheet-form.component.html',
+  selector: 'civil-servant-paycheck-payroll-form',
+  templateUrl: './paycheck-payroll-form.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class PaycheckSheetFormComponent extends FormBase implements OnInit, OnChanges {
+export class PaycheckPayrollFormComponent extends FormBase implements OnInit, OnChanges {
 
   @Input() years: IPaystubYear[] = [];
   @Output() onSelectYear: EventEmitter<IPaystubYear> = new EventEmitter();
   @Input() months: IPaystubMonth[] = [];
   @Output() onSelectMonth: EventEmitter<IPaystubMonth> = new EventEmitter();
-  @Input() sheets: IPaystubSheet[] = [];
-  @Output() onSelectSheet: EventEmitter<IPaystubSheet> = new EventEmitter();
+  @Input() payrolls: IPaystubPayroll[] = [];
+  @Output() onSelectPayroll: EventEmitter<IPaystubPayroll> = new EventEmitter();
 
   validationMessages = {
     year: {
@@ -24,7 +24,7 @@ export class PaycheckSheetFormComponent extends FormBase implements OnInit, OnCh
     month: {
       required: 'Obrigatório'
     },
-    sheet: {
+    payroll: {
       required: 'Obrigatório'
     }
   };
@@ -40,7 +40,7 @@ export class PaycheckSheetFormComponent extends FormBase implements OnInit, OnCh
     subTitle: 'Selecione o mês referente ao contracheque que deseja consultar'
   };
 
-  sheetsOptions = {
+  payrollsOptions = {
     title: 'Folha',
     subTitle: 'Selecione a folha referente ao contracheque que deseja consultar'
   };
@@ -62,9 +62,9 @@ export class PaycheckSheetFormComponent extends FormBase implements OnInit, OnCh
       const months: Array<IPaystubMonth> = changes['months'].currentValue || [];
       this.months = months.sort().reverse()
     }
-    if ('sheets' in changes) {
-      const sheets: Array<IPaystubSheet> = changes['sheets'].currentValue || [];
-      this.sheets = sheets.sort().reverse()
+    if ('payrolls' in changes) {
+      const payrolls: Array<IPaystubPayroll> = changes['payrolls'].currentValue || [];
+      this.payrolls = payrolls.sort().reverse()
     }
   }
 
@@ -78,8 +78,8 @@ export class PaycheckSheetFormComponent extends FormBase implements OnInit, OnCh
     return this.selectChange();
   }
 
-  selectSheet(sheet: IPaystubSheet): void {
-    this.onSelectSheet.emit(sheet);
+  selectPayroll(payroll: IPaystubPayroll): void {
+    this.onSelectPayroll.emit(payroll);
     return this.selectChange();
   }
 
@@ -91,7 +91,7 @@ export class PaycheckSheetFormComponent extends FormBase implements OnInit, OnCh
     return this.formBuilder.group({
       year: [null, [Validators.required]],
       month: [null, [Validators.required]],
-      sheet: [null, [Validators.required]]
+      payroll: [null, [Validators.required]]
     });
   }
 
