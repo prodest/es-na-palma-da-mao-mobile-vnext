@@ -7,6 +7,12 @@ import deburr from 'lodash-es/deburr';
 import { Concurso } from '../../model';
 import { AlunosQuery, AlunoService } from '../../providers';
 import { map } from 'rxjs/operators';
+
+type Distancia = {
+  cpf: string,
+  cursos: Array<number>
+}
+
 @IonicPage({
   segment: 'alunos'
 })
@@ -18,10 +24,10 @@ export class ListaOportunidadesPage {
 
   /* exemplo de novo retorno */ 
   distancia2: Array<object> = [];
-  distancia: Array<Object> = [
+  distancia: Array<Distancia> = [
     {
-      "cpf": "12345678902",
-      "cursos": [168,169,44,150,90,60,56,180,51]
+      cpf: "12345678902",
+      cursos: [168,169,44,150,90,60,56,180,51]
     }
   ];
   
@@ -123,10 +129,15 @@ export class ListaOportunidadesPage {
     }
   }
 
-  checaCurso(cursoId: number) {
-    let cursos: [] = this.distancia[0]["cursos"];
+  checaCurso(cursoId: number) 
+  {
+    let cursos: Array<number> = this.distancia[0]["cursos"];
     return cursos.some((curso) => curso == cursoId);
   }
+
+
+
+
   /* match_id_curso(concursos) {  // funcao que verifica se os orgaos recebidos estao iguais
     
     {  // se o usuario esta logado
