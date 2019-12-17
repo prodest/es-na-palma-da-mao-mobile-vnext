@@ -29,6 +29,7 @@ export interface Environment {
     mailer: string;
     guide: string;
     convertToPdf: string;
+    paystub: string;
   };
   push: {
     senderId: string;
