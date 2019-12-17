@@ -30,6 +30,8 @@ export interface Environment {
     guide: string;
     convertToPdf: string;
     sugestaodt: string;
+    sugestaoaluno: string;
+
   };
   push: {
     senderId: string;

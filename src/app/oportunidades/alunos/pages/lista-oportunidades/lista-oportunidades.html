@@ -25,9 +25,7 @@
             {{ concurso.tipo }} - {{ concurso.anoBase }}
           </h3>
           <p text-wrap class="concursos_descricao">{{ concurso.nome }}</p> 
-          
-          <!-- <p *ngIf="concurso.status === 'aberto' && concurso.distancia === 1 ">  Curso próximo a você </p>  -->
-          <p *ngIf="concurso.status === 'aberto' && checaCurso(concurso.id)"> Curso próximo a sua região</p> 
+          <p *ngIf="concurso.status === 'aberto' && checaCurso(concurso.id)"> Curso próximo a sua região </p> 
           
         </div>
         <div class="button-status">

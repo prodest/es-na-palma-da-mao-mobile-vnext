@@ -32,7 +32,8 @@ export const dev: Environment = {
     guide: process.env.API_GUIDE_URL || 'https://guiadeservicos.dchm.es.gov.br/Servicos',
     mailer: process.env.API_MAILER_URL || 'https://agendamento.dchm.es.gov.br/email',
     convertToPdf: process.env.API_CONVERT_TO_PDF || 'https://api.es.gov.br/pdf/',
-    sugestaodt: process.env.API_SUGESTAO_URL || 'https://api.es.gov.br/sugestaodt'
+    sugestaodt: process.env.API_SUGESTAO_URL || 'https://api.es.gov.br/sugestaodt',
+    sugestaoaluno: process.env.API_SUGESTAO_ALUNO_URL || 'https://api.es.gov.br/sugestaoaluno',
 
   },
   push: {

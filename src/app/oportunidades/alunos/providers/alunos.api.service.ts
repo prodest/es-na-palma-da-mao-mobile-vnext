@@ -8,6 +8,12 @@ import { ConcursoFavorito } from '../model/concurso-favorito.model';
 /*
 *
 */
+
+type Distancia = {
+  cpf: string,
+  cursos: Array<number>
+}
+
 @Injectable()
 export class AlunosApiService {
   /**
@@ -32,13 +38,13 @@ export class AlunosApiService {
       .pipe(share());
   };
   /* Concetando api dos alunos - distnacia */ 
-   getDistancias= (cpf: string): Observable<Concurso[]> => {
+   getDistancias= (cpf: string): Observable<Distancia[]> => {
     const headers: HttpHeaders = new HttpHeaders({
       Authorization: `Basic user:pass`, 
       [ANONYMOUS_HEADER]: 'true'
     })
-    let url = `${this.env.api.sugestaodt}/sugestao/cpf/orgao?cpf=${cpf}`;
-    return this.http.get<Concurso[]>(url, { headers }).pipe(share());
+    let url = `${this.env.api.sugestaoaluno}/sugestao/pessoa/cpf?cpf=${cpf}`;
+    return this.http.get<Distancia[]>(url, { headers }).pipe(share());
   } 
 
 }

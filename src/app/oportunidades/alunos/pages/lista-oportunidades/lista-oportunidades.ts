@@ -23,7 +23,7 @@ type Distancia = {
 export class ListaOportunidadesPage {
 
   /* exemplo de novo retorno */ 
-  distancia2: Array<object> = [];
+  distancia2: Array<Distancia> = [];
   distancia: Array<Distancia> = [
     {
       cpf: "12345678902",
@@ -63,7 +63,8 @@ export class ListaOportunidadesPage {
         this.allConcursos = this.filteredConcursos = concursos;
       });
 
-    // this.recebeDados();
+    this.recebeDados();
+
   }
   /**
    *
@@ -124,7 +125,7 @@ export class ListaOportunidadesPage {
   {
     if (this.auth.isLoggedIn) 
     {
-      let cpf = '03147642755'; // this.auth.state.claims.cpf;
+      let cpf = this.auth.state.claims.cpf; 
       this.apiService.getDistancias(cpf).subscribe(dados => { this.distancia2 = dados; });
     }
   }
