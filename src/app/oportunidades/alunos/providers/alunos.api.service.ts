@@ -37,13 +37,13 @@ export class AlunosApiService {
       .post<ConcursoFavorito>(`${this.env.api.espm}/studentOpportunities/data/favorite`, favoritos)
       .pipe(share());
   };
-  /* Concetando api dos alunos - distnacia */ 
+
    getDistancias= (cpf: string): Observable<Distancia[]> => {
     const headers: HttpHeaders = new HttpHeaders({
       Authorization: `Basic user:pass`, 
       [ANONYMOUS_HEADER]: 'true'
     })
-    let url = `${this.env.api.sugestaoaluno}/sugestao/pessoa/cpf?cpf=${cpf}`;
+    let url = `${this.env.api.sugestaoaluno}/sugestao/pessoal/cpf?cpf=${cpf}`;
     return this.http.get<Distancia[]>(url, { headers }).pipe(share());
   } 
 
