@@ -2,6 +2,11 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+<a name="6.3.1"></a>
+## [6.3.1](https://github.com/prodest/es-na-palma-da-mao-mobile-vnext/compare/v6.3.0...v6.3.1) (2019-12-17)
+
+
+
 <a name="6.3.0"></a>
 # [6.3.0](https://github.com/prodest/es-na-palma-da-mao-mobile-vnext/compare/v6.2.5...v6.3.0) (2019-12-17)
 
@@ -44,6 +49,9 @@ All notable changes to this project will be documented in this file. See [standa
 * **paystub-links:** select link output event ([3f26e2c](https://github.com/prodest/es-na-palma-da-mao-mobile-vnext/commit/3f26e2c))
 * **paystub-profiles:** add dynamic profiles input and output ([48a108a](https://github.com/prodest/es-na-palma-da-mao-mobile-vnext/commit/48a108a))
 
+
+<a name="6.2.5"></a>
+## [6.2.5](https://github.com/prodest/es-na-palma-da-mao-mobile-vnext/compare/v6.2.4...v6.2.5) (2019-12-17)
 
 
 <a name="6.2.4"></a>
