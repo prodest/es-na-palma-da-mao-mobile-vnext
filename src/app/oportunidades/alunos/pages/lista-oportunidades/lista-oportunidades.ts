@@ -126,7 +126,7 @@ export class ListaOportunidadesPage {
     if (this.auth.isLoggedIn) 
     {
       let cpf = this.auth.state.claims.cpf; 
-      this.apiService.getDistancias(cpf).subscribe(dados => { this.distancia2 = dados; });
+      this.apiService.getDistancias(cpf).subscribe(dados => { this.distancia2 = dados; },()=>{});
     }
   }
 
