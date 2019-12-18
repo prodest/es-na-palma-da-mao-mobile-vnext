@@ -24,13 +24,6 @@ export class ListaOportunidadesPage {
 
   /* exemplo de novo retorno */ 
   distancia2: Array<Distancia> = [];
-  distancia: Array<Distancia> = [
-    {
-      cpf: "12345678902",
-      cursos: [168,169,44,150,90,60,56,180,51]
-    }
-  ];
-  
   /**
    *
    */
@@ -61,8 +54,8 @@ export class ListaOportunidadesPage {
         console.log(concursos);
         
         this.allConcursos = this.filteredConcursos = concursos;
+        
       });
-
     this.recebeDados();
 
   }
@@ -127,52 +120,15 @@ export class ListaOportunidadesPage {
     {
       let cpf = this.auth.state.claims.cpf; 
       this.apiService.getDistancias(cpf).subscribe(dados => { this.distancia2 = dados; },()=>{});
+
     }
   }
 
   checaCurso(cursoId: number) 
   {
-    let cursos: Array<number> = this.distancia[0]["cursos"];
+    let cursos: Array<number> = this.distancia2[0]["cursos"];
     return cursos.some((curso) => curso == cursoId);
   }
-
-
-
-
-  /* match_id_curso(concursos) {  // funcao que verifica se os orgaos recebidos estao iguais
-    
-    {  // se o usuario esta logado
-      let cpf = '03147642755'; // this.auth.state.claims.cpf;
-      let newConcursos = []; // necessario criar pois nao estava reconhecendo o objeto criado.
-          
-      this.AlunosApiService.getDistancias(cpf).subscribe(dados => {this.dadosTeste = this.distancia2;});
-    
-      concursos.map(  // loop de fora 
-        (concurso: Concurso) => { 
-          let distancia;
-
-          this.dadosTeste.map(
-            (dados) => { 
-              if (dados.distancia[1] === concurso.id) {
-                distancia = 1;
-              }
-            }
-          );
-      
-        
-          newConcursos.push({
-            ...concurso,
-            porcentagem: distancia
-          });
-        }
-      );
-      return newConcursos;
-    }
-
-    return concursos;
-  } */
-
-
 
   /**
    *
