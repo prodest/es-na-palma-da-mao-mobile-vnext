@@ -2,6 +2,52 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+<a name="6.3.0"></a>
+# [6.3.0](https://github.com/prodest/es-na-palma-da-mao-mobile-vnext/compare/v6.2.3...v6.3.0) (2019-12-18)
+
+
+### Bug Fixes
+
+* **cordova:** build error ([ce53973](https://github.com/prodest/es-na-palma-da-mao-mobile-vnext/commit/ce53973))
+* **links-status:** uppercase scss class ([4ee4237](https://github.com/prodest/es-na-palma-da-mao-mobile-vnext/commit/4ee4237))
+* civil servant icon ([93fb6b4](https://github.com/prodest/es-na-palma-da-mao-mobile-vnext/commit/93fb6b4))
+* **payroll:** Acerto na atribuicao das folhas ([ff03f35](https://github.com/prodest/es-na-palma-da-mao-mobile-vnext/commit/ff03f35))
+* **paystub:** download on click submit button ([f007707](https://github.com/prodest/es-na-palma-da-mao-mobile-vnext/commit/f007707))
+* **paystub:** Fixing select form bug ([cb97e6b](https://github.com/prodest/es-na-palma-da-mao-mobile-vnext/commit/cb97e6b))
+* **paystub:** rm unknow import module ([3ec626b](https://github.com/prodest/es-na-palma-da-mao-mobile-vnext/commit/3ec626b))
+* **paystub-links:** implements oninit ([6bdd481](https://github.com/prodest/es-na-palma-da-mao-mobile-vnext/commit/6bdd481))
+* **presentation-civil-servant:** change target page to paystub page ([30e601f](https://github.com/prodest/es-na-palma-da-mao-mobile-vnext/commit/30e601f))
+* **presentation-civil-servant:** contracheque target page ([1af267d](https://github.com/prodest/es-na-palma-da-mao-mobile-vnext/commit/1af267d))
+* **sort:** Fixing months sorting ([49268a2](https://github.com/prodest/es-na-palma-da-mao-mobile-vnext/commit/49268a2))
+
+
+### Features
+
+* **app:** add service menu civil servand and presentation your page ([95da08f](https://github.com/prodest/es-na-palma-da-mao-mobile-vnext/commit/95da08f))
+* **civil-servant:** add download paystub static page ([010db08](https://github.com/prodest/es-na-palma-da-mao-mobile-vnext/commit/010db08))
+* **civil-servant:** add profile and link interface ([861b3cd](https://github.com/prodest/es-na-palma-da-mao-mobile-vnext/commit/861b3cd))
+* **civil-servant:** add year and month interfaces ([1678589](https://github.com/prodest/es-na-palma-da-mao-mobile-vnext/commit/1678589))
+* **download-paystub:** add paycheck sheet component ([ecc3d43](https://github.com/prodest/es-na-palma-da-mao-mobile-vnext/commit/ecc3d43))
+* **paycheck-sheet:** create static pay check sheet compoent ([22e9b8a](https://github.com/prodest/es-na-palma-da-mao-mobile-vnext/commit/22e9b8a))
+* **paycheck-sheet-form:** create pay check static form ([3cb1a16](https://github.com/prodest/es-na-palma-da-mao-mobile-vnext/commit/3cb1a16))
+* **paycheck-sheet-form:** get and update data by input and output ([433b483](https://github.com/prodest/es-na-palma-da-mao-mobile-vnext/commit/433b483))
+* **paystub:** add more paystub service methods ([d495fd2](https://github.com/prodest/es-na-palma-da-mao-mobile-vnext/commit/d495fd2))
+* **paystub:** Add payrolls request ([1d94e2d](https://github.com/prodest/es-na-palma-da-mao-mobile-vnext/commit/1d94e2d))
+* **paystub:** add paystub api get profiles and links ([073912e](https://github.com/prodest/es-na-palma-da-mao-mobile-vnext/commit/073912e))
+* **paystub:** add paystub api service profiles and links ([7709579](https://github.com/prodest/es-na-palma-da-mao-mobile-vnext/commit/7709579))
+* **paystub:** add paystub page ([1d9f758](https://github.com/prodest/es-na-palma-da-mao-mobile-vnext/commit/1d9f758))
+* **paystub:** Add paystub providers ([c23b73d](https://github.com/prodest/es-na-palma-da-mao-mobile-vnext/commit/c23b73d))
+* **paystub:** Create paystub page ([948628a](https://github.com/prodest/es-na-palma-da-mao-mobile-vnext/commit/948628a))
+* **paystub:** get paystub data by service ([dd42b72](https://github.com/prodest/es-na-palma-da-mao-mobile-vnext/commit/dd42b72))
+* **paystub-download:** add paystub data with input and output ([4c69f5f](https://github.com/prodest/es-na-palma-da-mao-mobile-vnext/commit/4c69f5f))
+* **paystub-links:** add dynamic links input and output ([d6de557](https://github.com/prodest/es-na-palma-da-mao-mobile-vnext/commit/d6de557))
+* **paystub-links:** Add links paystub static page ([4cbb911](https://github.com/prodest/es-na-palma-da-mao-mobile-vnext/commit/4cbb911))
+* **paystub-links:** add sort function ([e817db9](https://github.com/prodest/es-na-palma-da-mao-mobile-vnext/commit/e817db9))
+* **paystub-links:** select link output event ([3f26e2c](https://github.com/prodest/es-na-palma-da-mao-mobile-vnext/commit/3f26e2c))
+* **paystub-profiles:** add dynamic profiles input and output ([48a108a](https://github.com/prodest/es-na-palma-da-mao-mobile-vnext/commit/48a108a))
+
+
+
 <a name="6.2.3"></a>
 ## [6.2.3](https://github.com/prodest/es-na-palma-da-mao-mobile-vnext/compare/v6.2.2...v6.2.3) (2019-10-21)
 
