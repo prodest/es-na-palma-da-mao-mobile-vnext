@@ -68,22 +68,35 @@ export class PaycheckPayrollFormComponent extends FormBase implements OnInit, On
   }
 
   selectYear(year: IPaystubYear): void {
+    if (typeof year !== 'number') { return; }
     this.onSelectYear.emit(year);
+    this.resetMonth();
     return this.selectChange();
   }
 
   selectMonth(month: IPaystubMonth): void {
+    if (typeof month !== 'number') { return; }
     this.onSelectMonth.emit(month);
+    this.resetPayroll();
     return this.selectChange();
   }
 
   selectPayroll(payroll: IPaystubPayroll): void {
+    if (typeof payroll !== 'number') { return; }
     this.onSelectPayroll.emit(payroll);
     return this.selectChange();
   }
 
   selectChange = () => {
     this.cdr.detectChanges();
+  }
+
+  private resetMonth(): void {
+    this.form.get('month').setValue(null);
+  }
+
+  private resetPayroll(): void {
+    this.form.get('payroll').setValue(null);
   }
 
   protected createFormModel(): FormGroup {
