@@ -2,6 +2,17 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+<a name="6.3.3"></a>
+## [6.3.3](https://github.com/prodest/es-na-palma-da-mao-mobile-vnext/compare/v6.3.1...v6.3.3) (2019-12-18)
+
+
+### Bug Fixes
+
+* **paystub:** Fixing select form bug ([cb97e6b](https://github.com/prodest/es-na-palma-da-mao-mobile-vnext/commit/cb97e6b))
+* **sort:** Fixing months sorting ([49268a2](https://github.com/prodest/es-na-palma-da-mao-mobile-vnext/commit/49268a2))
+
+
+
 <a name="6.3.2"></a>
 ## [6.3.2](https://github.com/prodest/es-na-palma-da-mao-mobile-vnext/compare/v6.3.1...v6.3.2) (2019-12-18)
 
