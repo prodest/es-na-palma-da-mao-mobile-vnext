@@ -57,7 +57,6 @@ export class PaystubApiService {
       mes: mes.toString(),
       numPens: numPens.toString(),
     };
-    console.log(params);
     const retorno = this.http.get<IPaystubPayroll[]>(this.endpoint('contracheque/folhas'), {
       params
     });
