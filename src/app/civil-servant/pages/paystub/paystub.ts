@@ -151,8 +151,9 @@ export class PaystubPage implements OnInit {
         let fileName = `contracheque_${year}${month}${payroll.numeroFolha}.pdf`
 
         // Write the file
-        this.file.writeFile(filePath, fileName, blob, { replace: false })
+        this.file.writeFile(filePath, fileName, blob, { replace: true })
           .then((fileEntry: FileEntry) => {
+            this.navCtrl.pop();
             this.fileOpener
               .open(fileEntry.toURL(), 'application/pdf')
               .catch(err => {
