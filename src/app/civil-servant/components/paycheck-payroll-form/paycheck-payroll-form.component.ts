@@ -54,17 +54,16 @@ export class PaycheckPayrollFormComponent extends FormBase implements OnInit, On
   ngOnInit(): void { }
 
   ngOnChanges(changes: SimpleChanges): void {
+    const sortDescNumber = (a: number, b: number) => {
+      return a > b ? -1 : b > a ? 1 : 0;
+    }
     if ('years' in changes) {
       const years: Array<IPaystubYear> = changes['years'].currentValue || [];
-      this.years = years.sort().reverse()
+      this.years = years.sort(sortDescNumber)
     }
     if ('months' in changes) {
       const months: Array<IPaystubMonth> = changes['months'].currentValue || [];
-      this.months = months.sort().reverse()
-    }
-    if ('payrolls' in changes) {
-      const payrolls: Array<IPaystubPayroll> = changes['payrolls'].currentValue || [];
-      this.payrolls = payrolls.sort().reverse()
+      this.months = months.sort(sortDescNumber)
     }
   }
 
