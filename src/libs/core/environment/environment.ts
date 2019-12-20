@@ -32,6 +32,7 @@ export interface Environment {
     sugestaodt: string;
     sugestaoaluno: string;
 
+    paystub: string;
   };
   push: {
     senderId: string;
