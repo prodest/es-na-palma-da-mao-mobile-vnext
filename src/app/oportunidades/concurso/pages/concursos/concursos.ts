@@ -41,8 +41,9 @@ export class ConcursosPage {
     if (this.auth.isLoggedIn) 
     {
       
-       let cpf = this.auth.state.claims.cpf  
-      // let cpf =  '03147642755'; // '03147642755'; // this.auth.state.claims.cpf;
+       let cpf = this.auth.state.claims.cpf
+       
+      
         this.selecaoApiService.getPorcentagem(cpf).subscribe(
           dados => {
             this.porcentagens2 = dados
@@ -50,7 +51,9 @@ export class ConcursosPage {
           ()=>{
 
           }
+ 
         );
+        
     }
     
     console.log(this.valor)

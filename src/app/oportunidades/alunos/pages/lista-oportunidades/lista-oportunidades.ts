@@ -23,6 +23,7 @@ type Distancia = {
 export class ListaOportunidadesPage {
 
   /* exemplo de novo retorno */ 
+ 
   distancia2: Array<Distancia> = [];
   /**
    *
@@ -51,7 +52,7 @@ export class ListaOportunidadesPage {
       .selectAll()
       .pipe(map(concursos => concursos.sort(this.sortConcursos)))
       .subscribe(concursos => {
-        console.log(concursos);
+        
         
         this.allConcursos = this.filteredConcursos = concursos;
         
@@ -120,7 +121,6 @@ export class ListaOportunidadesPage {
     {
       let cpf = this.auth.state.claims.cpf; 
       this.apiService.getDistancias(cpf).subscribe(dados => { this.distancia2 = dados; },()=>{});
-
     }
   }
 
