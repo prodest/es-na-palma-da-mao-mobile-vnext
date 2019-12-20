@@ -4,7 +4,7 @@
   </ion-searchbar>
   <ion-content>
     <ion-list-header *ngIf="concursosLength">
-      {{filteredConcursos.length}} concursos encontrados
+      {{filteredConcursos?.length}} concursos encontrados
     </ion-list-header>
 
     <ion-list
@@ -21,7 +21,7 @@
           </h3>
             
           <p text-wrap class="concursos_descricao"> {{ concurso.descricao }}</p>
-          <h5 *ngIf="concurso.status != 'encerrado' && hasPercent(concurso.orgao.trim().toLowerCase()) "> {{porcentagens1[0][concurso.orgao.trim().toLowerCase()].toFixed(1) + " % sugerido"}} </h5>
+          <h5 *ngIf="concurso.status != 'encerrado' && hasPercent(concurso.orgao.trim().toLowerCase()) "> <strong>{{porcentagens2[concurso.orgao.trim().toLowerCase()].toFixed(1) + " % sugerido"}}</strong> </h5>
         </div> 
         
          

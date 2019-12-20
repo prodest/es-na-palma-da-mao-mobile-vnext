@@ -21,14 +21,14 @@ import { SelecaoApiService } from '../../providers/selecao.api.service';
 export class ConcursosPage {
 
     
-  porcentagens2: Array<Object> = [{}]
+  porcentagens2: Object = {}
   
 
   /**
   *
   */
   concursos$: Subject<Concurso[]>; // concursos que são exibidos na tela
-  concursosLenght: number;
+  concursosLength: number;
   allConcursos: Concurso[];
   filteredConcursos: Concurso[];
   trackById = trackById;
@@ -69,7 +69,7 @@ export class ConcursosPage {
 
   hasPercent(orgao: string) {
     
-    if ( this.porcentagens2[0][orgao.toLowerCase()] != undefined )
+    if ( this.porcentagens2[orgao.toLowerCase()] !== undefined )
     {
       return true;
     }
@@ -100,7 +100,7 @@ export class ConcursosPage {
     this.concursos$.next(
       this.sortByFavorites(concursos)
     );
-    this.concursosLenght = concursos.length;
+    this.concursosLength = concursos.length;
   };
 
   private sortByFavorites = (concursos: Concurso[]): Concurso[] => {

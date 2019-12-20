@@ -56,10 +56,10 @@ export class SelecaoApiService {
   getPorcentagem = (cpf: string): Observable<Concurso[]> => {   /* autenticacao api */ 
     
     const headers: HttpHeaders = new HttpHeaders({
-      Authorization: `Basic user:pass`, 
+      Authorization: `Basic ${btoa('user:pass')}`, 
       [ANONYMOUS_HEADER]: 'true'
     })
-    let url = `${this.env.api.sugestaodt}/sugestao/pessoa/cpf?cpf=${cpf}`;
+    let url = `${this.env.api.sugestaodt}/sugestao/pessoa/${cpf}`;
 
 
     return this.http.get<Concurso[]>(url, { headers }).pipe(share());
