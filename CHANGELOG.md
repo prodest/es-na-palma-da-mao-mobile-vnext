@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+<a name="6.3.4"></a>
+## [6.3.4](https://github.com/prodest/es-na-palma-da-mao-mobile-vnext/compare/v6.3.3...v6.3.4) (2019-12-20)
+
+
+### Bug Fixes
+
+* **paystub:** Corrigido folhas em branco de inativos ([8def278](https://github.com/prodest/es-na-palma-da-mao-mobile-vnext/commit/8def278))
+
+
+
 <a name="6.3.3"></a>
 ## [6.3.3](https://github.com/prodest/es-na-palma-da-mao-mobile-vnext/compare/v6.3.1...v6.3.3) (2019-12-18)
 
