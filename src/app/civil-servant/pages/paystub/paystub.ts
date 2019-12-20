@@ -126,7 +126,8 @@ export class PaystubPage implements OnInit {
 
     const loading = this.loading.show('Aguarde');
     const { numeroFuncionario, codigoPerfil } = this.currentProfile;
-    const { numeroVinculo, numeroPensionista, empresaCodigo } = this.currentLink;
+    const { numeroVinculo, numeroPensionista } = this.currentLink;
+    const { empresaCodigo } = payroll;
     const year = this.currentYear;
     const month = this.currentMonth;
     this.activeComponent = 'download';
