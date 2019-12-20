@@ -1,6 +1,10 @@
 page-sedu-denuncias {
   #content {
     background-color: white !important;
+
+    ion-slides {
+      overflow: scroll !important;
+    }
   }
   
   .slide-zoom {

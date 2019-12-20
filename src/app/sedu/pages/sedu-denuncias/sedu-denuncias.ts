@@ -41,11 +41,14 @@ export class SeduDenunciasPage {
   municipios$: Subject<Array<any>>;               // lista de municípios, obtida pela api, para exibir no select
   escolas: Array<Escola>;                         // lista de todas as escolas, obtida pela api
   tiposDenuncia$: Subject<Array<any>>;            // lista de tipos de denúncias, obtida pela api, para exibir no select
-  rotas: Array<any>;                              // lista de rotas, obetida pela api
+  papeis$: Subject<Array<any>>                    // lista de papeis dos autores das denuncias
+  rotas: Array<any>;                              // lista de rotas, obtida pela api
+  turnos: Array<any>;                             // lista de turnos, obtida pela api
+
   
   municipio$: Subject<string>;                    // município escolhido, atualizado pelo método setCity()
   escolasDoMunicipio$: Subject<Array<Escola>>;    // lista de escolas, filtrada por município, exibida no select de escolas, atualizada pelo subscribe no IonViewDidEnter
-  escola$: Subject<string>                        // escola escolhida, atualizado pelo método setSchool()
+  escola$: Subject<number>                        // escola escolhida, atualizado pelo método setSchool()
   rotasDaEscola$: Subject<Array<any>>;            // lista de rotas, filtrada por escola, exibida no select de rotas, atualizada pelo subscribe no IonViewDidEnter
   
   canSend$: BehaviorSubject<boolean>;
@@ -64,6 +67,7 @@ export class SeduDenunciasPage {
     this.escolasDoMunicipio$ = new Subject();
     this.tiposDenuncia$ = new Subject();
     this.rotasDaEscola$ = new Subject();
+    this.papeis$ = new Subject();
 
     this.canSend$ = new BehaviorSubject(false);
 
@@ -86,10 +90,15 @@ export class SeduDenunciasPage {
       );
     });
 
-    this.escola$.subscribe((escola: string) => {
-      this.rotasDaEscola$.next(
+    this.escola$.subscribe((idEscola: number) => {
+      this.api.getSchoolRoutes(idEscola)
+      .subscribe((rotas) => {
+        this.rotas = rotas;
+        this.rotasDaEscola$.next(rotas);
+      });
+      /* this.rotasDaEscola$.next(
         this.rotas.filter((rota) => `${rota.inepEscola}` === escola)
-      );
+      ); */
     });
 
     this.loadData();
@@ -117,10 +126,16 @@ export class SeduDenunciasPage {
       this.tiposDenuncia$.next(tipos);
     });
 
-    // carrega rotas
-    this.api.getAllRoutes()
-    .subscribe((rotas) => {
-      this.rotas = rotas;
+    // carrega papeis dos autores de reclamação/denuncia
+    this.api.getRoles()
+    .subscribe((papeis) => {
+      this.papeis$.next(papeis);
+    });
+
+    // carrega turnos das rotas
+    this.api.getRouteShifts()
+    .subscribe((turnos) => {
+      this.turnos = turnos;
     });
   }
 
@@ -135,6 +150,7 @@ export class SeduDenunciasPage {
    * 
    */
   setSchool(e) {
+    console.log("set escola", e);
     this.escola$.next(e);
   }
 
@@ -237,8 +253,10 @@ export class SeduDenunciasPage {
   }
 
   updateSenderLock() {    
+    console.log(this.denuncia.tipoReclamacao, this.denuncia.descricao);
+    
     this.canSend$.next(
-      (this.denuncia.tipoReclamacao && this.denuncia.descricao) ? true : false
+      (this.denuncia.tipoReclamacao.toString() && this.denuncia.descricao) ? true : false
     );
   }
 }

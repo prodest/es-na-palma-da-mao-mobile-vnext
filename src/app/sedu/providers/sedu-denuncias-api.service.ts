@@ -14,27 +14,64 @@ import { Escola } from '../model/escola';
 @Injectable()
 export class SeduDenunciasApiService {
 
+  options = {
+    headers: {
+      token: "fda958073b28452290110eae204a7fa"
+    }
+  };
+
   constructor(
     public http: HttpClient,
     @Inject(EnvVariables) private env: Environment,
     public auth: AuthQuery) {}
 
+  /**
+   * Obtém todos os Municípios disponíveis.
+   */
   getMunicipios(): Observable<any> {
-    return this.http.get(`${this.env.api.seduDenuncias}/municipios/`);
+    return this.http.get(`${this.env.api.seduDenuncias}/municipios`, this.options);
   }
 
+  /**
+   * Obtém todas as Escolas disponíveis.
+   */
   getSchools(): Observable<Escola[]> {
-    return this.http.get<Escola[]>(`${this.env.api.seduDenuncias}/escolas/`);
+    return this.http.get<Escola[]>(`${this.env.api.seduDenuncias}/escolas`, this.options);
   }
 
+  /**
+   * Obtém todos os Tipos de Reclamação disponíveis.
+   */
   getDemandTypes(): Observable<any> {
-    return this.http.get(`${this.env.api.seduDenuncias}/denuncias/tipos/`);
+    return this.http.get(`${this.env.api.seduDenuncias}/tipos`, this.options);
   }
 
+  /**
+   * Obtém as reclamações feitas por um Autor.
+   * @param idUser ID do usuário no Acesso Cidadão.
+   */
   getUserDemands(idUser: string): Observable<any> {
-    return this.http.get(`${this.env.api.seduDenuncias}/reclamante/${idUser}/denuncias`);
+    return this.http.get(`${this.env.api.seduDenuncias}/reclamante/${idUser}/denuncias`, this.options);
   }
 
+  /**
+   * Obtém o parecer de uma reclamação.
+   */
+  getDemandResponse(idDemand: number): Observable<any> {
+    return this.http.get(`${this.env.api.seduDenuncias}/reclamacao/${idDemand}/parecer`, this.options);
+  }
+
+  /**
+   * Obtém todos os Papéis de Autor disponíveis.
+   */
+  getRoles(): Observable<any> {
+    return this.http.get(`${this.env.api.seduDenuncias}/reclamante/papeis`, this.options);
+  }
+
+  /**
+   * Envia uma reclamação ao sistema.
+   * @param demand 
+   */
   sendDemand(demand: Denuncia) {
     let payload = {
       autor: demand.autor,
@@ -60,15 +97,29 @@ export class SeduDenunciasApiService {
     console.log(payload);
     
 
-    return this.http.post(`${this.env.api.seduDenuncias}/denuncia/`, payload);
+    return this.http.post(`${this.env.api.seduDenuncias}/reclamacao`, payload, this.options);
   }
 
+  /**
+   * Obtém todas as Rotas disponíveis.
+   */
   getAllRoutes(): Observable<any> {
-    return this.http.get(`${this.env.api.seduDenuncias}/rotas/`);
+    return this.http.get(`${this.env.api.seduDenuncias}/rotas`, this.options);
   }
 
-  getSchoolRoutes(id): Observable<any> {
-    return this.http.get(`${this.env.api.seduDenuncias}/escola/${id}/rotas`);
+  /**
+   * Obtém os Turnos de rota que existem.
+   */
+  getRouteShifts(): Observable<any> {
+    return this.http.get(`${this.env.api.seduDenuncias}/rotas/turnos`, this.options);
+  }
+
+  /**
+   * Obtém as Rotas de uma Escola.
+   * @param id ID da escola no Banco de Dados
+   */
+  getSchoolRoutes(id: number): Observable<any> {
+    return this.http.get(`${this.env.api.seduDenuncias}/escola/${id}/rotas`, this.options);
   }
 
 }

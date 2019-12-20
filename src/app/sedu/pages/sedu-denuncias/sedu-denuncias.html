@@ -14,17 +14,9 @@
       </ion-item>
       <ion-list radio-group [(ngModel)]="denuncia.papelDoAutor">
         <ion-list-header>Eu sou:</ion-list-header>
-        <ion-item>
-          <ion-label>Aluno do Estado</ion-label>
-          <ion-radio value=0></ion-radio>
-        </ion-item>
-        <ion-item>
-          <ion-label>Responsável de aluno do Estado</ion-label>
-          <ion-radio value=1></ion-radio>
-        </ion-item>
-        <ion-item>
-          <ion-label>Outro</ion-label>
-          <ion-radio value=2></ion-radio>
+        <ion-item *ngFor="let papel of papeis$ | async">
+          <ion-label>{{papel.nome}}</ion-label>
+          <ion-radio value="{{papel.id}}"></ion-radio>
         </ion-item>
         <ion-item *ngIf="denuncia.papelDoAutor == 2">
           <ion-label>Descreva</ion-label>
@@ -39,7 +31,7 @@
         informe os dados de um aluno que a utiliza
       </ion-list-header>
       <ion-item>
-        <ion-label floating>Nome completo</ion-label>
+        <ion-label floating>Nome completo do aluno</ion-label>
         <ion-input type="text" [(ngModel)]="denuncia.aluno"></ion-input>
       </ion-item>
       <ion-item>
@@ -72,7 +64,7 @@
           cancelText="Cancelar"
           [disabled]="(municipio$ | async) == undefined"
           (ionChange)="setSchool($event)">
-          <ion-option *ngFor="let escola of escolasDoMunicipio$ | async" [value]="escola.inep">{{escola.nome}}</ion-option>
+          <ion-option *ngFor="let escola of escolasDoMunicipio$ | async" [value]="escola.id">{{escola.nome}}</ion-option>
         </ion-select>
       </ion-item>
       <!-- TODO: Vincular rotas à API e filtrar por escola -->
@@ -82,7 +74,7 @@
           [(ngModel)]="denuncia.codigoRota"
           cancelText="Cancelar"
           [disabled]="(escola$ | async) == undefined">
-          <ion-option *ngFor="let rota of rotasDaEscola$ | async" [value]="rota.codigo">{{rota.nome}}</ion-option>
+          <ion-option *ngFor="let rota of rotasDaEscola$ | async" [value]="rota.codigo">{{turnos[rota.turno].nome}} - {{rota.nome}}</ion-option>
         </ion-select>
       </ion-item>
     </ion-slide> <!-- SLIDE 2 -->
