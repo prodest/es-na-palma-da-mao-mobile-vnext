@@ -190,9 +190,12 @@ export class DocumentsToSendPage implements OnInit, OnDestroy {
         documentAssignType: this.stepsValue.docStep.documentAssignType,
         file: { ...this.stepsValue.docStep.file }
       };
-
-      value.file.buffer = await this.convertService.convertTopdf(body).toPromise();
-
+      try {
+        value.file.buffer = await this.convertService.convertTopdf(body).toPromise();
+      } catch (error) {
+        this.onSendError(error, loading)
+        return
+      }
       this.stepsValue.docStep = value;
       this.service.storeUpdate(this.stepsValue.docStep, WizardSteps.DOC);
     }
