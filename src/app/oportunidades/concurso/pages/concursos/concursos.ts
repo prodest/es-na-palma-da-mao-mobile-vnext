@@ -59,7 +59,9 @@ export class ConcursosPage {
     const noFavorites: Concurso[] = concursos.filter((concurso: Concurso) => !concurso.favorito);
     return favorites.concat(noFavorites);
   }
-  
+  teste(){
+    
+  }
   /**
   *
   */
