@@ -29,7 +29,8 @@ export interface Environment {
     mailer: string;
     guide: string;
     convertToPdf: string;
-    seduDenuncias: string
+    seduDenuncias: string;
+    seduDenunciasToken: string;
   };
   push: {
     senderId: string;

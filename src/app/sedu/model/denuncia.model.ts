@@ -1,26 +1,28 @@
 export interface Denuncia {
+  id?: number;
+
   // dados do autor
   autor: string;
-  papelDoAutor: string;
+  papelDoAutor: number;
   outroPapel?: string;
   email: string;
+  acesso_cidadao: string;
 
   // dados de um aluno
   aluno: string;
   registroAcademico: string;
   codigoEDP: string;
-  inepEscola: string;
+  escolaId: number;
 
   // dados do veículo
   placaVeiculo: string;
 
   // dados da rota
-  codigoRota: number;
+  rotaId: number;
 
   // detalhes da reclamação
-  tipoReclamacao: string;
+  tipoReclamacao: number;
   dataReclamacao: Date;
-  dataReclamacaoString: string;
   outroTipo?: string;
   descricao: string;
 }

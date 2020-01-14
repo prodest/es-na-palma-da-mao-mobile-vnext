@@ -1,11 +1,10 @@
 import { Component, ViewChild } from '@angular/core';
 import { IonicPage, NavController, NavParams, Slides, AlertController, App } from 'ionic-angular';
-import { Denuncia } from '../../model/denuncia';
 import { AuthQuery } from '@espm/core';
 import { Subject } from 'rxjs/Subject';
 import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 import { SeduDenunciasApiService } from '../../providers';
-import { Escola } from '../../model/escola';
+import { Denuncia, Escola, Municipio, TipoDenuncia, PapelAutorDenuncia, Rota, TurnoRota } from '../../model';
 
 /**
  * Generated class for the SeduDenunciasPage page.
@@ -22,34 +21,36 @@ import { Escola } from '../../model/escola';
 export class SeduDenunciasPage {
   @ViewChild('slides') slides: Slides;
 
-  denuncia: Partial<Denuncia> = {
+  denuncia: Denuncia = {
     autor: "",
-    papelDoAutor: "",
+    papelDoAutor: null,
     outroPapel: "",
     email: "",
+    acesso_cidadao: this.auth.state.claims.subNovo,
     aluno: "",
     codigoEDP: "",
+    escolaId: null,
     registroAcademico: "",
     placaVeiculo: "",
-    tipoReclamacao: "",
+    rotaId: null,
+    tipoReclamacao: null,
+    outroTipo: "",
     dataReclamacao: null,
-    descricao: "",
-    inepEscola: "",
-    codigoRota: null
+    descricao: ""
   };
 
-  municipios$: Subject<Array<any>>;               // lista de municípios, obtida pela api, para exibir no select
-  escolas: Array<Escola>;                         // lista de todas as escolas, obtida pela api
-  tiposDenuncia$: Subject<Array<any>>;            // lista de tipos de denúncias, obtida pela api, para exibir no select
-  papeis$: Subject<Array<any>>                    // lista de papeis dos autores das denuncias
-  rotas: Array<any>;                              // lista de rotas, obtida pela api
-  turnos: Array<any>;                             // lista de turnos, obtida pela api
+  municipios$: Subject<Municipio[]>;         // lista de municípios, obtida pela api, para exibir no select
+  escolas: Escola[];                         // lista de todas as escolas, obtida pela api
+  tiposDenuncia$: Subject<TipoDenuncia[]>;   // lista de tipos de denúncias, obtida pela api, para exibir no select
+  papeis$: Subject<PapelAutorDenuncia[]>     // lista de papeis dos autores das denuncias
+  rotas: Rota[];                             // lista de rotas, obtida pela api
+  turnos: TurnoRota[];                       // lista de turnos, obtida pela api
 
   
-  municipio$: Subject<string>;                    // município escolhido, atualizado pelo método setCity()
-  escolasDoMunicipio$: Subject<Array<Escola>>;    // lista de escolas, filtrada por município, exibida no select de escolas, atualizada pelo subscribe no IonViewDidEnter
-  escola$: Subject<number>                        // escola escolhida, atualizado pelo método setSchool()
-  rotasDaEscola$: Subject<Array<any>>;            // lista de rotas, filtrada por escola, exibida no select de rotas, atualizada pelo subscribe no IonViewDidEnter
+  municipio$: Subject<number>;               // município escolhido, atualizado pelo método setCity()
+  escolasDoMunicipio$: Subject<Escola[]>;    // lista de escolas, filtrada por município, exibida no select de escolas, atualizada pelo subscribe no IonViewDidEnter
+  escola$: Subject<number>                   // escola escolhida, atualizado pelo método setSchool()
+  rotasDaEscola$: Subject<Rota[]>;           // lista de rotas, filtrada por escola, exibida no select de rotas, atualizada pelo subscribe no IonViewDidEnter
   
   canSend$: BehaviorSubject<boolean>;
 
@@ -84,7 +85,7 @@ export class SeduDenunciasPage {
     }
 
     // Atualiza a lista de escolas SEMPRE que o usuário troca o município no select
-    this.municipio$.subscribe((municipio: string) => {
+    this.municipio$.subscribe((municipio: number) => {
       this.escolasDoMunicipio$.next(
         this.escolas.filter((escola: Escola) => escola.municipio === municipio)
       );
@@ -92,7 +93,8 @@ export class SeduDenunciasPage {
 
     this.escola$.subscribe((idEscola: number) => {
       this.api.getSchoolRoutes(idEscola)
-      .subscribe((rotas) => {
+      .subscribe((rotas: Rota[]) => {
+        console.log("rotas", rotas);
         this.rotas = rotas;
         this.rotasDaEscola$.next(rotas);
       });
@@ -110,31 +112,36 @@ export class SeduDenunciasPage {
   loadData() {
     // carrega municípios
     this.api.getMunicipios()
-    .subscribe((municipios) => {
+    .subscribe((municipios: Municipio[]) => {
+      console.log("municipios", municipios);
       this.municipios$.next(municipios);
     });
 
     // carrega escolas
     this.api.getSchools()
-    .subscribe((escolas) => {
+    .subscribe((escolas: Escola[]) => {
+      console.log("escolas", escolas);
       this.escolas = escolas;
     });
 
     // carrega tipos de denuncias
     this.api.getDemandTypes()
-    .subscribe((tipos) => {
+    .subscribe((tipos: TipoDenuncia[]) => {
+      console.log("tipos", tipos);
       this.tiposDenuncia$.next(tipos);
     });
 
     // carrega papeis dos autores de reclamação/denuncia
     this.api.getRoles()
-    .subscribe((papeis) => {
+    .subscribe((papeis: PapelAutorDenuncia[]) => {
+      console.log("papeis", papeis);
       this.papeis$.next(papeis);
     });
 
     // carrega turnos das rotas
     this.api.getRouteShifts()
-    .subscribe((turnos) => {
+    .subscribe((turnos: TurnoRota[]) => {
+      console.log("turnos", turnos);
       this.turnos = turnos;
     });
   }
@@ -172,12 +179,10 @@ export class SeduDenunciasPage {
    * Envia a reclamação/denuncia.
    */
   send = () => {
-    this.api.sendDemand({
-      ...this.denuncia,
-      dataReclamacaoString: this.denuncia.dataReclamacao.toISOString()
-    } as Denuncia)
+    this.api.sendDemand(this.denuncia)
     .subscribe(
       res => {
+        console.log(res);
         this.showSuccessAlert(res["protocolo"]);
       }
     );
@@ -230,7 +235,7 @@ export class SeduDenunciasPage {
     
     if (this.slides.getActiveIndex() === 0) {
       if (this.denuncia.papelDoAutor) {
-        if (this.denuncia.papelDoAutor === "2") {
+        if (this.denuncia.papelDoAutor === 3) {
           if (this.denuncia.outroPapel) {
             return true;
           }
@@ -244,7 +249,7 @@ export class SeduDenunciasPage {
       if (
         this.denuncia.aluno &&
         this.denuncia.codigoEDP &&
-        this.denuncia.codigoRota) {
+        this.denuncia.rotaId) {
           return true;
       }
     }

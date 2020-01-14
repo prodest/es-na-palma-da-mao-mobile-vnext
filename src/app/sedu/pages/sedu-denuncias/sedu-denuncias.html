@@ -16,9 +16,9 @@
         <ion-list-header>Eu sou:</ion-list-header>
         <ion-item *ngFor="let papel of papeis$ | async">
           <ion-label>{{papel.nome}}</ion-label>
-          <ion-radio value="{{papel.id}}"></ion-radio>
+          <ion-radio [value]="papel.id"></ion-radio>
         </ion-item>
-        <ion-item *ngIf="denuncia.papelDoAutor == 2">
+        <ion-item *ngIf="denuncia.papelDoAutor == 3">
           <ion-label>Descreva</ion-label>
           <ion-input type="text" [(ngModel)]="denuncia.outroPapel"></ion-input>
         </ion-item>
@@ -54,13 +54,13 @@
         <ion-select
           cancelText="Cancelar"
           (ionChange)="setCity($event)">
-          <ion-option *ngFor="let municipio of municipios$ | async" [value]="municipio.nome">{{municipio.nome}}</ion-option>
+          <ion-option *ngFor="let municipio of municipios$ | async" [value]="municipio.id">{{municipio.nome}}</ion-option>
         </ion-select>
       </ion-item>
       <ion-item>
         <ion-label floating>Escola</ion-label>
         <ion-select
-          [(ngModel)]="denuncia.inepEscola"
+          [(ngModel)]="denuncia.escolaId"
           cancelText="Cancelar"
           [disabled]="(municipio$ | async) == undefined"
           (ionChange)="setSchool($event)">
@@ -71,10 +71,10 @@
       <ion-item>
         <ion-label floating>Nome da Rota</ion-label>
         <ion-select
-          [(ngModel)]="denuncia.codigoRota"
+          [(ngModel)]="denuncia.rotaId"
           cancelText="Cancelar"
           [disabled]="(escola$ | async) == undefined">
-          <ion-option *ngFor="let rota of rotasDaEscola$ | async" [value]="rota.codigo">{{turnos[rota.turno].nome}} - {{rota.nome}}</ion-option>
+          <ion-option *ngFor="let rota of rotasDaEscola$ | async" [value]="rota.id">{{turnos[rota.turno - 1].nome}} - {{rota.nome}}</ion-option>
         </ion-select>
       </ion-item>
     </ion-slide> <!-- SLIDE 2 -->
