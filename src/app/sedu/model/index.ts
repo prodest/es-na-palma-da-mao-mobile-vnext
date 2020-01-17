@@ -5,5 +5,6 @@ import { PapelAutorDenuncia } from './papelAutorDenuncia.model';
 import { Rota } from './rota.model';
 import { TipoDenuncia } from './tipoDenuncia.model';
 import { TurnoRota } from './turnoRota.model';
+import { StatusDenuncia } from './status.model';
 
-export { Denuncia, Escola, Municipio, PapelAutorDenuncia, Rota, TipoDenuncia, TurnoRota };
+export { Denuncia, Escola, Municipio, PapelAutorDenuncia, Rota, TipoDenuncia, TurnoRota, StatusDenuncia };

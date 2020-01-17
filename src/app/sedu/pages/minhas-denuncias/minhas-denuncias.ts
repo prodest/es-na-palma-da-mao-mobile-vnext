@@ -3,6 +3,7 @@ import { IonicPage, NavController } from 'ionic-angular';
 import { SeduDenunciasApiService } from '../../providers';
 import { Subject } from 'rxjs/Subject';
 import { AuthQuery } from '@espm/core';
+import { TipoDenuncia, Denuncia, PapelAutorDenuncia, StatusDenuncia } from '../../model';
 
 @IonicPage()
 @Component({
@@ -11,21 +12,44 @@ import { AuthQuery } from '@espm/core';
 })
 export class MinhasDenunciasPage {
 
-  denuncias: Array<any>;
-  denuncias$: Subject<Array<any>>;
+  denuncias: Array<Denuncia> = [];
+  denuncias$: Subject<Array<Denuncia>>;
 
+  tiposDenuncias: Array<TipoDenuncia>;
+  papeisReclamantes: Array<PapelAutorDenuncia>;
+  statusDenuncia: Array<StatusDenuncia>;
+  
   constructor(
     private api: SeduDenunciasApiService,
     public auth: AuthQuery,
     private navCtrl: NavController
   ) {
     this.denuncias$ = new Subject();
+    this.denuncias$.next([]);
   }
 
   ionViewWillLoad() {
+
+    // carrega tipos de denuncias
+    this.api.getDemandTypes()
+    .subscribe((tipos: TipoDenuncia[]) => {
+      this.tiposDenuncias = tipos
+    });
+
+    // carrega papeis dos autores de reclamação/denuncia
+    this.api.getRoles()
+    .subscribe((papeis: PapelAutorDenuncia[]) => {
+      this.papeisReclamantes = papeis;
+    });
+
+    // carrega status de denuncias
+    /* this.api.getDemandStatus()
+    .subscribe((status: StatusDenuncia[]) => {
+      this.statusDenuncia = status;
+    }); */
+
     this.api.getUserDemands(this.auth.state.claims.subNovo)
     .subscribe((denuncias) => {
-      console.log(denuncias);
       this.denuncias$.next(denuncias);
       this.denuncias = denuncias;
     });
@@ -42,4 +66,5 @@ export class MinhasDenunciasPage {
     };
     this.navCtrl.push("DetalhesDenunciaPage", params);
   }
+
 }

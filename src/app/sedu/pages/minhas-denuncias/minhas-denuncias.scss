@@ -8,6 +8,14 @@ page-minhas-denuncias {
     border-radius: 15px !important;
   }
 
+  p#none {
+    width: 60%;
+    align-self: center;
+    text-align: center;
+    color: #004297;
+    font-weight: 500;
+  }
+
   @media screen and (max-width: 361px) {
     .content p {
       font-size: 25px !important;

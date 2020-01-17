@@ -4,7 +4,7 @@ import { EnvVariables, Environment, AuthQuery } from '@espm/core';
 import { Observable } from 'rxjs/Observable';
 import { map } from 'rxjs/operators';
 
-import { Denuncia, Escola, Municipio, TipoDenuncia, PapelAutorDenuncia, TurnoRota, Rota } from '../model';
+import { Denuncia, Escola, Municipio, TipoDenuncia, PapelAutorDenuncia, TurnoRota, Rota, StatusDenuncia } from '../model';
 
 /*
   Generated class for the SeduDenunciasApiProvider provider.
@@ -15,16 +15,19 @@ import { Denuncia, Escola, Municipio, TipoDenuncia, PapelAutorDenuncia, TurnoRot
 @Injectable()
 export class SeduDenunciasApiService {
 
-  options = {
-    "headers": {
-      "token": this.env.api.seduDenunciasToken
-    }
-  };
+  options = {};
 
   constructor(
     public http: HttpClient,
     @Inject(EnvVariables) private env: Environment,
-    public auth: AuthQuery) {}
+    public auth: AuthQuery) {
+      
+      this.options = {
+        "headers": {
+          "token": this.env.api.seduDenunciasToken
+        }
+      };
+    }
 
   /**
    * Obtém todos os Municípios disponíveis.
@@ -65,11 +68,22 @@ export class SeduDenunciasApiService {
   }
 
   /**
+   * Obtém todos os Status de Reclamação possíveis
+   */
+  getDemandStatus(): Observable<StatusDenuncia[]> {
+    return this.http.get<StatusDenuncia[]>(`${this.env.api.seduDenuncias}/status`, this.options)
+    .pipe(map(res => res.map(status => ({
+      id: status['pk'],
+      nome: status['fields']['nome']
+    } as StatusDenuncia))));
+  }
+
+  /**
    * Obtém as reclamações feitas por um Autor.
    * @param idUser ID do usuário no Acesso Cidadão.
    */
-  getUserDemands(idUser: string): Observable<Denuncia[]> {
-    return this.http.get<Denuncia[]>(`${this.env.api.seduDenuncias}/reclamante/1/reclamacoes`, this.options)
+  getUserDemands(idUser: string): Observable<Denuncia[]> {    
+    return this.http.get<Denuncia[]>(`${this.env.api.seduDenuncias}/reclamante/${idUser}/reclamacoes`, this.options)
     .pipe(map(res => res.map(demand => ({
       ...demand['fields'],
       id: demand['pk'],
@@ -77,7 +91,6 @@ export class SeduDenunciasApiService {
       outroPapel: demand['fields']['outro_papel'],
       dataReclamacao: new Date(demand['fields']['data_ocorrido']),
       rotaId: demand['fields']['rota'],
-      status: "Analisando",
       tipoReclamacao: demand['fields']['tipo']
     }) as Denuncia)));
   }
