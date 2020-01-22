@@ -118,12 +118,7 @@ export class SeduDenunciasApiService {
    * @param demand 
    */
   sendDemand(demand: Denuncia) {
-    let payload = {
-      ...demand,
-      dataReclamacao: demand.dataReclamacao.toISOString()
-    };
-
-    return this.http.post(`${this.env.api.seduDenuncias}/reclamacao`, payload, this.options);
+    return this.http.post(`${this.env.api.seduDenuncias}/reclamacao`, demand, this.options);
   }
 
   /**

@@ -183,7 +183,7 @@ export class SeduDenunciasPage {
     .subscribe(
       res => {
         console.log(res);
-        this.showSuccessAlert(res["protocolo"]);
+        this.showSuccessAlert(res);
       }
     );
   }
