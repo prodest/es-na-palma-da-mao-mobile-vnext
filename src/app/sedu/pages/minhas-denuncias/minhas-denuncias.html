@@ -3,10 +3,10 @@
     *ngFor="let denuncia of (denuncias$ | async)"
     (click)="showDemand(denuncia.id)">
     <ion-card-header>
-      {{date(denuncia.dataReclamacao)}} - {{denuncia.status}}
+      {{date(denuncia.dataRegistro)}} - {{denuncia.status}}
     </ion-card-header>
     <ion-card-content>
-      <p>{{denuncia.tipoReclamacao}}</p>
+      <p>{{denuncia.tipoReclamacao || denuncia.outroTipo}}</p>
       <span>{{denuncia.descricao}}</span>
     </ion-card-content>
   </ion-card>

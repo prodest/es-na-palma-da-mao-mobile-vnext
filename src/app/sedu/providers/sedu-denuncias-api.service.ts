@@ -71,7 +71,7 @@ export class SeduDenunciasApiService {
    * Obtém todos os Status de Reclamação possíveis
    */
   getDemandStatus(): Observable<StatusDenuncia[]> {
-    return this.http.get<StatusDenuncia[]>(`${this.env.api.seduDenuncias}/status`, this.options)
+    return this.http.get<StatusDenuncia[]>(`${this.env.api.seduDenuncias}/reclamacao/status`, this.options)
     .pipe(map(res => res.map(status => ({
       id: status['pk'],
       nome: status['fields']['nome']
@@ -85,13 +85,26 @@ export class SeduDenunciasApiService {
   getUserDemands(idUser: string): Observable<Denuncia[]> {    
     return this.http.get<Denuncia[]>(`${this.env.api.seduDenuncias}/reclamante/${idUser}/reclamacoes`, this.options)
     .pipe(map(res => res.map(demand => ({
-      ...demand['fields'],
+      // ...demand['fields'],
       id: demand['pk'],
+      dataRegistro: new Date(demand['fields']['created_on']),
+      statusId: demand['fields']['status'],
+      protocolo: demand['fields']['protocolo'],
+
       descricao: demand['fields']['texto'],
-      outroPapel: demand['fields']['outro_papel'],
+      tipoReclamacao: demand['fields']['tipo'],
+      outroTipo: demand['fields']['outro_tipo'],
       dataReclamacao: new Date(demand['fields']['data_ocorrido']),
       rotaId: demand['fields']['rota'],
-      tipoReclamacao: demand['fields']['tipo']
+      placaVeiculo: demand['fields']['placa_veiculo'],
+      
+      autor: demand['fields']['reclamante'],
+      papelDoAutor: demand['fields']['papel'],
+      outroPapel: demand['fields']['outro_papel'],
+
+      aluno: demand['fields']['aluno'],
+
+
     }) as Denuncia)));
   }
 
@@ -99,7 +112,10 @@ export class SeduDenunciasApiService {
    * Obtém o parecer de uma reclamação.
    */
   getDemandResponse(idDemand: number): Observable<any> {
-    return this.http.get(`${this.env.api.seduDenuncias}/reclamacao/${idDemand}/parecer`, this.options);
+    return this.http.get(`${this.env.api.seduDenuncias}/reclamacao/${idDemand}/parecer`, this.options)
+    .pipe(map((res: [any]) => 
+      res.length > 0 ? res[0]["fields"]["texto"] : ""
+    ));
   }
 
   /**

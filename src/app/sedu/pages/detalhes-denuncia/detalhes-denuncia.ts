@@ -19,8 +19,8 @@ export class DetalhesDenunciaPage {
 
   ionViewWillLoad() {
     this.api.getDemandResponse(this.denuncia.id)
-    .subscribe((res: [any]) => {
-      if (res.length > 0) this.denuncia.parecer = res[0]["fields"]["texto"];
+    .subscribe((parecer) => {
+      this.denuncia.parecer = parecer;
     });
   }
 

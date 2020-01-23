@@ -13,20 +13,24 @@
     <ion-item-group>
         <ion-list-header>Dados da reclamação</ion-list-header>
       <ion-item>
-        <h2>Data</h2>
+        <h2>Data do ocorrido</h2>
         <p>{{date(denuncia.dataReclamacao)}}</p>
-      </ion-item>
-      <ion-item>
-        <h2>Tipo de Reclamação</h2>
-        <p>{{denuncia.tipoReclamacao}}</p>
-      </ion-item>
-      <ion-item>
-        <h2>Texto da Reclamação</h2>
-        <p>{{denuncia.descricao}}</p>
       </ion-item>
       <ion-item>
         <h2>Status</h2>
         <p>{{denuncia.status}}</p>
+      </ion-item>
+      <ion-item>
+        <h2>Tipo de Reclamação</h2>
+        <p>{{denuncia.tipoReclamacao || denuncia.outroTipo}}</p>
+      </ion-item>
+      <ion-item *ngIf="denuncia.placaVeiculo">
+        <h2>Placa do veículo</h2>
+        <p>{{denuncia.placaVeiculo}}</p>
+      </ion-item>
+      <ion-item>
+        <h2>Texto da Reclamação</h2>
+        <p>{{denuncia.descricao}}</p>
       </ion-item>
     </ion-item-group>
 

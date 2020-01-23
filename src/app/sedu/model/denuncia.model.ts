@@ -1,5 +1,10 @@
 export interface Denuncia {
   id?: number;
+  protocolo?: string;
+  statusId?: number;
+  status?: string;
+  dataRegistro?: Date;
+  parecer?: string;
 
   // dados do autor
   autor: string;
@@ -13,15 +18,17 @@ export interface Denuncia {
   registroAcademico: string;
   codigoEDP: string;
   escolaId: number;
+  escola?: string;
 
   // dados do veículo
   placaVeiculo: string;
 
   // dados da rota
   rotaId: number;
+  rota?: string;
 
   // detalhes da reclamação
-  tipoReclamacao: number;
+  tipoReclamacao: number | string;
   dataReclamacao: Date;
   outroTipo?: string;
   descricao: string;

@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController } from 'ionic-angular';
+import { IonicPage, NavController, LoadingController } from 'ionic-angular';
 import { SeduDenunciasApiService } from '../../providers';
 import { Subject } from 'rxjs/Subject';
 import { AuthQuery } from '@espm/core';
@@ -22,7 +22,8 @@ export class MinhasDenunciasPage {
   constructor(
     private api: SeduDenunciasApiService,
     public auth: AuthQuery,
-    private navCtrl: NavController
+    private navCtrl: NavController,
+    public loadCtrl: LoadingController
   ) {
     this.denuncias$ = new Subject();
     this.denuncias$.next([]);
@@ -43,17 +44,36 @@ export class MinhasDenunciasPage {
     });
 
     // carrega status de denuncias
-    /* this.api.getDemandStatus()
+    this.api.getDemandStatus()
     .subscribe((status: StatusDenuncia[]) => {
+      // console.log(status);      
       this.statusDenuncia = status;
-    }); */
-
-    this.api.getUserDemands(this.auth.state.claims.subNovo)
-    .subscribe((denuncias) => {
-      this.denuncias$.next(denuncias);
-      this.denuncias = denuncias;
     });
 
+    const loading = this.presentLoading();
+    this.api.getUserDemands(this.auth.state.claims.subNovo)
+    .subscribe((denuncias: Denuncia[]) => {
+      // console.log(denuncias);
+      denuncias.map((denuncia: Denuncia) => {
+        denuncia.status = this.statusDenuncia.find((status: StatusDenuncia) => status.id === denuncia.statusId).nome;
+        denuncia.tipoReclamacao = this.tiposDenuncias.find((tipo: TipoDenuncia) => tipo.id === denuncia.tipoReclamacao).nome;
+      });
+      this.denuncias$.next(denuncias);
+      this.denuncias = denuncias;
+      loading.dismiss();
+    });
+
+  }
+
+  /**
+   * Cria e inicializa um loading
+   */
+  presentLoading() {
+    const loader = this.loadCtrl.create({
+      content: "Aguarde..."
+    });
+    loader.present();
+    return loader;
   }
 
   date(date: string) {

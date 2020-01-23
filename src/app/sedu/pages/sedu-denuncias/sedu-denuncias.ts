@@ -1,5 +1,5 @@
 import { Component, ViewChild } from '@angular/core';
-import { IonicPage, NavController, NavParams, Slides, AlertController, App } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, Slides, AlertController, App, LoadingController } from 'ionic-angular';
 import { AuthQuery } from '@espm/core';
 import { Subject } from 'rxjs/Subject';
 import { BehaviorSubject } from 'rxjs/BehaviorSubject';
@@ -58,6 +58,7 @@ export class SeduDenunciasPage {
     public navCtrl: NavController,
     public navParams: NavParams,
     public alertCtrl: AlertController,
+    public loadCtrl: LoadingController,
     protected appCtrl: App,
     public auth: AuthQuery,
     public api: SeduDenunciasApiService
@@ -92,15 +93,14 @@ export class SeduDenunciasPage {
     });
 
     this.escola$.subscribe((idEscola: number) => {
+      const loading = this.presentLoading();
+
       this.api.getSchoolRoutes(idEscola)
       .subscribe((rotas: Rota[]) => {
-        console.log("rotas", rotas);
         this.rotas = rotas;
         this.rotasDaEscola$.next(rotas);
+        loading.dismiss();
       });
-      /* this.rotasDaEscola$.next(
-        this.rotas.filter((rota) => `${rota.inepEscola}` === escola)
-      ); */
     });
 
     this.loadData();
@@ -113,37 +113,50 @@ export class SeduDenunciasPage {
     // carrega municípios
     this.api.getMunicipios()
     .subscribe((municipios: Municipio[]) => {
-      console.log("municipios", municipios);
+      // console.log("municipios", municipios);
       this.municipios$.next(municipios);
     });
 
     // carrega escolas
     this.api.getSchools()
     .subscribe((escolas: Escola[]) => {
-      console.log("escolas", escolas);
+      // console.log("escolas", escolas);
       this.escolas = escolas;
     });
 
     // carrega tipos de denuncias
     this.api.getDemandTypes()
     .subscribe((tipos: TipoDenuncia[]) => {
-      console.log("tipos", tipos);
+      // console.log("tipos", tipos);
       this.tiposDenuncia$.next(tipos);
     });
 
+    const loading = this.presentLoading();
     // carrega papeis dos autores de reclamação/denuncia
     this.api.getRoles()
     .subscribe((papeis: PapelAutorDenuncia[]) => {
-      console.log("papeis", papeis);
+      // console.log("papeis", papeis);
       this.papeis$.next(papeis);
+      loading.dismiss();
     });
 
     // carrega turnos das rotas
     this.api.getRouteShifts()
     .subscribe((turnos: TurnoRota[]) => {
-      console.log("turnos", turnos);
+      // console.log("turnos", turnos);
       this.turnos = turnos;
     });
+  }
+
+  /**
+   * Cria e inicializa um loading
+   */
+  presentLoading() {
+    const loader = this.loadCtrl.create({
+      content: "Aguarde..."
+    });
+    loader.present();
+    return loader;
   }
 
   /**
@@ -157,7 +170,7 @@ export class SeduDenunciasPage {
    * 
    */
   setSchool(e) {
-    console.log("set escola", e);
+    // console.log("set escola", e);
     this.escola$.next(e);
   }
 
@@ -182,7 +195,7 @@ export class SeduDenunciasPage {
     this.api.sendDemand(this.denuncia)
     .subscribe(
       res => {
-        console.log(res);
+        // console.log(res);
         this.showSuccessAlert(res);
       }
     );
@@ -258,8 +271,6 @@ export class SeduDenunciasPage {
   }
 
   updateSenderLock() {    
-    console.log(this.denuncia.tipoReclamacao, this.denuncia.descricao);
-    
     this.canSend$.next(
       (this.denuncia.tipoReclamacao.toString() && this.denuncia.descricao) ? true : false
     );
