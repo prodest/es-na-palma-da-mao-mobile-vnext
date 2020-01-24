@@ -3,7 +3,7 @@ import { IonicPage, NavController, LoadingController } from 'ionic-angular';
 import { SeduDenunciasApiService } from '../../providers';
 import { Subject } from 'rxjs/Subject';
 import { AuthQuery } from '@espm/core';
-import { TipoDenuncia, Denuncia, PapelAutorDenuncia, StatusDenuncia } from '../../model';
+import { Denuncia } from '../../model';
 
 @IonicPage()
 @Component({
@@ -14,10 +14,6 @@ export class MinhasDenunciasPage {
 
   denuncias: Array<Denuncia> = [];
   denuncias$: Subject<Array<Denuncia>>;
-
-  tiposDenuncias: Array<TipoDenuncia>;
-  papeisReclamantes: Array<PapelAutorDenuncia>;
-  statusDenuncia: Array<StatusDenuncia>;
   
   constructor(
     private api: SeduDenunciasApiService,
@@ -30,34 +26,10 @@ export class MinhasDenunciasPage {
   }
 
   ionViewWillLoad() {
-
-    // carrega tipos de denuncias
-    this.api.getDemandTypes()
-    .subscribe((tipos: TipoDenuncia[]) => {
-      this.tiposDenuncias = tipos
-    });
-
-    // carrega papeis dos autores de reclamação/denuncia
-    this.api.getRoles()
-    .subscribe((papeis: PapelAutorDenuncia[]) => {
-      this.papeisReclamantes = papeis;
-    });
-
-    // carrega status de denuncias
-    this.api.getDemandStatus()
-    .subscribe((status: StatusDenuncia[]) => {
-      // console.log(status);      
-      this.statusDenuncia = status;
-    });
-
     const loading = this.presentLoading();
     this.api.getUserDemands(this.auth.state.claims.subNovo)
     .subscribe((denuncias: Denuncia[]) => {
       // console.log(denuncias);
-      denuncias.map((denuncia: Denuncia) => {
-        denuncia.status = this.statusDenuncia.find((status: StatusDenuncia) => status.id === denuncia.statusId).nome;
-        denuncia.tipoReclamacao = this.tiposDenuncias.find((tipo: TipoDenuncia) => tipo.id === denuncia.tipoReclamacao).nome;
-      });
       this.denuncias$.next(denuncias);
       this.denuncias = denuncias;
       loading.dismiss();
@@ -81,7 +53,7 @@ export class MinhasDenunciasPage {
   }
 
   showDemand(id: number) {
-    let params = {
+    const params = {
       demand: this.denuncias.find((demand) => demand.id === id)
     };
     this.navCtrl.push("DetalhesDenunciaPage", params);

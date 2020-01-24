@@ -84,25 +84,28 @@ export class SeduDenunciasApiService {
    */
   getUserDemands(idUser: string): Observable<Denuncia[]> {    
     return this.http.get<Denuncia[]>(`${this.env.api.seduDenuncias}/reclamante/${idUser}/reclamacoes`, this.options)
-    .pipe(map(res => res.map(demand => ({
-      // ...demand['fields'],
+    .pipe(map(res => res.map((demand: any) => ({
       id: demand['pk'],
-      dataRegistro: new Date(demand['fields']['created_on']),
-      statusId: demand['fields']['status'],
-      protocolo: demand['fields']['protocolo'],
+      dataRegistro: new Date(demand['created_on']),
+      status: demand['status'],
+      protocolo: demand['protocolo'],
 
-      descricao: demand['fields']['texto'],
-      tipoReclamacao: demand['fields']['tipo'],
-      outroTipo: demand['fields']['outro_tipo'],
-      dataReclamacao: new Date(demand['fields']['data_ocorrido']),
-      rotaId: demand['fields']['rota'],
-      placaVeiculo: demand['fields']['placa_veiculo'],
+      descricao: demand['texto'],
+      tipoReclamacao: demand['tipo'],
+      outroTipo: demand['outro_tipo'],
+      dataReclamacao: new Date(demand['data_ocorrido']),
+      rota: demand['rota'],
+      placaVeiculo: demand['placa_veiculo'],
       
-      autor: demand['fields']['reclamante'],
-      papelDoAutor: demand['fields']['papel'],
-      outroPapel: demand['fields']['outro_papel'],
+      autor: demand['reclamante'],
+      papelDoAutor: demand['papel'],
+      outroPapel: demand['outro_papel'],
 
-      aluno: demand['fields']['aluno'],
+      aluno: demand['aluno']['nome'],
+      codigoEDP: demand['aluno']['cod_energia'],
+      registroAcademico: demand['aluno']['ra'],
+      escola: demand['aluno']['escola'],
+      parecer: ""
 
 
     }) as Denuncia)));

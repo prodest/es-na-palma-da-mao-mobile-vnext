@@ -8,7 +8,7 @@ export interface Denuncia {
 
   // dados do autor
   autor: string;
-  papelDoAutor: number;
+  papelDoAutor: number | string;
   outroPapel?: string;
   email: string;
   acesso_cidadao: string;
