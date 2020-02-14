@@ -33,6 +33,7 @@ export const dev: Environment = {
     mailer: process.env.API_MAILER_URL || 'https://agendamento.dchm.es.gov.br/email',
     convertToPdf: process.env.API_CONVERT_TO_PDF || 'https://api.es.gov.br/pdf/',
     paystub: process.env.API_PAYSTUB || 'https://apisiarhes.dchm.es.gov.br/api/espm',
+    airQuality: 'https://qualidadedoarapi.es.gov.br/api/mapa',
   },
   push: {
     senderId: process.env.PUSH_SENDER_ID,
