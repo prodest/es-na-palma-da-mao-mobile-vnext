@@ -80,6 +80,13 @@ export const MENUS: ItemMenu[] = [
     isChecked: false,
     isCivilServant: true
   },
+  {
+    id: 25,
+    title: 'Qualidade do Ar',
+    icon: 'custom-modulo-qualidade',
+    component: 'QualidadeServicePage',
+    isChecked: false
+  }
 ];
 
 export function menusFactory() {
