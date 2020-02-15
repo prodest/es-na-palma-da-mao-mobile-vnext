@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams, App, MenuController, AlertController} from 'ionic-angular';
-import { AuthNeededService, AuthQuery} from '@espm/core';
+import { IonicPage, NavController, NavParams, App} from 'ionic-angular';
+import { AuthNeededService} from '@espm/core';
 // import { Vehicle, Ticket } from '../../model';
 // import { VehiclesService } from '../../providers';
 
@@ -15,28 +15,25 @@ export class QualidadeServicePage {
   loaded: boolean = false;
   menus = [
     {
-      buttonTitle: "CNH",
-      targetPage: "DriverLicenseStatusPage"
-    },
-    /* {
-      buttonTitle: "Infrações",
-      targetPage: "DriverLicenseStatusPage"
-    }, */
-    {
-      buttonTitle: "Meus Veículos",
-      targetPage: "VehiclesPage"
+      targetPage: "MapaQualidadePage"
     }
+  
+    // {
+    //   buttonTitle: "Meus Veículos",
+    //   targetPage: "VehiclesPage"
+    // }
+    
   ];
 
 
   constructor(public navCtrl: NavController,
     // private detran: VehiclesService,
-    private authQuery: AuthQuery,
-    private alertCtrl: AlertController,
+    // private authQuery: AuthQuery,
+    // private alertCtrl: AlertController,
     protected appCtrl: App,
     protected authNeeded: AuthNeededService,
     public navParams: NavParams,
-    private menuCtrl: MenuController
+    // private menuCtrl: MenuController
     ) {
   }
   /**
