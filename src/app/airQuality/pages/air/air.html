@@ -1,4 +1,16 @@
-<ion-header>
+<ion-content>
+    <ion-list *ngFor="let air of Air">
+        {{air.Cor}}
+        {{air.Faixa}}
+        {{air.DataHora}}
+    </ion-list>
+
+    <div *ngFor="let idItem of mapaId">
+        
+              {{ idItem.Poluente }}
+             
+              {{ idItem.DataHora }}
+    </div>
  
 </ion-content>
 
