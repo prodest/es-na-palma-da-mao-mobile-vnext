@@ -19,8 +19,10 @@ export class AirPage {
   loading: Loading;
 
   constructor(private service: AirService, private apiService: AirApiService) {
-     this.loadQualityId(2);
-     this.allDataQualityAir();
+    this.loadQualityId(2);
+    this.allDataQualityAir();
+
+
   }
   /**
    * recebe um id e puxa os dados referentes 
@@ -41,5 +43,9 @@ export class AirPage {
 
     });
   }
+  /**
+   * 
+   */
+
 
 }

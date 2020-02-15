@@ -5,9 +5,9 @@ export class MapaId {
     Estacao: string
     Max: string;
     Min: string;
-    DataHora: [];
-    ValorIqa: [];
-    Cor: [];
-    FaixaIQA: [];
+    DataHora: string[];
+    ValorIqa: string[];
+    Cor: string[];
+    FaixaIQA: string[];
 
 }
