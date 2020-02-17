@@ -56,13 +56,13 @@ export class AirPage {
    * 
    */
   loadMapa() {
-    var map = leaflet.map('map').setView([-20.2602057, -40.3505489], 11);
+    let map = leaflet.map('map').setView([-20.2602057, -40.3405489], 11);
 
     leaflet.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
       attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
     }).addTo(map);
 
-    leaflet.marker([-20.2786392, -40.3896752]).addTo(map)
+    leaflet.marker([-20.2786392, -40.2396752]).addTo(map)
       .bindPopup('A pretty CSS3 popup.<br> Easily customizable.')
       .openPopup();
   }
