@@ -1,0 +1,18 @@
+<module-page title="RENDIMENTOS" [ngSwitch]="activeComponent" no-padding no-footer>
+  <ion-list class="list-components" no-lines>
+    <ion-list-header>
+      Baixar informe rendimentos
+    </ion-list-header>
+    <ion-item *ngSwitchCase="'profile'">
+      <paystub-profiles [profiles]="profiles$ | async" (onSelectProfile)="getLinks($event)"></paystub-profiles>
+    </ion-item>
+    <ion-item class="no-padding" *ngSwitchCase="'links'">
+      <paystub-links [links]="links$ | async" (onSelectLink)="getYears($event)"></paystub-links>
+    </ion-item>
+    <ion-item *ngSwitchCase="'download'">
+      <report-yields-download [years]="years$ | async" [numVinc]="currentLink?.numeroVinculo"
+        [numFunc]="currentProfile?.numeroFuncionario" [companies]="companies$ | async" (onSelectYear)="getCompanies($event)"
+        (onSelectCompany)="download($event)"></report-yields-download>
+    </ion-item>
+  </ion-list>
+</module-page>
