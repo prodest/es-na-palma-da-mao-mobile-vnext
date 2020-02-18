@@ -4,10 +4,10 @@
       Baixar informe rendimentos
     </ion-list-header>
     <ion-item *ngSwitchCase="'profile'">
-      <paystub-profiles [profiles]="profiles$ | async" (onSelectProfile)="getLinks($event)"></paystub-profiles>
+      <siarhes-profiles [profiles]="profiles$ | async" (onSelectProfile)="getLinks($event)"></siarhes-profiles>
     </ion-item>
     <ion-item class="no-padding" *ngSwitchCase="'links'">
-      <paystub-links [links]="links$ | async" (onSelectLink)="getYears($event)"></paystub-links>
+      <siarhes-links [links]="links$ | async" (onSelectLink)="getYears($event)"></siarhes-links>
     </ion-item>
     <ion-item *ngSwitchCase="'download'">
       <report-yields-download [years]="years$ | async" [numVinc]="currentLink?.numeroVinculo"

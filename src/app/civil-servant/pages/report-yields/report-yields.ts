@@ -1,12 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { IonicPage, NavController, NavParams, Loading, AlertController, Platform } from 'ionic-angular';
-import { PaystubService } from '../../providers/paystub.service';
 import { AuthService, AcessoCidadaoClaims, LoadingService } from '@espm/core';
-import { IPaystubProfile, IPaystubLink, IPaystubYear, IReportYieldCompany } from '../../interfaces';
+import { ISiarhesProfile, ISiarhesLink, IPaystubYear, IReportYieldCompany } from '../../interfaces';
 import { Observable } from 'rxjs/Observable';
 import { mergeMap, finalize } from 'rxjs/operators';
 import { of } from 'rxjs/observable/of';
-import { ReportYieldsService } from '../../providers';
+import { SiarhesService } from '../../providers';
 import { File, FileEntry } from '@ionic-native/file';
 import { FileOpener } from '@ionic-native/file-opener';
 
@@ -19,13 +18,13 @@ import { FileOpener } from '@ionic-native/file-opener';
 })
 export class ReportYieldsPage implements OnInit {
   activeComponent: 'profile' | 'links' | 'download' = 'profile';
-  profiles$: Observable<IPaystubProfile[]> = of([]);
-  links$: Observable<IPaystubLink[]> = of([]);
+  profiles$: Observable<ISiarhesProfile[]> = of([]);
+  links$: Observable<ISiarhesLink[]> = of([]);
   years$: Observable<IPaystubYear[]> = of([]);
   companies$: Observable<IReportYieldCompany[]> = of([]);
   currentUser: AcessoCidadaoClaims | undefined;
-  currentProfile: IPaystubProfile | undefined;
-  currentLink: IPaystubLink | undefined;
+  currentProfile: ISiarhesProfile | undefined;
+  currentLink: ISiarhesLink | undefined;
   currentYear: IPaystubYear | undefined;
   currentCompanies: IReportYieldCompany | undefined;
 
@@ -36,8 +35,7 @@ export class ReportYieldsPage implements OnInit {
     public alertCtrl: AlertController,
     private platform: Platform,
     private fileOpener: FileOpener,
-    private paystubService: PaystubService,
-    private reportYieldsService: ReportYieldsService,
+    private siarhesService: SiarhesService,
     private auth: AuthService,
     private loading: LoadingService
   ) {}
@@ -57,24 +55,24 @@ export class ReportYieldsPage implements OnInit {
     if (!this.currentUser) {
       return;
     }
-    this.profiles$ = this.paystubService
+    this.profiles$ = this.siarhesService
       .getProfiles(this.currentUser.cpf)
       .pipe(finalize(() => loading.dismiss()));
   }
 
-  getLinks(profile?: IPaystubProfile): void {
+  getLinks(profile?: ISiarhesProfile): void {
     if (!profile) {
       return;
     }
     const loading = this.loading.show('Aguarde');
     this.activeComponent = 'links';
     this.currentProfile = profile;
-    this.links$ = this.paystubService
+    this.links$ = this.siarhesService
       .getLink(this.currentUser.cpf, profile.codigoPerfil, profile.numeroFuncionario)
       .pipe(finalize(() => loading.dismiss()));
   }
 
-  getYears(link?: IPaystubLink): void {
+  getYears(link?: ISiarhesLink): void {
     if (!this.currentProfile || !link) {
       return;
     }
@@ -84,12 +82,11 @@ export class ReportYieldsPage implements OnInit {
     const cpf = parseInt(this.currentUser.cpf, 10);
     this.activeComponent = 'download';
     this.currentLink = link;
-    this.years$ = this.reportYieldsService
-      .getYears(cpf, numeroFuncionario, numeroVinculo, numeroPensionista)
+    this.years$ = this.siarhesService
+      .getReportYieldsYears(cpf, numeroFuncionario, numeroVinculo, numeroPensionista)
       .pipe(finalize(() => loading.dismiss()));
   }
 
-  /*TO DO*/
   getCompanies(year?: IPaystubYear): void {
     if (!this.currentLink || !year) {
       return;
@@ -100,8 +97,8 @@ export class ReportYieldsPage implements OnInit {
     const cpf = parseInt(this.currentUser.cpf, 10);
     this.activeComponent = 'download';
     this.currentYear = year;
-    this.companies$ = this.reportYieldsService
-      .getCompanies(cpf, numeroFuncionario, numeroVinculo, numeroPensionista, year)
+    this.companies$ = this.siarhesService
+      .getReportYieldsCompanies(cpf, numeroFuncionario, numeroVinculo, numeroPensionista, year)
       .pipe(finalize(() => loading.dismiss()));
   }
 
@@ -120,7 +117,7 @@ export class ReportYieldsPage implements OnInit {
     const year = this.currentYear;
     this.activeComponent = 'download';
 
-    this.reportYieldsService
+    this.siarhesService
       .getReportYields(
         cpf,
         numeroFuncionario,

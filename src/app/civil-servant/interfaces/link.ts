@@ -1,4 +1,4 @@
-export interface IPaystubLink {
+export interface ISiarhesLink {
   dataExercicio: string;
   empresaCodigo: number;
   nomeInstituidor: string;

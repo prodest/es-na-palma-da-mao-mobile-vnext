@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { IonicPage, NavController, NavParams, Loading, AlertController, Platform } from 'ionic-angular';
-import { PaystubService } from '../../providers/paystub.service';
+import { SiarhesService } from '../../providers';
 import { AuthService, AcessoCidadaoClaims, LoadingService } from '@espm/core';
-import { IPaystubProfile, IPaystubLink, IPaystubYear, IPaystubMonth, IPaystubPayroll } from '../../interfaces';
+import { ISiarhesProfile, ISiarhesLink, IPaystubYear, IPaystubMonth, IPaystubPayroll } from '../../interfaces';
 import { Observable } from 'rxjs/Observable';
 import { mergeMap, finalize } from 'rxjs/operators';
 import { of } from 'rxjs/observable/of';
@@ -18,14 +18,14 @@ import { FileOpener } from '@ionic-native/file-opener';
 })
 export class PaystubPage implements OnInit {
   activeComponent: 'profile' | 'links' | 'download' = 'profile';
-  profiles$: Observable<IPaystubProfile[]> = of([]);
-  links$: Observable<IPaystubLink[]> = of([]);
+  profiles$: Observable<ISiarhesProfile[]> = of([]);
+  links$: Observable<ISiarhesLink[]> = of([]);
   years$: Observable<IPaystubYear[]> = of([]);
   months$: Observable<IPaystubMonth[]> = of([]);
   payrolls$: Observable<IPaystubPayroll[]> = of([]);
   currentUser: AcessoCidadaoClaims | undefined;
-  currentProfile: IPaystubProfile | undefined;
-  currentLink: IPaystubLink | undefined;
+  currentProfile: ISiarhesProfile | undefined;
+  currentLink: ISiarhesLink | undefined;
   currentYear: IPaystubYear | undefined;
   currentMonth: IPaystubMonth | undefined;
   currentPayroll: IPaystubPayroll | undefined;
@@ -37,7 +37,7 @@ export class PaystubPage implements OnInit {
     public alertCtrl: AlertController,
     private platform: Platform,
     private fileOpener: FileOpener,
-    private paystubService: PaystubService,
+    private siarhesService: SiarhesService,
     private auth: AuthService,
     private loading: LoadingService
   ) {}
@@ -57,24 +57,24 @@ export class PaystubPage implements OnInit {
     if (!this.currentUser) {
       return;
     }
-    this.profiles$ = this.paystubService
+    this.profiles$ = this.siarhesService
       .getProfiles(this.currentUser.cpf)
       .pipe(finalize(() => loading.dismiss()));
   }
 
-  getLinks(profile?: IPaystubProfile): void {
+  getLinks(profile?: ISiarhesProfile): void {
     if (!profile) {
       return;
     }
     const loading = this.loading.show('Aguarde');
     this.activeComponent = 'links';
     this.currentProfile = profile;
-    this.links$ = this.paystubService
+    this.links$ = this.siarhesService
       .getLink(this.currentUser.cpf, profile.codigoPerfil, profile.numeroFuncionario)
       .pipe(finalize(() => loading.dismiss()));
   }
 
-  getYears(link?: IPaystubLink): void {
+  getYears(link?: ISiarhesLink): void {
     if (!this.currentProfile || !link) {
       return;
     }
@@ -83,8 +83,8 @@ export class PaystubPage implements OnInit {
     const { numeroVinculo, numeroPensionista } = link;
     this.activeComponent = 'download';
     this.currentLink = link;
-    this.years$ = this.paystubService
-      .getYears(numeroFuncionario, numeroVinculo, numeroPensionista)
+    this.years$ = this.siarhesService
+      .getPaystubYears(numeroFuncionario, numeroVinculo, numeroPensionista)
       .pipe(finalize(() => loading.dismiss()));
   }
 
@@ -97,8 +97,8 @@ export class PaystubPage implements OnInit {
     const { numeroVinculo, numeroPensionista } = this.currentLink;
     this.activeComponent = 'download';
     this.currentYear = year;
-    this.months$ = this.paystubService
-      .getMonths(numeroFuncionario, numeroVinculo, year, numeroPensionista)
+    this.months$ = this.siarhesService
+      .getPaystubMonths(numeroFuncionario, numeroVinculo, year, numeroPensionista)
       .pipe(finalize(() => loading.dismiss()));
   }
 
@@ -112,8 +112,8 @@ export class PaystubPage implements OnInit {
     const year = this.currentYear;
     this.activeComponent = 'download';
     this.currentMonth = month;
-    this.payrolls$ = this.paystubService
-      .getPayroll(numeroFuncionario, numeroVinculo, year, month, numeroPensionista)
+    this.payrolls$ = this.siarhesService
+      .getPaystubPayroll(numeroFuncionario, numeroVinculo, year, month, numeroPensionista)
       .pipe(finalize(() => loading.dismiss()));
   }
 
@@ -133,7 +133,7 @@ export class PaystubPage implements OnInit {
     this.activeComponent = 'download';
     this.currentMonth = month;
 
-    this.paystubService
+    this.siarhesService
       .getPaystub(
         numeroFuncionario,
         numeroVinculo,
