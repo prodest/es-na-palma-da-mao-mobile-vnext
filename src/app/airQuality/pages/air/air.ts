@@ -21,11 +21,19 @@ export class AirPage {
   map: any;
   @ViewChild('map') mapContainer: ElementRef;
   constructor(private service: AirService, private apiService: AirApiService) {
-    // this.loadQualityId(2);
-    this.allDataQualityAir();
-
+   
 
   }
+
+  ionViewDidEnter() {
+    this.allDataQualityAir();
+    setTimeout(()=>{
+      this.loadMapa();
+    },5000);
+    
+    
+  }
+  
   /**
    * recebe um id e puxa os dados referentes 
    */
@@ -49,9 +57,7 @@ export class AirPage {
   /**
    * 
    */
-  ionViewDidEnter() {
-    this.loadMapa();
-  }
+  
   /**
    * 
    */
@@ -61,10 +67,14 @@ export class AirPage {
     leaflet.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
       attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
     }).addTo(map);
-
-    leaflet.marker([-20.2786392, -40.2396752]).addTo(map)
-      .bindPopup('A pretty CSS3 popup.<br> Easily customizable.')
-      .openPopup();
+    
+    this.Air.map(item =>{
+      let mark = leaflet.marker([item.Latitude,item.Longitude]).addTo(map);
+      mark.bindPopup(''+item.Iqa, {closeOnClick: false, autoClose: false}).openPopup();
+      map.addLayer(mark);
+    });
   }
-
+  /**
+   * 
+   */
 }
