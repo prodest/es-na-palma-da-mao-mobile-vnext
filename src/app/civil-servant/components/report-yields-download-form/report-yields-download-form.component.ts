@@ -61,8 +61,7 @@ export class ReportYieldsDownloadFormComponent extends FormBase implements OnIni
   }
 
   selectCompany(company: IReportYieldCompany): void {
-    console.log('Empresa ',company)
-    if (typeof company !== 'number') { return; }
+    if (typeof company.codigoEmpresa !== 'number') { return; }
     this.onSelectCompany.emit(company);
     return this.selectChange();
   }

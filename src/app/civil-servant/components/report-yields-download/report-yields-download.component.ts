@@ -11,7 +11,7 @@ export class ReportYieldsDownloadComponent {
   @Input() years: IPaystubYear[] = [];
   @Output() onSelectYear: EventEmitter<IPaystubYear> = new EventEmitter();
   @Input() companies: IReportYieldCompany[] = [];
-  @Output() onSelectCompanies: EventEmitter<IReportYieldCompany> = new EventEmitter();
+  @Output() onSelectCompany: EventEmitter<IReportYieldCompany> = new EventEmitter();
   @Input() numVinc: number;
   @Input() numFunc: number;
 
@@ -21,8 +21,8 @@ export class ReportYieldsDownloadComponent {
     this.onSelectYear.emit(year);
   }
 
-  selectCompanies(companies: IReportYieldCompany): void {
-    this.onSelectCompanies.emit(companies);
+  selectCompany(company: IReportYieldCompany): void {
+    this.onSelectCompany.emit(company);
   }
 
 }

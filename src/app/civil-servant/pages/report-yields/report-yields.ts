@@ -27,7 +27,7 @@ export class ReportYieldsPage implements OnInit {
   currentProfile: IPaystubProfile | undefined;
   currentLink: IPaystubLink | undefined;
   currentYear: IPaystubYear | undefined;
-  currentCompanies: IReportYieldCompany | undefined;
+  currentCompany: IReportYieldCompany | undefined;
 
   constructor(
     public navCtrl: NavController,
@@ -105,18 +105,18 @@ export class ReportYieldsPage implements OnInit {
       .pipe(finalize(() => loading.dismiss()));
   }
 
-  download(companies?: IReportYieldCompany): void {
+  download(company?: IReportYieldCompany): void {
 
-    if (!companies || !this.years$) {
+    if (!company || !this.years$) {
       return;
     }
-    this.currentCompanies = companies;
+    this.currentCompany = company;
 
     const cpf = parseInt(this.currentUser.cpf, 10);
     const loading = this.loading.show('Aguarde');
     const { numeroFuncionario } = this.currentProfile;
     const { numeroVinculo, numeroPensionista } = this.currentLink;
-    const { codigoEmpresa } = companies;
+    const { codigoEmpresa } = company;
     const year = this.currentYear;
     this.activeComponent = 'download';
 
