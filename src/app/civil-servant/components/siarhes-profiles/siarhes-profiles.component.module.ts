@@ -1,16 +1,16 @@
 import { NgModule } from '@angular/core';
 import { IonicPageModule } from 'ionic-angular';
-import { PaystubProfilesComponent } from './paystub-profiles.component';
+import { SiarhesProfilesComponent } from './siarhes-profiles.component';
 
 @NgModule({
   declarations: [
-    PaystubProfilesComponent,
+    SiarhesProfilesComponent,
   ],
   imports: [
     IonicPageModule
   ],
   exports: [
-    PaystubProfilesComponent,
+    SiarhesProfilesComponent,
   ]
 })
-export class PaystubProfilesComponentModule { }
+export class SiarhesProfilesComponentModule { }
