@@ -34,9 +34,7 @@ export class QualidadeMapaPage {
    * puxa todos os dados 
    */
   allDataQualityAir = () => {
-    console.log('Dadooooooos')
     this.service.getAllQualityAir().subscribe(dados => {
- 
       this.Air = dados
       console.log(this.Air)
 
