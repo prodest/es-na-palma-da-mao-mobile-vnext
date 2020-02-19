@@ -84,9 +84,9 @@ export const MENUS: ItemMenu[] = [
     id: 25,
     title: 'Qualidade do Ar',
     icon: 'custom-modulo-qualidade',
-    component: 'QualidadeMapaPage',
+    component: 'AirPage',
     isChecked: false
-  }
+  },
 ];
 
 export function menusFactory() {

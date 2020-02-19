@@ -30,7 +30,7 @@ export interface Environment {
     guide: string;
     convertToPdf: string;
     paystub: string;
-    airQuality:string;
+    airQuality: string;
   };
   push: {
     senderId: string;

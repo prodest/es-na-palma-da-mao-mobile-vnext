@@ -9,7 +9,7 @@ import { MapaId } from "../model/mapaId.model";
 
 
 @Injectable()
-export class QualidadedoArApi {
+export class AirApiService {
 
   constructor(private http: HttpClient, @Inject(EnvVariables) private env: Environment) {
 

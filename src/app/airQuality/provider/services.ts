@@ -1,13 +1,13 @@
 import { Injectable } from "@angular/core";
 import { Mapa } from "../model/mapa.model";
 import { Observable } from "rxjs/Observable";
-import { QualidadedoArApi } from "./api-qualidadedoar.service";
+import { AirApiService } from './airApiService'
 
 
 
 @Injectable()
-export class QualidadedoArService {
-  constructor(private api: QualidadedoArApi) { }
+export class AirService {
+  constructor(private api: AirApiService) { }
   /**
    * 
    */

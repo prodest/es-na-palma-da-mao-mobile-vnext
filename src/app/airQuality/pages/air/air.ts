@@ -1,34 +1,45 @@
 import { Component, ViewChild, ElementRef } from '@angular/core';
 import { IonicPage, Loading } from 'ionic-angular';
+import { AirService } from '../../provider/services';
 import { Mapa } from '../../model/mapa.model';
-import { QualidadedoArService } from '../../providers/qualidadedoar.service';
+import { AirApiService } from '../../provider/airApiService';
 import leaflet from 'leaflet';
-// import { QualidadedoArApi } from '../../providers/api-qualidadedoar.service';
 
-
-
-@IonicPage({})
+@IonicPage()
 @Component({
-  selector: 'page-qualidade-license',
-  templateUrl: 'qualidade-mapa.html'
+  selector: 'page-air',
+  templateUrl: 'air.html',
 })
-export class QualidadeMapaPage {
+
+export class AirPage {
 
   Air: Mapa[];
   mapaId: any[];
   loading: Loading;
   map: any;
   @ViewChild('map') mapContainer: ElementRef;
+  constructor(private service: AirService, private apiService: AirApiService) {
+   
 
-
-  constructor(private service: QualidadedoArService
-    // , private apiService: QualidadedoArApi
-    ) {}
+  }
 
   ionViewDidEnter() {
     this.allDataQualityAir();
-    // setTimeout(()=>{this.loadMapa();},5000);    
+    setTimeout(()=>{
+      this.loadMapa();
+    },5000);    
   }
+  
+  /**
+   * recebe um id e puxa os dados referentes 
+   */
+  loadQualityId = (id) => {
+    this.apiService.getId(id).subscribe(dados => {
+      this.mapaId = dados
+    });
+
+  };
+
 
   /**
    * puxa todos os dados 
@@ -37,10 +48,12 @@ export class QualidadeMapaPage {
     this.service.getAllQualityAir().subscribe(dados => {
       this.Air = dados
       console.log(this.Air)
+      return this.Air;
 
     });
   }
-
+ 
+  
   /**
    * carrega o mapa
    */
@@ -52,26 +65,12 @@ export class QualidadeMapaPage {
     }).addTo(map);
     
     this.Air.map(item =>{
-      let mark = leaflet.marker([item.Latitude,item.Longitude]).addTo(map);
-      mark.bindPopup(''+item.Iqa, {closeOnClick: false, autoClose: false}).openPopup();
+      let mark = leaflet.marker([item.Latitude,item.Longitude])
+      .bindPopup(''+item.Faixa).openPopup();
       map.addLayer(mark);
     });
   }
-
-  
-
-   /**
-   * recebe um id e puxa os dados referentes 
-   */
-  // loadQualityId = (id) => {
-  //   this.apiService.getId(id).subscribe(dados => {
-  //     this.mapaId = dados
-  //   });
-
-  // };
-
-   /**
+  /**
    * 
    */
-  
 }

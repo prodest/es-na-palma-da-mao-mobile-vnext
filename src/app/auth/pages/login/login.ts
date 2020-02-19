@@ -2,7 +2,7 @@ import { Component, Inject, OnInit } from '@angular/core';
 import { AcessoCidadaoClaims as User, AuthQuery, AuthService } from '@espm/core';
 import { Environment, EnvVariables } from '@espm/core/environment';
 import { InAppBrowser, InAppBrowserEvent, InAppBrowserObject } from '@ionic-native/in-app-browser';
-import { AlertController, IonicPage, LoadingController, NavController, Platform, ToastController, NavParams } from 'ionic-angular';
+import { AlertController, IonicPage, LoadingController, NavController, Platform, NavParams, ToastController } from 'ionic-angular';
 import { Observable } from 'rxjs/Observable';
 import { finalize } from 'rxjs/operators';
 
@@ -67,11 +67,34 @@ export class LoginPage implements OnInit {
   /**
    * Executa login na aplicação de acordo com as configurações do settings, usuário e senha.
    */
+   loginIn = () => {
+    let alert = this.alertCtrl.create({
+      title: 'Acesso',
+      message: `Login e senha são obrigatórios`,
+      buttons: [
+        {
+          text: 'Ok',
+          role: 'cancel'
+        }
+        
+      ]
+    });
+    alert.present();
+  };
+   /**
+    * 
+    */
   login = (username?: string, password?: string) => {
     if (!username || !password) {
-      this.toastCtrl.create({ message: 'Login e senha são obrigatórios', duration: 3000 }).present();
+    //this.loginIn();  
+    this.toastCtrl.create({ message: 'Login e senha são obrigatórios', duration: 3000 }).present();
       return;
     }
+    if (!username && !password) {
+      this.loginIn();  
+        // this.toastCtrl.create({ message: 'Login e senha são obrigatórios', duration: 3000 }).present();
+        return;
+      }
 
     this.loginWith(() => this.auth.acessoCidadaoLogin(username, password));
   };

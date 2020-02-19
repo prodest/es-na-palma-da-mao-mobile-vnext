@@ -1,3 +1,6 @@
+
+
+
 export class Mapa {
 
     Iqa: number;
