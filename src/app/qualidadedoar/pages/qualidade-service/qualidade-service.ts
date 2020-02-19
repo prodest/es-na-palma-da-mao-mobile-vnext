@@ -15,7 +15,7 @@ export class QualidadeServicePage {
   loaded: boolean = false;
   menus = [
     {
-      targetPage: "MapaQualidadePage"
+      targetPage: "QualidadeMapaPage"
     }
   
     // {

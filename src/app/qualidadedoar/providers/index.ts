@@ -1,6 +1,7 @@
-import { QualidadedoarApiService } from './qualidadedoar-api.service';
+import { QualidadedoArApi } from './api-qualidadedoar.service';
+import { QualidadedoArService } from './qualidadedoar.service';
 
 
-export { QualidadedoarApiService};
+export { QualidadedoArApi, QualidadedoArService};
 
-export const QualidadeProviders = [QualidadedoarApiService];
+export const QualidadeProviders = [QualidadedoArApi, QualidadedoArService];
