@@ -86,7 +86,7 @@ export class LoginPage implements OnInit {
     */
   login = (username?: string, password?: string) => {
     if (!username || !password) {
-    //this.loginIn();  
+    this.loginIn();  
     this.toastCtrl.create({ message: 'Login e senha são obrigatórios', duration: 3000 }).present();
       return;
     }

@@ -4,6 +4,7 @@ import { AirService } from '../../provider/services';
 import { Mapa } from '../../model/mapa.model';
 import { AirApiService } from '../../provider/airApiService';
 import leaflet from 'leaflet';
+// import { markDirty } from '@angular/core/src/render3';
 
 @IonicPage()
 @Component({
@@ -63,14 +64,27 @@ export class AirPage {
     leaflet.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
       attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
     }).addTo(map);
-    
-    this.Air.map(item =>{
-      let mark = leaflet.marker([item.Latitude,item.Longitude])
-      .bindPopup(''+item.Faixa).openPopup();
-      map.addLayer(mark);
-    });
+
+    this.pin(map);
+
+   
   }
+
   /**
    * 
    */
+  pin(map){
+    this.Air.map(item =>{
+      let mark = leaflet.marker([item.Latitude,item.Longitude]);
+      map.addLayer(mark);
+      mark.on('click', function(){
+        // abrir modal com as informações
+        console.log('blabla');
+        // console.log(this.loadQualityId(item.Estacao));
+        
+      });
+    });
+    
+  }
+
 }
