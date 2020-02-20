@@ -1,0 +1,21 @@
+civil-servant-report-yields-download-form {
+  ion-item.form-item {
+    padding-left: 10px;
+  }
+  button.download {
+    width: 100%;
+    text-transform: none;
+    background-color: #004297;
+
+    &.disabled {
+      opacity: 0.8;
+    }
+    &[clear] {
+      color: #004297 !important;
+    }
+  }
+  p.empty-data-info {
+    text-align: center;
+    color: #dc3545;
+  }
+}

@@ -29,7 +29,7 @@ export interface Environment {
     mailer: string;
     guide: string;
     convertToPdf: string;
-    paystub: string;
+    siarhes: string;
   };
   push: {
     senderId: string;
