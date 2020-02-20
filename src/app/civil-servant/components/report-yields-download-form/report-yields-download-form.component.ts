@@ -35,8 +35,6 @@ export class ReportYieldsDownloadFormComponent extends FormBase implements OnIni
     subTitle: 'Selecione a empresa referente ao informe que deseja consultar'
   };
 
-  monthsValues = ['', 'Janeiro', 'Fevereiro', 'Março', 'Abril', 'Maio', 'Junho', 'Julho', 'Agosto', 'Setembro', 'Outubro', 'Novembro', 'Dezembro']
-
   constructor(formBuilder: FormBuilder, private cdr: ChangeDetectorRef) {
     super(formBuilder);
   }

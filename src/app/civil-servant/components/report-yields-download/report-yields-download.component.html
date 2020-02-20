@@ -24,7 +24,7 @@
   </ion-item>
   <ion-item>
     <civil-servant-report-yields-download-form [years]="years" [companies]="companies"
-      (onSelectYear)="selectYear($event)" (onSubmit)="selectCompany($event)">
+      (onSelectYear)="selectYear($event)" (onSubmit)="selectCompany($event.company)">
     </civil-servant-report-yields-download-form>
   </ion-item>
 </ion-list>
