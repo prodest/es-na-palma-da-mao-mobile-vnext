@@ -21,22 +21,19 @@ export class AirPage {
     private service: AirService, 
     private navCtrl: NavController,
     ) {
+ 
   }
 
-  
-  ionViewDidEnter() {
-    this.allDataQualityAir();     
-    setTimeout(()=>{this.loadMapa();},5000);   
+  ionViewDidLoad(){
+    this.allDataQualityAir();
   }
-
   /**
    * puxa todos os dados 
    */
   allDataQualityAir = () => {
     this.service.getAllQualityAir().subscribe(dados => {
       this.Air = dados;
-      
-
+      this.loadMapa();
     });
   }
  
@@ -68,7 +65,7 @@ export class AirPage {
 
         // this.loadQualityId(item.IdEstacao);
                
-        this.modal(item.IdEstacao, this.Air.find( a => a.IdEstacao == item.IdEstacao));
+        this.modal(item.IdEstacao, this.Air.find( a => a.IdEstacao === item.IdEstacao));
 
         
       });

@@ -12,7 +12,29 @@
             </button> -->
             <!-- <div class="local-estacao text-center"><b>Escala do Índice de Qualidade do Ar (IQAr)</b><br><b>Faixa de Concentração do Poluente</b></div>
         </div> -->
-    <ion-card>
+    <ion-item>
+        <ion-label style="text-align:center;">
+            Índice de Qualidade do Ar (IQAr)<br>
+        
+            <b>Estação 
+                <span class="estacao-name">
+                    {{point.Localizacao}} ({{point.Descricao}})
+                </span>
+            </b>
+        </ion-label>
+        <ion-label style="text-align:center;">{{point.Faixa}}</ion-label>
+        
+    </ion-item>
+
+    <!-- <ion-item >
+       
+    </ion-item> -->
+
+
+
+
+    
+    <!-- <ion-card>
         <div class="modal-body" style="padding-top: 0; background-color:rgb(255, 255, 255);">
             
                 <div class="local-estacao text-center">
@@ -48,7 +70,7 @@
             </div>
                 <h5 class="modal-title" id="modal-poluentes-label"></h5>
         </div>
-    </ion-card>
+    </ion-card> -->
                 <!-- </div>
             </div>
         </div> -->

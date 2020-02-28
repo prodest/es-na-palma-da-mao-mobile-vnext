@@ -31,7 +31,7 @@ export class QualityPoint {
   loadQualityId = (id) => {
     this.apiService.getId(id).subscribe(dados => {
       this.infoPoint = dados;
-      // console.log(this.point)
+      console.log(this.point)
     });
   };
 
