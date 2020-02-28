@@ -1,0 +1,373 @@
+page-quality-air {
+    .scroll-content{
+      padding: 0px !important;
+    }
+
+    @media screen and (max-width: 361px){
+    nav-title .content p {
+        font-size: 15px;
+    }
+}
+
+
+.active, [active], .toolbar-title, ion-navbar.toolbar, .toolbar-background {
+    background-color: #f4f4f4;
+    color: #424242;
+}
+
+    .icon-escala-iqar {
+        width: 10px;
+        height: 13px;
+        background-image: url(../images/icon-escala.PNG);
+        background-size: contain;
+        display: inline-block;
+        margin-right: 3px;
+    }
+    
+    .header-app-qualidadear {
+        background-color: #1B89C6;
+        color: #fff;
+        border-bottom: 3px solid #0d6392;
+    }
+    element.style {
+        width: 0 !important;
+    }
+    table {
+        
+        width: 100%;
+    }
+    .header-app-qualidadear h3{
+        padding-top: 15px;
+        padding-bottom: 15px;
+        margin: 0;
+    }
+    
+    .leaflet-container .number-icon {
+        background-image: url(../images/placabg.png);
+        text-align: center;
+        background-size: contain;
+        background-repeat: no-repeat;
+    }
+    
+    .leaflet-container .number-icon .faixa{
+        background-color: white;
+        color: black;
+        border-radius: 3px 3px 3px 3px;
+        margin: 2px 3px 1px 2px;
+        font-size: 15px;
+        padding-top: 3px;
+        padding-bottom: 3px;
+        overflow: hidden;
+        font-weight: bold;
+    }
+    
+    .leaflet-popup-content-wrapper {
+        border-radius: 0;
+    }
+    
+    .section-popup {
+        margin-left: -15px;
+        margin-right: -15px;
+        padding-top: 8px;
+        padding-bottom: 8px;
+        border-bottom: 1px solid #585858;
+        text-align: center;
+    }
+    
+    .leaflet-container .header-popup {
+        border-bottom: 1px solid #585858;
+        font-size: 1.1em;
+        padding-top: 0;
+        padding-bottom: 5px;
+    }
+    
+    .section-popup.iqar-popup {
+        font-size: 1.1em;
+    }
+    
+    .section-popup.more-values-popup {
+        padding-left: 10px;
+        padding-right: 10px;
+        padding-bottom: 4px;
+        border-bottom: none;
+        padding-top: 8px;
+    }
+    
+    .section-popup.more-values-popup a {
+        cursor: pointer;
+        font-weight: bold;
+    }
+    
+    .iqar-value-popup {
+        padding-top: 6px;
+        padding-bottom: 6px;
+        border-radius: 2px;
+        margin-bottom: 2px;
+        font-weight: bold;
+        font-size: 1.3em;
+    }
+    
+    .date-iqar-popup {
+        font-size: 11px;
+    }
+    
+    .leaflet-container a.leaflet-popup-close-button {
+        background-color: #e85c5c;
+        color: white;
+        height: 18px;
+        padding: 2px;
+    }
+    
+    .leaflet-container a.leaflet-popup-close-button:hover {
+        color: white;
+        background-color: #cf4040;
+    }
+    
+    .easy-button-button .button-state .fa {
+        font-size: 19px;
+        padding-top: 5px;
+    }
+    
+    .modal-poluentes-class .padding-0 {
+        padding: 0;
+    }
+    
+    .modal-poluentes-class .padding-right-0 {
+        padding-right: 0;
+    }
+    
+    .leaflet-container a.btn-primary {
+        color: white;
+    }
+    
+    .modal-poluentes-class .modal-header {
+        border-bottom: none;
+    }
+    
+    .modal-poluentes-class .modal-content {
+        border-radius: 0;
+    }
+    
+    .modal-poluentes-class button.close {
+        background-color: #da2323;
+        color: white;
+        opacity: 1;
+        font-weight: normal;
+        width: 28px;
+        height: 28px;
+        font-size: 29px;
+    }
+    
+    .modal-poluentes-class .local-estacao {
+        margin-bottom: 9px;
+        font-size: 1.1em;
+    }
+    
+    .modal-poluentes-class .estacao-max-value {
+        font-size: 4em;
+        padding: 0px 10px;
+        border-radius: 5px;
+        text-align: center;
+        color: black;
+        border: 1px solid #ccc;    
+    }
+    
+    td.faixa-boa,
+    .iqar-value-popup.faixa-color-boa,
+    .modal-poluentes-class .estacao-max-value.faixa-boa {
+        background-color: #30cc09;
+        border: 1px solid #55a042;
+        width: 1%;
+        height: 40px;
+        align-items: center;
+        text-align: center;
+        padding-top: 5px;
+        font-size: large;
+    }
+    
+    td.faixa-moderada,
+    .iqar-value-popup.faixa-color-moderada,
+    .modal-poluentes-class .estacao-max-value.faixa-moderada {
+        background-color: #ffdb2b;
+        width: 1%;
+        height: 40px;
+    align-items: center;
+    text-align: center;
+    padding-top: 5px;
+    font-size: large;
+    }
+    
+    td.faixa-ruim,
+    .iqar-value-popup.faixa-color-ruim,
+    .modal-poluentes-class .estacao-max-value.faixa-ruim {
+        background-color: #f88c10;
+        border: 1px solid #a06929;
+        width: 1%;
+        height: 40px;
+    align-items: center;
+    text-align: center;
+    padding-top: 5px;
+    font-size: large;
+    }
+    
+    td.faixa-muitoruim,
+    .iqar-value-popup.faixa-color-muitoruim,
+    .modal-poluentes-class .estacao-max-value.faixa-muitoruim,
+    .modal-poluentes-class .estacao-max-value.faixa-muitoruim {
+        background-color: #ec3e3e;
+        border: 1px solid #b13e3e;
+        color: white;
+        width: 1%;
+        height: 40px;
+    align-items: center;
+    text-align: center;
+    padding-top: 5px;
+    font-size: large;
+    }
+    
+    td.faixa-pessima,
+    .iqar-value-popup.faixa-color-pessima,
+    .modal-poluentes-class .estacao-max-value.faixa-pessima {
+        background-color: #601686;
+        border: 1px solid #601686;
+        color: white;
+        width: 1%;
+        height: 40px;
+    align-items: center;
+    text-align: center;
+    padding-top: 5px;
+    font-size: large;
+    }
+    
+    .modal-poluentes-class .estacao-faixa {
+        margin-top: 0;
+        margin-bottom: 0;
+        font-size: 43px;
+        text-shadow: 1px 1px 1px black;
+    }
+    
+    .modal-poluentes-class .estacao-faixa.faixa-color-boa {
+        color: #30cc09;
+    }
+    
+    .modal-poluentes-class .estacao-faixa.faixa-color-moderada {
+        color: #FFC107;
+    }
+    
+    .modal-poluentes-class .estacao-faixa.faixa-color-ruim {
+        color: #f88c10;
+    }
+    
+    .modal-poluentes-class .estacao-faixa.faixa-color-muito-ruim,
+    .modal-poluentes-class .estacao-faixa.faixa-color-muitoruim {
+        color: #d63c3c;
+    }
+    
+    .modal-poluentes-class .estacao-faixa.faixa-color-pessima {
+        color: #601686;
+    }
+    
+    .modal-poluentes-class .table>tbody>tr>td, 
+    .modal-poluentes-class .table>tbody>tr>th, 
+    .modal-poluentes-class .table>tfoot>tr>td, 
+    .modal-poluentes-class .table>tfoot>tr>th, 
+    .modal-poluentes-class .table>thead>tr>td, 
+    .modal-poluentes-class .table>thead>tr>th {
+        border-top: none;
+    }
+    
+    .modal-poluentes-class .poluente-min-val{
+        color: #0086c8;
+    }
+    .modal-poluentes-class .poluente-max-val{
+        color: #ce3c3a;    
+    }
+    
+    
+    /* basic positioning */
+        .modal-poluentes-class .legend {
+            list-style: none;
+        }
+        .modal-poluentes-class .legend li {
+            float: left;
+            margin-right: 10px;
+        }
+        .modal-poluentes-class .legend span {
+            float: left;
+            width: 12px;
+            height: 12px;
+            margin: 2px;
+            margin-right: 4px;
+        }
+    /* your colors */
+        .modal-poluentes-class .legend .faixa-boa {
+            background-color: #3CF20E;
+        }
+        .modal-poluentes-class .legend .faixa-moderada {
+            background-color: #F5ED00;
+        }
+        .modal-poluentes-class .legend .faixa-ruim {
+            background-color: #F58300;
+        }
+        .modal-poluentes-class .legend .faixa-muitoruim {
+            background-color: #FA0000;
+        }
+        .modal-poluentes-class .legend .faixa-pessima {
+            background-color: #550080;
+        }
+    
+    
+    .modal-poluentes-class .row-header-poluente {
+        border-bottom: 2px solid #d4d4d4;
+        padding-bottom: 6px;
+        margin-bottom: 20px;
+        font-size: 1.05em;
+        font-weight: bold;
+    }
+    
+    
+    // @media (max-width:1199px) {
+    
+    //     .modal-poluentes-class .modal-header {
+    //         text-align: center;
+    //         padding-bottom: 0;
+    //     }
+    
+    //     .modal-poluentes-class .estacao-max-value {
+    //         margin-bottom: 9px;
+    //     }
+    
+    //     .modal-poluentes-class .estacao-max-value.faixa-ruim {
+    //         margin-bottom: 10px;
+    //     }
+    
+    // }
+    
+    // @media (max-width:991px) {
+    
+    
+    //     .modal-poluentes-class .row-container-poluente {
+    //         border-top: 1px solid #ccc;
+    //     }
+    
+    //     .modal-poluentes-class .row-poluente {
+    //         margin-bottom: 10px;
+    //         padding-bottom: 15px;
+    //         padding-top: 15px;
+    //         border-bottom: 1px solid #ccc;
+    //     }
+    //     .modal-poluentes-class .row-poluente-iqa,
+    //     .modal-poluentes-class .row-poluente-chart {
+    //         margin-bottom: 8px;
+    //     }
+    //     .modal-poluentes-class .row-poluente-iqa b {
+    //         font-weight: normal;
+    //     }
+    
+    //     .modal-poluentes-class .row-poluente-chart .chart-container {
+    //         height: 90px !important;
+    //     }    
+    
+    
+    // }
+}

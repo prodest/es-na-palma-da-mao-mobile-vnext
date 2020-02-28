@@ -1,10 +1,8 @@
 import { Component, ViewChild, ElementRef } from '@angular/core';
-import { IonicPage, Loading } from 'ionic-angular';
+import { IonicPage, Loading, NavController } from 'ionic-angular';
 import { AirService } from '../../provider/services';
 import { Mapa } from '../../model/mapa.model';
-import { AirApiService } from '../../provider/airApiService';
 import leaflet from 'leaflet';
-// import { markDirty } from '@angular/core/src/render3';
 
 @IonicPage()
 @Component({
@@ -19,37 +17,25 @@ export class AirPage {
   loading: Loading;
   map: any;
   @ViewChild('map') mapContainer: ElementRef;
-  constructor(private service: AirService, private apiService: AirApiService) {
-   
-
+  constructor(
+    private service: AirService, 
+    private navCtrl: NavController,
+    ) {
   }
 
-  ionViewDidEnter() {
-    this.allDataQualityAir();
-    setTimeout(()=>{
-      this.loadMapa();
-    },5000);    
-  }
   
-  /**
-   * recebe um id e puxa os dados referentes 
-   */
-  loadQualityId = (id) => {
-    this.apiService.getId(id).subscribe(dados => {
-      this.mapaId = dados
-    });
-
-  };
-
+  ionViewDidEnter() {
+    this.allDataQualityAir();     
+    setTimeout(()=>{this.loadMapa();},5000);   
+  }
 
   /**
    * puxa todos os dados 
    */
   allDataQualityAir = () => {
     this.service.getAllQualityAir().subscribe(dados => {
-      this.Air = dados
-      console.log(this.Air)
-      return this.Air;
+      this.Air = dados;
+      
 
     });
   }
@@ -77,14 +63,21 @@ export class AirPage {
     this.Air.map(item =>{
       let mark = leaflet.marker([item.Latitude,item.Longitude]);
       map.addLayer(mark);
-      mark.on('click', function(){
+      mark.on('click', () => {
         // abrir modal com as informações
-        console.log('blabla');
-        // console.log(this.loadQualityId(item.Estacao));
+
+        // this.loadQualityId(item.IdEstacao);
+               
+        this.modal(item.IdEstacao, this.Air.find( a => a.IdEstacao == item.IdEstacao));
+
         
       });
     });
     
+  }
+
+  modal(id, Air){
+    this.navCtrl.push('QualityPoint', { id : id, air:Air });
   }
 
 }

@@ -1,0 +1,59 @@
+
+<module-page title="Qualidade do Ar" no-padding>
+
+    <!-- <div *ngFor="let item of infoPoint">
+        {{item.Poluente}}
+    </div> -->
+
+    <!-- <div class="modal-content"> -->
+        <!-- <div class="modal-header" id="modal-escala-header" style="padding-bottom: 0;"> -->
+            <!-- <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+               Fechar
+            </button> -->
+            <!-- <div class="local-estacao text-center"><b>Escala do Índice de Qualidade do Ar (IQAr)</b><br><b>Faixa de Concentração do Poluente</b></div>
+        </div> -->
+    <ion-card>
+        <div class="modal-body" style="padding-top: 0; background-color:rgb(255, 255, 255);">
+            
+                <div class="local-estacao text-center">
+                    Índice de Qualidade do Ar (IQAr)<br>
+                    <b>Estação 
+                        <span class="estacao-name">
+                            {{point.Localizacao}} ({{point.Descricao}})
+                        </span>
+                    </b>
+                </div>
+           
+            
+            <div class="row">
+                <div class="col-lg-5">
+                    <div class="estacao-max-value">
+                    </div>
+                    <div class="estacao-max-poluente" style="font-size: 0.85em; margin-top:4px; text-align:center; ">Poluente:
+                        <span>
+                            {{point.Poluente}}
+                        </span>
+                    </div>
+                </div>
+                <div class="col-lg-7">
+                    <div>
+                        <h1 class="estacao-faixa"> {{point.Faixa}}</h1>
+                    </div>
+                    <div class="estacao-update-date">
+                        Atualizado dia <b class="update-date"> {{point.DataHora}} </b>
+                    </div>
+                    <div>(Dados das Últimas 48 horas)
+                    </div>
+                </div>
+            </div>
+                <h5 class="modal-title" id="modal-poluentes-label"></h5>
+        </div>
+    </ion-card>
+                <!-- </div>
+            </div>
+        </div> -->
+    <!-- </div> -->
+</module-page>
+
+
+  
