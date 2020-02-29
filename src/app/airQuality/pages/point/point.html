@@ -1,80 +1,70 @@
 
 <module-page title="Qualidade do Ar" no-padding>
 
-    <!-- <div *ngFor="let item of infoPoint">
-        {{item.Poluente}}
-    </div> -->
-
-    <!-- <div class="modal-content"> -->
-        <!-- <div class="modal-header" id="modal-escala-header" style="padding-bottom: 0;"> -->
-            <!-- <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-               Fechar
-            </button> -->
-            <!-- <div class="local-estacao text-center"><b>Escala do Índice de Qualidade do Ar (IQAr)</b><br><b>Faixa de Concentração do Poluente</b></div>
-        </div> -->
-    <ion-item>
-        <ion-label style="text-align:center;">
+    <div>
+        <ion-label class="titulo">
+            <br>
             Índice de Qualidade do Ar (IQAr)<br>
         
             <b>Estação 
-                <span class="estacao-name">
+                <span>
                     {{point.Localizacao}} ({{point.Descricao}})
                 </span>
             </b>
         </ion-label>
-        <ion-label style="text-align:center;">{{point.Faixa}}</ion-label>
-        
+    </div>
+    <div style="background-color: white;">
+    <div>
+        <span class="iqar-boa" *ngIf="point.Faixa == 'Boa'">{{point.Iqa}}<br> </span>
+        <span class="iqar-moderada" *ngIf="point.Faixa == 'Moderada'" >{{point.Iqa}}<br> </span>
+        <span class="iqar-ruim" *ngIf="point.Faixa == 'Ruim'" >{{point.Iqa}}<br> </span>
+        <span class="iqar-muitoruim"  *ngIf="point.Faixa == 'Muito Ruim'">{{point.Iqa}}<br> </span>
+        <span class="iqar-pessima" *ngIf="point.Faixa == 'Péssima'" >{{point.Iqa}}<br> </span>
+    
+</div>
+    </div>
+    <div style="font-size: 0.87em; margin-top:0px; text-align:center; background-color: white; ">
+        <br>Poluente:
+        <span>
+            {{point.Poluente}}
+        </span>
+    </div>
+    <ion-item no-lines >
+        <ion-label class="boa" *ngIf="point.Faixa == 'Boa'" >{{point.Faixa}}</ion-label>
+        <ion-label class="moderada" *ngIf="point.Faixa == 'Moderada'" >{{point.Faixa}}</ion-label>
+        <ion-label class="ruim" *ngIf="point.Faixa == 'Ruim'" >{{point.Faixa}}</ion-label>
+        <ion-label class="muitoruim" *ngIf="point.Faixa == 'Muito Ruim'" >{{point.Faixa}}</ion-label>
+        <ion-label class="pessima" *ngIf="point.Faixa == 'Péssima'" >{{point.Faixa}}</ion-label>
     </ion-item>
 
-    <!-- <ion-item >
-       
-    </ion-item> -->
-
-
-
-
-    
-    <!-- <ion-card>
-        <div class="modal-body" style="padding-top: 0; background-color:rgb(255, 255, 255);">
+    <div style="font-size: 0.87em;padding: 5px; text-align:center; background-color: white;">
+        <span style="text-align:center; font-size: 1em;">Atualizado dia {{point.DataHora}} <br> (Dados das Últimas 48 horas)</span>
+    </div>
+   
+    <div class="sessionChart">
+        <div class="chartOne" *ngFor="let info of infoPoint" >
+            <b>Poluente:</b> <br>
+            {{info.Poluente}} {{info.PoluenteSigla}}
+            <br><br>
+            <b>IQAr:</b> 
             
-                <div class="local-estacao text-center">
-                    Índice de Qualidade do Ar (IQAr)<br>
-                    <b>Estação 
-                        <span class="estacao-name">
-                            {{point.Localizacao}} ({{point.Descricao}})
-                        </span>
-                    </b>
-                </div>
-           
+
+            <br>         
             
-            <div class="row">
-                <div class="col-lg-5">
-                    <div class="estacao-max-value">
-                    </div>
-                    <div class="estacao-max-poluente" style="font-size: 0.85em; margin-top:4px; text-align:center; ">Poluente:
-                        <span>
-                            {{point.Poluente}}
-                        </span>
-                    </div>
-                </div>
-                <div class="col-lg-7">
-                    <div>
-                        <h1 class="estacao-faixa"> {{point.Faixa}}</h1>
-                    </div>
-                    <div class="estacao-update-date">
-                        Atualizado dia <b class="update-date"> {{point.DataHora}} </b>
-                    </div>
-                    <div>(Dados das Últimas 48 horas)
-                    </div>
-                </div>
-            </div>
-                <h5 class="modal-title" id="modal-poluentes-label"></h5>
         </div>
-    </ion-card> -->
-                <!-- </div>
-            </div>
-        </div> -->
-    <!-- </div> -->
+    </div>
+
+    <div style="background-color: white;">
+        <ul class="diva">
+            <li><span class="faixa-boa"></span> Boa</li>
+            <li><span class="faixa-moderada"></span> Moderada</li>
+            <li><span class="faixa-ruim"></span> Ruim</li>
+            <li><span class="faixa-muitoruim"></span> Muito Ruim</li>
+            <li><span class="faixa-pessima"></span> Péssima</li>
+        </ul>
+    </div>
+    <div style="margin-left: 5%; background-color: white;">* Valores sujeitos a validação posterior</div>
+
 </module-page>
 
 
