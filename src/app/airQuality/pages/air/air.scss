@@ -1,8 +1,14 @@
 page-air {
-   a{
-        text-align: center;
-        color: black;
-        height: 50px;
-    }
-   
+  a {
+    text-align: center;
+    color: black;
+    height: 50px;
+  }
+  .legenda {
+    position: absolute;
+    z-index: 9999; /* número máximo é 9999 */
+    bottom: 68px;
+    right: 2px;
+    
+  }
 }
