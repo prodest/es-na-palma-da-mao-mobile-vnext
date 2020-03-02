@@ -9,6 +9,14 @@ page-air {
     z-index: 9999; /* número máximo é 9999 */
     bottom: 68px;
     right: 2px;
-    
   }
+
+  .imagem{
+    background-image:url("../assets/imgs/icon-escala.png") ;
+    background-repeat: no-repeat;
+    margin-right: 10px;
+    width: 1px;
+    height: 22px;
+    background-size: contain;
+}
 }
