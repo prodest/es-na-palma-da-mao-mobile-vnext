@@ -130,6 +130,7 @@ page-quality-point {
 
     .chartOne{
         border-bottom: 0.1px solid;
+        display: table;
     }
 
     
@@ -169,5 +170,27 @@ page-quality-point {
         margin: 2px;
         display: inline-block;
         vertical-align: text-top;
+    }
+
+    .min-val{
+        color: #0086c8;
+        font-weight: 700;
+    }
+
+    .max-val{
+        color: #ce3c3a;
+        font-weight: 700;
+    }
+
+    .min-max-left{
+       float: left;
+    }
+    .min-max-right{
+        float: right;
+    }
+
+    .rodape{
+        margin-left: 5%;
+        background-color: white;
     }
 }

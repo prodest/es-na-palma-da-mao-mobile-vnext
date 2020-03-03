@@ -1,8 +1,6 @@
 
-<module-page title="Qualidade do Ar" no-padding>
+<module-page title="Qualidade do Ar" no-padding style="background-color: white;">
 
-    
-    
     <div>
         <ion-label class="titulo">
             <br>
@@ -18,10 +16,10 @@
     <div style="background-color: white;">
     <div>
         <span class="iqar-boa" *ngIf="point.Faixa == 'Boa'">{{iqar}}<br> </span>
-        <span class="iqar-moderada" *ngIf="point.Faixa == 'Moderada'" >{{point.Iqa}}<br> </span>
-        <span class="iqar-ruim" *ngIf="point.Faixa == 'Ruim'" >{{point.Iqa}}<br> </span>
-        <span class="iqar-muitoruim"  *ngIf="point.Faixa == 'Muito Ruim'">{{point.Iqa}}<br> </span>
-        <span class="iqar-pessima" *ngIf="point.Faixa == 'Péssima'" >{{point.Iqa}}<br> </span>
+        <span class="iqar-moderada" *ngIf="point.Faixa == 'Moderada'" >{{iqar}}<br> </span>
+        <span class="iqar-ruim" *ngIf="point.Faixa == 'Ruim'" >{{iqar}}<br> </span>
+        <span class="iqar-muitoruim"  *ngIf="point.Faixa == 'Muito Ruim'">{{iqar}}<br> </span>
+        <span class="iqar-pessima" *ngIf="point.Faixa == 'Péssima'" >{{iqar}}<br> </span>
     
     </div>
     </div>
@@ -40,11 +38,12 @@
     </ion-item>
 
     <div style="font-size: 0.87em;padding: 5px; text-align:center; background-color: white;">
-        <span style="text-align:center; font-size: 1em;">Atualizado dia {{formatDate(point.DataHora)}} <br> (Dados das Últimas 48 horas)</span>
+        <span style="text-align:center; font-size: 1em;">Atualizado dia {{formatDate(point.DataHora)}} <br> (Dados das últimas 48 horas)</span>
     </div>
    
     <div class="sessionChart">
-        <div class="chartOne" *ngFor="let info of infoPoint" >
+        <div class="chartOne" *ngFor="let info of infoPoint;" >
+            <br>
             <b>Poluente:</b> <br>
             {{info.Poluente}} {{info.PoluenteSigla}}
             <br><br>
@@ -54,9 +53,18 @@
             [datasets]="[{data:info.ValorIqa}]"
             [labels]="info.DataHora"
             [options]="chartOptions"
+            [colors]="[{ backgroundColor: info.Cor}]"
             [legend]="false"></canvas>
 
             <br>         
+            <div class="min-max-left">
+                <b>Min:</b>
+                <b class="min-val">{{info.Min}}</b>
+            </div>
+            <div class="min-max-right">
+                <b>Max:</b>
+                <b class="max-val">{{info.Max}}</b>
+            </div>
             
         </div>
     </div>
@@ -70,7 +78,9 @@
             <li><span class="faixa-pessima"></span> Péssima</li>
         </ul>
     </div>
-    <div style="margin-left: 5%; background-color: white;">* Valores sujeitos a validação posterior</div>
+    <br>
+    <div class="rodape">* Valores sujeitos a validação posterior</div>
+    <br>
 
 </module-page>
 
