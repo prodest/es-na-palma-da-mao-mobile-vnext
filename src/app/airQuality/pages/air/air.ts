@@ -3,6 +3,7 @@ import { IonicPage, Loading, NavController } from 'ionic-angular';
 import { AirService } from '../../provider/services';
 import { Mapa } from '../../model/mapa.model';
 import leaflet from 'leaflet';
+import { LoadingService } from '@espm/core';
 
 @IonicPage()
 @Component({
@@ -16,11 +17,15 @@ export class AirPage {
   mapaId: any[];
   loading: Loading;
   map: any;
+  loadMap :boolean = false;
+
   @ViewChild('map') mapContainer: ElementRef;
   constructor(
     private service: AirService, 
     private navCtrl: NavController,
+    private loadingService: LoadingService,
     ) {
+      this.loading = this.loadingService.show('Carregando mapa');
  
   }
 
@@ -31,9 +36,11 @@ export class AirPage {
    * puxa todos os dados 
    */
   allDataQualityAir = () => {
+    
     this.service.getAllQualityAir().subscribe(dados => {
       this.Air = dados;
       this.loadMapa();
+      
     });
   }
  
@@ -49,6 +56,8 @@ export class AirPage {
     }).addTo(map);
 
     this.pin(map);
+    this.loading.dismiss();
+    this.loadMap = true;
 
    
   }
@@ -74,7 +83,7 @@ export class AirPage {
   }
 
   modal(id, Air){
-    this.navCtrl.push('QualityPoint', { id : id, air:Air });
+    this.navCtrl.push('QualityPointPage', { id : id, air:Air });
   }
 
   tablePage(id, Air){

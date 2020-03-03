@@ -1,4 +1,4 @@
-import { Component, ViewChild, ElementRef } from '@angular/core';
+import { Component, ViewChild, ElementRef, OnInit } from '@angular/core';
 import { IonicPage, NavParams } from 'ionic-angular';
 import { AirApiService } from '../../provider/airApiService';
 import { MapaId } from '../../model/mapaId.model';
@@ -11,26 +11,28 @@ import { Mapa } from '../../model/mapa.model';
   templateUrl: 'point.html',
 })
 
-export class QualityPoint {
+export class QualityPointPage implements OnInit {
+ 
   @ViewChild('barchart') barchart : ElementRef;
   idPoint: number;
   infoPoint : MapaId[];
   point : Mapa;
   iqar: number;
+  formatedDate: string;
  
-  constructor( 
-    private apiService: AirApiService, 
-    public navParams: NavParams){ 
+  constructor(private apiService: AirApiService,public navParams: NavParams){ 
       this.idPoint =  this.navParams.get('id');
       this.point =  this.navParams.get('air');
-       
   } 
  
+  ngOnInit(): void {
+    this.formatedDate = this.formatDate(this.point.DataHora);
+  }
  
   formatDate(dateString){
     const date = new Date(dateString);
     const day = date.getDate();
-    const month = date.getUTCMonth();
+    const month = date.getMonth() + 1;
     const year = date.getFullYear();
     const hour = date.getHours();
     const minute = date.getMinutes();
@@ -42,13 +44,12 @@ export class QualityPoint {
     responsive: true
   };
 
- 
-
-
   ionViewDidEnter() {
     this.loadQualityId(this.idPoint);
     
   }
+
+
 
   /**
    * recebe um id e puxa os dados referentes 
@@ -74,8 +75,8 @@ export class QualityPoint {
   refreshMinMax(){
     for(let i=0; i < this.infoPoint.length; i++)
     {
-     this.infoPoint[i].Min = Math.round(parseInt(this.infoPoint[i].Min)).toString(); 
-     this.infoPoint[i].Max = Math.round(parseInt(this.infoPoint[i].Max)).toString();
+     this.infoPoint[i].Min = Math.round(parseInt(this.infoPoint[i].Min,10)).toString(); 
+     this.infoPoint[i].Max = Math.round(parseInt(this.infoPoint[i].Max,10)).toString();
     } 
   }
 

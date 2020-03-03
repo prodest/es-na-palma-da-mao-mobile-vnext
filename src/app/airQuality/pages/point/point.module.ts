@@ -4,15 +4,15 @@ import { HttpClientModule } from '@angular/common/http';
 import { AirService } from '../../provider/services'
 import { AirApiService } from '../../provider/airApiService';
 import { ModulePageComponentModule } from '@espm/shared';
-import { QualityPoint } from './point';
+import { QualityPointPage } from './point';
 import { ChartsModule } from 'ng2-charts/ng2-charts';
 
 @NgModule({
   declarations: [
-    QualityPoint,
+    QualityPointPage,
   ],
   imports: [
-    IonicPageModule.forChild(QualityPoint),
+    IonicPageModule.forChild(QualityPointPage),
     HttpClientModule , ModulePageComponentModule, ChartsModule
   ],
   providers: [

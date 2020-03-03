@@ -10,6 +10,7 @@ page-quality-point {
         font-size: 1.1em;
         margin-top: 0px;
         margin-bottom: 0px;
+        margin-right: 0px;
        
     }
 
@@ -131,6 +132,7 @@ page-quality-point {
     .chartOne{
         border-bottom: 0.1px solid;
         display: table;
+        width: 100%;
     }
 
     
@@ -192,5 +194,7 @@ page-quality-point {
     .rodape{
         margin-left: 5%;
         background-color: white;
+        margin-top: 55px;
+        margin-bottom: 20px;
     }
 }

@@ -1,5 +1,5 @@
 
-<module-page title="Qualidade do Ar" no-padding style="background-color: white;">
+<module-page title="Qualidade do Ar" no-padding>
 
     <div>
         <ion-label class="titulo">
@@ -38,7 +38,7 @@
     </ion-item>
 
     <div style="font-size: 0.87em;padding: 5px; text-align:center; background-color: white;">
-        <span style="text-align:center; font-size: 1em;">Atualizado dia {{formatDate(point.DataHora)}} <br> (Dados das últimas 48 horas)</span>
+        <span style="text-align:center; font-size: 1em;">Atualizado dia {{formatedDate}} <br> (Dados das últimas 48 horas)</span>
     </div>
    
     <div class="sessionChart">
@@ -77,10 +77,12 @@
             <li><span class="faixa-muitoruim"></span> Muito Ruim</li>
             <li><span class="faixa-pessima"></span> Péssima</li>
         </ul>
+
+       
+           <div class="rodape">* Valores sujeitos a validação posterior</div>
+       
     </div>
-    <br>
-    <div class="rodape">* Valores sujeitos a validação posterior</div>
-    <br>
+   
 
 </module-page>
 
