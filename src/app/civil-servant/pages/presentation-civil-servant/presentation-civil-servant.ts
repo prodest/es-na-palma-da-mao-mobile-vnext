@@ -14,6 +14,10 @@ export class PresentationCivilServantPage {
       buttonTitle: 'Contracheque',
       targetPage: 'PaystubPage'
     },
+    {
+      buttonTitle: 'Informe Rendimento',
+      targetPage: 'ReportYieldsPage'
+    },
   ];
 
   constructor( 

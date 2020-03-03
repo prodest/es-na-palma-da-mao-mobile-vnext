@@ -2,6 +2,21 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+<a name="6.3.5"></a>
+## [6.3.5](https://github.com/prodest/es-na-palma-da-mao-mobile-vnext/compare/v6.3.4...v6.3.5) (2020-02-28)
+
+
+### Bug Fixes
+
+* **report-yields-download:** FIx onSubmit($event) ([2053f5f](https://github.com/prodest/es-na-palma-da-mao-mobile-vnext/commit/2053f5f))
+
+
+### Features
+
+* **report-yields:** Add report yields feature ([eb42bee](https://github.com/prodest/es-na-palma-da-mao-mobile-vnext/commit/eb42bee))
+
+
+
 <a name="6.3.4"></a>
 ## [6.3.4](https://github.com/prodest/es-na-palma-da-mao-mobile-vnext/compare/v6.3.3...v6.3.4) (2019-12-20)
 

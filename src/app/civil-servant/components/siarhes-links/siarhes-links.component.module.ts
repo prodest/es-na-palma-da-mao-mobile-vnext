@@ -1,18 +1,18 @@
 import { NgModule } from '@angular/core';
 import { IonicPageModule } from 'ionic-angular';
-import { PaystubLinksComponent } from './paystub-links.component';
+import { SiarhesLinksComponent } from './siarhes-links.component';
 import { LinksStatusComponentModule } from '../links-status';
 
 @NgModule({
   declarations: [
-    PaystubLinksComponent,
+    SiarhesLinksComponent,
   ],
   imports: [
     LinksStatusComponentModule,
     IonicPageModule,
   ],
   exports: [
-    PaystubLinksComponent,
+    SiarhesLinksComponent,
   ]
 })
-export class PaystubLinksComponentModule { }
+export class SiarhesLinksComponentModule { }

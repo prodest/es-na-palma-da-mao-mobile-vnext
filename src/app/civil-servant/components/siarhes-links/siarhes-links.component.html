@@ -4,7 +4,7 @@
   </ion-searchbar>
   <ion-list>
     <div class="header" *ngIf="filteredLinks.length">
-      {{ filteredLinks.length }} vinculos encontrados
+      {{ filteredLinks.length }} vinculo(s) encontrado(s)
     </div>
     <button ion-item *ngFor="let link of filteredLinks" (click)="selectLink(link)">
       <div class="button-status">

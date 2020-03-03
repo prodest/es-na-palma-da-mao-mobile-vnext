@@ -31,6 +31,7 @@ export interface Environment {
     convertToPdf: string;
     paystub: string;
     airQuality: string;
+    siarhes: string;
   };
   push: {
     senderId: string;
