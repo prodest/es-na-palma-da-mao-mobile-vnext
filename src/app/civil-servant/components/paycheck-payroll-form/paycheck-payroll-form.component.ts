@@ -54,37 +54,49 @@ export class PaycheckPayrollFormComponent extends FormBase implements OnInit, On
   ngOnInit(): void { }
 
   ngOnChanges(changes: SimpleChanges): void {
+    const sortDescNumber = (a: number, b: number) => {
+      return a > b ? -1 : b > a ? 1 : 0;
+    }
     if ('years' in changes) {
       const years: Array<IPaystubYear> = changes['years'].currentValue || [];
-      this.years = years.sort().reverse()
+      this.years = years.sort(sortDescNumber)
     }
     if ('months' in changes) {
       const months: Array<IPaystubMonth> = changes['months'].currentValue || [];
-      this.months = months.sort().reverse()
-    }
-    if ('payrolls' in changes) {
-      const payrolls: Array<IPaystubPayroll> = changes['payrolls'].currentValue || [];
-      this.payrolls = payrolls.sort().reverse()
+      this.months = months.sort(sortDescNumber)
     }
   }
 
   selectYear(year: IPaystubYear): void {
+    if (typeof year !== 'number') { return; }
     this.onSelectYear.emit(year);
+    this.resetMonth();
     return this.selectChange();
   }
 
   selectMonth(month: IPaystubMonth): void {
+    if (typeof month !== 'number') { return; }
     this.onSelectMonth.emit(month);
+    this.resetPayroll();
     return this.selectChange();
   }
 
   selectPayroll(payroll: IPaystubPayroll): void {
+    if (typeof payroll !== 'number') { return; }
     this.onSelectPayroll.emit(payroll);
     return this.selectChange();
   }
 
   selectChange = () => {
     this.cdr.detectChanges();
+  }
+
+  private resetMonth(): void {
+    this.form.get('month').setValue(null);
+  }
+
+  private resetPayroll(): void {
+    this.form.get('payroll').setValue(null);
   }
 
   protected createFormModel(): FormGroup {

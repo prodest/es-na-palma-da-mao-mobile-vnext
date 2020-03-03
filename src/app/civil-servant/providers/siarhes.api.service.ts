@@ -1,23 +1,23 @@
 import { EnvVariables, Environment } from '@espm/core';
 import { Injectable, Inject } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { IPaystubProfile, IPaystubLink, IPaystubYear, IPaystubMonth, IPaystubPayroll } from '../interfaces';
+import { ISiarhesProfile, ISiarhesLink, IPaystubYear, IPaystubMonth, IPaystubPayroll, IReportYieldCompany } from '../interfaces';
 import { Observable } from 'rxjs/Observable';
 
 @Injectable()
-export class PaystubApiService {
+export class SiarhesApiService {
 
   private readonly api: string;
   constructor(private http: HttpClient, @Inject(EnvVariables) env: Environment) {
-    this.api = env.api.paystub;
+    this.api = env.api.siarhes;
   }
 
-  getProfiles(cpf: string): Observable<IPaystubProfile[]> {
-    return this.http.get<IPaystubProfile[]>(this.endpoint('perfis'), { params: { cpf } });
+  getProfiles(cpf: string): Observable<ISiarhesProfile[]> {
+    return this.http.get<ISiarhesProfile[]>(this.endpoint('perfis'), { params: { cpf } });
   }
 
-  getLink(cpf: string, codPerfil: number, numFunc: number): Observable<IPaystubLink[]> {
-    return this.http.get<IPaystubLink[]>(this.endpoint('vinculos'), {
+  getLink(cpf: string, codPerfil: number, numFunc: number): Observable<ISiarhesLink[]> {
+    return this.http.get<ISiarhesLink[]>(this.endpoint('vinculos'), {
       params: {
         cpf,
         codPerfil: codPerfil.toString(),
@@ -26,7 +26,7 @@ export class PaystubApiService {
     });
   }
 
-  getYears(numFunc: number, numVinc: number, numPens: number): Observable<IPaystubYear[]> {
+  getPaystubYears(numFunc: number, numVinc: number, numPens: number): Observable<IPaystubYear[]> {
     const params: { [key: string]: string } = {
       numFunc: numFunc.toString(),
       numVinc: numVinc.toString(),
@@ -37,7 +37,7 @@ export class PaystubApiService {
     });
   }
 
-  getMonths(numFunc: number, numVinc: number, ano: number, numPens: number): Observable<IPaystubMonth[]> {
+  getPaystubMonths(numFunc: number, numVinc: number, ano: number, numPens: number): Observable<IPaystubMonth[]> {
     const params: { [key: string]: string } = {
       numFunc: numFunc.toString(),
       numVinc: numVinc.toString(),
@@ -49,7 +49,7 @@ export class PaystubApiService {
     });
   }
 
-  getPayroll(numFunc: number, numVinc: number, ano: number, mes: number, numPens: number): Observable<IPaystubPayroll[]> {
+  getPaystubPayroll(numFunc: number, numVinc: number, ano: number, mes: number, numPens: number): Observable<IPaystubPayroll[]> {
     const params: { [key: string]: string } = {
       numFunc: numFunc.toString(),
       numVinc: numVinc.toString(),
@@ -57,7 +57,6 @@ export class PaystubApiService {
       mes: mes.toString(),
       numPens: numPens.toString(),
     };
-    console.log(params);
     const retorno = this.http.get<IPaystubPayroll[]>(this.endpoint('contracheque/folhas'), {
       params
     });
@@ -76,6 +75,30 @@ export class PaystubApiService {
       numPens: numPens.toString(),
     }
     return this.http.get(this.endpoint('contracheque'), { params, responseType: 'arraybuffer' });
+  }
+
+  getReportYieldsYears(cpf: number, numFunc: number, numVinc: number, numPens: number): Observable<IPaystubYear[]> {
+    return this.http.get<IPaystubYear[]>(
+      this.endpoint(
+        `informe/${cpf.toString()}/funcionarios/${numFunc.toString()}/vinculos/${numVinc.toString()}/pensionistas/${numPens.toString()}/anos`
+      )
+    );
+  }
+
+  getReportYieldsCompanies(cpf: number, numFunc: number, numVinc: number, numPens: number, ano: number): Observable<IReportYieldCompany[]> {
+    return this.http.get<IReportYieldCompany[]>(
+      this.endpoint(
+        `informe/${cpf.toString()}/funcionarios/${numFunc.toString()}/vinculos/${numVinc.toString()}/pensionistas/${numPens.toString()}/anos/${ano.toString()}/empresas`
+      )
+    );
+  }
+
+  getReportYields(cpf: number, numFunc: number, numVinc: number, numPens: number, ano: number, codEmpresa: number) {
+    return this.http.get(
+      this.endpoint(
+        `informe/${cpf.toString()}/funcionarios/${numFunc.toString()}/vinculos/${numVinc.toString()}/pensionistas/${numPens.toString()}/anos/${ano.toString()}/empresas/${codEmpresa}/pdf`
+      ),{ responseType: 'arraybuffer' }
+    );
   }
 
   private endpoint(route: number | string): string {

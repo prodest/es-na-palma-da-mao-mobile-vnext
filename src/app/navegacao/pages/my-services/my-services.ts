@@ -1,14 +1,13 @@
 import { Component, Inject, OnDestroy } from '@angular/core';
 import { IonicPage, NavController, App } from 'ionic-angular';
-import { AuthQuery, AuthNeededService, AuthService, CidadaoRole } from '@espm/core';
+import { AuthQuery, AuthNeededService } from '@espm/core';
 import deburr from 'lodash-es/deburr';
 import { ItemMenu } from '../../models';
 import { MenuService } from '../../providers/menu.service';
 import { MenuToken } from '@espm/core/menu';
 import { MenusQuery } from '../../providers';
-import { takeUntil, finalize } from 'rxjs/operators';
+import { takeUntil } from 'rxjs/operators';
 import { Subject } from 'rxjs/Subject';
-import { of } from 'rxjs/observable/of';
 
 @IonicPage()
 @Component({
@@ -22,7 +21,6 @@ export class MyServicesPage implements OnDestroy {
   private favorites: ItemMenu[] = [];
   private menuToShow$: Subject<ItemMenu[]>;
   private searching: boolean = false;
-  private userRoles: CidadaoRole[];
 
   constructor(
     protected appCtrl: App,
@@ -31,37 +29,22 @@ export class MyServicesPage implements OnDestroy {
     protected navCtrl: NavController,
     @Inject(MenuToken) private menus: ItemMenu[],
     private menuService: MenuService,
-    private menuQuery: MenusQuery,
-    private auth: AuthService
+    private menuQuery: MenusQuery
   ) {
 
     this.menuToShow$ = new Subject();
     this.menuToShow$.subscribe(this.updateSlides);
 
-    /**
-     * Para verificar se um usuário é um servidor público ou não antes é feita
-     * a busca dos papéis do usuário no acesso cidadão, se houver usuário logado.
-     * A verificação é feita através dos papéis, pois se tem pelo menos um papel
-     * é classificado como servidor público.
-     */
-    (this.authQuery.isLoggedIn ? this.auth.getUserRoles() : of([]))
-      .pipe(finalize(() => {
-
-        this.menuQuery.favorites$
-          .pipe(takeUntil(this.destroyed$))
-          .subscribe((favorites: ItemMenu[]) => {
-            this.favorites = favorites;
-            if (favorites.length > 0) {
-              this.menuToShow$.next(favorites);
-            } else {
-              this.menuToShow$.next(this.menus.filter(m => !m.isCivilServant || this.isCurrentUserCivilServant()));
-            }
-          });
-
-      }))
-      .subscribe(
-        roles => this.userRoles = roles
-      );
+    this.menuQuery.favorites$
+      .pipe(takeUntil(this.destroyed$))
+      .subscribe((favorites: ItemMenu[]) => {
+        this.favorites = favorites;
+        if (favorites.length > 0) {
+          this.menuToShow$.next(favorites);
+        } else {
+          this.menuToShow$.next([...this.menus]);
+        }
+      });
 
     /* Primeira carga dos módulos */
     this.menuService.loadMenu();
@@ -147,11 +130,4 @@ export class MyServicesPage implements OnDestroy {
    *
    */
   private normalize = (term: string) => (term ? deburr(term.toLowerCase()) : '');
-
-  /**
-   * @description verificação se o usuário atual é um servidor público
-   * @private
-   * @memberof MyServicesPage
-   */
-  private isCurrentUserCivilServant = () => this.authQuery.isLoggedIn && this.userRoles && this.userRoles.length > 0;
 }
