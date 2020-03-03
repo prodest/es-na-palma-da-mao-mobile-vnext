@@ -77,4 +77,8 @@ export class AirPage {
     this.navCtrl.push('QualityPoint', { id : id, air:Air });
   }
 
+  tablePage(id, Air){
+    this.navCtrl.push('QualityAirPage', { id : id, air:Air });
+  }
+
 }
