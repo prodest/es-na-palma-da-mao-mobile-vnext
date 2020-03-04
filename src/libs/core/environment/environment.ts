@@ -29,8 +29,9 @@ export interface Environment {
     mailer: string;
     guide: string;
     convertToPdf: string;
-    paystub: string;
     airQuality: string;
+    sugestaodt: string;
+    sugestaoaluno: string;
     siarhes: string;
   };
   push: {

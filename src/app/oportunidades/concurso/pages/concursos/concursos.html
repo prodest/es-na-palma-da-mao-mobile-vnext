@@ -4,8 +4,9 @@
   </ion-searchbar>
   <ion-content>
     <ion-list-header *ngIf="concursosLength">
-      {{filteredConcursos.length}} concursos encontrados
+      {{filteredConcursos?.length}} concursos encontrados
     </ion-list-header>
+
     <ion-list
         [virtualScroll]="concursos$ | async"
         [virtualTrackBy]="trackById"
@@ -18,8 +19,12 @@
           <h3 text-wrap class="concursos_name">
             {{ limite ( concurso.orgao ) }}
           </h3>
-          <p text-wrap class="concursos_descricao">{{ concurso.descricao }}</p>
-        </div>
+            
+          <p text-wrap class="concursos_descricao"> {{ concurso.descricao }}</p>
+          <h5 *ngIf="concurso.status != 'encerrado' && hasPercent(concurso.orgao.trim().toLowerCase()) "> <strong>{{porcentagens2[concurso.orgao.trim().toLowerCase()].toFixed(1) + " % sugerido"}}</strong> </h5>
+        </div> 
+        
+         
         <div class="button-status">
           <concurso-status [status]="concurso.status"></concurso-status>
           <p>
@@ -27,6 +32,7 @@
             <ion-icon *ngIf="!concurso.favorito" class="star_css" item-end name="md-star-outline"></ion-icon>
           </p>
         </div>
+        
       </button>
     </ion-list>
     <ion-item *ngIf="concursosLength" text-center no-lines id="not-found">

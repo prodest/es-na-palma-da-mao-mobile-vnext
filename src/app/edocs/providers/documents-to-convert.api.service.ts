@@ -15,7 +15,7 @@ export class DocumentsToConvertApiService extends ApiBaseService<any> {
    *
    */
   constructor(private http: HttpClient, @Inject(EnvVariables) env: Environment, private file: File) {
-    super(`${env.api.convertToPdf}/create/`);
+    super(env.api.convertToPdf);
   }
 
   convertToPdf(body: ConvertToPdfPostBody): Observable<ArrayBuffer> {
@@ -30,7 +30,7 @@ export class DocumentsToConvertApiService extends ApiBaseService<any> {
         formData.append('horizontalAlign', String(body.horizontalAlign));
         formData.append('verticalAlign', String(body.verticalAlign));
         formData.append('image', new Blob([fileBuffer]), fileNameSplited[fileNameSplited.length - 1]);
-        return this.http.post(this.endpoint(`image`), formData, { responseType: 'arraybuffer' });
+        return this.http.post(this.endpoint(`create/image`), formData, { responseType: 'arraybuffer' });
       })
     );
   }
