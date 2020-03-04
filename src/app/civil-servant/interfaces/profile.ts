@@ -1,4 +1,4 @@
-export interface IPaystubProfile {
+export interface ISiarhesProfile {
   codigoPerfil: number;
   nomeInstituidor: string;
   nomePerfil: string;

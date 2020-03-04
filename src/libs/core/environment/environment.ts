@@ -31,8 +31,7 @@ export interface Environment {
     convertToPdf: string;
     sugestaodt: string;
     sugestaoaluno: string;
-
-    paystub: string;
+    siarhes: string;
   };
   push: {
     senderId: string;

@@ -1,34 +1,32 @@
 import { Component, OnInit } from '@angular/core';
 import { IonicPage, NavController, NavParams, Loading, AlertController, Platform } from 'ionic-angular';
-import { SiarhesService } from '../../providers';
 import { AuthService, AcessoCidadaoClaims, LoadingService } from '@espm/core';
-import { ISiarhesProfile, ISiarhesLink, IPaystubYear, IPaystubMonth, IPaystubPayroll } from '../../interfaces';
+import { ISiarhesProfile, ISiarhesLink, IPaystubYear, IReportYieldCompany } from '../../interfaces';
 import { Observable } from 'rxjs/Observable';
 import { mergeMap, finalize } from 'rxjs/operators';
 import { of } from 'rxjs/observable/of';
+import { SiarhesService } from '../../providers';
 import { File, FileEntry } from '@ionic-native/file';
 import { FileOpener } from '@ionic-native/file-opener';
 
 @IonicPage({
-  segment: 'contracheque'
+  segment: 'rendimentos'
 })
 @Component({
-  selector: 'paystub',
-  templateUrl: 'paystub.html'
+  selector: 'report-yields',
+  templateUrl: 'report-yields.html'
 })
-export class PaystubPage implements OnInit {
+export class ReportYieldsPage implements OnInit {
   activeComponent: 'profile' | 'links' | 'download' = 'profile';
   profiles$: Observable<ISiarhesProfile[]> = of([]);
   links$: Observable<ISiarhesLink[]> = of([]);
   years$: Observable<IPaystubYear[]> = of([]);
-  months$: Observable<IPaystubMonth[]> = of([]);
-  payrolls$: Observable<IPaystubPayroll[]> = of([]);
+  companies$: Observable<IReportYieldCompany[]> = of([]);
   currentUser: AcessoCidadaoClaims | undefined;
   currentProfile: ISiarhesProfile | undefined;
   currentLink: ISiarhesLink | undefined;
   currentYear: IPaystubYear | undefined;
-  currentMonth: IPaystubMonth | undefined;
-  currentPayroll: IPaystubPayroll | undefined;
+  currentCompany: IReportYieldCompany | undefined;
 
   constructor(
     public navCtrl: NavController,
@@ -81,75 +79,59 @@ export class PaystubPage implements OnInit {
     const loading = this.loading.show('Aguarde');
     const { numeroFuncionario } = this.currentProfile;
     const { numeroVinculo, numeroPensionista } = link;
+    const cpf = parseInt(this.currentUser.cpf, 10);
     this.activeComponent = 'download';
     this.currentLink = link;
     this.years$ = this.siarhesService
-      .getPaystubYears(numeroFuncionario, numeroVinculo, numeroPensionista)
+      .getReportYieldsYears(cpf, numeroFuncionario, numeroVinculo, numeroPensionista)
       .pipe(finalize(() => loading.dismiss()));
   }
 
-  getMonths(year?: IPaystubYear): void {
+  getCompanies(year?: IPaystubYear): void {
     if (!this.currentLink || !year) {
       return;
     }
     const loading = this.loading.show('Aguarde');
     const { numeroFuncionario } = this.currentProfile;
     const { numeroVinculo, numeroPensionista } = this.currentLink;
+    const cpf = parseInt(this.currentUser.cpf, 10);
     this.activeComponent = 'download';
     this.currentYear = year;
-    this.months$ = this.siarhesService
-      .getPaystubMonths(numeroFuncionario, numeroVinculo, year, numeroPensionista)
+    this.companies$ = this.siarhesService
+      .getReportYieldsCompanies(cpf, numeroFuncionario, numeroVinculo, numeroPensionista, year)
       .pipe(finalize(() => loading.dismiss()));
   }
 
-  getPayrolls(month?: IPaystubMonth): void {
-    if (!this.currentYear || !month) {
+  download(company?: IReportYieldCompany): void {
+
+    if (!company || !this.years$) {
       return;
     }
+    this.currentCompany = company;
+
+    const cpf = parseInt(this.currentUser.cpf, 10);
     const loading = this.loading.show('Aguarde');
     const { numeroFuncionario } = this.currentProfile;
     const { numeroVinculo, numeroPensionista } = this.currentLink;
+    const { codigoEmpresa } = company;
     const year = this.currentYear;
     this.activeComponent = 'download';
-    this.currentMonth = month;
-    this.payrolls$ = this.siarhesService
-      .getPaystubPayroll(numeroFuncionario, numeroVinculo, year, month, numeroPensionista)
-      .pipe(finalize(() => loading.dismiss()));
-  }
-
-  download(payroll?: IPaystubPayroll): void {
-
-    if (!payroll || !this.currentMonth) {
-      return;
-    }
-    this.currentPayroll = payroll;
-
-    const loading = this.loading.show('Aguarde');
-    const { numeroFuncionario, codigoPerfil } = this.currentProfile;
-    const { numeroVinculo, numeroPensionista } = this.currentLink;
-    const { empresaCodigo } = payroll;
-    const year = this.currentYear;
-    const month = this.currentMonth;
-    this.activeComponent = 'download';
-    this.currentMonth = month;
 
     this.siarhesService
-      .getPaystub(
+      .getReportYields(
+        cpf,
         numeroFuncionario,
         numeroVinculo,
+        numeroPensionista,
         year,
-        month,
-        payroll.numeroFolha,
-        empresaCodigo,
-        codigoPerfil,
-        numeroPensionista
+        codigoEmpresa,
       )
       .pipe(finalize(() => loading.dismiss()))
       .subscribe(pdf => {
         const blob = new Blob([pdf], { type: 'application/pdf' });
 
         let filePath = this.platform.is('android') ? this.file.externalRootDirectory + '/Download/' : this.file.documentsDirectory;
-        let fileName = `contracheque_${year}${month}${payroll.numeroFolha}.pdf`
+        let fileName = `informe_rendimento_${year}${codigoEmpresa}.pdf`
 
         // Write the file
         this.file.writeFile(filePath, fileName, blob, { replace: true })
@@ -160,7 +142,7 @@ export class PaystubPage implements OnInit {
               .catch(err => {
                 const alert = this.alertCtrl.create({
                   title: 'Erro',
-                  subTitle: 'Não foi possível abrir o contracheque automaticamente. Tente abrí-lo manualmente ou clique em Baixar novamente.',
+                  subTitle: 'Não foi possível abrir o informe rendimento automaticamente. Tente abrí-lo manualmente ou clique em Baixar novamente.',
                   buttons: ['OK']
                 })
                 alert.present();
@@ -170,7 +152,7 @@ export class PaystubPage implements OnInit {
           .catch(err => {
             const alert = this.alertCtrl.create({
               title: 'Erro',
-              subTitle: 'Não foi possível baixar o contracheque. Tente novamente mais tarde.',
+              subTitle: 'Não foi possível baixar o informe rendimento. Tente novamente mais tarde.',
               buttons: ['OK']
             })
             alert.present();

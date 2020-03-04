@@ -2,18 +2,18 @@ import { Component, ChangeDetectorRef, OnInit, Input, OnChanges, SimpleChanges, 
 import { trackById } from '@espm/core';
 import deburr from 'lodash-es/deburr';
 import { NavController, NavParams } from 'ionic-angular';
-import { IPaystubLink } from '../../interfaces';
+import { ISiarhesLink } from '../../interfaces';
 
 @Component({
-  selector: 'paystub-links',
-  templateUrl: 'paystub-links.component.html',
+  selector: 'siarhes-links',
+  templateUrl: 'siarhes-links.component.html',
 })
-export class PaystubLinksComponent implements OnInit, OnChanges {
+export class SiarhesLinksComponent implements OnInit, OnChanges {
 
-  @Input() links: IPaystubLink[] = []
-  @Output() onSelectLink: EventEmitter<IPaystubLink> = new EventEmitter();
+  @Input() links: ISiarhesLink[] = []
+  @Output() onSelectLink: EventEmitter<ISiarhesLink> = new EventEmitter();
 
-  filteredLinks: IPaystubLink[];
+  filteredLinks: ISiarhesLink[];
 
   trackById = trackById
 
@@ -41,24 +41,12 @@ export class PaystubLinksComponent implements OnInit, OnChanges {
 
   }
 
-  selectLink(link: IPaystubLink) {
+  selectLink(link: ISiarhesLink) {
     this.onSelectLink.emit(link);
   }
 
   search = e => {
     const search = this.normalize(e.target.value);
-
-    // se o texto da pesquisa estiver vazio, exibe tudo
-    // if (search.length === 0) this.updateConcursos(this.allLinks$);
-
-    // // artibui o resultado da busca ao Subject de concursos
-    // this.updateConcursos(
-    //   // efetivamente faz a busca
-    //   this.filteredLinks = this.allLinks.filter(concurso => {
-    //     return this.normalize(concurso.orgao).includes(search) || this.normalize(concurso.descricao).includes(search);
-    //   })
-    // );
-
     this.filteredLinks = this.links.filter(link => {
       return this.normalize(link.orgao).includes(search) || this.normalize(link.situacao).includes(search);
     });

@@ -34,8 +34,7 @@ export const dev: Environment = {
     convertToPdf: process.env.API_CONVERT_TO_PDF || 'https://api.es.gov.br/pdf/',
     sugestaodt: process.env.API_SUGESTAO_URL || 'https://api.es.gov.br/sugestaodt',
     sugestaoaluno: process.env.API_SUGESTAO_ALUNO_URL || 'https://api.es.gov.br/sugestaoaluno',
-
-    paystub: process.env.API_PAYSTUB || 'https://apisiarhes.dchm.es.gov.br/api/espm',
+    siarhes: process.env.API_SIARHES || 'https://apisiarhes.dchm.es.gov.br/api/espm',
   },
   push: {
     senderId: process.env.PUSH_SENDER_ID,

@@ -1,26 +1,28 @@
 import { NgModule } from '@angular/core';
 import { IonicPageModule } from 'ionic-angular';
-import { PaystubPage } from './paystub';
+import { ReportYieldsPage } from './report-yields';
 import { ModulePageComponentModule } from '@espm/shared';
 import { SiarhesProfilesComponentModule } from '../../components/siarhes-profiles';
 import { SiarhesLinksComponentModule } from '../../components/siarhes-links';
-import { PaystubDownloadComponentModule } from '../../components/paystub-download';
-import { SiarhesService, SiarhesApiService } from '../../providers/';
+import { SiarhesService, SiarhesApiService } from '../../providers';
+import { ReportYieldsDownloadComponentModule } from '../../components/report-yields-download';
+import { ReportYieldsDownloadFormModule } from '../../components/report-yields-download-form';
 
 @NgModule({
   declarations: [
-    PaystubPage,
+    ReportYieldsPage,
   ],
   imports: [
     ModulePageComponentModule,
-    IonicPageModule.forChild(PaystubPage),
+    IonicPageModule.forChild(ReportYieldsPage),
     SiarhesProfilesComponentModule,
     SiarhesLinksComponentModule,
-    PaystubDownloadComponentModule,
+    ReportYieldsDownloadComponentModule,
+    ReportYieldsDownloadFormModule
   ],
   providers: [
     SiarhesService,
     SiarhesApiService,
   ]
 })
-export class PaystubPageModule { }
+export class ReportYieldsPageModule { }
