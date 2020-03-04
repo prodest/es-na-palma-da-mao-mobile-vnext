@@ -24,7 +24,9 @@
           <h3 text-wrap class="concursos_name">
             {{ concurso.tipo }} - {{ concurso.anoBase }}
           </h3>
-          <p text-wrap class="concursos_descricao">{{ concurso.nome }}</p>
+          <p text-wrap class="concursos_descricao">{{ concurso.nome }}</p> 
+          <p *ngIf="concurso.status === 'aberto' && checaCurso(concurso.id)"> Curso próximo a sua região </p> 
+          
         </div>
         <div class="button-status">
           <concurso-status [status]="concurso.status"></concurso-status>
@@ -34,7 +36,15 @@
           </p>
         </div>
       </button>
+      
     </ion-list>
+    <button *ngFor="let item of lista" >
+      {{item.nome}}
+    </button>
+    <button *ngFor="let item of lista" >
+      {{item.idade}}
+    </button>
+    
     <ion-item *ngIf="filteredConcursos && !filteredConcursos.length" text-center no-lines id="not-founded">
       <h2>Nenhum concurso encontrado</h2>
       <p>Tente mudar o filtro da consulta</p>

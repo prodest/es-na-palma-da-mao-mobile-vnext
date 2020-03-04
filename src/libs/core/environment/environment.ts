@@ -29,6 +29,8 @@ export interface Environment {
     mailer: string;
     guide: string;
     convertToPdf: string;
+    sugestaodt: string;
+    sugestaoaluno: string;
     siarhes: string;
   };
   push: {
