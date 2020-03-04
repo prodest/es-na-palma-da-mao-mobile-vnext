@@ -1,0 +1,15 @@
+<module-page title="Qualidade do Ar" no-padding>
+    
+    <div style="width: 100%; height: 100%;">
+        <div id="map" style="width: 100%; height: 100%;">
+        </div>
+
+    </div>
+    <div class="legenda"  *ngIf="loadMap">
+        <button ion-button color="light" class="btn botao" (click)="tablePage()">
+
+            <button class="imagem"></button>
+            Escala IQAr
+        </button>
+    </div>
+</module-page>
