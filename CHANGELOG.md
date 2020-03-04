@@ -2,6 +2,45 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+<a name="6.3.6"></a>
+## [6.3.6](https://github.com/prodest/es-na-palma-da-mao-mobile-vnext/compare/v6.3.5...v6.3.6) (2020-03-04)
+
+
+### Bug Fixes
+
+* **documents-to-send:** show error dialog on convert api error ([7024ca4](https://github.com/prodest/es-na-palma-da-mao-mobile-vnext/commit/7024ca4))
+* **legenda:** atualizando tabela da legenda da qualidade do ar ([fc65774](https://github.com/prodest/es-na-palma-da-mao-mobile-vnext/commit/fc65774))
+* **legenda:** atualizando tabela de faixa do ar ([7f29ec0](https://github.com/prodest/es-na-palma-da-mao-mobile-vnext/commit/7f29ec0))
+* **merge:** merge com a versao mais atual do app ([bce8adf](https://github.com/prodest/es-na-palma-da-mao-mobile-vnext/commit/bce8adf))
+
+
+### Features
+
+* **Air:** coordenadas dos municipios ([fef2ca9](https://github.com/prodest/es-na-palma-da-mao-mobile-vnext/commit/fef2ca9))
+* **Air:** correção dos models ([282ae9c](https://github.com/prodest/es-na-palma-da-mao-mobile-vnext/commit/282ae9c))
+* **Air:** estrutura de requisições de serviços ([3bb2fc3](https://github.com/prodest/es-na-palma-da-mao-mobile-vnext/commit/3bb2fc3))
+* **Air:** iserindo mapa leaflet ([46b283e](https://github.com/prodest/es-na-palma-da-mao-mobile-vnext/commit/46b283e))
+* **Air:** title css mapa ([741677d](https://github.com/prodest/es-na-palma-da-mao-mobile-vnext/commit/741677d))
+* **ajustes:** ajustando elementos ([9f5d57c](https://github.com/prodest/es-na-palma-da-mao-mobile-vnext/commit/9f5d57c))
+* **ar:** implementado qualidade do ar ([f6e9c78](https://github.com/prodest/es-na-palma-da-mao-mobile-vnext/commit/f6e9c78))
+* **detalhe ponto:** inserindo detalhes do ponto ([8edfc9f](https://github.com/prodest/es-na-palma-da-mao-mobile-vnext/commit/8edfc9f))
+* **graph:** inserindo grafico ([5d35655](https://github.com/prodest/es-na-palma-da-mao-mobile-vnext/commit/5d35655))
+* **iframe:** testando uso do iframe ([d43d374](https://github.com/prodest/es-na-palma-da-mao-mobile-vnext/commit/d43d374))
+* **igualando:** igualando ([4a99315](https://github.com/prodest/es-na-palma-da-mao-mobile-vnext/commit/4a99315))
+* **info:** click para informaçoes ([9f82c7e](https://github.com/prodest/es-na-palma-da-mao-mobile-vnext/commit/9f82c7e))
+* **info:** info do pino ([bf99c67](https://github.com/prodest/es-na-palma-da-mao-mobile-vnext/commit/bf99c67))
+* **info:** pagina de info ([b874283](https://github.com/prodest/es-na-palma-da-mao-mobile-vnext/commit/b874283))
+* **insert map:** inserindo mapa porem com erro de cors ([3910c30](https://github.com/prodest/es-na-palma-da-mao-mobile-vnext/commit/3910c30))
+* **legenda:** inserindo imagem no botao da legenda ([a64d6f4](https://github.com/prodest/es-na-palma-da-mao-mobile-vnext/commit/a64d6f4))
+* **legenda:** inserindo legenda no mapa ([fff919e](https://github.com/prodest/es-na-palma-da-mao-mobile-vnext/commit/fff919e))
+* **mobile:** atualizaçao clean ([08ab0e0](https://github.com/prodest/es-na-palma-da-mao-mobile-vnext/commit/08ab0e0))
+* **modal:** montando modal do pino ([913cb68](https://github.com/prodest/es-na-palma-da-mao-mobile-vnext/commit/913cb68))
+* **pin:** pin no mapa ([c24a474](https://github.com/prodest/es-na-palma-da-mao-mobile-vnext/commit/c24a474))
+* **qualidade:** iniciando modulo ([179260c](https://github.com/prodest/es-na-palma-da-mao-mobile-vnext/commit/179260c))
+* **test:** fazendo teste ([7c2d773](https://github.com/prodest/es-na-palma-da-mao-mobile-vnext/commit/7c2d773))
+
+
+
 <a name="6.3.5"></a>
 ## [6.3.5](https://github.com/prodest/es-na-palma-da-mao-mobile-vnext/compare/v6.3.4...v6.3.5) (2020-02-28)
 
