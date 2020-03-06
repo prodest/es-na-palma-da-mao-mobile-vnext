@@ -2,6 +2,6 @@ export interface Rota {
   id: number;
   nome: string;
   codigoRota: string;
-  turno: number;
+  tipo: string;
   escola: number;
 }

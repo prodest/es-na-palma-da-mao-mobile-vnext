@@ -27,7 +27,7 @@ export class MinhasDenunciasPage {
 
   ionViewWillLoad() {
     const loading = this.presentLoading();
-    this.api.getUserDemands(this.auth.state.claims.subNovo)
+    this.api.getUserDemands(this.auth.state.claims.cpf)
     .subscribe((denuncias: Denuncia[]) => {
       // console.log(denuncias);
       this.denuncias$.next(denuncias);
