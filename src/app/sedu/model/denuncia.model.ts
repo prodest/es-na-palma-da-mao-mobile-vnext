@@ -12,8 +12,10 @@ export interface Denuncia {
   outroPapel?: string;
   email: string;
   acesso_cidadao: string;
+  cpf: string;
 
   // dados de um aluno
+  alunoId: number;
   aluno: string;
   registroAcademico: string;
   codigoEDP: string;

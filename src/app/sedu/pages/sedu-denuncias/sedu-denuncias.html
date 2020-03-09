@@ -31,6 +31,9 @@
         informe os dados de um aluno que a utiliza
       </ion-list-header>
       <ion-item>
+        <ion-searchbar (ionInput)="getStudent($event)"></ion-searchbar>
+      </ion-item>
+      <ion-item>
         <ion-label floating>Nome completo do aluno</ion-label>
         <ion-input type="text" [(ngModel)]="denuncia.aluno"></ion-input>
       </ion-item>

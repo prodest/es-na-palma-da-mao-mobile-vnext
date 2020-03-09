@@ -106,7 +106,7 @@ export class SeduDenunciasApiService {
   }
 
   /**
-   * Obtém o parecer de uma reclamação.
+   * Obtém o parecer de uma reclamação. (APAGAR)
    */
   getDemandResponse(idDemand: number): Observable<any> {
     return this.http.get(`${this.env.api.seduDenuncias}/reclamacao/${idDemand}/parecer`, this.options)
@@ -128,7 +128,26 @@ export class SeduDenunciasApiService {
    * @param demand 
    */
   sendDemand(demand: Denuncia) {
-    return this.http.post(`${this.env.api.seduDenuncias}/reclamacao`, demand, this.options);
+    const payload = {
+      autor: demand.autor,
+      acesso_Cidadao: demand.acesso_cidadao,
+      papelDoAutor: demand.papelDoAutor,
+      outroPapel: demand.outroPapel,
+      email: demand.email,
+      alunoId: demand.alunoId,
+      ra: demand.registroAcademico,
+      codigoEDP: demand.codigoEDP,
+      escolaId: demand.escolaId,
+      placaVeiculo: demand.placaVeiculo,
+      rotaId: demand.rotaId,
+      tipoReclamacao: demand.tipoReclamacao,
+      outroTipo: demand.outroTipo,
+      dataReclamacao: demand.dataReclamacao.toISOString(),
+      descricao: demand.descricao,
+      reclamanteCpf: demand.cpf
+    };
+
+    return this.http.post(`${this.env.api.seduDenuncias}/reclamacao`, payload, this.options);
   }
 
   /**
@@ -147,9 +166,16 @@ export class SeduDenunciasApiService {
     return this.http.get<Rota[]>(`${this.env.api.seduDenuncias}/escolas/${id}/rotas`, this.options)
     .pipe(map(res => res.map(route => ({
       ...route,
-      codigoRota: route['codLinha'],
-      tipo: route['tipo']
+      codigoRota: route['codLinha']
     } as Rota))));
+  }
+
+  /**
+   * Obtém os dados de um aluno pelo RA
+   */
+  getStudentByRA(ra: string) {
+    return this.http.get<any[]>(`${this.env.api.seduDenuncias}/alunos/${ra}`)
+    .pipe();
   }
 
 }

@@ -27,7 +27,9 @@ export class SeduDenunciasPage {
     outroPapel: "",
     email: "",
     acesso_cidadao: this.auth.state.claims.subNovo,
+    cpf: this.auth.state.claims.cpf,
     aluno: "",
+    alunoId: 0,
     codigoEDP: "",
     escolaId: null,
     registroAcademico: "",
@@ -157,6 +159,21 @@ export class SeduDenunciasPage {
     });
     loader.present();
     return loader;
+  }
+
+  /**
+   * Chamada pelo searchbar, após a inserção do RA do aluno, para obter os dados.
+   */
+  getStudent(e) {
+    // TODO
+    console.log(e.target.value);
+
+    if (e.target.value) {
+      const ra = e.target.value;
+      this.api.getStudentByRA(ra).subscribe((aluno)=>{
+        console.log(aluno);
+      });
+    }
   }
 
   /**
