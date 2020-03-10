@@ -14,6 +14,7 @@ export class ReportYieldsDownloadComponent {
   @Output() onSelectCompany: EventEmitter<IReportYieldCompany> = new EventEmitter();
   @Input() numVinc: number;
   @Input() numFunc: number;
+  @Input() orgao: string;
 
   constructor(public navCtrl: NavController, public navParams: NavParams) { }
 

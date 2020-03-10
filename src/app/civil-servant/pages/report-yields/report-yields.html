@@ -12,7 +12,7 @@
     <ion-item *ngSwitchCase="'download'">
       <report-yields-download [years]="years$ | async" [numVinc]="currentLink?.numeroVinculo"
         [numFunc]="currentProfile?.numeroFuncionario" [companies]="companies$ | async" (onSelectYear)="getCompanies($event)"
-        (onSelectCompany)="download($event)"></report-yields-download>
+        (onSelectCompany)="download($event)" [orgao]="currentLink?.orgao"></report-yields-download>
     </ion-item>
   </ion-list>
 </module-page>
