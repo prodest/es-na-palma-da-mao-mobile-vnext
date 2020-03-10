@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+<a name="6.3.8"></a>
+## [6.3.8](https://github.com/prodest/es-na-palma-da-mao-mobile-vnext/compare/v6.3.7...v6.3.8) (2020-03-10)
+
+
+### Bug Fixes
+
+* **app:** alteração da ordem do menu principal ([76bac6a](https://github.com/prodest/es-na-palma-da-mao-mobile-vnext/commit/76bac6a))
+
+
+
 <a name="6.3.7"></a>
 ## [6.3.7](https://github.com/prodest/es-na-palma-da-mao-mobile-vnext/compare/v6.3.6...v6.3.7) (2020-03-05)
 
