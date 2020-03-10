@@ -16,6 +16,7 @@ export class PaystubDownloadComponent {
   @Output() onSelectPayroll: EventEmitter<IPaystubPayroll> = new EventEmitter();
   @Input() numVinc: number;
   @Input() numFunc: number;
+  @Input() orgao: string;
 
   constructor(public navCtrl: NavController, public navParams: NavParams) { }
 
