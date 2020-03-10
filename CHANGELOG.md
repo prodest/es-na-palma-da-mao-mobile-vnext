@@ -2,6 +2,11 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+<a name="6.3.7"></a>
+## [6.3.7](https://github.com/prodest/es-na-palma-da-mao-mobile-vnext/compare/v6.3.6...v6.3.7) (2020-03-05)
+
+
+
 <a name="6.3.6"></a>
 ## [6.3.6](https://github.com/prodest/es-na-palma-da-mao-mobile-vnext/compare/v6.3.5...v6.3.6) (2020-03-04)
 
