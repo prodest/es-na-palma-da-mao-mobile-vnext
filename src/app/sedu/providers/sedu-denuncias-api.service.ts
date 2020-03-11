@@ -5,6 +5,7 @@ import { Observable } from 'rxjs/Observable';
 import { map } from 'rxjs/operators';
 
 import { Denuncia, Escola, Municipio, TipoDenuncia, PapelAutorDenuncia, TurnoRota, Rota, StatusDenuncia } from '../model';
+import { Aluno } from '../model/aluno.model';
 
 /*
   Generated class for the SeduDenunciasApiProvider provider.
@@ -106,7 +107,7 @@ export class SeduDenunciasApiService {
   }
 
   /**
-   * Obtém o parecer de uma reclamação. (APAGAR)
+   * Obtém o parecer de uma reclamação. (TODO: APAGAR)
    */
   getDemandResponse(idDemand: number): Observable<any> {
     return this.http.get(`${this.env.api.seduDenuncias}/reclamacao/${idDemand}/parecer`, this.options)
@@ -174,7 +175,7 @@ export class SeduDenunciasApiService {
    * Obtém os dados de um aluno pelo RA
    */
   getStudentByRA(ra: string) {
-    return this.http.get<any[]>(`${this.env.api.seduDenuncias}/alunos/${ra}`)
+    return this.http.get<Aluno[]>(`${this.env.api.seduDenuncias}/alunos/${ra}`)
     .pipe();
   }
 

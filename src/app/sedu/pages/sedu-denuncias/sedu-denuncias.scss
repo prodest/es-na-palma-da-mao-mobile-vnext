@@ -19,6 +19,12 @@ page-sedu-denuncias {
     flex-direction: column;
     flex: 1;
   }
+
+  #slide-identificacao {
+    button {
+      margin-top: 15px;
+    }
+  }
   
   #slide-reclamacao {
     .slide-zoom {

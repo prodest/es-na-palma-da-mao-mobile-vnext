@@ -5,6 +5,7 @@ import { Subject } from 'rxjs/Subject';
 import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 import { SeduDenunciasApiService } from '../../providers';
 import { Denuncia, Escola, Municipio, TipoDenuncia, PapelAutorDenuncia, Rota, TurnoRota } from '../../model';
+import { Aluno } from '../../model/aluno.model';
 
 /**
  * Generated class for the SeduDenunciasPage page.
@@ -56,6 +57,9 @@ export class SeduDenunciasPage {
   
   canSend$: BehaviorSubject<boolean>;
 
+  dateFlag: boolean = false;
+  hourFlag: boolean = false;
+
   constructor(
     public navCtrl: NavController,
     public navParams: NavParams,
@@ -74,8 +78,6 @@ export class SeduDenunciasPage {
     this.papeis$ = new Subject();
 
     this.canSend$ = new BehaviorSubject(false);
-
-    this.denuncia.dataReclamacao = new Date();
   }
 
   ionViewDidEnter() {
@@ -87,16 +89,11 @@ export class SeduDenunciasPage {
       this.denuncia.email = this.auth.state.claims.email;
     }
 
-    // Atualiza a lista de escolas SEMPRE que o usuário troca o município no select
-    this.municipio$.subscribe((municipio: number) => {
-      this.escolasDoMunicipio$.next(
-        this.escolas.filter((escola: Escola) => escola.municipio === municipio)
-      );
-    });
-
+    // Atualiza a lista de rotas quando a escola$ é definida
     this.escola$.subscribe((idEscola: number) => {
       const loading = this.presentLoading();
 
+      // TODO: trocar pelas rotas do aluno
       this.api.getSchoolRoutes(idEscola)
       .subscribe((rotas: Rota[]) => {
         this.rotas = rotas;
@@ -112,13 +109,6 @@ export class SeduDenunciasPage {
    * Carrega os dados da API para o app
    */
   loadData() {
-    // carrega municípios
-    this.api.getMunicipios()
-    .subscribe((municipios: Municipio[]) => {
-      // console.log("municipios", municipios);
-      this.municipios$.next(municipios);
-    });
-
     // carrega escolas
     this.api.getSchools()
     .subscribe((escolas: Escola[]) => {
@@ -141,13 +131,6 @@ export class SeduDenunciasPage {
       this.papeis$.next(papeis);
       loading.dismiss();
     });
-
-    // carrega turnos das rotas
-    this.api.getRouteShifts()
-    .subscribe((turnos: TurnoRota[]) => {
-      // console.log("turnos", turnos);
-      this.turnos = turnos;
-    });
   }
 
   /**
@@ -162,25 +145,39 @@ export class SeduDenunciasPage {
   }
 
   /**
-   * Chamada pelo searchbar, após a inserção do RA do aluno, para obter os dados.
+   * Chamada pelo botão Validar, após a inserção do RA do aluno, para obter os dados.
    */
-  getStudent(e) {
-    // TODO
-    console.log(e.target.value);
+  getStudent() {
+    if (this.denuncia.registroAcademico) {
+      this.api.getStudentByRA(this.denuncia.registroAcademico).subscribe((alunos: Aluno[]) => {
+        if (alunos.length) {
+          const aluno: Aluno = alunos[0];
+          
+          this.denuncia.aluno = aluno.nome;
+          this.denuncia.alunoId = aluno.id;
+          this.denuncia.escolaId = aluno.escolaId;
+          this.denuncia.codigoEDP = aluno.codEnergia;
+          
+          // pega o nome da escola
+          this.denuncia.escola = this.escolas.filter((e: Escola)=> e.id === aluno.escolaId )[0]["nome"];
+          
+          this.escola$.next(aluno.escolaId); // TODO: vai sumir
+        } else {
+          this.denuncia.aluno = "";
+          this.denuncia.alunoId = 0;
+          this.denuncia.escolaId = null;
+          this.denuncia.escola = "";
+          this.denuncia.codigoEDP = "";
 
-    if (e.target.value) {
-      const ra = e.target.value;
-      this.api.getStudentByRA(ra).subscribe((aluno)=>{
-        console.log(aluno);
+          const alert = this.alertCtrl.create({
+            title: "Aluno não encontrado",
+            subTitle: "Verifique o número de matrícula e tente novamente",
+            buttons: ['Entendi']
+          });
+          alert.present();
+        }
       });
     }
-  }
-
-  /**
-   * Disparado pelo ionChange do ion-select de municípios para atualizar a lista de escolas.
-   */
-  setCity(e) {
-    this.municipio$.next(e);
   }
 
   /**
@@ -195,14 +192,24 @@ export class SeduDenunciasPage {
    * 
    */
   setDay({day, month, year}) {
+    if (this.denuncia.dataReclamacao == null) {
+      this.denuncia.dataReclamacao = new Date();
+    }
     this.denuncia.dataReclamacao.setFullYear(year, month-1, day);
+    this.dateFlag = true;
+    this.updateSenderLock();
   }
 
   /**
    * 
    */
   setHour({hour, minute}) {
+    if (this.denuncia.dataReclamacao == null) {
+      this.denuncia.dataReclamacao = new Date();
+    }
     this.denuncia.dataReclamacao.setHours(hour, minute);
+    this.hourFlag = true;
+    this.updateSenderLock();
   }
 
   /** 
@@ -264,7 +271,10 @@ export class SeduDenunciasPage {
   canGoNext(): boolean {
     
     if (this.slides.getActiveIndex() === 0) {
-      if (this.denuncia.papelDoAutor) {
+      if (
+        this.denuncia.papelDoAutor &&
+        this.denuncia.alunoId) {
+
         if (this.denuncia.papelDoAutor === 3) {
           if (this.denuncia.outroPapel) {
             return true;
@@ -276,20 +286,21 @@ export class SeduDenunciasPage {
     }
 
     if (this.slides.getActiveIndex() === 1) {
-      if (
-        this.denuncia.aluno &&
-        this.denuncia.codigoEDP &&
-        this.denuncia.rotaId) {
-          return true;
+      if (this.denuncia.rotaId) {
+        return true;
       }
     }
 
     return false;
   }
 
-  updateSenderLock() {    
-    this.canSend$.next(
-      (this.denuncia.tipoReclamacao.toString() && this.denuncia.descricao) ? true : false
-    );
+  updateSenderLock() {
+    const condicao: boolean = (
+      this.denuncia.dataReclamacao && this.dateFlag && this.hourFlag &&
+      this.denuncia.tipoReclamacao &&
+      this.denuncia.tipoReclamacao.toString() &&
+      this.denuncia.descricao) ? true : false;
+    
+    this.canSend$.next(condicao);
   }
 }

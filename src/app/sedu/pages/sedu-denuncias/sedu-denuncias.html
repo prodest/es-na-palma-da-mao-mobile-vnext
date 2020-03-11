@@ -4,83 +4,96 @@
     <ion-slide id="slide-identificacao"> <!-- SLIDE 1 - IDENTIFICAÇÃO DO AUTOR DA RECLAMAÇÃO -->
       <ion-list-header>Verifique suas informações. <br>
         Se este não é você, faça logout, por favor.</ion-list-header>
+      
       <ion-item>
         <ion-label floating>Seu nome</ion-label>
         <ion-input type="text" [(ngModel)]="denuncia.autor" [disabled]="true"></ion-input>
       </ion-item>
+
       <ion-item>
         <ion-label floating>Seu e-mail</ion-label>
         <ion-input type="text" [(ngModel)]="denuncia.email" [disabled]="true"></ion-input>
       </ion-item>
+
       <ion-list radio-group [(ngModel)]="denuncia.papelDoAutor">
+
         <ion-list-header>Eu sou:</ion-list-header>
+        
         <ion-item *ngFor="let papel of papeis$ | async">
           <ion-label>{{papel.nome}}</ion-label>
           <ion-radio [value]="papel.id"></ion-radio>
         </ion-item>
+
         <ion-item *ngIf="denuncia.papelDoAutor == 3">
-          <ion-label>Descreva</ion-label>
+          <ion-label>Descreva (obrigatório)</ion-label>
           <ion-input type="text" [(ngModel)]="denuncia.outroPapel"></ion-input>
         </ion-item>
+
       </ion-list>
-    </ion-slide> <!-- SLIDE 1 -->
+
+      <ion-list *ngIf="denuncia.papelDoAutor">
+        <ion-list-header *ngIf="denuncia.papelDoAutor == 1">Para continuar, informe sua matrícula:</ion-list-header>
+        <ion-list-header *ngIf="denuncia.papelDoAutor != 1">Para continuar, informe uma matrícula:</ion-list-header>
+        <ion-item>
+          <ion-label floating>Número do Registro Acadêmico</ion-label>
+          <ion-input type="number" [(ngModel)]="denuncia.registroAcademico"></ion-input>
+        </ion-item>
+        <button ion-button round
+          *ngIf="denuncia.registroAcademico"
+          (click)="getStudent()">Validar</button>
+      </ion-list>
+
+    </ion-slide> <!-- FIM DO SLIDE 1 -->
 
     <ion-slide id="slide-aluno"> <!-- SLIDE 2 - IDENTIFICAÇÃO DA ROTA ONDE HOUVE PROBLEMA -->
+
       <ion-list-header>
-        Para facilitar a identificação da rota <br>
-        informe os dados de um aluno que a utiliza
+        Verifique as informações do aluno
       </ion-list-header>
-      <ion-item>
-        <ion-searchbar (ionInput)="getStudent($event)"></ion-searchbar>
-      </ion-item>
+
       <ion-item>
         <ion-label floating>Nome completo do aluno</ion-label>
-        <ion-input type="text" [(ngModel)]="denuncia.aluno"></ion-input>
+        <ion-input type="text"
+          [(ngModel)]="denuncia.aluno"
+          [disabled]="true">
+        </ion-input>
       </ion-item>
+
       <ion-item>
         <ion-label floating>Nº Instalação EDP</ion-label>
-        <ion-input type="number" [(ngModel)]="denuncia.codigoEDP"></ion-input>
+        <ion-input type="number"
+          [(ngModel)]="denuncia.codigoEDP"
+          [disabled]="true"></ion-input>
       </ion-item>
+      
       <ion-item>
-        <ion-label floating>Registro Acadêmico (opcional)</ion-label>
-        <ion-input type="number" [(ngModel)]="denuncia.registroAcademico"></ion-input>
+        <ion-label floating>Escola</ion-label>
+        <ion-input type="text"
+          [value]="denuncia.escola"
+          [disabled]="true"></ion-input>
       </ion-item>
+
       <ion-list-header>
-        Outras informações da rota
+        Informações da rota
       </ion-list-header>
+
       <ion-item>
         <ion-label floating>Placa do veículo (opcional)</ion-label>
         <ion-input type="text" [(ngModel)]="denuncia.placaVeiculo"></ion-input>
       </ion-item>
+
       <ion-item>
-        <ion-label floating>Município</ion-label>
-        <ion-select
-          cancelText="Cancelar"
-          (ionChange)="setCity($event)">
-          <ion-option *ngFor="let municipio of municipios$ | async" [value]="municipio.id">{{municipio.nome}}</ion-option>
-        </ion-select>
-      </ion-item>
-      <ion-item>
-        <ion-label floating>Escola</ion-label>
-        <ion-select
-          [(ngModel)]="denuncia.escolaId"
-          cancelText="Cancelar"
-          [disabled]="(municipio$ | async) == undefined"
-          (ionChange)="setSchool($event)">
-          <ion-option *ngFor="let escola of escolasDoMunicipio$ | async" [value]="escola.id">{{escola.nome}}</ion-option>
-        </ion-select>
-      </ion-item>
-      <!-- TODO: Vincular rotas à API e filtrar por escola -->
-      <ion-item>
-        <ion-label floating>Nome da Rota</ion-label>
+        <ion-label floating>Rota</ion-label>
         <ion-select
           [(ngModel)]="denuncia.rotaId"
           cancelText="Cancelar"
           [disabled]="(escola$ | async) == undefined">
+          
+          <!-- TODO: mudar para ROTAS DO ALUNO -->
           <ion-option *ngFor="let rota of rotasDaEscola$ | async" [value]="rota.id">{{rota.nome}}</ion-option>
         </ion-select>
       </ion-item>
-    </ion-slide> <!-- SLIDE 2 -->
+    </ion-slide> <!-- FIM DO SLIDE 2 -->
 
     <ion-slide id="slide-reclamacao"> <!-- SLIDE 3 - DETALHAMENTO DA RECLAMAÇÃO -->
       <div id="inputs-reclamacao">
@@ -131,19 +144,25 @@
         [action]="send"
         [disabled]="!(canSend$ | async)"
       ></large-button>
-    </ion-slide> <!-- SLIDE 3 -->
+    </ion-slide> <!-- FIM DO SLIDE 3 -->
 
   </ion-slides>
+
   <div id="nav-slides">
+    <!-- Botão: Voltar Slide -->
     <span class="nav-slide">
       <button *ngIf="!slides.isBeginning()" icon-only id="prev-slide" (click)="prev()">
         <ion-icon name="custom-nav-voltar"></ion-icon>
       </button>
     </span>
+  
+    <!-- Botão: Próximo Slide -->
     <span class="nav-slide">
       <button *ngIf="!slides.isEnd() && canGoNext()" icon-only id="next-slide" (click)="next()">
         <ion-icon name="custom-nav-avancar"></ion-icon>
       </button>
     </span>
-    </div>
+  
+  </div>
+
 </module-page>
