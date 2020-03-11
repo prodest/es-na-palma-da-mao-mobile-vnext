@@ -89,8 +89,7 @@
           cancelText="Cancelar"
           [disabled]="(escola$ | async) == undefined">
           
-          <!-- TODO: mudar para ROTAS DO ALUNO -->
-          <ion-option *ngFor="let rota of rotasDaEscola$ | async" [value]="rota.id">{{rota.nome}}</ion-option>
+          <ion-option *ngFor="let rota of rotasDoAluno$ | async" [value]="rota.id">{{rota.nome}}</ion-option>
         </ion-select>
       </ion-item>
     </ion-slide> <!-- FIM DO SLIDE 2 -->

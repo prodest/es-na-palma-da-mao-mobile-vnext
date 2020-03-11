@@ -53,7 +53,7 @@ export class SeduDenunciasPage {
   municipio$: Subject<number>;               // município escolhido, atualizado pelo método setCity()
   escolasDoMunicipio$: Subject<Escola[]>;    // lista de escolas, filtrada por município, exibida no select de escolas, atualizada pelo subscribe no IonViewDidEnter
   escola$: Subject<number>                   // escola escolhida, atualizado pelo método setSchool()
-  rotasDaEscola$: Subject<Rota[]>;           // lista de rotas, filtrada por escola, exibida no select de rotas, atualizada pelo subscribe no IonViewDidEnter
+  rotasDoAluno$: Subject<Rota[]>;            // lista de rotas de um aluno, exibida no select de rotas, atualizada pelo método getStudent()
   
   canSend$: BehaviorSubject<boolean>;
 
@@ -74,7 +74,7 @@ export class SeduDenunciasPage {
     this.escola$ = new Subject();
     this.escolasDoMunicipio$ = new Subject();
     this.tiposDenuncia$ = new Subject();
-    this.rotasDaEscola$ = new Subject();
+    this.rotasDoAluno$ = new Subject();
     this.papeis$ = new Subject();
 
     this.canSend$ = new BehaviorSubject(false);
@@ -88,19 +88,6 @@ export class SeduDenunciasPage {
       this.denuncia.autor = this.auth.state.claims.nome;
       this.denuncia.email = this.auth.state.claims.email;
     }
-
-    // Atualiza a lista de rotas quando a escola$ é definida
-    this.escola$.subscribe((idEscola: number) => {
-      const loading = this.presentLoading();
-
-      // TODO: trocar pelas rotas do aluno
-      this.api.getSchoolRoutes(idEscola)
-      .subscribe((rotas: Rota[]) => {
-        this.rotas = rotas;
-        this.rotasDaEscola$.next(rotas);
-        loading.dismiss();
-      });
-    });
 
     this.loadData();
   }
@@ -160,6 +147,8 @@ export class SeduDenunciasPage {
           
           // pega o nome da escola
           this.denuncia.escola = this.escolas.filter((e: Escola)=> e.id === aluno.escolaId )[0]["nome"];
+
+          this.rotasDoAluno$.next(aluno.rotas);
           
           this.escola$.next(aluno.escolaId); // TODO: vai sumir
         } else {

@@ -17,13 +17,6 @@ export class DetalhesDenunciaPage {
     this.denuncia = navParams.get('demand');
   }
 
-  ionViewWillLoad() {
-    this.api.getDemandResponse(this.denuncia.id)
-    .subscribe((parecer) => {
-      this.denuncia.parecer = parecer;
-    });
-  }
-
   date(date: string) {
     return (new Date(date)).toLocaleString();
   }

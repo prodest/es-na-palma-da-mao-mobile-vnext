@@ -1,3 +1,5 @@
+import { Rota } from ".";
+
 export interface Aluno {
   id: number;
   nome: string;
@@ -8,4 +10,5 @@ export interface Aluno {
   mae: string;
   codEnergia: string;
   ra: string;
+  rotas: Rota[];
 }

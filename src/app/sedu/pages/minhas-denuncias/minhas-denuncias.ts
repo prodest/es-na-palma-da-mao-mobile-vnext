@@ -29,7 +29,7 @@ export class MinhasDenunciasPage {
     const loading = this.presentLoading();
     this.api.getUserDemands(this.auth.state.claims.cpf)
     .subscribe((denuncias: Denuncia[]) => {
-      // console.log(denuncias);
+      console.log(denuncias);
       this.denuncias$.next(denuncias);
       this.denuncias = denuncias;
       loading.dismiss();

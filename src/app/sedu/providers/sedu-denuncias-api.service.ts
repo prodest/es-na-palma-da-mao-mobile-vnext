@@ -25,7 +25,7 @@ export class SeduDenunciasApiService {
       
       this.options = {
         "headers": {
-          // "token": this.env.api.seduDenunciasToken
+          // nomeDoHeader: valor
         }
       };
     }
@@ -81,39 +81,17 @@ export class SeduDenunciasApiService {
     return this.http.get<Denuncia[]>(`${this.env.api.seduDenuncias}/reclamante/${cpf}/reclamacoes`, this.options)
     .pipe(map(res => res.map((demand: any) => ({
       ...demand,
-      // *dataRegistro: new Date(demand['created_on']),
-      // status: demand['status'],
-      // protocolo: demand['protocolo'],
+      dataRegistro: new Date(demand['createdOn']),
 
       descricao: demand['texto'],
       tipoReclamacao: demand['tipo'],
-      // outroTipo: demand['outro_tipo'],
       dataReclamacao: new Date(demand['dataOcorrido']),
-      // rota: demand['rota'],
-      // placaVeiculo: demand['placa_veiculo'],
       
       autor: demand['reclamante'],
       papelDoAutor: demand['papel'],
-      // outroPapel: demand['outro_papel'],
 
-      // aluno: demand['aluno']['nome'],
-      // *codigoEDP: demand['aluno']['cod_energia'],
-      // *registroAcademico: demand['aluno']['ra'],
-      // *escola: demand['aluno']['escola'],
       parecer: demand['parecerFinal']
-
-
     }) as Denuncia)));
-  }
-
-  /**
-   * Obtém o parecer de uma reclamação. (TODO: APAGAR)
-   */
-  getDemandResponse(idDemand: number): Observable<any> {
-    return this.http.get(`${this.env.api.seduDenuncias}/reclamacao/${idDemand}/parecer`, this.options)
-    .pipe(map((res: [any]) => 
-      res.length > 0 ? res[0]["fields"]["texto"] : ""
-    ));
   }
 
   /**
