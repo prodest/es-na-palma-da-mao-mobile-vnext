@@ -19,6 +19,8 @@ export class AirPage {
   map: any;
   loadMap :boolean = false;
 
+
+
   @ViewChild('map') mapContainer: ElementRef;
   constructor(
     private service: AirService, 
@@ -62,17 +64,22 @@ export class AirPage {
    
   }
 
+  
+
   /**
    * 
    */
   pin(map){
     this.Air.map(item =>{
-      let mark = leaflet.marker([item.Latitude,item.Longitude]);
+      let pinIcon = leaflet.divIcon({
+        className: "number-icon",
+        iconSize: [48, 60],
+        html: "<div class=\"faixa\" style=\"background-color: " + item.Cor + "\">" + item.Iqa.toFixed(0) +"</div>"});
+
+      let mark = leaflet.marker([item.Latitude,item.Longitude], {icon: pinIcon});
       map.addLayer(mark);
       mark.on('click', () => {
         // abrir modal com as informações
-
-        // this.loadQualityId(item.IdEstacao);
                
         this.modal(item.IdEstacao, this.Air.find( a => a.IdEstacao === item.IdEstacao));
 
