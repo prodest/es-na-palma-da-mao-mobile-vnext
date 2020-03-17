@@ -2,182 +2,57 @@
 
     <ion-content>
 
-        <div class="modal modal-poluentes-class modal-escala-class fade in active" id="modalEscala" tabindex="-1"
-            role="dialog" aria-labelledby="modal-escala-label" aria-hidden="true">
-            <div class="modal-dialog modal-lg" role="document">
-                <div class="modal-content">
-                    <div class="modal-header" id="modal-escala-header" style="padding-bottom: 0;">
-
-
-                    </div>
-                    <div class="modal-body" style="padding-top: 0;">
-                        <div class="subtitulo">
-                            <b>Escala do Índice de Qualidade do Ar (IQAr)</b>
-                            <br>
-                            <b>Faixa de Concentração* do Poluente</b>
-                        </div>
-                        <div class="row">
-                            <table style="margin-bottom: 10px;"
-                                class="table table-condensed table-bordered table-striped table-responsive-stack tamanho-tabela"
-                                id="tableOne">
-
-                                <tbody>
-                                    
-                                    <div >
-                                        <div>
-                                            <td class="faixa-boa"><b>Classificação¹ :</b><b>Boa</b></td>
-                                        </div>
-                                        <hr>
-
-                                        <th><b>MP<sub>10</sub> (24h): </b></th>
-                                        <td>0 - 50</td> <br>
-                                        <hr>
-                                        <th><b>MP<sub>2,5</sub> (24h): </b></th>
-                                        <td>0 - 25</td><br>
-                                        <hr>
-                                        <th><b>SO<sub>2</sub> (24h): </b></th>
-                                        <td>0 - 20</td> <br>
-                                        <hr>
-                                        <th><b>NO<sub>2</sub> (1h): </b></th>
-                                        <td>0 - 200</td> <br>
-                                        <hr>
-                                        <th><b>O<sub>3</sub> (8h): </b></th>
-                                        <td>0 - 100</td> <br>
-                                        <hr>
-                                        <th><b>C<sub>o</sub> (8h): </b></th>
-                                        <td>0 - 10.000</td>
-                                        <hr>
-
-
-                                    </div>
-
-                                    <div>
-                                        <div>
-                                            <td style="min-width: 101px;" class="faixa-moderada"><b>Classificação¹
-                                                    :</b><b>Moderada</b></td>
-                                        </div>
-                                        <hr>
-                                        <th><b>MP<sub>10</sub> (24h): </b></th>
-                                        <td> >50 - 120</td> <br>
-                                        <hr>
-                                        <th><b>MP<sub>2,5</sub> (24h): </b></th>
-                                        <td> >25 - 60</td> <br>
-                                        <hr>
-                                        <th><b>SO<sub>2</sub> (24h): </b></th>
-                                        <td> >20 - 60</td> <br>
-                                        <hr>
-                                        <th><b>NO<sub>2</sub> (1h): </b></th>
-                                        <td> >200 - 240</td> <br>
-                                        <hr>
-                                        <th><b>O<sub>3</sub> (8h): </b></th>
-                                        <td> >100 - 140</td> <br>
-                                        <hr>
-                                        <th><b>C<sub>o</sub> (8h): </b></th>
-                                        <td> >10.000 - 13.000</td>
-                                        <hr>
-
-                                    </div>
-                                    <div>
-                                        <div>
-                                            <td style="min-width: 101px;" class="faixa-ruim"><b>Classificação¹
-                                                    :</b><b>Ruim</b></td>
-                                            <hr>
-                                        </div>
-                                        <th><b>MP<sub>10</sub> (24h): </b></th>
-                                        <td> >120 - 150</td> <br>
-                                        <hr>
-                                        <th><b>MP<sub>2,5</sub> (24h): </b></th>
-                                        <td> >60 - 125</td> <br>
-                                        <hr>
-                                        <th><b>SO<sub>2</sub> (24h): </b></th>
-                                        <td> >60 - 365</td> <br>
-                                        <hr>
-                                        <th><b>NO<sub>2</sub> (1h): </b></th>
-                                        <td> >240 - 320</td> <br>
-                                        <hr>
-                                        <th><b>O<sub>3</sub> (8h): </b></th>
-                                        <td> >140 - 160</td> <br>
-                                        <hr>
-                                        <th><b>C<sub>o</sub> (8h): </b></th>
-                                        <td> >13.000 - 15.000</td>
-                                        <hr>
-
-                                    </div>
-                                    <div>
-                                        <div>
-                                            <td style="min-width: 101px;" class="faixa-muitoruim"><b>Classificação¹
-                                                    :</b><b>Muito Ruim</b></td>
-                                            <hr>
-                                        </div>
-                                        <th><b>MP<sub>10</sub> (24h): </b></th>
-                                        <td> >150 - 250</td> <br>
-                                        <hr>
-                                        <th><b>MP<sub>2,5</sub> (24h): </b></th>
-                                        <td> >125 - 210</td> <br>
-                                        <hr>
-                                        <th><b>SO<sub>2</sub> (24h): </b></th>
-                                        <td> >365 - 800</td> <br>
-                                        <hr>
-                                        <th><b>NO<sub>2</sub> (1h): </b></th>
-                                        <td> >320 - 1.130</td> <br>
-                                        <hr>
-                                        <th><b>O<sub>3</sub> (8h): </b></th>
-                                        <td> >160 - 200</td> <br>
-                                        <hr>
-                                        <th><b>C<sub>o</sub> (8h): </b></th>
-                                        <td> >15.000 - 17.000</td>
-                                        <hr>
-
-                                    </div>
-                                    <div>
-                                        <div>
-                                            <td style="min-width: 101px;" class="faixa-pessima"><b>Classificação¹
-                                                    :</b><b>Péssimo</b></td>
-                                            <hr>
-                                        </div>
-                                        <th><b>MP<sub>10</sub> (24h): </b></th>
-                                        <td> >250</td> <br>
-                                        <hr>
-                                        <th><b>MP<sub>2,5</sub> (24h): </b></th>
-                                        <td> >210</td> <br>
-                                        <hr>
-                                        <th><b>SO<sub>2</sub> (24h): </b></th>
-                                        <td> >800</td> <br>
-                                        <hr>
-                                        <th><b>NO<sub>2</sub> (1h): </b></th>
-                                        <td> >1.130</td> <br>
-                                        <hr>
-                                        <th><b>O<sub>3</sub> (8h): </b></th>
-                                        <td> >200</td> <br>
-                                        <hr>
-                                        <th><b>C<sub>o</sub> (8h): </b></th>
-                                        <td> >17.000</td>
-                                        <hr>
-                                    </div>
-
-                                </tbody>
-                            </table>
-                        </div>
-
-                        <div class="row row-footnotes tamanho-tabela" style="line-height: 1.3em;">
-                            <div class="col-lg-12">
-                                <small style="margin-bottom: 4px;display: block;">
-                                    * Valores em µg / m3
-                                </small>
-                                <small style="margin-bottom: 4px;display: block; text-align: justify">¹ A classificação qualitativa da
-                                    qualidade do ar é definida de acordo com as faixas numéricas adimensionais
-                                    estabelecidas para o IQAr, estas, que por sua vez, estão relacionadas com as faixas
-                                    de concentração dos poluentes atmosféricos regulamentados. Os valores das faixas do
-                                    IQAr atualmente praticados são: 0 a 40 → “BOA”; >
-                                    40 a 80 → “MODERADA”; > 80 a 120 → “RUIM”; > 120 a 200 → “MUITO RUIM”; > 200 →
-                                    “PÉSSIMA”.
-                                </small>
-                            </div>
-                        </div>
-
-                    </div>
-                </div>
+        <div>
+            <div class="subtitulo">
+                <b>Escala do Índice de Qualidade do Ar (IQAr)</b>
+                <br>
+                <br>
             </div>
+            
+            <div class="informacoes"><img src="../../../../assets/imgs/boa.png">
+            </div>
+            <b>0 – 40 Boa</b>
+            <ion-list  no-lines class="conteudo-texto">
+                
+                A qualidade do ar é satisfatória e oferece pouco ou nenhum risco à saúde da população exposta. As concentrações dos poluentes atmosféricos atendem as diretrizes da Organização Mundial da Saúde.
+
+            </ion-list>
+
+            <div class="informacoes"><img src="../../../../assets/imgs/Moderada.png">
+            </div>
+            <b>41 – 80 Moderada</b>
+            <ion-list  no-lines  class="conteudo-texto">
+                A qualidade do ar é aceitável. Em grupos extremamente sensíveis à poluição do ar, podem ocorrer efeitos à saúde. Para estes grupos é recomendável evitar a realização de atividades prolongadas ou de alto esforço físico ao ar livre.
+
+
+            </ion-list>
+
+            <div class="informacoes"><img src="../../../../assets/imgs/Ruim.png">
+            </div>
+            <b>81 – 120 Ruim</b>
+            <ion-list  no-lines  class="conteudo-texto">
+                A qualidade do ar é ruim. Grupos sensíveis à poluição do ar (crianças, idosos, asmáticos, etc.) devem evitar a realização de atividades prolongadas ou de alto esforço físico ao ar livre.
+
+
+            </ion-list>
+
+            <div class="informacoes"><img src="../../../../assets/imgs/MuitoRuim.png">
+            </div>
+            <b>121 – 200 Muito Ruim</b>
+            <ion-list  no-lines  class="conteudo-texto">
+                A qualidade do ar muito ruim. Grupos sensíveis à poluição do ar (crianças, idosos, asmáticos, etc.) devem evitar a realização de atividades prolongadas ou de alto esforço físico ao ar livre. Toda a população exposta deve reduzir a realização de atividades ao ar livre.
+
+
+            </ion-list>
+
+            <div class="informacoes"><img src="../../../../assets/imgs/Péssima.png">
+            </div>
+            <b>> 201 Péssima</b>
+            <ion-list  no-lines  class="conteudo-texto">
+                Toda população deve evitar a realização de atividades ao ar livre.
+
+
+            </ion-list>
         </div>
 
     </ion-content>
