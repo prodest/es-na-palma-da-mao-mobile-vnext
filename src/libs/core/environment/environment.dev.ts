@@ -7,6 +7,7 @@ export const dev: Environment = {
   mocks: {
     edocs: false
   },
+
   api: {
     invalidTokenHttpCode: 498,
     news: process.env.API_NEWS_URL || 'https://api.es.gov.br/developers/news',
@@ -36,6 +37,7 @@ export const dev: Environment = {
     sugestaodt: process.env.API_SUGESTAO_URL || 'https://api.es.gov.br/sugestaodt',
     sugestaoaluno: process.env.API_SUGESTAO_ALUNO_URL || 'https://api.es.gov.br/sugestaoaluno',
     siarhes: process.env.API_SIARHES || 'https://apisiarhes.dchm.es.gov.br/api/espm',
+    clima: process.env.API_CLIMA || 'http://api.openweathermap.org/data/2.5/weather',
   },
   push: {
     senderId: process.env.PUSH_SENDER_ID,

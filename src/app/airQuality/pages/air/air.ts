@@ -71,20 +71,23 @@ export class AirPage {
    */
   pin(map){
     this.Air.map(item =>{
-      let pinIcon = leaflet.divIcon({
-        className: "number-icon",
-        iconSize: [48, 60],
-        html: "<div class=\"faixa\" style=\"background-color: " + item.Cor + "\">" + item.Iqa.toFixed(0) +"</div>"});
-
-      let mark = leaflet.marker([item.Latitude,item.Longitude], {icon: pinIcon});
-      map.addLayer(mark);
-      mark.on('click', () => {
-        // abrir modal com as informações
-               
-        this.modal(item.IdEstacao, this.Air.find( a => a.IdEstacao === item.IdEstacao));
-
-        
-      });
+      if (item.Faixa != null && item.Valor != 0){
+        let pinIcon = leaflet.divIcon({
+          className: "number-icon",
+          iconSize: [48, 60],
+          html: "<div class=\"faixa\" style=\"background-color: " + item.Cor + "\">" + item.Iqa.toFixed(0) +"</div>"});
+  
+        let mark = leaflet.marker([item.Latitude,item.Longitude], {icon: pinIcon});
+        map.addLayer(mark);
+        mark.on('click', () => {
+          // abrir modal com as informações
+                 
+          this.modal(item.IdEstacao, this.Air.find( a => a.IdEstacao === item.IdEstacao));
+  
+          
+        });
+      }
+      
     });
     
   }

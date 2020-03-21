@@ -29,4 +29,9 @@ export class AirApiService {
 
   }
 
+  getWeather(latitude,longitude): Observable<MapaId[]> {
+    return this.http.get<MapaId[]>(`${this.env.api.clima}?lat=${latitude}&lon=${longitude}&appid=${process.env.KEY_ACESS_WEATHER}&lang=pt_br`).pipe(share());
+  }
+
+
 }
