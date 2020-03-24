@@ -2,6 +2,17 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+<a name="6.3.13"></a>
+## [6.3.13](https://github.com/prodest/es-na-palma-da-mao-mobile-vnext/compare/v6.3.12...v6.3.13) (2020-03-24)
+
+
+### Features
+
+* **dados clima:** dados do clima e ajustes ([c0851b8](https://github.com/prodest/es-na-palma-da-mao-mobile-vnext/commit/c0851b8))
+* **geolocalizacao:** posicionamento relativo ([21b9c96](https://github.com/prodest/es-na-palma-da-mao-mobile-vnext/commit/21b9c96))
+
+
+
 <a name="6.3.12"></a>
 ## [6.3.12](https://github.com/prodest/es-na-palma-da-mao-mobile-vnext/compare/v6.3.11...v6.3.12) (2020-03-17)
 
