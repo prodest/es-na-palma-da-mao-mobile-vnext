@@ -33,6 +33,7 @@ export interface Environment {
     sugestaodt: string;
     sugestaoaluno: string;
     siarhes: string;
+    clima: string;
   };
   push: {
     senderId: string;

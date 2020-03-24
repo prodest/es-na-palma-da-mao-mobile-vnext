@@ -40,6 +40,17 @@
     <div style="font-size: 0.87em;padding: 5px; text-align:center; background-color: white;">
         <span style="text-align:center; font-size: 1em;">Atualizado dia {{formatedDate}} <br> (Dados das últimas 48 horas)</span>
     </div>
+
+    <div class="clima-tempo">
+        <img src="../../../../assets/imgs/sol.png">
+        <span>{{formatCelsius}} °C </span>
+        
+        <img src="../../../../assets/imgs/humidity.png">
+        <span>{{humidade}}% </span> 
+        
+        <img src="../../../../assets/imgs/vento.png">
+        <span>{{vento}} km/h</span>
+    </div>
    
     <div class="sessionChart">
         <div class="chartOne" *ngFor="let info of infoPoint;" >

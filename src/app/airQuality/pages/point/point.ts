@@ -19,6 +19,11 @@ export class QualityPointPage implements OnInit {
   point : Mapa;
   iqar: number;
   formatedDate: string;
+  formatCelsius:string;
+  climate : MapaId[];
+  vento: number;
+  temperatura: number;
+  humidade: number;
  
   constructor(private apiService: AirApiService,public navParams: NavParams){ 
       this.idPoint =  this.navParams.get('id');
@@ -27,6 +32,7 @@ export class QualityPointPage implements OnInit {
  
   ngOnInit(): void {
     this.formatedDate = this.formatDate(this.point.DataHora);
+    
   }
  
   formatDate(dateString){
@@ -40,15 +46,34 @@ export class QualityPointPage implements OnInit {
     return `${day}/${month}/${year} às ${hour}:${minute}h`;
   }
 
+  formatedCelsius(temperatura){
+    const resultado = temperatura - 273.15;
+    return `${Math.round(resultado)}`;
+  }
+
   chartOptions = {
     responsive: true
   };
 
   ionViewDidEnter() {
     this.loadQualityId(this.idPoint);
+    this.loadClimate();
     
   }
 
+  loadClimate(){
+    this.apiService.getWeather(this.point.Latitude, this.point.Longitude).subscribe(
+      dados => {
+        this.climate = dados;
+
+        this.vento = this.climate['wind']['speed'];
+        this.temperatura = this.climate['main']['temp'];
+        this.humidade = this.climate['main']['humidity'];
+
+        this.formatCelsius = this.formatedCelsius(this.temperatura);
+      }
+    );
+  }
 
 
   /**
@@ -61,7 +86,7 @@ export class QualityPointPage implements OnInit {
       this.refreshMinMax();
       this.iqar = Math.round(this.point.Iqa);
     });
-  };
+  }
 
   refreshHour(){
     for(let i=0; i < this.infoPoint.length; i++)
