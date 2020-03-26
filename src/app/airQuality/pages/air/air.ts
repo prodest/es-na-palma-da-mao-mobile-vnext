@@ -15,7 +15,7 @@ export class AirPage {
   Air: Mapa[];
   mapaId: any[];
   loading: Loading;
-  map: any;
+  map: leaflet.Map;
   loadMap: boolean = false;
   longitude: any;
   latitude: any;
@@ -45,12 +45,20 @@ export class AirPage {
   ionViewDidLoad() {
     this.allDataQualityAir();
   }
+  ionViewCanLeave() {
+    // document.getElementById('airmap').outerHTML = '';
+  }
   /**
    * puxa todos os dados
    */
   allDataQualityAir = () => {
     this.service.getAllQualityAir().subscribe(dados => {
       this.Air = dados;
+
+      if (this.map != null) {
+        this.map.off();
+        this.map.remove();
+      }
       this.loadMapa();
     });
   };
@@ -59,19 +67,24 @@ export class AirPage {
    * carrega o mapa
    */
   async loadMapa() {
-    let map = leaflet.map('map').setView([-20.2602057, -40.3405489], 11);
+    if (this.map) {
+      this.map.off();
+      this.map.remove();
+    }
+
+    this.map = leaflet.map('airmap').setView([-20.2602057, -40.3405489], 11);
 
     leaflet
       .tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
         attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
       })
-      .addTo(map);
+      .addTo(this.map);
 
-    this.pin(map);
+    this.pin(this.map);
 
     this.loading.dismiss();
     this.loadMap = true;
-    await this.pinPeople(map);
+    await this.pinPeople(this.map);
   }
 
   /**
