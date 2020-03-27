@@ -2,6 +2,17 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+<a name="6.3.14"></a>
+## [6.3.14](https://github.com/prodest/es-na-palma-da-mao-mobile-vnext/compare/v6.3.13...v6.3.14) (2020-03-27)
+
+
+### Bug Fixes
+
+* **airQuality:** fix env ([f631ff0](https://github.com/prodest/es-na-palma-da-mao-mobile-vnext/commit/f631ff0))
+* **airQuality:** now user point return defalt value if have error ([c8779d3](https://github.com/prodest/es-na-palma-da-mao-mobile-vnext/commit/c8779d3))
+
+
+
 <a name="6.3.13"></a>
 ## [6.3.13](https://github.com/prodest/es-na-palma-da-mao-mobile-vnext/compare/v6.3.12...v6.3.13) (2020-03-24)
 
