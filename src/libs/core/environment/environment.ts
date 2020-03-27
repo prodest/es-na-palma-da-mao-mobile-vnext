@@ -34,6 +34,7 @@ export interface Environment {
     sugestaoaluno: string;
     siarhes: string;
     clima: string;
+    climaKey: string;
   };
   push: {
     senderId: string;
