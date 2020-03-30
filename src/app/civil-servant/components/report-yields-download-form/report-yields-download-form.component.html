@@ -1,0 +1,24 @@
+<form novalidate [formGroup]="form" (ngSubmit)="onSubmitClick(form.value)">
+  <ion-item *ngIf="years?.length === 0">
+    <p class="empty-data-info">Nenhum dado encontrado.</p>
+  </ion-item>
+  <ion-item class="form-item" *ngIf="years?.length">
+    <ion-label>Ano</ion-label>
+    <ion-select cancelText="Cancelar" formControlName="year" name="year" [selectOptions]="yearsOptions"
+      (ionChange)="selectYear($event)">
+      <ion-option *ngFor="let year of years" [value]="year">{{ year }}</ion-option>
+    </ion-select>
+  </ion-item>
+  <espm-validation-message [errors]="validationErrors['year']"></espm-validation-message>
+  <ion-item class="form-item" *ngIf="companies?.length">
+    <ion-label>Empresa</ion-label>
+    <ion-select cancelText="Cancelar" formControlName="company" name="company" [selectOptions]="companiesOptions"
+      (ionChange)="selectCompany($event)">
+      <ion-option *ngFor="let company of companies" [value]="company">{{ company.nomeEmpresa }}</ion-option>
+    </ion-select>
+  </ion-item>
+  <espm-validation-message [errors]="validationErrors['company']"></espm-validation-message>
+  <button type="submit" ion-button class="download" [disabled]="form.invalid">
+    Baixar
+  </button>
+</form>

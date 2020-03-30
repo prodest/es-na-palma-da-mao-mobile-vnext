@@ -37,7 +37,7 @@ ion-menu {
     background-color: #004297;
     color: white;
   }
-  
+
   ion-content {
     background-color: transparent !important;
     background-image: none;
@@ -225,9 +225,14 @@ ion-icon {
     background: transparent url(../assets/icon/icone-processos.png)no-repeat left bottom;
     background-size: contain;
   }
-  &[class*="modulo-documentos"] {
+  &[class*="modulo-servidor"] {
     background: transparent url(../assets/icon/icone-servidor-publico.png)no-repeat left bottom;
     background-size: contain;
+  }
+  &[class*="modulo-qualidade"] {
+    background: transparent url(../assets/icon/icone-nuvem.jpg)no-repeat left bottom;
+    background-size: contain;
+    
   }
 
   /* Ícone Selecionar favoritos */
@@ -367,7 +372,7 @@ ion-spinner[section-loading] {
   }
 }
 .split-pane-side .scroll-content {
-  background-color: #e9f7fe; 
+  background-color: #e9f7fe;
 }
 
 ion-list-header {
@@ -378,10 +383,10 @@ ion-list-header {
 
 ion-alert {
   font-family: 'Poppins';
-  
+
   .alert-wrapper {
     border-radius: 30px !important;
-    
+
     .alert-head {
       text-align: center;
 
@@ -398,7 +403,7 @@ ion-alert {
       justify-content: space-evenly;
       padding: 0;
       border-top: 1px solid #ccc;
-      
+
       button {
         margin: 0;
         flex: 1;

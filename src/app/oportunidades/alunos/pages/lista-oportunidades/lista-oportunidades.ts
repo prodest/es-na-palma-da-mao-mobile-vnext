@@ -1,10 +1,18 @@
+import { AlunosApiService } from './../../providers/alunos.api.service';
+// import { ID } from '@datorama/akita';
 import { Component } from '@angular/core';
-import { trackById } from '@espm/core';
+import { trackById, AuthQuery } from '@espm/core';
 import { IonicPage, NavController } from 'ionic-angular';
 import deburr from 'lodash-es/deburr';
 import { Concurso } from '../../model';
 import { AlunosQuery, AlunoService } from '../../providers';
 import { map } from 'rxjs/operators';
+
+type Distancia = {
+  cpf: string;
+  cursos: Array<number>;
+};
+
 @IonicPage({
   segment: 'alunos'
 })
@@ -13,6 +21,9 @@ import { map } from 'rxjs/operators';
   templateUrl: 'lista-oportunidades.html'
 })
 export class ListaOportunidadesPage {
+  /* exemplo de novo retorno */
+
+  distancia2: Array<Distancia> = [];
   /**
    *
    */
@@ -23,7 +34,13 @@ export class ListaOportunidadesPage {
   /**
    *
    */
-  constructor(private navCtrl: NavController, private service: AlunoService, private query: AlunosQuery) {}
+  constructor(
+    private navCtrl: NavController,
+    private auth: AuthQuery,
+    private service: AlunoService,
+    private query: AlunosQuery,
+    private apiService: AlunosApiService
+  ) {}
 
   /**
    *
@@ -37,6 +54,7 @@ export class ListaOportunidadesPage {
       .subscribe(concursos => {
         this.allConcursos = this.filteredConcursos = concursos;
       });
+    this.recebeDados();
   }
   /**
    *
@@ -62,6 +80,7 @@ export class ListaOportunidadesPage {
       return this.normalize(concurso.nome).includes(search) || this.normalize(concurso.tipo).includes(search);
     });
   };
+
   /**
    *  volta para pagina de apresentação
    */
@@ -91,6 +110,23 @@ export class ListaOportunidadesPage {
       return valor;
     }
   };
+
+  recebeDados() {
+    if (this.auth.isLoggedIn) {
+      let cpf = this.auth.state.claims.cpf;
+      this.apiService.getDistancias(cpf).subscribe(
+        dados => {
+          this.distancia2 = dados;
+        },
+        () => {}
+      );
+    }
+  }
+
+  checaCurso(cursoId: number) {
+    let cursos: Array<number> = this.distancia2[0]['cursos'];
+    return cursos.some(curso => curso === cursoId);
+  }
 
   /**
    *

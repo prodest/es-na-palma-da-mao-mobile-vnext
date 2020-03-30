@@ -2,6 +2,221 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+<a name="6.3.15"></a>
+## [6.3.15](https://github.com/prodest/es-na-palma-da-mao-mobile-vnext/compare/v6.3.14...v6.3.15) (2020-03-28)
+
+
+
+<a name="6.3.14"></a>
+## [6.3.14](https://github.com/prodest/es-na-palma-da-mao-mobile-vnext/compare/v6.3.13...v6.3.14) (2020-03-27)
+
+
+### Bug Fixes
+
+* **airQuality:** fix env ([f631ff0](https://github.com/prodest/es-na-palma-da-mao-mobile-vnext/commit/f631ff0))
+* **airQuality:** now user point return defalt value if have error ([c8779d3](https://github.com/prodest/es-na-palma-da-mao-mobile-vnext/commit/c8779d3))
+
+
+
+<a name="6.3.13"></a>
+## [6.3.13](https://github.com/prodest/es-na-palma-da-mao-mobile-vnext/compare/v6.3.12...v6.3.13) (2020-03-24)
+
+
+### Features
+
+* **dados clima:** dados do clima e ajustes ([c0851b8](https://github.com/prodest/es-na-palma-da-mao-mobile-vnext/commit/c0851b8))
+* **geolocalizacao:** posicionamento relativo ([21b9c96](https://github.com/prodest/es-na-palma-da-mao-mobile-vnext/commit/21b9c96))
+
+
+
+<a name="6.3.12"></a>
+## [6.3.12](https://github.com/prodest/es-na-palma-da-mao-mobile-vnext/compare/v6.3.11...v6.3.12) (2020-03-17)
+
+
+### Features
+
+* **ajustes:** ajustes a pedido do cliente ([cb5eee5](https://github.com/prodest/es-na-palma-da-mao-mobile-vnext/commit/cb5eee5))
+
+
+
+<a name="6.3.11"></a>
+## [6.3.11](https://github.com/prodest/es-na-palma-da-mao-mobile-vnext/compare/v6.3.10...v6.3.11) (2020-03-11)
+
+
+
+<a name="6.3.10"></a>
+## [6.3.10](https://github.com/prodest/es-na-palma-da-mao-mobile-vnext/compare/v6.3.9...v6.3.10) (2020-03-11)
+
+
+
+<a name="6.3.9"></a>
+## [6.3.9](https://github.com/prodest/es-na-palma-da-mao-mobile-vnext/compare/v6.3.8...v6.3.9) (2020-03-11)
+
+
+
+<a name="6.3.8"></a>
+## [6.3.8](https://github.com/prodest/es-na-palma-da-mao-mobile-vnext/compare/v6.3.7...v6.3.8) (2020-03-10)
+
+
+### Bug Fixes
+
+* **app:** alteração da ordem do menu principal ([76bac6a](https://github.com/prodest/es-na-palma-da-mao-mobile-vnext/commit/76bac6a))
+
+
+
+<a name="6.3.7"></a>
+## [6.3.7](https://github.com/prodest/es-na-palma-da-mao-mobile-vnext/compare/v6.3.6...v6.3.7) (2020-03-05)
+
+
+
+<a name="6.3.6"></a>
+## [6.3.6](https://github.com/prodest/es-na-palma-da-mao-mobile-vnext/compare/v6.3.5...v6.3.6) (2020-03-04)
+
+
+### Bug Fixes
+
+* **documents-to-send:** show error dialog on convert api error ([7024ca4](https://github.com/prodest/es-na-palma-da-mao-mobile-vnext/commit/7024ca4))
+* **legenda:** atualizando tabela da legenda da qualidade do ar ([fc65774](https://github.com/prodest/es-na-palma-da-mao-mobile-vnext/commit/fc65774))
+* **legenda:** atualizando tabela de faixa do ar ([7f29ec0](https://github.com/prodest/es-na-palma-da-mao-mobile-vnext/commit/7f29ec0))
+* **merge:** merge com a versao mais atual do app ([bce8adf](https://github.com/prodest/es-na-palma-da-mao-mobile-vnext/commit/bce8adf))
+
+
+### Features
+
+* **Air:** coordenadas dos municipios ([fef2ca9](https://github.com/prodest/es-na-palma-da-mao-mobile-vnext/commit/fef2ca9))
+* **Air:** correção dos models ([282ae9c](https://github.com/prodest/es-na-palma-da-mao-mobile-vnext/commit/282ae9c))
+* **Air:** estrutura de requisições de serviços ([3bb2fc3](https://github.com/prodest/es-na-palma-da-mao-mobile-vnext/commit/3bb2fc3))
+* **Air:** iserindo mapa leaflet ([46b283e](https://github.com/prodest/es-na-palma-da-mao-mobile-vnext/commit/46b283e))
+* **Air:** title css mapa ([741677d](https://github.com/prodest/es-na-palma-da-mao-mobile-vnext/commit/741677d))
+* **ajustes:** ajustando elementos ([9f5d57c](https://github.com/prodest/es-na-palma-da-mao-mobile-vnext/commit/9f5d57c))
+* **ar:** implementado qualidade do ar ([f6e9c78](https://github.com/prodest/es-na-palma-da-mao-mobile-vnext/commit/f6e9c78))
+* **detalhe ponto:** inserindo detalhes do ponto ([8edfc9f](https://github.com/prodest/es-na-palma-da-mao-mobile-vnext/commit/8edfc9f))
+* **graph:** inserindo grafico ([5d35655](https://github.com/prodest/es-na-palma-da-mao-mobile-vnext/commit/5d35655))
+* **iframe:** testando uso do iframe ([d43d374](https://github.com/prodest/es-na-palma-da-mao-mobile-vnext/commit/d43d374))
+* **igualando:** igualando ([4a99315](https://github.com/prodest/es-na-palma-da-mao-mobile-vnext/commit/4a99315))
+* **info:** click para informaçoes ([9f82c7e](https://github.com/prodest/es-na-palma-da-mao-mobile-vnext/commit/9f82c7e))
+* **info:** info do pino ([bf99c67](https://github.com/prodest/es-na-palma-da-mao-mobile-vnext/commit/bf99c67))
+* **info:** pagina de info ([b874283](https://github.com/prodest/es-na-palma-da-mao-mobile-vnext/commit/b874283))
+* **insert map:** inserindo mapa porem com erro de cors ([3910c30](https://github.com/prodest/es-na-palma-da-mao-mobile-vnext/commit/3910c30))
+* **legenda:** inserindo imagem no botao da legenda ([a64d6f4](https://github.com/prodest/es-na-palma-da-mao-mobile-vnext/commit/a64d6f4))
+* **legenda:** inserindo legenda no mapa ([fff919e](https://github.com/prodest/es-na-palma-da-mao-mobile-vnext/commit/fff919e))
+* **mobile:** atualizaçao clean ([08ab0e0](https://github.com/prodest/es-na-palma-da-mao-mobile-vnext/commit/08ab0e0))
+* **modal:** montando modal do pino ([913cb68](https://github.com/prodest/es-na-palma-da-mao-mobile-vnext/commit/913cb68))
+* **pin:** pin no mapa ([c24a474](https://github.com/prodest/es-na-palma-da-mao-mobile-vnext/commit/c24a474))
+* **qualidade:** iniciando modulo ([179260c](https://github.com/prodest/es-na-palma-da-mao-mobile-vnext/commit/179260c))
+* **test:** fazendo teste ([7c2d773](https://github.com/prodest/es-na-palma-da-mao-mobile-vnext/commit/7c2d773))
+
+
+
+<a name="6.3.5"></a>
+## [6.3.5](https://github.com/prodest/es-na-palma-da-mao-mobile-vnext/compare/v6.3.4...v6.3.5) (2020-02-28)
+
+
+### Bug Fixes
+
+* **report-yields-download:** FIx onSubmit($event) ([2053f5f](https://github.com/prodest/es-na-palma-da-mao-mobile-vnext/commit/2053f5f))
+
+
+### Features
+
+* **report-yields:** Add report yields feature ([eb42bee](https://github.com/prodest/es-na-palma-da-mao-mobile-vnext/commit/eb42bee))
+
+
+
+<a name="6.3.4"></a>
+## [6.3.4](https://github.com/prodest/es-na-palma-da-mao-mobile-vnext/compare/v6.3.3...v6.3.4) (2019-12-20)
+
+
+### Bug Fixes
+
+* **paystub:** Corrigido folhas em branco de inativos ([8def278](https://github.com/prodest/es-na-palma-da-mao-mobile-vnext/commit/8def278))
+
+
+
+<a name="6.3.3"></a>
+## [6.3.3](https://github.com/prodest/es-na-palma-da-mao-mobile-vnext/compare/v6.3.1...v6.3.3) (2019-12-18)
+
+
+### Bug Fixes
+
+* **paystub:** Fixing select form bug ([cb97e6b](https://github.com/prodest/es-na-palma-da-mao-mobile-vnext/commit/cb97e6b))
+* **sort:** Fixing months sorting ([49268a2](https://github.com/prodest/es-na-palma-da-mao-mobile-vnext/commit/49268a2))
+
+
+
+<a name="6.3.2"></a>
+## [6.3.2](https://github.com/prodest/es-na-palma-da-mao-mobile-vnext/compare/v6.3.1...v6.3.2) (2019-12-18)
+
+
+### Bug Fixes
+
+* **paystub:** Fixing select form bug ([cb97e6b](https://github.com/prodest/es-na-palma-da-mao-mobile-vnext/commit/cb97e6b))
+* **sort:** Fixing months sorting ([49268a2](https://github.com/prodest/es-na-palma-da-mao-mobile-vnext/commit/49268a2))
+
+
+
+<a name="6.3.1"></a>
+## [6.3.1](https://github.com/prodest/es-na-palma-da-mao-mobile-vnext/compare/v6.3.0...v6.3.1) (2019-12-17)
+
+
+
+<a name="6.3.0"></a>
+# [6.3.0](https://github.com/prodest/es-na-palma-da-mao-mobile-vnext/compare/v6.2.5...v6.3.0) (2019-12-17)
+
+
+### Bug Fixes
+
+* **document-summary-list:** Fix error when open edocs authenticated area ([e1d3e27](https://github.com/prodest/es-na-palma-da-mao-mobile-vnext/commit/e1d3e27))
+* civil servant icon ([93fb6b4](https://github.com/prodest/es-na-palma-da-mao-mobile-vnext/commit/93fb6b4))
+* **links-status:** uppercase scss class ([4ee4237](https://github.com/prodest/es-na-palma-da-mao-mobile-vnext/commit/4ee4237))
+* **payroll:** Acerto na atribuicao das folhas ([ff03f35](https://github.com/prodest/es-na-palma-da-mao-mobile-vnext/commit/ff03f35))
+* **paystub:** download on click submit button ([f007707](https://github.com/prodest/es-na-palma-da-mao-mobile-vnext/commit/f007707))
+* **paystub:** rm unknow import module ([3ec626b](https://github.com/prodest/es-na-palma-da-mao-mobile-vnext/commit/3ec626b))
+* **paystub-links:** implements oninit ([6bdd481](https://github.com/prodest/es-na-palma-da-mao-mobile-vnext/commit/6bdd481))
+* **presentation-civil-servant:** change target page to paystub page ([30e601f](https://github.com/prodest/es-na-palma-da-mao-mobile-vnext/commit/30e601f))
+* **presentation-civil-servant:** contracheque target page ([1af267d](https://github.com/prodest/es-na-palma-da-mao-mobile-vnext/commit/1af267d))
+
+
+### Features
+
+* **app:** add service menu civil servand and presentation your page ([95da08f](https://github.com/prodest/es-na-palma-da-mao-mobile-vnext/commit/95da08f))
+* **civil-servant:** add download paystub static page ([010db08](https://github.com/prodest/es-na-palma-da-mao-mobile-vnext/commit/010db08))
+* **civil-servant:** add profile and link interface ([861b3cd](https://github.com/prodest/es-na-palma-da-mao-mobile-vnext/commit/861b3cd))
+* **civil-servant:** add year and month interfaces ([1678589](https://github.com/prodest/es-na-palma-da-mao-mobile-vnext/commit/1678589))
+* **download-paystub:** add paycheck sheet component ([ecc3d43](https://github.com/prodest/es-na-palma-da-mao-mobile-vnext/commit/ecc3d43))
+* **paycheck-sheet:** create static pay check sheet compoent ([22e9b8a](https://github.com/prodest/es-na-palma-da-mao-mobile-vnext/commit/22e9b8a))
+* **paycheck-sheet-form:** create pay check static form ([3cb1a16](https://github.com/prodest/es-na-palma-da-mao-mobile-vnext/commit/3cb1a16))
+* **paycheck-sheet-form:** get and update data by input and output ([433b483](https://github.com/prodest/es-na-palma-da-mao-mobile-vnext/commit/433b483))
+* **paystub:** add more paystub service methods ([d495fd2](https://github.com/prodest/es-na-palma-da-mao-mobile-vnext/commit/d495fd2))
+* **paystub:** Add payrolls request ([1d94e2d](https://github.com/prodest/es-na-palma-da-mao-mobile-vnext/commit/1d94e2d))
+* **paystub:** add paystub api get profiles and links ([073912e](https://github.com/prodest/es-na-palma-da-mao-mobile-vnext/commit/073912e))
+* **paystub:** add paystub api service profiles and links ([7709579](https://github.com/prodest/es-na-palma-da-mao-mobile-vnext/commit/7709579))
+* **paystub:** add paystub page ([1d9f758](https://github.com/prodest/es-na-palma-da-mao-mobile-vnext/commit/1d9f758))
+* **paystub:** Add paystub providers ([c23b73d](https://github.com/prodest/es-na-palma-da-mao-mobile-vnext/commit/c23b73d))
+* **paystub:** Create paystub page ([948628a](https://github.com/prodest/es-na-palma-da-mao-mobile-vnext/commit/948628a))
+* **paystub:** get paystub data by service ([dd42b72](https://github.com/prodest/es-na-palma-da-mao-mobile-vnext/commit/dd42b72))
+* **paystub-download:** add paystub data with input and output ([4c69f5f](https://github.com/prodest/es-na-palma-da-mao-mobile-vnext/commit/4c69f5f))
+* **paystub-links:** add dynamic links input and output ([d6de557](https://github.com/prodest/es-na-palma-da-mao-mobile-vnext/commit/d6de557))
+* **paystub-links:** Add links paystub static page ([4cbb911](https://github.com/prodest/es-na-palma-da-mao-mobile-vnext/commit/4cbb911))
+* **paystub-links:** add sort function ([e817db9](https://github.com/prodest/es-na-palma-da-mao-mobile-vnext/commit/e817db9))
+* **paystub-links:** select link output event ([3f26e2c](https://github.com/prodest/es-na-palma-da-mao-mobile-vnext/commit/3f26e2c))
+* **paystub-profiles:** add dynamic profiles input and output ([48a108a](https://github.com/prodest/es-na-palma-da-mao-mobile-vnext/commit/48a108a))
+
+
+<a name="6.2.5"></a>
+## [6.2.5](https://github.com/prodest/es-na-palma-da-mao-mobile-vnext/compare/v6.2.4...v6.2.5) (2019-12-17)
+
+
+<a name="6.2.4"></a>
+## [6.2.4](https://github.com/prodest/es-na-palma-da-mao-mobile-vnext/compare/v6.2.3...v6.2.4) (2019-12-17)
+
+
+### Bug Fixes
+
+* **cordova:** build error ([ce53973](https://github.com/prodest/es-na-palma-da-mao-mobile-vnext/commit/ce53973))
+
+
+
 <a name="6.2.3"></a>
 ## [6.2.3](https://github.com/prodest/es-na-palma-da-mao-mobile-vnext/compare/v6.2.2...v6.2.3) (2019-10-21)
 

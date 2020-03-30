@@ -1,0 +1,51 @@
+page-air {
+  a {
+    text-align: center;
+    color: black;
+    height: 50px;
+  }
+  .legenda {
+    position: absolute;
+    z-index: 9999; /* número máximo é 9999 */
+    bottom: 68px;
+    right: 2px;
+  }
+
+  .imagem{
+    background-image:url("../assets/imgs/icon-escala.png") ;
+    background-repeat: no-repeat;
+    margin-right: 10px;
+    width: 1px;
+    height: 22px;
+    background-size: contain;
+  }
+
+  module-page {
+    background-image:url("../assets/imgs/logo_iema.png");
+    background-repeat: no-repeat;
+    background-position-x: 96%;
+    background-position-y: 3%;
+    background-size: 60px;
+    
+  }
+
+  .number-icon {
+      background-image: url("../assets/icon/placabg.png");
+      text-align: center;
+      background-size: contain;
+      background-repeat: no-repeat;
+  }
+
+  .number-icon .faixa{
+      background-color: white;
+      color: black;
+      border-radius: 3px 3px 3px 3px;
+      margin: 2px 3px 1px 2px;
+      font-size: 15px;
+      padding-top: 3px;
+      padding-bottom: 3px;
+      overflow: hidden;
+      font-weight: bold;
+  } 
+}
+

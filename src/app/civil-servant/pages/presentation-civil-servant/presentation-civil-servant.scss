@@ -1,0 +1,13 @@
+page-presentation-civil-servant {
+
+  @media screen and (max-width: 450px){
+    module-index ion-list [ion-button] .button-inner {
+      font-size: 15px;
+    }
+  }
+  @media screen and (max-width: 359px){
+    module-index ion-list [ion-button] .button-inner {
+      font-size: 11px;
+    }
+  }
+}

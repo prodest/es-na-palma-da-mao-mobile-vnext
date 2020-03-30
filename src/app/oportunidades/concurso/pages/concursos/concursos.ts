@@ -1,10 +1,15 @@
+// import { Auth } from './../../../../../libs/core/auth/index';
+
+
 import { Component } from '@angular/core';
-import { trackById } from '@espm/core';
+import { trackById, AuthQuery } from '@espm/core';
 import { IonicPage, NavController } from 'ionic-angular';
 import deburr from 'lodash-es/deburr';
 import { Concurso } from '../../model';
 import { SelecaoQuery, SelecaoService } from '../../providers';
 import { Subject } from 'rxjs/Subject';
+import { SelecaoApiService } from '../../providers/selecao.api.service';
+
 
 @IonicPage({
   segment: 'concursos'
@@ -14,29 +19,72 @@ import { Subject } from 'rxjs/Subject';
   templateUrl: 'concursos.html'
 })
 export class ConcursosPage {
+
+    
+  porcentagens2: Object = {}
+  
+
   /**
   *
   */
   concursos$: Subject<Concurso[]>; // concursos que são exibidos na tela
-  concursosLenght: number;
+  concursosLength: number;
   allConcursos: Concurso[];
   filteredConcursos: Concurso[];
   trackById = trackById;
-  
+  valor = [];
   /**
   *
   */
-  constructor(private navCtrl: NavController, private service: SelecaoService, private query: SelecaoQuery) {
+  constructor(private auth: AuthQuery, private navCtrl: NavController, private service: SelecaoService, private query: SelecaoQuery, private selecaoApiService: SelecaoApiService) {
     this.concursos$ = new Subject();
+    if (this.auth.isLoggedIn) 
+    {
+      
+       let cpf = this.auth.state.claims.cpf
+       
+      
+        this.selecaoApiService.getPorcentagem(cpf).subscribe(
+          dados => {
+            this.porcentagens2 = dados
+          },
+          ()=>{
+
+          }
+ 
+        );
+        
+    }
+    
+    console.log(this.valor)
   }
-  
   /**
   *
+  */  
+  verificationOrgan() {
+  }
+  /*
+  *
   */
+
+  hasPercent(orgao: string) {
+    
+    if ( this.porcentagens2[orgao.toLowerCase()] !== undefined )
+    {
+      return true;
+    }
+    return false;
+  }   
+    
+  
+  
   ionViewWillLoad() {
+    
     this.query
     .selectAll()
     .subscribe((concursos: Concurso[]) => {
+      // console.log(concursos);
+      
       this.allConcursos = concursos;
       this.updateConcursos(concursos);
     });
@@ -44,6 +92,7 @@ export class ConcursosPage {
     // carrega dados
     this.service.loadAll();
   }
+
   /**
   *
   */
@@ -51,7 +100,7 @@ export class ConcursosPage {
     this.concursos$.next(
       this.sortByFavorites(concursos)
     );
-    this.concursosLenght = concursos.length;
+    this.concursosLength = concursos.length;
   };
 
   private sortByFavorites = (concursos: Concurso[]): Concurso[] => {
