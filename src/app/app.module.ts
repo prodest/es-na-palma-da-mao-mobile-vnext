@@ -44,10 +44,12 @@ import { NewsProviders } from './news/providers';
 import { TransparencyProviders } from './secont/transparency/providers';
 import { SepProviders } from './sep/providers';
 import { SchedulingService } from './scheduling/providers/scheduling.service';
+// import { QualidadeProviders } from './qualidadedoar/providers';
 
 import { TranscolOnlineStores } from './ceturb/transcol-online/state';
 import { MenusProviders } from './navegacao/providers';
 import { SeduDenunciasProviders } from './sedu/providers';
+
 
 moment.locale('pt-br');
 

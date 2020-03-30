@@ -29,6 +29,12 @@ export interface Environment {
     mailer: string;
     guide: string;
     convertToPdf: string;
+    airQuality: string;
+    sugestaodt: string;
+    sugestaoaluno: string;
+    siarhes: string;
+    clima: string;
+    climaKey: string;
     seduDenuncias: string;
     seduDenunciasToken: string;
   };

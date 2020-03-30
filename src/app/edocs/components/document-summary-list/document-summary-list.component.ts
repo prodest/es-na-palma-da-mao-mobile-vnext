@@ -8,9 +8,10 @@ import {
   SimpleChanges,
   ViewChild,
 } from '@angular/core';
-import { trackById } from '@espm/core';
-import { InfiniteScroll, NavController, Refresher } from 'ionic-angular';
+import { trackById, AuthQuery } from '@espm/core';
+import { InfiniteScroll, NavController, Refresher, App } from 'ionic-angular';
 import { untilDestroyed } from 'ngx-take-until-destroy';
+import { of } from 'rxjs/observable/of';
 import { Observable } from 'rxjs/Observable';
 import { filter, tap } from 'rxjs/operators';
 
@@ -35,7 +36,11 @@ export class DocumentSummaryListComponent implements OnChanges, OnInit, OnDestro
   /**
    *
    */
-  constructor(private docsService: DocumentsService, private docsQuery: DocumentsQuery, private navCtrl: NavController) {}
+  constructor(private docsService: DocumentsService, 
+    private docsQuery: DocumentsQuery, 
+    private navCtrl: NavController, 
+    private authQuery: AuthQuery,
+    protected appCtrl: App) {}
 
   /**
    *
@@ -50,6 +55,15 @@ export class DocumentSummaryListComponent implements OnChanges, OnInit, OnDestro
    *
    */
   ngOnInit(): void {
+    // permite acesso à tela se autenticados
+    const isAllowed = this.authQuery.isLoggedIn;
+
+    if (!isAllowed) {
+      this.documents$ = of([]);
+      this.hasMore$ = of(false);
+      this.isLoading$ = of(false);
+      return;
+    }
     this.documents$ = this.docsQuery.selectDocuments();
     this.hasMore$ = this.docsQuery.selectHasMore();
     this.isLoading$ = this.docsQuery.selectLoading();

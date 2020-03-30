@@ -1,0 +1,30 @@
+<ion-list no-lines>
+  <ion-item class="sub-header">
+    <ion-row>
+      <ion-col>
+        <h2>{{ orgao }}</h2>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col>
+        <table class="table">
+          <tbody>
+            <tr>
+              <th>Número do vínculo:</th>
+              <td>{{ numVinc }}</td>
+            </tr>
+            <tr>
+              <th>Número funcional:</th>
+              <td>{{ numFunc }}</td>
+            </tr>
+          </tbody>
+        </table>
+      </ion-col>
+    </ion-row>
+  </ion-item>
+  <ion-item>
+    <civil-servant-report-yields-download-form [years]="years" [companies]="companies"
+      (onSelectYear)="selectYear($event)" (onSubmit)="selectCompany($event.company)">
+    </civil-servant-report-yields-download-form>
+  </ion-item>
+</ion-list>

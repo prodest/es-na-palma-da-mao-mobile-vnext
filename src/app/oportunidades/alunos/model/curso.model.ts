@@ -10,5 +10,6 @@ export class Curso {
   ofertante: string;
   status: string;
   municipio: string;
+  distancia: string;
 
 }

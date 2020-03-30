@@ -1,0 +1,96 @@
+<module-page title="Qualidade do Ar" no-padding>
+  <div>
+    <ion-label class="titulo">
+      <br />
+      Índice de Qualidade do Ar (IQAr)<br />
+
+      <b
+        >Estação
+        <span>
+          {{point.Localizacao}} ({{point.Descricao}})
+        </span>
+      </b>
+    </ion-label>
+  </div>
+  <div style="background-color: white;">
+    <div>
+      <span class="iqar-boa" *ngIf="point.Faixa == 'Boa'">{{iqar}}<br /> </span>
+      <span class="iqar-moderada" *ngIf="point.Faixa == 'Moderada'">{{iqar}}<br /> </span>
+      <span class="iqar-ruim" *ngIf="point.Faixa == 'Ruim'">{{iqar}}<br /> </span>
+      <span class="iqar-muitoruim" *ngIf="point.Faixa == 'Muito Ruim'">{{iqar}}<br /> </span>
+      <span class="iqar-pessima" *ngIf="point.Faixa == 'Péssima'">{{iqar}}<br /> </span>
+    </div>
+  </div>
+  <div style="font-size: 0.87em; margin-top:0px; text-align:center; background-color: white; ">
+    <br />Poluente:
+    <span>
+      {{point.Poluente}}
+    </span>
+  </div>
+  <ion-item no-lines>
+    <ion-label class="boa" *ngIf="point.Faixa == 'Boa'">{{point.Faixa}}</ion-label>
+    <ion-label class="moderada" *ngIf="point.Faixa == 'Moderada'">{{point.Faixa}}</ion-label>
+    <ion-label class="ruim" *ngIf="point.Faixa == 'Ruim'">{{point.Faixa}}</ion-label>
+    <ion-label class="muitoruim" *ngIf="point.Faixa == 'Muito Ruim'">{{point.Faixa}}</ion-label>
+    <ion-label class="pessima" *ngIf="point.Faixa == 'Péssima'">{{point.Faixa}}</ion-label>
+  </ion-item>
+
+  <div style="font-size: 0.87em;padding: 5px; text-align:center; background-color: white;">
+    <span style="text-align:center; font-size: 1em;"
+      >Atualizado dia {{formatedDate}} <br />
+      (Dados das últimas 48 horas)</span
+    >
+  </div>
+
+  <div class="clima-tempo">
+    <img src="../../../../assets/imgs/sol.png" />
+    <span>{{formatCelsius}} °C </span>
+
+    <img src="../../../../assets/imgs/humidity.png" />
+    <span>{{humidade}}% </span>
+
+    <img src="../../../../assets/imgs/vento.png" />
+    <span>{{vento}} km/h</span>
+  </div>
+
+  <div class="sessionChart">
+    <div class="chartOne" *ngFor="let info of infoPoint;">
+      <br />
+      <b>Poluente:</b> <br />
+      {{info.Poluente}} {{info.PoluenteSigla}}
+      <br /><br />
+      <b>IQAr:</b>
+      <canvas
+        baseChart
+        [chartType]="'bar'"
+        [datasets]="[{data:info.ValorIqa}]"
+        [labels]="info.DataHora"
+        [options]="chartOptions"
+        [colors]="[{ backgroundColor: info.Cor}]"
+        [legend]="false"
+      ></canvas>
+
+      <br />
+      <div class="min-max-left">
+        <b>Min:</b>
+        <b class="min-val">{{info.Min}}</b>
+      </div>
+      <div class="min-max-right">
+        <b>Max:</b>
+        <b class="max-val">{{info.Max}}</b>
+      </div>
+    </div>
+  </div>
+
+  <div style="background-color: white;">
+    <ul class="diva">
+      <li><span class="faixa-boa"></span> Boa</li>
+      <li><span class="faixa-moderada"></span> Moderada</li>
+      <li><span class="faixa-ruim"></span> Ruim</li>
+      <li><span class="faixa-muitoruim"></span> Muito Ruim</li>
+      <li><span class="faixa-pessima"></span> Péssima</li>
+    </ul>
+
+    <div class="rodape">* Valores sujeitos a validação posterior</div>
+  </div>
+</module-page>

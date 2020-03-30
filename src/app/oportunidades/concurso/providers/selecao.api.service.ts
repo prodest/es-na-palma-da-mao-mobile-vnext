@@ -1,6 +1,6 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Inject, Injectable } from '@angular/core';
-import { Environment, EnvVariables } from '@espm/core';
+import { Environment, EnvVariables, ANONYMOUS_HEADER } from '@espm/core';
 import { Observable } from 'rxjs/Observable';
 
 import { Classificacao, Concurso } from '../model';
@@ -15,7 +15,9 @@ export class SelecaoApiService {
   /**
    *
    */
-  constructor(private http: HttpClient, @Inject(EnvVariables) private env: Environment) {}
+  constructor(private http: HttpClient, @Inject(EnvVariables) private env: Environment) {
+
+  }
 
   /**
    *
@@ -45,6 +47,28 @@ export class SelecaoApiService {
   getFavorites = (): Observable<ConcursoFavorito> => {
     return this.http.get<ConcursoFavorito>(`${this.env.api.espm}/publicTender/data/favorite`).pipe(share());
   };
+  
+  /**
+   * 
+   * 
+   * 
+   */
+  getPorcentagem = (cpf: string): Observable<Concurso[]> => {   /* autenticacao api */ 
+    
+    const headers: HttpHeaders = new HttpHeaders({
+      Authorization: `Basic ${btoa('user:pass')}`, 
+      [ANONYMOUS_HEADER]: 'true'
+    })
+    let url = `${this.env.api.sugestaodt}/sugestao/pessoa/${cpf}`;
+
+
+    return this.http.get<Concurso[]>(url, { headers }).pipe(share());
+    // /cpf/orgao?cpf=<cpf_que _voce_vai_mandar>&orgao=<primeiro_orgao>&orgao=<segundo_orgao>
+  }; 
+
+  /**
+   * 
+   */
   syncFavorites = (favoritos): Observable<ConcursoFavorito> => {
     return this.http.post<ConcursoFavorito>(`${this.env.api.espm}/publicTender/data/favorite`, favoritos).pipe(share());
   };

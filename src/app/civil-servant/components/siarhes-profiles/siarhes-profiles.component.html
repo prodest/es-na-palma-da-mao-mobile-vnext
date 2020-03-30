@@ -1,0 +1,14 @@
+<p class="info">Selecione o perfil que deseja consultar:</p>
+<ion-list>
+  <p class="text-danger" *ngIf="!profiles || profiles.length === 0">
+    Não há perfis disponível no usuário atual.
+  </p>
+  <button ion-item *ngFor="let profile of profiles" (click)="selectProfile(profile)">
+    <div class="button-content">
+      <h3 text-wrap class="concursos_name">
+        {{ profile.nomePerfil }}
+      </h3>
+      <p text-wrap>{{ profile.perfilAcesso }}</p>
+    </div>
+  </button>
+</ion-list>

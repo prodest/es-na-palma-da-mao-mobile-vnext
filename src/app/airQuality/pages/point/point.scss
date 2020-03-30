@@ -1,0 +1,220 @@
+page-quality-point {
+   
+    module-page {
+        background-image:url("../assets/imgs/logo_iema.png");
+        background-repeat: no-repeat;
+        background-position-x: 96%;
+        background-position-y: 3%;
+        background-size: 60px;
+        
+    }
+
+    .scroll-content{
+        padding: 0px !important;
+    } 
+
+    .titulo{
+        text-align: center;
+        background-color:white;
+        font-size: 1.1em;
+        margin-top: 0px;
+        margin-bottom: 0px;
+        margin-right: 0px;
+       
+    }
+
+    .iqar-boa{
+        font-size: 3em;
+        margin-left: 25%;
+        margin-right: 25%;
+        text-align: center;
+        background-color: #3CF20E;
+        margin-top: 15px;
+        display: flow-root;
+        border: 1px #55a042;
+        border-radius: 5px;
+    }
+
+    .iqar-moderada{
+        font-size: 3em;
+        margin-left: 25%;
+        margin-right: 25%;
+        text-align: center;
+        background-color: #F5ED00;
+        margin-top: 15px;
+        display: flow-root;
+        border: 1px #55a042;
+        border-radius: 5px;
+    }
+
+    .iqar-ruim{
+        font-size: 3em;
+        margin-left: 25%;
+        margin-right: 25%;
+        text-align: center;
+        background-color: #F58300;
+        margin-top: 15px;
+        display: flow-root;
+        border: 1px #55a042;
+        border-radius: 5px;
+    }
+
+    .iqar-muitoruim{
+        font-size: 3em;
+        margin-left: 25%;
+        margin-right: 25%;
+        text-align: center;
+        background-color: #FA0000;
+        margin-top: 15px;
+        display: flow-root;
+        border: 1px #55a042;
+        border-radius: 5px;
+    }
+
+    .iqar-pessima{
+        font-size: 3em;
+        margin-left: 25%;
+        margin-right: 25%;
+        text-align: center;
+        background-color: #550080;
+        margin-top: 15px;
+        display: flow-root;
+        border: 1px #55a042;
+        border-radius: 5px;
+    }
+
+    .boa{
+        text-align:center; 
+        font-size: 2em;
+        color: #3CF20E;
+        margin-top: 0;
+        margin-bottom: 0;
+        font-size: 43px;
+        text-shadow: 1px 1px 1px black;
+    }
+
+    .moderada{
+        text-align:center; 
+        font-size: 2em;
+        margin-top: 0;
+        margin-bottom: 0;
+        font-size: 43px;
+        text-shadow: 1px 1px 1px black;
+        color: #F5ED00;
+    }
+
+    .ruim{
+        color: #F58300;
+        text-align:center; 
+        font-size: 2em;
+        margin-top: 0;
+        margin-bottom: 0;
+        font-size: 43px;
+        text-shadow: 1px 1px 1px black;
+    }
+
+    .muitoruim{
+        text-align:center; 
+        font-size: 2em;
+        margin-top: 0;
+        margin-bottom: 0;
+        font-size: 43px;
+        text-shadow: 1px 1px 1px black;
+        color: #FA0000;
+    }
+    .pessima{
+        text-align:center; 
+        font-size: 2em;
+        margin-top: 0;
+        margin-bottom: 0;
+        font-size: 43px;
+        text-shadow: 1px 1px 1px black;
+        color: #550080;
+    }
+
+    .sessionChart{
+        border-top: black;
+        padding: 15px;     
+        background-color: white;
+    }
+
+    .chartOne{
+        border-bottom: 0.1px solid;
+        display: table;
+        width: 100%;
+    }
+
+    
+    .diva{
+     background-color: white;
+     list-style: none;
+     margin-top: 0;
+     margin-bottom: 10px;
+
+    }
+
+    .diva li{
+        float: left;
+        margin-right: 10px;
+    }
+
+    .diva .faixa-boa {
+        background-color: #3CF20E;
+    }
+
+    .diva .faixa-moderada {
+        background-color: #F5ED00;
+    }
+    .diva .faixa-ruim {
+        background-color: #F58300;
+    }
+    .diva .faixa-muitoruim {
+        background-color: #FA0000;
+    }
+    .diva .faixa-pessima {
+        background-color: #550080;
+    }
+
+    .diva span {
+        width: 12px;
+        height: 12px;
+        margin: 2px;
+        display: inline-block;
+        vertical-align: text-top;
+    }
+
+    .min-val{
+        color: #0086c8;
+        font-weight: 700;
+    }
+
+    .max-val{
+        color: #ce3c3a;
+        font-weight: 700;
+    }
+
+    .min-max-left{
+       float: left;
+    }
+    .min-max-right{
+        float: right;
+    }
+
+    .clima-tempo{
+        background-color: white;
+        font-size: 1.1em;
+        text-align: center;
+        padding: 0px;
+    }
+
+    .rodape{
+        margin-left: 5%;
+        background-color: white;
+        margin-top: 55px;
+        margin-bottom: 20px;
+    }
+
+    img{
+        width: 21px;
+    }
+}

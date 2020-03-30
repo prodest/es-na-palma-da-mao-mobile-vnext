@@ -1,0 +1,28 @@
+<div class="content">
+  <ion-searchbar placeholder="Pesquisar..." [showCancelButton]="true" cancelButtonText="Cancelar" [animated]="false"
+    (ionInput)="search($event)" (ionClear)="clear($event)" (ionCancel)="clear($event)">
+  </ion-searchbar>
+  <ion-list>
+    <div class="header" *ngIf="filteredLinks.length">
+      {{ filteredLinks.length }} vinculo(s) encontrado(s)
+    </div>
+    <button ion-item *ngFor="let link of filteredLinks" (click)="selectLink(link)">
+      <div class="button-status">
+        <links-status [status]="link.numeroVinculo"></links-status>
+      </div>
+      <div class="button-content">
+        <h3 text-wrap class="concursos_name">
+          {{ limite ( link.orgao ) }}
+        </h3>
+        <p text-wrap class="concursos_descricao">{{ link.dataExercicio | date:'dd/MM/yyyy' }}</p>
+      </div>
+      <div class="button-status">
+        <links-status [status]="link.situacao"></links-status>
+      </div>
+    </button>
+  </ion-list>
+  <ion-item *ngIf="!filteredLinks.length" text-center no-lines id="not-found">
+    <h2>Nenhum vinculo encontrado</h2>
+    <p>Tente mudar o vinculo da consulta</p>
+  </ion-item>
+</div>

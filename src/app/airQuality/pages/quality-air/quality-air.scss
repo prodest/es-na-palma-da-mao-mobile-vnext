@@ -1,0 +1,30 @@
+page-quality-air {
+
+  .scroll-content {
+    padding: 10%;
+  }
+
+  .subtitulo {
+    text-align: center;
+    font-size: 120%;
+  }
+
+  .conteudo-texto {
+    text-align: justify;
+  }
+ 
+  .informacoes {
+    float: left; 
+    width: 18%;
+  }
+
+  module-page {
+    background-image:url("../assets/imgs/logo_iema.png");
+    background-repeat: no-repeat;
+    background-position-x: 96%;
+    background-position-y: 3%;
+    background-size: 60px;
+    
+  }
+ 
+}
