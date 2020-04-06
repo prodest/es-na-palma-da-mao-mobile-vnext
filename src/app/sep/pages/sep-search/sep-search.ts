@@ -10,11 +10,11 @@ import { takeUntil } from 'rxjs/operators';
 import { AuthQuery } from '@espm/core';
 
 @IonicPage({
-  segment: 'sep/consulta'
+  segment: 'sep/consulta',
 })
 @Component({
   selector: 'page-sep-search',
-  templateUrl: 'sep-search.html'
+  templateUrl: 'sep-search.html',
 })
 export class SepSearchPage implements OnDestroy {
   protocolId: string;
@@ -52,7 +52,7 @@ export class SepSearchPage implements OnDestroy {
     } else if (protocol.length < 2 || protocol.length > 13) {
       this.showMessage('O protocolo deve ter entre 2 e 13 dígitos');
     } else if (protocol) {
-      this.sepService.getProtocol(protocol).subscribe(this.goToProtocol);
+      this.sepService.getProtocol(protocol).subscribe(this.goToProtocol, (error) => console.log(error));
     }
   }
 
@@ -62,10 +62,7 @@ export class SepSearchPage implements OnDestroy {
    */
   ionViewWillLoad() {
     if (this.authQuery.isLoggedIn) {
-      this.sepService
-        .loadFavorites()
-        .pipe(takeUntil(this.destroyed$))
-        .subscribe();
+      this.sepService.loadFavorites().pipe(takeUntil(this.destroyed$)).subscribe();
     }
   }
 
@@ -74,17 +71,17 @@ export class SepSearchPage implements OnDestroy {
    *
    */
   scanBarcode() {
-    this.permissions.requestCameraPermission().then(request => {
+    this.permissions.requestCameraPermission().then((request) => {
       if (request.hasPermission) {
         let options = {
           preferFrontCamera: false,
           prompt: 'Posicione o código dentro da área de leitura', // supported on Android only
-          format: 'CODE_39'
+          format: 'CODE_39',
         };
 
         this.barcodeScanner
           .scan(options)
-          .then(barcodeData => (barcodeData.cancelled ? null : this.search(barcodeData.text)))
+          .then((barcodeData) => (barcodeData.cancelled ? null : this.search(barcodeData.text)))
           .catch(console.error);
       }
     });

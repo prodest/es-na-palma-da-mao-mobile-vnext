@@ -51,22 +51,22 @@ export class SepApiService {
    * Para adaptar a versão antiga com a versão nova do objeto FavoriteProtocol
    */
   private normalizeFavorites = (data: FavoriteProtocolsData): FavoriteProtocolsData => {
-    const protocols = (data.protocols || (data as any).favoriteProcess || (data as any).favoriteProtocols)
-      .map(protocol => {
+    const protocols = (data.protocols || (data as any).favoriteProcess || (data as any).favoriteProtocols || [])
+      .map((protocol) => {
         return typeof protocol === 'string'
           ? {
               number: protocol,
               subject: '',
               summary: '',
-              status: ''
+              status: '',
             }
           : protocol;
       })
-      .filter((item, index, self) => self.findIndex(i => i.number === item.number) === index);
+      .filter((item, index, self) => self.findIndex((i) => i.number === item.number) === index);
 
     return {
       ...data,
-      ...{ protocols }
+      ...{ protocols },
     };
   };
 }
