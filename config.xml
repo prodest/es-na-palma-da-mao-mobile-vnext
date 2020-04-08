@@ -45,6 +45,10 @@
         <hook src="scripts/updateGradleClasspathCordovaLib.sh" type="before_build" />
         <edit-config file="AndroidManifest.xml" mode="merge" target="/manifest/application/activity[@android:name='MainActivity']">
             <activity android:windowSoftInputMode="adjustPan" />
+            <application android:usesCleartextTraffic="true" />
+        </edit-config>
+        <edit-config file="app/src/main/AndroidManifest.xml" mode="merge" target="/manifest/application" xmlns:android="http://schemas.android.com/apk/res/android">
+            <application android:usesCleartextTraffic="true" />
         </edit-config>
         <config-file mode="merge" parent="/manifest/application/activity" target="AndroidManifest.xml">
             <intent-filter>

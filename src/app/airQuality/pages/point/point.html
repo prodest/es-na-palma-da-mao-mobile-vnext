@@ -13,7 +13,7 @@
     </ion-label>
   </div>
   <div style="background-color: white;">
-    <div>
+    <div *ngIf="point">
       <span class="iqar-boa" *ngIf="point.Faixa == 'Boa'">{{iqar}}<br /> </span>
       <span class="iqar-moderada" *ngIf="point.Faixa == 'Moderada'">{{iqar}}<br /> </span>
       <span class="iqar-ruim" *ngIf="point.Faixa == 'Ruim'">{{iqar}}<br /> </span>
@@ -21,7 +21,7 @@
       <span class="iqar-pessima" *ngIf="point.Faixa == 'Péssima'">{{iqar}}<br /> </span>
     </div>
   </div>
-  <div style="font-size: 0.87em; margin-top:0px; text-align:center; background-color: white; ">
+  <div style="font-size: 0.87em; margin-top: 0px; text-align: center; background-color: white;">
     <br />Poluente:
     <span>
       {{point.Poluente}}
@@ -35,8 +35,8 @@
     <ion-label class="pessima" *ngIf="point.Faixa == 'Péssima'">{{point.Faixa}}</ion-label>
   </ion-item>
 
-  <div style="font-size: 0.87em;padding: 5px; text-align:center; background-color: white;">
-    <span style="text-align:center; font-size: 1em;"
+  <div style="font-size: 0.87em; padding: 5px; text-align: center; background-color: white;">
+    <span style="text-align: center; font-size: 1em;"
       >Atualizado dia {{formatedDate}} <br />
       (Dados das últimas 48 horas)</span
     >
