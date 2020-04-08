@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+<a name="6.3.16"></a>
+## [6.3.16](https://github.com/prodest/es-na-palma-da-mao-mobile-vnext/compare/v6.3.15...v6.3.16) (2020-04-08)
+
+
+### Bug Fixes
+
+* **bugs:** corrigido bugs no modulo qualidade do ar e E-Docs ([91d1250](https://github.com/prodest/es-na-palma-da-mao-mobile-vnext/commit/91d1250))
+
+
+
 <a name="6.3.15"></a>
 ## [6.3.15](https://github.com/prodest/es-na-palma-da-mao-mobile-vnext/compare/v6.3.14...v6.3.15) (2020-03-28)
 
