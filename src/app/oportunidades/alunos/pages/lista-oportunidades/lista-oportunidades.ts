@@ -14,11 +14,11 @@ type Distancia = {
 };
 
 @IonicPage({
-  segment: 'alunos'
+  segment: 'alunos',
 })
 @Component({
   selector: 'espm-lista-oportunidades-page',
-  templateUrl: 'lista-oportunidades.html'
+  templateUrl: 'lista-oportunidades.html',
 })
 export class ListaOportunidadesPage {
   /* exemplo de novo retorno */
@@ -50,8 +50,8 @@ export class ListaOportunidadesPage {
     this.service.loadAll();
     this.query
       .selectAll()
-      .pipe(map(concursos => concursos.sort(this.sortConcursos)))
-      .subscribe(concursos => {
+      .pipe(map((concursos) => concursos.sort(this.sortConcursos)))
+      .subscribe((concursos) => {
         this.allConcursos = this.filteredConcursos = concursos;
       });
     this.recebeDados();
@@ -60,11 +60,11 @@ export class ListaOportunidadesPage {
    *
    */
   private sortConcursos = (a: Concurso, b: Concurso) => {
-    if (a.favorito && b.favorito) {
+    if (a.favorito && b.favorito && a.anoBase && b.anoBase) {
       return 1;
-    } else if (a.favorito) {
+    } else if (a.favorito || a.anoBase > b.anoBase) {
       return -1;
-    } else if (b.favorito) {
+    } else if (b.favorito || a.anoBase < b.anoBase) {
       return 1;
     } else {
       return 1;
@@ -74,9 +74,9 @@ export class ListaOportunidadesPage {
   /**
    *
    */
-  search = e => {
+  search = (e) => {
     const search = this.normalize(e.target.value);
-    this.filteredConcursos = this.allConcursos.filter(concurso => {
+    this.filteredConcursos = this.allConcursos.filter((concurso) => {
       return this.normalize(concurso.nome).includes(search) || this.normalize(concurso.tipo).includes(search);
     });
   };
@@ -103,7 +103,7 @@ export class ListaOportunidadesPage {
   }
 
   // tamanho do nome "orgão" limitado
-  limite = valor => {
+  limite = (valor) => {
     if (valor.length > 12) {
       return valor.substring(0, 12) + '…';
     } else {
@@ -115,7 +115,7 @@ export class ListaOportunidadesPage {
     if (this.auth.isLoggedIn) {
       let cpf = this.auth.state.claims.cpf;
       this.apiService.getDistancias(cpf).subscribe(
-        dados => {
+        (dados) => {
           this.distancia2 = dados;
         },
         () => {}
@@ -125,7 +125,7 @@ export class ListaOportunidadesPage {
 
   checaCurso(cursoId: number) {
     let cursos: Array<number> = this.distancia2[0]['cursos'];
-    return cursos.some(curso => curso === cursoId);
+    return cursos.some((curso) => curso === cursoId);
   }
 
   /**

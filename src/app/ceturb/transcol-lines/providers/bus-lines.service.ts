@@ -49,7 +49,11 @@ export class BusLinesService implements OnDestroy {
     // salva favoritos no server todas as vezes que os favoritos forem atualizados após o carregamento
     // inicial da loja
     this.busLinesQuery.favorites$
-      .pipe(filter(() => !this.busLinesStore.isPristine), flatMap(this.saveFavorites), takeUntil(this.destroyed$))
+      .pipe(
+        filter(() => !this.busLinesStore.isPristine),
+        flatMap(this.saveFavorites),
+        takeUntil(this.destroyed$)
+      )
       .subscribe();
   }
 
@@ -87,13 +91,11 @@ export class BusLinesService implements OnDestroy {
       this.showLoading();
     }
 
-    return this.api
-      .getLineDetails(lineNumber)
-      .pipe(
-        finalize(this.dismissLoading),
-        tap(details => this.busLinesStore.update(lineNumber, details)),
-        mapTo(this.busLinesQuery.getEntity(lineNumber))
-      );
+    return this.api.getLineDetails(lineNumber).pipe(
+      finalize(this.dismissLoading),
+      tap((details) => this.busLinesStore.update(lineNumber, details)),
+      mapTo(this.busLinesQuery.getEntity(lineNumber))
+    );
   };
 
   /**
@@ -123,8 +125,8 @@ export class BusLinesService implements OnDestroy {
    */
   private saveFavorites = (favoriteLines: BusLine[]): Observable<FavoriteLinesData> => {
     return this.api.saveFavoriteLines({
-      favoriteLines: favoriteLines.map(line => line.number),
-      date: new Date().toISOString()
+      favoriteLines: favoriteLines.map((line) => line.number),
+      date: new Date().toISOString(),
     });
   };
 
@@ -139,7 +141,7 @@ export class BusLinesService implements OnDestroy {
       buttons: [
         {
           text: 'Entendi',
-          role: 'cancel'
+          role: 'cancel',
         },
         {
           text: 'Autenticar',
@@ -149,9 +151,9 @@ export class BusLinesService implements OnDestroy {
               .setRoot('LoginPage')
               .then(() => alert.dismiss());
             return false;
-          }
-        }
-      ]
+          },
+        },
+      ],
     });
     return alert.present();
   };
@@ -161,10 +163,10 @@ export class BusLinesService implements OnDestroy {
    *
    */
   private markFavorites = ([lines, favorites]: [BusLine[], FavoriteLinesData]): BusLine[] => {
-    return lines.map(line => {
+    return lines.map((line) => {
       return {
         ...line,
-        isFavorite: favorites.favoriteLines.some(l => l === line.number)
+        isFavorite: favorites.favoriteLines ? favorites.favoriteLines.some((l) => l === line.number) : false,
       };
     });
   };

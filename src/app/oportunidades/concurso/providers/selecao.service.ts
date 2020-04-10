@@ -12,10 +12,10 @@ import { forkJoin } from 'rxjs/observable/forkJoin';
 import { ConcursoFavorito } from '../model/concurso-favorito.mode';
 
 const markFavorites = ([concursos, favorites]: [Concurso[], ConcursoFavorito]): Concurso[] => {
-  return concursos.map(concurso => {
+  return concursos.map((concurso) => {
     return {
       ...concurso,
-      favorito: !!(favorites.idTender || []).find(f => f === concurso.id)
+      favorito: !!(favorites.idTender || []).find((f) => f === concurso.id),
     };
   });
 };
@@ -34,7 +34,6 @@ constructor
 }
 
 */
-
 export class SelecaoService {
   /**
    *
@@ -58,7 +57,10 @@ export class SelecaoService {
     this.showLoading();
     this.api
       .getConcurso(id)
-      .pipe(finalize(() => this.dismissLoading()), tap(concurso => this.store.upsert(concurso.id, concurso)))
+      .pipe(
+        finalize(() => this.dismissLoading()),
+        tap((concurso) => this.store.upsert(concurso.id, concurso))
+      )
       .subscribe();
   };
 
@@ -66,15 +68,17 @@ export class SelecaoService {
    *
    */
   loadAll = () => {
-    this.showLoading(); 
+    this.showLoading();
+    try {
+      const concursos$ = this.authQuery.isLoggedIn
+        ? forkJoin(this.getAllConcursos(), this.api.getFavorites()).pipe(map(markFavorites))
+        : this.getAllConcursos();
+      concursos$.pipe(finalize(() => this.dismissLoading())).subscribe((concursos) => this.store.set(concursos));
+    } catch (error) {
+      console.log('Erro no loadAll', error);
+    }
 
-    const concursos$ = this.authQuery.isLoggedIn 
-      ? forkJoin(this.getAllConcursos(), this.api.getFavorites()).pipe(map(markFavorites))
-      : this.getAllConcursos();
-
-    concursos$.pipe(finalize(() => this.dismissLoading())).subscribe(concursos => this.store.set(concursos));
-
-   // this.loadAllpercent();
+    // this.loadAllpercent();
   };
   /**
    * 
@@ -100,7 +104,7 @@ export class SelecaoService {
     this.store.update(concurso.id, { favorito: !concurso.favorito });
     let favoritos = {
       idTender: this.getFavoritos(),
-      date: new Date().toISOString()
+      date: new Date().toISOString(),
     };
     this.api.syncFavorites(favoritos).subscribe();
 
@@ -119,7 +123,7 @@ export class SelecaoService {
   private getFavoritos() {
     let favoritos = [];
     of(
-      this.query.getAll().map(c => {
+      this.query.getAll().map((c) => {
         if (c.favorito) {
           favoritos.push(c.id);
         }

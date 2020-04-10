@@ -6,13 +6,13 @@ import { Concurso } from '../model';
 import { share } from 'rxjs/operators';
 import { ConcursoFavorito } from '../model/concurso-favorito.model';
 /*
-*
-*/
+ *
+ */
 
 type Distancia = {
-  cpf: string,
-  cursos: Array<number>
-}
+  cpf: string;
+  cursos: Array<number>;
+};
 
 @Injectable()
 export class AlunosApiService {
@@ -24,13 +24,21 @@ export class AlunosApiService {
    *
    */
   getConcurso(id): Observable<Concurso> {
-    return this.http.get<Concurso>(`${this.env.api.selecaoalunos}/${id}`).pipe(share());
+    try {
+      return this.http.get<Concurso>(`${this.env.api.selecaoalunos}/${id}`).pipe(share());
+    } catch (error) {
+      console.log('Erro em getConcurso', error);
+    }
   }
   /**
    *
    */
   getAllConcursos = (): Observable<Concurso[]> => {
-    return this.http.get<Concurso[]>(this.env.api.selecaoalunos).pipe(share());
+    try {
+      return this.http.get<Concurso[]>(this.env.api.selecaoalunos).pipe(share());
+    } catch (error) {
+      console.log('Erro em getAllConcursos', error);
+    }
   };
   syncFavorites = (favoritos): Observable<ConcursoFavorito> => {
     return this.http
@@ -38,13 +46,14 @@ export class AlunosApiService {
       .pipe(share());
   };
 
-   getDistancias= (cpf: string): Observable<Distancia[]> => {
+  getDistancias = (cpf: string): Observable<Distancia[]> => {
     const headers: HttpHeaders = new HttpHeaders({
-      Authorization: `Basic user:pass`, 
-      [ANONYMOUS_HEADER]: 'true'
-    })
+      Authorization: `Basic user:pass`,
+      [ANONYMOUS_HEADER]: 'true',
+    });
     let url = `${this.env.api.sugestaoaluno}/sugestao/pessoal/${cpf}`;
-    return this.http.get<Distancia[]>(url, { headers }).pipe(share());
-  } 
-
+    return this.http
+      .get<Distancia[]>(url, { headers })
+      .pipe(share());
+  };
 }
