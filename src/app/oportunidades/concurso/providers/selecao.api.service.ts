@@ -8,68 +8,92 @@ import { share } from 'rxjs/operators';
 import { ConcursoFavorito } from '../model/concurso-favorito.mode';
 
 /*
-*
-*/
+ *
+ */
 @Injectable()
 export class SelecaoApiService {
   /**
    *
    */
-  constructor(private http: HttpClient, @Inject(EnvVariables) private env: Environment) {
-
-  }
+  constructor(private http: HttpClient, @Inject(EnvVariables) private env: Environment) {}
 
   /**
    *
    */
   getConcurso(id): Observable<Concurso> {
-    return this.http.get<Concurso>(`${this.env.api.empregabilidade}/${id}`).pipe(share());
+    try {
+      return this.http.get<Concurso>(`${this.env.api.empregabilidade}/${id}`).pipe(share());
+    } catch (error) {
+      console.log('Erro em getConcurso', error);
+    }
   }
 
   /**
    *
    */
   getClassificacao(idConcurso, idCargo): Observable<Classificacao[]> {
-    return this.http
-      .get<Classificacao[]>(`${this.env.api.empregabilidade}/${idConcurso}/cargo/${idCargo}/classificacao`)
-      .pipe(share());
+    try {
+      return this.http
+        .get<Classificacao[]>(`${this.env.api.empregabilidade}/${idConcurso}/cargo/${idCargo}/classificacao`)
+        .pipe(share());
+    } catch (error) {
+      console.log('Erro em getClassificacao', error);
+    }
   }
 
   /**
    *
    */
   getAllConcursos = (): Observable<Concurso[]> => {
-    return this.http.get<Concurso[]>(this.env.api.empregabilidade).pipe(share());
+    try {
+      return this.http.get<Concurso[]>(this.env.api.empregabilidade).pipe(share());
+    } catch (error) {
+      console.log('Erro em getAllConcursos', error);
+    }
   };
   /**
    *
    */
   getFavorites = (): Observable<ConcursoFavorito> => {
-    return this.http.get<ConcursoFavorito>(`${this.env.api.espm}/publicTender/data/favorite`).pipe(share());
+    try {
+      return this.http.get<ConcursoFavorito>(`${this.env.api.espm}/publicTender/data/favorite`).pipe(share());
+    } catch (error) {
+      console.log('Erro em getFavorites', error);
+    }
   };
-  
+
   /**
-   * 
-   * 
-   * 
+   *
+   *
+   *
    */
-  getPorcentagem = (cpf: string): Observable<Concurso[]> => {   /* autenticacao api */ 
-    
+  getPorcentagem = (cpf: string): Observable<Concurso[]> => {
+    /* autenticacao api */
+
     const headers: HttpHeaders = new HttpHeaders({
-      Authorization: `Basic ${btoa('user:pass')}`, 
-      [ANONYMOUS_HEADER]: 'true'
-    })
+      Authorization: `Basic ${btoa('user:pass')}`,
+      [ANONYMOUS_HEADER]: 'true',
+    });
     let url = `${this.env.api.sugestaodt}/sugestao/pessoa/${cpf}`;
+    try {
+      return this.http
+        .get<Concurso[]>(url, { headers })
+        .pipe(share());
+    } catch (error) {
+      console.log('Erro em getPorcentagem', error);
+    }
 
-
-    return this.http.get<Concurso[]>(url, { headers }).pipe(share());
     // /cpf/orgao?cpf=<cpf_que _voce_vai_mandar>&orgao=<primeiro_orgao>&orgao=<segundo_orgao>
-  }; 
+  };
 
   /**
-   * 
+   *
    */
   syncFavorites = (favoritos): Observable<ConcursoFavorito> => {
-    return this.http.post<ConcursoFavorito>(`${this.env.api.espm}/publicTender/data/favorite`, favoritos).pipe(share());
+    try {
+      return this.http.post<ConcursoFavorito>(`${this.env.api.espm}/publicTender/data/favorite`, favoritos).pipe(share());
+    } catch (error) {
+      console.log('Erro em syncFavorites', error);
+    }
   };
 }
