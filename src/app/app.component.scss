@@ -234,6 +234,10 @@ ion-icon {
     background-size: contain;
     
   }
+  &[class*="modulo-denuncias"] {
+    background: transparent url(../assets/icon/icone-denuncias.png)no-repeat left bottom;
+    background-size: contain;
+  }
 
   /* Ícone Selecionar favoritos */
   &[class*="custom-selecionar-favoritos"] {
@@ -393,6 +397,10 @@ ion-alert {
       h2 {
         font-weight: 600 !important;
       }
+    }
+
+    .alert-radio-group .alert-radio-label {
+      white-space: unset;
     }
 
     .alert-message {

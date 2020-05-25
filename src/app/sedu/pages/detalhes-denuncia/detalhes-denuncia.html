@@ -1,0 +1,67 @@
+<module-page title="Reclamação" no-padding>
+  <ion-list no-lines>
+
+    <!-- PARECER SOBRE A RECLAMAÇÃO -->
+    <ion-item-group *ngIf="denuncia.parecer && denuncia.parecer != ''">
+      <ion-list-header>Parecer</ion-list-header>
+      <ion-item>
+        <h2>{{denuncia.parecer}}</h2>
+      </ion-item>
+    </ion-item-group>
+
+    <!-- DETALHES DA RECLAMAÇÃO -->
+    <ion-item-group>
+      <ion-list-header>Dados da reclamação</ion-list-header>
+      <ion-item>
+        <h2>Protocolo</h2>
+        <p>{{denuncia.protocolo}}</p>
+      </ion-item>
+      <ion-item>
+        <h2>Status</h2>
+        <p>{{denuncia.status}}</p>
+      </ion-item>
+      <ion-item>
+        <h2>Data do ocorrido</h2>
+        <p>{{date(denuncia.dataReclamacao)}}</p>
+      </ion-item>
+      <ion-item>
+        <h2>Tipo de Reclamação</h2>
+        <p>{{denuncia.tipoReclamacao || denuncia.outroTipo}}</p>
+      </ion-item>
+      <ion-item *ngIf="denuncia.placaVeiculo">
+        <h2>Placa do veículo</h2>
+        <p>{{denuncia.placaVeiculo}}</p>
+      </ion-item>
+      <ion-item>
+        <h2>Texto da Reclamação</h2>
+        <p>{{denuncia.descricao}}</p>
+      </ion-item>
+    </ion-item-group>
+
+    <!-- DADOS DO ALUNO ATRELADO À RECLAMAÇÃO -->
+    <ion-item-group>
+      <ion-list-header>Dados do aluno</ion-list-header>
+      <ion-item>
+        <h2>Nome</h2>
+        <p>{{denuncia.aluno || "Não informado"}}</p>
+      </ion-item>
+      <ion-item>
+        <h2>Registro Acadêmico</h2>
+        <p>{{denuncia.registroAcademico || "Não informado"}}</p>
+      </ion-item>
+      <ion-item>
+        <h2>Código EDP</h2>
+        <p>{{denuncia.codigoEDP || "Não informado"}}</p>
+      </ion-item>
+      <ion-item>
+        <h2>Escola</h2>
+        <p>{{denuncia.escola}}</p>
+      </ion-item>
+      <ion-item>
+        <h2>Rota que o atende</h2>
+        <p>{{denuncia.rota}}</p>
+      </ion-item>
+    </ion-item-group>
+    
+  </ion-list>
+</module-page>

@@ -1,0 +1,13 @@
+page-sedu-index {
+  @media screen and (max-width: 361px) {
+    .button-inner {
+      font-size: 1.8rem;
+    }
+  }
+
+  @media screen and (max-width: 321px) {
+    .button-inner {
+      font-size: 1.5rem;
+    }
+  }
+}

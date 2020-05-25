@@ -39,6 +39,8 @@ export const dev: Environment = {
     siarhes: process.env.API_SIARHES || 'https://apisiarhes.dchm.es.gov.br/api/espm',
     clima: process.env.API_CLIMA || 'http://api.openweathermap.org/data/2.5/weather',
     climaKey: process.env.KEY_ACESS_WEATHER
+    seduDenuncias: process.env.API_SEDU_DENUNCIAS_URL || 'https://api.es.gov.br/sedu/api/denuncias',
+    seduDenunciasToken: process.env.API_SEDU_DENUNCIAS_TOKEN
   },
   push: {
     senderId: process.env.PUSH_SENDER_ID,

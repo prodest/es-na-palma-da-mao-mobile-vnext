@@ -1,0 +1,14 @@
+<module-page title="Minhas Reclamações" no-padding>
+  <ion-card
+    *ngFor="let denuncia of (denuncias$ | async)"
+    (click)="showDemand(denuncia.id)">
+    <ion-card-header>
+      {{date(denuncia.dataRegistro)}} - {{denuncia.status}}
+    </ion-card-header>
+    <ion-card-content>
+      <p>{{denuncia.tipoReclamacao || denuncia.outroTipo}}</p>
+      <span>{{denuncia.descricao}}</span>
+    </ion-card-content>
+  </ion-card>
+  <p id="none" *ngIf="denuncias.length == 0">Não há reclamações registradas para seu usuário.</p>
+</module-page>

@@ -1,0 +1,88 @@
+page-sedu-denuncias {
+  #content {
+    background-color: white !important;
+
+    ion-slides {
+      overflow: scroll !important;
+    }
+  }
+  
+  .slide-zoom {
+    height: 100%;
+    flex: 1;
+    overflow: scroll;
+    overflow-y: visible;    
+  }
+  
+  .slide-zoom > div {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+  }
+
+  #slide-identificacao {
+    button {
+      margin-top: 15px;
+    }
+  }
+  
+  #slide-reclamacao {
+    .slide-zoom {
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+
+    #inputs-reclamacao {
+      flex-direction: column;
+
+      #data-hora {
+        display: flex;
+        flex-direction: row;
+      }
+
+      // #dateIonItem, #hourIonItem {
+      //   width: 45%;
+      // }
+    }
+
+  }
+
+  large-button {
+    width: 75%;
+    align-self: center;
+  }
+
+  #item-descricao {
+    flex: 1;
+    padding-bottom: 15px;
+
+    ion-label {
+      white-space: unset;
+    }
+
+    textarea {
+      height: 100%;
+    }
+  }
+
+  #nav-slides {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    width: 100%;
+    border-top: 1px solid #abe1fa;
+
+    .nav-slide button {
+      font-size: 20px;
+      background-color: transparent;
+      margin: 10px 15px;
+    }
+    
+    #next-slide {
+      align-self: flex-end;
+    }
+  }
+
+}

@@ -35,6 +35,8 @@ export interface Environment {
     siarhes: string;
     clima: string;
     climaKey: string;
+    seduDenuncias: string;
+    seduDenunciasToken: string;
   };
   push: {
     senderId: string;

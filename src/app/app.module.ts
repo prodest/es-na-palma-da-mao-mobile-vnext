@@ -48,6 +48,7 @@ import { SchedulingService } from './scheduling/providers/scheduling.service';
 
 import { TranscolOnlineStores } from './ceturb/transcol-online/state';
 import { MenusProviders } from './navegacao/providers';
+import { SeduDenunciasProviders } from './sedu/providers';
 
 
 moment.locale('pt-br');
@@ -113,7 +114,7 @@ registerLocaleData(ptBr);
     ...OportunidadesProviders,
     ...AlunosProviders,
     ...TranscolOnlineStores,
-
+    ...SeduDenunciasProviders,
     {
       provide: ErrorHandler,
       useClass: IonicErrorHandler

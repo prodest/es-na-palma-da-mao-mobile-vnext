@@ -82,18 +82,24 @@ export const MENUS: ItemMenu[] = [
     component: 'PresentationPage',
     isChecked: false
   },
-
- 
-];
-
-export function menusFactory() {
-  return MENUS;
-}
-
-export const MenuToken = new InjectionToken('menu-data');
-
-// menu provider
-export const MenusStaticProvider = {
-  provide: MenuToken,
-  useFactory: menusFactory
-};
+     {
+       id: 23,
+       title: "Sedu",
+       icon: 'custom-modulo-educacao',
+       component: 'SeduIndexPage',
+       isChecked: false
+     }
+  ];
+  
+  export function menusFactory() {
+    return MENUS;
+  }
+  
+  export const MenuToken = new InjectionToken('menu-data');
+  
+  // menu provider
+  export const MenusStaticProvider = {
+    provide: MenuToken,
+    useFactory: menusFactory
+  };
+  

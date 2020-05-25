@@ -17,6 +17,11 @@ export class LargeButtonComponent {
   @Input() text: string;
   @Input() color: string;
   @Input() disabled: boolean;
+  @Input() action: Function;
   
   constructor() {}
+
+  runAction() {
+    if (this.action) this.action();
+  }
 }

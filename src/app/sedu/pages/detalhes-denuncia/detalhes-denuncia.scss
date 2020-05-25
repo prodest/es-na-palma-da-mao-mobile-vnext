@@ -1,0 +1,25 @@
+page-detalhes-denuncia {
+
+  ion-label {
+    white-space: normal;
+  }
+
+  ion-list {
+    margin: 0 !important;
+  }
+
+  #content {
+    background-color: #fff !important;
+  } 
+  
+  ion-card {
+    box-shadow: none !important;
+    border-radius: 15px !important;
+  }
+
+  @media screen and (max-width: 361px) {
+    .content p {
+      font-size: 25px !important;
+    }
+  }
+}

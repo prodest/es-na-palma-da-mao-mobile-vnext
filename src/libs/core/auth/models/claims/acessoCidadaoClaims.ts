@@ -24,7 +24,7 @@ export interface AcessoCidadaoClaims {
    * Claim com o email do usuário
    *
    */
-  emailaddress: string;
+  email: string;
 
   /**
    * Claim com o telefone residencial do usuário

@@ -1,0 +1,167 @@
+<module-page title="SEDU" no-padding no-footer>
+  <ion-slides #slides>
+
+    <ion-slide id="slide-identificacao"> <!-- SLIDE 1 - IDENTIFICAÇÃO DO AUTOR DA RECLAMAÇÃO -->
+      <ion-list-header>Verifique suas informações. <br>
+        Se este não é você, faça logout, por favor.</ion-list-header>
+      
+      <ion-item>
+        <ion-label floating>Seu nome</ion-label>
+        <ion-input type="text" [(ngModel)]="denuncia.autor" [disabled]="true"></ion-input>
+      </ion-item>
+
+      <ion-item>
+        <ion-label floating>Seu e-mail</ion-label>
+        <ion-input type="text" [(ngModel)]="denuncia.email" [disabled]="true"></ion-input>
+      </ion-item>
+
+      <ion-list radio-group [(ngModel)]="denuncia.papelDoAutor">
+
+        <ion-list-header>Eu sou:</ion-list-header>
+        
+        <ion-item *ngFor="let papel of papeis$ | async">
+          <ion-label>{{papel.nome}}</ion-label>
+          <ion-radio [value]="papel.id"></ion-radio>
+        </ion-item>
+
+        <ion-item *ngIf="denuncia.papelDoAutor == 3">
+          <ion-label>Descreva (obrigatório)</ion-label>
+          <ion-input type="text" [(ngModel)]="denuncia.outroPapel"></ion-input>
+        </ion-item>
+
+      </ion-list>
+
+      <ion-list *ngIf="denuncia.papelDoAutor">
+        <ion-list-header *ngIf="denuncia.papelDoAutor == 1">Para continuar, informe sua matrícula:</ion-list-header>
+        <ion-list-header *ngIf="denuncia.papelDoAutor != 1">Para continuar, informe uma matrícula:</ion-list-header>
+        <ion-item>
+          <ion-label floating>Número do Registro Acadêmico</ion-label>
+          <ion-input type="number" [(ngModel)]="denuncia.registroAcademico"></ion-input>
+        </ion-item>
+        <button ion-button round
+          *ngIf="denuncia.registroAcademico"
+          (click)="getStudent()">Validar</button>
+      </ion-list>
+
+    </ion-slide> <!-- FIM DO SLIDE 1 -->
+
+    <ion-slide id="slide-aluno"> <!-- SLIDE 2 - IDENTIFICAÇÃO DA ROTA ONDE HOUVE PROBLEMA -->
+
+      <ion-list-header>
+        Verifique as informações do aluno
+      </ion-list-header>
+
+      <ion-item>
+        <ion-label floating>Nome completo do aluno</ion-label>
+        <ion-input type="text"
+          [(ngModel)]="denuncia.aluno"
+          [disabled]="true">
+        </ion-input>
+      </ion-item>
+
+      <ion-item>
+        <ion-label floating>Nº Instalação EDP</ion-label>
+        <ion-input type="number"
+          [(ngModel)]="denuncia.codigoEDP"
+          [disabled]="true"></ion-input>
+      </ion-item>
+      
+      <ion-item>
+        <ion-label floating>Escola</ion-label>
+        <ion-input type="text"
+          [value]="denuncia.escola"
+          [disabled]="true"></ion-input>
+      </ion-item>
+
+      <ion-list-header>
+        Informações da rota
+      </ion-list-header>
+
+      <ion-item>
+        <ion-label floating>Placa do veículo (opcional)</ion-label>
+        <ion-input type="text" [(ngModel)]="denuncia.placaVeiculo"></ion-input>
+      </ion-item>
+
+      <ion-item>
+        <ion-label floating>Rota</ion-label>
+        <ion-select
+          [(ngModel)]="denuncia.rotaId"
+          cancelText="Cancelar"
+          [disabled]="(escola$ | async) == undefined">
+          
+          <ion-option *ngFor="let rota of rotasDoAluno$ | async" [value]="rota.id">{{rota.nome}}</ion-option>
+        </ion-select>
+      </ion-item>
+    </ion-slide> <!-- FIM DO SLIDE 2 -->
+
+    <ion-slide id="slide-reclamacao"> <!-- SLIDE 3 - DETALHAMENTO DA RECLAMAÇÃO -->
+      <div id="inputs-reclamacao">
+        <ion-list-header>Agora detalhe sua reclamação</ion-list-header>
+        <ion-item>
+          <ion-label floating>Tipo de reclamação</ion-label>
+          <ion-select
+            [(ngModel)]="denuncia.tipoReclamacao"
+            (ionChange)="updateSenderLock()"
+            cancelText="Cancelar">
+            <ion-option *ngFor="let tipo of tiposDenuncia$ | async" [value]="tipo.id">{{tipo.nome}}</ion-option>
+          </ion-select>
+        </ion-item>
+        <ion-item *ngIf="denuncia.tipoReclamacao == 5">
+          <ion-label floating>Que tipo?</ion-label>
+          <ion-input type="text" [(ngModel)]="denuncia.outroTipo"></ion-input>
+        </ion-item>
+        <div id="data-hora">
+          <ion-item id="dateIonItem">
+            <ion-label floating>Data do ocorrido</ion-label>
+            <ion-datetime
+              cancelText="Cancelar"
+              doneText="OK"
+              displayFormat="D MMM YYYY" 
+              pickerFormat="D MMM YYYY" 
+              (ionChange)="setDay($event)"></ion-datetime>
+          </ion-item>
+          <ion-item id="hourIonItem">
+            <ion-label floating>Horário do ocorrido</ion-label>
+            <ion-datetime
+              cancelText="Cancelar"
+              doneText="OK"
+              displayFormat="HH:mm"
+              pickerFormat="HH mm"
+              (ionChange)="setHour($event)"></ion-datetime>
+          </ion-item>
+        </div>
+        <ion-item id="item-descricao">
+          <ion-label floating>Descreva sua reclamação. Tente dar o máximo de detalhes possível.</ion-label>
+          <ion-textarea [(ngModel)]="denuncia.descricao" (ionChange)="updateSenderLock()"></ion-textarea>
+        </ion-item>
+      </div>
+      <large-button
+        text="Enviar"
+        leftIcon="ios-add-circle-outline"
+        rightIcon="ios-arrow-forward-outline"
+        color="primary-dark"
+        [action]="send"
+        [disabled]="!(canSend$ | async)"
+      ></large-button>
+    </ion-slide> <!-- FIM DO SLIDE 3 -->
+
+  </ion-slides>
+
+  <div id="nav-slides">
+    <!-- Botão: Voltar Slide -->
+    <span class="nav-slide">
+      <button *ngIf="!slides.isBeginning()" icon-only id="prev-slide" (click)="prev()">
+        <ion-icon name="custom-nav-voltar"></ion-icon>
+      </button>
+    </span>
+  
+    <!-- Botão: Próximo Slide -->
+    <span class="nav-slide">
+      <button *ngIf="!slides.isEnd() && canGoNext()" icon-only id="next-slide" (click)="next()">
+        <ion-icon name="custom-nav-avancar"></ion-icon>
+      </button>
+    </span>
+  
+  </div>
+
+</module-page>
