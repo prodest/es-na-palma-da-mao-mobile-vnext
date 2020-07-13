@@ -183,7 +183,7 @@
     "nodemon": "^1.19.1",
     "prettier": "^1.9.1",
     "purifycss": "^1.2.6",
-    "standard-version": "^4.3.0",
+    "standard-version": "^8.0.1",
     "tslint": "^5.8.0",
     "tslint-config-prettier": "^1.9.0",
     "tslint-config-standard": "^7.0.0",
