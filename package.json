@@ -174,7 +174,7 @@
     "commitizen": "^3.0.7",
     "cz-conventional-changelog": "^2.1.0",
     "dotenv": "^4.0.0",
-    "googleapis": "^28.1.0",
+    "googleapis": "^39.1.0",
     "htmlhint": "^0.10.1",
     "husky": "^0.14.3",
     "lint-staged": "^6.0.0",
