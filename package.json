@@ -158,7 +158,7 @@
     "ng2-haversine": "^0.1.1",
     "ng2-pdf-viewer": "^5.2.3",
     "ngx-take-until-destroy": "^5.2.3",
-    "node-sass": "^4.13.0",
+    "node-sass": "^4.13.1",
     "phonegap-plugin-barcodescanner": "^8.1.0",
     "phonegap-plugin-multidex": "^1.0.0",
     "phonegap-plugin-push": "^2.3.0",
